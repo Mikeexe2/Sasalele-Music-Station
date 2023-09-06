@@ -1,26 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-<head>
-  <title>Internet Radio</title>
-  <style type="text/css">
-    body {
-      background-color: #E4F3FF;
-      font-family: sans-serif, Helvetica, Arial;
-      font-size: 18px;
-    }
-    h1 {
-      color: #2D58AE;
-      font-size: 25px;
-    }
-    hr {
-      color: #555555;
-    }
-  </style>
-</head>
-
-<body>
-  <h1>Playlist</h1>
+<h1>Playlist</h1>
   <hr />
   <ol>
     <li><a href="https://snkazuracast5.com:8000/radio.mp3" target="_blank">80s</a></li>
@@ -225,7 +203,6 @@
     <li> <a href="http://stream.zenolive.com/9veewz5r8neuv.aac" target="_blank">Animextream Radio</a></li>
     <li> <a href="http://www.edenofthewest.com/radio/8000/radio.mp3%20" target="_blank">Eden Radio</a></li>
     <li> <a href="https://stream.rcast.net/67511.m3u" target="_blank">RADIO ALFA ANIME</a></li>
-	
 	<li> <a href="https://918thefan.com/" target="_blank">91.8 The fan</a></li>
 	<li> <a href="https://tunein.com/radio/Vocaloid-Radio-s221579/" target="_blank">Vocaloid Radio</a></li>
 	<li> <a href="https://radionami.com/#main.php" target="_blank">Radio Nami</a></li>
@@ -248,5 +225,3 @@
 	<li> <a href="https://radionami.com/" target="_blank">Radio Nami</a></li>
   </ol>
   <hr />
-</body>
-</html>
