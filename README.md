@@ -1,4 +1,24 @@
-# Internet-radio-stream-links
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <title>Internet Radio</title>
+  <style type="text/css">
+    body {
+      background-color: #E4F3FF;
+      font-family: sans-serif, Helvetica, Arial;
+      font-size: 18px;
+    }
+    h1 {
+      color: #2D58AE;
+      font-size: 25px;
+    }
+    hr {
+      color: #555555;
+    }
+  </style>
+</head>
+
 <body>
   <h1>Playlist</h1>
   <hr />
@@ -15,8 +35,8 @@
     <li> <a href="https://snkazuracast5.com:8040/radio.mp3" target="_blank">Anime J-Pop</a></li>
     <li> <a href="https://snkazuracast5.com:8050/radio.mp3" target="_blank">Anime J-Rock</a></li>
     <li> <a href="http://radio.animenexus.mx:8000/animenexus" target="_blank">Anime Nexus</a></li>
-    <li> <a href="https://snkazuracast5.com:8060/radio.mp3" target="_blank"></a>Anime Openings</li>
-    <li> <a href="https://stream-14.zeno.fm/acnhrkt8c4duv?zs=" target="_blank"></a>Anime Pa Ra Ti</li>
+    <li> <a href="https://snkazuracast5.com:8060/radio.mp3" target="_blank">Anime Openings</a></li>
+    <li> <a href="https://stream-157.zeno.fm/acnhrkt8c4duv?zs=_b3NhdkaTKW0Wz0KycfgDg&zs=" target="_blank">Anime Pa Ra Ti</a></li>
     <li> <a href="http://stream.zeno.fm/rfun7q8bt8quv" target="_blank">Anime Plus Radio</a></li>
     <li> <a href="http://stream.laut.fm/animefm" target="_blank">Anime Radio</a></li>
     <li> <a href="http://stream.zeno.fm/3hhp76wdz4zuv" target="_blank">Anime Songs</a></li>
