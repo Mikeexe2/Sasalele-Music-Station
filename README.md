@@ -1,4 +1,4 @@
-<h1>Playlist</h1>
+  <h1>Playlist</h1>
   <hr />
   <ol>
     <li><a href="https://snkazuracast5.com:8000/radio.mp3" target="_blank">80s</a></li>
@@ -223,5 +223,9 @@
 	<li> <a href="http://player.yggdrasilradio.net/" target="_blank">Yggdrasil Radio1</a></li>
 	<li> <a href="https://tunein.com/radio/Yggdrasil-Radio-s120196/" target="_blank">Yggdrasil Radio2</a></li>
 	<li> <a href="https://radionami.com/" target="_blank">Radio Nami</a></li>
+	<li> <a href="https://asiadreamradio.torontocast.stream/stations/japanhitsplayer.html" target="_blank">Online Web Player (Japanese)</a></li>
+	<li> <a href="https://onlineradiobox.com/jp/Tokyo" target="_blank">Online Radio Box (Tokyo)</a></li>
+	<li> <a href="https://onlineradiobox.com/genre/anime/" target="_blank">Online Radio Box (Anime)</a></li>
+	<li> <a href="https://tunein.com/radio/Stream-Anime-g2752/" target="_blank">TuneIn Anime Radio Stations</a></li>
   </ol>
   <hr />
