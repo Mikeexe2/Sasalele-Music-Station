@@ -1,0 +1,136 @@
+.dh {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f2fabd;
+  padding: 10px;
+  background: #fff url(https://raw.githubusercontent.com/Mikeexe2/Internet-radio-stream-links/main/assets/sasalele_bg.jpg) no-repeat right;
+}
+
+body {
+  font-family: Verdana, sans-serif;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.banner img {
+  width: 500px;
+  height: 50px;
+}
+
+.nav {
+  display: flex;
+}
+
+.nav a {
+  text-decoration: none;
+  font-size: 30px;
+  color: #fffefe;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.nav a:hover {
+  background-color: #282828;
+  color: #fff;
+}
+
+
+.station {
+  background-color: #bbf9c8;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+.station h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.station li {
+  margin-bottom: 5px;
+}
+
+.station li a {
+  text-decoration: none;
+  color: #333;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  display: block;
+}
+
+.station li a:hover {
+  background-color: #86abeb;
+  color: #fff;
+}
+
+#player {
+  position: sticky;
+  bottom: 0;
+  height: var(--player-height);
+  flex: 0 0 var(--player-height);
+  box-sizing: border-box;
+  background-color: #fff;
+  display: flex;
+  padding: 10px 15px;
+  box-shadow: 0 0 5px #ccc;
+  z-index: 10;
+}
+
+#player .cover {
+  --width: 60px;
+  position: relative;
+  width: var(--width);
+  height: var(--width);
+  flex: 0 0 var(--width);
+  overflow: hidden;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  margin-right: 15px;
+}
+
+#player .cover::after {
+  position: absolute;
+  color: #fff;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+#player .cover img {
+  width: 100%;
+  display: block;
+}
+
+#player .info {
+  flex: 1;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+#player .info .name {
+  margin-bottom: 5px;
+}
+
+#player .operate {
+  flex: 0 0 40px;
+  display: none;
+}
