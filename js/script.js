@@ -1,3 +1,4 @@
+document.addEventListener('DOMContentLoaded', () => {
 var m3uFileURL = "https://raw.githubusercontent.com/Mikeexe2/Internet-radio-stream-links/main/all.m3u";
 
 // Fetch the M3U file
@@ -49,4 +50,6 @@ fetch(m3uFileURL)
                 document.getElementById("playlist").appendChild(li);
             }
         }
+    });
+
     });
