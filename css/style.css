@@ -1,10 +1,13 @@
 .dh {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #f2fabd;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  background-color: #f1f1f1;
   padding: 10px;
-  background: #fff url(https://raw.githubusercontent.com/Mikeexe2/Internet-radio-stream-links/main/assets/sasalele_bg.jpg) no-repeat right;
+  background: url(https://raw.githubusercontent.com/Mikeexe2/Internet-radio-stream-links/main/assets/sasalele_bg.jpg) right;
 }
 
 body {
@@ -49,7 +52,7 @@ body {
 .station {
   background-color: #bbf9c8;
   padding: 10px;
-  margin-top: 20px;
+  margin-top: 60px;
 }
 
 .station h1 {
