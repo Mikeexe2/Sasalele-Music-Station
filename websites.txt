@@ -1,3 +1,144 @@
+http://radio.llolo.lol:8000/streambot.mp3
+http://dir.xiph.org/static/img/logo_jumbo.svg
+radio.llolo.lol (Mostly relaxing music to code to)
+
+http://185.33.21.112:80/top40_128
+https://www.1.fm/content/images/logo/04X560.png
+1.FM - Absolute Top 40 (www.1.fm)
+
+http://23.82.11.87:21928/stream
+https://calmradio.com/templates/calmradio/favicons/apple-touch-icon.png
+CALMRADIO.COM - J Pop
+
+http://216.235.89.171:80/hitlist
+https://powerhitz.com/favicon.ico
+POWERHITZ.COM - THE HITLIST - #1 FOR HIT MUSIC
+
+https://zeno.fm/radio/anime-flash/?
+https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FPB9HVXvxKxsVbSuK_FKi5-twSDgaDtGzCIolTBrgakc%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2QwMDE1OGEyLTY2NDgtNDNlOS1hYzJjLTI2NTI4MmJkOGI3NC9pbWFnZS8_dXBkYXRlZD0xNjc1Nzc4OTMzMDAw.webp&w=1920&q=100
+Anime Flash
+
+https://zeno.fm/radio/kamehouse-station/?
+https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FAZrN1od7WKoXGTE6th8tuw0N4OsXsRK8nrBK7uMnOr0%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUNRMmN1bzBnc01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUNRdWVDNTZBa01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjE3MDIxMjAwMDA.webp&w=1920&q=100
+Kamehouse Station
+
+http://stream.tsubakianimeradio.com:9000/stream/1/
+http://tsubakianimeradio.com/wp-content/uploads/2020/08/logo-new.png
+Tsubaki Web Radio
+
+http://hyades.shoutca.st:8551/stream
+https://www.shoutcast.com/images/shoutcast.svg
+Omg kpop
+
+http://163.172.169.217:80/asp-s
+https://ambientsleepingpill.com/logo.png
+Ambient sleeping pill
+
+http://61.89.201.27:8000/radikishi.mp3
+https://www.radiokishiwada.jp/data/html/template/default/img/common/facebook_ogp.jpg
+Kishiwada Radio
+
+http://radio.kahoku.net:8000/;
+http://wavenet.under.jp/fm/wp-content/uploads/2018/05/fmkahoku_logo.jpg
+FM Kahoku 78.7 (FM Kahoku City, Ishikawa)
+
+http://s04.radio-tochka.com:5470/mount
+https://cdn-profiles.tunein.com/s277840/images/logod.png?t=638304549700000000
+Wave ANime Radio
+
+http://curiosity.shoutca.st:8019/stream
+https://www.allradio.net/icon-512x512.png
+V家电台·Vocaloid Radio
+
+https://vocaloid.radioca.st/stream
+https://radiocastsolutions.com/wp-content/uploads/2017/10/cropped-RadioCastSolutionsLogo-250w.png
+Vocaloid Radio (320kbps)
+
+http://vrx.piro.moe:8000/stream-192
+https://oiradio.co/assets/images/stations/e/e6d35bf8758b84a9ff8d856b96a3801b.png
+Vocaloid Radio VRX
+
+http://serv.1fm.me:8004/;
+https://www.otakus-dream.com/wp-content/uploads/2021/05/logo-3.png
+Radio Otaku's Dream
+
+http://80.252.130.250:8000/radionami
+https://radionami.com/style/horo.png
+Radio Nami
+
+http://5.9.2.139:8000/any-anime.ru
+https://radionami.com/style/horo.png
+Radio Nami - MP3 320k (Home)
+
+http://176.9.50.179:8000/any-anime.ru
+https://radionami.com/style/horo.png
+Radio Nami - MP3 320k (Maru #1)
+
+http://stm1.radiojhero.com:8008/;
+https://radiojhero.com/assets/logojhero.23cabdfc.png
+Radio J-Hero
+
+http://79.111.119.111:8002/jpop
+http://radcap.ru/graf2/radcaplogo-hor.svg
+Radio Caprice J-Pop
+
+http://79.111.119.111:8002/jrock
+http://radcap.ru/graf2/radcaplogo-hor.svg
+Radio Caprice J-Rock
+
+http://79.111.119.111:8002/anime
+http://radcap.ru/graf2/radcaplogo-hor.svg
+Radio Caprice Anime
+
+http://54.37.73.148:8000/stream
+https://radioaoi.pl/wp-content/themes/RadioAoi/images/favicon.png
+Radio AOI
+
+http://stm24.srvstm.com:9526/
+https://www.akiba.com.br/imagem/todas/logo_akiba.png
+Radio Akiba Brasil
+
+http://91.121.110.129:8030/radio.mp3/;
+https://kwii.xyz/ext/planetstyles/flightdeck/store/kawaii-logo1500.png
+Kawaii Anime Radio
+
+http://radio.jphip.com:8800/
+http://jphip.com/images/jphip-logo.png
+JPHiP Radio
+
+http://perseus.shoutca.st:8803/stream
+https://perseus.shoutca.st/theme/images/login-logo.png
+Japan Next?
+
+http://192.99.4.210:3684/stream
+http://goradio.gr/assets/img/logo-lg.png
+Greek Otaku Radio
+
+http://finalfantasystation.com:8000/stream
+https://cdn.onlineradiobox.com/img/l/7/30787.v3.png
+Final Fantasy Radio
+
+http://65.21.61.215:8000/citypopone
+https://thumbnailer.mixcloud.com/unsafe/166x166/profile/4/9/5/3/fc1f-e4d5-4fac-b9c0-1435a5d23863
+City Pop One
+
+http://streaming06.hstbr.net:8114/live
+https://liveonlineradio.net/wp-content/uploads/2020/02/cirilo-radio-220x108.jpg
+Cirilo Radio
+
+http://23.82.11.87:20328/stream
+https://static.mytuner.mobi/media/tvos_radios/zek84pakpcxd.png
+CALMRADIO.COM - Shakuhachi
+
+http://65.109.81.84:7868/stream
+https://www.radio.net/images/broadcasts/7d/9e/186340/1/c300.png
+Anytime Anime Radio V3
+
+http://radio.animenexus.mx:8000/animenexus
+https://www.animenexusla.com/wp-content/uploads/2021/05/ANIME-NEXUS-LOGO-15_Mesa-de-trabajo-1-500x188.png
+Anime Nexus
+
+
 https://www.rcast.net/dir/anime/page1
 https://www.rcast.net/assets/img/logo.png
 RCAST anime genre
@@ -29,6 +170,18 @@ Radio Nami
 https://japan-next.blogspot.com/
 https://1.bp.blogspot.com/-WYvLtD46Tik/XHuMLFCHJTI/AAAAAAAAHag/zil8qukJvU8eWZvlbqIHZT8Ej9NZ-dRvwCK4BGAYYCw/s1600/Logo%2Bcopia.png
 Japan Next
+
+http://tsubakianimeradio.com/
+http://tsubakianimeradio.com/wp-content/uploads/2020/08/logo-new.png
+TSUBAKI ANIME RADIO
+
+https://www.isekaianimeradio.net/
+https://www.isekaianimeradio.net/images/icons/favicon.ico
+Isekai Anime Radio
+
+http://yumicoradio.net/
+http://yumicoradio.net/img/yumicoradioV2.jpg
+Yumi Co. Radio
 
 https://tunein.com/radio/Wave-Anime-Radio-s277840/
 https://cdn-profiles.tunein.com/s277840/images/logod.png?t=638304549700000000
