@@ -6,7 +6,7 @@
   z-index: 9999;
   width: 100%;
   padding: 8px;
-  background: #afadec;
+  background-image: linear-gradient(to right, #beeea6, #a3b6f7);
 }
 
 body {
@@ -17,6 +17,7 @@ body {
 }
 
 .search-container {
+  position: relative;
   display: flex;
   align-items: center;
   margin-bottom: 1rem;
@@ -29,13 +30,23 @@ body {
   width: 100%;
   padding: 10px;
   font-size: 16px;
+  border: 2px solid #555;
 }
+
+#searchInput.error {
+  border-color: red;
+}
+
+#searchInput::placeholder {
+  color: #555;
+}
+
 
 #searchButton {
   padding: 10px;
   background-color: #555;
   color: white;
-  border: 2px;
+  border: none;
   cursor: pointer;
 }
 
@@ -49,7 +60,11 @@ body {
 #websiteList li {
   display: inline-block;
   margin-right: 10px;
+}
 
+#websiteList li:hover a:hover {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  background-color: #86abeb;
 }
 
 .logo {
