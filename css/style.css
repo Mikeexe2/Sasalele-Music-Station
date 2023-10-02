@@ -19,10 +19,14 @@ body {
 .search-container {
   display: flex;
   align-items: center;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  margin-right: 60px;
+  margin-left: 60px;
 }
 
 #searchInput {
-  width: 200px;
+  width: 100%;
   padding: 10px;
   font-size: 16px;
 }
@@ -31,18 +35,21 @@ body {
   padding: 10px;
   background-color: #555;
   color: white;
-  border: none;
+  border: 2px;
   cursor: pointer;
 }
 
 #websiteList {
   list-style: none;
   padding: 0;
+  margin-right: 60px;
+  margin-left: 60px;
 }
 
 #websiteList li {
   display: inline-block;
   margin-right: 10px;
+
 }
 
 .logo {
@@ -63,6 +70,7 @@ body {
 
 .nav {
   display: flex;
+  border: 2px;
 }
 
 .nav a {
@@ -221,7 +229,7 @@ footer {
   margin-left: 60px;
 }
 
-@media (max-width: 768px) {
+@media only screen and (max-width: 600px) {
   .dh {
     display: block;
     position: static;
@@ -264,7 +272,7 @@ footer {
   }
 
   .nav a {
-    font-size: 18px;
+    font-size: 16px;
     margin-bottom: 10px;
     margin-right: 0;
   }
@@ -281,7 +289,7 @@ footer {
 
   #player {
     position: sticky;
-    margin-top: 20px;
+    margin-top: 100px;
   }
 
   #player .cover {
