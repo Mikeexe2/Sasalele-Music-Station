@@ -6,14 +6,14 @@
   z-index: 9999;
   width: 100%;
   padding: 8px;
-  background: #98cef9;
+  background: #afadec;
 }
 
 body {
   font-size: 16px;
   color: #525252;
   font-family: Tahoma, Verdana;
-  background: #98cef9;
+  background: #afadec;
 }
 
 .search-container {
@@ -33,6 +33,16 @@ body {
   color: white;
   border: none;
   cursor: pointer;
+}
+
+#websiteList {
+  list-style: none;
+  padding: 0;
+}
+
+#websiteList li {
+  display: inline-block;
+  margin-right: 10px;
 }
 
 .logo {
@@ -71,7 +81,7 @@ body {
 
 .station {
   text-align: center;
-  background-color: #eebad6;
+  background-image: linear-gradient(to right, #a6c1ee, #fbc2eb);
   padding: 2px;
   margin-right: 60px;
   margin-left: 60px;
@@ -165,7 +175,7 @@ body {
   justify-content: center;
   flex-wrap: wrap;
   padding-top: 2rem;
-  background-color: #eebad6;
+  background-image: linear-gradient(to right, #a6c1ee, #fbc2eb);
   margin-right: 60px;
   margin-left: 60px;
 }
@@ -174,7 +184,7 @@ body {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  background-color: #eebad6;
+  background-image: linear-gradient(to right, #a6c1ee, #fbc2eb);
   padding: 2px;
   margin-right: 60px;
   margin-left: 60px;
@@ -204,9 +214,91 @@ body {
 }
 
 footer {
-  background-color: #8ffab2;
+  background: #afadec;
   text-align: center;
   padding: 10px;
   margin-right: 60px;
   margin-left: 60px;
+}
+
+@media (max-width: 768px) {
+  .dh {
+    display: block;
+    position: static;
+    width: 100%;
+    padding: 8px;
+    background: #afadec;
+  }
+
+  .search-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #searchInput {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  #searchButton {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .logo {
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .logo img {
+    margin-right: 0;
+  }
+
+  .banner img {
+    width: 100%;
+    height: auto;
+  }
+
+  .nav {
+    flex-direction: column;
+  }
+
+  .nav a {
+    font-size: 18px;
+    margin-bottom: 10px;
+    margin-right: 0;
+  }
+
+  .station {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .station li a {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  #player {
+    position: sticky;
+    margin-top: 20px;
+  }
+
+  #player .cover {
+    margin-right: 0;
+  }
+
+  .heading,
+  .radio,
+  .download,
+  .websites,
+  footer {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .container {
+    flex-basis: 100%;
+    margin-bottom: 1rem;
+  }
 }
