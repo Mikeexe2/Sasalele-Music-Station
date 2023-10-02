@@ -1,34 +1,30 @@
+https://r-a-d.io/
+https://r-a-d.io/assets/logo_image_small.png
+r-a-d.io/
+
+https://listen.moe/
+https://listen.moe/_nuxt/img/logo-square-64.248c1f3.png
+LISTEN.moe
+
+https://en.anison.fm/
+https://en.anison.fm/images/logo_h_en.png
+Anison.FM
+
+https://tunein.com/radio/Stream-Anime-g2752/
+https://cdn-web.tunein.com/assets/img/apple-touch-icon-180.png
+Stream Anime TuneIn
+
+https://onlineradiobox.com/genre/anime/
+https://cdn.onlineradiobox.com/img/ios_favicon.png
+Anime Radio Stations
+
 http://radio.llolo.lol:8000/streambot.mp3
 http://dir.xiph.org/static/img/logo_jumbo.svg
 radio.llolo.lol (Mostly relaxing music to code to)
 
-http://185.33.21.112:80/top40_128
-https://www.1.fm/content/images/logo/04X560.png
-1.FM - Absolute Top 40 (stream)
-
-https://www.1.fm/station/top40
-https://www.1.fm/content/images/logo/04X560.png
-TOP 40
-
-https://www.1.fm/stations
-https://www.1.fm/content/images/logo/04X560.png
-All stations from 1.fm
-
 http://23.82.11.87:21928/stream
 https://calmradio.com/templates/calmradio/favicons/apple-touch-icon.png
 CALMRADIO.COM - J Pop
-
-https://powerhitz.com/Hitlist
-https://powerhitz.com/favicon.ico
-POWERHITZ.COM - THE HITLIST
-
-https://powerhitz.com/ThePlanet
-https://powerhitz.com/images/menu/theplanet.png
-The Planet
-
-https://powerhitz.com/OfficeMix
-https://powerhitz.com/images/menu/officemix-80x80.png
-The office Mix
 
 https://zeno.fm/radio/anime-flash/?
 https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FPB9HVXvxKxsVbSuK_FKi5-twSDgaDtGzCIolTBrgakc%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2QwMDE1OGEyLTY2NDgtNDNlOS1hYzJjLTI2NTI4MmJkOGI3NC9pbWFnZS8_dXBkYXRlZD0xNjc1Nzc4OTMzMDAw.webp&w=1920&q=100
@@ -39,28 +35,12 @@ https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FAZrN1od7WKoXGTE6
 Kamehouse Station
 
 http://stream.tsubakianimeradio.com:9000/stream/1/
-http://tsubakianimeradio.com/wp-content/uploads/2020/08/logo-new.png
+https://static.tuneyou.com/images/logos/500_500/91/15991/Tsubakiotakuradio_5.jpg
 Tsubaki Web Radio
 
 http://tsubakianimeradio.com/
-http://tsubakianimeradio.com/wp-content/uploads/2020/08/logo-new.png
+https://static.tuneyou.com/images/logos/500_500/91/15991/Tsubakiotakuradio_5.jpg
 Tsubaki Web Radio (Website)
-
-http://hyades.shoutca.st:8551/stream
-https://www.shoutcast.com/images/shoutcast.svg
-Omg kpop
-
-http://163.172.169.217:80/asp-s
-https://ambientsleepingpill.com/logo.png
-Ambient sleeping pill
-
-http://61.89.201.27:8000/radikishi.mp3
-https://www.radiokishiwada.jp/data/html/template/default/img/common/facebook_ogp.jpg
-Kishiwada Radio
-
-http://radio.kahoku.net:8000/;
-http://wavenet.under.jp/fm/wp-content/uploads/2018/05/fmkahoku_logo.jpg
-FM Kahoku 78.7 (FM Kahoku City, Ishikawa)
 
 http://s04.radio-tochka.com:5470/mount
 https://cdn-profiles.tunein.com/s277840/images/logod.png?t=638304549700000000
@@ -127,7 +107,7 @@ https://cdn-profiles.tunein.com/s232606/images/logod.png?t=637193869350000000
 Kawaii Anime Radio
 
 http://radio.jphip.com:8800/
-http://jphip.com/images/jphip-logo.png
+https://cdn-radiotime-logos.tunein.com/s54003d.png
 JPHiP Radio
 
 http://perseus.shoutca.st:8803/stream
@@ -135,7 +115,7 @@ https://perseus.shoutca.st/theme/images/login-logo.png
 Japan Next?
 
 http://192.99.4.210:3684/stream
-http://goradio.gr/assets/img/logo-lg.png
+https://static2.mytuner.mobi/media/tvos_radios/v3k92qjeu8td.png
 Greek Otaku Radio
 
 http://finalfantasystation.com:8000/stream
@@ -233,3 +213,43 @@ Asia Dream Radio
 http://popupplayer.radio.net/popupplayer/index.html?station=power-945-radio&tenant=www.radio.net&authId=2662be89-ef2b-420d-a97e-8702936fa9af
 https://d3kle7qwymxpcy.cloudfront.net/images/broadcasts/99/0e/176596/1/c300.png
 Power 945 Radio
+
+http://hyades.shoutca.st:8551/stream
+https://www.shoutcast.com/images/shoutcast.svg
+Omg kpop
+
+http://163.172.169.217:80/asp-s
+https://ambientsleepingpill.com/logo.png
+Ambient sleeping pill
+
+http://61.89.201.27:8000/radikishi.mp3
+https://www.radiokishiwada.jp/data/html/template/default/img/common/facebook_ogp.jpg
+Kishiwada Radio
+
+http://radio.kahoku.net:8000/;
+http://wavenet.under.jp/fm/wp-content/uploads/2018/05/fmkahoku_logo.jpg
+FM Kahoku 78.7 (FM Kahoku City, Ishikawa)
+
+https://powerhitz.com/Hitlist
+https://powerhitz.com/favicon.ico
+POWERHITZ.COM - THE HITLIST
+
+http://185.33.21.112:80/top40_128
+https://www.1.fm/content/images/logo/04X560.png
+1.FM - Absolute Top 40 (stream)
+
+https://www.1.fm/station/top40
+https://www.1.fm/content/images/logo/04X560.png
+TOP 40
+
+https://www.1.fm/stations
+https://www.1.fm/content/images/logo/04X560.png
+All stations from 1.fm
+
+https://powerhitz.com/ThePlanet
+https://powerhitz.com/images/menu/theplanet.png
+The Planet
+
+https://powerhitz.com/OfficeMix
+https://powerhitz.com/images/menu/officemix-80x80.png
+The office Mix
