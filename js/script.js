@@ -1,4 +1,33 @@
-document.addEventListener('DOMContentLoaded', () => {
+const websites = [
+    { name: 'Google', url: 'https://www.google.com/search?q=' },
+    { name: 'YouTube', url: 'https://www.youtube.com/results?search_query=' },
+
+];
+
+// Get HTML elements
+const searchInput = document.getElementById('searchInput');
+const searchButton = document.getElementById('searchButton');
+const websiteList = document.getElementById('websiteList');
+
+// Event listener for search button click
+searchButton.addEventListener('click', function () {
+    const searchTerm = searchInput.value.trim();
+    if (searchTerm !== '') {
+        websiteList.innerHTML = ''; // Clear previous website list
+
+        // Create list items for each website
+        websites.forEach(function (website) {
+            const listItem = document.createElement('li');
+            const link = document.createElement('a');
+            link.href = website.url + encodeURIComponent(searchTerm);
+            link.target = '_blank';
+            link.textContent = website.name;
+            listItem.appendChild(link);
+            websiteList.appendChild(listItem);
+        });
+    }
+});
+
 var m3uFileURL = "https://raw.githubusercontent.com/Mikeexe2/Internet-radio-stream-links/main/all.m3u";
 
 // Fetch the M3U file
@@ -27,6 +56,7 @@ fetch(m3uFileURL)
                 // Set the link and name attributes
                 a.href = link;
                 a.textContent = name;
+
                 // Add an event listener to play the station when clicked
                 a.addEventListener('click', function (event) {
                     event.preventDefault();
@@ -50,6 +80,61 @@ fetch(m3uFileURL)
                 document.getElementById("playlist").appendChild(li);
             }
         }
+
+        // Add event listener to the cover image (miku-gif) for random play
+        var cover = document.getElementById('miku-gif');
+        cover.addEventListener('click', function () {
+            var playlist = document.getElementById('playlist');
+            var stationCount = playlist.childElementCount;
+            if (stationCount > 0) {
+                var randomIndex = Math.floor(Math.random() * stationCount);
+                var randomStation = playlist.children[randomIndex].children[0];
+                randomStation.click();
+            }
+        });
     });
 
+
+const websitesContainer = document.querySelector('.websites');
+
+fetch("https://raw.githubusercontent.com/Mikeexe2/Internet-radio-stream-links/main/websites.txt")
+    .then(response => response.text())
+    .then(data => {
+        // Split the data into individual websites
+        const websitesData = data.split('\n\n');
+
+        // Iterate over each website's data
+        websitesData.forEach(websiteData => {
+            // Split the website's data into lines
+            const lines = websiteData.split('\n');
+
+            // Extract the website's information from the lines
+            const link = lines[0];
+            const imageSrc = lines[1];
+            const name = lines[2];
+
+            const container = document.createElement('div');
+            container.classList.add('container');
+
+            const linkElement = document.createElement('a');
+            linkElement.href = link;
+            linkElement.target = "_blank";
+
+            const image = document.createElement('img');
+            image.src = imageSrc;
+            image.alt = 'network error';
+
+            linkElement.appendChild(image);
+            container.appendChild(linkElement);
+
+            const heading = document.createElement('h5');
+            heading.textContent = name;
+            container.appendChild(heading);
+
+            websitesContainer.appendChild(container);
+        });
+    })
+    .catch(error => {
+        console.error('Error retrieving data:', error);
     });
+
