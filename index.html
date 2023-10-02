@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+    <head>
+        <link rel="shortcut icon" type="x-icon"
+            href="https://raw.githubusercontent.com/Mikeexe2/Internet-radio-stream-links/main/assets/sasalele_logo.png">
+        <title>Sasalele Music Station</title>
+        <meta name="Keywords" content="Anime Music,Music,Internet Radio,Streaming sites,Sasalele Music Station" />
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+
+    <body>
+        <div class="dh">
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/Mikeexe2/Internet-radio-stream-links/main/assets/sasalele_logo.png"
+                    alt="Logo" />
+            </div>
+            <div class="nav">
+                <a href="index.html#radios">Radio</a>
+                <a href="index.html#websites">Websites</a>
+                <a href="index.html#scrap">Tools</a>
+                <a href="index.html#lyrics">Song DB</a>
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Search...">
+                    <button id="searchButton"><i class="fa fa-search"></i></button>
+                </div>
+                <ul id="websiteList"></ul>
+            </div>
+        </div>
+
+        <section id="radios"></section>
+        <div class="radio">
+            <h4>Radio Stations</h4>
+        </div>
+        <div class="station">
+            <div class="banner">
+                <img src="https://raw.githubusercontent.com/Mikeexe2/Internet-radio-stream-links/main/assets/sasalele_banner.png"
+                    title="Music" alt="Music" />
+            </div>
+            <ol id="playlist">
+                <!-- get stations from github -->
+            </ol>
+        </div>
+        <div id="player">
+            <div class="cover">
+                <img src="https://radiojhero.com/assets/playlist.6ef1aa8f.gif" alt="miku" id="miku-gif" />
+            </div>
+            <div class="info">
+                <div id="streamInfo"></div>
+            </div>
+            <p id="stationName">Click miku gif to random play</p>
+            <audio id="miniPlayer" controls preload="auto"></audio>
+        </div>
+
+        <section id="websites">
+            <div class="websites">
+                <!-- dynamically listed out -->
+            </div>
+        </section>
+        <section id="scrap">
+            <div class="heading">
+                <h4>Download Songs here:</h4>
+            </div>
+        </section>
+        <div class="download">
+            <div class="container">
+                <a href="https://spotifymate.com/" target=" _blank"><img
+                        src="https://spotifymate.com/images/apple-touch-icon.png" alt="Spotify Mate"></a>
+                <h5>Spotify Mate</h5>
+            </div>
+
+            <div class="container">
+                <a href="https://bestmp3converter.com/" target=" _blank"><img
+                        src="https://www.youtube.com/img/desktop/yt_1200.png" alt="YTMP3"></a>
+                <h5>YouTube to MP3 Converter</h5>
+            </div>
+
+            <div class="container">
+                <a href="https://free-mp3-download.net/" target=" _blank"><img
+                        src="https://free-mp3-download.net/img/icon.png" alt="Freemp3"></a>
+                <h5>Free MP3 Download</h5>
+            </div>
+            <div class="container">
+                <a href="https://en.mygomp3.com/" target=" _blank"><img src="https://en.mygomp3.com/img/mygomp3.png"
+                        alt="mygomp3"></a>
+                <h5>Online YouTube MP3 Downloader (mygomp3)</h5>
+            </div>
+            <div class="container">
+                <a href="https://seinopsys.dev/lrc" target=" _blank"><img src="https://seinopsys.dev/favicon-16x16.png"
+                        alt="SEI"></a>
+                <h5>LRC Online Editor</h5>
+            </div>
+        </div>
+
+        <section id="lyrics">
+            <div class="heading">
+                <h4>Find it here:</h4>
+            </div>
+        </section>
+
+        <div class="download">
+            <div class="container">
+                <a href="https://www.kugeci.com/" target=" _blank"><img src="https://www.kugeci.com/img/logo.png"
+                        alt="酷歌词 www.kugeci.com"></a>
+                <h5>酷歌词 www.kugeci.com</h5>
+            </div>
+            <div class="container">
+                <a href="https://zh.followlyrics.com/" target=" _blank"><img
+                        src="https://encrypted-tbn2.gstatic.com/faviconV2?url=https://zh.followlyrics.com&client=VFE&size=64&type=FAVICON&fallback_opts=TYPE,SIZE,URL&nfrp=2"
+                        alt="FollowLyrics"></a>
+                <h5>FollowLyrics</h5>
+            </div>
+            <div class="container">
+                <a href="https://www.musicenc.com/" target=" _blank"><img
+                        src="https://www.musicenc.com/zb_users/theme/bijiblog/include/touxiang.jpg" alt="music enc"></a>
+                <h5>Music enc</h5>
+            </div>
+            <div class="container">
+                <a href="https://music.163.com/#" target=" _blank"><img
+                        src="http://p3.music.126.net/tBTNafgjNnTL1KlZMt7lVA==/18885211718935735.jpg" alt="music163"></a>
+                <h5>网易云音乐</h5>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2023 Sasalele team. All rights reserved.</p>
+            <p>Contact Email: sasalele-team@basic.pp.ua</p>
+        </footer>
+        <script src="https://kit.fontawesome.com/9e5ba2e3f5.js" crossorigin="anonymous"></script>
+        <script src="script.js"></script>
+    </body>
+
+</html>
