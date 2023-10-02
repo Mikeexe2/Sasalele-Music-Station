@@ -4,15 +4,31 @@ radio.llolo.lol (Mostly relaxing music to code to)
 
 http://185.33.21.112:80/top40_128
 https://www.1.fm/content/images/logo/04X560.png
-1.FM - Absolute Top 40 (www.1.fm)
+1.FM - Absolute Top 40 (stream)
+
+https://www.1.fm/station/top40
+https://www.1.fm/content/images/logo/04X560.png
+TOP 40
+
+https://www.1.fm/stations
+https://www.1.fm/content/images/logo/04X560.png
+All stations from 1.fm
 
 http://23.82.11.87:21928/stream
 https://calmradio.com/templates/calmradio/favicons/apple-touch-icon.png
 CALMRADIO.COM - J Pop
 
-http://216.235.89.171:80/hitlist
+https://powerhitz.com/Hitlist
 https://powerhitz.com/favicon.ico
-POWERHITZ.COM - THE HITLIST - #1 FOR HIT MUSIC
+POWERHITZ.COM - THE HITLIST
+
+https://powerhitz.com/ThePlanet
+https://powerhitz.com/images/menu/theplanet.png
+The Planet
+
+https://powerhitz.com/OfficeMix
+https://powerhitz.com/images/menu/officemix-80x80.png
+The office Mix
 
 https://zeno.fm/radio/anime-flash/?
 https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FPB9HVXvxKxsVbSuK_FKi5-twSDgaDtGzCIolTBrgakc%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2QwMDE1OGEyLTY2NDgtNDNlOS1hYzJjLTI2NTI4MmJkOGI3NC9pbWFnZS8_dXBkYXRlZD0xNjc1Nzc4OTMzMDAw.webp&w=1920&q=100
@@ -25,6 +41,10 @@ Kamehouse Station
 http://stream.tsubakianimeradio.com:9000/stream/1/
 http://tsubakianimeradio.com/wp-content/uploads/2020/08/logo-new.png
 Tsubaki Web Radio
+
+http://tsubakianimeradio.com/
+http://tsubakianimeradio.com/wp-content/uploads/2020/08/logo-new.png
+Tsubaki Web Radio (Website)
 
 http://hyades.shoutca.st:8551/stream
 https://www.shoutcast.com/images/shoutcast.svg
@@ -86,20 +106,24 @@ http://79.111.119.111:8002/jrock
 http://radcap.ru/graf2/radcaplogo-hor.svg
 Radio Caprice J-Rock
 
-http://79.111.119.111:8002/anime
+http://radcap.ru/anime.html
 http://radcap.ru/graf2/radcaplogo-hor.svg
 Radio Caprice Anime
 
-http://54.37.73.148:8000/stream
+https://radioaoi.pl/player/
 https://radioaoi.pl/wp-content/themes/RadioAoi/images/favicon.png
 Radio AOI
 
-http://stm24.srvstm.com:9526/
+http://stm24.srvstm.com:9526/index.html?sid=1
+https://www.akiba.com.br/imagem/todas/logo_akiba.png
+Radio Akiba Brasil (Shoutcast)
+
+https://www.akiba.com.br/
 https://www.akiba.com.br/imagem/todas/logo_akiba.png
 Radio Akiba Brasil
 
-http://91.121.110.129:8030/radio.mp3/;
-https://kwii.xyz/ext/planetstyles/flightdeck/store/kawaii-logo1500.png
+https://tunein.com/radio/Kawaii-Anime-Radio-s232606/
+https://cdn-profiles.tunein.com/s232606/images/logod.png?t=637193869350000000
 Kawaii Anime Radio
 
 http://radio.jphip.com:8800/
@@ -169,10 +193,6 @@ Radio Nami
 https://japan-next.blogspot.com/
 https://1.bp.blogspot.com/-WYvLtD46Tik/XHuMLFCHJTI/AAAAAAAAHag/zil8qukJvU8eWZvlbqIHZT8Ej9NZ-dRvwCK4BGAYYCw/s1600/Logo%2Bcopia.png
 Japan Next
-
-http://tsubakianimeradio.com/
-http://tsubakianimeradio.com/wp-content/uploads/2020/08/logo-new.png
-TSUBAKI ANIME RADIO
 
 https://www.isekaianimeradio.net/
 https://www.isekaianimeradio.net/images/icons/favicon.ico
