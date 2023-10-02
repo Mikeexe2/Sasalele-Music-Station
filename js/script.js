@@ -1,10 +1,14 @@
 const websites = [
     { name: 'Google', url: 'https://www.google.com/search?q=' },
     { name: 'YouTube', url: 'https://www.youtube.com/results?search_query=' },
-
+    { name: 'Netease', url: 'https://music.163.com/#/search/m/?s=' },
+    { name: 'MusicEnc', url: 'https://www.musicenc.com/?search=' },
+    { name: 'Kugeci', url: 'https://www.kugeci.com/search?q=' },
+    { name: 'FollowLyrics', url: 'https://zh.followlyrics.com/search?name=' },
+    { name: '巴哈姆特', url: 'https://m.gamer.com.tw/search.php?q=' },
+    { name: 'J-Lyric.net', url: 'https://search3.j-lyric.net/index.php?ex=on&ct=2&ca=2&cl=2&kt=' }
 ];
 
-// Get HTML elements
 const searchInput = document.getElementById('searchInput');
 const searchButton = document.getElementById('searchButton');
 const websiteList = document.getElementById('websiteList');
@@ -25,9 +29,18 @@ searchButton.addEventListener('click', function () {
             listItem.appendChild(link);
             websiteList.appendChild(listItem);
         });
+    } else {
+        searchInput.classList.add('error');
+        searchInput.placeholder = 'Please enter a search term';
     }
 });
 
+// Event listener for Enter key press
+searchInput.addEventListener('keyup', function (event) {
+    if (event.key === 'Enter') {
+        searchButton.click();
+    }
+});
 var m3uFileURL = "https://raw.githubusercontent.com/Mikeexe2/Internet-radio-stream-links/main/all.m3u";
 
 // Fetch the M3U file
