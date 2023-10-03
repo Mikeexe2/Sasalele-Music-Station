@@ -6,7 +6,7 @@
   z-index: 9999;
   width: 100%;
   padding: 8px;
-  background-image: linear-gradient(to right, #beeea6, #a3b6f7);
+  background-image: linear-gradient(to right, #beeea6, #f7a3b8);
 }
 
 body {
@@ -244,7 +244,16 @@ footer {
   margin-left: 60px;
 }
 
-@media only screen and (max-width: 600px) {
+@viewport {
+  width: device-width;
+  zoom: 1.1;
+  min-zoom: 0.4;
+  max-zoom: 2;
+  user-zoom: fixed;
+}
+
+@media only screen and (max-width: 480px) {
+
   .dh {
     display: block;
     position: static;
