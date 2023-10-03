@@ -31,7 +31,6 @@ searchButton.addEventListener('click', function () {
         });
     } else {
         searchInput.classList.add('error');
-        searchInput.placeholder = 'Please enter a search term';
     }
 });
 
