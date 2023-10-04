@@ -1,45 +1,3 @@
-const websites = [
-    { name: 'Google', url: 'https://www.google.com/search?q=' },
-    { name: 'YouTube', url: 'https://www.youtube.com/results?search_query=' },
-    { name: 'Netease', url: 'https://music.163.com/#/search/m/?s=' },
-    { name: 'MusicEnc', url: 'https://www.musicenc.com/?search=' },
-    { name: 'Kugeci', url: 'https://www.kugeci.com/search?q=' },
-    { name: 'FollowLyrics', url: 'https://zh.followlyrics.com/search?name=' },
-    { name: '巴哈姆特', url: 'https://m.gamer.com.tw/search.php?q=' },
-    { name: 'J-Lyric.net', url: 'https://search3.j-lyric.net/index.php?ex=on&ct=2&ca=2&cl=2&kt=' }
-];
-
-const searchInput = document.getElementById('searchInput');
-const searchButton = document.getElementById('searchButton');
-const websiteList = document.getElementById('websiteList');
-
-// Event listener for search button click
-searchButton.addEventListener('click', function () {
-    const searchTerm = searchInput.value.trim();
-    if (searchTerm !== '') {
-        websiteList.innerHTML = ''; // Clear previous website list
-
-        // Create list items for each website
-        websites.forEach(function (website) {
-            const listItem = document.createElement('li');
-            const link = document.createElement('a');
-            link.href = website.url + encodeURIComponent(searchTerm);
-            link.target = '_blank';
-            link.textContent = website.name;
-            listItem.appendChild(link);
-            websiteList.appendChild(listItem);
-        });
-    } else {
-        searchInput.classList.add('error');
-    }
-});
-
-// Event listener for Enter key press
-searchInput.addEventListener('keyup', function (event) {
-    if (event.key === 'Enter') {
-        searchButton.click();
-    }
-});
 var m3uFileURL = "https://raw.githubusercontent.com/Mikeexe2/Internet-radio-stream-links/main/all.m3u";
 
 // Fetch the M3U file
@@ -106,7 +64,7 @@ fetch(m3uFileURL)
         });
     });
 
-
+// Dynamically list out website from github
 const websitesContainer = document.querySelector('.websites');
 
 fetch("https://raw.githubusercontent.com/Mikeexe2/Internet-radio-stream-links/main/websites.txt")
@@ -134,7 +92,6 @@ fetch("https://raw.githubusercontent.com/Mikeexe2/Internet-radio-stream-links/ma
 
             const image = document.createElement('img');
             image.src = imageSrc;
-            image.alt = 'network error';
 
             linkElement.appendChild(image);
             container.appendChild(linkElement);
@@ -150,3 +107,74 @@ fetch("https://raw.githubusercontent.com/Mikeexe2/Internet-radio-stream-links/ma
         console.error('Error retrieving data:', error);
     });
 
+// Search function
+const searchInput = document.getElementById('searchInput');
+const searchButton = document.getElementById('searchButton');
+const websites = document.querySelectorAll('.button');
+const innerContainer = document.querySelector('.inner');
+const searchTermsContainer = document.getElementById('searchTerms');
+
+searchButton.addEventListener('click', () => {
+    const searchTerm = searchInput.value.trim();
+
+    if (searchTerm !== '') {
+        innerContainer.style.display = 'block';
+        searchTermsContainer.textContent = searchTerm;
+    } else {
+        searchInput.classList.add('error');
+    }
+    // Clear the input field
+    searchInput.value = '';
+});
+
+searchInput.addEventListener('keyup', function (event) {
+    if (event.key === 'Enter') {
+        searchButton.click();
+    }
+});
+
+const websiteButtons = document.querySelectorAll('.button');
+
+for (let i = 0; i < websiteButtons.length; i++) {
+    websiteButtons[i].addEventListener('click', function () {
+        const websiteLabel = this.querySelector('.button-label').textContent;
+        const searchTerm = searchTermsContainer.textContent;
+        const websiteURL = getWebsiteURL(websiteLabel, searchTerm);
+        if (websiteURL !== '') {
+            window.open(websiteURL, '_blank');
+        }
+    });
+}
+// Search result links generation
+function getWebsiteURL(label, searchTerm) {
+    const encodedSearchTerm = encodeURIComponent(searchTerm);
+
+    switch (label) {
+        case 'Spotify':
+            return `https://open.spotify.com/search/${encodedSearchTerm}`;
+        case 'Apple Music':
+            return `https://music.apple.com/search?term=${encodedSearchTerm}`;
+        case 'Amazon Music':
+            return `https://music.amazon.com/search/${encodedSearchTerm}`;
+        case 'Amazon Music Japan':
+            return `https://music.amazon.co.jp/search/${encodedSearchTerm}`;
+        case 'YouTube Music':
+            return `https://music.youtube.com/search?q=${encodedSearchTerm}`;
+        case 'YouTube':
+            return `https://www.youtube.com/results?search_query=${encodedSearchTerm}`;
+        case 'VGMdb':
+            return `https://vgmdb.net/search?q=${encodedSearchTerm}`;
+        case 'MusicEnc':
+            return `https://www.musicenc.com/?search=${encodedSearchTerm}`;
+        case 'Kugeci':
+            return `https://www.kugeci.com/search?q=${encodedSearchTerm}`;
+        case '网易云（Netease）':
+            return `https://music.163.com/#/search/m/?s=${encodedSearchTerm}`;
+        case 'J-Lyric.net':
+            return `https://search3.j-lyric.net/index.php?ex=on&ct=2&ca=2&cl=2&kt==${encodedSearchTerm}`;
+        case '巴哈姆特':
+            return `https://m.gamer.com.tw/search.php?q=${encodedSearchTerm}`;
+        default:
+            return '';
+    }
+}
