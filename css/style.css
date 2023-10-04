@@ -1,6 +1,9 @@
 .dh {
   display: flex;
-  position: fixed;
+  position: sticky;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #282828;
   top: 0;
   width: 100%;
   padding: 8px;
@@ -55,7 +58,7 @@ body {
   color: #555;
 }
 
-#search-terms {
+#searchTerms {
   font-size: 24px;
   font-weight: bold;
   color: #ff5733;
@@ -164,6 +167,26 @@ table {
   background-image: url('https://i2.bahamut.com.tw/favicon.svg?v=1689129528');
 }
 
+.icon-kkbox {
+  background-image: url('https://www.kkbox.com/favicon.ico');
+}
+
+.icon-audiomack {
+  background-image: url('https://audiomack.com/static/favicon-32x32.png');
+}
+
+.icon-audarchive {
+  background-image: url('https://archive.org/offshoot_assets/favicon.ico');
+}
+
+.icon-soundcloud {
+  background-image: url('https://a-v2.sndcdn.com/assets/images/sc-icons/favicon-2cadd14bdb.ico');
+}
+
+.icon-shazam {
+  background-image: url('https://www.shazam.com/resources/f6f457227917dcdfc9538fbbb5a931f111648b3d/favicon.ico');
+}
+
 .logo {
   display: flex;
   align-items: center;
@@ -178,7 +201,7 @@ table {
 .banner img {
   float: right;
   width: 100%;
-  height: 40px;
+  height: 100px;
 }
 
 .nav {
@@ -187,11 +210,11 @@ table {
 }
 
 .nav a {
-  text-decoration: none;
+  text-decoration: underline;
   font-size: 20px;
   color: #000000;
   padding: 5px 10px;
-  border-radius: 4px;
+  border-radius: 2px;
 }
 
 .nav a:hover {
@@ -217,6 +240,11 @@ table {
   margin-bottom: 1rem;
   border-radius: 2px;
   color: rgb(3, 3, 3);
+}
+
+audio {
+  width: 200px;
+  height: 60px;
 }
 
 #playlist li:hover a:hover {
@@ -278,7 +306,7 @@ table {
   font-family: Verdana;
   text-align: center;
   background: url(https://raw.githubusercontent.com/Mikeexe2/Internet-radio-stream-links/main/assets/sasalele_bg.jpg) no-repeat center;
-  margin-top: 50px;
+  margin-top: 15px;
   margin-right: 60px;
   margin-left: 60px;
   padding: 2px;
@@ -337,84 +365,219 @@ footer {
 
 @viewport {
   width: device-width;
-  zoom: 1.1;
+  zoom: 1.0;
   min-zoom: 0.4;
   max-zoom: 2;
   user-zoom: fixed;
 }
 
 @media only screen and (max-width: 480px) {
+
+  .dh {
+    display: flex;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    padding: 2px;
+    border-width: 1.5px;
+    border-style: solid;
+    border-color: #282828;
+    background-image: linear-gradient(to right, #beeea6, #f7a3b8);
+  }
+
   .search-container {
-    flex-direction: row;
-    align-items: stretch;
+    display: flex;
+    align-items: center;
+    margin: 1rem auto;
+    width: 80%;
   }
 
   #searchInput {
-    width: 100%;
-    margin-bottom: 10px;
+    flex: 1;
+    padding: 8px;
+    font-size: 10px;
+    border-bottom: 2px solid #555;
+    background-color: #e1d2d2;
   }
 
   #searchButton {
-    margin-left: auto;
-    margin-right: auto;
+    padding: 5px 6px;
+    margin-left: 5px;
   }
 
-  .logo {
-    justify-content: center;
-    margin-bottom: 10px;
+  #searchTerms {
+    font-size: 12px;
+    font-weight: bold;
+    color: #ff5733;
+    text-decoration: none;
+  }
+
+  .label {
+    margin-top: 1px;
+    font-size: 13;
+    font-weight: bold;
+  }
+
+  .inner {
+    padding: 7px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    margin-right: 5px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+  }
+
+  .button-label {
+    font-size: 9px;
+    line-height: 10px;
+    margin-left: 30px;
+  }
+
+  .button {
+    border: 1px solid #666;
+    border-radius: 10%;
+    height: 22px;
+  }
+
+  .button-icon {
+    background-repeat: no-repeat;
+    background-size: contain;
+    float: left;
+    height: 16px;
+    margin-left: 3px;
+    margin-top: 2px;
+    width: 14px;
   }
 
   .logo img {
-    margin-right: 0;
+    width: 35px;
+    height: 35px;
   }
 
-  .nav {
-    flex-direction: row;
+  .banner img {
+    float: center;
+    margin-top: 10px;
+    height: 50px;
+    margin-right: 5px;
+    margin-left: 5px;
   }
 
   .nav a {
-    font-size: 16px;
-    margin-bottom: 10px;
-    margin-right: 0;
+    text-decoration: underline;
+    font-size: 13px;
+    color: #000000;
+    padding: 0.5px 0.5px;
+    border-radius: 1px;
   }
 
   .station {
-    margin-right: 0;
-    margin-left: 0;
+    background-image: linear-gradient(to right, #a6c1ee, #fbc2eb);
+    padding: 2px;
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+
+  .station h1 {
+    font-size: 12px;
+    margin-bottom: 2px;
+  }
+
+  #playlist li {
+    text-align: center;
+    margin-bottom: 0.4rem;
+    border-radius: 10%;
   }
 
   .station li a {
-    margin-right: 0;
-    margin-left: 0;
+    color: #333;
+    padding: 2px 2px;
+    border-radius: 3px;
+    display: block;
   }
 
   #player {
-    position: fixed;
-    margin-top: 100px;
+    position: sticky;
     display: flex;
-    flex-shrink: 5;
+    padding: 3px;
+    border-radius: 5%;
   }
 
   #player .cover {
-    margin-right: 0;
+    margin-right: 1px;
   }
 
-  .heading,
-  .radio,
-  .download,
-  .websites,
-  footer {
-    margin-right: 0;
-    margin-left: 0;
+  #player .cover img {
+    width: 50px;
+    height: auto;
+    border-radius: 50%;
+  }
+
+  #stationName {
+    margin: 1px 1px;
+    font-size: 14px;
+  }
+
+  audio {
+    width: 200px;
+    height: 60px;
+  }
+
+  .heading {
+    font-size: 14px;
+    color: #ffffff;
+    margin-right: 5px;
+    margin-left: 5px;
+    padding: 2px;
+  }
+
+  .radio {
+    font-size: 14px;
+    text-align: center;
+    margin-top: 2px;
+    margin-right: 5px;
+    margin-left: 5px;
+    padding: 2px;
+  }
+
+  .download {
+    padding-top: 1rem;
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+
+  .websites {
+    padding: 1px;
+    margin-right: 5px;
+    margin-left: 5px;
   }
 
   .container {
-    flex-basis: 20%;
-    margin-bottom: 0.2rem;
+    flex-basis: 18%;
+    padding: 0.05rem;
+  }
+
+  .container h5 {
+    font-weight: 500;
+    font-size: 0.6rem;
+    padding: 0.05rem;
+  }
+
+  .container:hover {
+    padding: 0.06rem;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    background-color: #86abeb;
   }
 
   .container img {
-    width: 120px;
-    height: 120px;
+    width: 40px;
+    height: 40px;
+  }
+
+  footer {
+    text-align: center;
+    padding: 5px;
+    margin-right: 10px;
+    margin-left: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
   }
 }
