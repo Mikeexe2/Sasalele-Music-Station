@@ -156,24 +156,36 @@ function getWebsiteURL(label, searchTerm) {
             return `https://music.apple.com/search?term=${encodedSearchTerm}`;
         case 'Amazon Music':
             return `https://music.amazon.com/search/${encodedSearchTerm}`;
-        case 'Amazon Music Japan':
+        case 'Amazon Japan':
             return `https://music.amazon.co.jp/search/${encodedSearchTerm}`;
-        case 'YouTube Music':
-            return `https://music.youtube.com/search?q=${encodedSearchTerm}`;
         case 'YouTube':
             return `https://www.youtube.com/results?search_query=${encodedSearchTerm}`;
-        case 'VGMdb':
-            return `https://vgmdb.net/search?q=${encodedSearchTerm}`;
-        case 'MusicEnc':
-            return `https://www.musicenc.com/?search=${encodedSearchTerm}`;
-        case 'Kugeci':
-            return `https://www.kugeci.com/search?q=${encodedSearchTerm}`;
+        case 'YouTube Music':
+            return `https://music.youtube.com/search?q=${encodedSearchTerm}`;
         case '网易云（Netease）':
             return `https://music.163.com/#/search/m/?s=${encodedSearchTerm}`;
+        case 'KKBOX':
+            return `https://www.kkbox.com/my/en/search?q=${encodedSearchTerm}`;
+        case 'VGMdb':
+            return `https://vgmdb.net/search?q=${encodedSearchTerm}`;
+        case 'Audiomack':
+            return `https://audiomack.com/search?q=${encodedSearchTerm}`;
+        case 'MusicEnc':
+            return `https://www.musicenc.com/?search=${encodedSearchTerm}`;
         case 'J-Lyric.net':
             return `https://search3.j-lyric.net/index.php?ex=on&ct=2&ca=2&cl=2&kt==${encodedSearchTerm}`;
+        case 'FollowLyrics':
+            return `https://zh.followlyrics.com/search?name=${encodedSearchTerm}`;
+        case 'Kugeci':
+            return `https://www.kugeci.com/search?q=${encodedSearchTerm}`;
         case '巴哈姆特':
             return `https://m.gamer.com.tw/search.php?q=${encodedSearchTerm}`;
+        case 'Soundcloud':
+            return `https://soundcloud.com/search?q=${encodedSearchTerm}`;
+        case 'Audio Archive':
+            return `https://archive.org/details/audio?query=${encodedSearchTerm}`;
+        case 'Shazam':
+            return `https://www.shazam.com/`;
         default:
             return '';
     }
