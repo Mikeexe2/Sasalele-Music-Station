@@ -6,14 +6,15 @@
   z-index: 9999;
   width: 100%;
   padding: 8px;
-  background-image: linear-gradient(to right, #beeea6, #f7a3b8);
+  background-color: white;
+  color: black;
 }
 
 body {
   font-size: 16px;
   color: #525252;
   font-family: Tahoma, Verdana;
-  background: #afadec;
+  background: white;
 }
 
 .search-container {
@@ -73,14 +74,16 @@ body {
 }
 
 .logo img {
-  width: 50px;
-  height: 50px;
-  margin-right: 10px;
+  width: 60px;
+  height: 60px;
+  margin-right:10px
+
 }
 
 .banner img {
-  width: 500px;
-  height: 50px;
+  margin-top: 25px;
+  width: 600px;
+  height: 85px;
 }
 
 .nav {
@@ -90,29 +93,32 @@ body {
 
 .nav a {
   text-decoration: none;
-  font-size: 25px;
-  color: #000000;
-  padding: 5px 10px;
+  font-size: 20px;
+  color: black;
+  padding: 5px 140px;
   border-radius: 5px;
   margin-right: 10px;
+  margin-top: 12px;
 }
 
 .nav a:hover {
-  background-color: #282828;
+  background-color: lightskyblue;
   color: #fff;
 }
 
 .station {
   text-align: center;
-  background-image: linear-gradient(to right, #a6c1ee, #fbc2eb);
+  background-color: rgb(207, 234, 251);
   padding: 2px;
   margin-right: 60px;
   margin-left: 60px;
+ 
 }
 
 .station h1 {
   font-size: 24px;
   margin-bottom: 5px;
+  
 }
 
 #playlist li {
@@ -122,7 +128,9 @@ body {
   color: rgb(3, 3, 3);
 }
 
-
+.radio h2{
+  margin-top: 25px;
+}
 #playlist li:hover a:hover {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   background-color: #86abeb;
@@ -172,24 +180,26 @@ body {
 
 .heading {
   font-size: 18px;
-  color: #ffffff;
+  color: white;
   font-family: Verdana;
   text-align: center;
-  background: url(https://raw.githubusercontent.com/Mikeexe2/Internet-radio-stream-links/main/assets/sasalele_bg.jpg) no-repeat left;
+  background-color:lightskyblue;
   margin-right: 60px;
   margin-left: 60px;
   padding: 2px;
 }
 
 .radio {
-  font-size: 18px;
-  color: #ffffff;
-  font-family: Verdana;
-  margin-top: 50px;
-  text-align: center;
-  background: url(https://raw.githubusercontent.com/Mikeexe2/Internet-radio-stream-links/main/assets/sasalele_bg.jpg) no-repeat top;
   margin-right: 60px;
   margin-left: 60px;
+  font-size: 18px;
+  color: black;
+  font-family: Verdana;
+  margin-top: 65px;
+  text-align: center;
+  background-color: lightskyblue;
+  
+  
   padding: 2px;
 }
 
