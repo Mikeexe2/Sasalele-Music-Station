@@ -7,14 +7,15 @@
   top: 0;
   width: 100%;
   padding: 8px;
-  background-image: linear-gradient(to right, #beeea6, #f7a3b8);
+  background-color: white;
+  color: black;
 }
 
 body {
   font-size: 16px;
   color: #525252;
   font-family: Tahoma, Verdana;
-  background: #afadec;
+  background: white;
 }
 
 .search-container {
@@ -78,15 +79,18 @@ table {
   text-indent: initial;
   border-spacing: 2px;
   border-color: rgb(0, 0, 0);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .inner {
-  padding: 20px;
+  padding: 5px;
+  text-align: center;
   background-color: #f4f4f4;
   border-radius: 10px;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.25);
-  margin-right: 180px;
-  margin-left: 180px;
+  margin-right: 220px;
+  margin-left: 220px;
   margin-bottom: 20px;
 }
 
@@ -193,15 +197,15 @@ table {
 }
 
 .logo img {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   margin-right: 10px;
 }
 
 .banner img {
-  float: right;
-  width: 100%;
-  height: 100px;
+  margin-top: 25px;
+  width: 600px;
+  height: 85px;
 }
 
 .nav {
@@ -210,15 +214,17 @@ table {
 }
 
 .nav a {
-  text-decoration: underline;
+  text-decoration: none;
   font-size: 20px;
-  color: #000000;
-  padding: 5px 10px;
-  border-radius: 2px;
+  color: black;
+  padding: 5px 70px;
+  border-radius: 5px;
+  margin-right: 10px;
+  margin-top: 12px;
 }
 
 .nav a:hover {
-  background-color: #282828;
+  background-color: lightskyblue;
   color: #fff;
 }
 
@@ -263,7 +269,7 @@ audio {
 #player {
   position: fixed;
   bottom: 0;
-  background-color: #000000;
+  background-color: #5d5c5c;
   display: block;
   align-items: center;
   padding: 10px;
@@ -291,10 +297,10 @@ audio {
 
 .heading {
   font-size: 18px;
-  color: #ffffff;
+  color: white;
   font-family: Verdana;
   text-align: center;
-  background: url(https://raw.githubusercontent.com/Mikeexe2/Internet-radio-stream-links/main/assets/sasalele_bg.jpg) no-repeat left;
+  background-color: lightskyblue;
   margin-right: 60px;
   margin-left: 60px;
   padding: 2px;
@@ -302,14 +308,18 @@ audio {
 
 .radio {
   font-size: 18px;
-  color: #ffffff;
+  color: black;
   font-family: Verdana;
   text-align: center;
-  background: url(https://raw.githubusercontent.com/Mikeexe2/Internet-radio-stream-links/main/assets/sasalele_bg.jpg) no-repeat center;
-  margin-top: 15px;
+  background-color: lightskyblue;
+  margin-top: 20px;
   margin-right: 60px;
   margin-left: 60px;
   padding: 2px;
+}
+
+.radio h2 {
+  margin-top: 25px;
 }
 
 .download {
@@ -351,8 +361,8 @@ audio {
 }
 
 .container img {
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 100px;
 }
 
 footer {
@@ -456,10 +466,9 @@ footer {
 
   .banner img {
     float: center;
-    margin-top: 10px;
+    margin-top: 2px;
     height: 50px;
-    margin-right: 5px;
-    margin-left: 5px;
+    width: 160px;
   }
 
   .nav a {
@@ -471,7 +480,7 @@ footer {
   }
 
   .station {
-    background-image: linear-gradient(to right, #a6c1ee, #fbc2eb);
+    background-color: rgb(207, 234, 251);
     padding: 2px;
     margin-right: 5px;
     margin-left: 5px;
@@ -518,8 +527,8 @@ footer {
   }
 
   audio {
-    width: 200px;
-    height: 60px;
+    width: 400px;
+    height: 80px;
   }
 
   .heading {
