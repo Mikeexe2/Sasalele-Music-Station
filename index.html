@@ -22,101 +22,193 @@
             </div>
             <div class="nav">
                 <a href="index.html#radios">Radio Stations <i class="fas fa-radio"></i></a>
-                <a href="index.html#websites">More Websites <i class="fas fa-globe"></i></a>
-                <a href="index.html#scrap">Search for a song <i class="fas fa-search"></i></a>
-                <a href="index.html#lyrics">Music <i class="fas fa-database"></i></a>
+                <a href="index.html#websites">Websites <i class="fas fa-globe"></i></a>
+                <a href="index.html#scrap">Donwnload <i class="fas fa-download"></i></a>
+                <a href="index.html#search">Search <i class="fas fa-search"></i></a>
             </div>
         </div>
 
-        <section id="radios">
-            <div class="radio">
-                <h2>Radio Stations</h2>
-            </div>
-            <div class="station">
-                <div class="banner">
-                    <img src="https://raw.githubusercontent.com/Mikeexe2/Internet-radio-stream-links/main/assets/sasalele_banner.png"
-                        title="Music" alt="Music" />
-                </div>
-                <ol id="playlist">
-                    <!-- get stations from github -->
-                </ol>
-            </div>
-        </section>
+        <div class="radio" id="radios">
+            <h2>Radio Stations</h2>
+        </div>
 
-        <section id="websites">
-            <div class="websites">
-                <!-- dynamically listed out -->
-            </div>
-        </section>
-        <section id="scrap">
-            <div class="heading">
-                <h2>Download Songs here:</h2>
-            </div>
-            <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Enter song name to search it on ...">
-                <button id="searchButton"><i class="fa fa-search"></i></button>
-            </div>
-            <ul id="websiteList"></ul>
-            <div class="download">
-                <div class="container">
-                    <a href="https://spotifymate.com/" target=" _blank"><img
-                            src="https://spotifymate.com/images/apple-touch-icon.png" alt="Spotify Mate"></a>
-                    <h5>Spotify Mate</h5>
-                </div>
+        <div class="station">
+            <ol id="playlist">
+                <!-- get stations from github -->
+            </ol>
+        </div>
 
-                <div class="container">
-                    <a href="https://bestmp3converter.com/" target=" _blank"><img
-                            src="https://www.youtube.com/img/desktop/yt_1200.png" alt="YTMP3"></a>
-                    <h5>YouTube to MP3 Converter</h5>
-                </div>
+        <div class="websites" id="websites">
+            <!-- dynamically listed out -->
+        </div>
+        <div class="heading" id="search">
+            <h2>Find your song on:</h2>
+        </div>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Enter something to start searching...">
+            <button id="searchButton"><i class="fa fa-search"></i></button>
+        </div>
+        <div class="inner" style="display:none;">
+            <p>You searched for: <span id="searchTerms"></span></p>
+            <div class="label">Search it on:</div>
+            <table class="websiteList">
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="button">
+                                <div class="button-icon icon-youtube"></div>
+                                <div class="button-label">YouTube</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="button">
+                                <div class="button-icon icon-youtubemusic"></div>
+                                <div class="button-label">YouTube Music</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="button">
+                                <div class="button-icon icon-netease"></div>
+                                <div class="button-label">网易云（Netease）</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="button">
+                                <div class="button-icon icon-shazam"></div>
+                                <div class="button-label">Shazam</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="button">
+                                <div class="button-icon icon-soundcloud"></div>
+                                <div class="button-label">Soundcloud</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="button">
+                                <div class="button-icon icon-audarchive"></div>
+                                <div class="button-label">Audio Archive</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="button">
+                                <div class="button-icon icon-vgmdb"></div>
+                                <div class="button-label">VGMdb</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="button">
+                                <div class="button-icon icon-kkbox"></div>
+                                <div class="button-label">KKBOX</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="button">
+                                <div class="button-icon icon-spotify"></div>
+                                <div class="button-label">Spotify</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="button">
+                                <div class="button-icon icon-apple"></div>
+                                <div class="button-label">Apple Music</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="button">
+                                <div class="button-icon icon-amazon"></div>
+                                <div class="button-label">Amazon Music</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="button">
+                                <div class="button-icon icon-amazonjp"></div>
+                                <div class="button-label">Amazon Japan</div>
+                            </div>
+                        </td>
+                    <tr>
+                        <td>
+                            <div class="button">
+                                <div class="button-icon icon-musicenc"></div>
+                                <div class="button-label">MusicEnc</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="button">
+                                <div class="button-icon icon-jlyric"></div>
+                                <div class="button-label">J-Lyric.net</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="button">
+                                <div class="button-icon icon-followlyrics"></div>
+                                <div class="button-label">FollowLyrics</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="button">
+                                <div class="button-icon icon-kugeci"></div>
+                                <div class="button-label">Kugeci</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="button">
+                                <div class="button-icon icon-baha"></div>
+                                <div class="button-label">巴哈姆特</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="button">
+                                <div class="button-icon icon-audiomack"></div>
+                                <div class="button-label">Audiomack</div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <a href="https://chrome.google.com/webstore/detail/shazam-find-song-names-fr/mmioliijnhnoblpgimnlajmefafdfilb"
+                target="_blank">Click
+                here to use shazam extension on your browser<i class="fas fa-search"></i></a>
+        </div>
 
-                <div class="container">
-                    <a href="https://free-mp3-download.net/" target=" _blank"><img
-                            src="https://free-mp3-download.net/img/icon.png" alt="Freemp3"></a>
-                    <h5>Free MP3 Download</h5>
-                </div>
-                <div class="container">
-                    <a href="https://en.mygomp3.com/" target=" _blank"><img src="https://en.mygomp3.com/img/mygomp3.png"
-                            alt="mygomp3"></a>
-                    <h5>Online YouTube MP3 Downloader (mygomp3)</h5>
-                </div>
-                <div class="container">
-                    <a href="https://seinopsys.dev/lrc" target=" _blank"><img
-                            src="https://seinopsys.dev/favicon-16x16.png" alt="SEI"></a>
-                    <h5>LRC Online Editor</h5>
-                </div>
+        <div class="heading" id="scrap">
+            <h2>Download Songs here:</h2>
+        </div>
+        <div class="download">
+            <div class="container">
+                <a href="https://spotifymate.com/" target=" _blank"><img
+                        src="https://spotifymate.com/images/apple-touch-icon.png" alt="Spotify Mate"></a>
+                <h5>Spotify Mate</h5>
             </div>
-        </section>
-        <section id="lyrics">
-            <div class="heading">
-                <h2>Find your song on:</h2>
+
+            <div class="container">
+                <a href="https://bestmp3converter.com/" target=" _blank"><img
+                        src="https://www.youtube.com/img/desktop/yt_1200.png" alt="YTMP3"></a>
+                <h5>YouTube to MP3 Converter</h5>
             </div>
-            <div class="download">
-                <div class="container">
-                    <a href="https://www.kugeci.com/" target=" _blank"><img src="https://www.kugeci.com/img/logo.png"
-                            alt="酷歌词 www.kugeci.com"></a>
-                    <h5>酷歌词 www.kugeci.com</h5>
-                </div>
-                <div class="container">
-                    <a href="https://zh.followlyrics.com/" target=" _blank"><img
-                            src="https://encrypted-tbn2.gstatic.com/faviconV2?url=https://zh.followlyrics.com&client=VFE&size=64&type=FAVICON&fallback_opts=TYPE,SIZE,URL&nfrp=2"
-                            alt="FollowLyrics"></a>
-                    <h5>FollowLyrics</h5>
-                </div>
-                <div class="container">
-                    <a href="https://www.musicenc.com/" target=" _blank"><img
-                            src="https://www.musicenc.com/zb_users/theme/bijiblog/include/touxiang.jpg"
-                            alt="music enc"></a>
-                    <h5>Music enc</h5>
-                </div>
-                <div class="container">
-                    <a href="https://music.163.com/#" target=" _blank"><img
-                            src="http://p3.music.126.net/tBTNafgjNnTL1KlZMt7lVA==/18885211718935735.jpg"
-                            alt="music163"></a>
-                    <h5>网易云音乐</h5>
-                </div>
+            <div class="container">
+                <a href="https://free-mp3-download.net/" target=" _blank"><img
+                        src="https://free-mp3-download.net/img/icon.png" alt="Freemp3"></a>
+                <h5>Free MP3 Download</h5>
             </div>
-        </section>
+            <div class="container">
+                <a href="https://en.mygomp3.com/" target=" _blank"><img src="https://en.mygomp3.com/img/mygomp3.png"
+                        alt="mygomp3"></a>
+                <h5>Online YouTube MP3 Downloader (mygomp3)</h5>
+            </div>
+            <div class="container">
+                <a href="https://seinopsys.dev/lrc" target=" _blank"><img src="https://seinopsys.dev/favicon-16x16.png"
+                        alt="SEI"></a>
+                <h5>LRC Online Editor</h5>
+            </div>
+        </div>
+
         <div id="player">
             <div class="cover">
                 <img src="https://radiojhero.com/assets/playlist.6ef1aa8f.gif" alt="miku" id="miku-gif" />
@@ -126,6 +218,10 @@
             </div>
             <p id="stationName">Click miku gif to random play</p>
             <audio id="miniPlayer" controls preload="auto"></audio>
+        </div>
+        <div class="banner">
+            <img src="https://raw.githubusercontent.com/Mikeexe2/Internet-radio-stream-links/main/assets/sasalele_banner.png"
+                title="Music" alt="Music" />
         </div>
         <footer>
             <p>&copy; 2023 Sasalele team. All rights reserved.</p>
