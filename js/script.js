@@ -186,6 +186,8 @@ function getWebsiteURL(label, searchTerm) {
             return `https://archive.org/details/audio?query=${encodedSearchTerm}`;
         case 'Shazam':
             return `https://www.shazam.com/`;
+        case 'Google':
+            return `https://www.google.com/search?q=${encodedSearchTerm}`;
         default:
             return '';
     }
