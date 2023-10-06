@@ -20,7 +20,7 @@ Anime Radio Stations
 
 http://radio.llolo.lol:8000/streambot.mp3
 http://dir.xiph.org/static/img/logo_jumbo.svg
-radio.llolo.lol (Mostly relaxing music to code to)
+radio.llolo.lol
 
 http://23.82.11.87:21928/stream
 https://calmradio.com/templates/calmradio/favicons/apple-touch-icon.png
