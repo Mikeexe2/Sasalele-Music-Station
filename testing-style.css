@@ -191,6 +191,10 @@ table {
   background-image: url('https://www.shazam.com/resources/f6f457227917dcdfc9538fbbb5a931f111648b3d/favicon.ico');
 }
 
+.icon-google {
+  background-image: url('https://www.gstatic.com/images/branding/product/ico/googleg_alldp.ico');
+}
+
 .logo {
   display: flex;
   align-items: center;
