@@ -7,7 +7,7 @@
   top: 0;
   width: 100%;
   padding: 8px;
-  background-color: white;
+  background: linear-gradient(to right, #E5CCC9, #FEC5E5, #FFD1DC);
   color: black;
 }
 
@@ -15,7 +15,7 @@ body {
   font-size: 16px;
   color: #525252;
   font-family: Tahoma, Verdana;
-  background: white;
+  background: linear-gradient(to right, #a6c1ee, #fbc2eb);
 }
 
 .search-container {
@@ -266,7 +266,7 @@ audio {
   color: #333;
   padding: 5px 5px;
   border-radius: 3px;
-  background-color: #ffffff;
+  background-color: #FFD1DC;
   display: block;
 }
 
@@ -312,10 +312,10 @@ audio {
 
 .radio {
   font-size: 18px;
-  color: black;
+  color: #696880;
   font-family: Verdana;
   text-align: center;
-  background-color: lightskyblue;
+  background-color: ;
   margin-top: 20px;
   margin-right: 60px;
   margin-left: 60px;
