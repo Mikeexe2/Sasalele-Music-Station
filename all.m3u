@@ -1,4 +1,8 @@
 #EXTM3U
+#EXTINF:0, Friends Forever Internet Radio
+https://s5.radio.co/s6140c7241/listen
+#EXTINF:0, DoujinStyle Radio
+https://streams.radio.co/s5ff57669c/listen
 #EXTINF:0, 80s
 https://snkazuracast5.com:8000/radio.mp3
 #EXTINF:0, Vocaloid Radio on mikupa
