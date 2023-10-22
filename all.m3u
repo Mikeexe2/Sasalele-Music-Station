@@ -1,14 +1,32 @@
 #EXTM3U
 #EXTINF:0, LISTEN.MOE
 https://listen.moe/stream
+#EXTINF:0,  r-a-d.io
+https://stream.r-a-d.io/main.mp3
 #EXTINF:0, Friends Forever Internet Radio
 https://s5.radio.co/s6140c7241/listen
 #EXTINF:0, DoujinStyle Radio
 https://streams.radio.co/s5ff57669c/listen
-#EXTINF:0, 80s
-https://snkazuracast5.com:8000/radio.mp3
+#EXTINF:0, Anison.FM (128Kbs)
+https://pool.anison.fm/AniSonFM(128)
+#EXTINF:0, Anison.FM (256Kbs)
+https://pool.anison.fm/AniSonFM(256)
+#EXTINF:0, Anison.FM (320Kbs)
+https://pool.anison.fm/AniSonFM(320)
+#EXTINF:0, Big B Radio - Jpop
+https://antares.dribbcast.com/proxy/jpop?mp=/s
+#EXTINF:0, Big B Radio
+https://antares.dribbcast.com/proxy/apop?mp=/s
+#EXTINF:0, BOX: J-POP  Radio
+http://play.streamafrica.net/jpopradio%20
+#EXTINF:0, BOX :/apan City Pop -
+https://play.streamafrica.net/JapanCityPop
+#EXTINF:0, BOX :/-POP Radio -
+https://play.streamafrica.net/jpopradio
 #EXTINF:0, Vocaloid Radio on mikupa
 http://aska.ru-hoster.com:8093/mikuparu
+#EXTINF:0, 80s
+https://snkazuracast5.com:8000/radio.mp3
 #EXTINF:0, 90s
 https://snkazuracast5.com:8010/radio.mp3
 #EXTINF:0, Akari Radio
@@ -49,30 +67,7 @@ http://stream.animeradio.de/animeradio.mp3
 http://stream-47.zeno.fm:80/tqnyyz5r8neuv?zs=l4ID561kTbC1MWt2H9x29A
 #EXTINF:0, Animu FM
 http://cast.animu.com.br:9079/stream
-#EXTINF:0, Anison.FM (128Kbit)
-https://pool.anison.fm/AniSonFM(128)
-#EXTINF:0, Anison.FM (256Kbit)
-https://pool.anison.fm/AniSonFM(256)
-#EXTINF:0, Anison.FM (320Kbit)
-https://pool.anison.fm/AniSonFM(320)
-#EXTINF:0, Big B Radio - Jpop
-https://antares.dribbcast.com/proxy/jpop?mp=/s
-#EXTINF:0, Big B Radio
-https://antares.dribbcast.com/proxy/apop?mp=/s
-#EXTINF:0, BOX: J-POP  Radio
-http://play.streamafrica.net/jpopradio%20
-#EXTINF:0, BOX :/apan City Pop -
-https://play.streamafrica.net/JapanCityPop
-#EXTINF:0, BOX :/-POP Radio -� 
-https://play.streamafrica.net/jpopradio
-#EXTINF:0, Fan World Anime Radio
-http://184.154.45.106:8461/autodj
-#EXTINF:0, Geek Radio Music
-http://stream.zenolive.com/8d0xskxsxxquv
-#EXTINF:0, Geheimwelt
-http://geheimwelt.stream.laut.fm/geheimwelt
-#EXTINF:0,Gensokyo Radio | 24/7 Touhou Music Stream
-https://stream.gensokyoradio.net/3
+#EXTINF:0, Gensokyo Radio | 24/7 Touhou Music Stream
 https://stream.gensokyoradio.net/1
 #EXTINF:0, ILOVEANIMEMANGA
 http://stream.laut.fm/iloveanimemanga
@@ -108,8 +103,6 @@ http://kawaii-music.stream.laut.fm/kawaii-music
 https://kathy.torontocast.com:2600/stream
 #EXTINF:0, Nichijou Shuffle
 http://stream.zeno.fm/tncreqmcwnhvv
-#EXTINF:0, LISTEN_MOE
-https://listen.moe/stream
 #EXTINF:0, Oku FM
 http://stream.zeno.fm/nrpe1a0n3p8uv
 #EXTINF:0, Only Hit Japan
@@ -123,8 +116,6 @@ http://otaku-world.stream.laut.fm/otaku-world
 http://stream.phate.io/phatecc
 #EXTINF:0, PurePure
 http://purepure.stream.laut.fm/purepure
-#EXTINF:0,  r-a-d.io
-https://stream.r-a-d.io/main.mp3
 #EXTINF:0, Radio 3d6 GDL
 http://stream-51.zeno.fm/xug9mpg0k2zuv?zs=
 #EXTINF:0, Radio Anime 24
@@ -246,3 +237,9 @@ http://stream.zenolive.com/qpn8mkt8c4duv.aac
 http://stream.zenolive.com/9veewz5r8neuv.aac
 #EXTINF:0, RADIO ALFA ANIME
 https://stream.rcast.net/67511.m3u
+#EXTINF:0, Fan World Anime Radio
+http://184.154.45.106:8461/autodj
+#EXTINF:0, Geek Radio Music
+http://stream.zenolive.com/8d0xskxsxxquv
+#EXTINF:0, Geheimwelt
+http://geheimwelt.stream.laut.fm/geheimwelt
