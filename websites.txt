@@ -1,3 +1,15 @@
+http://radio.garden/visit/
+https://radio.garden/public/icons/ios/ios-appicon-76-76.png
+Radio Garden
+
+https://tunein.com/radio/Stream-Anime-g2752/
+https://cdn-web.tunein.com/assets/img/apple-touch-icon-180.png
+Stream Anime TuneIn
+
+https://onlineradiobox.com/genre/anime/
+https://cdn.onlineradiobox.com/img/ios_favicon.png
+Anime Radio Stations
+
 https://r-a-d.io/
 https://r-a-d.io/assets/logo_image_small.png
 r-a-d.io/
@@ -9,14 +21,6 @@ LISTEN.moe
 https://en.anison.fm/
 https://en.anison.fm/images/logo_h_en.png
 Anison.FM
-
-https://tunein.com/radio/Stream-Anime-g2752/
-https://cdn-web.tunein.com/assets/img/apple-touch-icon-180.png
-Stream Anime TuneIn
-
-https://onlineradiobox.com/genre/anime/
-https://cdn.onlineradiobox.com/img/ios_favicon.png
-Anime Radio Stations
 
 http://radio.llolo.lol:8000/streambot.mp3
 http://dir.xiph.org/static/img/logo_jumbo.svg
@@ -221,6 +225,34 @@ Omg kpop
 http://163.172.169.217:80/asp-s
 https://ambientsleepingpill.com/logo.png
 Ambient sleeping pill
+
+https://www.jcbasimul.com/
+https://www.jcbasimul.com/images/jcba/apple-touch-icon.png
+JCBAインターネットサイマルラジオ
+
+https://tunein.com/radio/Stream-Japanese-Talk-g349/
+https://cdn-web.tunein.com/assets/img/apple-touch-icon-180.png
+Japanese Talk Podcasts
+
+https://www.simulradio.info/
+https://www.simulradio.info/images/logo2.png
+サイマルラジオ (SimulRadio)
+
+https://radiko.jp/
+https://radiko.jp/images/radiko-icon-circle.png?_=1
+radiko(ラジコ)
+
+https://www.j-wave.co.jp/
+https://www.j-wave.co.jp/apple-touch-icon.jpg
+J-WAVE 81.3 FM RADIO | FMラジオ局
+
+https://www.tfm.co.jp/
+https://www.tfm.co.jp/img/touch-icon.png
+TOKYO FM 80.0MHz
+
+https://www.nhk.or.jp/radio/
+https://www.nhk.or.jp/radio/img/brand.png
+NHKラジオ らじる★らじる
 
 http://61.89.201.27:8000/radikishi.mp3
 https://www.radiokishiwada.jp/data/html/template/default/img/common/facebook_ogp.jpg
