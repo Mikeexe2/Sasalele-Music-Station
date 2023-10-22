@@ -1,4 +1,6 @@
 #EXTM3U
+#EXTINF:0, LISTEN.MOE
+https://listen.moe/stream
 #EXTINF:0, Friends Forever Internet Radio
 https://s5.radio.co/s6140c7241/listen
 #EXTINF:0, DoujinStyle Radio
