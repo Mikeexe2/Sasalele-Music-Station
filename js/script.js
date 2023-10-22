@@ -1,4 +1,4 @@
-var m3uFileURL = "https://raw.githubusercontent.com/Mikeexe2/Internet-radio-stream-links/main/all.m3u";
+var m3uFileURL = "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/all.m3u";
 
 // Fetch the M3U file
 fetch(m3uFileURL)
@@ -22,12 +22,12 @@ fetch(m3uFileURL)
                 // Create a new list item element
                 var li = document.createElement('li');
                 var a = document.createElement('a');
+                var playIcon = document.createElement('i');
 
                 // Set the link and name attributes
                 a.href = link;
                 a.textContent = name;
-
-                // Add an event listener to play the station when clicked
+                
                 a.addEventListener('click', function (event) {
                     event.preventDefault();
 
@@ -43,6 +43,9 @@ fetch(m3uFileURL)
                 a.setAttribute('data-link', link);
                 a.setAttribute('station-name', name);
 
+                playIcon.classList.add('fas', 'fa-play');
+                a.insertBefore(playIcon, a.firstChild);
+
                 // Append the link to the list item
                 li.appendChild(a);
 
@@ -51,7 +54,7 @@ fetch(m3uFileURL)
             }
         }
 
-        // Add event listener to the cover image (miku-gif) for random play
+        // random play
         var cover = document.getElementById('miku-gif');
         cover.addEventListener('click', function () {
             var playlist = document.getElementById('playlist');
@@ -67,7 +70,7 @@ fetch(m3uFileURL)
 // Dynamically list out website from github
 const websitesContainer = document.querySelector('.websites');
 
-fetch("https://raw.githubusercontent.com/Mikeexe2/Internet-radio-stream-links/main/websites.txt")
+fetch("https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/websites.txt")
     .then(response => response.text())
     .then(data => {
         // Split the data into individual websites
@@ -162,7 +165,7 @@ function getWebsiteURL(label, searchTerm) {
             return `https://www.youtube.com/results?search_query=${encodedSearchTerm}`;
         case 'YouTube Music':
             return `https://music.youtube.com/search?q=${encodedSearchTerm}`;
-        case '网易云（Netease）':
+        case '网易云':
             return `https://music.163.com/#/search/m/?s=${encodedSearchTerm}`;
         case 'KKBOX':
             return `https://www.kkbox.com/my/en/search?q=${encodedSearchTerm}`;
@@ -179,7 +182,7 @@ function getWebsiteURL(label, searchTerm) {
         case 'Kugeci':
             return `https://www.kugeci.com/search?q=${encodedSearchTerm}`;
         case '巴哈姆特':
-            return `https://m.gamer.com.tw/search.php?q=${encodedSearchTerm}`;
+            return `https://m.gamer.com.tw/search.php?q=${encodedSearchTerm}+歌詞`;
         case 'Soundcloud':
             return `https://soundcloud.com/search?q=${encodedSearchTerm}`;
         case 'Audio Archive':
@@ -188,7 +191,289 @@ function getWebsiteURL(label, searchTerm) {
             return `https://www.shazam.com/`;
         case 'Google':
             return `https://www.google.com/search?q=${encodedSearchTerm}`;
+        case 'Google(Lyrics)':
+            return `https://www.google.com/search?q=${encodedSearchTerm}+歌詞 `;
+        case 'Uta-net':
+            return `https://www.uta-net.com/search/?target=art&type=in&keyword=${encodedSearchTerm}`;
         default:
             return '';
     }
+}
+
+const CLIENT_ID = '993505903479-tk48veqhlu2r1hiu9m2hvaq2l81urnla.apps.googleusercontent.com';
+const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest';
+const SCOPES = 'https://www.googleapis.com/auth/drive.readonly';
+
+let tokenClient;
+let gapiInited = false;
+let gisInited = false;
+
+function gapiLoaded() {
+    gapi.load('client', initializeGapiClient);
+}
+
+async function initializeGapiClient() {
+    await gapi.client.init({
+        discoveryDocs: [DISCOVERY_DOC],
+    });
+    gapiInited = true;
+}
+
+function gisLoaded() {
+    tokenClient = google.accounts.oauth2.initTokenClient({
+        client_id: CLIENT_ID,
+        scope: SCOPES,
+        callback: '',
+    });
+    gisInited = true;
+}
+
+function handleAuthClick(folderId) {
+    tokenClient.callback = async (resp) => {
+        if (resp.error !== undefined) {
+            throw (resp);
+        }
+
+        getContents(folderId, "initial");
+        localStorage.setItem("returning", "true");
+        document.getElementById('return').style.display = 'none';
+
+        gapi.client.drive.about.get({
+            'fields': "user",
+        }).then(function (response) {
+            window.location.hash = '#~' + response.result.user.permissionId;
+        });
+    };
+
+    if (gapi.client.getToken() === null) {
+        tokenClient.requestAccessToken({ prompt: '' });
+    } else {
+        tokenClient.requestAccessToken({ prompt: '' });
+    }
+}
+
+function handleSignoutClick() {
+    const token = gapi.client.getToken();
+    if (token !== null) {
+        google.accounts.oauth2.revoke(token.access_token);
+        gapi.client.setToken('');
+    }
+}
+
+
+function getContents(id, type) {
+    var contentsQuery = "'" + id + "'" + " in parents and trashed = false ";
+    gapi.client.drive.files.list({
+        'pageSize': 1000,
+        'q': contentsQuery,
+        'orderBy': 'name',
+        'fields': "nextPageToken, files(id, name, mimeType, webContentLink)"
+    }).then(function (response) {
+
+        // hide intro
+        document.getElementById('intro').style.display = 'none';
+
+        // set location
+        if (type == "initial") {
+            var location = "contents";
+        } else {
+            var location = id;
+
+            // check for previous load
+            if (document.getElementById(location).classList.contains("loaded")) {
+                return;
+            }
+        }
+
+        var files = response.result.files;
+        if (files && files.length > 0) {
+
+            // loop folders
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+
+                if (file.mimeType.includes("application/vnd.google-apps.folder")) {
+                    document.getElementById(location).innerHTML += `
+          <details id="${file.id}">
+            <summary onclick="getContents('${file.id}')">${file.name}</summary>
+          </details>
+          `;
+                }
+                document.getElementById(location).classList.add("loaded");
+            }
+
+            // loop files
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+
+                if (file.mimeType.includes("audio")) {
+                    document.getElementById(location).innerHTML += `
+          <button class="track" onclick="playTrack('${file.id}', this)"><i class="fas fa-play"></i> ${file.name}</button>
+          `;
+                }
+
+                document.getElementById(location).classList.add("loaded");
+            }
+
+        } else {
+            alert('No files found.');
+        }
+
+        document.getElementById(location).firstElementChild.focus();
+    });
+}
+
+/* ----------------------- */
+/* ------USER FOLDER------ */
+/* ----------------------- */
+
+function submitFolderId(e) {
+    e.preventDefault();
+    localStorage.setItem("parentfolder", document.getElementById('parentfolder').value);
+    handleAuthClick(document.getElementById('parentfolder').value);
+}
+
+function getFolderId() {
+    document.getElementById('parentfolder').value = localStorage.getItem("parentfolder");
+}
+
+/* ----------------------- */
+/* ---------AUDIO--------- */
+/* ----------------------- */
+
+audio = document.getElementById('audio');
+source = document.getElementById('source');
+if (document.getElementsByClassName("playing")[0]) {
+    playing = document.getElementsByClassName("playing")[0];
+} else {
+    playing = false;
+}
+
+function playTrack(id, element, type) {
+    // check if clicked track is already 'playing'
+    if (element == playing) {
+        if (audio.paused) {
+            audio.play();
+        } else {
+            audio.pause();
+        }
+        return;
+    }
+
+    // check for something already 'playing'
+    if (playing) {
+        resetIconToPlay();
+        playing.classList.remove("playing");
+    }
+
+    // set new track
+    element.classList.add("playing");
+    playing = document.getElementsByClassName("playing")[0];
+    audio.pause();
+    source.src = "";
+    audio.load();
+
+    spinner = `
+    <div id="spinner">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  `;
+    playing.innerHTML += spinner;
+
+    // demo track
+    if (type == "demo") {
+        source.src = "https://drive.google.com/uc?id=" + id + "&export=download";
+        audio.load();
+        audio.oncanplay = audio.play();
+        if (document.getElementById("spinner")) {
+            document.getElementById("spinner").remove();
+        }
+        return;
+    }
+
+    // user track
+    gapi.client.drive.files.get({
+        'fileId': id,
+        'alt': 'media',
+    }).then(function (response) {
+        dataArr = Uint8Array.from(response.body.split('').map((chr) => chr.charCodeAt(0)));
+        file = new File([dataArr], 'audiofilename', { type: response.headers['Content-Type'] });
+        source.src = URL.createObjectURL(file);
+        source.type = response.headers['Content-Type'];
+        audio.load();
+        audio.oncanplay = audio.play();
+        if (document.getElementById("spinner")) {
+            document.getElementById("spinner").remove();
+        }
+    });
+}
+
+function prevTrack() {
+    if (audio.currentTime > 3 || !playing.previousElementSibling.previousElementSibling) {
+        audio.currentTime = 0;
+        audio.play();
+    } else if (playing.previousElementSibling.previousElementSibling) {
+        resetIconToPlay();
+        playing.previousElementSibling.click();
+    }
+}
+
+function nextTrack() {
+    if (playing.nextElementSibling) {
+        resetIconToPlay();
+        playing.nextElementSibling.click();
+    }
+}
+
+function resetIconToPlay() {
+    playing.firstChild.classList.remove("fa-pause");
+    playing.firstChild.classList.add("fa-play");
+    if (document.getElementById("bars")) {
+        document.getElementById("bars").remove();
+    }
+}
+
+function resetIconToPause() {
+    playing.firstChild.classList.remove("fa-play");
+    playing.firstChild.classList.add("fa-pause");
+    indicator = `
+    <div id="bars">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  `;
+    playing.innerHTML += indicator;
+}
+
+audio.onended = function () {
+    if (playing.nextElementSibling) {
+        playing.nextElementSibling.focus();
+    }
+    nextTrack();
+};
+
+audio.onpause = function () {
+    resetIconToPlay();
+}
+audio.onplay = function () {
+    resetIconToPause();
+}
+
+
+if (localStorage.getItem("returning") == "true" && localStorage.getItem("parentfolder") !== null) {
+    document.getElementById('return').style.display = 'block';
+} else {
+    document.getElementById('intro').style.display = 'block';
+}
+
+function changeFolder() {
+    document.getElementById('return').style.display = 'none';
+    document.getElementById('intro').style.display = 'block';
+    document.getElementById('parentfolder').focus();
+    localStorage.setItem("returning", "false");
 }
