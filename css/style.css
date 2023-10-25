@@ -1,24 +1,18 @@
 .dh {
   display: flex;
-  position: sticky;
-  border-width: 3px;
+  position: fixed;
+  border-width: 1px;
   border-style: solid;
   border-color: #282727;
   top: 0;
-  left: 0cm;
-  width: 98%;
-  padding: 10px;
-  background: linear-gradient(to right, #E5CCC9, #FEC5E5, #FFD1DC);
+  width: 100%;
+  padding: 5px;
+  background: linear-gradient(to right, #e5ccc9, #fec5e5, #ffd1dc);
 }
 
 body {
-  width: 98%;
+  width: 100%;
   background: linear-gradient(to right, #a6c1ee, #fbc2eb);
-}
-
-p {
-  margin-right: 5px;
-  margin-left: 5px;
 }
 
 .search-container {
@@ -34,12 +28,12 @@ p {
   padding: 10px;
   font-size: 16px;
   border-bottom: 2px solid #555;
-  background-color: #e1d2d2;
+  background-color: #fcdfed;
   transition: all 0.3s ease;
 }
 
 #searchInput.error {
-  border-color: red;
+  border-color: rgb(255, 1, 1);
 }
 
 #searchInput::placeholder {
@@ -47,31 +41,61 @@ p {
 }
 
 #searchButton {
-  background-color: #494949;
-  color: #fff;
-  padding: 10px 20px;
-  border-radius: 1px;
+  background-color: #424141;
+  color: #ffffff;
+  padding: 10px 10px;
+  border-radius: 50%;
   margin-left: 10px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 #searchButton:hover {
-  background-color: #fff;
-  color: #555;
+  background-color: #5991e6;
 }
 
 #searchTerms {
-  font-size: 24px;
+  font-size: 16px;
   font-weight: bold;
-  color: #ff5733;
+  color: #3358ff;
   text-decoration: none;
 }
 
 .label {
-  margin-top: 20px;
-  font-size: 18px;
+  margin-top: 1px;
+  font-size: 15px;
   font-weight: bold;
+}
+
+#lastFMInfo {
+  font-size: 14px;
+  font-weight: bold;
+  justify-content: center;
+}
+
+.card-panel {
+  padding: 5px;
+  border: 1.5px solid #797979;
+}
+
+.video-container {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  width: 300px;
+  height: 200px;
+}
+
+.video-container iframe {
+  width: 100%;
+  height: 100%;
+}
+
+.close-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
 }
 
 table {
@@ -86,16 +110,19 @@ table {
 }
 
 .inner {
-  padding: 10px;
+  padding: 5px;
   text-align: center;
-  background-image: url('https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/search.gif');
-  background-size: 80px;
-  margin-right: 20px;
-  margin-left: 20px;
-  margin-bottom: 20px;
+  background-color: #e0f8f1;
+  margin-right: 5px;
+  margin-left: 5px;
+  margin-bottom: 5px;
   border-width: 3px;
   border-style: solid;
   border-color: #5869ff;
+}
+
+ul {
+  list-style-type: none;
 }
 
 .button-label {
@@ -191,8 +218,8 @@ table {
   background-image: url('https://a-v2.sndcdn.com/assets/images/sc-icons/favicon-2cadd14bdb.ico');
 }
 
-.icon-shazam {
-  background-image: url('https://www.shazam.com/resources/f6f457227917dcdfc9538fbbb5a931f111648b3d/favicon.ico');
+.icon-lastfm {
+  background-image: url('https://www.last.fm/static/images/lastfm_avatar_applemusic.b06eb8ad89be.png');
 }
 
 .icon-google {
@@ -203,36 +230,34 @@ table {
   background-image: url('https://ures.jp/uta-net.com/img/sp/logo.png?2');
 }
 
-
 .logo {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .logo img {
-  width: 220px;
-  height: 35px;
+  width: 200px;
+  height: 25px;
 }
 
 .banner img {
   text-align: center;
   width: 420px;
-  height: 90px;
+  height: 80px;
 }
 
 .nav {
-  display: flex;
-  border: 1.5px;
+  display: block;
 }
 
 .nav a {
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 16px;
   color: black;
-  padding: 2px 30px;
-  border-radius: 5px;
-  margin-right: 1px;
+  text-decoration: none;
+  padding: 1px 30px;
+}
+
+.nav a i {
+  margin-left: 2px;
 }
 
 .station {
@@ -255,10 +280,7 @@ table {
   color: rgb(3, 3, 3);
 }
 
-
-
 #playlist li:hover a:hover {
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   background-color: #86abeb;
 }
 
@@ -266,14 +288,14 @@ table {
   color: #333;
   padding: 5px 5px;
   border-radius: 3px;
-  background-color: #FFD1DC;
+  background-color: #f9cfd8;
   display: block;
 }
 
 #player {
   position: fixed;
   bottom: 0;
-  background-color: #6b80fa;
+  background-color: #232323;
   display: flex;
   align-items: center;
   padding: 5px;
@@ -316,14 +338,10 @@ table {
   color: #696880;
   font-family: Verdana;
   text-align: center;
-  margin-top: 20px;
+  margin-top: 50px;
   margin-right: 60px;
   margin-left: 60px;
   padding: 2px;
-}
-
-.radio h2 {
-  margin-top: 25px;
 }
 
 .download {
@@ -509,7 +527,6 @@ input {
   border: 0;
 }
 
-
 #audio-wrapper {
   position: fixed;
   bottom: 0px;
@@ -536,19 +553,13 @@ button {
   cursor: pointer;
 }
 
-button i {
-  color: #fff;
-}
-
 #audio {
-  outline: none;
   width: 300px;
   height: 60px;
 }
 
 audio {
-  outline: none;
-  width: 400px;
+  width: 300px;
   height: 60px;
 }
 
@@ -671,7 +682,7 @@ main {
 
 ul#navi li {
   list-style-type: none;
-  padding: 15px;
+  padding: 1px;
   margin: 0px;
   text-align: center;
 }
@@ -686,8 +697,8 @@ ul#navi li button {
   border: none;
   color: rgb(16, 149, 193);
   width: auto;
-  margin-left: 60px;
-  margin-right: 60px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 
@@ -728,23 +739,46 @@ ul#navi li button {
 
   #searchTerms {
     font-size: 12px;
-    font-weight: bold;
-    color: #ff5733;
-    text-decoration: none;
   }
 
   .label {
     margin-top: 1px;
     font-size: 13;
-    font-weight: bold;
   }
 
   .inner {
-    padding: 7px;
+    padding: 2px;
     border-radius: 5px;
     margin-right: 5px;
     margin-left: 5px;
     margin-bottom: 5px;
+  }
+
+  #lastFMInfo {
+    font-size: 11px;
+  }
+
+  .card-panel {
+    padding: 2px;
+    border: 1px solid #353535;
+  }
+
+  .video-container {
+    top: 190px;
+    right: 15px;
+    width: 150px;
+    height: 100px;
+  }
+
+  .video-container iframe {
+    width: 100%;
+    height: 100%;
+  }
+
+  .close-button {
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
   }
 
   .button-label {
@@ -760,9 +794,6 @@ ul#navi li button {
   }
 
   .button-icon {
-    background-repeat: no-repeat;
-    background-size: contain;
-    float: left;
     height: 16px;
     margin-left: 3px;
     margin-top: 2px;
@@ -781,7 +812,6 @@ ul#navi li button {
   }
 
   .nav a {
-    text-decoration: none;
     font-size: 11px;
     padding: 1px 1px;
     border-radius: 1px;
@@ -800,16 +830,13 @@ ul#navi li button {
   }
 
   #playlist li {
-    text-align: center;
     margin-bottom: 0.4rem;
     border-radius: 10%;
   }
 
   .station li a {
-    color: #333;
     padding: 2px 2px;
     border-radius: 3px;
-    display: block;
   }
 
   #player {
