@@ -1,7 +1,5 @@
-var m3uFileURL = "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/all.m3u";
-
 // Fetch the M3U file
-fetch(m3uFileURL)
+fetch("https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/all.m3u")
     .then(response => response.text())
     .then(data => {
         // Split the data by line breaks
@@ -27,7 +25,7 @@ fetch(m3uFileURL)
                 // Set the link and name attributes
                 a.href = link;
                 a.textContent = name;
-                
+
                 a.addEventListener('click', function (event) {
                     event.preventDefault();
 
@@ -123,6 +121,8 @@ searchButton.addEventListener('click', () => {
     if (searchTerm !== '') {
         innerContainer.style.display = 'block';
         searchTermsContainer.textContent = searchTerm;
+        lastfmSearch(searchTerm);
+        YouTubeSearch(searchTerm);
     } else {
         searchInput.classList.add('error');
     }
@@ -136,6 +136,96 @@ searchInput.addEventListener('keyup', function (event) {
     }
 });
 
+// function that uses the lastFM API to fetch matching song titles
+function lastfmSearch(songTitle) {
+    var baseURL = "https://ws.audioscrobbler.com/2.0/?method=track.search&format=json";
+
+    var lastfmAPIKey = "b9747c75368b42160af4301c2bf654a1";
+    var parameterssongSearch = `&api_key=${lastfmAPIKey}&track=${songTitle}`;
+
+    baseURL = baseURL + parameterssongSearch;
+
+    var requestOptions = {
+        method: "GET",
+        redirect: "follow",
+    };
+
+    fetch(baseURL, requestOptions)
+        .then(function (response) {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error(response.statusText);
+        })
+        .then(function (data) {
+            console.log("song title search: ", data);
+            displaysongSearch(data);
+        })
+        .catch(function (error) {
+            console.log("Error from lastfm song title API: ", error);
+        });
+}
+
+// Function to display matching song - artist
+function displaysongSearch(data) {
+    const searchTerm = searchInput.value.trim();
+    document.getElementById("lastFMInfo").innerHTML = "";
+
+    var songSearchDiv = document.getElementById("lastFMInfo");
+
+    var songSearchList = document.createElement("ul");
+
+    for (var i = 0; i < 5; i++) {
+        var songTitleName = data.results.trackmatches.track[i].name;
+        var songTitleArtist = data.results.trackmatches.track[i].artist;
+        var result = "<li>" + songTitleName + " - " + songTitleArtist + "</li>";
+        console.log(result);
+        songSearchList.innerHTML += result;
+    }
+
+    songSearchDiv.appendChild(songSearchList);
+}
+
+function YouTubeSearch(songName) {
+
+    const ytURL =
+        "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&type=video&videoSyndicated=true&videoEmbeddable=true&q=";
+    var ytAPIKey = "&key=AIzaSyAwM_RLjqj8dbbMAP5ls4qg1olDsaxSq5s";
+
+    var VideoDisplay = document.querySelector("#YouTubeVideo");
+
+    if ((VideoDisplay.style.display = "none")) {
+        VideoDisplay.style.display = "block";
+    }
+
+    var fullYTURLPathTitle = ytURL + songName + ytAPIKey;
+
+    console.log(fullYTURLPathTitle);
+
+    fetch(fullYTURLPathTitle)
+        .then(function (response) {
+            console.log(response);
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error(response.statusText);
+        })
+        .then(function (data) {
+            console.log(data.items[0].id.videoId);
+
+            var UniqueVidId = data.items[0].id.videoId;
+            document.getElementById("YouTubeVideo").src =
+                "https://www.youtube.com/embed/" + UniqueVidId;
+        })
+        .catch(function (error) {
+            console.log("Error from Youtube by song title API: ", error);
+        });
+}
+
+function closeVideo() {
+    document.getElementById("YouTubeVideo").style.display = "none";
+}
+
 const websiteButtons = document.querySelectorAll('.button');
 
 for (let i = 0; i < websiteButtons.length; i++) {
@@ -148,6 +238,7 @@ for (let i = 0; i < websiteButtons.length; i++) {
         }
     });
 }
+
 // Search result links generation
 function getWebsiteURL(label, searchTerm) {
     const encodedSearchTerm = encodeURIComponent(searchTerm);
@@ -187,8 +278,8 @@ function getWebsiteURL(label, searchTerm) {
             return `https://soundcloud.com/search?q=${encodedSearchTerm}`;
         case 'Audio Archive':
             return `https://archive.org/details/audio?query=${encodedSearchTerm}`;
-        case 'Shazam':
-            return `https://www.shazam.com/`;
+        case 'last.fm':
+            return `https://www.last.fm/search/tracks?q=${encodedSearchTerm}`;
         case 'Google':
             return `https://www.google.com/search?q=${encodedSearchTerm}`;
         case 'Google(Lyrics)':
@@ -200,6 +291,48 @@ function getWebsiteURL(label, searchTerm) {
     }
 }
 
+function YouTubeSearchByTitle() {
+
+    console.log("RUNNING YOUTUBE FUNCTION");
+    const ytURL =
+        "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&type=video&videoSyndicated=true&videoEmbeddable=true&q=";
+    var ytAPIKey = "&key=AIzaSyAwM_RLjqj8dbbMAP5ls4qg1olDsaxSq5s";
+
+    var songName = document.getElementById("titleinput").value;
+    if (!songName) {
+        return;
+    }
+    var VideoDisplay = document.querySelector("#YouTubeVideo");
+
+    if ((VideoDisplay.style.display = "none")) {
+        VideoDisplay.style.display = "block";
+    }
+
+    var fullYTURLPathTitle = ytURL + songName + ytAPIKey;
+
+    console.log(fullYTURLPathTitle);
+
+    fetch(fullYTURLPathTitle)
+        .then(function (response) {
+            console.log(response);
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error(response.statusText);
+        })
+        .then(function (data) {
+            console.log(data.items[0].id.videoId);
+
+            var UniqueVidId = data.items[0].id.videoId;
+            document.getElementById("YouTubeVideo").src =
+                "https://www.youtube.com/embed/" + UniqueVidId;
+        })
+        .catch(function (error) {
+            console.log("Error from Youtube by song title API: ", error);
+        });
+}
+
+// google drive music player
 const CLIENT_ID = '993505903479-tk48veqhlu2r1hiu9m2hvaq2l81urnla.apps.googleusercontent.com';
 const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest';
 const SCOPES = 'https://www.googleapis.com/auth/drive.readonly';
@@ -323,10 +456,7 @@ function getContents(id, type) {
     });
 }
 
-/* ----------------------- */
-/* ------USER FOLDER------ */
-/* ----------------------- */
-
+//USER FOLDER
 function submitFolderId(e) {
     e.preventDefault();
     localStorage.setItem("parentfolder", document.getElementById('parentfolder').value);
@@ -336,10 +466,7 @@ function submitFolderId(e) {
 function getFolderId() {
     document.getElementById('parentfolder').value = localStorage.getItem("parentfolder");
 }
-
-/* ----------------------- */
-/* ---------AUDIO--------- */
-/* ----------------------- */
+//AUDIO
 
 audio = document.getElementById('audio');
 source = document.getElementById('source');
