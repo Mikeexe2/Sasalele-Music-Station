@@ -9,6 +9,8 @@
         <title>Sasalele Music Station</title>
         <meta name="Keywords"
             content="Anime Music,Internet Radio,Japanese Music Streaming sites,Sasalele Music Station" />
+        <meta name="description"
+            content="Collection of a list of internet radio featuring japanese contents, having search function and also google drive music player." />
         <link rel="stylesheet" type="text/css" href="style.css">
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -21,13 +23,21 @@
                         src="https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/sasalele_banner.png"
                         alt="logo"></a>
             </div>
-            <div class="nav">
-                <a href="#radios">Radio Stations <i class="fa fa-radio" style="color:blue"></i></a>
-                <a href="#websites">More Websites <i class="fa fa-music" style="color:blue"></i></a>
-                <a href="#scrap">Download <i class="fas fa-download" style="color:blue"></i></a>
-                <a href="#drive">Google Drive Music <i class="fas fa-music" style="color:blue"></i></a>
-                <a href="#search">Search <i class="fas fa-search" style="color:blue"></i></a>
-            </div>
+
+            <head>
+                <link rel="stylesheet" href="styles.css">
+            </head>
+
+            <body>
+                <div class="nav">
+                    <a href="#radios">Radio Stations <i class="fa fa-radio"></i></a>
+                    <a href="#websites">More Websites <i class="fa fa-music"></i></a>
+                    <a href="#scrap">Download <i class="fas fa-download"></i></a>
+                    <a href="#drive">Google Drive Music <i class="fas fa-music"></i></a>
+                    <a href="#search">Search <i class="fas fa-search"></i></a>
+                </div>
+            </body>
+
         </div>
 
         <div class="radio" id="radios">
@@ -51,11 +61,16 @@
         <div class="heading" id="search">
             <h2>Find your song on</h2>
             <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Enter something to start searching...">
+                <input type="text" id="searchInput" placeholder="Enter song name...">
                 <button id="searchButton"><i class="fa fa-search"></i></button>
             </div>
             <div class="inner" style="display:none;">
-                <p>You searched for: <span id="searchTerms"></span></p>
+                <h5>You searched for: <span id="searchTerms"></span></h5>
+                <div class="card-panel" id="lastFMInfo"></div>
+                <div class="video-container" id="videoContainer">
+                    <iframe id="YouTubeVideo" style="display: none"></iframe>
+                    <span class="close-button" onclick="closeVideo()"><i class="fas fa-times"></i></span>
+                </div>
                 <div class="label">Search it on:</div>
                 <table class="websiteList">
                     <tbody>
@@ -196,17 +211,17 @@
                             </td>
                             <td>
                                 <div class="button">
-                                    <div class="button-icon icon-shazam"></div>
-                                    <div class="button-label">Shazam</div>
+                                    <div class="button-icon icon-lastfm"></div>
+                                    <div class="button-label">last.fm</div>
                                 </div>
                             </td>
                         </tr>
                     </tbody>
-                    <a href="https://chrome.google.com/webstore/detail/shazam-find-song-names-fr/mmioliijnhnoblpgimnlajmefafdfilb"
-                        target="_blank">Use Shazam extension on your browser <i class="fas fa-search"></i></a>
                 </table>
-
+                <a href="https://chrome.google.com/webstore/detail/shazam-find-song-names-fr/mmioliijnhnoblpgimnlajmefafdfilb"
+                    target="_blank">Use Shazam extension on your browser <i class="fas fa-search"></i></a>
             </div>
+
         </div>
 
 
@@ -268,7 +283,8 @@
             </div>
 
             <div id="intro" style="display: none;"></div>
-            <p>Enter the ID for the <a href="https://drive.google.com" target="_blank">Google Drive</a> folder you would
+            <p>Enter the ID for the <a href="https://drive.google.com" target="_blank">Google Drive</a> folder you
+                would
                 like to use and click the 'Login' button.<br> The ID can be found by taking that last part of the
                 folder's
                 URL, for example, <strong>drive.google.com/drive/folders/12345-abcde</strong> has an ID of
@@ -339,9 +355,9 @@
                     Player</a></br>
             </p>
             <h5><a href="https://t.me/sasalelemusic" target="_blank"><img
-                        src="https://img.icons8.com/fluency/96/telegram-app.png" /> Discussion Group</a></h5>
+                        src="https://img.icons8.com/fluency/96/telegram-app.png" />Discussion Group</a></h5>
             <h5><a href="https://github.com/Mikeexe2/Sasalele-Music-Station" target="_blank"><img
-                        src="https://github.com/fluidicon.png" /> Github</a></h5>
+                        src="https://github.com/fluidicon.png" />Github</a></h5>
             <p>Contact Email: <a href="mailto:sasalele-team@basic.pp.ua">sasalele-team@basic.pp.ua</a></p>
 
         </footer>
