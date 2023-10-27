@@ -23,13 +23,13 @@
                         src="https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/sasalele_banner.png"
                         alt="logo"></a>
             </div>
-                <div class="nav">
-                    <a href="#radios">Radio Stations <i class="fa fa-radio"></i></a>
-                    <a href="#websites">More Websites <i class="fa fa-music"></i></a>
-                    <a href="#scrap">Download <i class="fas fa-download"></i></a>
-                    <a href="#drive">Google Drive Music <i class="fas fa-music"></i></a>
-                    <a href="#search">Search <i class="fas fa-search"></i></a>
-                </div>
+            <div class="nav">
+                <a href="#radios">Radio Stations <i class="fa fa-radio"></i></a>
+                <a href="#websites">More Websites <i class="fa fa-music"></i></a>
+                <a href="#scrap">Download <i class="fas fa-download"></i></a>
+                <a href="#drive">Google Drive Music <i class="fas fa-music"></i></a>
+                <a href="#search">Search <i class="fas fa-search"></i></a>
+            </div>
         </div>
         <div class="radio" id="radios">
             <h2>Enjoy Your Musical Feast Here</h2>
@@ -51,19 +51,20 @@
 
         <div class="heading" id="search">
             <h2>Find your song on</h2>
-              </div>
-            <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Enter song name...">
-                <button id="searchButton"><i class="fa fa-search"></i></button>
+        </div>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Enter song name...">
+            <button id="searchButton"><i class="fa fa-search"></i></button>
+        </div>
+        <div class="inner" style="display:none;">
+            <h5>You searched for: <span id="searchTerms"></span></h5>
+            <div class="card-panel" id="lastFMInfo"></div>
+            <div class="video-container" id="videoContainer">
+                <iframe id="YouTubeVideo" style="display: none"></iframe>
+                <span class="close-button" onclick="closeVideo()"><i class="fas fa-times"></i></span>
             </div>
-            <div class="inner" style="display:none;">
-                <h5>You searched for: <span id="searchTerms"></span></h5>
-                <div class="card-panel" id="lastFMInfo"></div>
-                <div class="video-container" id="videoContainer">
-                    <iframe id="YouTubeVideo" style="display: none"></iframe>
-                    <span class="close-button" onclick="closeVideo()"><i class="fas fa-times"></i></span>
-                </div>
-                <div class="label">Search it on:</div>
+            <div class="label">Search it on:</div>
+            <div class="table-container">
                 <table class="websiteList">
                     <tbody>
                         <tr>
@@ -209,10 +210,12 @@
                         </tr>
                     </tbody>
                 </table>
-                <a href="https://chrome.google.com/webstore/detail/shazam-find-song-names-fr/mmioliijnhnoblpgimnlajmefafdfilb"
-                    target="_blank">Use Shazam extension on your browser <i class="fas fa-search"></i></a>
             </div>
-        
+            <a href="https://chrome.google.com/webstore/detail/shazam-find-song-names-fr/mmioliijnhnoblpgimnlajmefafdfilb"
+                target="_blank">Use Shazam extension on your browser <i class="fas fa-search"></i></a>
+        </div>
+
+
         <div class="heading" id="scrap">
             <h2>Download Songs here</h2>
         </div>
@@ -253,14 +256,14 @@
             <div class="info">
                 <div id="streamInfo"></div>
             </div>
-            <p id="stationName">Click Miku to play random station</p>
-            <audio id="miniPlayer" controls preload="auto"></audio>
+            <p id="stationName">Click on Miku to play a random station</p>
+            <audio id="miniPlayer" controls controlsList="nodownload noplaybackrate"></audio>
         </div>
 
         <div class="heading" id="drive">
             <h2>Drive Music Player</h2>
         </div>
-        
+
         <main role="main" class="content">
 
             <div id="return" style="display: none;">
