@@ -385,7 +385,7 @@ ul {
 
 .container h5 {
   font-weight: bold;
-  font-size: 12px;
+  font-size: 14px;
   padding: 0.1px;
 }
 
@@ -540,11 +540,11 @@ input {
 #audio-wrapper {
   position: fixed;
   bottom: 0px;
-  right: 10px;
-  display: flex;
-  align-items: center;
+  right: 20px;
   background-color: #4285f4;
   padding: 10px;
+  box-shadow: 0 0 5px #a6c3f4;
+  border-radius: 10px;
 }
 
 #audio-container {
