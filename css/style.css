@@ -5,13 +5,13 @@
   border-style: solid;
   border-color: #282727;
   top: 0;
-  width: 100%;
+  width: 98%;
   padding: 5px;
   background: linear-gradient(to right, #e5ccc9, #fec5e5, #ffd1dc);
 }
 
 body {
-  width: 100%;
+  width: 98%;
   background: linear-gradient(to right, #a6c1ee, #fbc2eb);
 }
 
@@ -75,6 +75,8 @@ body {
 
 .card-panel {
   padding: 5px;
+  margin-right: 20px;
+  margin-left: 20px;
   border: 1.5px solid #797979;
 }
 
@@ -100,21 +102,25 @@ body {
 
 table {
   display: table;
+  text-align: center;
   border-collapse: separate;
   box-sizing: border-box;
   text-indent: initial;
   border-spacing: 2px;
   border-color: rgb(0, 0, 0);
-  margin-left: auto;
-  margin-right: auto;
+}
+
+.table-container {
+  display: flex;
+  justify-content: center;
 }
 
 .inner {
   padding: 5px;
   text-align: center;
   background-color: #e0f8f1;
-  margin-right: 5px;
-  margin-left: 5px;
+  margin-right: 80px;
+  margin-left: 80px;
   margin-bottom: 5px;
   border-width: 3px;
   border-style: solid;
@@ -230,14 +236,11 @@ ul {
   background-image: url('https://ures.jp/uta-net.com/img/sp/logo.png?2');
 }
 
-.logo {
-  display: flex;
-  align-items: flex-start;
-}
-
 .logo img {
+  display: flex;
   width: 200px;
-  height: 25px;
+  height: 40px;
+  margin-right: 10px;
 }
 
 .banner img {
@@ -247,25 +250,29 @@ ul {
 }
 
 .nav {
-  display: block;
+  display: flex;
 }
 
 .nav a {
-  color: black;
+  display: block;
+  padding: 10px 20px;
+  margin-right: 10px;
+  background-color: #fff;
+  color: #333;
+  font-weight: bold;
   text-decoration: none;
-  padding: 1px 30px;
+  border-radius: 5px;
 }
 
-.nav a i {
-  margin-left: 2px;
+.nav a:hover {
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
 }
 
 .station {
-  text-align: center;
   background-image: linear-gradient(to right, #a6c1ee, #fbc2eb);
   padding: 2px;
-  margin-right: 60px;
-  margin-left: 60px;
 }
 
 .station h1 {
@@ -274,10 +281,13 @@ ul {
 }
 
 #playlist li {
+  font-size: 16px;
   text-align: center;
+  color: #333;
   margin-bottom: 1rem;
   border-radius: 2px;
-  color: rgb(3, 3, 3);
+  margin-right: 50px;
+  margin-left: 50px;
 }
 
 #playlist li:hover a:hover {
@@ -296,7 +306,7 @@ ul {
   position: fixed;
   bottom: 0;
   background-color: #232323;
-  display: flex;
+  display: block;
   align-items: center;
   padding: 5px;
   box-shadow: 0 0 5px #000000;
@@ -309,7 +319,7 @@ ul {
 }
 
 #player .cover img {
-  width: 70px;
+  width: 60px;
   height: auto;
   border-radius: 50%;
   cursor: pointer;
@@ -366,17 +376,17 @@ ul {
 
 .container {
   flex-basis: 18%;
-  padding: 0.5rem;
+  padding: 0.2px;
   text-align: center;
   border-width: 1px;
   border-style: solid;
-  border-color: #282727;
+  border-color: #050505;
 }
 
 .container h5 {
   font-weight: bold;
-  font-size: 1rem;
-  padding: 0.5rem;
+  font-size: 12px;
+  padding: 0.1px;
 }
 
 .container:hover {
@@ -385,8 +395,8 @@ ul {
 }
 
 .container img {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
 }
 
 footer {
@@ -530,10 +540,10 @@ input {
 #audio-wrapper {
   position: fixed;
   bottom: 0px;
-  right: 0px;
+  right: 10px;
   display: flex;
   align-items: center;
-  background: rgb(60, 60, 60);
+  background-color: #4285f4;
   padding: 10px;
 }
 
@@ -542,25 +552,15 @@ input {
   align-items: center;
 }
 
-button {
-  background: none;
-  border: none;
-  margin-left: 10px;
-  margin-right: 10px;
-  padding: 5px;
-  font-size: 14px;
-  color: #fff;
-  cursor: pointer;
-}
 
 #audio {
-  width: 300px;
-  height: 60px;
+  width: 250px;
+  height: 30px;
 }
 
 audio {
-  width: 300px;
-  height: 60px;
+  width: 250px;
+  height: 30px;
 }
 
 button:hover,
@@ -706,9 +706,8 @@ ul#navi li button {
 
   .dh {
     display: flex;
-    position: sticky;
     padding: 2px;
-    border-width: 1.5px;
+    border-width: 1px;
     background-image: linear-gradient(to right, #beeea6, #f7a3b8);
   }
 
@@ -749,8 +748,8 @@ ul#navi li button {
   .inner {
     padding: 2px;
     border-radius: 5px;
-    margin-right: 5px;
-    margin-left: 5px;
+    margin-right: 20px;
+    margin-left: 20px;
     margin-bottom: 5px;
   }
 
@@ -759,7 +758,12 @@ ul#navi li button {
   }
 
   .card-panel {
+    margin-right: 20px;
+    margin-left: 20px;
     padding: 2px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     border: 1px solid #353535;
   }
 
@@ -782,9 +786,10 @@ ul#navi li button {
   }
 
   .button-label {
-    font-size: 9px;
+    font-size: 8px;
+    font-weight: 800;
     line-height: 10px;
-    margin-left: 30px;
+    margin-left: 10px;
   }
 
   .button {
@@ -801,8 +806,8 @@ ul#navi li button {
   }
 
   .logo img {
-    width: 100px;
-    height: 50px;
+    width: 50px;
+    height: 40px;
   }
 
   .banner img {
@@ -820,8 +825,6 @@ ul#navi li button {
   .station {
     background-color: rgb(207, 234, 251);
     padding: 2px;
-    margin-right: 5px;
-    margin-left: 5px;
   }
 
   .station h1 {
@@ -832,6 +835,8 @@ ul#navi li button {
   #playlist li {
     margin-bottom: 0.4rem;
     border-radius: 10%;
+    margin-right: 5px;
+    margin-left: 5px;
   }
 
   .station li a {
@@ -868,11 +873,10 @@ ul#navi li button {
 
   .radio {
     font-size: 14px;
-    text-align: center;
-    margin-top: 2px;
+    margin-top: 50px;
     margin-right: 5px;
     margin-left: 5px;
-    padding: 2px;
+    padding: 1px;
   }
 
   .download {
@@ -889,17 +893,15 @@ ul#navi li button {
 
   .container {
     flex-basis: 18%;
-    padding: 0.05rem;
+    padding: 0px;
   }
 
   .container h5 {
-    font-weight: 500;
-    font-size: 0.6rem;
-    padding: 0.05rem;
+    font-size: 10px;
+    padding: 0px;
   }
 
   .container:hover {
-    padding: 0.06rem;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
     background-color: #86abeb;
   }
@@ -931,18 +933,18 @@ ul#navi li button {
 
   #audio-wrapper {
     bottom: 80px;
-    right: 40px;
+    right: 80px;
     display: inline-block;
     padding: 2px;
   }
 
   audio {
-    width: 300px;
+    width: 250px;
     height: 30px;
   }
 
   #audio {
-    width: 200px;
+    width: 150px;
     height: 30px;
   }
 
