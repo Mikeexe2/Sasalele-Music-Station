@@ -1,7 +1,3 @@
-http://radio.garden/visit/
-https://radio.garden/public/icons/ios/ios-appicon-76-76.png
-Radio Garden
-
 https://tunein.com/radio/Stream-Anime-g2752/
 https://cdn-web.tunein.com/assets/img/apple-touch-icon-180.png
 Stream Anime TuneIn
@@ -21,6 +17,26 @@ LISTEN.moe
 https://en.anison.fm/
 https://en.anison.fm/images/logo_h_en.png
 Anison.FM
+
+https://kara.moe/
+https://kara.moe/_nuxt/icons/512x512.maskable.544eb38c.png
+kara.moe
+
+https://touhou.kuukunen.net/
+https://touhou.kuukunen.net/images/default.png
+Touhou Player
+
+https://tlmc.pf-n.co/tlmc
+https://pytouhou.linkmauve.fr/rust-touhou.svg
+Touhou Lossess Music Collection
+
+https://animethemes.moe/
+https://animethemes.moe/apple-touch-icon.png
+AnimeThemes.moe
+
+https://themes.moe/
+https://themes.moe/assets/favicon.png
+Themes.moe
 
 http://radio.llolo.lol:8000/streambot.mp3
 http://dir.xiph.org/static/img/logo_jumbo.svg
@@ -276,7 +292,7 @@ TOP 40
 
 https://www.1.fm/stations
 https://www.1.fm/content/images/logo/04X560.png
-All stations from 1.fm
+All stations from 1.FM
 
 https://powerhitz.com/ThePlanet
 https://powerhitz.com/images/menu/theplanet.png
@@ -285,3 +301,7 @@ The Planet
 https://powerhitz.com/OfficeMix
 https://powerhitz.com/images/menu/officemix-80x80.png
 The office Mix
+
+http://radio.garden/visit/
+https://radio.garden/public/icons/ios/ios-appicon-76-76.png
+Radio Garden
