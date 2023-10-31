@@ -18,6 +18,10 @@ https://en.anison.fm/
 https://en.anison.fm/images/logo_h_en.png
 Anison.FM
 
+https://radio.animebits.moe/
+https://radio.animebits.moe/img/icon-256.webp
+anime(bits)
+
 https://kara.moe/
 https://kara.moe/_nuxt/icons/512x512.maskable.544eb38c.png
 kara.moe
