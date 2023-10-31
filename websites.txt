@@ -43,7 +43,7 @@ https://themes.moe/assets/favicon.png
 Themes.moe
 
 http://radio.llolo.lol:8000/streambot.mp3
-http://dir.xiph.org/static/img/logo_jumbo.svg
+https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/radio.llolo.lol.jpg
 radio.llolo.lol
 
 http://23.82.11.87:21928/stream
@@ -103,15 +103,15 @@ https://radiojhero.com/assets/logojhero.23cabdfc.png
 Radio J-Hero
 
 http://79.111.119.111:8002/jpop
-http://radcap.ru/graf2/radcaplogo-hor.svg
+https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/Radio%20Caprice%20J-Pop.jpg
 Radio Caprice J-Pop
 
 http://79.111.119.111:8002/jrock
-http://radcap.ru/graf2/radcaplogo-hor.svg
+https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/Radio%20Caprice%20J-Pop.jpg
 Radio Caprice J-Rock
 
 http://radcap.ru/anime.html
-http://radcap.ru/graf2/radcaplogo-hor.svg
+https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/Radio%20Caprice%20J-Pop.jpg
 Radio Caprice Anime
 
 https://radioaoi.pl/player/
@@ -203,7 +203,7 @@ https://www.isekaianimeradio.net/images/icons/favicon.ico
 Isekai Anime Radio
 
 http://yumicoradio.net/
-https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Testing-image/yumicoradioV2.jpg
+https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/yumicoradioV2.jpg
 Yumi Co. Radio
 
 https://tunein.com/radio/Wave-Anime-Radio-s277840/
@@ -279,7 +279,7 @@ https://www.radiokishiwada.jp/data/html/template/default/img/common/facebook_ogp
 Kishiwada Radio
 
 http://radio.kahoku.net:8000/;
-http://wavenet.under.jp/fm/wp-content/uploads/2018/05/fmkahoku_logo.jpg
+https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/FM%20Kahoku%2078.7.jpg
 FM Kahoku 78.7 (FM Kahoku City, Ishikawa)
 
 https://powerhitz.com/Hitlist
