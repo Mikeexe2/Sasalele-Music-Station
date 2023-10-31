@@ -203,7 +203,7 @@ https://www.isekaianimeradio.net/images/icons/favicon.ico
 Isekai Anime Radio
 
 http://yumicoradio.net/
-https://github.com/Mikeexe2/Sasalele-Music-Station/blob/main/Testing-image/yumicoradioV2.jpg
+https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Testing-image/yumicoradioV2.jpg
 Yumi Co. Radio
 
 https://tunein.com/radio/Wave-Anime-Radio-s277840/
