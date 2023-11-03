@@ -250,6 +250,10 @@ https://www.jcbasimul.com/
 https://www.jcbasimul.com/images/jcba/apple-touch-icon.png
 JCBAインターネットサイマルラジオ
 
+https://fmplapla.com/
+https://fmplapla.com/favicon.ico
+FM++ エフエムプラプラ
+
 https://tunein.com/radio/Stream-Japanese-Talk-g349/
 https://cdn-web.tunein.com/assets/img/apple-touch-icon-180.png
 Japanese Talk Podcasts
@@ -274,13 +278,122 @@ https://www.nhk.or.jp/radio/
 https://www.nhk.or.jp/radio/img/brand.png
 NHKラジオ らじる★らじる
 
+https://mytuner-radio.com/radio/radiomorioka-radio-morioka-412040/
+https://static2.mytuner.mobi/media/tvos_radios/k5fRz4vfTj.jpg
+ラヂオもりおか (Radio Morioka)
+
+http://e.mytuner-radio.com/embed/kocorazi-jun-shan-komiyuniteifang-song-412035
+https://static2.mytuner.mobi/media/tvos_radios/DmaKYL6FhD.png
+KOCOラジ (郡山コミュニティ放送) live
+
+https://radio.menu/stations/global-superradio-cc-fm-sun/
+https://www.wasabi-jpn.com/wp-content/uploads/2015/09/radio1.jpg
+FM SUN
+
+https://radio.menu/stations/superradio-cc-fm78-1/
+https://static2.mytuner.mobi/media/tvos_radios/fhpBus75bj.jpg
+ラジオカロスサッポロ FM78.1
+
+https://mytuner-radio.com/radio/maebashicityehuemu-m-wave-410790/
+https://static2.mytuner.mobi/media/tvos_radios/nnCjqkbFaz.png
+まえばしCITYエフエム (M-wave) live
+
+https://radio.menu/stations/global-superradio-cc-egao/
+http://fm-egao.jp/img/ogp.png
+エフエムEGAO
+
+https://mytuner-radio.com/radio/wi-radio-480137/
+https://static2.mytuner.mobi/media/tvos_radios/efqpy4k3jdqb.png
+wi-radio 77.6MHz
+
+https://mytuner-radio.com/radio/tokyo-star-radio-ba-wang-zi-fm-480147/
+https://static2.mytuner.mobi/media/tvos_radios/nkdjrxrksehq.png
+Tokyo Star Radio (八王子FM) live
+
+http://e.mytuner-radio.com/embed/reds-wave-412042
+https://static2.mytuner.mobi/media/tvos_radios/FWUQKtjHUU.png
+REDS WAVE
+
+https://radio.menu/stations/world-kbs-co-kr-kbs-world-tv/
+https://world.kbs.co.kr/service/common/images/favorite_2021.png
+KBS World TV
+
+https://mytuner-radio.com/radio/natorazi-fm-801-412037/
 http://61.89.201.27:8000/radikishi.mp3
 https://www.radiokishiwada.jp/data/html/template/default/img/common/facebook_ogp.jpg
 Kishiwada Radio
 
-http://radio.kahoku.net:8000/;
+http://e.mytuner-radio.com/embed/fm-kahoku-440671
 https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/FM%20Kahoku%2078.7.jpg
 FM Kahoku 78.7 (FM Kahoku City, Ishikawa)
+
+https://mytuner-radio.com/radio/fmuruma-fm-uruma-417177/
+https://static2.mytuner.mobi/media/tvos_radios/sFcMxhmByx.jpg
+FMうるま
+
+http://e.mytuner-radio.com/embed/dada-more-radio-417290
+https://static2.mytuner.mobi/media/tvos_radios/uN2RtwtrA9.png
+Dada More Radio
+
+http://e.mytuner-radio.com/embed/ban-banrazio-411994
+https://static2.mytuner.mobi/media/tvos_radios/rF2eHFaqAr.png
+BAN-BANラジオ
+
+https://mytuner-radio.com/radio/baywave-beiuebu-411995/
+https://static2.mytuner.mobi/media/tvos_radios/LfNNSYN25U.png
+BAYWAVE (ベイウェーブ) 
+
+http://e.mytuner-radio.com/embed/daraz-fm-410013
+https://static2.mytuner.mobi/media/tvos_radios/hVKpzRKeVk.png
+DARAZ FM（だらずFM）
+
+https://mytuner-radio.com/radio/775-lively-fm-nanakoraiburiehuemu-480144/
+https://static2.mytuner.mobi/media/tvos_radios/grnz2aeurpsu.png
+77.5 Lively FM (ナナコライブリーエフエム) 
+
+http://e.mytuner-radio.com/embed/air-station-hibikieasuteshiyonhibiki-417174
+https://static2.mytuner.mobi/media/tvos_radios/DfYPPq5ysK.jpg
+Air Station Hibiki（エアーステーションひびき）
+
+https://radio.menu/stations/global-superradio-cc-b-fm791/
+https://static2.mytuner.mobi/media/tvos_radios/U9g9qzhmxs.png
+エフエムびざん（B・FM791）
+
+http://e.mytuner-radio.com/embed/lu-jiao-kiritanpofm-kiritampo-fm-417144
+https://static2.mytuner.mobi/media/tvos_radios/2VkWmAU3tr.png
+鹿角きりたんぽFM (Kiritampo FM) live
+
+http://e.mytuner-radio.com/embed/reinbotaunfm-rainbowtown-fm-399785
+https://static2.mytuner.mobi/media/tvos_radios/Y75fHmQJ2B.png
+レインボータウンFM (Rainbowtown FM)
+
+https://radio.menu/stations/global-superradio-cc-heart-fm/
+https://heartfm.jp/wp-content/uploads/2022/12/cropped-favicon-180x180.png
+FM Nanjo - Heart FM Nanjo - 77.2 FM
+
+https://mytuner-radio.com/radio/radio3-fm-762-412038/
+https://static2.mytuner.mobi/media/tvos_radios/AZSGm5UgMV.png
+仙台のコミュニティFM RADIO3(ラジオ3) 76.2MHz
+
+https://open.spotify.com/show/5uxD2MB2xTgl5gwQIA0Et2
+https://static2.mytuner.mobi/media/tvos_radios/AZSGm5UgMV.png
+FM RADIO3(ラジオ3)ポッドキャストチャンネル
+
+https://mytuner-radio.com/radio/fm-kawaguchi-480142/
+https://static2.mytuner.mobi/media/tvos_radios/um4prebafvr3.png
+FM Kawaguchi
+
+http://e.mytuner-radio.com/embed/ehuemu-motsutokomu-fm-motcom-412018
+https://static2.mytuner.mobi/media/tvos_radios/S53QKQZD4h.png
+エフエム モットコム (FM Mot.com)
+
+https://mytuner-radio.com/radio/ehuemuenuwan-fm-n1-417156/
+https://static2.mytuner.mobi/media/tvos_radios/WtRyZmqLkY.png
+えふえむ・エヌ・ワン (FM N1) 
+
+https://zeno.fm/radio/tatsuro-yamashita-radio/
+https://seeded-session-images.scdn.co/v1/img/artist/41hQ0PoEyj9xEBhwt73aWC/en
+Tatsuro Yamashita Radio
 
 https://powerhitz.com/Hitlist
 https://powerhitz.com/favicon.ico
@@ -306,6 +419,34 @@ https://powerhitz.com/OfficeMix
 https://powerhitz.com/images/menu/officemix-80x80.png
 The office Mix
 
+https://mytuner-radio.com/radio/wvvv-969-fm-428151/
+https://static2.mytuner.mobi/media/tvos_radios/ndNjXmkjcJ.png
+WVVV 96.9 FM live
+
+https://streamer.radio.co/s83eb8ff39/listen
+https://static.mytuner.mobi/media/tvos_radios/r8uhzyznrxlc.jpg
+Súper Tokio Radio
+
+https://somafm.com/player/#/now-playing/vaporwaves
+https://api.somafm.com/img/vaporwaves120.jpg
+Vaporwaves
+
+https://onlineradiobox.com/jp/radioeigekaiindies/?cs=jp.radioeigekaiindies
+https://cdn.onlineradiobox.com/img/l/4/13174.v7.png
+Radio Eigekai Indies (ラジオエーゲ海)
+
+http://e.mytuner-radio.com/embed/zhong-yang-ehuemu-radio-city-417149
+https://static2.mytuner.mobi/media/tvos_radios/3SCwD4YueR.jpg
+中央エフエム (Radio City) live
+
+https://mytuner-radio.com/radio/bimufm-beam-fm-455988/
+https://static2.mytuner.mobi/media/tvos_radios/vs4uqp2uyxcf.png
+ビームFM (Beam FM) 
+
 http://radio.garden/visit/
 https://radio.garden/public/icons/ios/ios-appicon-76-76.png
 Radio Garden
+
+https://instant.audio/
+https://cdn.webrad.io/favicon.ico
+Instant Audio
