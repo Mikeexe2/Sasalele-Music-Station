@@ -319,6 +319,9 @@ https://world.kbs.co.kr/service/common/images/favorite_2021.png
 KBS World TV
 
 https://mytuner-radio.com/radio/natorazi-fm-801-412037/
+https://static2.mytuner.mobi/media/tvos_radios/BcEDgNBR2D.png
+なとらじ FM 80.1
+
 http://61.89.201.27:8000/radikishi.mp3
 https://www.radiokishiwada.jp/data/html/template/default/img/common/facebook_ogp.jpg
 Kishiwada Radio
