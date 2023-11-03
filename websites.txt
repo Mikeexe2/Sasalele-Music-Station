@@ -323,7 +323,7 @@ https://static2.mytuner.mobi/media/tvos_radios/BcEDgNBR2D.png
 なとらじ FM 80.1
 
 http://61.89.201.27:8000/radikishi.mp3
-https://www.radiokishiwada.jp/data/html/template/default/img/common/facebook_ogp.jpg
+https://www.radio.net/images/broadcasts/85/31/15223/c300.png
 Kishiwada Radio
 
 http://e.mytuner-radio.com/embed/fm-kahoku-440671
