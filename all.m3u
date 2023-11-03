@@ -23,8 +23,6 @@ http://play.streamafrica.net/jpopradio%20
 https://play.streamafrica.net/JapanCityPop
 #EXTINF:0, BOX :/-POP Radio -
 https://play.streamafrica.net/jpopradio
-#EXTINF:0, Vocaloid Radio on mikupa
-http://aska.ru-hoster.com:8093/mikuparu
 #EXTINF:0, 80s
 https://snkazuracast5.com:8000/radio.mp3
 #EXTINF:0, 90s
@@ -143,6 +141,10 @@ http://node-17.zeno.fm/692dbdr067zuv
 https://azuracast.mahoro-net.org/listen/tsumugi/radio.mp3
 #EXTINF:0, Vocaloid Radio VRX (256kbps)
 https://vrx.piro.moe/stream-256.m3u
+#EXTINF:0, Vocaloid Radio on mikupa
+http://aska.ru-hoster.com:8093/mikuparu
+#EXTINF:0, Vocaloid Radio
+http://curiosity.shoutca.st:8019/128
 #EXTINF:0,FM Naha
 https://mtist.as.smartstream.ne.jp/30068/livestream/chunklist.m3u8
 #EXTINF:0, Fred Film Radio
@@ -189,10 +191,8 @@ https://kathy.torontocast.com/jazzsakura
 https://snkazuracast5.com:8180/radio.mp3
 #EXTINF:0, Otaku Tunes
 https://snkazuracast5.com:8190/radio.mp3
-#EXTINF:0, Ottava
-http://ottava2.out.airtime.pro:8000/ottava2_a
-#EXTINF:0, Radio Plaza Ogg (65kbps)
-http://radio.plaza.one/ogg_low
+#EXTINF:0, Radio Plaza opus
+http://radio.plaza.one/opus
 #EXTINF:0, Radio Plaza mp3 (128kbps)
 http://radio.plaza.one/mp3
 #EXTINF:0, RaueteMusik - Study
@@ -227,9 +227,7 @@ http://stream.rcast.net/65538
 https://radio.animebits.moe/stream/stream192.mp3
 #EXTINF:0, Anime Bits 256k
 https://radio.animebits.moe/stream/stream256.ogg
-#EXTINF:0, BOX :/nime Radio
-https://play.streamafrica.net/weebanimeradio
-#EXTINF:0, Weeb Radio Network
+#EXTINF:0, BOX : Weeb Anime Network -アニメラジオ
 http://play.streamafrica.net/weebanimeradio
 #EXTINF:0, Anime Para Ti
 http://stream.zenolive.com/qpn8mkt8c4duv.aac
@@ -241,5 +239,25 @@ https://stream.rcast.net/67511.m3u
 http://184.154.45.106:8461/autodj
 #EXTINF:0, Geek Radio Music
 http://stream.zenolive.com/8d0xskxsxxquv
+#EXTINF:0, Bitter Sweet Music JP
+https://sonicssl.namehost.ro/8520/live.jp
+#EXTINF:0, エフエムつやま
+http://onair.fm-tsuyama.jp:1080/fmtsuyama_live.ogg
+#EXTINF:0, FMかほく
+http://radio.kahoku.net:8000/;
+#EXTINF:0, Kishiwada Radio
+http://61.89.201.27:8000/radikishi.mp3
+#EXTINF:0, Japanimradio (Manganime Radio)
+http://streaming.radionomy.com/JamendoLounge
+#EXTINF:0, Nonstop Casiopea - Fusion Radio
+https://nonstopcasiopea.radioca.st/;
 #EXTINF:0, Geheimwelt
 http://geheimwelt.stream.laut.fm/geheimwelt
+#EXTINF:0, AFN 360 Country
+https://16643.live.streamtheworld.com/AFN_CTYP_SC
+#EXTINF:0, Funky Corner Radio
+https://ais-sa2.cdnstream1.com/2447_192.mp3
+#EXTINF:0, 羊飼いラジオHitsujikai Radio / Shepherd radio
+https://streaming.radio.co/se4a8e6a93/listen
+#EXTINF:0, Ottava (Voice of the Planet)
+http://ottava2.out.airtime.pro:8000/ottava2_a
