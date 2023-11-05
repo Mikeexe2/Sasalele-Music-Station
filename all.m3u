@@ -261,3 +261,5 @@ https://ais-sa2.cdnstream1.com/2447_192.mp3
 https://streaming.radio.co/se4a8e6a93/listen
 #EXTINF:0, Ottava (Voice of the Planet)
 http://ottava2.out.airtime.pro:8000/ottava2_a
+#EXTINF:0, test
+http://80.252.130.250:8000/radionami
