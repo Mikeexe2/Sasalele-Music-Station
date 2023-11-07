@@ -1,0 +1,2000 @@
+[
+  {
+    "name": "LISTEN.MOE",
+    "url": "https://listen.moe/stream",
+    "favicon": "https://listen.moe/_nuxt/img/logo-square-64.248c1f3.png",
+    "website": "https://listen.moe/"
+  },
+  {
+    "name": "R/a/dio",
+    "url": "https://stream.r-a-d.io/main.mp3",
+    "favicon": "https://r-a-d.io/assets/logo_image_small.png",
+    "website": "https://r-a-d.io/"
+  },
+  {
+    "name": "Radio Otaku's Dream",
+    "url": "http://serv.1fm.me:8004/;",
+    "favicon": "https://www.otakus-dream.com/wp-content/uploads/2021/05/logo-3.png",
+    "website": "https://www.otakus-dream.com/"
+  },
+  {
+    "name": "Vocaloid Radio VRX (192kbps)",
+    "url": "http://vrx.piro.moe:8000/stream-192",
+    "favicon": "https://oiradio.co/assets/images/stations/e/e6d35bf8758b84a9ff8d856b96a3801b.png",
+    "website": "https://vrx.piro.moe/"
+  },
+  {
+    "name": "Vocaloid Radio VRX (256kbps)",
+    "url": "https://vrx.piro.moe/stream-256",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FRCy5Lpzu9mblzOPiXVIg6I4WP9ZpYSp15pZemxtd_Hg%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2RiMTc0YWQ0LTI3MWQtNGYyMy05ZTdkLWMyZDUwNWZiYTQyYi9pbWFnZS8_dXBkYXRlZD0xNjk2NjE1NjIyMDAw.webp&w=1920&q=100",
+    "website": "https://vrx.piro.moe/"
+  },
+  {
+    "name": "Vocaloid Radio (320kbps)",
+    "url": "https://vocaloid.radioca.st/stream",
+    "favicon": "https://vocaloidradio.com/wp-content/uploads/2020/02/vocaloidradio-300x300.jpg",
+    "website": "https://vocaloidradio.com/"
+  },
+  {
+    "name": "V家电台·Vocaloid Radio",
+    "url": "http://curiosity.shoutca.st:8019/stream",
+    "favicon": "https://vocaloidradio.com/wp-content/uploads/2020/02/vocaloidradio-300x300.jpg",
+    "website": "https://vocaloidradio.com/"
+  },
+  {
+    "name": "Wave ANime Radio",
+    "url": "http://s04.radio-tochka.com:5470/mount",
+    "favicon": "https://cdn-profiles.tunein.com/s277840/images/logod.png?t=638304549700000000",
+    "website": "https://t.me/waveanime"
+  },
+  {
+    "name": "Tsubaki Web Radio",
+    "url": "http://stream.tsubakianimeradio.com:9000/stream/1/",
+    "favicon": "https://static.tuneyou.com/images/logos/500_500/91/15991/Tsubakiotakuradio_5.jpg",
+    "website": "http://tsubakianimeradio.com/"
+  },
+  {
+    "name": "CALMRADIO.COM - J Pop",
+    "url": "http://23.82.11.87:21928/stream",
+    "favicon": "https://calmradio.com/templates/calmradio/favicons/apple-touch-icon.png",
+    "website": ""
+  },
+  {
+    "name": "Radio Nami",
+    "url": "http://80.252.130.250:8000/radionami",
+    "favicon": "https://radionami.com/style/horo.png",
+    "website": "https://radionami.com/"
+  },
+  {
+    "name": "Radio Nami - MP3 320k (Home)",
+    "url": "http://5.9.2.139:8000/any-anime.ru",
+    "favicon": "https://radionami.com/style/horo.png",
+    "website": "https://radionami.com/"
+  },
+  {
+    "name": "Radio J-Hero",
+    "url": "http://stm1.radiojhero.com:8008/;",
+    "favicon": "https://radiojhero.com/assets/logojhero.23cabdfc.png",
+    "website": "https://radiojhero.com/"
+  },
+  {
+    "name": "Radio Caprice J-Pop",
+    "url": "http://79.111.119.111:8002/jpop",
+    "favicon": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/Radio%20Caprice%20J-Pop.jpg",
+    "website": "http://radcap.ru/jpop.html"
+  },
+  {
+    "name": "Radio Caprice J-Rock",
+    "url": "http://79.111.119.111:8002/jrock",
+    "favicon": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/Radio%20Caprice%20J-Pop.jpg",
+    "website": "http://radcap.ru/jrock.html"
+  },
+  {
+    "name": "Radio Caprice Anime",
+    "url": "http://79.111.119.111:8002/anime",
+    "favicon": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/Radio%20Caprice%20J-Pop.jpg",
+    "website": "http://radcap.ru/anime.html"
+  },
+  {
+    "name": "JPHiP Radio",
+    "url": "http://radio.jphip.com:8800/;stream.nsv&type=mp3&quot",
+    "favicon": "https://cdn-radiotime-logos.tunein.com/s54003d",
+    "website": "http://radio.jphip.com:8800/"
+  },
+  {
+    "name": "JapanNext",
+    "url": "http://perseus.shoutca.st:8803/stream",
+    "favicon": "https://1.bp.blogspot.com/-WYvLtD46Tik/XHuMLFCHJTI/AAAAAAAAHag/zil8qukJvU8eWZvlbqIHZT8Ej9NZ-dRvwCK4BGAYYCw/s1600/Logo%2Bcopia.png",
+    "website": "https://japan-next.blogspot.com/"
+  },
+  {
+    "name": "Greek Otaku Radio",
+    "url": "http://192.99.4.210:3684/stream",
+    "favicon": "https://static2.mytuner.mobi/media/tvos_radios/v3k92qjeu8td.png",
+    "website": "http://goradio.gr/"
+  },
+  {
+    "name": "Final Fantasy Radio",
+    "url": "http://finalfantasystation.com:8000/stream",
+    "favicon": "http://finalfantasyradio.co/wp-content/uploads/2014/04/cropped-FFRBB_v2-1-192x192.png",
+    "website": "http://finalfantasyradio.co/"
+  },
+  {
+    "name": "City Pop One radio",
+    "url": "https://m.radio.fm:8443/citypopone-192",
+    "favicon": "https://thumbnailer.mixcloud.com/unsafe/166x166/profile/4/9/5/3/fc1f-e4d5-4fac-b9c0-1435a5d23863",
+    "website": "https://tokyo.citypop.one/two"
+  },
+  {
+    "name": "BOX : City Pop Radio",
+    "url": "https://boxradio-edge-10.streamafrica.net/jpopchill",
+    "favicon": "https://icdn2.streamafrica.net/boxradiostacks/b91d19608118b703.jpg",
+    "website": "https://player.boxradio.net/"
+  },
+  {
+    "name": "BOX: J-POP  Radio",
+    "url": "https://boxradio-edge-04.streamafrica.net/jpop",
+    "favicon": "https://icdn2.streamafrica.net/boxradiostacks/91cdc5a75caea1f9.jpg",
+    "website": "https://player.boxradio.net/"
+  },
+  {
+    "name": "BOX : Weeb Anime Network",
+    "url": "http://play.streamafrica.net/weebanimeradio",
+    "favicon": "https://icdn2.streamafrica.net/boxradiostacks/2d7e163f1d2aa471.jpg",
+    "website": "https://player.boxradio.net/"
+  },
+  {
+    "name": "Cirilo Rádio",
+    "url": "http://streaming06.hstbr.net:8114/live",
+    "favicon": "https://cdn-radiotime-logos.tunein.com/s244947d.png",
+    "website": "https://tunein.com/radio/Cirilo-Rdio-s244947/"
+  },
+  {
+    "name": "CALMRADIO.COM - Shakuhachi",
+    "url": "http://23.82.11.87:20328/stream",
+    "favicon": "https://static2.mytuner.mobi/media/tvos_radios/zek84pakpcxd.png",
+    "website": "https://mytuner-radio.com/radio/calm-radio-shakuhachi-465630/"
+  },
+  {
+    "name": "Anytime Anime Radio V3",
+    "url": "http://65.109.81.84:7868/stream",
+    "favicon": "https://static2.mytuner.mobi/media/tvos_radios/HY8hJz9mxf.jpeg",
+    "website": "https://zeno.fm/radio/anytime-anime-radio/"
+  },
+  {
+    "name": "Anime Nexus",
+    "url": "http://radio.animenexus.mx:8000/animenexus",
+    "favicon": "https://www.animenexusla.com/wp-content/uploads/2021/05/ANIME-NEXUS-LOGO-15_Mesa-de-trabajo-1-500x188.png",
+    "website": "https://www.animenexusla.com/"
+  },
+  {
+    "name": "Kawaii Anime Radio",
+    "url": "http://91.121.110.129:8030/radio.mp3/;",
+    "favicon": "https://static2.mytuner.mobi/media/tvos_radios/8c77y93npxu4.png",
+    "website": "https://tunein.com/radio/Kawaii-Anime-Radio-s232606/"
+  },
+  {
+    "name": "Radio AOI",
+    "url": "http://54.37.73.148:8000/stream",
+    "favicon": "https://radioaoi.pl/wp-content/themes/RadioAoi/images/favicon.png",
+    "website": "https://radioaoi.pl/"
+  },
+  {
+    "name": "Radio Akiba Brasil",
+    "url": "http://stm24.srvstm.com:9526/",
+    "favicon": "https://www.akiba.com.br/imagem/todas/logo_akiba.png",
+    "website": "http://stm24.srvstm.com:9526/index.html?sid=1"
+  },
+  {
+    "name": "ADBT Radio",
+    "url": "http://217.79.181.61:8000/listen.pls/;stream.nsv&type=mp3&quot",
+    "favicon": "https://adbt.it.cx/pic/coolblue/logo.gif",
+    "website": "https://adbt.it.cx/"
+  },
+  {
+    "name": "JPopsuki Radio!",
+    "url": "http://65.21.170.149:8000/stream",
+    "favicon": "https://jpopsuki.eu/static/styles/public/favicon.ico",
+    "website": "http://jpopsuki.fm:2199/start/jpopsuki/"
+  },
+  {
+    "name": "Japanimradio (Manganime Radio)",
+    "url": "http://streaming.radionomy.com/JamendoLounge",
+    "favicon": "https://static2.mytuner.mobi/media/tvos_radios/tds4w7v9tpcu.jpg",
+    "website": "https://onlineradiobox.com/jp/japanimradio/?cs=jp.japanimradio&played=1"
+  },
+  {
+    "name": "Friends Forever Internet Radio",
+    "url": "https://s5.radio.co/s6140c7241/listen",
+    "favicon": "https://www.grahambaster.com/favicon.ico",
+    "website": "https://www.grahambaster.com/"
+  },
+  {
+    "name": "DoujinStyle Radio",
+    "url": "https://streams.radio.co/s5ff57669c/listen",
+    "favicon": "https://doujinstyle.com/layout/dslogo62.png?102999",
+    "website": "https://doujinstyle.com/?p=home&page=1"
+  },
+  {
+    "name": "Anison.FM (128Kbs)",
+    "url": "https://pool.anison.fm/AniSonFM(128)",
+    "favicon": "http://anison.fm/images/logo-og.png",
+    "website": "https://en.anison.fm/"
+  },
+  {
+    "name": "Anison.FM (256Kbs)",
+    "url": "https://pool.anison.fm/AniSonFM(256)",
+    "favicon": "http://anison.fm/images/logo-og.png",
+    "website": "https://en.anison.fm/"
+  },
+  {
+    "name": "Anison.FM (320Kbs)",
+    "url": "https://pool.anison.fm/AniSonFM(320)",
+    "favicon": "http://anison.fm/images/logo-og.png",
+    "website": "https://en.anison.fm/"
+  },
+  {
+    "name": "Big B Radio - J Pop",
+    "url": "https://antares.dribbcast.com/proxy/jpop?mp=/s",
+    "favicon": "https://bigbradio.net/img/player-logo.png",
+    "website": "https://bigbradio.net/jpop#display_current"
+  },
+  {
+    "name": "Big B Radio - Asian Pop",
+    "url": "https://antares.dribbcast.com/proxy/apop?mp=/s",
+    "favicon": "https://bigbradio.net/img/player-logo.png",
+    "website": "https://bigbradio.net/apop#display_current"
+  },
+  {
+    "name": "Big B Radio -C Pop",
+    "url": "https://antares.dribbcast.com/proxy/cpop?mp=/s",
+    "favicon": "https://bigbradio.net/img/player-logo.png",
+    "website": "https://bigbradio.net/cpop#display_current"
+  },
+  {
+    "name": "Big B Radio - K Pop",
+    "url": "https://antares.dribbcast.com/proxy/kpop?mp=/s",
+    "favicon": "https://bigbradio.net/img/player-logo.png",
+    "website": "https://bigbradio.net/kpop#display_current"
+  },
+  {
+    "name": "80s",
+    "url": "https://snkazuracast5.com:8000/radio.mp3",
+    "favicon": "https://www.azuracast.com/icons/114.png",
+    "website": "https://www.azuracast.com/"
+  },
+  {
+    "name": "90s",
+    "url": "https://snkazuracast5.com:8010/radio.mp3",
+    "favicon": "https://www.azuracast.com/icons/114.png",
+    "website": "https://www.azuracast.com/"
+  },
+  {
+    "name": "Anime Emotional",
+    "url": "https://snkazuracast5.com:8020/radio.mp3",
+    "favicon": "https://www.azuracast.com/icons/114.png",
+    "website": "https://www.azuracast.com/"
+  },
+  {
+    "name": "Anime Ending",
+    "url": "https://snkazuracast5.com:8030/radio.mp3",
+    "favicon": "https://www.azuracast.com/icons/114.png",
+    "website": "https://www.azuracast.com/"
+  },
+  {
+    "name": "Anime J-Pop",
+    "url": "https://snkazuracast5.com:8040/radio.mp3",
+    "favicon": "https://www.azuracast.com/icons/114.png",
+    "website": "https://www.azuracast.com/"
+  },
+  {
+    "name": "Anime J-Rock",
+    "url": "https://snkazuracast5.com:8050/radio.mp3",
+    "favicon": "https://www.azuracast.com/icons/114.png",
+    "website": "https://www.azuracast.com/"
+  },
+  {
+    "name": "Anime Openings",
+    "url": "https://snkazuracast5.com:8060/radio.mp3",
+    "favicon": "https://www.azuracast.com/icons/114.png",
+    "website": ""
+  },
+  {
+    "name": "Anime Soundtrack",
+    "url": "https://snkazuracast5.com:8070/radio.mp3",
+    "favicon": "https://www.azuracast.com/icons/114.png",
+    "website": "https://www.azuracast.com/"
+  },
+  {
+    "name": "Anime Themes",
+    "url": "https://snkazuracast5.com:8090/radio.mp3",
+    "favicon": "https://www.azuracast.com/icons/114.png",
+    "website": "https://www.azuracast.com/"
+  },
+  {
+    "name": "Anime Metal",
+    "url": "https://snkazuracast5.com:8100/radio.mp3",
+    "favicon": "https://www.azuracast.com/icons/114.png",
+    "website": "https://www.azuracast.com/"
+  },
+  {
+    "name": "Anime Beats",
+    "url": "https://snkazuracast5.com:8110/radio.mp3",
+    "favicon": "https://www.azuracast.com/icons/114.png",
+    "website": "https://www.azuracast.com/"
+  },
+  {
+    "name": "Anime Lo Fi Mix",
+    "url": "https://snkazuracast5.com:8120/radio.mp3",
+    "favicon": "https://www.azuracast.com/icons/114.png",
+    "website": "https://www.azuracast.com/"
+  },
+  {
+    "name": "Anime Vibes",
+    "url": "https://snkazuracast5.com:8130/radio.mp3",
+    "favicon": "https://www.azuracast.com/icons/114.png",
+    "website": "https://www.azuracast.com/"
+  },
+  {
+    "name": "Asian Beats",
+    "url": "https://snkazuracast5.com:8140/radio.mp3",
+    "favicon": "https://www.azuracast.com/icons/114.png",
+    "website": "https://www.azuracast.com/"
+  },
+  {
+    "name": "Chill Opening",
+    "url": "https://snkazuracast5.com:8150/radio.mp3",
+    "favicon": "https://www.azuracast.com/icons/114.png",
+    "website": "https://www.azuracast.com/"
+  },
+  {
+    "name": "Chill Session",
+    "url": "https://snkazuracast5.com:8160/radio.mp3",
+    "favicon": "https://www.azuracast.com/icons/114.png",
+    "website": "https://www.azuracast.com/"
+  },
+  {
+    "name": "ChillHop Music",
+    "url": "https://snkazuracast5.com:8170/radio.mp3",
+    "favicon": "https://www.azuracast.com/icons/114.png",
+    "website": "https://www.azuracast.com/"
+  },
+  {
+    "name": "Lo-fi Mix",
+    "url": "https://snkazuracast5.com:8180/radio.mp3",
+    "favicon": "https://www.azuracast.com/icons/114.png",
+    "website": "https://www.azuracast.com/"
+  },
+  {
+    "name": "Otaku Tunes",
+    "url": "https://snkazuracast5.com:8190/radio.mp3",
+    "favicon": "https://www.azuracast.com/icons/114.png",
+    "website": "https://www.azuracast.com/"
+  },
+  {
+    "name": "Sunday Tunes",
+    "url": "https://snkazuracast5.com:8200/radio.mp3",
+    "favicon": "https://www.azuracast.com/icons/114.png",
+    "website": "https://www.azuracast.com/"
+  },
+  {
+    "name": "ANIME FM",
+    "url": "http://stream.laut.fm/animefm",
+    "favicon": "https://assets.laut.fm/430eee566f87b874e69447572ad8a86c?t=_120x120",
+    "website": "https://laut.fm/animefm"
+  },
+  {
+    "name": "ILOVEANIMEMANGA",
+    "url": "http://stream.laut.fm/iloveanimemanga",
+    "favicon": "https://assets.laut.fm/cded68a41e175395f813b022bce2defe?t=_120x120",
+    "website": "https://laut.fm/iloveanimemanga"
+  },
+  {
+    "name": "EVIL ANIME FM",
+    "url": "http://stream.laut.fm/evil-animefm",
+    "favicon": "https://assets.laut.fm/fb4ef657f908a7de77866692ba5f1d03?t=_120x120",
+    "website": "https://laut.fm/evil-animefm"
+  },
+  {
+    "name": "ANIME ACADEMY",
+    "url": "http://stream.laut.fm/animeacademy",
+    "favicon": "https://assets.laut.fm/37845770ffbaa43c9dee391abe0657bf?t=_120x120",
+    "website": "https://laut.fm/animeacademy"
+  },
+  {
+    "name": "J NATION",
+    "url": "http://stream.laut.fm/j-nation",
+    "favicon": "https://assets.laut.fm/1da07ca134df444d9deb83cf7d3f8184?t=_120x120",
+    "website": "https://laut.fm/j-nation"
+  },
+  {
+    "name": "KAWAII MUSIC",
+    "url": "http://stream.laut.fm/kawaii-music",
+    "favicon": "https://assets.laut.fm/af01eb8c8dfbed6279c89bda7810e229?t=_120x120",
+    "website": "https://laut.fm/kawaii-music"
+  },
+  {
+    "name": "OTAKU WORLD",
+    "url": "http://stream.laut.fm/otaku-world",
+    "favicon": "https://assets.laut.fm/f19962299153e2f76903c9a83522f2db?t=_120x120",
+    "website": "https://laut.fm/otaku-world"
+  },
+  {
+    "name": "PUREPURE",
+    "url": "http://stream.laut.fm/purepure",
+    "favicon": "https://assets.laut.fm/28da09b8fc5c70202424a931d4094ba6?t=_120x120",
+    "website": "https://laut.fm/purepure"
+  },
+  {
+    "name": "ANIMEKLATU",
+    "url": "http://stream.laut.fm/animklatu",
+    "favicon": "https://assets.laut.fm/4907293d80789063c926758d9ea2e7c3?t=_120x120",
+    "website": "https://laut.fm/animklatu"
+  },
+  {
+    "name": "FREECALL",
+    "url": "http://stream.laut.fm/freecall",
+    "favicon": "https://assets.laut.fm/3c2a10c127502040f6e1147115babb42?t=_120x120",
+    "website": "https://laut.fm/freecall"
+  },
+  {
+    "name": "ANIMEALIVE",
+    "url": "http://stream.laut.fm/animealive",
+    "favicon": "https://assets.laut.fm/e351c5856f121d60c93eb863bd99398b?t=_120x120",
+    "website": "https://laut.fm/animealive"
+  },
+  {
+    "name": "ANIME RADIO SWITZERLAND",
+    "url": "http://stream.laut.fm/anime-radio-switzerland",
+    "favicon": "https://assets.laut.fm/336cec266761f0b4b8217f776f2f310a?t=_120x120",
+    "website": "https://laut.fm/anime-radio-switzerland"
+  },
+  {
+    "name": "FLUFFYLANDRPG",
+    "url": "http://stream.laut.fm/fluffylandrpg",
+    "favicon": "https://assets.laut.fm/22a7dc63f531cc656a23556c72c852a1?t=_120x120",
+    "website": "https://laut.fm/fluffylandrpg"
+  },
+  {
+    "name": "GEHEIMWELT",
+    "url": "http://stream.laut.fm/geheimwelt",
+    "favicon": "https://assets.laut.fm/91dc9fb4b9a777b00e493b2b50423b57?t=_120x120",
+    "website": "https://laut.fm/geheimwelt"
+  },
+  {
+    "name": "JUSTPLAY",
+    "url": "http://stream.laut.fm/justplay",
+    "favicon": "https://assets.laut.fm/1ed53a46858d0db88e4932a9ea15095f?t=_120x120",
+    "website": "https://laut.fm/justplay"
+  },
+  {
+    "name": "SACREDINC",
+    "url": "http://stream.laut.fm/sacredinc",
+    "favicon": "https://assets.laut.fm/e652c24d5a4903f7f32f45a6ad7db7be?t=_120x120",
+    "website": "https://laut.fm/sacredinc"
+  },
+  {
+    "name": "DRYSTAN",
+    "url": "http://stream.laut.fm/drystan",
+    "favicon": "https://assets.laut.fm/e837bb137d5e31a048d55632f3f84394?t=_120x120",
+    "website": "https://laut.fm/drystan"
+  },
+  {
+    "name": "AKV 1",
+    "url": "http://stream.laut.fm/akv1",
+    "favicon": "https://assets.laut.fm/a7065ce1e213580644356a223ccb6b68?t=_120x120",
+    "website": "https://laut.fm/akv1"
+  },
+  {
+    "name": "DARKARMY RADIO",
+    "url": "http://stream.laut.fm/darkarmyradio",
+    "favicon": "https://assets.laut.fm/7aba0120d3425473a3dd9492bd5aec1c?t=_120x120",
+    "website": "https://laut.fm/darkarmyradio"
+  },
+  {
+    "name": "CREWFIRE FM",
+    "url": "http://stream.laut.fm/crewfirefm",
+    "favicon": "https://assets.laut.fm/00a622418e3b6ac92dfae3514b958f39?t=_120x120",
+    "website": "https://laut.fm/crewfirefm"
+  },
+  {
+    "name": "TOTALGENIAL",
+    "url": "http://stream.laut.fm/totalgenial",
+    "favicon": "https://assets.laut.fm/c4cb6092d91ddccb4d1368c6e9497a01?t=_120x120",
+    "website": "https://laut.fm/totalgenial"
+  },
+  {
+    "name": "ACW",
+    "url": "http://stream.laut.fm/acw",
+    "favicon": "https://assets.laut.fm/f3b0ea4c7dd8d4e0b00055b3e5413ec8?t=_120x120",
+    "website": "https://laut.fm/acw"
+  },
+  {
+    "name": "VARVIA",
+    "url": "http://stream.laut.fm/varvia",
+    "favicon": "https://assets.laut.fm/9c4b3b61b61c2333f371efa4f20bc6bd?t=_120x120",
+    "website": "https://laut.fm/varvia"
+  },
+  {
+    "name": "MELOVOX",
+    "url": "http://stream.laut.fm/melovox",
+    "favicon": "https://assets.laut.fm/c6a149d55237ce67ca2758f51e823bd3?t=_120x120",
+    "website": "https://laut.fm/melovox"
+  },
+  {
+    "name": "MYSTERY",
+    "url": "http://stream.laut.fm/mystery",
+    "favicon": "https://assets.laut.fm/770d619b7b021311fc36d1e5e2640be4?t=_120x120",
+    "website": "https://laut.fm/mystery"
+  },
+  {
+    "name": "AZURCRAFTNET",
+    "url": "http://stream.laut.fm/azurcraftnet",
+    "favicon": "https://assets.laut.fm/5259a2e367d3050b408ec90ef4fe28e0?t=_120x120",
+    "website": "https://laut.fm/azurcraftnet"
+  },
+  {
+    "name": "NEWMUSICFMANIME",
+    "url": "http://stream.laut.fm/newmusicfmanime",
+    "favicon": "https://assets.laut.fm/7fdb9f34d66f9569791d0fe17e043e20?t=_120x120",
+    "website": "https://laut.fm/newmusicfmanime"
+  },
+  {
+    "name": "FREIZEITPARKCHECK",
+    "url": "http://stream.laut.fm/freizeitparkcheck",
+    "favicon": "https://assets.laut.fm/a44c9185c3851a1ef8bd1929f9f893b6?t=_120x120",
+    "website": "https://laut.fm/freizeitparkcheck"
+  },
+  {
+    "name": "MOVIEDANCE",
+    "url": "http://stream.laut.fm/moviedance",
+    "favicon": "https://assets.laut.fm/924196b9b3a8abfb760a4d145b12ee06?t=_120x120",
+    "website": "https://laut.fm/moviedance"
+  },
+  {
+    "name": "RADIO BRAINAFK",
+    "url": "http://stream.laut.fm/radio-brainafk",
+    "favicon": "https://assets.laut.fm/b3e9ffc3ef1d2fd83f99c50c8642fd73?t=_120x120",
+    "website": "https://laut.fm/radio-brainafk"
+  },
+  {
+    "name": "GAMEMUSIC",
+    "url": "http://stream.laut.fm/gamemusic",
+    "favicon": "https://assets.laut.fm/fea0fe7f28d6b2f8ffa6ddde0ac95af3?t=_120x120",
+    "website": "https://laut.fm/gamemusic"
+  },
+  {
+    "name": "KPOP 4 YOU",
+    "url": "http://stream.laut.fm/kpop4you",
+    "favicon": "https://assets.laut.fm/b7119e8b197b36769ab545cafcad0cfc?t=_120x120",
+    "website": "https://laut.fm/kpop4you"
+  },
+  {
+    "name": "KPOPHITS",
+    "url": "http://stream.laut.fm/kpophits",
+    "favicon": "https://assets.laut.fm/7844dad997230cdcc18d5f055544bff3?t=_120x120",
+    "website": "https://laut.fm/kpophits"
+  },
+  {
+    "name": "RADIOKPOP",
+    "url": "http://stream.laut.fm/radiokpop",
+    "favicon": "https://assets.laut.fm/e837bb137d5e31a048d55632f3f84394?t=_120x120",
+    "website": "https://laut.fm/radiokpop"
+  },
+  {
+    "name": "K WORLD",
+    "url": "http://stream.laut.fm/k-world",
+    "favicon": "https://assets.laut.fm/0af3734b6022b5729c498161e1c82491?t=_120x120",
+    "website": "https://laut.fm/k-world"
+  },
+  {
+    "name": "FLOPSI",
+    "url": "http://stream.laut.fm/flopsi",
+    "favicon": "https://assets.laut.fm/bd01de85939d0a155f880b2e4a213f62?t=_120x120",
+    "website": "https://laut.fm/flopsi"
+  },
+  {
+    "name": "HESSENPOP",
+    "url": "http://stream.laut.fm/hessenpop",
+    "favicon": "https://assets.laut.fm/346328eea6a0fd60a171beb312ad250f?t=_120x120",
+    "website": "https://laut.fm/hessenpop"
+  },
+  {
+    "name": "DRYFE",
+    "url": "http://stream.laut.fm/dryfe",
+    "favicon": "https://assets.laut.fm/9153363475cbacb4d22b822955a85f95?t=_120x120",
+    "website": "https://laut.fm/dryfe"
+  },
+  {
+    "name": "ANIME RADIO DE",
+    "url": "http://stream.laut.fm/anime-radio-de",
+    "favicon": "https://assets.laut.fm/b42c8dcb61c933540ef592c080acf9bb?t=_120x120",
+    "website": "https://laut.fm/anime-radio-de"
+  },
+  {
+    "name": "LUKASPRODUCTION",
+    "url": "http://stream.laut.fm/lukasproduction",
+    "favicon": "https://assets.laut.fm/20a3df019279db6e1b549bf9c23d3483?t=_120x120",
+    "website": "https://laut.fm/lukasproduction"
+  },
+  {
+    "name": "LEON",
+    "url": "http://stream.laut.fm/leon",
+    "favicon": "https://assets.laut.fm/005b73bd0fff871ffedaf89922eb4099?t=_120x120",
+    "website": "https://laut.fm/leon"
+  },
+  {
+    "name": "DELFIN",
+    "url": "http://stream.laut.fm/delfin",
+    "favicon": "https://assets.laut.fm/6e7926d5bc49e0a5aaa132feb0050587?t=_120x120",
+    "website": "https://laut.fm/delfin"
+  },
+  {
+    "name": "LITE RADIO",
+    "url": "http://stream.laut.fm/literadio",
+    "favicon": "https://assets.laut.fm/94d40de9a730438676ba62027855cdf5?t=_120x120",
+    "website": "https://laut.fm/literadio"
+  },
+  {
+    "name": "HABBOLOUD",
+    "url": "http://stream.laut.fm/habboloud",
+    "favicon": "https://assets.laut.fm/c3ec54ee8e7f290fff058c7a57b9dd17?t=_120x120",
+    "website": "https://laut.fm/habboloud"
+  },
+  {
+    "name": "RADIOTRDFMEXTRA",
+    "url": "http://stream.laut.fm/radiotrdfmextra",
+    "favicon": "https://assets.laut.fm/b7328cd128e38bbb062be10223913d56?t=_120x120",
+    "website": "https://laut.fm/radiotrdfmextra"
+  },
+  {
+    "name": "KULTUR ONLINE FM",
+    "url": "http://stream.laut.fm/kultur-online-fm",
+    "favicon": "https://assets.laut.fm/e874c79618bc3d82761e25b809ca9b0a?t=_120x120",
+    "website": "https://laut.fm/kultur-online-fm"
+  },
+  {
+    "name": "JURO FUNK",
+    "url": "http://stream.laut.fm/juro-funk",
+    "favicon": "https://assets.laut.fm/0b44572c4ad69f59695602ca47ae5d1b?t=_120x120",
+    "website": "https://laut.fm/juro-funk"
+  },
+  {
+    "name": "RADIO PARANORMAL",
+    "url": "http://stream.laut.fm/radio-paranormal",
+    "favicon": "https://assets.laut.fm/45e685660342d331fce6d8ad9c32de5c?t=_120x120",
+    "website": "https://laut.fm/radio-paranormal"
+  },
+  {
+    "name": "STARTYOUR RADIO",
+    "url": "http://stream.laut.fm/startyourradio",
+    "favicon": "https://laut.fm/assets/touch-icons/apple-touch-icon.png?9e172e15",
+    "website": "https://laut.fm/startyourradio"
+  },
+  {
+    "name": "NIGHTCORE RADIO",
+    "url": "http://stream.laut.fm/nightcoreradio",
+    "favicon": "https://assets.laut.fm/e837bb137d5e31a048d55632f3f84394?t=_120x120",
+    "website": "https://laut.fm/nightcoreradio"
+  },
+  {
+    "name": "NIGHCORELAND",
+    "url": "http://stream.laut.fm/nighcoreland",
+    "favicon": "https://assets.laut.fm/ef29ea29e75ef403fb12fd15ec89774f?t=_120x120",
+    "website": "https://laut.fm/nighcoreland"
+  },
+  {
+    "name": "NIGHTCOREJUNIORLK",
+    "url": "http://stream.laut.fm/nightcorejuniorlk",
+    "favicon": "https://assets.laut.fm/c411710cd14a9bf96e98fc0281c695d0?t=_120x120",
+    "website": "https://laut.fm/nightcorejuniorlk"
+  },
+  {
+    "name": "ALLES",
+    "url": "http://stream.laut.fm/alles",
+    "favicon": "https://assets.laut.fm/71d47a9a97e0bd36d6c4db03cd2989f0?t=_120x120",
+    "website": "https://laut.fm/alles"
+  },
+  {
+    "name": "HAPPYFM NIGHTSCORE",
+    "url": "http://stream.laut.fm/happyfmnightscore",
+    "favicon": "https://laut.fm/assets/touch-icons/apple-touch-icon.png?9e172e15",
+    "website": "https://laut.fm/happyfmnightscore"
+  },
+  {
+    "name": "ELITEFMNCS",
+    "url": "http://stream.laut.fm/elitefmncs",
+    "favicon": "https://assets.laut.fm/9f7f78b13f88d9103584ded7967c1875?t=_120x120",
+    "website": "https://laut.fm/elitefmncs"
+  },
+  {
+    "name": "MIXEDNIGHTCORE",
+    "url": "http://stream.laut.fm/mixednightcore",
+    "favicon": "https://assets.laut.fm/248c9ec304db69fbbf48a5d13f0d0f74?t=_120x120",
+    "website": "https://laut.fm/mixednightcore"
+  },
+  {
+    "name": "F 4 BIX",
+    "url": "http://stream.laut.fm/f4bix",
+    "favicon": "https://assets.laut.fm/e837bb137d5e31a048d55632f3f84394?t=_120x120",
+    "website": "https://laut.fm/f4bix"
+  },
+  {
+    "name": "HAPPY FM",
+    "url": "http://stream.laut.fm/happyfm",
+    "favicon": "https://laut.fm/assets/touch-icons/apple-touch-icon.png?9e172e15",
+    "website": "https://laut.fm/happyfm"
+  },
+  {
+    "name": "NIGHTCOREMUSIC",
+    "url": "http://stream.laut.fm/nightcoremusic",
+    "favicon": "https://assets.laut.fm/7ac63d83b5204ff2e56da2686f4ec218?t=_120x120",
+    "website": "https://laut.fm/nightcoremusic"
+  },
+  {
+    "name": "RADIOMEGALINE",
+    "url": "http://stream.laut.fm/radiomegaline",
+    "favicon": "https://assets.laut.fm/cdbcae27047ea1b17ad4c9e7ae91c786?t=_120x120",
+    "website": "https://laut.fm/radiomegaline"
+  },
+  {
+    "name": "FADENIGHTCORE",
+    "url": "http://stream.laut.fm/fadenightcore",
+    "favicon": "https://assets.laut.fm/b0a1166004c572007fdb7941f8c455a8?t=_120x120",
+    "website": "https://laut.fm/fadenightcore"
+  },
+  {
+    "name": "NIGHTCORE",
+    "url": "http://stream.laut.fm/nightcore",
+    "favicon": "https://assets.laut.fm/b77e045cfcb0c1f32225d713f89bcbe8?t=_120x120",
+    "website": "https://laut.fm/nightcore"
+  },
+  {
+    "name": "DJBASEFIGTE-RADIO",
+    "url": "http://stream.laut.fm/djbasefigteradio",
+    "favicon": "https://assets.laut.fm/80db3d3d2850e1a37f84a0bd0cf70fb2?t=_120x120",
+    "website": "https://laut.fm/djbasefigteradio"
+  },
+  {
+    "name": "NIGHTCOREMUSIK",
+    "url": "http://stream.laut.fm/nightcoremusik",
+    "favicon": "https://assets.laut.fm/421b5997e23639913170b9d69c07b772?t=_120x120",
+    "website": "https://laut.fm/nightcoremusik"
+  },
+  {
+    "name": "LA CASA DE WEGEH",
+    "url": "http://stream.laut.fm/la_casa_de_wegeh",
+    "favicon": "https://assets.laut.fm/2d9ffb7af46e21424508ff68efb0044c?t=_120x120",
+    "website": "https://laut.fm/la_casa_de_wegeh"
+  },
+  {
+    "name": "MATZZTEG",
+    "url": "http://stream.laut.fm/matzzteg",
+    "favicon": "https://assets.laut.fm/3822548ca620d3dabda9fbb5e50ea204?t=_120x120",
+    "website": "https://laut.fm/matzzteg"
+  },
+  {
+    "name": "NIGHTCORELENA",
+    "url": "http://stream.laut.fm/nightcorelena",
+    "favicon": "https://assets.laut.fm/be182982d90ba58c5ad0ef6fb9f83e81?t=_120x120",
+    "website": "https://laut.fm/nightcorelena"
+  },
+  {
+    "name": "CYTRADIOGAMING",
+    "url": "http://stream.laut.fm/cytradiogaming",
+    "favicon": "https://laut.fm/assets/touch-icons/apple-touch-icon.png?9e172e15",
+    "website": "https://laut.fm/cytradiogaming"
+  },
+  {
+    "name": "NIGHTCOREJERRY",
+    "url": "http://stream.laut.fm/nightcorejerry",
+    "favicon": "https://assets.laut.fm/89dd50fc429bdc420dcf78273362215f?t=_120x120",
+    "website": "https://laut.fm/nightcorejerry"
+  },
+  {
+    "name": "COOKIECITY",
+    "url": "http://stream.laut.fm/cookiecity",
+    "favicon": "https://assets.laut.fm/7441136f6cffd8cbea21084f25484894?t=_120x120",
+    "website": "https://laut.fm/cookiecity"
+  },
+  {
+    "name": "2 LIVE",
+    "url": "http://stream.laut.fm/2live",
+    "favicon": "https://assets.laut.fm/6c200e34d28bf3852e92e1dbe88dbc0d?t=_120x120",
+    "website": "https://laut.fm/2live"
+  },
+  {
+    "name": "NXTZONE",
+    "url": "http://stream.laut.fm/nxtzone",
+    "favicon": "https://assets.laut.fm/5cdc80b3ad79d3612f7c0a0d0044850c?t=_120x120",
+    "website": "https://laut.fm/nxtzone"
+  },
+  {
+    "name": "RADIOREVOLUTION 44",
+    "url": "http://stream.laut.fm/radiorevolution44",
+    "favicon": "https://assets.laut.fm/93ba1e18a3a2eada64795d6e9d398140?t=_120x120",
+    "website": "https://laut.fm/radiorevolution44"
+  },
+  {
+    "name": "RNC",
+    "url": "http://stream.laut.fm/rnc",
+    "favicon": "https://assets.laut.fm/3556ce419cbe8cb85daf8129e6e46ff0?t=_120x120",
+    "website": "https://laut.fm/rnc"
+  },
+  {
+    "name": "ICE",
+    "url": "http://stream.laut.fm/ice",
+    "favicon": "https://assets.laut.fm/c57fe71c13d277aad9773090baa3b3a1?t=_120x120",
+    "website": "https://laut.fm/ice"
+  },
+  {
+    "name": "DYHNUNITYFM ELECTRO",
+    "url": "http://stream.laut.fm/dyhnunityfm-electro",
+    "favicon": "https://assets.laut.fm/b75d4eceff2460ee80cdb9a76bcfa4af?t=_120x120",
+    "website": "https://laut.fm/dyhnunityfm-electro"
+  },
+  {
+    "name": "NQR",
+    "url": "http://stream.laut.fm/nqr",
+    "favicon": "https://assets.laut.fm/e837bb137d5e31a048d55632f3f84394?t=_120x120",
+    "website": "https://laut.fm/nqr"
+  },
+  {
+    "name": "CAPRICE 247",
+    "url": "http://stream.laut.fm/caprice247",
+    "favicon": "https://assets.laut.fm/e915b3cb5b9b208e34ce7d3e2a4d6f80?t=_120x120",
+    "website": "https://laut.fm/caprice247"
+  },
+  {
+    "name": "JF FM",
+    "url": "http://stream.laut.fm/jffm",
+    "favicon": "https://assets.laut.fm/176b5d8742dad0d8a5103cda3a658254?t=_120x120",
+    "website": "https://laut.fm/rgb"
+  },
+  {
+    "name": "HENTAI-RADIO",
+    "url": "http://stream.laut.fm/hentai_radio",
+    "favicon": "https://assets.laut.fm/e837bb137d5e31a048d55632f3f84394?t=_120x120",
+    "website": "https://laut.fm/hentai_radio"
+  },
+  {
+    "name": "Akari Radio",
+    "url": "https://stream-151.zeno.fm/0t952vqukfeuv",
+    "favicon": "https://cdn-profiles.tunein.com/s281848/images/logod.jpg?t=638111146200000000",
+    "website": "https://radioakari.blogspot.com/"
+  },
+  {
+    "name": "Anime Pa Ra Ti",
+    "url": "https://stream-155.zeno.fm/acnhrkt8c4duv",
+    "favicon": "https://www.radio.net/images/broadcasts/d2/de/115781/3/c300.png",
+    "website": "https://zeno.fm/radio/radioanimeparati/"
+  },
+  {
+    "name": "Anime Plus Radio",
+    "url": "https://stream-156.zeno.fm/rfun7q8bt8quv",
+    "favicon": "https://www.animeplusradio.com/images/img0008.png",
+    "website": "https://onlineradiobox.com/co/animeplus/?cs=co.animeplus&played=1"
+  },
+  {
+    "name": "Anime Songs",
+    "url": "https://stream-150.zeno.fm/3hhp76wdz4zuv",
+    "favicon": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/sasalele_logo.png",
+    "website": "https://github.com/Mikeexe2/Sasalele-Music-Station/issues/new"
+  },
+  {
+    "name": "Animecol Radio",
+    "url": "http://186.147.235.2:80/animecol",
+    "favicon": "https://cdn.onlineradiobox.com/img/l/5/56395.v21.png",
+    "website": "https://onlineradiobox.com/co/animecol/?cs=co.animecol&played=1&lang=en"
+  },
+  {
+    "name": "AnimeNfo Radio",
+    "url": "https://stream-152.zeno.fm/xwa8ckz7mzzuv",
+    "favicon": "https://cdn.onlineradiobox.com/img/l/2/12922.v3.png",
+    "website": "https://zeno.fm/radio/animenfo-radio/"
+  },
+  {
+    "name": "AnimeRadio.de",
+    "url": "http://stream.animeradio.de/animeradio.mp3",
+    "favicon": "https://www.animeradio.de/img/favicon.png",
+    "website": "https://www.animeradio.de/"
+  },
+  {
+    "name": "Animextre radio",
+    "url": "https://stream-153.zeno.fm/tqnyyz5r8neuv",
+    "favicon": "https://pbs.twimg.com/profile_images/580585136032477184/6R3aYz5h_400x400.png",
+    "website": "https://ugc.production.linktr.ee/n1U7N76ATYKnK6dQO5zn_qxPqwxt3A2LeiE7c?io=true&size=avatar-v1_0"
+  },
+  {
+    "name": "Animu FM",
+    "url": "http://cast.animu.com.br:9079/stream",
+    "favicon": "https://www.animu.com.br/wp-content/uploads/2021/04/cropped-Icone-A-new-sem-stroke-192x192.png",
+    "website": "https://www.animu.com.br/"
+  },
+  {
+    "name": "Gensokyo Radio | 24/7 Touhou Music Stream",
+    "url": "https://stream.gensokyoradio.net/1",
+    "favicon": "https://gensokyoradio.net/images/gr1.png",
+    "website": "https://gensokyoradio.net/playing/"
+  },
+  {
+    "name": "J-Idols Project Radio",
+    "url": "http://26453.live.streamtheworld.com/SAM05AAC121.mp3",
+    "favicon": "https://static2.mytuner.mobi/media/tvos_radios/u72bquebkvwj.png",
+    "website": "https://mytuner-radio.com/radio/j-idols-project-radio-435940/"
+  },
+  {
+    "name": "J-Pop Project Radio",
+    "url": "http://13683.live.streamtheworld.com/SAM10AAC139.mp3",
+    "favicon": "https://static2.mytuner.mobi/media/tvos_radios/5slkqvvdhajd.png",
+    "website": "https://listen.samcloud.com/w/83273/JPop-Project-Radio#history"
+  },
+  {
+    "name": "J-Club Powerplay HipHop",
+    "url": "https://kathy.torontocast.com/jclubhiphop",
+    "favicon": "https://static2.mytuner.mobi/media/tvos_radios/bdkhh44s4eg7.png",
+    "website": "https://asiadreamradio.torontocast.stream/stations/jclubplayer.html"
+  },
+  {
+    "name": "J-Pop Powerplay Kawaii",
+    "url": "https://kathy.torontocast.com/kawaii",
+    "favicon": "https://static2.mytuner.mobi/media/tvos_radios/bytgkfy7xy4q.jpg",
+    "website": "https://asiadreamradio.torontocast.stream/stations/jkawaiiplayer.html"
+  },
+  {
+    "name": "J-Pop Powerplay",
+    "url": "https://kathy.torontocast.com/powerplay",
+    "favicon": "https://static2.mytuner.mobi/media/tvos_radios/3lstl6zfgcbx.png",
+    "website": "https://asiadreamradio.torontocast.stream/stations/jpowerplayer.html"
+  },
+  {
+    "name": "J-Rock Powerplay",
+    "url": "https://kathy.torontocast.com/jrock",
+    "favicon": "https://static2.mytuner.mobi/media/tvos_radios/jsndecatjnre.png",
+    "website": "https://asiadreamradio.torontocast.stream/stations/jrockplayer.html"
+  },
+  {
+    "name": "Japan Hits - All J-Pop",
+    "url": "http://cast1.torontocast.com:2120/;",
+    "favicon": "https://asiadreamradio.torontocast.stream/stations/images/winampj/japanhits@2x.png",
+    "website": "https://asiadreamradio.torontocast.stream/stations/japanhitsplayer.html"
+  },
+  {
+    "name": "JSakura 懐かしい",
+    "url": "http://cast1.torontocast.com:2170/;",
+    "favicon": "https://asiadreamradio.torontocast.stream/stations/images/winampj/natsukashii500@2x.png",
+    "website": "https://asiadreamradio.torontocast.stream/stations/natsukashiiplayer.html"
+  },
+  {
+    "name": "Jazz Sakura",
+    "url": "http://kathy.torontocast.com:3330/;",
+    "favicon": "https://asiadreamradio.torontocast.stream/stations/images/winampj/JazzSakuraLogo512jp@2x.png",
+    "website": "https://asiadreamradio.torontocast.stream/stations/jazzsakuraplayer.html"
+  },
+  {
+    "name": "J-Club Bandstand",
+    "url": "http://igor.torontocast.com:3220/;",
+    "favicon": "https://asiadreamradio.torontocast.stream/stations/images/winampj/bandlogo512-1.png",
+    "website": "https://asiadreamradio.torontocast.stream/stations/jazzbandplayer.html"
+  },
+  {
+    "name": "J1 GOLD",
+    "url": "https://jenny.torontocast.com:2000/stream/J1GOLD",
+    "favicon": "https://mmo.aiircdn.com/387/5e76b6ec32e23.png",
+    "website": "https://www.j1fm.tokyo/player/j1gold/"
+  },
+  {
+    "name": "J1 HITS",
+    "url": "https://jenny.torontocast.com:2000/stream/J1HITS",
+    "favicon": "https://mmo.aiircdn.com/387/5e763a347e800.png",
+    "website": "https://www.j1fm.tokyo/player/j1hits/"
+  },
+  {
+    "name": "J1 XTRA",
+    "url": "https://jenny.torontocast.com:2000/stream/J1XTRA",
+    "favicon": "https://mmo.aiircdn.com/387/5e76abc69417c.png",
+    "website": "https://www.j1fm.tokyo/player/j1xtra/"
+  },
+  {
+    "name": "J1 HD",
+    "url": "https://maggie.torontocast.com:2000/stream/J1HD",
+    "favicon": "https://mmo.aiircdn.com/387/60c2869c5240f.png",
+    "website": "https://www.j1fm.tokyo/player/j1hd/"
+  },
+  {
+    "name": "Japan Fans",
+    "url": "http://radyo1.radyo-dinle.tc/8126/stream%20",
+    "favicon": "https://www.japan-fans.com/favicon.ico",
+    "website": "http://radyo1.radyo-dinle.tc:8126/index.html?sid=1"
+  },
+  {
+    "name": "Jazz Sakura",
+    "url": "https://kathy.torontocast.com/jazzsakura",
+    "favicon": "https://static2.mytuner.mobi/media/tvos_radios/nxrsacawm2ey.png",
+    "website": "https://asiadreamradio.torontocast.stream/stations/jazzsakuraplayer.html"
+  },
+  {
+    "name": "Japanisu",
+    "url": "http://stream.radioani.me/radio/8000/radio.mp3",
+    "favicon": "https://static2.mytuner.mobi/media/tvos_radios/e4ECHXZyGk.png",
+    "website": "https://www.radioani.me/"
+  },
+  {
+    "name": "JMusic Anime Radio",
+    "url": "https://stream-157.zeno.fm/g0wsfbbaft5tv",
+    "favicon": "https://liveonlineradio.net/wp-content/uploads/2019/09/jmusicanime-radio-220x108.jpg",
+    "website": "https://zeno.fm/radio/jmusicanime-radio/"
+  },
+  {
+    "name": "LOVELIVE PROJECT RADIO",
+    "url": "https://kathy.torontocast.com:2600/stream",
+    "favicon": "https://loveliveradio.com/images/LLPR-Circle.png",
+    "website": "https://loveliveradio.com/radio.html"
+  },
+  {
+    "name": "Nichijou Shuffle",
+    "url": "http://stream.zeno.fm/tncreqmcwnhvv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FEvjJv-aGqklQQbj3MVaDv1193d489HkX2Y47sU3fZlI%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUNJcGRLUTVnZ01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUNJaGFLRDdna01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjE3NDUwNzgwMDA.webp&w=1920&q=100",
+    "website": "https://onlineradiobox.com/mm/nichijoushuffle/?cs=mm.nichijoushuffle&played=1&lang=en"
+  },
+  {
+    "name": "Okufm",
+    "url": "http://stream.zeno.fm/nrpe1a0n3p8uv",
+    "favicon": "https://cdn.onlineradiobox.com/img/l/8/102198.v2.png",
+    "website": "https://onlineradiobox.com/cr/oku/?cs=cr.oku&played=1&lang=en"
+  },
+  {
+    "name": "Only Hit Japan",
+    "url": "http://stream.onlyhit.us:80/japan",
+    "favicon": "https://cdn.onlineradiobox.com/img/l/2/96212.v6.png",
+    "website": "https://onlineradiobox.com/us/onlyhitjapan/?cs=us.onlyhitjapan&played=1"
+  },
+  {
+    "name": "Opening Radio",
+    "url": "http://stream.zeno.fm/tza2ayy47qruv",
+    "favicon": "https://www.radio.net/images/broadcasts/e5/bd/125003/2/c300.png",
+    "website": "https://zeno.fm/radio/opening-radio/"
+  },
+  {
+    "name": "Otaku Music Radio",
+    "url": "http://kathy.torontocast.com:2880/stream/1/",
+    "favicon": "https://cdn.onlineradiobox.com/img/l/0/6280.v9.png",
+    "website": "https://onlineradiobox.com/es/otakumusic/?cs=mx.3d6gdl&played=1&lang=en"
+  },
+  {
+    "name": "Phate Radio",
+    "url": "http://stream.phate.io/phatecc",
+    "favicon": "https://phate.io/assets/favicon/apple-touch-icon-120x120-4fcde181ace32fa6e3e29617d677a24368609abc8764b28ff9a0a2da9c5fe8d6.png",
+    "website": "https://phate.io/"
+  },
+  {
+    "name": "Radio 3d6 GDL",
+    "url": "https://stream-150.zeno.fm/xug9mpg0k2zuv?zs",
+    "favicon": "https://cdn.onlineradiobox.com/img/l/6/90516.v4.png",
+    "website": "https://onlineradiobox.com/mx/3d6gdl/?cs=mx.3d6gdl&played=1"
+  },
+  {
+    "name": "Radio Anime 24",
+    "url": "https://ssl-1.radiohost.pl:7028/stream",
+    "favicon": "https://scscript.radiohost.pl/cache/imgs/squareStylist-250-00002484-2fbff9f4.png",
+    "website": "https://mytuner-radio.com/radio/radio-anime-24-415247/"
+  },
+  {
+    "name": "Radio Anime Night",
+    "url": "http://stm11.srvstm.com:8356/;",
+    "favicon": "https://static2.mytuner.mobi/media/tvos_radios/wzxcsa39zzg3.jpg",
+    "website": "https://mytuner-radio.com/radio/radio-animenight-465064/"
+  },
+  {
+    "name": "Radio Anime Stream",
+    "url": "http://radioanime.radioca.st/stream%20",
+    "favicon": "http://radioanime.radioca.st/images/favicon.ico",
+    "website": "http://radioanime.radioca.st/index.html?sid=1"
+  },
+  {
+    "name": "Yggdrasil Radio",
+    "url": "http://radio.shirayuki.org:9200/;&type=mp3",
+    "favicon": "https://yggdrasilradio.com/images/default-album-art.webp",
+    "website": "https://yggdrasilradio.com/"
+  },
+  {
+    "name": "Rádio Blast",
+    "url": "https://centova4.transmissaodigital.com:20143/principal;",
+    "favicon": "https://cdn.onlineradiobox.com/img/l/7/53127.v5.png",
+    "website": "https://onlineradiobox.com/br/blast/?cs=br.blast&played=1&lang=en"
+  },
+  {
+    "name": "Radio Free Otaku",
+    "url": "http://streaming.radio.co/s8267e5edc/listen",
+    "favicon": "https://static2.mytuner.mobi/media/tvos_radios/4yxkkk9gvtqg.png",
+    "website": "https://onlineradiobox.com/us/freeotaku/?cs=us.freeotaku&played=1"
+  },
+  {
+    "name": "Ronin Radio",
+    "url": "http://s3.radio.co/sff133d65b/listen",
+    "favicon": "https://cdn-profiles.tunein.com/s296483/images/logod.png?t=637151337440000000",
+    "website": "https://onlineradiobox.com/us/ronin/?cs=us.ronin&played=1"
+  },
+  {
+    "name": "SBS PopAsia",
+    "url": "https://sbs-ice.streamguys1.com/sbs-popasia-sbs-web",
+    "favicon": "https://www.radio.net/images/broadcasts/54/c0/14971/1/c300.png",
+    "website": "https://www.sbs.com.au/audio/music/popasia"
+  },
+  {
+    "name": "Stereo Anime",
+    "url": "https: //radio.stereoanime.net/listen/stereoanime/128",
+    "favicon": "https://4.bp.blogspot.com/-kJEv2YEg8Pw/WlVULWQfd4I/AAAAAAAAAbU/n-JKoygXE8UzmOoe4ZLQ5zQ3A8zZLs8ugCK4BGAYYCw/s150/121560462990111118.j",
+    "website": "https://www.stereoanime.net/"
+  },
+  {
+    "name": "RadioDoki",
+    "url": "http://142.4.216.144:8972/stream",
+    "favicon": "https://cdn.onlineradiobox.com/img/l/0/73530.v2.png",
+    "website": "https://onlineradiobox.com/mx/doki/?cs=mx.doki"
+  },
+  {
+    "name": "Kohina Radio",
+    "url": "http://kohina.duckdns.org:8000/stream.ogg",
+    "favicon": "https://cdn.onlineradiobox.com/img/l/0/71600.v5.png",
+    "website": "https://player.kohina.com/streamplayer/"
+  },
+  {
+    "name": "Isekai Anime Radio",
+    "url": "https://cast.isekaianimeradio.net/radio/8000/radio.mp3",
+    "favicon": "https://cdn.onlineradiobox.com/img/l/6/102706.v5.png",
+    "website": "https://isekaianimeradio.mx/"
+  },
+  {
+    "name": "Radio Jkanime",
+    "url": "https://stream.zeno.fm/4n10t55g4uhvv",
+    "favicon": "https://i.servimg.com/u/f58/20/50/78/73/jk-log10.png",
+    "website": "https://jkanime.foroactivo.com/"
+  },
+  {
+    "name": "Lazus anime radio",
+    "url": "http://stream.zeno.fm/wwl1pz3upisuv",
+    "favicon": "https://cdn.onlineradiobox.com/img/l/8/125048.v5.png",
+    "website": "https://onlineradiobox.com/mx/lazusanime/?cs=mx.lazusanime&played=1"
+  },
+  {
+    "name": "Tsumugi radio",
+    "url": "https://azuracast.mahoro-net.org/listen/tsumugi/radio.mp3",
+    "favicon": "https://i0.wp.com/tsumugi.neantvert.eu/wp-content/uploads/2010/08/cropped-Melow.jpg?fit=180%2C180&ssl=1",
+    "website": "https://azuracast.mahoro-net.org/public/tsumugi"
+  },
+  {
+    "name": "SunsetRavens",
+    "url": "https://radio1.knetz.moe:8060/SunsetPlay.mp3",
+    "favicon": "https://sunsetravens.moe/templates/favicon.ico",
+    "website": "https://sunsetravens.moe/plugins/radio_icecast_stream/stream_popup.php?id=17"
+  },
+  {
+    "name": "Shinny FM",
+    "url": "https://stream.zeno.fm/aq6mkfyaxa0uv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2F5yy0tprolOhgHWpvu1Ym3ROlb6-k4Je5IxJbisyPOho%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSURRLUp2MTFRa01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSURRaExXdGxnZ01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2Nzg1MjA2NTIwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/shinny/"
+  },
+  {
+    "name": "Kibo.FM",
+    "url": "http://animerad.io:8005/kibofm",
+    "favicon": "https://kibo.fm/assets/img/icons/apple-icon-120x120.png",
+    "website": "https://kibo.fm/webplayer"
+  },
+  {
+    "name": "Anime Lo-Fi Room",
+    "url": "https://stream.zeno.fm/k2vkgfhkaxhvv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FGCTF-i8dmOviOskSi9llWTeZZyEkCL6R7jUiRSoO9UQ%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSURJeXFyQXJnc01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSURJeXZMRGdna01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjE3MjUzODIwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/anime-lo-fi-room/"
+  },
+  {
+    "name": "East Journey",
+    "url": "https://stream.zeno.fm/gnicozidx4ytv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2F9tZqpG4Rx_J9QWb6sX8AT1KQiVVjhfhr4zrUPflr8bk%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2VmZjQ4NjQ3LWQ3ODgtNDVjMS1hZmQ5LWFjYzBiMmU3ZWIxNC9pbWFnZS8_dXBkYXRlZD0xNjgxMjk0OTg2MDAw.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/east-journey/"
+  },
+  {
+    "name": "Tactac",
+    "url": "https://stream-152.zeno.fm/692dbdr067zuv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2Fmc8nAbx4wDRr9enGAPw3BZOo6lgTdS3iZAXCWLhkhDI%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUNRNzgtRjZBZ01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUNRcjlLQTZRa01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjE0NDUyNzcwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/tactac/"
+  },
+  {
+    "name": "Smuglo.li r/a/dio",
+    "url": "https://stream.smuglo.li/stream",
+    "favicon": "https://smuglo.li/static/favicon.ico",
+    "website": "https://zeno.fm/radio/smuglo-li-r-a-dio/"
+  },
+  {
+    "name": "Unidentified",
+    "url": "https://stream-149.zeno.fm/mkpenp2uqncvv",
+    "favicon": "https://zeno.fm/static/icons/favicon-96x96.png",
+    "website": "https://zeno.fm/radio/country-genre/Japan/Music/"
+  },
+  {
+    "name": "AniRadio",
+    "url": "https://stream.zeno.fm/uqtqaymd3k0uv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2F0NH6eO_8FoOMpAU1KoUQrFMf49kYZ1Ew5TE4eGEUroc%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSURRb2RTUXhBc01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSURRNGRqTWxRc01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjAwMDcwNzUwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/aniradio/"
+  },
+  {
+    "name": "Kitsune",
+    "url": "https://stream.zeno.fm/iujwoaxo43auv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2Fo4gx1NB7g8on2rPYo_hH4UtXwwkjIANFu1_szXwN6Zg%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zLzY5YTI2NmI1LTdkYjMtNDFmOC1hODM4LTM1ZGU3YTk1YjE1OS9pbWFnZS8_dXBkYXRlZD0xNjk4OTQ0NDg5MDAw.webp&w=128&q=100",
+    "website": "https://zeno.fm/radio/kitsune-b2lg/"
+  },
+  {
+    "name": "982thebeatjapan",
+    "url": "https://stream.zeno.fm/75c2pu6q01zuv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2F46KOwQkHUMJQe8-5xvptu4-a8R0JXFcfIPuQEOwvnyY%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUNRanIyc3d3a01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUNRN3NHZnp3Z01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjE3MTgyMjMwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/982thebeatjapan/"
+  },
+  {
+    "name": "FuryoMaxx",
+    "url": "https://stream.zeno.fm/hr12au0mky8uv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FWkoKu8vBrn6laACwxk2Ql18NOemQnD0-kBrO84S6gBI%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUN3NGVHTG5RZ01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUN3NFoyZWtRa01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjAyNDA4NjUwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/furyomaxx/"
+  },
+  {
+    "name": "J-Pop and R",
+    "url": "https://stream.zeno.fm/2z4nbuwcrm0uv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FNlEXUUFq1Tgyhua9tASksSpm757v-sy8OTyp7tlTmYk%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSURRcFpQQmh3a01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSURReFl5MHpBZ01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NTgyNDkxMjcwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/j-pop-and-r/"
+  },
+  {
+    "name": "Animeradio",
+    "url": "https://stream.zeno.fm/vs06u1e87zhvv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FIrs3FSsIKENKWcoZZcPfBJ-PqYWhRsYPHiaRGVF0jZA%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUNndDlIbm1na01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSURJNllLN2lnc01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjE3MjY1OTgwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/animerafiootaku/"
+  },
+  {
+    "name": "Radio Mangago",
+    "url": "https://stream.zeno.fm/j8mnd53cmcvtv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FOWV69rau5R6Jd-vj1fXtyuIg-MeSmkieZIkp-eZBph8%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zLzc3YTg5Y2U4LTk5OTQtNGZmYS04OGI2LTBmNzBlZjI5M2ZiYi9pbWFnZS8_dXBkYXRlZD0xNjkzODA2OTgzMDAw.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/radio-mangago-5s2i/"
+  },
+  {
+    "name": "Radio Mangaclash",
+    "url": "https://stream.zeno.fm/hj40hbufqsqtv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FOvG8vJoinWAdgVwqgzs0UoobvM0PvhcWLoFyU3V3Bis%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2IzMjkwZjhhLWQyZWItNDY2ZC1iZTg4LTM1MGU0ODQxMGUxNS9pbWFnZS8_dXBkYXRlZD0xNjkzMjQ0Mzk2MDAw.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/radio-mangaclash/"
+  },
+  {
+    "name": "Radio Manhua",
+    "url": "https://stream.zeno.fm/skroepgdndfuv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FLXfqED7mxEUnY4-Rayn3eTsVolurNv7WwZAHPJnOQtc%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zLzk3MzI1Nzc1LWZlZTAtNGQwOS05NGRlLWZkMTk4YWJhZGMwMi9pbWFnZS8_dXBkYXRlZD0xNjgzNDE1NzY3MDAw.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/radio-manhua/"
+  },
+  {
+    "name": "Radio Kiss",
+    "url": "https://stream.zeno.fm/tzt3zoqyiiutv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FoLURlhY7oj3dQ9ojdR0Pj0GWKjT1ni-uJfFYexkZGaw%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2QzODE2YzZjLTM5ODQtNDcxNy05MzFjLTMwNGU0ZTRlMmY2Mi9pbWFnZS8_dXBkYXRlZD0xNjkwOTMzNjQ0MDAw.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/radio-kiss-epav/"
+  },
+  {
+    "name": "Aqua Manga Radio",
+    "url": "https://stream.zeno.fm/d9etbnqt060uv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2F7SRFCjsJcxavJmKRND9Ms-26oG_y1cn3sHX13Zw03mU%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2RhNGFjMjc5LWRlZjgtNDQ0Yi1iMDljLTM3M2JkZWM3NWE1OC9pbWFnZS8_dXBkYXRlZD0xNjc2OTU2OTM1MDAw.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/aquamangaradio/"
+  },
+  {
+    "name": "radio cosmic",
+    "url": "https://stream.zeno.fm/jphpgtbbpsfvv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FTjX1e6_9m8IyLXrbMAvd0-zKjZ8Rq5GKxFDW83x9b64%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2Q2MzFkZTdmLWM1ZWItNDExZS05MzUyLWUwNzRjYTE1NTMwZS9pbWFnZS8_dXBkYXRlZD0xNjk1NzQ1MzY4MDAw.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/radio-cosmic-bs9f/"
+  },
+  {
+    "name": "Zinmanga Radio",
+    "url": "https://stream.zeno.fm/2rvxf6vee1tvv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FZTHv0-AnD0Q1MchGQsdimvyMUbAWsqyQbOFtlypW7R0%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zLzhkYjhiZTkyLWJiNTUtNDk1ZC1iY2RhLWNiZjc4NmRjNDk0OC9pbWFnZS8_dXBkYXRlZD0xNjk1MDIxMTgwMDAw.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/zinmanga-radio/"
+  },
+  {
+    "name": "Radio Helscans",
+    "url": "https://stream.zeno.fm/xdsjmwzznkqvv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2Fvqo7ObYZimFA-ybtyrha1fh0VY8lb91S2lZ1iBKcI38%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2I3NzlkYzdkLTA3MjEtNGRlMS05NTk4LTM0NzI3NTRjYTFlMC9pbWFnZS8_dXBkYXRlZD0xNjk0ODk4NDM2MDAw.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/radio-helscans/"
+  },
+  {
+    "name": "Radio Freak",
+    "url": "https://stream.zeno.fm/mtc097mepbhvv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2Frb7pCcFT-ej57sqIeBhWbRLiLSoupB6N62svfq938kU%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2EzMjUzNWI2LTllMDEtNDAwMS05NjAzLTdjZWUzY2QwM2EyZC9pbWFnZS8_dXBkYXRlZD0xNjk1MjUyNTkwMDAw.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/radio-freak/"
+  },
+  {
+    "name": "Radio Manga",
+    "url": "https://stream.zeno.fm/ingblqjnlohuv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FWewZLsjxwbBowaLaCLyJuqZtJlX7ZMP1ToZJPxe4NSw%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zLzAwNThmZWQyLWE5NzEtNGNhZi1hMjkyLWYzMzJkMDE4NTYxOS9pbWFnZS8_dXBkYXRlZD0xNjgyMDc0Mzk4MDAw.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/radio-reset/"
+  },
+  {
+    "name": "Night Scans Radio",
+    "url": "https://stream.zeno.fm/7t7lkbcgjrnuv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2Fqon95D4DNdK7MOXpvQ_1d2eZKoTLEFq654nGd-EpYj8%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zLzAwZGVlNTQ5LTM0MmUtNGY5Mi04ZTQ1LTQwZDExMjQxZjhkNi9pbWFnZS8_dXBkYXRlZD0xNjk1MDIxMjc2MDAw.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/night-scans-radio/"
+  },
+  {
+    "name": "Radio Koneko",
+    "url": "https://stream.zeno.fm/kn3v4vwhwf9uv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2Fv-YdhQ3QZR83dXHyeqDY2w3kA62-tecfyfbyp8FhY3I%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUR3azdMX3J3a01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUR3c19XaGxBb01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjE5Mjc5MzYwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/konekoradio/"
+  },
+  {
+    "name": "Radio Flash Mix",
+    "url": "https://stream.zeno.fm/71ta75vgwbruv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2F1hDj1SR-egOYfBL6YHqsdqLgbVIDf2L7LQ3_dstCXvM%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUNnbDgyV2pBc01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUNnejZDZmt3c01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjIzODA2OTQwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/radio-flash-mix/"
+  },
+  {
+    "name": "DMusic Radio",
+    "url": "https://stream.zeno.fm/mphk12g0kc9uv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FWMCb7B1VsPW8bvXOe71J8ABBgW_49_xIuiOYuOynFDs%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUNnelpHNnd3Z01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUR3M3A3am9nc01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2OTM4MzAxOTIwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/dmusic-radio-at/"
+  },
+  {
+    "name": "Radio Future Funk",
+    "url": "https://stream.zeno.fm/48533y95cnruv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FWtp4rficSoRkzoffxPqNLfVEEfOKQEjUVgHsqS4Bl8g%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSURnbnBLeXJBa01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSURnM3R2aHpnb01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjIyNDU1MTAwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/future-fnk/"
+  },
+  {
+    "name": "Otakus y Santos - Radio",
+    "url": "https://stream.zeno.fm/7ya34wyowbruv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FINyUVfX-SwDc-XXTL37SqSrrbihMCG_AQ86Oku6wSLs%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zLzQ5NWUwNzdmLTg3MWQtNDFiYS04NmFlLTEyNWIxOTU3YWI1Zi9pbWFnZS8_dXBkYXRlZD0xNjY1NDIyNDIyMDAw.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/otakus-y-santos-radio/"
+  },
+  {
+    "name": "Tatsuro Yamashita Radio",
+    "url": "https://stream.zeno.fm/p83d0vdp54zuv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2Fx0RWHDSOzJ61SssA4GLtcxXb6hNus39GnISWw3LFzww%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUNRdGNIT3ZBa01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUNRcmFMdnpna01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjE3MDM4MDQwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/tatsuro-yamashita-radio/"
+  },
+  {
+    "name": "JKT48 Radio",
+    "url": "https://stream.zeno.fm/rfmrjm58r5nvv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FeG-6ANnudEUKNANBfCf9oq_1VcPT4c5GP6ClnRVLSTE%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2NjNzI5NTkxLTFiYzYtNDc4MS04NGRjLTA4YWVjMWE1YzBiNi9pbWFnZS8_dXBkYXRlZD0xNjk4MTcxMjE5MDAw.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/jkt48radio/"
+  },
+  {
+    "name": "AnimePop by SoundMasteRadio",
+    "url": "https://stream.zeno.fm/qlrhkrmqp42tv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FYPykjHs2k7OXm7buCpA6SFZm-XXtI8vO4WsA62dpay0%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zLzM4Yjc1MTA5LTA3ODMtNDMwOC04ZDcxLTg4ZmI5MmFiNDlhMS9pbWFnZS8_dXBkYXRlZD0xNjk4NjkxMjY3MDAw.webp&w=1920&q=100",
+    "website": ""
+  },
+  {
+    "name": "Love Live Music 2",
+    "url": "https://stream.zeno.fm/z7s4pbe9o47uv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FN0PgDL7y6hMEwWuHtrmXg9ASmBEJA1PfbE0mmYdPbj8%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zLzY3YWI3ODMyLTRiNDgtNGNlYy1hMDgwLWE0NjU2ZDUwNWM0Zi9pbWFnZS8_dXBkYXRlZD0xNjkyOTEwODkwMDAw.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/love-live-music-2/"
+  },
+  {
+    "name": "FMTX Radio",
+    "url": "https://stream.zeno.fm/0gkf48yv7hhvv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2Fn8hNjBqXFLDc5aQn7TMfLuez1AgWHrFnk5GC3QVjri4%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUNJN29lei1Rc01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUNJcnFIR3NBc01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2OTYwMjI3MDYwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/fmtx-radio-LIVE/"
+  },
+  {
+    "name": "MizarFM",
+    "url": "https//stream.zeno.fm/36kpdc4qn18uv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FoZLjZiCzJHfzUurEd0BGlvwcCdKDe5NokfN6x2MEaYU%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUN3M2R2SmhRb01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUN3M2NTMWlna01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2Njc0NDk1NDIwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/mizarfm/"
+  },
+  {
+    "name": "JJSE Japan Radio",
+    "url": "https://stream.zeno.fm/rotfckpnfi3vv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2Fqce0s-PLlEfnvRQo85GI2ALvWkantzvZYhbBhXef_Sk%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zLzVkN2ZmNDRlLWUwOWMtNDYzYy04OGUwLTNhNjU0ZWY1YzE0MS9pbWFnZS8_dXBkYXRlZD0xNjc3NjQ2MDU1MDAw.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/jjse-japan-radio/"
+  },
+  {
+    "name": "Weebio",
+    "url": "https://stream.zeno.fm/9csa2ksv81zuv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FXT4ymkEEW038Xm0So16VptyJsOqF9rbPkKu9Rr6OiBo%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUNRZ2F1Rm9Bc01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUNRZ1p1bjRBb01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2ODc5NTMzNjUwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/weebio/"
+  },
+  {
+    "name": "Takeuti Town Radio 1ch",
+    "url": "https://stream.zeno.fm/7y5ay9u44bhvv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2Fp2OlTPGgrqJjKeq_YIv9h-xITs6wEU3w39SDk5BpDjE%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUR3dThuSXFBc01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUR3LTV6QWlRb01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NzMzMzU4MzQwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/takeuti-town-radio-1ch/"
+  },
+  {
+    "name": "Emisora Rio Mar",
+    "url": "https://stream.zeno.fm/ingrlgleg7auv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FNQJzndwtaVJ-V9zIE4XdV0OE_bbhn4EmugEWJIYnX7U%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2E2MDI3ODlhLWJiOGMtNDllNS1iNDY5LTZkZjUzZTA2NzIwNi9pbWFnZS8_dXBkYXRlZD0xNjk3MDQzMDQ2MDAw.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/emisora-rio-mar/"
+  },
+  {
+    "name": "Kizuna Radio Colombia",
+    "url": "https://stream.zeno.fm/c4r2ds0sasquv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FDhoCWUXWSn4MTzjeiYyM8I7wNK9bhJ8C8fQ-LFjyIcQ%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSURBLVl1bHR3a01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUNBZ0lEeWlBb01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2OTEyNTIzNjcwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/kizunaradiocolombia/"
+  },
+  {
+    "name": "J Verse",
+    "url": "https://stream.zeno.fm/xtxxu8emnkhvv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2Fq8B885RhIgc21rUSavvr7I3LVWI7WpJ4GKxZ6JEQXHM%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUR3NjlyVy1Bc01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUNJNmRpVThRb01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2Njk5ODgwOTYwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/j-verse-my/"
+  },
+  {
+    "name": "FM BROS.",
+    "url": "https://stream.zeno.fm/gankz4m06bhvv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FMPunqglRKTRvJiSQU0Cac0_sXLE7Fs-7P5Wu3F-nAA8%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUR3MjZ1Znpna01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUR3eDdiaGdRZ01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjE5MDM4NjIwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/bros-channel/"
+  },
+  {
+    "name": "Animax Radio",
+    "url": "https://stream.zeno.fm/ep9mpnntsnhvv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FDfb5tSkf-omIxkQFE_Rb2of29dBRSiyzaZ-diRse4n0%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUN3MWFfdjNRb01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUNJdWZpUzd3b01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2OTkxMzIyMjAwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/animaxradio/"
+  },
+  {
+    "name": "JMusicTY",
+    "url": "https://stream.zeno.fm/3stqe5x9tc9uv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FxZ87Ag2Lamb9HWcARShH1ElVaiyAh82jTrlcDiDNqS0%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUR3NGFMMXNnb01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUR3a1pTeG9Rb01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjE5Mzk1NzQwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/jmusicty/"
+  },
+  {
+    "name": "Future Funk Radio",
+    "url": "https://stream.zeno.fm/9th16b9d6zhvv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2F1_tLOMj55UsUkxPNpTTUv4lMa_vJzfbLoDU2KBQgvx0%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSURJc2RqSmhRb01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSURJOGJfNTd3a01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2Nzk0MzY2NDYwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/future-funk-radio/"
+  },
+  {
+    "name": "Radio Japamix",
+    "url": "https://stream.zeno.fm/vcls0bo2uvvvv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FYC9Qwhrh3n_gzBlIxEyMbh7xEo8f9mX0nSg-IShES28%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2ZhNGM5MjJmLTZlODEtNDAyZC1iMTlmLTFmOTJhNTdhMDNhMC9pbWFnZS8_dXBkYXRlZD0xNjgzNjU2OTY1MDAw.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/radiojapamix/"
+  },
+  {
+    "name": "Anime and Japanese Songs",
+    "url": "https://stream.zeno.fm/ddetxwuhkpeuv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FQkO_4AFn7pmdBvUz46e_XBjZymJgokjRNJ_gOaO0n1E%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUNBa2JTQjNBZ01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUNBZ01EaGlnb01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjE3Nzg2OTAwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/anime-and-japanese-songs/"
+  },
+  {
+    "name": "Vocaloid",
+    "url": "https://stream.zeno.fm/7fifg2awejquv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2F_Tq3PSUPB2wCPKo9PoYNTpVjG0z1ikB8FQG3C4_cNaA%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zLzI2OWMyYmE2LTJmODUtNGU2ZC1hMjg3LWYyN2I5OTQ5Yjc5Yy9pbWFnZS8_dXBkYXRlZD0xNjc1NTQ3MjQzMDAw.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/vocaloid/"
+  },
+  {
+    "name": "Sprite HoloRadio",
+    "url": "https://stream.zeno.fm/2yu68unk7s8uv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FoCcJHoX6eHRTRkue8tg8VRFQcWFz1zc8V9V4HbAQXoQ%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSURBMWJld3RnZ01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUN3Z3EyTnZRa01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjEwNDc4MzAwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/sprite-holoradio/"
+  },
+  {
+    "name": "RadioKanimes",
+    "url": "https://stream.zeno.fm/dpfqxmzcswzuv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2F3v0u2HvVqG1uiD09benEhPLeZdfYHMBEZ_Iis_et4EA%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUNRNU9lX21nZ01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUNRNUo3dzFRa01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NTg1NTE0MjgwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/radiokanimes/"
+  },
+  {
+    "name": "RÁDIO ANIMEINFOBR",
+    "url": "https://stream.zeno.fm/k01037h7h0hvv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FgHbSKVqgHg_p0TvSYaK8dWXeNQj_CoZOK3nekqLhIBg%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSURJbFltQjlBc01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSURJLWZxM3lBa01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjE4OTE3NTUwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/animeinfobr/"
+  },
+  {
+    "name": "Linked Horizon Radio",
+    "url": "https://stream.zeno.fm/bljr3tjfpiuvv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FdqH0H7vWiqk7ygrH49bkRqOHEqEnlEqo2TbadNQQW30%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zLzU0ZTQyNDEyLTExOGEtNGNhNi1iNzc4LTI2MmYyYjBhNTYyZS9pbWFnZS8_dXBkYXRlZD0xNjY0NjYxOTc3MDAw.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/linked-horizon-radio/"
+  },
+  {
+    "name": "Global Beats FM",
+    "url": "https://stream.zeno.fm/gazgysbgs0hvv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2F8hZXpKSzWl93tvF000sGqPwbnGhm1GEw2pSCqk7OQ1A%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSURJdGQ3SzdRa01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSURJelpETW1Rb01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NzE2MTQyOTIwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/global-beats-fm/"
+  },
+  {
+    "name": "LOFIRADIOYO",
+    "url": "https://stream.zeno.fm/cemea6b26bhvv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FR5Th7f3acH7QYW4DXP_tdjhm-_175VVsUaaq-smx0GM%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSURnNWVtd25Ba01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUR3eDRTaC13b01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NTkyMTIxNDQwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/underground-railroad-radio-nyc3hwfa6b26bhvv/"
+  },
+  {
+    "name": "Radio DozaAnime",
+    "url": "https://stream.zeno.fm/x0rgqwv75zhvv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FoKdD2lPSWQz8eC-ko0pwpHA-mh88ZIv0B9F2ZMWbyUw%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSURJNFktQXVnc01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSURJc2ZiSXNRa01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjE5MDIzNDIwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/radio-doza-anime/"
+  },
+  {
+    "name": "Akiharadio",
+    "url": "https://stream.zeno.fm/dpk0nznyes8uv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FP0XuR4KqTEgvrvzyPS5WOsodHSGn_lK-IWx285AAqgA%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUNROHVfU2dRZ01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUN3dU51b3l3c01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjAzNDUzNTcwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/akiharadio/"
+  },
+  {
+    "name": "Shikon No Tama Radio",
+    "url": "https://stream.zeno.fm/whehxaqutvduv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FR4MkfT9ul2zksWSmyOVmPxzOgdcc8J8E_k723B7tOEo%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUNBaVpMVXN3Z01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUNBZ0syMG53a01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NzkyMDQ2NTgwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/shikonnotamaradio/"
+  },
+  {
+    "name": "Little Osaka FM",
+    "url": "https://stream.zeno.fm/pjrprpgelblvv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2F_7vlPdHujmXDPDqGlXqNE9AL0AtpRiiGdEzz8AVmBAA%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zLzgyZWUyMjQzLTcxZTQtNGFlMy04MmUzLWQ3ZGM3YmRmODFjYi9pbWFnZS8_dXBkYXRlZD0xNjY5NTMxNjMwMDAw.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/little-osaka-fm/"
+  },
+  {
+    "name": "AniPeru Zero",
+    "url": "https://stream.zeno.fm/a3hm4n993k0uv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FCG6t7PKljmau_Nv69x-MYsnt1OLtfllBuuX9KahNrPI%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSURRa1oyd2d3Z01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSURRMGJmRGlBa01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2OTkwNjc1MTcwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/aniperu-zero/"
+  },
+  {
+    "name": "Otaku 89.8 Fm",
+    "url": "https://stream.zeno.fm/rr0t8247368uv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FJSNvMG0InlYorZ5A7iybgltTt_ERcWRiP8yo7fm9EHI%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUR3bUxxbXlBb01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUR3bUxyQWpBZ01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NTMyNzgxMTQwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/otaku88-fmqs1u8247368uv/"
+  },
+  {
+    "name": "Radio Zen",
+    "url": "https://stream.zeno.fm/765cszwekzzuv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FFls_oqhThqP8bpbcX0qq88ao-BUg6OgQkzZHu3oqg50%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUNRcXNQWnV3c01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUNRbXZlZDlnb01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjE3MjU1NDgwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/radio-zen/"
+  },
+  {
+    "name": "Kantoral Japones",
+    "url": "https://stream.zeno.fm/muth7kcknrdtv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FAvPzHHnDJmQfIvfmEF_macsfVvOz-i121UziCTMYSqc%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2YwY2VjMDMwLWU2M2QtNGZhNy1hMzBiLWZlZjY0YzlmY2UyZi9pbWFnZS8_dXBkYXRlZD0xNjY2ODI5OTAwMDAw.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/kantoral-japones/"
+  },
+  {
+    "name": "Retro Idol Japanese Music",
+    "url": "https://stream.zeno.fm/qp5vjrxwiyhvv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FhUWu7F7SFvjfw0jkwttn2NO_ouetH0wdiPxa5T4Qc_c%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zLzgxNGVmNTBjLTQwMWQtNDQ4YS1iODNlLWZkZTEwMTVhNjJmMy9pbWFnZS8_dXBkYXRlZD0xNjkwODc1OTA3MDAw.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/retro-idol-japanese-music/"
+  },
+  {
+    "name": "Anime Lux",
+    "url": "https://stream.zeno.fm/ms7r8z744hhvv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FKNRRFCfJd28Y2GsShV4Kw4gjQRqWMt5MOZD1ZR5D8RY%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUNJem9MQ19Rb01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUNJenJ5OHhnb01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjE3MjY3MTEwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/anime-lux/"
+  },
+  {
+    "name": "RADIO MOSHI",
+    "url": "https://stream.zeno.fm/nq7fdn7wqfhvv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2Fc9XlIW3G2OXickjj0YCWU3oCEhGBCs_YcLl4bjBOGCI%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUNJaW82Tm1nc01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUNJNnRTV3l3a01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NzcwMTE4MjEwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/radio-moshi/"
+  },
+  {
+    "name": "Breezbae Radio",
+    "url": "https://stream.zeno.fm/vqa2reaebchvv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FTrnnoUsDD973YnbUKnzUwaBDYL-exosIA9L72DED1jI%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUR3dDZMRmdBb01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUR3dDhuSy13b01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjE2OTYzMzYwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/breezbae-radio/"
+  },
+  {
+    "name": "Maid Café",
+    "url": "https://stream.zeno.fm/ddpzcuq1ra0uv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FKtOnmzaSwv7zxDezu9zwyqwLg58Zgmo8qbGrhyIhilM%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSURRcUlPRDV3Z01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSURRNk5IWXBBc01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NDM5NzkxOTQwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/babymetalradio/"
+  },
+  {
+    "name": "Radio E L E G A N T E",
+    "url": "https://stream.zeno.fm/qtdssvt9xzzu",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FBHd1tmv-ohfDObQIIjEZOaVUgfKegk1XbjYAK6W7M_E%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUNRMXN5MDRRc01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUNRdHBDTjl3Z01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjA3OTMxOTcwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/radioelegante/"
+  },
+  {
+    "name": "Vocaloid AR",
+    "url": "https://stream.zeno.fm/qff0x4wyd5zuv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FTF39-kViNUMQRt4K8jmAUSQe6EklzescVo2jMQfz6DE%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUNRZzR2QXRna01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUNRZzdYMXNnZ01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjgyNzUyMjAwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/vocaloid-ar/"
+  },
+  {
+    "name": "JMusicAnime World",
+    "url": "https://stream.zeno.fm/04852hp5vy5tv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2Fwt3e4jMavSzsTtsQqiCb3weIE3jNoqjmdU1Jyj9OnPQ%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUNBa2JTQjNBZ01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUNBZ0lDdW1Rb01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE1NzQxMTczMTQwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/jmusicanime-world/"
+  },
+  {
+    "name": "Coolture Japan Music",
+    "url": "https://stream.zeno.fm/se7zynf3srhvv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FVQd5RS6HPJ2-K0fk-icjpmQ46oHjwsPDoH3Keic0mmo%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUNJdTdDSmdRZ01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUNJaDVIY2xRc01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjE4MTQ1MDIwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/coolturejapan/"
+  },
+  {
+    "name": "FNKY Radio",
+    "url": "https://stream.zeno.fm/9cbvzc3d6zhvv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FopFNJqh1KyGRbxk1hUAb8O7u50ql8zZxATfAI1qorD4%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSURJMFlHSWdBb01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSURJeVpDZG53c01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjE0OTQ2MzcwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/fnky-radio/"
+  },
+  {
+    "name": "Radio Kawaii",
+    "url": "https://stream.zeno.fm/990u4rrxqnhvv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FJWHhvFw-ltFqCmDgW4YOfDYiDoDJp4zsp8Lr5MI2nIs%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUNJMlpqdWh3a01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUNJbWI3eDJ3b01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjAwMjk4MDkwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/radio-kawaii/"
+  },
+  {
+    "name": "BansheeRadio",
+    "url": "https://stream.zeno.fm/0tsswznd7f0uv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FaSOp53pWf3h9DvtZvDxouGqYgK4I9XcDG7XHzxUQImM%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSURRaHVhUTRnZ01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSURRaHFXMGpRZ01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NTkyMjQxODIwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/bansheeradio/"
+  },
+  {
+    "name": "Rádio Mirai",
+    "url": "https://stream.zeno.fm/mfkqstngk5zuv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FDhxFdZf89r1yTp4Ma4B0jcRNjNZMIHnytru4ObkOaJY%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUNRa19hZHJ3Z01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUNRNF83VDNnc01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjY0NjI0MjkwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/radiomirai/"
+  },
+  {
+    "name": "Merodi Matsuri",
+    "url": "https://stream.zeno.fm/c45cb5sbf2zuv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FHEMjhA9c76Ph-RBZEWRIna5TBaD9BxeihXRvriob-b8%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUNnemZxNTdnc01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUNRcVozdHpRb01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjE1ODE5ODUwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/merodi-matsuri/"
+  },
+  {
+    "name": "Radio Seagull",
+    "url": "https://stream.zeno.fm/s31sbsbonhyuv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FlEff_Gn4QxrSp-gHDfUY2o7_1Zc9MmY6LKP_fbo8Nv4%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2RjZWNlZDUxLTMwMTAtNGNmMC1iNGM3LWMwYWU3NDQ2YzMyMi9pbWFnZS8_dXBkYXRlZD0xNjYyNTMzNTg1MDAw.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/radio-seagull/"
+  },
+  {
+    "name": "Phantasm War",
+    "url": "https://stream.zeno.fm/ttdwqybl1rlvv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FaT03YOvtxLPWJ0YzklEbTKYhxhXmPWuXvUO8Ujj3n_Y%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zLzVjODVhNGEwLWMyNDItNDkyZS1hMzEzLTQ4Y2YyZjAwMWRjYS9pbWFnZS8_dXBkYXRlZD0xNjkzODMwMTExMDAw.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/phantasm-war/"
+  },
+  {
+    "name": "Vocaloid Radio on mikupa",
+    "url": "http://aska.ru-hoster.com:8093/mikuparu",
+    "favicon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbjvbrnWy_sUIJfpG9CdEtihW3I9bdy-4Ch4H13jWZKQ&s",
+    "website": "https://vocaloidradio.mikupa.ru/"
+  },
+  {
+    "name": "All Anime Radio",
+    "url": "http://stream.rcast.net/65538",
+    "favicon": "https://static2.mytuner.mobi/media/tvos_radios/wuurz9j8daql.png",
+    "website": "https://mytuner-radio.com/radio/all-anime-radio-467661/"
+  },
+  {
+    "name": "Anime Bits (192kbps)",
+    "url": "https://radio.animebits.moe/stream/stream192.mp3",
+    "favicon": "https://radio.animebits.moe/img/icon-128.webp",
+    "website": "https://radio.animebits.moe/"
+  },
+  {
+    "name": "Anime Bits (256kbps)",
+    "url": "https://radio.animebits.moe/stream/stream256.ogg",
+    "favicon": "https://radio.animebits.moe/img/icon-128.webp",
+    "website": "https://radio.animebits.moe/"
+  },
+  {
+    "name": "Animextream Radio",
+    "url": "https://stream-153.zeno.fm/9veewz5r8neuv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FeHDnT0MHY-0PYgOYS-JIQ--WV8uyLlbInbDI1CIu45M%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSURBNG92RndBc01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUNBZ0lEeWlBb01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NzY0Mzc4MTgwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/animextream-radio/"
+  },
+  {
+    "name": "RADIO ALFA ANIME",
+    "url": "https://stream.rcast.net/67511.m3u",
+    "favicon": "https://www.radioalfacanavese.it/wp-content/uploads/2021/02/alfa_favicon-150x150.png",
+    "website": "https://www.radioalfacanavese.it/radio-alfa-anime/"
+  },
+  {
+    "name": "Fan World Anime Radio",
+    "url": "http://184.154.45.106:8461/autodj",
+    "favicon": "https://cdn.raddio.net/storage/photos/133785/273dec5f55823da52736282f1ba7a2ef_100x100.webp",
+    "website": "https://raddio.net/133785-fan-world-anime-radio/"
+  },
+  {
+    "name": "Geek Radio Music",
+    "url": "http://stream.zenolive.com/8d0xskxsxxquv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FsOObk3dKgDb6C0RPvss_RG0x4R_jDstPEA-b-c3kKTs%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUNncUkyNjRBZ01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUNnNkxiLWp3c01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjE1NDYxMTAwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/geekradioM/"
+  },
+  {
+    "name": "Bitter Sweet Music JP",
+    "url": "https://sonicssl.namehost.ro/8520/live.jp",
+    "favicon": "https://cdn.onlineradiobox.com/img/l/4/83054.v9.png",
+    "website": "https://onlineradiobox.com/jp/bittersweetmusicjp/?cs=jp.bittersweetmusicjp"
+  },
+  {
+    "name": "Unidentified2",
+    "url": "ns341468.ip-37-187-126.eu:8000/radio.mp3",
+    "favicon": "chrome://global/skin/media/pause-fill.svg)",
+    "website": "chrome://global/skin/media/pause-fill.svg)"
+  },
+  {
+    "name": "Anime Flash",
+    "url": "https://stream.zeno.fm/lxnpskbosrlvv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FPB9HVXvxKxsVbSuK_FKi5-twSDgaDtGzCIolTBrgakc%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2QwMDE1OGEyLTY2NDgtNDNlOS1hYzJjLTI2NTI4MmJkOGI3NC9pbWFnZS8_dXBkYXRlZD0xNjc1Nzc4OTMzMDAw.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/anime-flash/?"
+  },
+  {
+    "name": "Kamehouse Station",
+    "url": "https://stream.zeno.fm/dayuza9yt4zuv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FAZrN1od7WKoXGTE6th8tuw0N4OsXsRK8nrBK7uMnOr0%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUNRMmN1bzBnc01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUNRdWVDNTZBa01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjE3MDIxMjAwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/kamehouse-station/"
+  },
+  {
+    "name": "Radio-AniNeko",
+    "url": "https://anip-rs01.anineko.de:8270/R-AniNeko_128kbps.mp3",
+    "favicon": "https://cdn.onlineradiobox.com/img/l/7/77087.v17.png",
+    "website": "https://radio-anineko.de/"
+  },
+  {
+    "name": "Fananpy Radio",
+    "url": "https://stream.zeno.fm/regkgyq537zuv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FDkPQRTvbXFEQC5lhfIiciGzcbKFAExtSRS_pObUIAFc%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSUNRei1QSi1nZ01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUNRajdMS3pBc01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjE3MDMwMjMwMDA.webp&w=1920&q=100",
+    "website": "https://onlineradiobox.com/py/fananpy/?cs=py.fananpy&played=1"
+  },
+  {
+    "name": "Kodama Station",
+    "url": "https://cast.kodamastation.com:8000/radio.mp3",
+    "favicon": "https://static2.mytuner.mobi/media/tvos_radios/haJ84vKr2k.png",
+    "website": "https://onlineradiobox.com/pe/kodama/?cs=pe.kodama&played=1"
+  },
+  {
+    "name": "Radio Anime AX",
+    "url": "https://stream.zeno.fm/c963db7eec9uv",
+    "favicon": "https://cdn.onlineradiobox.com/img/l/7/87737.v8.png",
+    "website": "https://onlineradiobox.com/co/animeax/?cs=co.animeax&played=1"
+  },
+  {
+    "name": "Anime Tracks",
+    "url": "https://centova.listenon.in/proxy/animetracks/stream",
+    "favicon": "https://www.animetracks.com/wp-content/uploads/2023/04/favicon-32x32-1.png",
+    "website": "https://www.animetracks.com/"
+  },
+  {
+    "name": "Yumi Co. Radio",
+    "url": "http://yumicoradio.net:8000/stream",
+    "favicon": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/yumicoradioV2.jpg",
+    "website": "http://yumicoradio.net/"
+  },
+  {
+    "name": "Eden Radio",
+    "url": "https://edenofthewest.com/listen/eden-radio/radio.mp3",
+    "favicon": "https://www.edenofthewest.com/static/icons/production/192.png",
+    "website": "https://www.edenofthewest.com/public/eden-radio"
+  },
+  {
+    "name": "Power 945 Radio",
+    "url": "https://jaynair.radioca.st/stream",
+    "favicon": "https://listenonlineradio.com/wp-content/uploads/Power-945.jpg",
+    "website": "https://mytuner-radio.com/radio/power-945-radio-454207/"
+  },
+  {
+    "name": "ビームFM (Beam FM) ",
+    "url": "https://ice1.streeemer.com:8030/radio.mp3",
+    "favicon": "https://static2.mytuner.mobi/media/tvos_radios/vs4uqp2uyxcf.png",
+    "website": "https://mytuner-radio.com/radio/bimufm-beam-fm-455988/"
+  },
+  {
+    "name": "Radio Eigekai Indies (ラジオエーゲ海)",
+    "url": "https://stream.radiojar.com/66zgtscuc1duv",
+    "favicon": "https://cdn.onlineradiobox.com/img/l/4/13174.v7.png",
+    "website": "https://onlineradiobox.com/jp/radioeigekaiindies/?cs=jp.radioeigekaiindies"
+  },
+  {
+    "name": "Súper Tokio Radio",
+    "url": "https://streamer.radio.co/s83eb8ff39/listen",
+    "favicon": "https://static.mytuner.mobi/media/tvos_radios/r8uhzyznrxlc.jpg",
+    "website": "https://mytuner-radio.com/es/emisora/super-tokio-radio-464596/"
+  },
+  {
+    "name": "Nonstop Casiopea - Fusion Radio",
+    "url": "https://nonstopcasiopea.radioca.st/;",
+    "favicon": "https://nonstopcasiopea.com/gallery_gen/e0dd500141ee47f743134cc944ea5bf3_370x350_0x0_370x370_crop.png",
+    "website": "https://nonstopcasiopea.com/"
+  },
+  {
+    "name": "Japanese Ambient Music Radio",
+    "url": "https://server.laradio.online:59009/live",
+    "favicon": "https://www.thekyotoconnection.com/wp-content/uploads/2022/04/cropped-The-Kyoto-Connection-180x180.png",
+    "website": "https://www.thekyotoconnection.com/radio/"
+  },
+  {
+    "name": "SOMA.FM-Digitalis",
+    "url": "http://ice4.somafm.com:80/digitalis-128-mp3",
+    "favicon": "https://somafm.com/favicon.ico",
+    "website": "https://somafm.com/player/#/now-playing/digitalis"
+  },
+  {
+    "name": "SOMA.FM- drone zone",
+    "url": "http://ice6.somafm.com:80/dronezone-128-mp3",
+    "favicon": "https://somafm.com/favicon.ico",
+    "website": "https://somafm.com/player/#/now-playing/dronezone"
+  },
+  {
+    "name": "RauteMusik STUDY",
+    "url": "http://rautemusik-de-hz-fal-stream17.radiohost.de:80/study",
+    "favicon": "https://cdn.onlineradiobox.com/img/l/8/72448.v6.png",
+    "website": "https://www.rm.fm/study"
+  },
+  {
+    "name": "Nightwave Plaza - Online Vaporwave Radio",
+    "url": "http://radio.plaza.one/mp3",
+    "favicon": "https://plaza.one/icons/favicon.ico?v=2208042",
+    "website": "https://plaza.one/"
+  },
+  {
+    "name": "CINEMIX",
+    "url": "https://kathy.torontocast.com:1825/stream",
+    "favicon": "https://static2.mytuner.mobi/media/tvos_radios/wtae6p2f9muz.jpg",
+    "website": "https://mytuner-radio.com/radio/cinemix-france-442860/"
+  },
+  {
+    "name": "WREP",
+    "url": "http://c13.radioboss.fm:8200/stream",
+    "favicon": "https://static2.mytuner.mobi/media/tvos_radios/ulybycxqecdl.jpg",
+    "website": "https://wrep.jp/listen/"
+  },
+  {
+    "name": "Split Infinity Radio 128kbps mp3",
+    "url": "http://listen.siradio.fm/listen.pls/;stream.nsv&type=mp3&quot",
+    "favicon": "https://siradio.fm/m/i/siradio_favicon_256.png",
+    "website": "https://siradio.fm/"
+  },
+  {
+    "name": " Moon Mission Recordings",
+    "url": "http://uk5.internet-radio.com/proxy/mmr/;stream.nsv&type=mp3&quot",
+    "favicon": "https://www.internet-radio.com/images/internet-radio-icon_20x20.png",
+    "website": "https://www.internet-radio.com/station/mmr/"
+  },
+  {
+    "name": "Culture Failure",
+    "url": "http://culturefailure.com:8000/listen.pls/;stream.nsv&type=mp3&quot",
+    "favicon": "https://static2.mytuner.mobi/media/tvos_radios/vgTmmnHzNb.png",
+    "website": "https://mytuner-radio.com/radio/culture-failure-415928/"
+  },
+  {
+    "name": "Kishiwada Radio",
+    "url": "http://61.89.201.27:8000/radikishi.mp3",
+    "favicon": "https://www.radiokishiwada.jp/data/html/template/default/img/common/facebook_ogp.jpg",
+    "website": "https://www.radiokishiwada.jp/"
+  },
+  {
+    "name": "FRED Film Radio Ch14 Japanese",
+    "url": "https://s10.webradio-hosting.com/proxy/fredradiojp/stream",
+    "favicon": "https://cdn-radiotime-logos.tunein.com/s196406d.png",
+    "website": "https://internetradiouk.com/fred-film-ch14-japanese/"
+  },
+  {
+    "name": " FMかほく",
+    "url": "http://radio.kahoku.net:8000/;",
+    "favicon": "http://wavenet.under.jp/fm/wp-content/uploads/2018/05/fmkahoku_logo.jpg",
+    "website": "https://fm.kahoku.net/"
+  },
+  {
+    "name": "湘南ビーチFM | Shonan BeachFM 78.9",
+    "url": "http://shonanbeachfm.out.airtime.pro:8000/shonanbeachfm_a",
+    "favicon": "https://static2.mytuner.mobi/media/tvos_radios/Yve4FR2sFn.png",
+    "website": "https://mytuner-radio.com/radio/xiang-nan-bichifm-shonan-beach-fm-412043/"
+  },
+  {
+    "name": "エフエムつやま FM 78.0",
+    "url": "http://onair.fm-tsuyama.jp:1080/fmtsuyama_live.ogg",
+    "favicon": "https://static2.mytuner.mobi/media/tvos_radios/zKvjNUfeTJ.png",
+    "website": "https://www.fm-tsuyama.jp/"
+  },
+  {
+    "name": "羊飼いラジオHitsujikai Radio / Shepherd radio",
+    "url": "https://streaming.radio.co/se4a8e6a93/listen",
+    "favicon": "https://images.radio.co/station_logos/se4a8e6a93.jpg",
+    "website": "https://www.hitsujikai-radio.com/"
+  },
+  {
+    "name": "ラヂオきしわだ Kishiwada Radio",
+    "url": "http://61.89.201.27:8000/radikishi.mp3",
+    "favicon": "https://static2.mytuner.mobi/media/tvos_radios/WQfMsY4EEx.png",
+    "website": "https://fm797.com/page/"
+  },
+  {
+    "name": "Free FM",
+    "url": "https://rocafmadrid.radioca.st/",
+    "favicon": "https://rocafmadrid.radioca.st/images/favicon.ico",
+    "website": "https://rocafmadrid.radioca.st/index.html?sid=1"
+  },
+  {
+    "name": "Free FM X-Mas",
+    "url": "http://stream.zeno.fm/h60er015v68uv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2Ffmnf9jNX9swHIq30J87Ms5xz-N9spcvdimsWgndjoto%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSURnN3ZINWtnc01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUR3d05DeDhRb01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjE1OTc0NTIwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/freefmxmas/"
+  },
+  {
+    "name": "Free FM Love",
+    "url": "http://stream.zeno.fm/umsptm6rvy8uv",
+    "favicon": "https://zeno.fm/_next/image/?url=https%3A%2F%2Fimages.zeno.fm%2FMA168U2dtB3URkb0OAqx_qMA6m-IL8VXIrYCEA6Kmww%2Frs%3Afit%3A240%3A240%2Fg%3Ace%3A0%3A0%2FaHR0cHM6Ly9zdHJlYW0tdG9vbHMuemVub21lZGlhLmNvbS9jb250ZW50L3N0YXRpb25zL2FneHpmbnBsYm04dGMzUmhkSE55TWdzU0NrRjFkR2hEYkdsbGJuUVlnSURnN3ZINWtnc01DeElPVTNSaGRHbHZibEJ5YjJacGJHVVlnSUN3bVlHNXNRc01vZ0VFZW1WdWJ3L2ltYWdlLz91cGRhdGVkPTE2NjE1OTc2OTAwMDA.webp&w=1920&q=100",
+    "website": "https://zeno.fm/radio/freefmlove/"
+  },
+  {
+    "name": "Allzic Faire la Fete",
+    "url": "http://allzic26.ice.infomaniak.ch/allzic26.mp3",
+    "favicon": "https://liveonlineradio.net/wp-content/uploads/2015/05/Allzic-Faire-la-Fete.jpg",
+    "website": "https://www.allzicradio.com/fr/player/listen/1683/allzic-radio-faire-la-fete"
+  },
+  {
+    "name": "A-chan",
+    "url": "http://jenny.torontocast.com:8066/;stream.nsv",
+    "favicon": "https://cdn.onlineradiobox.com/img/l/7/75877.v2.png",
+    "website": "https://onlineradiobox.com/jp/achan/?cs=jp.achan"
+  },
+  {
+    "name": "radio.llolo.lol",
+    "url": "http://radio.llolo.lol:8000/streambot.mp3",
+    "favicon": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/radio.llolo.lol.jpg",
+    "website": "https://radio.llolo.lol/"
+  },
+  {
+    "name": "Generation KPop",
+    "url": "http://stream9.mexiserver.com:8242/stream",
+    "favicon": "https://static2.mytuner.mobi/media/tvos_radios/8vcerarbgdye.png",
+    "website": "https://mytuner-radio.com/radio/generacion-kpop-peru-464532/"
+  },
+  {
+    "name": "Delta radio - K-Pop",
+    "url": "http://streams.deltaradio.de:80/kpop/mp3-192/",
+    "favicon": "https://liveradio.de/media/cache/station_detail/deltaradio-streamicon_kpop_600px.png",
+    "website": "https://webradio.coolstreaming.us/player/?stream=60554"
+  },
+  {
+    "name": "Hitlist (top 40)",
+    "url": "http://live.powerhitz.com/hitlist?aw_0_req.gdpr=true",
+    "favicon": "https://powerhitz.com/favicon.ico",
+    "website": "https://powerhitz.com/Hitlist"
+  },
+  {
+    "name": "TOP 40- 1.FM",
+    "url": "http://185.33.21.112:80/top40_128",
+    "favicon": "https://www.1.fm/content/images/logo/04X560.png",
+    "website": "https://www.1.fm/station/top40"
+  },
+  {
+    "name": "Office Mix (Soft Pop)",
+    "url": "http://live.powerhitz.com/officemix?aw_0_req.gdpr=true",
+    "favicon": "https://powerhitz.com/images/menu/officemix-80x80.png",
+    "website": "https://powerhitz.com/OfficeMix"
+  },
+  {
+    "name": "1Power (top 40/hip hop)",
+    "url": "http://live.powerhitz.com/1power?aw_0_req.gdpr=true",
+    "favicon": "https://powerhitz.com/images/menu/1power-80x80.png",
+    "website": "https://powerhitz.com/1Power"
+  },
+  {
+    "name": "Hot 108 Jamz (hip hop)",
+    "url": "",
+    "favicon": "https://powerhitz.com/images/menu/hot108jamz-80x80.png",
+    "website": "https://powerhitz.com/Jamz"
+  },
+  {
+    "name": "OO's Hip Hop",
+    "url": "https://strm112.1.fm/top40_mobile_mp3?aw_0_req.gdpr=true",
+    "favicon": "https://www.1.fm/content/images/logo/04X560.png",
+    "website": "https://www.1.fm/station/club"
+  },
+  {
+    "name": "Ambient sleeping pill",
+    "url": "http://163.172.169.217:80/asp-s",
+    "favicon": "https://ambientsleepingpill.com/logo.png",
+    "website": "https://ambientsleepingpill.com/"
+  },
+  {
+    "name": "AFN 360 Country",
+    "url": "https://16643.live.streamtheworld.com/AFN_CTYP_SC",
+    "favicon": "https://www.radio.net/images/broadcasts/0f/e5/23151/c300.png",
+    "website": "https://mytuner-radio.com/radio/afn-360-country-462554/"
+  },
+  {
+    "name": "Funky Corner Radio",
+    "url": "https://ais-sa2.cdnstream1.com/2447_192.mp3",
+    "favicon": "https://static2.mytuner.mobi/media/tvos_radios/Hysj36Jz4R.png",
+    "website": "https://mytuner-radio.com/radio/funky-corner-radio-425321/"
+  },
+  {
+    "name": "Ottava (Voice of the Planet)",
+    "url": "http://ottava2.out.airtime.pro:8000/ottava2_a",
+    "favicon": "https://ottava.jp/planet/ottava_twitter.png",
+    "website": "https://ottava.jp/planet/"
+  },
+  {
+    "name": "Omg kpop",
+    "url": "http://hyades.shoutca.st:8551/stream",
+    "favicon": "https://online-radio.cc/public/img/logo/md38e8f22ce182a21556054d8cfd2fbd6/c8462b529/omg_k_pop.png",
+    "website": "http://www.omgkpop.com/"
+  }
+]
