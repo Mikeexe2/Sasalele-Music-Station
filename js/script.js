@@ -1,111 +1,149 @@
-// Fetch the M3U file
-fetch("https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/all.m3u")
-    .then(response => response.text())
+fetch("https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/all.json")
+    .then(response => response.json())
     .then(data => {
-        // Split the data by line breaks
-        var lines = data.split('\n');
+        var streamInfo = document.getElementById('streamInfo');
+        var player = document.getElementById('miniPlayer');
+        var stationName = document.getElementById('stationName');
+        var radiostations = document.getElementById('radiostations');
 
-        // Iterate through each line of the M3U file
-        for (var i = 0; i < lines.length; i++) {
-            var line = lines[i].trim();
+        data.forEach(station => {
+            // Create a new radio station widget
+            var rad = document.createElement('div');
+            rad.className = 'widget';
 
-            // Check if the line contains station information
-            if (line.startsWith('#EXTINF:')) {
-                // Extract the station name from the line
-                var name = line.split(',')[1].trim();
+            // Create the play button with Font Awesome icon
+            var radPlayButton = document.createElement('div');
+            radPlayButton.className = 'main-play-button';
+            radPlayButton.innerHTML = '<i class="fas fa-play"></i>';
 
-                // Extract the station link from the next line
-                var link = lines[i + 1].trim();
+            // Create a link with station information
+            var radLink = document.createElement('a');
+            radLink.className = 'player-radio-link';
+            radLink.href = station.website;
+            radLink.target = '_blank';
+            radLink.innerHTML = '<img class="rad-icon" src="' + station.favicon + '">' +
+                '<span class="player-radio-name">' + station.name + '</span>';
 
-                // Create a new list item element
-                var li = document.createElement('li');
-                var a = document.createElement('a');
-                var playIcon = document.createElement('i');
+            // Add click event to the play button
+            radPlayButton.addEventListener('click', function () {
+                playStation(station, radPlayButton);
+            });
 
-                // Set the link and name attributes
-                a.href = link;
-                a.textContent = name;
+            // Append elements to the radio station widget
+            rad.appendChild(radPlayButton);
+            rad.appendChild(radLink);
 
-                a.addEventListener('click', function (event) {
-                    event.preventDefault();
+            // Append the radio station widget to the radTopBar
+            radiostations.appendChild(rad);
+        });
 
-                    var player = document.getElementById('miniPlayer');
-                    player.src = this.getAttribute('data-link');
+        // Random play function
+        var mikuGif = document.getElementById('miku-gif');
+        mikuGif.addEventListener('click', function () {
+            var stations = radiostations.querySelectorAll('.widget');
+            var randomIndex = Math.floor(Math.random() * stations.length);
+            var playButton = stations[randomIndex].querySelector('.main-play-button');
+            playButton.click();
+        });
+
+        function playStation(station, playButton) {
+            var allPlayButtons = document.querySelectorAll('.main-play-button');
+            allPlayButtons.forEach(function (button) {
+                if (button !== playButton) {
+                    updatePlayButtonIcon(button, false); // Reset other play buttons to pause icon
+                }
+            });
+
+            if (player.getAttribute('data-link') === station.url) {
+                if (player.paused) {
                     player.play();
-
-                    var stationName = this.getAttribute('station-name');
-                    document.getElementById('stationName').textContent = stationName;
-                });
-
-                // Set the data-link attribute to store the station link
-                a.setAttribute('data-link', link);
-                a.setAttribute('station-name', name);
-
-                playIcon.classList.add('fas', 'fa-play');
-                a.insertBefore(playIcon, a.firstChild);
-
-                // Append the link to the list item
-                li.appendChild(a);
-
-                // Append the list item to the playlist
-                document.getElementById("playlist").appendChild(li);
+                    updatePlayButtonIcon(playButton, true);
+                } else {
+                    player.pause();
+                    updatePlayButtonIcon(playButton, false);
+                }
+            } else {
+                player.src = station.url;
+                player.play();
+                streamInfo.innerHTML = '<a href="' + station.website + '" target="_blank"><img src="' + station.favicon + '"></a>';
+                stationName.textContent = station.name;
+                player.setAttribute('data-link', station.url);
+                updatePlayButtonIcon(playButton, true);
             }
         }
 
-        // random play
-        var cover = document.getElementById('miku-gif');
-        cover.addEventListener('click', function () {
-            var playlist = document.getElementById('playlist');
-            var stationCount = playlist.childElementCount;
-            if (stationCount > 0) {
-                var randomIndex = Math.floor(Math.random() * stationCount);
-                var randomStation = playlist.children[randomIndex].children[0];
-                randomStation.click();
+        function updatePlayButtonIcon(playButton, isPlaying) {
+            playButton.innerHTML = isPlaying ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>';
+        }
+        player.addEventListener('ended', function () {
+            var currentPlayButton = radTopBar.querySelector('.main-play-button[data-link="' + player.getAttribute('data-link') + '"]');
+            updatePlayButtonIcon(currentPlayButton, false);
+        });
+
+        player.addEventListener('pause', function () {
+            var currentPlayButton = radTopBar.querySelector('.main-play-button[data-link="' + player.getAttribute('data-link') + '"]');
+            updatePlayButtonIcon(currentPlayButton, false);
+        });
+    });
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const targetElement = document.querySelector(this.getAttribute('href'));
+        const offset = 60; // Adjust this value according to your layout
+
+        if (targetElement) {
+            window.scrollTo({
+                top: targetElement.offsetTop - offset,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// Dynamically list out websites
+fetch('https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/websites.json')
+    .then(response => response.json())
+    .then(websites => {
+        // Group websites based on categories
+        const groupedWebsites = websites.reduce((result, website) => {
+            (result[website.tags] = result[website.tags] || []).push(website);
+            return result;
+        }, {});
+
+        Object.entries(groupedWebsites).forEach(([tags, websites]) => {
+            const containerHTML = websites.map(website => `
+            <div class="container">
+              <a href="${website.url}" target="_blank">
+                <img src="${website.imgSrc}">
+                <h5>${website.name}</h5>
+              </a>
+            </div>
+          `).join('');
+
+            // Insert the generated HTML into the respective tags element
+            if (tags === 'radio') {
+                document.querySelector('#radiohere').innerHTML = containerHTML;
+            } else if (tags === 'website') {
+                document.querySelector('#websitehere').innerHTML = containerHTML;
+            } else if (tags === 'radiojp') {
+                document.querySelector('#radiojphere').innerHTML = containerHTML;
             }
         });
     });
 
-// Dynamically list out website from github
-const websitesContainer = document.querySelector('.websites');
-
-fetch("https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/websites.txt")
-    .then(response => response.text())
-    .then(data => {
-        // Split the data into individual websites
-        const websitesData = data.split('\n\n');
-
-        // Iterate over each website's data
-        websitesData.forEach(websiteData => {
-            // Split the website's data into lines
-            const lines = websiteData.split('\n');
-
-            // Extract the website's information from the lines
-            const link = lines[0];
-            const imageSrc = lines[1];
-            const name = lines[2];
-
-            const container = document.createElement('div');
-            container.classList.add('container');
-
-            const linkElement = document.createElement('a');
-            linkElement.href = link;
-            linkElement.target = "_blank";
-
-            const image = document.createElement('img');
-            image.src = imageSrc;
-
-            linkElement.appendChild(image);
-            container.appendChild(linkElement);
-
-            const heading = document.createElement('h5');
-            heading.textContent = name;
-            container.appendChild(heading);
-
-            websitesContainer.appendChild(container);
-        });
-    })
-    .catch(error => {
-        console.error('Error retrieving data:', error);
+fetch('https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/downloads.json')
+    .then(response => response.json())
+    .then(scrap => {
+        const containerHTML = scrap.map(website => `
+    <div class="container">
+        <a href="${website.url}" target="_blank">
+            <img src="${website.imgSrc}">
+                <h5>${website.name}</h5>
+        </a>
+    </div>`).join('');
+        document.querySelector('.download').innerHTML = containerHTML;
     });
 
 // Search function
@@ -222,10 +260,6 @@ function YouTubeSearch(songName) {
         });
 }
 
-function closeVideo() {
-    document.getElementById("YouTubeVideo").style.display = "none";
-}
-
 const websiteButtons = document.querySelectorAll('.button');
 
 for (let i = 0; i < websiteButtons.length; i++) {
@@ -262,8 +296,6 @@ function getWebsiteURL(label, searchTerm) {
             return `https://www.kkbox.com/my/en/search?q=${encodedSearchTerm}`;
         case 'VGMdb':
             return `https://vgmdb.net/search?q=${encodedSearchTerm}`;
-        case 'Audiomack':
-            return `https://audiomack.com/search?q=${encodedSearchTerm}`;
         case 'MusicEnc':
             return `https://www.musicenc.com/?search=${encodedSearchTerm}`;
         case 'J-Lyric.net':
@@ -286,6 +318,22 @@ function getWebsiteURL(label, searchTerm) {
             return `https://www.google.com/search?q=${encodedSearchTerm}+歌詞 `;
         case 'Uta-net':
             return `https://www.uta-net.com/search/?target=art&type=in&keyword=${encodedSearchTerm}`;
+        case 'MusicBrainz':
+            return `https://musicbrainz.org/search?query=${encodedSearchTerm}&type=work&method=indexed`;
+        case 'Gnudb':
+            return `https://gnudb.org/song/${encodedSearchTerm}`;
+        case 'TouHouDB':
+            return `https://touhoudb.com/Search?filter=${encodedSearchTerm}`;
+        case 'MikuDB':
+            return `https://mikudb.moe/?s=${encodedSearchTerm}`;
+        case 'ニコニコ動画':
+            return `https://www.nicovideo.jp/search/${encodedSearchTerm}`;
+        case 'VocaDB':
+            return `https://vocadb.net/Search?filter=${encodedSearchTerm}`;
+        case 'Japanese Song Lyrics':
+            return `https://japanesesonglyrics.com/?s=${encodedSearchTerm}`;
+        case 'PetitLyrics':
+            return `https://petitlyrics.com/search_lyrics?title=${encodedSearchTerm}`;
         default:
             return '';
     }
@@ -293,7 +341,6 @@ function getWebsiteURL(label, searchTerm) {
 
 function YouTubeSearchByTitle() {
 
-    console.log("RUNNING YOUTUBE FUNCTION");
     const ytURL =
         "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&type=video&videoSyndicated=true&videoEmbeddable=true&q=";
     var ytAPIKey = "&key=AIzaSyAwM_RLjqj8dbbMAP5ls4qg1olDsaxSq5s";
@@ -466,8 +513,8 @@ function submitFolderId(e) {
 function getFolderId() {
     document.getElementById('parentfolder').value = localStorage.getItem("parentfolder");
 }
-//AUDIO
 
+//AUDIO
 audio = document.getElementById('audio');
 source = document.getElementById('source');
 if (document.getElementsByClassName("playing")[0]) {
