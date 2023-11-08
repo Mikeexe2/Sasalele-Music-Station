@@ -204,14 +204,16 @@ nav ul li a.active::after {
   position: relative;
   padding-bottom: 56.25%;
   height: 0;
+  margin: 0 auto;
+  max-width: 100%;
 }
 
 .video-container iframe {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100% !important;
-  height: 100% !important;
+  width: 100%;
+  height: 100%;
 }
 
 table {
