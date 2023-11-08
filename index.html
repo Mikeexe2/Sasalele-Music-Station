@@ -8,7 +8,7 @@
             href="https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/sasalele_logo.png">
         <title>Sasalele Music Station</title>
         <meta name="Keywords"
-            content="Anime Music, Google Drive Music Player, Internet Radio, Japanese Music, Sasalele Music Station, Song Search, Download Music Tools" />
+            content="Sasalele, Google Drive Music Player, Internet Radio, Japanese Music, Sasalele Music Station, Song Search, Download Music Tools" />
         <meta name="description"
             content="Collection of a list of internet radio and websites featuring japanese music, having search function to find your song online and also google drive music player." />
         <link rel="stylesheet" type="text/css" href="style.css">
@@ -17,326 +17,360 @@
     </head>
 
     <body onload="getFolderId()">
-        <div class="dh">
+        <div class="navbar">
             <div class="logo">
-                <a href="https://basic.pp.ua"><img
-                        src="https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/sasalele_banner.png"
-                        alt="logo"></a>
+                <a href="https://basic.pp.ua">
+                    <img src="https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/sasalele_banner.png"
+                        alt="logo">
+                </a>
             </div>
-            <div class="nav">
-                <a href="#radios">Radio Stations <i class="fa fa-radio"></i></a>
-                <a href="#websites">More Websites <i class="fa fa-music"></i></a>
-                <a href="#scrap">Download <i class="fas fa-download"></i></a>
-                <a href="#drive">Google Drive Music <i class="fas fa-music"></i></a>
-                <a href="#search">Search <i class="fas fa-search"></i></a>
-            </div>
+            <nav>
+                <ul>
+                    <li><a href="#radios">Radio Stations <i class="fa fa-radio"></i></a></li>
+                    <li><a href="#websites">More Websites <i class="fa fa-music"></i></a></li>
+                    <li><a href="#scrap">Download <i class="fas fa-download"></i></a></li>
+                    <li><a href="#drive">Google Drive Music <i class="fas fa-music"></i></a></li>
+                    <li><a href="#search">Search <i class="fas fa-search"></i></a></li>
+                </ul>
+            </nav>
         </div>
-        <div class="radio" id="radios">
-            <h2>Enjoy Your Musical Feast Here</h2>
+        <section id="radios">
+            <h2 class="section-title">Enjoy Your Musical Feast Here</h2>
             <div class="banner">
                 <img
                     src="https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/sasalele_banner2.png" />
             </div>
-        </div>
+            <div id="radiostations"></div>
+        </section>
 
-        <div class="station">
-            <ol id="playlist">
-            </ol>
-        </div>
-        <div class="heading">
-            <h2>More Websites</h2>
-        </div>
-        <div class="websites" id="websites">
-        </div>
-
-        <div class="heading" id="search">
-            <h2>Find your song on</h2>
-        </div>
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Enter song name...">
-            <button id="searchButton"><i class="fa fa-search"></i></button>
-        </div>
-        <div class="inner" style="display:none;">
-            <h5>You searched for: <span id="searchTerms"></span></h5>
-            <div class="card-panel" id="lastFMInfo"></div>
-            <div class="video-container" id="videoContainer">
-                <iframe id="YouTubeVideo" style="display: none"></iframe>
-                <span class="close-button" onclick="closeVideo()"><i class="fas fa-times"></i></span>
+        <section id="search">
+            <h2 class="section-title">Search</h2>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Enter song name...">
+                <button id="searchButton"><i class="fa fa-search"></i></button>
             </div>
-            <div class="label">Search it on:</div>
-            <div class="table-container">
-                <table class="websiteList">
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="button">
-                                    <div class="button-icon icon-google"></div>
-                                    <div class="button-label">Google</div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="button">
-                                    <div class="button-icon icon-youtube"></div>
-                                    <div class="button-label">YouTube</div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="button">
-                                    <div class="button-icon icon-youtubemusic"></div>
-                                    <div class="button-label">YouTube Music</div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="button">
-                                    <div class="button-icon icon-spotify"></div>
-                                    <div class="button-label">Spotify</div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="button">
-                                    <div class="button-icon icon-apple"></div>
-                                    <div class="button-label">Apple Music</div>
-                                </div>
-                            </td>
+            <div class="inner" style="display:none;">
+                <h5>You searched for: <span id="searchTerms"></span></h5>
+                <div class="card-panel" id="lastFMInfo"></div>
+                <div class="label">Search it on:</div>
+                <div class="table-container">
+                    <table class="websiteList">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="button">
+                                        <div class="button-icon icon-google"></div>
+                                        <div class="button-label">Google</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="button">
+                                        <div class="button-icon icon-youtube"></div>
+                                        <div class="button-label">YouTube</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="button">
+                                        <div class="button-icon icon-youtubemusic"></div>
+                                        <div class="button-label">YouTube Music</div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="button">
+                                        <div class="button-icon icon-spotify"></div>
+                                        <div class="button-label">Spotify</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="button">
+                                        <div class="button-icon icon-apple"></div>
+                                        <div class="button-label">Apple Music</div>
+                                    </div>
+                                </td>
 
-                            <td>
-                                <div class="button">
-                                    <div class="button-icon icon-netease"></div>
-                                    <div class="button-label">网易云</div>
-                                </div>
-                            </td>
-                        <tr>
-                        <tr>
-                            <td>
-                                <div class="button">
-                                    <div class="button-icon icon-soundcloud"></div>
-                                    <div class="button-label">Soundcloud</div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="button">
-                                    <div class="button-icon icon-amazon"></div>
-                                    <div class="button-label">Amazon Music</div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="button">
-                                    <div class="button-icon icon-amazonjp"></div>
-                                    <div class="button-label">Amazon Japan</div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="button">
-                                    <div class="button-icon icon-audarchive"></div>
-                                    <div class="button-label">Audio Archive</div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="button">
-                                    <div class="button-icon icon-vgmdb"></div>
-                                    <div class="button-label">VGMdb</div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="button">
-                                    <div class="button-icon icon-kkbox"></div>
-                                    <div class="button-label">KKBOX</div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="button">
-                                    <div class="button-icon icon-musicenc"></div>
-                                    <div class="button-label">MusicEnc</div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="button">
-                                    <div class="button-icon icon-jlyric"></div>
-                                    <div class="button-label">J-Lyric.net</div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="button">
-                                    <div class="button-icon icon-followlyrics"></div>
-                                    <div class="button-label">FollowLyrics</div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="button">
-                                    <div class="button-icon icon-kugeci"></div>
-                                    <div class="button-label">Kugeci</div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="button">
-                                    <div class="button-icon icon-google"></div>
-                                    <div class="button-label">Google(Lyrics)</div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="button">
-                                    <div class="button-icon icon-baha"></div>
-                                    <div class="button-label">巴哈姆特</div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="button">
-                                    <div class="button-icon icon-utanet"></div>
-                                    <div class="button-label">Uta-net</div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="button">
-                                    <div class="button-icon icon-audiomack"></div>
-                                    <div class="button-label">Audiomack</div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="button">
-                                    <div class="button-icon icon-lastfm"></div>
-                                    <div class="button-label">last.fm</div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <a href="https://chrome.google.com/webstore/detail/shazam-find-song-names-fr/mmioliijnhnoblpgimnlajmefafdfilb"
-                target="_blank">Use Shazam extension on your browser <i class="fas fa-search"></i></a>
-        </div>
+                                <td>
+                                    <div class="button">
+                                        <div class="button-icon icon-netease"></div>
+                                        <div class="button-label">网易云</div>
+                                    </div>
+                                </td>
+                            <tr>
+                            <tr>
+                                <td>
+                                    <div class="button">
+                                        <div class="button-icon icon-soundcloud"></div>
+                                        <div class="button-label">Soundcloud</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="button">
+                                        <div class="button-icon icon-amazon"></div>
+                                        <div class="button-label">Amazon Music</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="button">
+                                        <div class="button-icon icon-amazon"></div>
+                                        <div class="button-label">Amazon Japan</div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="button">
+                                        <div class="button-icon icon-audarchive"></div>
+                                        <div class="button-label">Audio Archive</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="button">
+                                        <div class="button-icon icon-vgmdb"></div>
+                                        <div class="button-label">VGMdb</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="button">
+                                        <div class="button-icon icon-kkbox"></div>
+                                        <div class="button-label">KKBOX</div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="button">
+                                        <div class="button-icon icon-musicbrainz"></div>
+                                        <div class="button-label">MusicBrainz</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="button">
+                                        <div class="button-icon icon-lastfm"></div>
+                                        <div class="button-label">last.fm</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="button">
+                                        <div class="button-icon icon-gnudb"></div>
+                                        <div class="button-label">Gnudb</div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="button">
+                                        <div class="button-icon icon-musicenc"></div>
+                                        <div class="button-label">MusicEnc</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="button">
+                                        <div class="button-icon icon-jlyric"></div>
+                                        <div class="button-label">J-Lyric.net</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="button">
+                                        <div class="button-icon icon-followlyrics"></div>
+                                        <div class="button-label">FollowLyrics</div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="button">
+                                        <div class="button-icon icon-kugeci"></div>
+                                        <div class="button-label">Kugeci</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="button">
+                                        <div class="button-icon icon-google"></div>
+                                        <div class="button-label">Google(Lyrics)</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="button">
+                                        <div class="button-icon icon-baha"></div>
+                                        <div class="button-label">巴哈姆特</div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="button">
+                                        <div class="button-icon icon-utanet"></div>
+                                        <div class="button-label">Uta-net</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="button">
+                                        <div class="button-icon icon-jplyrics"></div>
+                                        <div class="button-label">Japanese Song Lyrics</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="button">
+                                        <div class="button-icon icon-petitlyrics"></div>
+                                        <div class="button-label">PetitLyrics</div>
+                                    </div>
+                                </td>
 
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="button">
+                                        <div class="button-icon icon-niconico"></div>
+                                        <div class="button-label">ニコニコ動画</div>
+                                    </div>
+                                </td>
 
-        <div class="heading" id="scrap">
-            <h2>Download Songs here</h2>
-        </div>
-        <div class="download">
-            <div class="container">
-                <a href="https://spotifymate.com/" target="_blank"><img
-                        src="https://spotifymate.com/images/apple-touch-icon.png" alt="Spotify Mate"></a>
-                <h5>Spotify Mate</h5>
-            </div>
+                                <td>
+                                    <div class="button">
+                                        <div class="button-icon icon-mikudb"></div>
+                                        <div class="button-label">MikuDB</div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="button">
+                                        <div class="button-icon icon-vocadb"></div>
+                                        <div class="button-label">VocaDB</div>
+                                    </div>
+                                </td>
 
-            <div class="container">
-                <a href="https://bestmp3converter.com/" target="_blank"><img
-                        src="https://www.youtube.com/img/desktop/yt_1200.png" alt="YTMP3"></a>
-                <h5>YouTube to MP3 Converter</h5>
-            </div>
-            <div class="container">
-                <a href="https://free-mp3-download.net/" target="_blank"><img
-                        src="https://free-mp3-download.net/img/icon.png" alt="Freemp3"></a>
-                <h5>Free MP3 Download</h5>
-            </div>
-            <div class="container">
-                <a href="https://en.mygomp3.com/" target="_blank"><img src="https://en.mygomp3.com/img/mygomp3.png"
-                        alt="mygomp3"></a>
-                <h5>Online YouTube MP3 Downloader (mygomp3)</h5>
-            </div>
-            <div class="container">
-                <a href="https://seinopsys.dev/lrc" target="_blank"><img src="https://seinopsys.dev/favicon-16x16.png"
-                        alt="SEI"></a>
-                <h5>LRC Online Editor</h5>
-            </div>
-        </div>
-
-        <div id="player">
-            <div class="cover">
-                <img src="https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/miku.gif"
-                    alt="miku" id="miku-gif" />
-            </div>
-            <div class="info">
-                <div id="streamInfo"></div>
-            </div>
-            <p id="stationName">Click on Miku to play a random station</p>
-            <audio id="miniPlayer" controls controlsList="nodownload noplaybackrate"></audio>
-        </div>
-
-        <div class="heading" id="drive">
-            <h2>Drive Music Player</h2>
-        </div>
-
-        <main role="main" class="content">
-
-            <div id="return" style="display: none;">
-                <form onsubmit="submitFolderId(event)">
-                    <button type="submit" style="display: block; width: auto; max-width: 180px; margin: auto;"><i
-                            class="fa-brands fa-google" style="margin-right: 10px;"></i> Log back in</button>
-                </form>
-            </div>
-
-            <div id="intro" style="display: none;"></div>
-            <p>Enter the ID for the <a href="https://drive.google.com" target="_blank">Google Drive</a> folder you
-                would
-                like to use and click the 'Login' button.<br> The ID can be found by taking that last part of the
-                folder's
-                URL, for example, <strong>drive.google.com/drive/folders/12345-abcde</strong> has an ID of
-                "12345-abcde".
-                <br>Alternatively,"root" can be used to browse from your top-level folder.
-                <br>Note: Trust the website and click on proceed in order to login (sadly not verified yet).
-            </p>
-
-            <form onsubmit="submitFolderId(event)">
-                <label for="parentfolder" class="sr-only">Drive Folder ID:</label>
-                <input required type="text" id="parentfolder" name="parentfolder" placeholder="google-drive-folder-id">
-                <button type="submit" class="custom-button"><i class="fa-brands fa-google"
-                        style="margin-right: 10px;"></i> Login</button>
-            </form>
-
-            <div id="demo" class="loaded">
-
-                <details open>
-                    <summary>Collection 1</summary>
-                    <button class="track" onclick="playTrack('163OAKTdmk1ed-adDEc8j44qbiagn6gns', this, 'demo')"><i
-                            class="fas fa-play"></i> 千本桜 - 和楽器バンド</button>
-                    <button class="track" onclick="playTrack('12v6RuZyXxNiv2qSh7Ei-77p5YW_inqlQ', this, 'demo')"><i
-                            class="fas fa-play"></i> ハーゲンダッツ以下の殺風景 - なゆごろう</button>
-                    <button class="track" onclick="playTrack('1EGRUpWoZ-8mme6L_2G9kITBA1xrF77_a', this, 'demo')"><i
-                            class="fas fa-play"></i> 空気椅子 - 別野加奈</button>
-                </details>
-
-                <details open>
-                    <summary>Collection 2</summary>
-                    <button class="track" onclick="playTrack('1wm5fe2JkCCD8ru0q2krieIb8mbZGUu5o', this, 'demo')"><i
-                            class="fas fa-play"></i> Goldrop - 舞花</button>
-                    <button class="track" onclick="playTrack('14rb76C7CXYNp5eEHPAWE2JxCG_rG5Y0G', this, 'demo')"><i
-                            class="fas fa-play"></i> わたがし - back number</button>
-                    <button class="track" onclick="playTrack('1NTn5laDhrpt1ApALTstCtiK96jlCMgmm', this, 'demo')"><i
-                            class="fas fa-play"></i> 涼風爽夏 -すずかぜ、さやか- - 【暁Records】</button>
-                </details>
-            </div>
-
-            </div>
-
-            <div id="contents"></div>
-
-        </main>
-
-        <div role="contentinfo">
-
-            <ul id="navi">
-                <li><button onclick="changeFolder()">Change Folder</button></li>
-                <li><a href="https://myaccount.google.com/security">Revoke Access</a></li>
-            </ul>
-
-            <div id="audio-wrapper">
-                <div id="audio-container">
-                    <button id="prev-btn" onclick="prevTrack()"><i class="fas fa-step-backward"></i></button>
-
-                    <audio id="audio" controls controlsList="nodownload noplaybackrate">
-                        <source id="source" src="" type="audio/mpeg">
-                    </audio>
-                    <button id="next-btn" onclick="nextTrack()"><i class="fas fa-step-forward"></i></button>
+                                <td>
+                                    <div class="button">
+                                        <div class="button-icon icon-touhoudb"></div>
+                                        <div class="button-label">TouhouDB</div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <a href="https://chrome.google.com/webstore/detail/shazam-find-song-names-fr/mmioliijnhnoblpgimnlajmefafdfilb"
+                    target="_blank">Use Shazam extension on your browser <i class="fas fa-search"></i></a>
+                <div class="video-container" id="videoContainer">
+                    <iframe id="YouTubeVideo" style="display: none" frameborder="0" allowfullscreen></iframe>
                 </div>
             </div>
+        </section>
+
+
+        <section id="websites">
+            <h2 class="section-title">More Websites</h2>
+            <div class="flex-container" id="websitehere">
+            </div>
+            <h2 class="section-title">More Radios</h2>
+            <div class="flex-container" id="radiohere">
+            </div>
+            <h2 class="section-title">Japanese Radios</h2>
+            <div class="flex-container" id="radiojphere">
+            </div>
+        </section>
+
+
+        <section id="scrap">
+            <h2 class="section-title">Download</h2>
+            <div class="download">
+            </div>
+        </section>
+
+        <section id="drive">
+            <h2 class="section-title">Google Drive Music</h2>
+
+            <main role="main" class="content">
+
+                <div id="return" style="display: none;">
+                    <form onsubmit="submitFolderId(event)">
+                        <button type="submit" style="display: block; width: auto; max-width: 180px; margin: auto;"><i
+                                class="fa-brands fa-google" style="margin-right: 10px;"></i> Log back in</button>
+                    </form>
+                </div>
+
+                <div id="intro" style="display: none;"></div>
+                <div id="audio-wrapper">
+                    <div id="audio-container">
+                        <button id="prev-btn" onclick="prevTrack()"><i class="fas fa-step-backward"></i></button>
+                        <audio id="audio" controls controlsList="nodownload noplaybackrate">
+                            <source id="source" src="" type="audio/mpeg">
+                        </audio>
+                        <button id="next-btn" onclick="nextTrack()"><i class="fas fa-step-forward"></i></button>
+                    </div>
+                </div>
+                <p>Enter the ID for the <a href="https://drive.google.com" target="_blank">Google Drive</a> folder
+                    you
+                    would
+                    like to use and click the 'Login' button.<br> The ID can be found by taking that last part of
+                    the
+                    folder's
+                    URL, for example, <strong>drive.google.com/drive/folders/12345-abcde</strong> has an ID of
+                    "12345-abcde".
+                    <br>Alternatively,"root" can be used to browse from your top-level folder.
+                    <br><strong>Note: Trust the website and click on proceed in order to login.</strong>
+                </p>
+
+                <form onsubmit="submitFolderId(event)">
+                    <label for="parentfolder" class="sr-only">Drive Folder ID:</label>
+                    <input required type="text" id="parentfolder" name="parentfolder"
+                        placeholder="google-drive-folder-id">
+                    <button type="submit" class="custom-button"><i class="fa-brands fa-google"></i> Login</button>
+                </form>
+
+                <div id="demo" class="loaded">
+
+                    <details open>
+                        <summary>Collection 1</summary>
+                        <button class="track" onclick="playTrack('163OAKTdmk1ed-adDEc8j44qbiagn6gns', this, 'demo')"><i
+                                class="fas fa-play"></i> 千本桜 - 和楽器バンド</button>
+                        <button class="track" onclick="playTrack('12v6RuZyXxNiv2qSh7Ei-77p5YW_inqlQ', this, 'demo')"><i
+                                class="fas fa-play"></i> ハーゲンダッツ以下の殺風景 - なゆごろう</button>
+                        <button class="track" onclick="playTrack('1EGRUpWoZ-8mme6L_2G9kITBA1xrF77_a', this, 'demo')"><i
+                                class="fas fa-play"></i> 空気椅子 - 別野加奈</button>
+                    </details>
+
+                    <details open>
+                        <summary>Collection 2</summary>
+                        <button class="track" onclick="playTrack('1wm5fe2JkCCD8ru0q2krieIb8mbZGUu5o', this, 'demo')"><i
+                                class="fas fa-play"></i> Goldrop - 舞花</button>
+                        <button class="track" onclick="playTrack('14rb76C7CXYNp5eEHPAWE2JxCG_rG5Y0G', this, 'demo')"><i
+                                class="fas fa-play"></i> わたがし - back number</button>
+                        <button class="track" onclick="playTrack('1NTn5laDhrpt1ApALTstCtiK96jlCMgmm', this, 'demo')"><i
+                                class="fas fa-play"></i> 涼風爽夏 -すずかぜ、さやか- - 【暁Records】</button>
+                    </details>
+                </div>
+
+                <div id="contents">
+                    <div role="contentinfo">
+
+                        <ul id="navi">
+                            <li><button onclick="changeFolder()">Change Folder</button></li>
+                            <li><a href="https://myaccount.google.com/security">Revoke Access</a></li>
+                        </ul>
+
+
+                    </div>
+                </div>
+
+            </main>
+
+        </section>
+
+        <div id="player">
+
+            <div class="info">
+                <div class="cover">
+                    <img src="https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/miku.gif"
+                        id="miku-gif" />
+                    <div id="streamInfo"></div>
+                </div>
+                <div id="stationName">Click miku for a random station!</div>
+            </div>
+
+            <audio id="miniPlayer" autoplay controls controlsList="nodownload noplaybackrate"></audio>
         </div>
 
         <footer>
@@ -351,10 +385,10 @@
                         src="https://github.com/fluidicon.png" />Github</a></h5>
             <p>Contact Email: <a href="mailto:sasalele-team@basic.pp.ua">sasalele-team@basic.pp.ua</a></p>
         </footer>
-        <script src="https://kit.fontawesome.com/9e5ba2e3f5.js" crossorigin="anonymous"></script>
-        <script src="script.js"></script>
-        <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
-        <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
     </body>
+    <script src="https://kit.fontawesome.com/9e5ba2e3f5.js" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+    <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
+    <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
 
 </html>
