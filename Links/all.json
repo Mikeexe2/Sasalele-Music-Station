@@ -98,7 +98,7 @@
   {
     "name": "JPHiP Radio",
     "url": "http://radio.jphip.com:8800/;stream.nsv&type=mp3&quot",
-    "favicon": "https://cdn-radiotime-logos.tunein.com/s54003d",
+    "favicon": "https://mytuner-radio.com/static/mytuner/images/player/play.png",
     "website": "http://radio.jphip.com:8800/"
   },
   {
@@ -115,7 +115,7 @@
   },
   {
     "name": "Final Fantasy Radio",
-    "url": "http://finalfantasystation.com:8000/stream",
+    "url": "https://static2.mytuner.mobi/media/tvos_radios/mhgzuyryuk8r.png",
     "favicon": "http://finalfantasyradio.co/wp-content/uploads/2014/04/cropped-FFRBB_v2-1-192x192.png",
     "website": "http://finalfantasyradio.co/"
   },
@@ -1694,7 +1694,7 @@
   {
     "name": "Unidentified2",
     "url": "ns341468.ip-37-187-126.eu:8000/radio.mp3",
-    "favicon": "chrome://global/skin/media/pause-fill.svg)",
+    "favicon": "https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/512x512/plain/symbol_questionmark.png",
     "website": "chrome://global/skin/media/pause-fill.svg)"
   },
   {
