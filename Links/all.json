@@ -115,8 +115,8 @@
   },
   {
     "name": "Final Fantasy Radio",
-    "url": "https://static2.mytuner.mobi/media/tvos_radios/mhgzuyryuk8r.png",
-    "favicon": "http://finalfantasyradio.co/wp-content/uploads/2014/04/cropped-FFRBB_v2-1-192x192.png",
+    "url": "http://finalfantasystation.com:8000/stream",
+    "favicon": "https://static2.mytuner.mobi/media/tvos_radios/mhgzuyryuk8r.png",
     "website": "http://finalfantasyradio.co/"
   },
   {
