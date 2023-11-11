@@ -22,7 +22,8 @@ body {
 }
 
 .logo img {
-  max-width: 100px;
+  width: 200px;
+  height: 30px;
   margin-right: 10px;
 }
 
@@ -42,7 +43,7 @@ i {
 nav ul li a {
   text-decoration: none;
   color: #000000;
-  font-style: oblique;
+  font-weight: bold;
   display: flex;
   align-items: center;
   margin-left: 5px;
@@ -70,6 +71,14 @@ nav ul li a.active::after {
   position: sticky;
   top: 0;
   z-index: 100;
+}
+
+#aplayer {
+  padding: 50px 40px;
+  margin-left: 50px;
+  margin-right: 50px;
+  background: rgb(249, 240, 240);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 #rad {
@@ -138,9 +147,11 @@ nav ul li a.active::after {
 .search-container {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin: 1rem auto;
   width: 80%;
   max-width: 600px;
+  position: relative;
 }
 
 #searchInput {
@@ -150,6 +161,7 @@ nav ul li a.active::after {
   border-bottom: 2px solid #555;
   background-color: #fcdfed;
   transition: all 0.3s ease;
+  padding-right: 40px;
 }
 
 #searchInput.error {
@@ -161,51 +173,55 @@ nav ul li a.active::after {
 }
 
 #searchButton {
-  background-color: #424141;
-  color: #ffffff;
+  background-color: #b662f72b;
+  color: #047bff;
+  font-size: 20px;
   padding: 10px 10px;
-  border-radius: 50%;
-  margin-left: 10px;
+  position: absolute;
+  border: none;
+  right: 0;
+  margin-right: 2px;
+  margin-bottom: 10px;
   cursor: pointer;
   transition: all 0.3s ease;
-}
-
-#searchButton:hover {
-  background-color: #5991e6;
+  outline: none;
 }
 
 #searchTerms {
-  font-size: 16px;
+  font-size: 22px;
   font-weight: bold;
-  color: #3358ff;
+  color: hsl(0, 0%, 2%);
   text-decoration: none;
 }
 
 .label {
-  margin-top: 1px;
-  font-size: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 20px;
   font-weight: bold;
+  color: #000000;
 }
 
 #lastFMInfo {
   font-size: 14px;
   font-weight: bold;
   justify-content: center;
+  background-color: #ffffff;
 }
 
 .card-panel {
-  padding: 5px;
-  margin-right: 20px;
-  margin-left: 20px;
-  border: 1.5px solid #797979;
+  padding: 10px;
+  width: 70%;
+  margin: 0 auto;
+  border: 4px solid #797979;
 }
 
 .video-container {
   position: relative;
-  padding-bottom: 56.25%;
+  padding-bottom: 45.25%;
   height: 0;
   margin: 0 auto;
-  max-width: 100%;
+  max-width: 70%;
 }
 
 .video-container iframe {
@@ -234,13 +250,9 @@ table {
 .inner {
   padding: 5px;
   text-align: center;
-  background-color: #e0f8f1;
-  margin-right: 80px;
-  margin-left: 80px;
+  margin-right: 20px;
+  margin-left: 20px;
   margin-bottom: 5px;
-  border-width: 3px;
-  border-style: solid;
-  border-color: #5869ff;
   background-image: url('https://usagif.com/wp-content/uploads/funny-anime-gif-73.gif');
   background-size: cover;
   background-repeat: no-repeat;
@@ -253,7 +265,7 @@ ul {
 }
 
 .button-label {
-  font-size: 16px;
+  font-size: 16 px;
   font-weight: 1000;
   line-height: 30px;
   margin-left: 32px;
@@ -265,6 +277,7 @@ ul {
   height: 30px;
   width: 100%;
   opacity: 1;
+  background-color: #f3f3f3;
   cursor: pointer;
 }
 
@@ -352,7 +365,6 @@ ul {
 
 .icon-petitlyrics {
   background-image: url('https://petitlyrics.com/favicon.ico');
-
 }
 
 .icon-musicbrainz {
@@ -420,7 +432,6 @@ ul {
   border-radius: 10px;
   background: linear-gradient(to right, #a6c1ee, #fbc2eb);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
 }
 
 .cover {
@@ -460,17 +471,31 @@ ul {
 }
 
 .section-title {
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: 30px;
-  color: #c1c1c1;
-  margin-bottom: 20px;
+  color: #ffffff;
+  margin-bottom: 10px;
   max-width: 90%;
   margin: 0 auto;
-  padding: 10px 20px;
-  border-radius: 20px;
+  padding: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  text-transform: uppercase;
+  border-radius: 5px;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.section-title::before,
+.section-title::after {
+  content: "";
+  width: 50px;
+  height: 50px;
   background-image: url('https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/miku.gif');
-  background-size: 280px;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .download {
@@ -534,23 +559,45 @@ ul {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
-  margin-left: 40px;
-  margin-right: 40px;
-  padding-left: 40px;
-  padding-right: 40px;
+  margin: 40px 40px 0;
+  padding: 0 40px;
+}
+
+#explain {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#explain p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+}
+
+#explain a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#explain a:hover {
+  text-decoration: underline;
 }
 
 footer {
   bottom: 0;
   width: 100%;
-  background-color: #5c5050;
+  background-color: #3d3d3d;
   color: #ffffff;
   text-align: center;
   padding: 10px 0;
   margin-top: 40px;
   margin-bottom: 80px;
 }
-
 
 footer p {
   margin: 0;
@@ -720,6 +767,7 @@ button i {
 }
 
 audio {
+  width: 100%;
   height: 40px;
 }
 
@@ -837,28 +885,32 @@ summary {
 }
 
 main {
-  padding-bottom: 0px !important;
+  padding-bottom: 60px !important;
 }
 
 ul#navi li {
-  list-style-type: none;
-  padding: 1px;
-  margin: 0px;
+  list-style: none;
+  padding: 2px;
+  justify-content: center;
   text-align: center;
 }
 
 ul#navi li a,
 ul#navi li button {
-  font-size: 16px;
+  font-size: 10px;
+  text-decoration: none;
 }
 
 #navi button {
-  background: none;
-  border: none;
-  color: rgb(16, 149, 193);
-  width: auto;
-  margin-left: 10px;
-  margin-right: 10px;
+  padding: 5px 5px;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#navi a:hover {
+  text-decoration: underline;
 }
 
 
@@ -877,12 +929,8 @@ ul#navi li button {
 
   .logo img {
     max-width: 20px;
+    height: 10px;
     margin-right: 1px;
-  }
-
-  p {
-    margin-right: 1px;
-    margin-left: 1px;
   }
 
   .section-title {
@@ -917,6 +965,11 @@ ul#navi li button {
     font-size: 8px;
   }
 
+  .content {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
   #radiostations {
     margin-left: 10px;
     margin-right: 10px;
@@ -924,6 +977,13 @@ ul#navi li button {
     padding: 1px;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 5px;
+  }
+
+  #aplayer {
+    padding: 5px 10px;
+    margin-left: 15px;
+    margin-right: 15px;
+
   }
 
   .search-container {
@@ -944,7 +1004,7 @@ ul#navi li button {
   }
 
   #searchTerms {
-    font-size: 12px;
+    font-size: 18px;
   }
 
   .label {
@@ -965,13 +1025,12 @@ ul#navi li button {
   }
 
   .card-panel {
-    margin-right: 20px;
-    margin-left: 20px;
-    padding: 2px;
+    padding: 12px;
     justify-content: center;
-    align-items: center;
-    text-align: center;
-    border: 1px solid #353535;
+  }
+
+  .video-container {
+    padding-bottom: 56.25%;
   }
 
   .button-label {
@@ -1058,10 +1117,17 @@ ul#navi li button {
     margin-bottom: 10px !important;
   }
 
+  #explain {
+    margin: 0 auto;
+    padding: 10px;
+  }
+
+  #explain p {
+    font-size: 12px;
+    line-height: 1;
+  }
+
   #audio-wrapper {
-    bottom: 80px;
-    right: 80px;
-    display: inline-block;
     padding: 2px;
   }
 
@@ -1071,7 +1137,7 @@ ul#navi li button {
   }
 
   #audio {
-    width: 150px;
+    width: 400px;
     height: 30px;
   }
 
