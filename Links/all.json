@@ -181,7 +181,7 @@
   },
   {
     "name": "Radio Akiba Brasil",
-    "url": "http://stm24.srvstm.com:9526/",
+    "url": "http://stm24.srvstm.com:9526/;",
     "favicon": "https://www.akiba.com.br/imagem/todas/logo_akiba.png",
     "website": "http://stm24.srvstm.com:9526/index.html?sid=1"
   },
