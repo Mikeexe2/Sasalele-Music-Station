@@ -8,14 +8,15 @@
             href="https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/sasalele_logo.png">
         <title>Sasalele Music Station</title>
         <meta name="Keywords"
-            content="Sasalele, Google Drive Music Player, Internet Radio list, Japanese Music, Sasalele Music Station, Song Search, Download Music Tools, Sasalele Radio" />
+            content="Sasalele, Google Drive Music Player, Internet Radio stream list, Japanese Music, Sasalele Music Station, Song Search, Download Music Tools, Sasalele Radio" />
         <meta name="description"
-            content="Collection of a list of internet radio and websites featuring japanese music, having search function to find your song online and also google drive music player." />
-        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-        <! -- try to load http radio stream links-->
-            <link rel="stylesheet" type="text/css" href="style.css">
-            <link rel="stylesheet"
-                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            content="Collection of a list of internet radio and websites featuring japanese music. You can also log into your own Google Drive and have a seamless playback of your music files using the Google Drive music player. Identifiy the song from radio with the help of the search engine, and download it on other websites." />
+        <link rel="canonical" href="https://basic.pp.ua">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.js"></script>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
 
     <body onload="getFolderId()">
@@ -42,6 +43,20 @@
                 <img
                     src="https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/sasalele_banner2.png" />
             </div>
+            <div id="explain">
+                <p><strong>Tips:</strong> Some radio streams over HTTP cannot be loaded on this HTTPS website due to
+                    Chrome's restrictions.
+                    To resolve
+                    this issue, you can either go to <a
+                        href="https://support.google.com/chrome/thread/29505473?hl=en&msgid=39996297">Site
+                        Settings</a>
+                    and allow
+                    insecure content, <strong>or</strong> Use a different browser like Firefox. For the moment they
+                    haven't
+                    blocked unencrypted content on an otherwise encrypted
+                    page web page.</p>
+            </div>
+
             <div id="radiostations"></div>
         </section>
 
@@ -52,7 +67,7 @@
                 <button id="searchButton"><i class="fa fa-search"></i></button>
             </div>
             <div class="inner" style="display:none;">
-                <h5>You searched for: <span id="searchTerms"></span></h5>
+                <div class="label">You searched for: <span id="searchTerms"></span></div>
                 <div class="card-panel" id="lastFMInfo"></div>
                 <div class="label">Search it on:</div>
                 <div class="table-container">
@@ -218,7 +233,27 @@
                                         <div class="button-label">PetitLyrics</div>
                                     </div>
                                 </td>
+                            </tr>
+                            <tr>
 
+                                <td>
+                                    <div class="button">
+                                        <div class="button-icon icon-mikudb"></div>
+                                        <div class="button-label">MikuDB</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="button">
+                                        <div class="button-icon icon-vocadb"></div>
+                                        <div class="button-label">VocaDB</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="button">
+                                        <div class="button-icon icon-touhoudb"></div>
+                                        <div class="button-label">TouhouDB</div>
+                                    </div>
+                                </td>
                             </tr>
                             <tr>
                                 <td>
@@ -227,40 +262,18 @@
                                         <div class="button-label">ニコニコ動画</div>
                                     </div>
                                 </td>
-
-                                <td>
-                                    <div class="button">
-                                        <div class="button-icon icon-mikudb"></div>
-                                        <div class="button-label">MikuDB</div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="button">
-                                        <div class="button-icon icon-vocadb"></div>
-                                        <div class="button-label">VocaDB</div>
-                                    </div>
-                                </td>
-
-                                <td>
-                                    <div class="button">
-                                        <div class="button-icon icon-touhoudb"></div>
-                                        <div class="button-label">TouhouDB</div>
-                                    </div>
-                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <a href="https://chrome.google.com/webstore/detail/shazam-find-song-names-fr/mmioliijnhnoblpgimnlajmefafdfilb"
-                    target="_blank">Use Shazam extension on your browser <i class="fas fa-search"></i></a>
+                    target="_blank"><strong>Use Shazam extension on your browser</strong> <i
+                        class="fas fa-search"></i></a>
                 <div class="video-container" id="videoContainer">
-                    <iframe id="YouTubeVideo" style="display: none" frameborder="0" allowfullscreen></iframe>
+                    <iframe id="YouTubeVideo" style="display: none" frameborder="2" allowfullscreen></iframe>
                 </div>
             </div>
         </section>
-
 
         <section id="websites">
             <h2 class="section-title">More Websites</h2>
@@ -274,7 +287,6 @@
             </div>
         </section>
 
-
         <section id="scrap">
             <h2 class="section-title">Download</h2>
             <div class="download">
@@ -283,17 +295,8 @@
 
         <section id="drive">
             <h2 class="section-title">Google Drive Music</h2>
-
+            <div id="aplayer"></div>
             <main role="main" class="content">
-
-                <div id="return" style="display: none;">
-                    <form onsubmit="submitFolderId(event)">
-                        <button type="submit" style="display: block; width: auto; max-width: 180px; margin: auto;"><i
-                                class="fa-brands fa-google" style="margin-right: 10px;"></i> Log back in</button>
-                    </form>
-                </div>
-
-                <div id="intro" style="display: none;"></div>
                 <div id="audio-wrapper">
                     <div id="audio-container">
                         <button id="prev-btn" onclick="prevTrack()"><i class="fas fa-step-backward"></i></button>
@@ -303,17 +306,27 @@
                         <button id="next-btn" onclick="nextTrack()"><i class="fas fa-step-forward"></i></button>
                     </div>
                 </div>
-                <p>Enter the ID for the <a href="https://drive.google.com" target="_blank">Google Drive</a> folder
-                    you
-                    would
-                    like to use and click the 'Login' button.<br> The ID can be found by taking that last part of
-                    the
-                    folder's
-                    URL, for example, <strong>drive.google.com/drive/folders/12345-abcde</strong> has an ID of
-                    "12345-abcde".
-                    <br>Alternatively,"root" can be used to browse from your top-level folder.
-                    <br><strong>Note: Trust the website and click on proceed in order to login.</strong>
-                </p>
+                <div id="return" style="display: none;">
+                    <form onsubmit="submitFolderId(event)">
+                        <button type="submit" style="display: block; width: auto; max-width: 180px; margin: auto;"><i
+                                class="fa-brands fa-google" style="margin-right: 10px;"></i> Log back in</button>
+                    </form>
+                </div>
+
+                <div id="intro" style="display: none;"></div>
+                <div id="explain">
+                    <p>Enter the ID for the <a href="https://drive.google.com" target="_blank">Google Drive</a> folder
+                        you
+                        would
+                        like to use and click the 'Login' button.<br> The ID can be found by taking that last part of
+                        the
+                        folder's
+                        URL, for example, <strong>drive.google.com/drive/folders/12345-abcde</strong> has an ID of
+                        "12345-abcde".
+                        <br>Alternatively,"root" can be used to browse from your top-level folder.
+                        <br><strong>Note: Trust the website and click on proceed in order to login.</strong>
+                    </p>
+                </div>
 
                 <form onsubmit="submitFolderId(event)">
                     <label for="parentfolder" class="sr-only">Drive Folder ID:</label>
@@ -345,18 +358,10 @@
                     </details>
                 </div>
 
-                <div id="contents">
-                    <div role="contentinfo">
-
-                        <ul id="navi">
-                            <li><button onclick="changeFolder()">Change Folder</button></li>
-                            <li><a href="https://myaccount.google.com/security">Revoke Access</a></li>
-                        </ul>
-
-
-                    </div>
-                </div>
-
+                <ul id="navi">
+                    <li><button onclick="changeFolder()">Change Folder</button></li>
+                    <li><button a href="https://myaccount.google.com/security">Revoke Access</a></button></li>
+                </ul>
             </main>
 
         </section>
@@ -376,11 +381,11 @@
         </div>
 
         <footer>
-            <p>&copy; 2023 Sasalele Team. All Rights Reserved. Portions of this site use code from open source
-                projects
-                including <br><a href="https://github.com/dandalpiaz/drive-music-player" target="_blank">Drive Music
-                    Player</a></br>
-            </p>
+            <p>&copy; 2023 Sasalele Team. All Rights Reserved.</p>
+            Portions of this site use code from open source
+            projects
+            including: <a href="https://github.com/dandalpiaz/drive-music-player" target="_blank">Drive Music
+                Player</a>,<a href="https://github.com/DIYgod/APlayer" target="_blank">APlayer</a>
             <h5><a href="https://t.me/sasalelemusic" target="_blank"><img
                         src="https://img.icons8.com/fluency/96/telegram-app.png" />Discussion Group</a></h5>
             <h5><a href="https://github.com/Mikeexe2/Sasalele-Music-Station" target="_blank"><img
