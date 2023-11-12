@@ -70,15 +70,6 @@ fetch("https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Li
         function updatePlayButtonIcon(playButton, isPlaying) {
             playButton.innerHTML = isPlaying ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>';
         }
-        player.addEventListener('ended', function () {
-            var currentPlayButton = radTopBar.querySelector('.main-play-button[data-link="' + player.getAttribute('data-link') + '"]');
-            updatePlayButtonIcon(currentPlayButton, false);
-        });
-
-        player.addEventListener('pause', function () {
-            var currentPlayButton = radTopBar.querySelector('.main-play-button[data-link="' + player.getAttribute('data-link') + '"]');
-            updatePlayButtonIcon(currentPlayButton, false);
-        });
     });
 
 // Smooth scrolling
@@ -849,5 +840,20 @@ const ap = new APlayer({
         lrc: '[00:09.01]词：Uru \n[00:16.86]曲：Uru \n[00:19.30]编曲：トオミヨウ \n[00:33.44]夏の終わりを知らせるように（就像是宣告着夏天的落幕） \n[00:39.84]道端にそっと並んで咲いた（在道路的一旁静静的开放） \n[00:46.25]夕にも染まらず風も知らない（不为暮色所染 也不识风为何物） \n[00:52.68]青い青いリンドウ（那一片蓝色的龙胆花） \n[00:58.14]傷つくことを恐れながら（过去的我害怕会受伤） \n[01:04.43]心を隠したりしたけれど（而封闭起自己的心扉） \n[01:10.84]誰かが傍にいてくれる温かさを（是你让我体会到） \n[01:17.24]教えてもらったから（有个人陪伴在身边 是多么温暖的事情） \n[01:23.69]さよならじゃない（后会有期） \n[01:28.76]名も知らない遠い場所へ（走向尚不知名的遥远地方） \n[01:36.28]離れたとしても記憶の中で（哪怕从此天各一方） \n[01:42.72]息をし続ける（你也将永远存活在我的记忆之中） \n[01:49.33]夜に埋もれて（没入夜色之中） \n[01:54.08]誰も知らない遠い場所へ（走向无人知晓的遥远地方） \n[02:01.92]迷ったとしても記憶の中の（哪怕途中迷失了方向 愿记忆中的温暖） \n[02:08.07]温もりでずっと今を照らせるよう（能为我所在的当下 带来永恒的光亮） \n[02:28.73]遠くで聞こえる祭りの声は（远远听见夏日祭的喧闹声） \n[02:35.06]関係ないんだってそう思っていた（我曾以为那些都与我无关） \n[02:41.49]見たくもなかった境界線が（不愿去回顾的境界线） \n[02:47.84]寂しかった日々（是那一段寂寞的岁月） \n[02:53.28]誰の背中も追わなかった（不曾有过什么追求） \n[02:59.63]時には嘘もついたけれど（有时也会自欺欺人） \n[03:06.06]守りたいものがここにできたこと（可现在我却在这里 找到了我想守护的东西） \n[03:12.41]それがただ嬉しくて（仅是如此便让我欣喜万分） \n[03:18.85]さよならじゃない（后会有期） \n[03:23.90]向かい合えずいた寂しさも（无法与你坦诚相待的寂寞） \n[03:31.56]帰りたい場所がここにあるだけで（只要这里还有我心灵的归宿） \n[03:37.70]それだけで強さに変わる（只是如此便能成为我的力量） \n[03:44.37]愛されたいと本当はもがいていた（事实上我也曾渴望被爱 而痛苦的挣扎过） \n[03:50.41]この孤独も涙も包むような（因为我遇到了那个可以包容我的孤独） \n[03:57.26]優しさに出逢えたから（我的泪水的 温柔之人） \n[04:06.82]さよならじゃない（后会有期） \n[04:11.89]例えばもう会えなくなっても（哪怕这辈子再也无法相见） \n[04:19.73]きっとどこかで（我相信我们一定会在某处） \n[04:22.70]笑っていると（会心） \n[04:25.96]心繋げて（而笑） \n[04:32.54]さよならじゃない（后会有期） \n[04:37.50]名も知らない遠い場所へ（走向尚不知名的遥远地方） \n[04:45.04]離れたとしても記憶の中の（哪怕从此天各一方） \n[04:51.25]温もりをずっとずっと忘れないよ（我也会永远记得 记忆里曾有过的温暖）',
         theme: '#a19cba'
     },
-    ]
+    {
+        name: 'Licht und Schatten',
+        artist: 'やまだ 豊',
+        url: 'https://drive.google.com/uc?export=download&id=1LDR5h8-DMGThbbdQm2uYJ1eTyaOQku4K',
+        cover: 'https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/cf/6a/fb/cf6afb88-3e7c-4f6c-f112-0b5be855c88d/MJSA-01158-9.jpg/1200x1200bb.jpg',
+        lrc: '',
+        theme: '#505d6b'
+    },
+    {
+        name: 'My Hero Is Our Hero',
+        artist: '林ゆうき',
+        url: 'https://drive.google.com/uc?export=download&id=1LzJnvmX_nIXpNzfTTFKXW-UI7vIpFPVP',
+        cover: 'https://i.discogs.com/qVRNltnVIVbNlE48Ae77GvRfprMQ4VixQ3zjiBMISGM/rs:fit/g:sm/q:40/h:300/w:300/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTE5ODU4/MDc1LTE2Mjg5NDM5/MDMtODI4OS5qcGVn.jpeg',
+        lrc: '',
+        theme: '#505d6b'
+    }]
 });
