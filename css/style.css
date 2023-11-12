@@ -85,15 +85,6 @@ nav ul li a.active::after {
   background: rgb(249, 240, 240);
   border: 1px solid rgb(129, 127, 128);
   border-radius: 6px;
-
-}
-
-#radtop-bar {
-  height: 75px;
-  width: 100%;
-  display: block;
-  padding: 5px;
-  line-height: 20px;
 }
 
 .rad-icon {
@@ -108,7 +99,7 @@ nav ul li a.active::after {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
-  background-color: #f9f9f9;
+  background-color: #b5c0fd;
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -144,6 +135,19 @@ nav ul li a.active::after {
   margin-left: 10px;
 }
 
+.player-radio-name {
+  font-weight: bold;
+  margin-left: 10px;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.player-radio-name:hover {
+  color: blue;
+  text-decoration: underline;
+}
+
 .search-container {
   display: flex;
   align-items: center;
@@ -159,7 +163,6 @@ nav ul li a.active::after {
   padding: 10px;
   font-size: 16px;
   border-bottom: 2px solid #555;
-  background-color: #fcdfed;
   transition: all 0.3s ease;
   padding-right: 40px;
 }
@@ -173,14 +176,14 @@ nav ul li a.active::after {
 }
 
 #searchButton {
-  background-color: #b662f72b;
+  background-color: transparent;
   color: #047bff;
-  font-size: 20px;
+  font-size: 16px;
   padding: 10px 10px;
   position: absolute;
   border: none;
   right: 0;
-  margin-right: 2px;
+  margin-right: 8px;
   margin-bottom: 10px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -265,18 +268,19 @@ ul {
 }
 
 .button-label {
-  font-size: 16 px;
-  font-weight: 1000;
-  line-height: 30px;
-  margin-left: 32px;
+  font-size: 15 px;
+  font-weight: bold;
+  line-height: 1;
+  display: block;
+  padding-left: 10px;
 }
 
 .button {
-  border: 1px solid #666;
-  border-radius: 4px;
-  height: 30px;
-  width: 100%;
-  opacity: 1;
+  border: 2px solid #0d0d0d;
+  border-radius: 9px;
+  height: auto;
+  width: auto;
+  padding: 10px;
   background-color: #f3f3f3;
   cursor: pointer;
 }
@@ -286,9 +290,8 @@ ul {
   background-size: contain;
   float: left;
   height: 20px;
-  margin-left: 6px;
-  margin-top: 5px;
-  width: 22px;
+  margin-left: 0;
+  width: 40px;
 }
 
 .icon-spotify {
@@ -461,7 +464,7 @@ ul {
 }
 
 #stationName {
-  font-size: 18px;
+  font-size: 16px;
   color: #333;
 }
 
@@ -524,7 +527,7 @@ ul {
   border-radius: 8px;
   margin: 10px;
   transition: all 0.3s ease;
-  background-color: #ffffff;
+  background-color: #b5c0fd;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -564,8 +567,8 @@ ul {
 }
 
 #explain {
-  max-width: 600px;
-  margin: 20px auto;
+  width: 80%;
+  margin: 0 auto;
   padding: 20px;
   background-color: #f2f2f2;
   border-radius: 10px;
@@ -1031,26 +1034,18 @@ ul#navi li button {
 
   .video-container {
     padding-bottom: 56.25%;
+    max-width: 100%;
   }
 
   .button-label {
     font-size: 8px;
-    font-weight: 800;
-    line-height: 10px;
-    margin-left: 10px;
-  }
-
-  .button {
-    border: 1px solid #666;
-    border-radius: 10%;
-    height: 22px;
+    font-style: normal;
   }
 
   .button-icon {
-    height: 16px;
-    margin-left: 3px;
-    margin-top: 2px;
-    width: 14px;
+    height: 15px;
+    width: 10px;
+    margin-right: 5px;
   }
 
   .banner img {
