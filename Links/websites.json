@@ -1,319 +1,311 @@
 [
   {
     "url": "https://yggdrasilradio.com/",
-    "imgSrc": "https://yggdrasilradio.com/images/default-album-art.webp",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/yggdrasil%20radio.webp",
     "name": "Yggdrasil Radio",
     "tags": "radio"
   },
   {
     "url": "https://tunein.com/radio/Stream-Anime-g2752/",
-    "imgSrc": "https://cdn-web.tunein.com/assets/img/apple-touch-icon-180.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/tuneIn.webp",
     "name": "Anime Radio Station on TuneIn",
     "tags": "website"
   },
   {
     "url": "https://onlineradiobox.com/genre/anime/",
-    "imgSrc": "https://cdn.onlineradiobox.com/img/ios_favicon.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/anime%20radio%20station.png",
     "name": "Anime Radio Stations",
     "tags": "website"
   },
   {
     "url": "https://www.rcast.net/dir/anime/page1",
-    "imgSrc": "https://www.rcast.net/assets/img/logo.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/rcast%20anime.png",
     "name": "RCAST anime genre",
     "tags": "website"
   },
   {
     "url": "https://kara.moe/",
-    "imgSrc": "https://kara.moe/_nuxt/icons/512x512.maskable.544eb38c.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/karamoe.png",
     "name": "kara.moe",
     "tags": "website"
   },
   {
     "url": "https://touhou.kuukunen.net/",
-    "imgSrc": "https://touhou.kuukunen.net/images/default.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/touhou%20player.png",
     "name": "Touhou Player",
     "tags": "website"
   },
   {
     "url": "https://tlmc.pf-n.co/tlmc",
-    "imgSrc": "https://pytouhou.linkmauve.fr/rust-touhou.svg",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/touhou%20lossless.svg",
     "name": "Touhou Lossess Music Collection",
     "tags": "website"
   },
   {
     "url": "https://animethemes.moe/",
-    "imgSrc": "https://animethemes.moe/apple-touch-icon.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/anime%20themes%20moe.png",
     "name": "AnimeThemes.moe",
     "tags": "website"
   },
   {
     "url": "https://themes.moe/",
-    "imgSrc": "https://themes.moe/assets/favicon.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/themesmoe.png",
     "name": "Themes.moe",
     "tags": "website"
   },
   {
     "url": "https://player.boxradio.net/",
-    "imgSrc": "https://player.boxradio.net/static/images/misc/boxradio.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/box%20radio%20player.png",
     "name": "Box Radio Player",
     "tags": "radio"
   },
   {
     "url": "https://mytuner-radio.com/radio/fmna-ba-fm-naha-462029/",
-    "imgSrc": "https://static2.mytuner.mobi/media/tvos_radios/pxbdrzqc8hmn.jpg",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/fmnaha.jpg",
     "name": "FM那覇 (FM Naha) ",
     "tags": "radiojp"
   },
   {
     "url": "https://bigbradio.net/",
-    "imgSrc": "https://bigbradio.net/sites/default/files/logo-transparent-sm.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/big%20b%20radio.png",
     "name": "Big B Radio",
     "tags": "radio"
   },
   {
     "url": "https://asiadreamradio.torontocast.stream/stations/jp.html",
-    "imgSrc": "https://asiadreamradio.torontocast.stream/stations/images/jp/shape_mh_33@2x.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/asia%20dream%20radio.png",
     "name": "Asia Dream Radio",
     "tags": "radio"
   },
   {
     "url": "https://www.jcbasimul.com/",
-    "imgSrc": "https://www.jcbasimul.com/images/jcba/apple-touch-icon.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/jcba.png",
     "name": "JCBAインターネットサイマルラジオ",
     "tags": "website"
   },
   {
     "url": "https://fmplapla.com/",
-    "imgSrc": "https://fmplapla.com/favicon.ico",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/fmpurapura.ico",
     "name": "エフエムプラプラ (FM++)",
     "tags": "website"
   },
   {
     "url": "https://tunein.com/radio/Stream-Japanese-Talk-g349/",
-    "imgSrc": "https://cdn-web.tunein.com/assets/img/apple-touch-icon-180.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/japan%20podcasts.webp",
     "name": "Japanese Talk Podcasts List on TuneIn",
     "tags": "website"
   },
   {
     "url": "https://www.simulradio.info/",
-    "imgSrc": "https://www.simulradio.info/images/logo2.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/simulradio.png",
     "name": "サイマルラジオ (SimulRadio)",
     "tags": "website"
   },
   {
     "url": "https://radiko.jp/",
-    "imgSrc": "https://radiko.jp/images/radiko-icon-circle.png?_=1",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/radiko.png",
     "name": "ラジコ (radiko)",
     "tags": "website"
   },
   {
     "url": "https://www.j-wave.co.jp/",
-    "imgSrc": "https://www.j-wave.co.jp/apple-touch-icon.jpg",
-    "name": "J-WAVE 81.3 FM RADIO | FMラジオ局",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/jwave.jpg",
     "tags": "website"
   },
   {
     "url": "https://www.tfm.co.jp/",
-    "imgSrc": "https://www.tfm.co.jp/img/touch-icon.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/tokyofm.png",
     "name": "TOKYO FM 80.0MHz",
     "tags": "website"
   },
   {
     "url": "https://www.nhk.or.jp/radio/",
-    "imgSrc": "https://www.nhk.or.jp/radio/img/brand.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/nhk%20radio.png",
     "name": "NHKラジオ らじる★らじる",
     "tags": "website"
   },
   {
     "url": "https://mytuner-radio.com/radio/radiomorioka-radio-morioka-412040/",
-    "imgSrc": "https://static2.mytuner.mobi/media/tvos_radios/k5fRz4vfTj.jpg",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/radiomorioka.jpg",
     "name": "ラヂオもりおか (Radio Morioka)",
     "tags": "radiojp"
   },
   {
     "url": "https://mytuner-radio.com/radio/kocorazi-jun-shan-komiyuniteifang-song-412035/",
-    "imgSrc": "https://static2.mytuner.mobi/media/tvos_radios/DmaKYL6FhD.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/koco.png",
     "name": "KOCOラジ (郡山コミュニティ放送) live",
     "tags": "radiojp"
   },
   {
     "url": "https://radio.menu/stations/global-superradio-cc-fm-sun/",
-    "imgSrc": "https://www.wasabi-jpn.com/wp-content/uploads/2015/09/radio1.jpg",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/FM%20SUN.jpg",
     "name": "FM SUN",
     "tags": "radiojp"
   },
   {
     "url": "https://radio.menu/stations/superradio-cc-fm78-1/",
-    "imgSrc": "https://static2.mytuner.mobi/media/tvos_radios/fhpBus75bj.jpg",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/ラジオカロスサッポロ%20FM78.1.jpg",
     "name": "ラジオカロスサッポロ FM78.1",
     "tags": "radiojp"
   },
   {
     "url": "https://mytuner-radio.com/radio/maebashicityehuemu-m-wave-410790/",
-    "imgSrc": "https://static2.mytuner.mobi/media/tvos_radios/nnCjqkbFaz.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/まえばしCITYエフエム%20(M-wave)%20live.png",
     "name": "まえばしCITYエフエム (M-wave) live",
     "tags": "radiojp"
   },
   {
     "url": "https://radio.menu/stations/global-superradio-cc-egao/",
-    "imgSrc": "https://csra.fm/logo/fm-egao.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/エフエムEGAO.png",
     "name": "エフエムEGAO",
     "tags": "radiojp"
   },
   {
     "url": "https://mytuner-radio.com/radio/wi-radio-480137/",
-    "imgSrc": "https://static2.mytuner.mobi/media/tvos_radios/efqpy4k3jdqb.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/wi-radiO.png",
     "name": "wi-radio 77.6MHz",
     "tags": "radiojp"
   },
   {
     "url": "https://mytuner-radio.com/radio/tokyo-star-radio-ba-wang-zi-fm-480147/",
-    "imgSrc": "https://static2.mytuner.mobi/media/tvos_radios/nkdjrxrksehq.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/Tokyo%20Star%20Radio%20(八王子FM).png",
     "name": "Tokyo Star Radio (八王子FM)",
     "tags": "radiojp"
   },
   {
     "url": "http://e.mytuner-radio.com/embed/reds-wave-412042",
-    "imgSrc": "https://static2.mytuner.mobi/media/tvos_radios/FWUQKtjHUU.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/REDS%20WAVE.png",
     "name": "REDS WAVE",
     "tags": "radiojp"
   },
   {
     "url": "https://radio.menu/stations/world-kbs-co-kr-kbs-world-tv/",
-    "imgSrc": "https://world.kbs.co.kr/service/common/images/favorite_2021.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/KBS%20world%20tv.png",
     "name": "KBS World TV",
     "tags": "radiojp"
   },
   {
     "url": "https://mytuner-radio.com/radio/natorazi-fm-801-412037/",
-    "imgSrc": "https://static2.mytuner.mobi/media/tvos_radios/BcEDgNBR2D.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/なとらじ%20FM%2080.1.png",
     "name": "なとらじ FM 80.1",
     "tags": "radiojp"
   },
   {
     "url": "https://mytuner-radio.com/radio/fmuruma-fm-uruma-417177/",
-    "imgSrc": "https://static2.mytuner.mobi/media/tvos_radios/sFcMxhmByx.jpg",
-    "name": "FMうるま",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/FMうるま.jpg",
+    "name": "FMうるま.jpg",
     "tags": "radiojp"
   },
   {
     "url": "http://e.mytuner-radio.com/embed/dada-more-radio-417290",
-    "imgSrc": "https://static2.mytuner.mobi/media/tvos_radios/uN2RtwtrA9.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/Dada%20More%20Radio.png",
     "name": "Dada More Radio",
     "tags": "radiojp"
   },
   {
     "url": "http://e.mytuner-radio.com/embed/ban-banrazio-411994",
-    "imgSrc": "https://static2.mytuner.mobi/media/tvos_radios/rF2eHFaqAr.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/BAN-BANラジオ.png",
     "name": "BAN-BANラジオ",
     "tags": "radiojp"
   },
   {
     "url": "https://mytuner-radio.com/radio/baywave-beiuebu-411995/",
-    "imgSrc": "https://static2.mytuner.mobi/media/tvos_radios/LfNNSYN25U.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/BAYWAVE%20(ベイウェーブ).png",
     "name": "BAYWAVE (ベイウェーブ) ",
     "tags": "radiojp"
   },
   {
     "url": "http://e.mytuner-radio.com/embed/daraz-fm-410013",
-    "imgSrc": "https://static2.mytuner.mobi/media/tvos_radios/hVKpzRKeVk.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/DARAZ%20FM（だらずFM）.png",
     "name": "DARAZ FM（だらずFM）",
     "tags": "radiojp"
   },
   {
     "url": "https://mytuner-radio.com/radio/775-lively-fm-nanakoraiburiehuemu-480144/",
-    "imgSrc": "https://static2.mytuner.mobi/media/tvos_radios/grnz2aeurpsu.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/",
     "name": "77.5 Lively FM (ナナコライブリーエフエム) ",
     "tags": "radiojp"
   },
   {
     "url": "http://e.mytuner-radio.com/embed/air-station-hibikieasuteshiyonhibiki-417174",
-    "imgSrc": "https://static2.mytuner.mobi/media/tvos_radios/DfYPPq5ysK.jpg",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/Air%20Station%20Hibiki（エアーステーションひびき）.jpg",
     "name": "Air Station Hibiki（エアーステーションひびき）",
     "tags": "radiojp"
   },
   {
     "url": "https://radio.menu/stations/global-superradio-cc-b-fm791/",
-    "imgSrc": "https://static2.mytuner.mobi/media/tvos_radios/U9g9qzhmxs.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/%E3%82%A8%E3%83%95%E3%82%A8%E3%83%A0%E3%81%B3%E3%81%96%E3%82%93%EF%BC%88B%E3%83%BBFM791%EF%BC%89.png",
     "name": "エフエムびざん（B・FM791）",
     "tags": "radiojp"
   },
   {
     "url": "http://e.mytuner-radio.com/embed/lu-jiao-kiritanpofm-kiritampo-fm-417144",
-    "imgSrc": "https://static2.mytuner.mobi/media/tvos_radios/2VkWmAU3tr.png",
-    "name": "鹿角きりたんぽFM (Kiritampo FM)",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/kiritampo%20radio.png",
     "tags": "radiojp"
   },
   {
     "url": "http://e.mytuner-radio.com/embed/reinbotaunfm-rainbowtown-fm-399785",
-    "imgSrc": "https://static2.mytuner.mobi/media/tvos_radios/Y75fHmQJ2B.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/rainbowtown%20radio.png",
     "name": "レインボータウンFM (Rainbowtown FM)",
     "tags": "radiojp"
   },
   {
     "url": "https://radio.menu/stations/global-superradio-cc-heart-fm/",
-    "imgSrc": "https://heartfm.jp/wp-content/uploads/2022/12/cropped-favicon-180x180.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/fm%20nanjo.png",
     "name": "FM Nanjo - Heart FM Nanjo - 77.2 FM",
     "tags": "radiojp"
   },
   {
     "url": "https://mytuner-radio.com/radio/radio3-fm-762-412038/",
-    "imgSrc": "https://static2.mytuner.mobi/media/tvos_radios/AZSGm5UgMV.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/仙台のコミュニティFM%20RADIO3(ラジオ3)%2076.2MH.png",
     "name": "仙台のコミュニティFM RADIO3(ラジオ3) 76.2MHz",
     "tags": "radiojp"
   },
   {
     "url": "https://open.spotify.com/show/5uxD2MB2xTgl5gwQIA0Et2",
-    "imgSrc": "https://static2.mytuner.mobi/media/tvos_radios/AZSGm5UgMV.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/fm%20radio3.png",
     "name": "FM RADIO3(ラジオ3)ポッドキャストチャンネル",
     "tags": "website"
   },
   {
-    "url": "https://mytuner-radio.com/radio/fm-kawaguchi-480142/",
-    "imgSrc": "https://static2.mytuner.mobi/media/tvos_radios/um4prebafvr3.png",
-    "name": "FM Kawaguchi 856 studio (FM川口)",
-    "tags": ""
-  },
-  {
     "url": "http://e.mytuner-radio.com/embed/ehuemu-motsutokomu-fm-motcom-412018",
-    "imgSrc": "https://static2.mytuner.mobi/media/tvos_radios/S53QKQZD4h.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/FM%20MOT.com.png",
     "name": "エフエム モットコム (FM Mot.com)",
     "tags": "radiojp"
   },
   {
     "url": "https://mytuner-radio.com/radio/ehuemuenuwan-fm-n1-417156/",
-    "imgSrc": "https://static2.mytuner.mobi/media/tvos_radios/WtRyZmqLkY.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/fmn1.png",
     "name": "えふえむ・エヌ・ワン (FM N1) ",
-    "tags": ""
+    "tags": "radiojp"
   },
   {
     "url": "https://www.1.fm/stations",
-    "imgSrc": "https://www.1.fm/content/images/logo/04X560.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/1.FM%20HIP.png",
     "name": "All stations from 1.FM",
     "tags": "website"
   },
   {
     "url": "https://somafm.com/player/#/now-playing/vaporwaves",
-    "imgSrc": "https://api.somafm.com/img/vaporwaves120.jpg",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/vaporwares.jpg",
     "name": "Vaporwaves",
     "tags": "radio"
   },
   {
     "url": "http://e.mytuner-radio.com/embed/zhong-yang-ehuemu-radio-city-417149",
-    "imgSrc": "https://static2.mytuner.mobi/media/tvos_radios/3SCwD4YueR.jpg",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/中央エフエム%20(Radio%20City).jpg",
     "name": "中央エフエム (Radio City)",
     "tags": "radiojp"
   },
   {
     "url": "http://radio.garden/visit/",
-    "imgSrc": "https://radio.garden/public/icons/ios/ios-appicon-76-76.png",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/radiogarden.png",
     "name": "Radio Garden",
     "tags": "radio"
   },
   {
     "url": "https://instant.audio/",
-    "imgSrc": "https://cdn.webrad.io/favicon.ico",
+    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/instant%20audio.ico",
     "name": "Instant Audio",
     "tags": "website"
   }
