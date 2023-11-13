@@ -110,6 +110,7 @@
   {
     "url": "https://www.j-wave.co.jp/",
     "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/jwave.jpg",
+    "name": "J-WAVE 81.3 FM RADIO",
     "tags": "website"
   },
   {
@@ -241,6 +242,7 @@
   {
     "url": "http://e.mytuner-radio.com/embed/lu-jiao-kiritanpofm-kiritampo-fm-417144",
     "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/kiritampo%20radio.png",
+    "name": "鹿角きりたんぽFM (Kiritampo FM)",
     "tags": "radiojp"
   },
   {
