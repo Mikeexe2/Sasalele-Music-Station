@@ -322,7 +322,7 @@ function getWebsiteURL(label, searchTerm) {
             return `https://musicbrainz.org/search?query=${encodedSearchTerm}&type=work&method=indexed`;
         case 'Gnudb':
             return `https://gnudb.org/song/${encodedSearchTerm}`;
-        case 'TouHouDB':
+        case 'TouhouDB':
             return `https://touhoudb.com/Search?filter=${encodedSearchTerm}`;
         case 'MikuDB':
             return `https://mikudb.moe/?s=${encodedSearchTerm}`;
