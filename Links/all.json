@@ -26,7 +26,7 @@
   {
     "name": "Vocaloid Radio VRX (256kbps)",
     "url": "https://vrx.piro.moe/stream-256",
-    "favicon": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/radios/Vocaloid%20Radio%20VRX%20(256kbps).png",
+    "favicon": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/radios/Vocaloid%20Radio%20VRX%20(256%20kbps).png",
     "website": "https://vrx.piro.moe/"
   },
   {
@@ -80,19 +80,19 @@
   {
     "name": "Radio Caprice J-Pop",
     "url": "http://79.111.119.111:8002/jpop",
-    "favicon": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/radios/Radio%20Caprice%20J-Pop",
+    "favicon": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/radios/Radio%20Caprice%20J-Pop.jpg",
     "website": "http://radcap.ru/jpop.html"
   },
   {
     "name": "Radio Caprice J-Rock",
     "url": "http://79.111.119.111:8002/jrock",
-    "favicon": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/radios/Radio%20Caprice%20J-Pop",
+    "favicon": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/radios/Radio%20Caprice%20J-Pop.jpg",
     "website": "http://radcap.ru/jrock.html"
   },
   {
     "name": "Radio Caprice Anime",
     "url": "http://79.111.119.111:8002/anime",
-    "favicon": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/radios/Radio%20Caprice%20J-Pop",
+    "favicon": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/radios/Radio%20Caprice%20J-Pop.jpg",
     "website": "http://radcap.ru/anime.html"
   },
   {
@@ -128,19 +128,19 @@
   {
     "name": "BOX : City Pop Radio",
     "url": "https://boxradio-edge-10.streamafrica.net/jpopchill",
-    "favicon": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/radios/BOX%20City%20Pop%20Radio.jpg",
+    "favicon": "  https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/radios/BOX%20City%20Pop%20Radio.jpg",
     "website": "https://player.boxradio.net/"
   },
   {
     "name": "BOX: J-POP  Radio",
     "url": "https://boxradio-edge-04.streamafrica.net/jpop",
-    "favicon": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/radios/BOX%20J-POP%20Radio.jpg",
+    "favicon": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/radios/BOX%20J-POP%20%20Radio.jpg",
     "website": "https://player.boxradio.net/"
   },
   {
     "name": "BOX : Weeb Anime Network",
     "url": "http://play.streamafrica.net/weebanimeradio",
-    "favicon": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/radios/BOX%20Weeb%20Anime%20Network.jp",
+    "favicon": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/radios/BOX%20Weeb%20Anime%20Network.jpg",
     "website": "https://player.boxradio.net/"
   },
   {
@@ -158,7 +158,7 @@
   {
     "name": "Anytime Anime Radio V3",
     "url": "http://65.109.81.84:7868/stream",
-    "favicon": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/radios/AnytimeAnime%20Radio%20V3.jpeg",
+    "favicon": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/radios/Anytime%20Anime%20Radio%20V3.jpeg",
     "website": "https://zeno.fm/radio/anytime-anime-radio/"
   },
   {
@@ -494,7 +494,7 @@
   {
     "name": "CREWFIRE FM",
     "url": "http://stream.laut.fm/crewfirefm",
-    "favicon": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/radios/CREWFIRE%FM.jpg",
+    "favicon": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/radios/CREWFIRE%20FM.jpg",
     "website": "https://laut.fm/crewfirefm"
   },
   {
@@ -878,7 +878,7 @@
   {
     "name": "Anime Songs",
     "url": "https://stream-150.zeno.fm/3hhp76wdz4zuv",
-    "favicon": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/radios/",
+    "favicon": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/radios/Unidentified2.png",
     "website": "https://github.com/Mikeexe2/Sasalele-Music-Station/issues/new"
   },
   {
