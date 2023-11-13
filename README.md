@@ -25,6 +25,9 @@ Post in [issue](https://github.com/Mikeexe2/Sasalele-Music-Station/issues/new) s
 [telegram_badge]: https://img.shields.io/badge/telegram-❤️-252850?style=plastic&logo=telegram
 [telegram_link]: https://t.me/sasalelemusic
 
+# Thanks!
+Portions of this site use code from open source projects including: <a href="https://github.com/dandalpiaz/drive-music-player" target="_blank">Drive Music Player</a> and <a href="https://github.com/DIYgod/APlayer" target="_blank">APlayer</a>
+
 <a href="https://star-history.com/#Mikeexe2/Sasalele-Music-Station&Date">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Mikeexe2/Sasalele-Music-Station&type=Date&theme=dark" />
