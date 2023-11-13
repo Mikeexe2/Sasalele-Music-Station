@@ -8,7 +8,7 @@
             href="https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/sasalele_logo.png">
         <title>Sasalele Music Station</title>
         <meta name="Keywords"
-            content="Sasalele, Google Drive Music Player, Internet Radio stream list, Japanese Music, Sasalele Music Station, Song Search, Download Music Tools, Sasalele Radio" />
+            content="Sasalele Radio, Google Drive Music Player, Internet Radio stream list, Japanese Music, Sasalele Music Station, Song Search, Download Music Tools" />
         <meta name="description"
             content="Collection of a list of internet radio and websites featuring japanese music. You can also log into your own Google Drive and have a seamless playback of your music files using the Google Drive music player. Identifiy the song from radio with the help of the search engine, and download it on other websites." />
         <link rel="canonical" href="https://basic.pp.ua">
@@ -30,9 +30,10 @@
             <nav>
                 <ul>
                     <li><a href="#radios">Radio Stations <i class="fa fa-radio"></i></a></li>
-                    <li><a href="#websites">More Websites <i class="fa fa-music"></i></a></li>
+                    <li><a href="#websites">More Websites <i class="fa fa-globe"></i></a></li>
+                    <li><a href="#musik">Music Player <i class="fa fa-music"></i></a></li>
                     <li><a href="#scrap">Download <i class="fas fa-download"></i></a></li>
-                    <li><a href="#drive">Google Drive Music <i class="fas fa-music"></i></a></li>
+                    <li><a href="#drive">Google Drive Music <i class="fa-brands fa-google"></i></a></li>
                     <li><a href="#search">Search <i class="fas fa-search"></i></a></li>
                 </ul>
             </nav>
@@ -43,23 +44,25 @@
                 <img
                     src="https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/sasalele_banner2.png" />
             </div>
-            <div id="explain">
-                <p><strong>Tips:</strong> Some radio streams over HTTP cannot be loaded on this HTTPS website due to
-                    Chrome's restrictions.
-                    To resolve
-                    this issue, you can either go to <a
-                        href="https://support.google.com/chrome/thread/29505473?hl=en&msgid=39996297">Site
-                        Settings</a>
-                    and allow
-                    insecure content, <strong>or</strong> Use a different browser like Firefox. For the moment they
-                    haven't
-                    blocked unencrypted content on an otherwise encrypted
-                    page web page.</p>
+            <div id="tips">
+                <p><strong>Radio not playing? </strong>Some radio streams over HTTP cannot be loaded on this HTTPS
+                    website due to Chrome's restrictions. To resolve this issue, click on the lock icon in the URL bar
+                    -> Site settings -> allow insecure content. <a
+                        href="https://support.google.com/chrome/thread/29505473?hl=en&msgid=39996297"
+                        target="_blank">More Info</a> <br><strong> OR </strong></br> Use a different browser like
+                    Firefox. For the moment, they haven't blocked unencrypted content on an otherwise encrypted web
+                    page.
+                    <br><strong> Found any problem? </strong><a
+                        href="https://github.com/Mikeexe2/Sasalele-Music-Station/issues/new" target="_blank">Submit
+                        an Issue here</a></br>
+                </p>
             </div>
-
             <div id="radiostations"></div>
         </section>
-
+        <section id="musik">
+            <h2 class="section-title">Sasalele Music Station's Playlist</h2>
+            <div id="aplayer"></div>
+        </section>
         <section id="search">
             <h2 class="section-title">Search</h2>
             <div class="search-container">
@@ -267,10 +270,9 @@
                     </table>
                 </div>
                 <a href="https://chrome.google.com/webstore/detail/shazam-find-song-names-fr/mmioliijnhnoblpgimnlajmefafdfilb"
-                    target="_blank"><strong>Use Shazam extension on your browser</strong> <i
-                        class="fas fa-search"></i></a>
+                    target="_blank">Use Shazam extension on your browser <i class="fas fa-search"></i></a>
                 <div class="video-container" id="videoContainer">
-                    <iframe id="YouTubeVideo" style="display: none" frameborder="2" allowfullscreen></iframe>
+                    <iframe id="YouTubeVideo" style="display: none" allowfullscreen></iframe>
                 </div>
             </div>
         </section>
@@ -295,7 +297,6 @@
 
         <section id="drive">
             <h2 class="section-title">Google Drive Music</h2>
-            <div id="aplayer"></div>
             <main role="main" class="content">
                 <div id="audio-wrapper">
                     <div id="audio-container">
@@ -313,57 +314,70 @@
                     </form>
                 </div>
 
-                <div id="intro" style="display: none;"></div>
-                <div id="explain">
-                    <p>Enter the ID for the <a href="https://drive.google.com" target="_blank">Google Drive</a> folder
-                        you
-                        would
-                        like to use and click the 'Login' button.<br> The ID can be found by taking that last part of
-                        the
-                        folder's
-                        URL, for example, <strong>drive.google.com/drive/folders/12345-abcde</strong> has an ID of
-                        "12345-abcde".
-                        <br>Alternatively,"root" can be used to browse from your top-level folder.
-                        <br><strong>Note: Trust the website and click on proceed in order to login.</strong>
-                    </p>
+                <div id="intro" style="display: none;">
+                    <div id="explain">
+                        <p><strong>How To Use</strong><br>Enter the ID for the <a href="https://drive.google.com"
+                                target="_blank">Google Drive</a>
+                            folder
+                            you
+                            would
+                            like to use and click the 'Login' button. The ID can be found by taking that last part
+                            of
+                            the
+                            folder's
+                            URL, for example, <strong>drive.google.com/drive/folders/12345-abcde</strong> has an ID of
+                            "12345-abcde".
+                            <br>Alternatively,"root" can be used to browse from your top-level folder.
+                            <br><strong>Note: Trust the website and click on proceed in order to login.</strong>
+                        </p>
+                        </p>
+                    </div>
+
+                    <form onsubmit="submitFolderId(event)">
+                        <label for="parentfolder" class="sr-only">Drive Folder ID:</label>
+                        <input required type="text" id="parentfolder" name="parentfolder"
+                            placeholder="google-drive-folder-id">
+                        <button type="submit" class="custom-button"><i class="fa-brands fa-google"></i> Login</button>
+                    </form>
+
+                    <div id="demo" class="loaded">
+
+                        <details open>
+                            <summary>Collection 1</summary>
+                            <button class="track"
+                                onclick="playTrack('163OAKTdmk1ed-adDEc8j44qbiagn6gns', this, 'demo')"><i
+                                    class="fas fa-play"></i> 千本桜 - 和楽器バンド</button>
+                            <button class="track"
+                                onclick="playTrack('12v6RuZyXxNiv2qSh7Ei-77p5YW_inqlQ', this, 'demo')"><i
+                                    class="fas fa-play"></i> ハーゲンダッツ以下の殺風景 - なゆごろう</button>
+                            <button class="track"
+                                onclick="playTrack('1EGRUpWoZ-8mme6L_2G9kITBA1xrF77_a', this, 'demo')"><i
+                                    class="fas fa-play"></i> 空気椅子 - 別野加奈</button>
+                        </details>
+
+                        <details open>
+                            <summary>Collection 2</summary>
+                            <button class="track"
+                                onclick="playTrack('1wm5fe2JkCCD8ru0q2krieIb8mbZGUu5o', this, 'demo')"><i
+                                    class="fas fa-play"></i> Goldrop - 舞花</button>
+                            <button class="track"
+                                onclick="playTrack('14rb76C7CXYNp5eEHPAWE2JxCG_rG5Y0G', this, 'demo')"><i
+                                    class="fas fa-play"></i> わたがし - back number</button>
+                            <button class="track"
+                                onclick="playTrack('1NTn5laDhrpt1ApALTstCtiK96jlCMgmm', this, 'demo')"><i
+                                    class="fas fa-play"></i> 涼風爽夏 -すずかぜ、さやか- - 【暁Records】</button>
+                        </details>
+                    </div>
                 </div>
 
-                <form onsubmit="submitFolderId(event)">
-                    <label for="parentfolder" class="sr-only">Drive Folder ID:</label>
-                    <input required type="text" id="parentfolder" name="parentfolder"
-                        placeholder="google-drive-folder-id">
-                    <button type="submit" class="custom-button"><i class="fa-brands fa-google"></i> Login</button>
-                </form>
 
-                <div id="demo" class="loaded">
+                <div id="contents"></div>
 
-                    <details open>
-                        <summary>Collection 1</summary>
-                        <button class="track" onclick="playTrack('163OAKTdmk1ed-adDEc8j44qbiagn6gns', this, 'demo')"><i
-                                class="fas fa-play"></i> 千本桜 - 和楽器バンド</button>
-                        <button class="track" onclick="playTrack('12v6RuZyXxNiv2qSh7Ei-77p5YW_inqlQ', this, 'demo')"><i
-                                class="fas fa-play"></i> ハーゲンダッツ以下の殺風景 - なゆごろう</button>
-                        <button class="track" onclick="playTrack('1EGRUpWoZ-8mme6L_2G9kITBA1xrF77_a', this, 'demo')"><i
-                                class="fas fa-play"></i> 空気椅子 - 別野加奈</button>
-                    </details>
-
-                    <details open>
-                        <summary>Collection 2</summary>
-                        <button class="track" onclick="playTrack('1wm5fe2JkCCD8ru0q2krieIb8mbZGUu5o', this, 'demo')"><i
-                                class="fas fa-play"></i> Goldrop - 舞花</button>
-                        <button class="track" onclick="playTrack('14rb76C7CXYNp5eEHPAWE2JxCG_rG5Y0G', this, 'demo')"><i
-                                class="fas fa-play"></i> わたがし - back number</button>
-                        <button class="track" onclick="playTrack('1NTn5laDhrpt1ApALTstCtiK96jlCMgmm', this, 'demo')"><i
-                                class="fas fa-play"></i> 涼風爽夏 -すずかぜ、さやか- - 【暁Records】</button>
-                    </details>
-                </div>
-
-                <ul id="navi">
-                    <li><button onclick="changeFolder()">Change Folder</button></li>
-                    <li><button a href="https://myaccount.google.com/security">Revoke Access</a></button></li>
-                </ul>
             </main>
-
+            <ul id="navi">
+                <li><button onclick="changeFolder()">Change Folder</button></li>
+                <li><button a href="https://myaccount.google.com/security">Revoke Access</a></button></li>
+            </ul>
         </section>
 
         <div id="player">
@@ -382,10 +396,6 @@
 
         <footer>
             <p>&copy; 2023 Sasalele Team. All Rights Reserved.</p>
-            Portions of this site use code from open source
-            projects
-            including: <a href="https://github.com/dandalpiaz/drive-music-player" target="_blank">Drive Music
-                Player</a>,<a href="https://github.com/DIYgod/APlayer" target="_blank">APlayer</a>
             <h5><a href="https://t.me/sasalelemusic" target="_blank"><img
                         src="https://img.icons8.com/fluency/96/telegram-app.png" />Discussion Group</a></h5>
             <h5><a href="https://github.com/Mikeexe2/Sasalele-Music-Station" target="_blank"><img
