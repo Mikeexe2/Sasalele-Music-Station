@@ -322,7 +322,7 @@ function getWebsiteURL(label, searchTerm) {
             return `https://musicbrainz.org/search?query=${encodedSearchTerm}&type=work&method=indexed`;
         case 'Gnudb':
             return `https://gnudb.org/song/${encodedSearchTerm}`;
-        case 'TouhouDB':
+        case 'TouHouDB':
             return `https://touhoudb.com/Search?filter=${encodedSearchTerm}`;
         case 'MikuDB':
             return `https://mikudb.moe/?s=${encodedSearchTerm}`;
@@ -616,13 +616,14 @@ const ap = new APlayer({
     fixed: false,
     autoplay: false,
     theme: '#b7daff',
+    order: 'random',
     loop: 'all',
-    order: 'list',
+    order: 'random',
     preload: 'auto',
     volume: 0.7,
     mutex: true,
     listFolded: false,
-    listMaxHeight: '200px',
+    listMaxHeight: '90px',
     lrcType: 3,
     audio: [{
         name: "前前前世",
@@ -684,7 +685,7 @@ const ap = new APlayer({
         name: 'Break Beat Bark!',
         artist: '神田沙也加',
         url: 'https://drive.google.com/uc?export=download&id=1GbZRNlum1WjsHtXHxRrZh3-LYi7ZXBbx',
-        cover: '/music/cover/Break Beat Bark.jpg',
+        cover: 'https://i.quotev.com/h7lqxrfxaaaa.jpg',
         lrc: 'https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/lrc/Break%20Beat%20Bark!%20-%20%E7%A5%9E%E7%94%B0%E6%B2%99%E4%B9%9F%E5%8A%A0%20.lrc',
         theme: '#0b2065'
     },
@@ -847,6 +848,268 @@ const ap = new APlayer({
         cover: 'https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/cf/6a/fb/cf6afb88-3e7c-4f6c-f112-0b5be855c88d/MJSA-01158-9.jpg/1200x1200bb.jpg',
         lrc: '',
         theme: '#505d6b'
+    },
+    {
+        name: 'AI DO.',
+        artist: '桥本美雪',
+        url: 'https://drive.google.com/uc?export=download&id=1eursbJJsDOL9qER4MwW1AYuJoeqzqpS2',
+        cover: 'https://medium-media.vgm.io/albums/70/37707/37707-1559760648.jpg',
+        lrc: 'https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/lrc/AI%20DO.%20-%20桥本美雪.lrc',
+        theme: '#2e477e'
+    },
+    {
+        name: 'Apple And Cinnamon',
+        artist: '宇多田ヒカル',
+        url: 'https://drive.google.com/uc?export=download&id=1j5ObqJr7Dp8-iBPwUE2cOwGfCBTKhP6d',
+        cover: 'https://i.ytimg.com/vi/2dMu4Fz2M6M/maxresdefault.jpg',
+        lrc: 'https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/lrc/Apple%20And%20Cinnamon%20-%20宇多田ヒカル.lrc',
+        theme: '#2e477e'
+    },
+    {
+        name: 'Keep on Keeping on',
+        artist: 'SawanoHiroyuki[nZk],aLIEz.',
+        url: 'https://drive.google.com/uc?export=download&id=1-Jzf5_DcSOoGv0YxhMJL6SmHwIHm8Gpo',
+        cover: 'https://static.wikia.nocookie.net/hiroyuki-sawano/images/f/fa/AZ_aLIEz_Regular_Cover.jpg/revision/latest?cb=20200808080846',
+        lrc: 'https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/lrc/Keep%20on%20Keeping%20on%20-%20SawanoHiroyuki%5BnZk%5D%2CaLIEz.lrc',
+        theme: '#2e477e'
+    },
+    {
+        name: 'loser',
+        artist: 'KANA-BOON',
+        url: 'https://drive.google.com/uc?export=download&id=1XjDVFeJxYAuTFyRpz0NjRSSLxmGwxamy',
+        cover: 'https://i.scdn.co/image/ab67616d0000b27303e166e73d4bfadc04b4b9f9',
+        lrc: 'https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/lrc/loser%20-%20KANA-BOON.lrc',
+        theme: '#2e477e'
+    },
+    {
+        name: 'Moon',
+        artist: 'Perfume',
+        url: 'https://drive.google.com/uc?export=download&id=1Z5iIqe88-uOmxLoNoyI3xYGSVIepdHQd',
+        cover: 'https://images.genius.com/e33b2dd0777209b8a3c0fd1cbca646b8.1000x1000x1.png',
+        lrc: 'https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/lrc/Moon%20-%20Perfume.lrc',
+        theme: '#2e477e'
+    },
+    {
+        name: 'MOON SIGNAL',
+        artist: 'Sphere',
+        url: 'https://drive.google.com/uc?export=download&id=1xllFxj_tgO9hS6NDVXNS70w0U0o9NUe9',
+        cover: 'https://is1-ssl.mzstatic.com/image/thumb/Music123/v4/bd/42/86/bd428603-02a7-728c-569e-36aff3ae7879/886448022398.jpg/1200x1200bb.jpg',
+        lrc: 'https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/lrc/MOON%20SIGNAL%20-%20Sphere.lrc',
+        theme: '#2e477e'
+    },
+    {
+        name: 'One Life',
+        artist: 'ナノ',
+        url: 'https://drive.google.com/uc?export=download&id=1vVIjhIPcoIy9kFyXlQ6lRdLvgbQWHzhS',
+        cover: 'https://i.ytimg.com/vi/P1pIZu93-zM/maxresdefault.jpg',
+        lrc: 'https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/lrc/One%20Life%20-%20ナノ.lrc',
+        theme: '#2e477e'
+    },
+    {
+        name: 'technovision',
+        artist: '伊藤加奈子',
+        url: 'https://drive.google.com/uc?export=download&id=1OHon13e-9hT90-8NTZCasKuUZ-KmG4sZ',
+        cover: 'https://y.qq.com/music/photo_new/T002R300x300M000003AGEDl3ESzYk_1.jpg?max_age=2592000',
+        lrc: 'https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/lrc/technovision%20-%20伊藤加奈子.lrc',
+        theme: '#2e477e'
+    },
+    {
+        name: 'メビウス',
+        artist: '鈴木このみ',
+        url: 'https://drive.google.com/uc?export=download&id=1LTG_gNYqbi8-InlhwCWX5g4qUjdyTcRF',
+        cover: 'https://y.qq.com/music/photo_new/T002R300x300M000000wD0sS0UBVgE_1.jpg?max_age=2592000',
+        lrc: 'https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/lrc/メビウス%20(梅比乌斯)%20-%20鈴木このみ.lrc',
+        theme: '#2e477e'
+    },
+    {
+        name: 'Damn Good Day',
+        artist: '星街すいせい',
+        url: 'https://drive.google.com/uc?export=download&id=1ckqOgwyg6_x9SU2DwFfsN_DeA3mzr_Lk',
+        cover: 'https://images.genius.com/b5b197af4217d02a5362b5ee13d40e27.500x500x1.jpg',
+        lrc: 'https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/lrc/Damn%20Good%20Day%20-%20星街すいせい.lrc',
+        theme: '#2e477e'
+    },
+    {
+        name: 'Necro Fantasia feat. 美里',
+        artist: 'Alstroemeria Records,美里',
+        url: 'https://drive.google.com/uc?export=download&id=1L7WBBBthnEMuZsFF5xMxRNlW3yMGpq-4',
+        cover: 'https://i.scdn.co/image/ab67616d0000b27399e46d544c0d3aeaab238f0e',
+        lrc: 'https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/lrc/Necro%20Fantasia%20feat.%20美里%20-%20Alstroemeria%20Records%2C美里.lrc',
+        theme: '#2e477e'
+    },
+    {
+        name: 'ぐらでーしょん',
+        artist: 'KANA-BOON,北澤ゆうほ',
+        url: 'https://drive.google.com/uc?export=download&id=d/1gwgKjEVDRrMnN_ocoGqUHoOxSSCEpr68',
+        cover: 'https://aop-emtg-jp.s3.amazonaws.com/prod/public/kanaboon/contents/information/fed9d25f2a1e238ebd6e19567b3374e2.png',
+        lrc: 'https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/lrc/ぐらでーしょん%20(波淡法)%20-%20KANA-BOON%2C北澤ゆうほ.lrc',
+        theme: '#2e477e'
+    },
+    {
+        name: 'チョ・イ・ス',
+        artist: '雨宮天',
+        url: 'https://drive.google.com/uc?export=download&id=1peQORjB9Soyh6HGqXWGaYYrkoKzcFat2',
+        cover: 'https://i.kfs.io/album/global/6259823,3v1/fit/500x500.jpg',
+        lrc: 'https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/lrc/チョ・イ・ス%20-%20雨宮天.lrc',
+        theme: '#2e477e'
+    },
+    {
+        name: 'ひかり',
+        artist: 'Flower Flower',
+        url: 'https://drive.google.com/uc?export=download&id=1bB9Xc6eQgzizpofHXi4kbZ7t0GBQ1rog',
+        cover: 'https://i.scdn.co/image/ab67616d0000b27376a5c13ed7a066fe02a99fa5',
+        lrc: 'https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/lrc/ひかり%20-%20Flower%20Flower.lrc',
+        theme: '#2e477e'
+    },
+    {
+        name: '人形ノ涙',
+        artist: '仲村芽衣子',
+        url: 'https://drive.google.com/uc?export=download&id=1gtNNiJ1IBGWwQRPCqpUktyNmfKXcoIkK/view',
+        cover: 'https://www.tunecore.co.jp/s3pna/tcj-image-production/u10847/r673576/itd673576.png',
+        lrc: 'https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/lrc/人形ノ涙%20-%20仲村芽衣子.lrc',
+        theme: '#2e477e'
+    },
+    {
+        name: '喋蝶結び',
+        artist: 'ななひら',
+        url: 'https://drive.google.com/uc?export=download&id=1U1K16NyhxdXHaK5qmoFA-pnGmlFovv4g',
+        cover: 'https://i.ytimg.com/vi/6qKPSd6dEjs/maxresdefault.jpg',
+        lrc: 'https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/lrc/喋蝶結び%20-%20ななひら.lrc',
+        theme: '#2e477e'
+    },
+    {
+        name: '月に唄えば',
+        artist: 'サイダーガール',
+        url: 'https://drive.google.com/uc?export=download&id=1PMJ_9M9TIW0P4p3FiipM2FjP3cKxRcYV',
+        cover: 'https://i.kfs.io/album/global/29413719,0v1/fit/500x500.jpg',
+        lrc: 'https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/lrc/月に唄えば%20-%20サイダーガール.lrc',
+        theme: '#2e477e'
+    },
+    {
+        name: '甘いワナ ~Paint It, Black',
+        artist: '宇多田ヒカル',
+        url: 'https://drive.google.com/uc?export=download&id=1yIsl_FxR3MVSZymASn2YEMBhqNDdiAG_',
+        cover: 'https://i.kfs.io/album/global/30579665,0v1/fit/500x500.jpg',
+        lrc: 'https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/lrc/甘いワナ%20~Paint%20It%2C%20Black%20-%20宇多田ヒカル.lrc',
+        theme: '#2e477e'
+    },
+    {
+        name: '廻廻奇譚',
+        artist: 'Eve',
+        url: 'https://drive.google.com/uc?export=download&id=1IRCmKykQ5XPU-V1CvuySVOgHaLH46nyS',
+        cover: 'https://eveofficial-kaikaiwarutsu.com/img/main_sp_1105.jpg?=',
+        lrc: 'https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/lrc/廻廻奇譚%20-%20Eve.lrc',
+        theme: '#2e477e'
+    },
+    {
+        name: '足りない音はキミの声',
+        artist: '諸星すみれ',
+        url: 'https://drive.google.com/uc?export=download&id=1gfOXMPLl4cnKufGSGC7xWCzk9PgzW5mb',
+        cover: 'https://i.ytimg.com/vi/goIn3hw1dlE/sddefault.jpg',
+        lrc: 'https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/lrc/足りない音はキミの声%20-%20諸星すみれ.lrc',
+        theme: '#2e477e'
+    },
+    {
+        name: 'Tender affection',
+        artist: '阿保剛',
+        url: 'https://drive.google.com/uc?export=download&id=1U-vrE3k8mjDn7oXMkOaj_R_0NkEjtBUt',
+        cover: 'https://i.scdn.co/image/ab67616d0000b273d832768a591d9104472c9e0b',
+        lrc: '',
+        theme: '#2e477e'
+    },
+    {
+        name: '别れ',
+        artist: '阿保剛',
+        url: 'https://drive.google.com/uc?export=download&id=1Jfe0I6-h-lRwpki4kkOccl9oVp1M4s96',
+        cover: 'https://i.scdn.co/image/ab67616d0000b273d832768a591d9104472c9e0b',
+        lrc: '',
+        theme: '#2e477e'
+    },
+    {
+        name: '铃羽',
+        artist: '村上純',
+        url: 'https://drive.google.com/uc?export=download&id=1Oqoac1f-RbEIB3IAbSbtYbt5DU_UsZB4',
+        cover: 'https://i.scdn.co/image/ab67616d0000b273d832768a591d9104472c9e0b',
+        lrc: '',
+        theme: '#2e477e'
+    },
+    {
+        name: 'スカイクラッドの観測者',
+        artist: '伊藤加奈子',
+        url: 'https://drive.google.com/uc?export=download&id=14B4JIiIlqw270lzQh3ldcT7unuJKlAD4',
+        lrc: 'https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/lrc/スカイクラッドの観測者%20-%20伊藤加奈子.lrc',
+        theme: '#2e477e'
+    },
+    {
+        name: 'GATE OF STEINER (Bonus Track)',
+        artist: '佐々木恵梨',
+        url: 'https://drive.google.com/uc?export=download&id=15NNWq52ZX2xgvFvkVi-7guRAzsR3UN4Z',
+        lrc: 'https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/lrc/GATE%20OF%20STEINER%20(Bonus%20Track)%20-%20佐々木恵梨.lrc',
+        theme: '#2e477e'
+    },
+    {
+        name: 'GATE OF STEINER -Piano-',
+        artist: '阿保剛',
+        url: 'https://drive.google.com/uc?export=download&id=1atByYgtX0n2AT9a83qLC4RFH4Y6A78oH',
+        cover: 'https://i.scdn.co/image/ab67616d0000b273d832768a591d9104472c9e0b',
+        lrc: '',
+        theme: '#2e477e'
+    },
+    {
+        name: 'Dメール',
+        artist: '阿保剛',
+        url: 'https://drive.google.com/uc?export=download&id=1uODR-ZBN9_CuVmlJvXjrDcOgbhnCytS1',
+        cover: 'https://i.scdn.co/image/ab67616d0000b273d832768a591d9104472c9e0b',
+        lrc: '',
+        theme: '#2e477e'
+    },
+    {
+        name: 'Promise-piano',
+        artist: '阿保剛',
+        url: 'https://drive.google.com/uc?export=download&id=1gn9n-ihQCna4r2OOi_i5eXh9Ufs2RFdj',
+        cover: 'https://i.scdn.co/image/ab67616d0000b273d832768a591d9104472c9e0b',
+        lrc: '',
+        theme: '#2e477e'
+    },
+    {
+        name: 'いつもこの場所で',
+        artist: 'あやね',
+        url: 'https://drive.google.com/uc?export=download&id=1xF5xQnJokaHFnR8lHONtMw01l5zSoF64',
+        cover: 'https://i.scdn.co/image/ab67616d0000b273423e971ce00d4dc2c6298203',
+        lrc: 'https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/lrc/いつもこの場所で%20-%20あやね.lrc',
+        theme: '#2e477e'
+    },
+    {
+        name: 'あなたの選んだこの時を',
+        artist: 'いとうかなこ',
+        url: 'https://drive.google.com/uc?export=download&id=1w2ZrGoqoQjBmIPzfppm9N0vgwBf_uqtB',
+        cover: 'https://music.mages.co.jp/wp/wp-content/uploads/2016/08/FVCG1236X.jpg',
+        lrc: 'https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/lrc/あなたの選んだこの時を%20-%20いとうかなこ.lrc',
+        theme: '#2e477e'
+    },
+    {
+        name: 'Believe me',
+        artist: '阿保剛',
+        url: 'https://drive.google.com/uc?export=download&id=1ArwDlnOOQBzkV23k4kldQlZ-ScGHmFMe',
+        cover: 'https://i.scdn.co/image/ab67616d0000b273d832768a591d9104472c9e0b',
+        lrc: '',
+        theme: '#2e477e'
+    },
+    {
+        name: 'Fake Verthandi',
+        artist: '阿保剛',
+        url: 'https://drive.google.com/uc?export=download&id=1DovBpuJ-vmceBFiiN_nUPc0Sqx2XAIkL',
+        cover: 'https://lyricsfromanime.com/animes-info/steins-gate/cover/steins-gate-lyrics.jpg',
+        lrc: '',
+        theme: '#2e477e'
+    },
+    {
+        name: 'Gate of Steiner',
+        artist: '阿保剛',
+        url: 'https://drive.google.com/uc?export=download&id=1gmRo2BfJbwVxiGnJHObYjPanZTNpUOS7',
+        cover: 'https://i.scdn.co/image/ab67616d0000b273d832768a591d9104472c9e0b',
+        lrc: '',
+        theme: '#2e477e'
     },
     {
         name: 'My Hero Is Our Hero',
