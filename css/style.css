@@ -10,7 +10,7 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
-  font-family: Arial,Helvetica,'Heiti SC','Microsoft Yahei',simsun,sans-serif;
+  font-family: Arial, Helvetica, 'Heiti SC', 'Microsoft Yahei', simsun, sans-serif;
 }
 
 .navbar {
@@ -565,8 +565,20 @@ ul {
   padding: 0 40px;
 }
 
-#explain {
+#tips {
   width: 80%;
+  overflow: hidden;
+  margin: 0 auto;
+  padding: 5px 10px;
+  border: 1px solid #e2e2e2;
+  border-left: 5px solid #fff000;
+  background-color: #c0f0ff;
+  color: #333;
+  font-size: 15px;
+}
+
+#explain {
+  width: 90%;
   margin: 0 auto;
   padding: 20px;
   background-color: #f2f2f2;
@@ -705,8 +717,16 @@ input {
   margin-left: 10px;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 10px;
   margin-top: 10px;
+}
+
+#parentfolder {
+  width: 40%;
+}
+
+.custom-button i {
+  font-size: 10px;
 }
 
 .custom-button:hover {
@@ -935,6 +955,10 @@ ul#navi li button {
     margin-right: 1px;
   }
 
+  #parentfolder {
+    width: 10%;
+  }
+
   .section-title {
     text-align: center;
     font-size: 14px;
@@ -1100,14 +1124,19 @@ ul#navi li button {
   }
 
   .content {
-    margin-left: 10px;
+    margin-left: auto;
     margin-right: 10px;
   }
 
   form input,
   form button {
-    width: 75% !important;
+    width: 80% !important;
     margin-bottom: 10px !important;
+  }
+
+  #tips {
+    padding: 5px;
+    font-size: 12px;
   }
 
   #explain {
@@ -1145,7 +1174,7 @@ ul#navi li button {
 @media (max-width: 1199px) {
   .content {
     max-width: 100%;
-    padding-left: 40px;
-    padding-right: 40px;
+    padding-left: 4px;
+    padding-right: 4px;
   }
 }
