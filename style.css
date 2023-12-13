@@ -1,0 +1,1245 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background: linear-gradient(to right, #a6c1ee, #fbc2eb);
+    width: 100%;
+    height: 3.25em;
+    line-height: 3.25em;
+    text-align: center;
+    font-weight: 700;
+    cursor: default;
+}
+
+#nav ul {
+    position: relative;
+    z-index: 1001;
+}
+
+#nav li {
+    display: inline-block;
+    margin: 0 0.5em 0 0.5em;
+    top: 0;
+    position: relative;
+    -moz-transition: top .15s ease-in-out;
+    -webkit-transition: top .15s ease-in-out;
+    -o-transition: top .15s ease-in-out;
+    -ms-transition: top .15s ease-in-out;
+    transition: top .15s ease-in-out;
+}
+
+#nav li a,
+#nav li span {
+    -moz-transition: background-color .2s ease-in-out, color .2s ease-in-out;
+    -webkit-transition: background-color .2s ease-in-out, color .2s ease-in-out;
+    -ms-transition: background-color .2s ease-in-out, color .2s ease-in-out;
+    transition: background-color .2s ease-in-out, color .2s ease-in-out;
+    position: relative;
+    display: block;
+    text-decoration: none;
+    color: #373837;
+    top: -6px;
+    padding: 6px;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    outline: 0;
+}
+
+#nav li:hover {
+    top: 3px;
+}
+
+#nav li:hover a,
+#nav li:hover span {
+    background: #3b3939;
+    color: #fff;
+}
+
+#nav li.logo:hover a,
+#nav li.logo:hover span {
+    background: none;
+}
+
+.logo {
+    float: left;
+}
+
+.logo img {
+    width: 70px;
+    height: 52px;
+}
+
+i {
+    margin-left: 4px;
+}
+
+#nav ul ul {
+    display: none;
+    position: absolute;
+    padding: 0 1.25em;
+    border-radius: 6px;
+    line-height: 1em;
+    text-align: left;
+    padding-left: 0;
+}
+
+#nav ul li:hover>ul {
+    display: block;
+}
+
+body {
+    background-image: url('https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/sasalele_bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    font-family: Arial, Helvetica, 'Heiti SC', 'Microsoft Yahei', simsun, sans-serif;
+    padding: 3.25em 0 10em 0;
+}
+
+#aplayer {
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 2);
+}
+
+#rad {
+    background: rgb(249, 240, 240);
+    border: 1px solid rgb(129, 127, 128);
+    border-radius: 6px;
+}
+
+.rad-icon {
+    float: left;
+    width: 50px;
+    height: 50px;
+    margin-top: -5px;
+    box-shadow: black 0px 0px 3px -1px;
+}
+
+.widget {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    background-color: #b5c0fd;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.main-play-button {
+    cursor: pointer;
+    background-color: #ff5722;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.main-play-button:hover {
+    background-color: #EEE;
+}
+
+.player-radio-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+}
+
+.player-radio-name {
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.player-radio-name {
+    font-weight: bold;
+    margin-left: 10px;
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.player-radio-name:hover {
+    color: blue;
+    text-decoration: underline;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1rem auto;
+    width: 80%;
+    max-width: 600px;
+    position: relative;
+}
+
+#searchInput {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    border-bottom: 2px solid #555;
+    transition: all 0.3s ease;
+    padding-right: 40px;
+}
+
+#searchInput.error {
+    border-color: rgb(255, 1, 1);
+}
+
+#searchInput::placeholder {
+    color: #555;
+}
+
+#searchButton {
+    background-color: transparent;
+    color: #047bff;
+    font-size: 16px;
+    padding: 10px 10px;
+    position: absolute;
+    border: none;
+    right: 0;
+    margin-right: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+#searchTerms {
+    font-size: 20px;
+    font-weight: normal;
+    font-style: oblique;
+}
+
+.label {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #000000;
+}
+
+#lastFMInfo {
+    font-size: 14px;
+    font-weight: bold;
+    justify-content: center;
+    background-color: #ffffff;
+}
+
+.card-panel {
+    padding: 10px;
+    width: 90%;
+    margin: 0 auto;
+    border: 1.5px solid #1e1d1d;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 40.25%;
+    height: 0;
+    margin: 0 auto;
+    max-width: 70%;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 90%;
+    height: 90%;
+}
+
+.table-container {
+    display: flex;
+    justify-content: center;
+}
+
+.inner {
+    padding: 5px 10px;
+    text-align: center;
+    margin-right: 40px;
+    margin-left: 40px;
+    margin-bottom: 5px;
+    background-image: url('https://drive.google.com/uc?export=download&id=1oZEE3CSK-eubrQqL69ORBghSmr059Uc-');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.button-label {
+    font-size: 12 px;
+    font-weight: normal;
+    line-height: 1;
+    display: flex;
+    padding-left: 10px;
+}
+
+.button {
+    border: 2px solid #0d0d0d;
+    border-radius: 9px;
+    height: auto;
+    width: auto;
+    padding: 10px;
+    background-color: #e6ebf1;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #b6d0ef;
+}
+
+.button-icon {
+    height: 30px;
+    width: 20px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    float: left;
+    margin-left: 5px;
+}
+
+.icon-spotify {
+    background-image: url('https://open.spotifycdn.com/cdn/images/favicon32.b64ecc03.png');
+}
+
+.icon-apple {
+    background-image: url('https://music.apple.com/assets/favicon/favicon-32.png');
+}
+
+.icon-amazon {
+    background-image: url('https://d5fx445wy2wpk.cloudfront.net/icons/amznMusic_favicon.png');
+}
+
+.icon-youtube {
+    background-image: url('https://www.youtube.com/s/desktop/a24ea7cc/img/favicon.ico');
+}
+
+.icon-youtubemusic {
+    background-image: url('https://music.youtube.com/img/favicon_32.png');
+}
+
+.icon-netease {
+    background-image: url('https://s1.music.126.net/style/favicon.ico?v20180823');
+}
+
+.icon-vgmdb {
+    background-image: url('https://vgmdb.net/favicon.ico');
+}
+
+.icon-musicenc {
+    background-image: url('https://www.musicenc.com/zb_users/theme/bijiblog/include/touxiang.jpg');
+}
+
+.icon-jlyric {
+    background-image: url('https://j-lyric.net/j-lyric.ico');
+}
+
+.icon-followlyrics {
+    background-image: url('https://static.thenounproject.com/png/3984569-200.png');
+}
+
+.icon-kugeci {
+    background-image: url('https://www.kugeci.com/favicon-32x32.png');
+}
+
+.icon-baha {
+    background-image: url('https://i2.bahamut.com.tw/favicon.svg?v=1689129528');
+}
+
+.icon-kkbox {
+    background-image: url('https://www.kkbox.com/favicon.ico');
+}
+
+.icon-audarchive {
+    background-image: url('https://archive.org/offshoot_assets/favicon.ico');
+}
+
+.icon-soundcloud {
+    background-image: url('https://a-v2.sndcdn.com/assets/images/sc-icons/favicon-2cadd14bdb.ico');
+}
+
+.icon-lastfm {
+    background-image: url('https://www.last.fm/static/images/lastfm_avatar_applemusic.b06eb8ad89be.png');
+}
+
+.icon-google {
+    background-image: url('https://www.gstatic.com/images/branding/product/ico/googleg_alldp.ico');
+}
+
+.icon-utanet {
+    background-image: url('https://ures.jp/uta-net.com/img/sp/logo.png?2');
+}
+
+.icon-petitlyrics {
+    background-image: url('https://petitlyrics.com/favicon.ico');
+}
+
+.icon-musicbrainz {
+    background-image: url('https://musicbrainz.org/static/images/favicons/apple-touch-icon-72x72.png');
+}
+
+.icon-gnudb {
+    background-image: url('https://gnudb.org/favicon.ico');
+}
+
+.icon-niconico {
+    background-image: url('https://nicovideo.cdn.nimg.jp/web/images/favicon/48.png');
+}
+
+.icon-vocadb {
+    background-image: url('https://vocadb.net/Content/favicon.ico');
+}
+
+.icon-jplyrics {
+    background-image: url('https://japanesesonglyrics.com/wp-content/uploads/2018/11/cropped-Logo-PiPOP-h%C3%ACnh-2-copy-2-1-192x192.png');
+}
+
+.icon-touhoudb {
+    background-image: url('https://static.touhoudb.com/img/touhouDB_180.png');
+}
+
+.icon-mikudb {
+    background-image: url('https://mikudb.moe/wp-content/uploads/2018/07/cropped-10525972_1492354831010105_210414510710110987_n-180x180.jpg');
+}
+
+.banner {
+    text-align: center;
+}
+
+.banner img {
+    width: 600px;
+    height: 100px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 10px 10px rgb(73 75 73);
+}
+
+#radiostations {
+    margin-top: 10px;
+    padding: 10px;
+    max-width: 90%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 10px;
+    justify-content: center;
+    align-items: start;
+}
+
+#player {
+    position: fixed;
+    bottom: 0;
+    display: block;
+    text-align: left;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    margin-left: 15px;
+    border-radius: 10px;
+    background: linear-gradient(to right, #a6c1ee, #fbc2eb);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+}
+
+.cover {
+    text-align: left;
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    gap: 100px;
+}
+
+.info {
+    padding: 0 20px;
+}
+
+.cover img {
+    width: 55px;
+    height: 55px;
+    border-radius: 10%;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+}
+
+#stationName {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+#miniPlayer {
+    width: 100%;
+    padding: 0 10px;
+    margin-top: 10px;
+}
+
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 25px;
+    color: #ffffff;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 2px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 2);
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 30px;
+    letter-spacing: 1px;
+    position: relative;
+    background-color: rgba(29, 24, 24, 0.45);
+}
+
+.section-title::before {
+    content: "";
+    width: 48px;
+    height: 48px;
+    margin-left: 20px;
+    background-image: url('https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/miku.gif');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.section-title::after {
+    content: "";
+    width: 48px;
+    height: 48px;
+    margin-right: 20px;
+    background-image: url('https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/miku.gif');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.download {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-top: 1rem;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 10px;
+    margin: 0 auto;
+    width: 90%;
+}
+
+.container {
+    flex-basis: 10%;
+    padding: 10px;
+    text-align: center;
+    border: 2px solid #e1e1e1;
+    border-radius: 8px;
+    margin: 10px;
+    transition: all 0.3s ease;
+    background-color: #b5c0fd;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.container a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+}
+
+.container:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+    background-color: #f4f4f4;
+}
+
+.container img {
+    width: 120px;
+    height: 120px;
+    object-fit: fit;
+}
+
+.container h5 {
+    font-weight: 700;
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+.content {
+    background-image: url('https://drive.google.com/uc?export=download&id=1mii-g5dmQ2JfkNnZ0yF7v8qoQzYZjQaF');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    margin: 25px 25px 0;
+    padding: 0 40px;
+}
+
+#tips {
+    width: 90%;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 5px 5px;
+    border: 1px solid #fbe91f;
+    border-left: 5px solid #fff000;
+    background-color: #ffffff;
+    color: #333;
+    font-size: 14px;
+}
+
+#tips a {
+    color: #79b3ff;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+#tips a:hover {
+    color: #b4b4b4;
+}
+
+#explain {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#explain p {
+    font-size: 16px;
+    line-height: 1.2;
+    color: #333;
+}
+
+#explain a {
+    color: #79b3ff;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+#explain a:hover {
+    color: #b4b4b4;
+}
+
+#footer {
+    bottom: 0;
+    width: 100%;
+    background-color: #111111;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+#footer p {
+    margin: 0;
+    padding: 2px 0;
+}
+
+#footer a {
+    color: #79b3ff;
+    text-decoration: underline;
+    margin-left: 10px;
+}
+
+#footer a:hover {
+    color: #b4b4b4;
+}
+
+#footer img {
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+}
+
+details details {
+    margin-left: 25px;
+}
+
+details details:first-of-type {
+    margin-top: 20px;
+}
+
+details details:last-of-type {
+    border: none;
+}
+
+button.track {
+    border: none;
+    background: #18232c;
+    text-align: left;
+    color: rgb(16, 149, 193);
+    margin-left: 15px;
+    margin-bottom: 3px;
+    padding: 4px;
+    padding-left: 12px;
+    padding-right: 12px;
+    width: calc(100% - 15px);
+}
+
+button.track:last-of-type {
+    margin-bottom: 15px;
+}
+
+button.track:first-of-type {
+    margin-top: 20px;
+}
+
+button.track i {
+    margin-right: 10px;
+    font-size: 12px;
+    vertical-align: middle;
+}
+
+.playing {
+    color: #a65980 !important;
+}
+
+form {
+    text-align: center;
+    margin-top: 10px;
+}
+
+input {
+    text-align: left;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 25px;
+    max-width: 100%;
+}
+
+.custom-button {
+    padding: 10px 10px;
+    background-color: #4285f4;
+    color: #fff;
+    border: none;
+    margin-left: 10px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+.custom-button i {
+    margin-right: 4px;
+    font-size: 15px;
+}
+
+#parentfolder {
+    width: 40%;
+}
+
+.custom-button:hover {
+    opacity: 0.8;
+}
+
+/* visibly hidden */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+#audio-wrapper {
+    padding: 10px;
+    text-align: center;
+}
+
+#audio-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#prev-btn,
+#next-btn {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#prev-btn i,
+#next-btn i {
+    font-size: 18px;
+}
+
+#prev-btn:hover,
+#next-btn:hover {
+    background-color: #555;
+}
+
+#source {
+    display: none;
+}
+
+#audio {
+    width: 100%;
+    height: 40px;
+}
+
+audio {
+    width: 100%;
+    height: 50px;
+}
+
+#bars {
+    height: 1em;
+    position: relative;
+    float: right;
+    right: 15px;
+    top: 5px;
+}
+
+.bar {
+    background: slategray;
+    bottom: 0;
+    height: .1em;
+    position: absolute;
+    width: 3px;
+    animation: sound 1s cubic-bezier(.17, .37, .43, .67) infinite alternate;
+}
+
+@keyframes sound {
+    0% {
+        opacity: .35;
+        height: .1em;
+    }
+
+    100% {
+        opacity: 1;
+        height: 1em;
+    }
+}
+
+.bar:nth-child(1) {
+    left: 0em;
+    animation-duration: 0.6s;
+}
+
+.bar:nth-child(2) {
+    left: .25em;
+    animation-duration: 0.4s;
+}
+
+.bar:nth-child(3) {
+    left: .50em;
+    animation-duration: 1.2s;
+}
+
+.bar:nth-child(4) {
+    left: .75em;
+    animation-duration: 0.5s;
+}
+
+#spinner {
+    display: block;
+    position: relative;
+    right: 18px;
+    top: 1px;
+    float: right;
+}
+
+#spinner div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    margin: 0px;
+    border: 4px solid #ddd;
+    border-radius: 50%;
+    animation: spinner 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #ddd transparent transparent transparent;
+}
+
+#spinner div:nth-child(1) {
+    animation-delay: -0.45s;
+}
+
+#spinner div:nth-child(2) {
+    animation-delay: -0.3s;
+}
+
+#spinner div:nth-child(3) {
+    animation-delay: -0.15s;
+}
+
+@keyframes spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+details {
+    margin-bottom: 11px;
+}
+
+button.track,
+details,
+summary {
+    font-size: 14px;
+}
+
+#return {
+    margin-top: 30px;
+}
+
+main {
+    padding-bottom: 20px !important;
+}
+
+ul#option li {
+    list-style: none;
+    padding: 2px;
+    text-align: center;
+}
+
+ul#option li a,
+ul#option li button {
+    font-size: 12px;
+    text-decoration: none;
+}
+
+#option button {
+    padding: 5px 10px;
+    background-color: #1a1b1c;
+    color: #56aefd;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#option button:hover {
+    text-decoration: underline;
+}
+
+@media only screen and (max-width: 600px) {
+    body {
+        padding: 2.7em 0 10em 0;
+    }
+
+    #nav {
+        height: 4.25em;
+        line-height: 0.3em;
+        font-size: 10px;
+    }
+
+    #nav li {
+        margin: 0;
+        top: 0;
+    }
+
+    #nav li a,
+    #nav li span {
+        top: -1px;
+        padding: 5px;
+    }
+
+    #nav li:hover {
+        top: 1px;
+    }
+
+    .logo img {
+        width: 30px;
+        height: 30px;
+    }
+
+    i {
+        margin-left: 1px;
+    }
+
+    #nav ul ul {
+        display: none;
+        position: absolute;
+        padding: 0 1.25em;
+        border-radius: 6px;
+        line-height: 1em;
+    }
+
+    #nav ul li:hover>ul {
+        display: block;
+    }
+
+    #parentfolder {
+        width: 10%;
+    }
+
+    .download {
+        margin-right: 1px;
+        margin-left: 1px;
+    }
+
+    .section-title {
+        font-size: 12px;
+        max-width: 100%;
+        padding: 5px;
+        letter-spacing: 0.3px;
+    }
+
+    .section-title::before,
+    .section-title::after {
+        width: 30px;
+        height: 30px;
+    }
+
+    #radtop-bar {
+        padding: 3px;
+        line-height: 10px;
+    }
+
+    .rad-icon {
+        float: left;
+        width: 30px;
+        height: 30px;
+        margin-top: 1px;
+    }
+
+    .widget {
+        margin-bottom: 2px;
+        padding: 5px;
+    }
+
+    .main-play-button {
+        width: 25px;
+        height: 25px;
+        font-size: 10px;
+    }
+
+    .player-radio-name {
+        font-size: 10px;
+    }
+
+    .content {
+        margin: 10px 10px 0;
+        padding: 0 5px;
+    }
+
+    #radiostations {
+        margin-top: 1px;
+        padding: 1px;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 5px;
+    }
+
+    #aplayer {
+        padding: 5px 10px;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    .search-container {
+        display: flex;
+        align-items: center;
+        margin: 1rem auto;
+        width: 80%;
+    }
+
+    #searchInput {
+        padding: 9px;
+        font-size: 11px;
+    }
+
+    #searchButton {
+        padding: 5px 6px;
+        margin-left: 5px;
+    }
+
+    #searchTerms {
+        font-size: 13px;
+    }
+
+    .label {
+        margin-top: 1px;
+        font-size: 13px;
+    }
+
+    .inner {
+        padding: 2px;
+        border-radius: 5px;
+        margin-right: 5px;
+        margin-left: 5px;
+        margin-bottom: 5px;
+    }
+
+    #lastFMInfo {
+        font-size: 11px;
+    }
+
+    .card-panel {
+        padding: 12px;
+    }
+
+    .video-container {
+        padding-bottom: 56.25%;
+        max-width: 100%;
+    }
+
+    .video-container iframe {
+        width: 100%;
+        height: 100%;
+    }
+
+    .button {
+        padding: 5px;
+    }
+
+    .button-label {
+        font-size: 11px;
+        padding: 2px;
+        padding-left: 3px;
+    }
+
+    .button-icon {
+        margin-right: 3px;
+    }
+
+    .banner img {
+        margin-top: 5px;
+        height: 40px;
+        width: 200px;
+    }
+
+    #player {
+        padding: 2px;
+        border-radius: 10%;
+        margin-bottom: 10px;
+        margin-left: 10px;
+    }
+
+    #player .cover {
+        margin-left: 1px;
+    }
+
+    #player .cover img {
+        width: 40px;
+        height: 40px;
+    }
+
+    #stationName {
+        font-size: 12px;
+    }
+
+    .container {
+        flex-basis: 25%;
+        padding: 5px;
+        border: 1px solid #e1e1e1;
+        margin: 5px;
+    }
+
+    .container h5 {
+        font-size: 11px;
+        padding: 0px;
+    }
+
+    .container img {
+        width: 48px;
+        height: 48px;
+    }
+
+    #footer {
+        font-size: 10px;
+    }
+
+    .custom-button {
+        border-radius: 20px;
+        font-size: 10px;
+        margin-top: 1px;
+    }
+
+    #parentfolder {
+        width: 50%;
+    }
+
+    input {
+        font-size: 10px;
+    }
+
+    .custom-button i {
+        font-size: 10px;
+    }
+
+    form button {
+        width: 30%;
+    }
+
+    #tips {
+        padding: 4px;
+        font-size: 10px;
+    }
+
+    #explain {
+        margin: 0 auto;
+        padding: 5px;
+    }
+
+    #explain p {
+        font-size: 10px;
+        line-height: 1;
+    }
+
+    ul#option li a,
+    ul#option li button {
+        font-size: 10px;
+    }
+
+    #audio-wrapper {
+        padding: 2px;
+    }
+
+    audio {
+        width: 250px;
+        height: 30px;
+    }
+
+    #audio {
+        width: 400px;
+        height: 30px;
+    }
+
+    button.track,
+    details,
+    p,
+    summary {
+        font-size: 12px;
+    }
+
+    button {
+        margin-left: 2px;
+        margin-right: 2px;
+        padding: 2px;
+        font-size: 10px;
+    }
+}
