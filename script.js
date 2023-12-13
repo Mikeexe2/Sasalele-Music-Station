@@ -1,164 +1,278 @@
-fetch("https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/all.json").then(e => e.json()).then(e => {
-    var t, a = document.getElementById("streamInfo"), o = document.getElementById("miniPlayer"), r = document.getElementById("stationName"), c = document.getElementById("radiostations");
-    function n(e, t) {
-        document.querySelectorAll(".main-play-button").forEach(function (e) {
-            e !== t && s(e, !1)
-        }),
-            o.getAttribute("data-link") === e.url ? o.paused ? (o.play(),
-                s(t, !0)) : (o.pause(),
-                    s(t, !1)) : (o.src = e.url,
-                        o.play(),
-                        a.innerHTML = '<a href="' + e.website + '" target="_blank"><img src="' + e.favicon + '"></a>',
-                        r.textContent = e.name,
-                        o.setAttribute("data-link", e.url),
-                        s(t, !0))
-    }
-    function s(e, t) {
-        e.innerHTML = t ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>'
-    }
-    e.forEach(e => {
-        var t = document.createElement("div");
-        t.className = "widget";
-        var a = document.createElement("div");
-        a.className = "main-play-button",
-            a.innerHTML = '<i class="fas fa-play"></i>';
-        var o = document.createElement("a");
-        o.className = "player-radio-link",
-            o.href = e.website,
-            o.target = "_blank",
-            o.innerHTML += '<img class="rad-icon" src="' + e.favicon + '"><span class="player-radio-name">' + e.name + "</span>",
-            a.addEventListener("click", function () {
-                n(e, a)
-            }),
-            t.appendChild(a),
-            t.appendChild(o),
-            c.appendChild(t)
-    }
-    ),
-        document.getElementById("miku-gif").addEventListener("click", function () {
-            var e = c.querySelectorAll(".widget");
-            e[Math.floor(Math.random() * e.length)].querySelector(".main-play-button").click()
-        })
-}
-),
-    fetch("https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/websites.json").then(e => e.json()).then(e => {
-        let t = e.reduce((e, t) => ((e[t.tags] = e[t.tags] || []).push(t),
-            e), {});
-        Object.entries(t).forEach(([e, t]) => {
-            let a = t.map(e => `
+// Dynamically list out radios
+fetch("https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/all.json")
+    .then(response => response.json())
+    .then(data => {
+        var streamInfo = document.getElementById('streamInfo');
+        var player = document.getElementById('miniPlayer');
+        var stationName = document.getElementById('stationName');
+        var radiostations = document.getElementById('radiostations');
+
+        data.forEach(station => {
+            var rad = document.createElement('div');
+            rad.className = 'widget';
+
+            var radPlayButton = document.createElement('div');
+            radPlayButton.className = 'main-play-button';
+            radPlayButton.innerHTML = '<i class="fas fa-play"></i>';
+
+            var radLink = document.createElement('a');
+            radLink.className = 'player-radio-link';
+            radLink.href = station.website;
+            radLink.target = '_blank';
+            radLink.innerHTML += '<img class="rad-icon" src="' + station.favicon + '">' +
+                '<span class="player-radio-name">' + station.name + '</span>';
+
+            radPlayButton.addEventListener('click', function () {
+                playStation(station, radPlayButton);
+            });
+
+            rad.appendChild(radPlayButton);
+            rad.appendChild(radLink);
+
+            radiostations.appendChild(rad);
+        });
+
+        // Random play function
+        var mikuGif = document.getElementById('miku-gif');
+        mikuGif.addEventListener('click', function () {
+            var stations = radiostations.querySelectorAll('.widget');
+            var randomIndex = Math.floor(Math.random() * stations.length);
+            var playButton = stations[randomIndex].querySelector('.main-play-button');
+            playButton.click();
+        });
+
+        function playStation(station, playButton) {
+            var allPlayButtons = document.querySelectorAll('.main-play-button');
+            allPlayButtons.forEach(function (button) {
+                if (button !== playButton) {
+                    updatePlayButtonIcon(button, false); // Reset other play buttons to pause icon
+                }
+            });
+
+            if (player.getAttribute('data-link') === station.url) {
+                if (player.paused) {
+                    player.play();
+                    updatePlayButtonIcon(playButton, true);
+                } else {
+                    player.pause();
+                    updatePlayButtonIcon(playButton, false);
+                }
+            } else {
+                player.src = station.url;
+                player.play();
+                streamInfo.innerHTML = '<a href="' + station.website + '" target="_blank"><img src="' + station.favicon + '"></a>';
+                stationName.textContent = station.name;
+                player.setAttribute('data-link', station.url);
+                updatePlayButtonIcon(playButton, true);
+            }
+        }
+
+        function updatePlayButtonIcon(playButton, isPlaying) {
+            playButton.innerHTML = isPlaying ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>';
+        }
+    });
+
+// Dynamically list out websites
+fetch('https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/websites.json')
+    .then(response => response.json())
+    .then(websites => {
+        // Group websites based on categories
+        const groupedWebsites = websites.reduce((result, website) => {
+            (result[website.tags] = result[website.tags] || []).push(website);
+            return result;
+        }, {});
+
+        Object.entries(groupedWebsites).forEach(([tags, websites]) => {
+            const containerHTML = websites.map(website => `
             <div class="container">
-              <a href="${e.url}" target="_blank">
-                <img src="${e.imgSrc}">
-                <h5>${e.name}</h5>
+              <a href="${website.url}" target="_blank">
+                <img src="${website.imgSrc}">
+                <h5>${website.name}</h5>
               </a>
             </div>
-          `).join("");
-            "radio" === e ? document.querySelector("#radiohere").innerHTML = a : "website" === e ? document.querySelector("#websitehere").innerHTML = a : "radiojp" === e && (document.querySelector("#radiojphere").innerHTML = a)
+          `).join('');
+
+            // Insert the generated HTML into the respective tags element
+            if (tags === 'radio') {
+                document.querySelector('#radiohere').innerHTML = containerHTML;
+            } else if (tags === 'website') {
+                document.querySelector('#websitehere').innerHTML = containerHTML;
+            } else if (tags === 'radiojp') {
+                document.querySelector('#radiojphere').innerHTML = containerHTML;
+            }
+        });
+    });
+
+// Dynamically list out download sites
+fetch('https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/downloads.json')
+    .then(response => response.json())
+    .then(scrap => {
+        const parentElement = document.querySelector('.download');
+
+        scrap.forEach(website => {
+            const container = document.createElement('div');
+            container.className = 'container';
+
+            const link = document.createElement('a');
+            link.href = website.url;
+            link.target = '_blank';
+
+            const img = document.createElement('img');
+            img.src = website.imgSrc;
+
+            const h5 = document.createElement('h5');
+            h5.textContent = website.name;
+
+            link.append(img, h5);
+            container.appendChild(link);
+            parentElement.appendChild(container);
+        });
+    });
+
+// Smooth scrolling
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const targetElement = document.querySelector(this.getAttribute('href'));
+        const offset = 60;
+
+        if (targetElement) {
+            window.scrollTo({
+                top: targetElement.offsetTop - offset,
+                behavior: 'smooth'
+            });
         }
-        )
+    });
+});
+
+// Search function
+const searchInput = document.getElementById('searchInput');
+const searchButton = document.getElementById('searchButton');
+const websites = document.querySelectorAll('.button');
+const innerContainer = document.querySelector('.inner');
+const searchTermsContainer = document.getElementById('searchTerms');
+
+searchButton.addEventListener('click', () => {
+    const searchTerm = searchInput.value.trim();
+
+    if (searchTerm !== '') {
+        innerContainer.style.display = 'block';
+        searchTermsContainer.textContent = searchTerm;
+        YouTubeSearch(searchTerm);
+        lastfmSearch(searchTerm);
+    } else {
+        searchInput.classList.add('error');
     }
-    ),
-    fetch("https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/Links/downloads.json").then(e => e.json()).then(e => {
-        let t = document.querySelector(".download");
-        e.forEach(e => {
-            let a = document.createElement("div");
-            a.className = "container";
-            let o = document.createElement("a");
-            o.href = e.url,
-                o.target = "_blank";
-            let r = document.createElement("img");
-            r.src = e.imgSrc;
-            let c = document.createElement("h5");
-            c.textContent = e.name,
-                o.append(r, c),
-                a.appendChild(o),
-                t.appendChild(a)
-        }
-        )
+    // Clear the input field
+    searchInput.value = '';
+});
+
+searchInput.addEventListener('keyup', function (event) {
+    if (event.key === 'Enter') {
+        searchButton.click();
     }
-    );
-const searchInput = document.getElementById("searchInput")
-    , searchButton = document.getElementById("searchButton")
-    , websites = document.querySelectorAll(".button")
-    , innerContainer = document.querySelector(".inner")
-    , searchTermsContainer = document.getElementById("searchTerms");
-function lastfmSearch(e) {
-    var t = "https://ws.audioscrobbler.com/2.0/?method=track.search&format=json";
-    fetch(t += `&api_key=b9747c75368b42160af4301c2bf654a1&track=${e}`, {
+});
+
+// Function that uses the lastFM API to fetch matching song titles
+function lastfmSearch(songTitle) {
+    var baseURL = "https://ws.audioscrobbler.com/2.0/?method=track.search&format=json";
+
+    var lastfmAPIKey = "b9747c75368b42160af4301c2bf654a1";
+    var parameterssongSearch = `&api_key=${lastfmAPIKey}&track=${songTitle}`;
+
+    baseURL = baseURL + parameterssongSearch;
+
+    var requestOptions = {
         method: "GET",
-        redirect: "follow"
-    }).then(function (e) {
-        if (e.ok)
-            return e.json();
-        throw Error(e.statusText)
-    }).then(function (e) {
-        console.log("song title search:", e),
-            displaysongSearch(e)
-    }).catch(function (e) {
-        console.log("Error from lastfm song title API:", e)
-    })
+        redirect: "follow",
+    };
+
+    fetch(baseURL, requestOptions)
+        .then(function (response) {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error(response.statusText);
+        })
+        .then(function (data) {
+            console.log("song title search:", data);
+            displaysongSearch(data);
+        })
+        .catch(function (error) {
+            console.log("Error from lastfm song title API:", error);
+        });
 }
-function displaysongSearch(e) {
+
+// Function to display matching song - artist
+function displaysongSearch(data) {
     searchInput.value.trim(),
         document.getElementById("lastFMInfo").innerHTML = "";
-    for (var t = document.getElementById("lastFMInfo"), a = document.createElement("ul"), o = 0; o < 5; o++) {
-        var r, c = "<li>" + e.results.trackmatches.track[o].name + " - " + e.results.trackmatches.track[o].artist + "</li>";
-        console.log(c),
-            a.innerHTML += c
+
+    var songSearchDiv = document.getElementById("lastFMInfo");
+
+    var songSearchList = document.createElement("ul");
+
+    for (var i = 0; i < 5; i++) {
+        var songTitleName = data.results.trackmatches.track[i].name;
+        var songTitleArtist = data.results.trackmatches.track[i].artist;
+        var result = "<li>" + songTitleName + " - " + songTitleArtist + "</li>";
+        console.log(result);
+        songSearchList.innerHTML += result;
     }
-    t.appendChild(a)
+
+    songSearchDiv.appendChild(songSearchList);
 }
-function YouTubeSearch(e) {
-    var t = document.querySelector("#YouTubeVideo");
-    "none" === t.style.display && (t.style.display = "block");
-    var a = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&type=video&q=${e}&key=AIzaSyAwM_RLjqj8dbbMAP5ls4qg1olDsaxSq5s`;
-    console.log(a),
-        fetch(a).then(function (e) {
-            if (e.ok)
-                return e.json();
-            throw Error(e.statusText)
-        }).then(function (e) {
-            console.log(e.items[0].id.videoId);
-            var t = e.items[0].id.videoId;
-            document.getElementById("YouTubeVideo").src = "https://www.youtube.com/embed/" + t
-        }).catch(function (e) {
-            console.log("Error from Youtube by song title API:", e)
-        })
-}
-searchButton.addEventListener("click", () => {
-    let e = searchInput.value.trim();
-    "" !== e ? (innerContainer.style.display = "block",
-        searchTermsContainer.textContent = e,
-        YouTubeSearch(e),
-        lastfmSearch(e)) : searchInput.classList.add("error"),
-        searchInput.value = ""
-}
-),
-    searchInput.addEventListener("keyup", function (e) {
-        "Enter" === e.key && searchButton.click()
-    }),
-    document.querySelectorAll('a[href^="#"]').forEach(e => {
-        e.addEventListener("click", function (e) {
-            e.preventDefault();
-            let t = document.querySelector(this.getAttribute("href"));
-            t && window.scrollTo({
-                top: t.offsetTop - 60,
-                behavior: "smooth"
-            })
-        })
+
+// Get YouTube most relevant result
+function YouTubeSearch(data) {
+
+    var VideoDisplay = document.querySelector("#YouTubeVideo");
+
+    if (VideoDisplay.style.display === "none") {
+        VideoDisplay.style.display = "block";
     }
-    );
-const websiteButtons = document.querySelectorAll(".button");
-for (let i = 0; i < websiteButtons.length; i++)
-    websiteButtons[i].addEventListener("click", function () {
-        let e = this.querySelector(".button-label").textContent
-            , t = searchTermsContainer.textContent
-            , a = getWebsiteURL(e, t);
-        "" !== a && window.open(a, "_blank")
+
+    var URLpath = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&type=video&q=${data}&key=AIzaSyAwM_RLjqj8dbbMAP5ls4qg1olDsaxSq5s`;
+
+    console.log(URLpath);
+    fetch(URLpath)
+        .then(function (response) {
+            if (response.ok) {
+                return response.json();
+            }
+            throw Error(response.statusText)
+        })
+        .then(function (data) {
+            console.log(data.items[0].id.videoId);
+
+            var UniqueVidId = data.items[0].id.videoId;
+            document.getElementById("YouTubeVideo").src = "https://www.youtube.com/embed/" + UniqueVidId;
+        })
+        .catch(function (error) {
+            console.log("Error from Youtube by song title API:", error);
+        });
+}
+
+
+// Search by website
+const websiteButtons = document.querySelectorAll('.button');
+
+for (let i = 0; i < websiteButtons.length; i++) {
+    websiteButtons[i].addEventListener('click', function () {
+        const websiteLabel = this.querySelector('.button-label').textContent;
+        const searchTerm = searchTermsContainer.textContent;
+        const websiteURL = getWebsiteURL(websiteLabel, searchTerm);
+        if (websiteURL !== '') {
+            window.open(websiteURL, '_blank');
+        }
     });
-function getWebsiteURL(e, t) {
-    let a = encodeURIComponent(t);
-    switch (e) {
+}
+
+// Generate search query
+function getWebsiteURL(label, searchTerm) {
+    let a = encodeURIComponent(searchTerm);
+    switch (label) {
         case "Spotify":
             return `https://open.spotify.com/search/${a}`;
         case "Apple Music":
@@ -219,10 +333,14 @@ function getWebsiteURL(e, t) {
             return ""
     }
 }
-const CLIENT_ID = "993505903479-tk48veqhlu2r1hiu9m2hvaq2l81urnla.apps.googleusercontent.com"
-    , DISCOVERY_DOC = "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"
-    , SCOPES = "https://www.googleapis.com/auth/drive.readonly";
-let tokenClient, gapiInited = !1, gisInited = !1;
+
+// Google drive music player
+const CLIENT_ID = "993505903479-tk48veqhlu2r1hiu9m2hvaq2l81urnla.apps.googleusercontent.com",
+    DISCOVERY_DOC = "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest",
+    SCOPES = "https://www.googleapis.com/auth/drive.readonly";
+let tokenClient, gapiInited = !1,
+    gisInited = !1;
+
 function gapiLoaded() {
     gapi.load("client", initializeGapiClient)
 }
@@ -232,6 +350,7 @@ async function initializeGapiClient() {
     }),
         gapiInited = !0
 }
+
 function gisLoaded() {
     tokenClient = google.accounts.oauth2.initTokenClient({
         client_id: "993505903479-tk48veqhlu2r1hiu9m2hvaq2l81urnla.apps.googleusercontent.com",
@@ -240,6 +359,7 @@ function gisLoaded() {
     }),
         gisInited = !0
 }
+
 function handleAuthClick(e) {
     tokenClient.callback = async t => {
         if (void 0 !== t.error)
@@ -252,18 +372,19 @@ function handleAuthClick(e) {
             }).then(function (e) {
                 window.location.hash = "#~" + e.result.user.permissionId
             })
-    }
-        ,
+    },
         gapi.client.getToken(),
         tokenClient.requestAccessToken({
             prompt: ""
         })
 }
+
 function handleSignoutClick() {
     let e = gapi.client.getToken();
     null !== e && (google.accounts.oauth2.revoke(e.access_token),
         gapi.client.setToken(""))
 }
+
 function getContents(e, t) {
     gapi.client.drive.files.list({
         pageSize: 1e3,
@@ -302,14 +423,17 @@ function getContents(e, t) {
         document.getElementById(o).firstElementChild.focus()
     })
 }
+
 function submitFolderId(e) {
     e.preventDefault(),
         localStorage.setItem("parentfolder", document.getElementById("parentfolder").value),
         handleAuthClick(document.getElementById("parentfolder").value)
 }
+
 function getFolderId() {
     document.getElementById("parentfolder").value = localStorage.getItem("parentfolder")
 }
+
 function playTrack(e, t, a) {
     if (t == playing) {
         audio.paused ? audio.play() : audio.pause();
@@ -353,20 +477,24 @@ function playTrack(e, t, a) {
             document.getElementById("spinner") && document.getElementById("spinner").remove()
     })
 }
+
 function prevTrack() {
     audio.currentTime > 3 || !playing.previousElementSibling.previousElementSibling ? (audio.currentTime = 0,
         audio.play()) : playing.previousElementSibling.previousElementSibling && (resetIconToPlay(),
             playing.previousElementSibling.click())
 }
+
 function nextTrack() {
     playing.nextElementSibling && (resetIconToPlay(),
         playing.nextElementSibling.click())
 }
+
 function resetIconToPlay() {
     playing.firstChild.classList.remove("fa-pause"),
         playing.firstChild.classList.add("fa-play"),
         document.getElementById("bars") && document.getElementById("bars").remove()
 }
+
 function resetIconToPause() {
     playing.firstChild.classList.remove("fa-play"),
         playing.firstChild.classList.add("fa-pause"),
@@ -380,6 +508,7 @@ function resetIconToPause() {
   `,
         playing.innerHTML += indicator
 }
+
 function changeFolder() {
     document.getElementById("return").style.display = "none",
         document.getElementById("intro").style.display = "block",
@@ -392,17 +521,16 @@ audio = document.getElementById("audio"),
     audio.onended = function () {
         playing.nextElementSibling && playing.nextElementSibling.focus(),
             nextTrack()
-    }
-    ,
+    },
     audio.onpause = function () {
         resetIconToPlay()
-    }
-    ,
+    },
     audio.onplay = function () {
         resetIconToPause()
-    }
-    ,
+    },
     "true" == localStorage.getItem("returning") && null !== localStorage.getItem("parentfolder") ? document.getElementById("return").style.display = "block" : document.getElementById("intro").style.display = "block";
+
+//Music Player
 const ap = new APlayer({
     container: document.getElementById("aplayer"),
     fixed: !1,
