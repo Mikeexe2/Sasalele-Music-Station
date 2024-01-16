@@ -1,17 +1,16 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en">
 
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
         <title>Sasalele Music Station</title>
         <meta name="robots" content="index, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
         <meta name="Keywords"
             content="Japanese Radio Stations, Japan Music, Internet Radio stream URL, Japanese Music, J-Pop, Japanese Learning, Japanese Internet Radio">
         <meta name="description"
-            content="Listen to your favorite Japan music. Collecting more than 400 internet radio and websites featuring Japanese music. You can also log into your own Google Drive and have a seamless playback of your music files using the Google Drive music player. Identifiy the song from radio with the help of the search engine, and download it using other websites.">
+            content="Listen to your favorite Japan music on 400 internet radios and websites featuring Japanese music. Login and play music files using the Google Drive music player. Identifiy the song from radio with the help of the search engine, and download it using other websites.">
         <link rel="canonical" href="https://basic.pp.ua/">
-        <meta property="og:locale" content="en_US">
         <meta property="og:type" content="website">
         <meta property="og:title" content="Sasalele Music Station">
         <meta property="og:url" content="https://basic.pp.ua/">
@@ -20,7 +19,7 @@
          "@context": "https://schema.org",
          "@type": "WebSite",
          "name": "Sasalele Music Station",
-         "alternateName": ["Sasalele Radio", "Sasalele Music", "Sasa Lele", "sasalele"],
+         "alternateName": ["Sasalele Radio", "Sasa lele Music station", "Sasa Lele", "sasalele"],
          "url": "https://basic.pp.ua/"
          }
       </script>
@@ -35,9 +34,11 @@
         <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.js"></script>
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
     </head>
 
-    <body onload="getFolderId()">
+    <body>
         <nav id="nav">
             <ul>
                 <li class="logo"><a href="https://basic.pp.ua/"><img
@@ -54,25 +55,31 @@
                 <li><a href="#musik">Music <i class="fa fa-music"></i></a></li>
                 <li><a href="#scrap">Download <i class="fas fa-download"></i></a></li>
                 <li><a href="#drive">Drive Music Player <i class="fa-brands fa-google"></i></a></li>
+                <li><a href="#chat">Chat <i class="far fa-comment"></i></a></li>
                 <li><a href="#search">Search <i class="fas fa-search"></i></a></li>
             </ul>
         </nav>
+        <div class="banner"><img
+                src="https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/sasalele_banner2.png">
+        </div>
         <section id="radios">
             <h2 class="section-title">Enjoy Your Musical Feast Here</h2>
-            <div class="banner"><img
-                    src="https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/sasalele_banner2.png">
-            </div>
-            <div id="tips">
+
+            <details close id="tips">
+                <summary>Tips</summary>
                 <p><strong>Radio not playing? </strong>If you are on a chromium based web browser (chrome, vivaldi,
                     opera, edge etc …) you are not able to listen to the most of the streams. To resolve this issue,
-                    click on the lock icon in the URL bar, select the 'Site Settings' option, then scroll down to the
+                    click on the lock icon in the URL bar, select the 'Site Settings' option, then scroll down to
+                    the
                     'Insecure content' option at the bottom of the page and select 'Allow'. <a
                         href="https://support.google.com/chrome/thread/29505473?hl=en&msgid=39996297"
-                        target="_blank">Why this happens</a><br><strong>OR</strong><br>Use a different browser like
+                        target="_blank">Why this
+                        happens</a><br><strong>OR</strong><br>Use a different browser like
                     Firefox. For the moment, they haven't blocked unencrypted content on an otherwise encrypted web
                     page.
                 </p>
-            </div>
+            </details>
+
             <div id="radiostations"></div>
         </section>
         <section id="musik">
@@ -301,7 +308,7 @@
             <h2 class="section-title">Download</h2>
             <div class="download"></div>
         </section>
-        <section id="drive">
+        <section id="drive" onload="getFolderId()">
             <h2 class="section-title">Google Drive Music Player</h2>
             <main role="main" class="content">
                 <div id="audio-wrapper">
@@ -319,15 +326,16 @@
                                 style="margin-right:10px"></i> Log back in</button></form>
                 </div>
                 <div id="intro" style="display:none">
-                    <div id="explain">
-                        <p><strong>How To Use</strong><br>Enter the ID for the <a href="https://drive.google.com"
-                                target="_blank">Google Drive</a> folder you would like to use and click the 'Login'
+                    <details close id="tips">
+                        <summary><strong>How To Use</strong></summary>
+                        <p>Enter the ID for the <a href="https://drive.google.com" target="_blank">Google
+                                Drive</a> folder you would like to use and click the 'Login'
                             button. The ID can be found by taking that last part of the folder's URL, for example,
                             <strong>drive.google.com/drive/folders/12345-abcde</strong> has an ID of
                             "12345-abcde".<br>Alternatively,"root" can be used to browse from your top-level
                             folder.<br><strong>Note: Trust the website and click on proceed in order to login.</strong>
                         </p>
-                    </div>
+                    </details>
                     <form onsubmit="submitFolderId(event)"><label for="parentfolder" class="sr-only">Drive
                             Folder ID:</label> <input required id="parentfolder" name="parentfolder"
                             placeholder="google-drive-folder-id"> <button type="submit" class="custom-button"><i
@@ -363,31 +371,43 @@
                 <div id="contents"></div>
                 <ul id="option">
                     <li><button onclick="changeFolder()">Change Folder</button></li>
-                    <li><button a href="https://myaccount.google.com/security">Revoke Access</button></li>
+                    <li><a href="https://myaccount.google.com/security" target="_blank"><button>Revoke
+                                Access</button></a></li>
                 </ul>
             </main>
         </section>
+
+        <section id="chat">
+            <h2 class="section-title">Chat</h2>
+            <div class="joinform"></div>
+            <div class="chat_container"></div>
+        </section>
+
         <div id="player">
+            <button id="togglePlayer">
+                <i class="fas fa-expand"></i>
+                <i class="fas fa-compress"></i>
+            </button>
             <div class="info">
                 <div class="cover">
                     <img src="https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/miku.gif"
                         id="miku-gif">
                     <div id="streamInfo"></div>
                 </div>
-                <div id="stationName">Click miku for a random station!</div>
+                <div id="stationName">Click miku for a random station</div>
             </div>
             <audio id="miniPlayer" autoplay controls controlslist="nodownload noplaybackrate"></audio>
         </div>
         <footer id="footer">
             <section>
-                <p>This is<strong> Sasalele Music Station</strong>, yet another japanese radio station.</p>
+                <p>This is Sasalele Music Station, yet another japanese radio station.</p>
             </section>
             <p>&copy; 2023 Sasalele Team. All Rights Reserved.</p>
             <h5><a href="https://t.me/sasalelemusic" target="_blank"><img
                         src="https://img.icons8.com/fluency/96/telegram-app.png">Discussion Group</a></h5>
             <h5><a href="https://github.com/Mikeexe2/Sasalele-Music-Station" target="_blank"><img
                         src="https://github.com/fluidicon.png">Github</a></h5>
-            <p>Contact Email: <a href="mailto:sasalele-team@basic.pp.ua">sasalele-team@basic.pp.ua</a></p>
+            <p>Contact Email:<a href="mailto:sasalele-team@basic.pp.ua">sasalele-team@basic.pp.ua</a></p>
         </footer>
         <script src="https://kit.fontawesome.com/9e5ba2e3f5.js" crossorigin="anonymous"></script>
         <script src="script.js"></script>
