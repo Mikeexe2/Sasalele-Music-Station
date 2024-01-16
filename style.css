@@ -9,11 +9,11 @@
     top: 0;
     left: 0;
     z-index: 1000;
-    background: linear-gradient(to right, #a6c1ee, #fbc2eb);
+    background: linear-gradient(to bottom, #333333, #666666);
     width: 100%;
     height: 3.25em;
     line-height: 3.25em;
-    text-align: center;
+    text-align: right;
     font-weight: 700;
     cursor: default;
 }
@@ -44,7 +44,7 @@
     position: relative;
     display: block;
     text-decoration: none;
-    color: #373837;
+    color: #fefffe;
     top: -6px;
     padding: 6px;
     border-bottom-left-radius: 6px;
@@ -72,12 +72,12 @@
 }
 
 .logo img {
-    width: 70px;
-    height: 52px;
+    width: 72px;
+    height: 50px;
 }
 
 i {
-    margin-left: 4px;
+    margin-left: 1px;
 }
 
 #nav ul ul {
@@ -95,6 +95,7 @@ i {
 }
 
 body {
+    animation: blur 0.5s ease-out;
     background-image: url('https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/sasalele_bg.jpg');
     background-size: cover;
     background-repeat: no-repeat;
@@ -138,7 +139,7 @@ body {
 
 .main-play-button {
     cursor: pointer;
-    background-color: #ff5722;
+    background-color: #4a7ff0;
     color: #fff;
     width: 40px;
     height: 40px;
@@ -151,7 +152,7 @@ body {
 }
 
 .main-play-button:hover {
-    background-color: #EEE;
+    background-color: #080707;
 }
 
 .player-radio-link {
@@ -276,9 +277,9 @@ body {
     margin-right: 40px;
     margin-left: 40px;
     margin-bottom: 5px;
-    background-image: url('https://drive.google.com/uc?export=download&id=1oZEE3CSK-eubrQqL69ORBghSmr059Uc-');
     background-size: cover;
     background-repeat: no-repeat;
+    background-image: url('https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/wall2.jpg');
     background-attachment: fixed;
     background-position: center;
 }
@@ -321,6 +322,7 @@ ul {
 .icon-spotify {
     background-image: url('https://open.spotifycdn.com/cdn/images/favicon32.b64ecc03.png');
 }
+
 
 .icon-apple {
     background-image: url('https://music.apple.com/assets/favicon/favicon-32.png');
@@ -449,14 +451,54 @@ ul {
 #player {
     position: fixed;
     bottom: 0;
-    display: block;
     text-align: left;
     justify-content: space-around;
     margin-bottom: 20px;
     margin-left: 15px;
     border-radius: 10px;
-    background: linear-gradient(to right, #a6c1ee, #fbc2eb);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+    background: linear-gradient(to bottom, #a6c1ee, #fbc2eb);
+    transition: height 0.5s ease-in-out;
+    max-height: 100%;
+    overflow: hidden;
+}
+
+#player.minimized {
+    max-height: 100px;
+}
+
+#togglePlayer {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    border: none;
+    background: transparent;
+    color: #040404;
+    cursor: pointer;
+}
+
+#togglePlayer .fas {
+    color: #333;
+    font-size: 20px;
+}
+
+#togglePlayer .fa-expand {
+    display: none;
+}
+
+#togglePlayer .fa-compress {
+    display: initial;
+}
+
+#player.minimized #togglePlayer .fa-expand {
+    display: initial;
+}
+
+#player.minimized #togglePlayer .fa-compress {
+    display: none;
+}
+
+#togglePlayer .hidden {
+    display: none;
 }
 
 .cover {
@@ -493,26 +535,21 @@ ul {
 .section-title {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     font-size: 25px;
     color: #ffffff;
     max-width: 100%;
     margin: 0 auto;
     padding: 2px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 2);
     text-align: center;
-    text-transform: uppercase;
-    border-radius: 30px;
     letter-spacing: 1px;
     position: relative;
-    background-color: rgba(29, 24, 24, 0.45);
 }
 
 .section-title::before {
     content: "";
     width: 48px;
     height: 48px;
-    margin-left: 20px;
+    margin-left: 70px;
     background-image: url('https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/miku.gif');
     background-size: cover;
     background-repeat: no-repeat;
@@ -522,7 +559,7 @@ ul {
     content: "";
     width: 48px;
     height: 48px;
-    margin-right: 20px;
+    margin-right: 70px;
     background-image: url('https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/miku.gif');
     background-size: cover;
     background-repeat: no-repeat;
@@ -583,7 +620,7 @@ ul {
 }
 
 .content {
-    background-image: url('https://drive.google.com/uc?export=download&id=1mii-g5dmQ2JfkNnZ0yF7v8qoQzYZjQaF');
+    background-image: url('https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/wall3.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -594,6 +631,8 @@ ul {
 
 #tips {
     width: 90%;
+    font-size: 16px;
+    line-height: 1.2;
     overflow: hidden;
     margin: 0 auto;
     padding: 5px 5px;
@@ -601,7 +640,6 @@ ul {
     border-left: 5px solid #fff000;
     background-color: #ffffff;
     color: #333;
-    font-size: 14px;
 }
 
 #tips a {
@@ -611,38 +649,13 @@ ul {
 }
 
 #tips a:hover {
-    color: #b4b4b4;
-}
-
-#explain {
-    width: 100%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f2f2f2;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-#explain p {
-    font-size: 16px;
-    line-height: 1.2;
-    color: #333;
-}
-
-#explain a {
-    color: #79b3ff;
-    text-decoration: underline;
-    font-weight: bold;
-}
-
-#explain a:hover {
-    color: #b4b4b4;
+    color: #b9b9b9;
 }
 
 #footer {
     bottom: 0;
     width: 100%;
-    background-color: #111111;
+    background-color: #383838ef;
     color: #ffffff;
     text-align: center;
     margin-top: 20px;
@@ -749,6 +762,231 @@ input {
 
 .custom-button:hover {
     opacity: 0.8;
+}
+
+.joinform {
+    text-align: center;
+    margin-top: 20px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#join_container {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    margin-top: 80px;
+}
+
+#join_inner_container {
+    width: 50%;
+    height: 100%;
+    display: inline-block;
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+#join_input_container {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    margin-bottom: 10px;
+}
+
+#join_input {
+    padding: 5px;
+    width: 150px;
+    height: 40px;
+    color: #1D3354;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    background-color: white;
+}
+
+#join_input:focus {
+    box-shadow: 0 10px 30px -17px #1D3354;
+}
+
+#join_button_container {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+}
+
+#join_button {
+    width: 60%;
+    height: 40px;
+    padding: 8px 12px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    color: #111111;
+}
+
+#chatt {
+    margin: 0 auto;
+    background-color: #ffffff;
+}
+
+#chat_inner_container {
+    margin: 0 auto;
+    border-radius: 3%;
+    padding: 5px 10px;
+    height: 450px;
+    width: 80%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: #d7f8f9;
+}
+
+#chat_content_container {
+    width: 100%;
+    height: 80%;
+    float: left;
+    overflow-y: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#chat_input_container {
+    width: 100%;
+    height: 8%;
+    float: left;
+    background-color: transparent;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 10px;
+}
+
+#chat_input {
+    width: 90%;
+    height: 100%;
+    float: left;
+    background-color: transparent;
+    color: #1D3354;
+    font-size: 15px;
+}
+
+#chat_input_send {
+    float: right;
+    padding: 8px 12px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    margin-left: 5px;
+}
+
+#chat_input_send.enabled {
+    background-color: #45a049;
+    cursor: pointer;
+}
+
+#chat_input_send:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+#chat_logout_container {
+    width: 100%;
+    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#chat_logout {
+    color: #D64045;
+    cursor: pointer;
+}
+
+#chat_logout:hover {
+    text-decoration: underline;
+}
+
+.message_container {
+    width: 100%;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.message_inner_container {
+    width: 100%;
+    display: inline-block;
+    color: #1D3354;
+}
+
+.message_user_container {
+    width: 100%;
+    display: inline-block;
+}
+
+.message_user {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.message_content_container {
+    width: 100%;
+    display: inline-block;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.message_content {
+    font-weight: normal;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.loader_container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    border-top: 6px solid #D64045;
+    border-bottom: 6px solid #1D3354;
+    border-left: 6px solid #E9FFF9;
+    border-right: 6px solid #E9FFF9;
+}
+
+@keyframes blur {
+    0% {
+        filter: blur(5px);
+    }
+
+    100% {}
 }
 
 /* visibly hidden */
@@ -920,6 +1158,7 @@ summary {
 
 main {
     padding-bottom: 20px !important;
+    color: ivory;
 }
 
 ul#option li {
@@ -1027,6 +1266,11 @@ ul#option li button {
         margin-top: 1px;
     }
 
+    #chat_input {
+        width: 80%;
+        font-size: 12px;
+    }
+
     .widget {
         margin-bottom: 2px;
         padding: 5px;
@@ -1053,6 +1297,7 @@ ul#option li button {
         grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
         gap: 5px;
     }
+
 
     #aplayer {
         padding: 5px 10px;
@@ -1134,9 +1379,17 @@ ul#option li button {
 
     #player {
         padding: 2px;
-        border-radius: 10%;
+        border-radius: 2%;
         margin-bottom: 10px;
         margin-left: 10px;
+    }
+
+    #togglePlayer .fas {
+        font-size: 14px;
+    }
+
+    #player.minimized {
+        max-height: 80px;
     }
 
     #player .cover {
@@ -1198,16 +1451,6 @@ ul#option li button {
     #tips {
         padding: 4px;
         font-size: 10px;
-    }
-
-    #explain {
-        margin: 0 auto;
-        padding: 5px;
-    }
-
-    #explain p {
-        font-size: 10px;
-        line-height: 1;
     }
 
     ul#option li a,
