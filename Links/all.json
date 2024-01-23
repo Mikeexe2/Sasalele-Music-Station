@@ -1751,6 +1751,24 @@
         "favicon": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/radios/Unidentified2.png",
         "website": "chrome://global/skin/media/pause-fill.svg)"
     },
+	 {
+        "name": "BnP Radio",
+        "url": "https://radio.bnp-radio.ru/live",
+        "favicon": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/radios/BNPRadio.jpg",
+        "website": "https://bnp-radio.ru/"
+    },	
+	{
+        "name": "Cyber Anime Radio",
+        "url": "http://cyberanimeradio.ru:9000/",
+        "favicon": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/radios/CyberAnimeRadio.png",
+        "website": "https://cyberanimeradio.ru/"
+    },
+	{
+        "name": "Agape's JPop/Anisong Radio",
+        "url": "http://nas.agapec.fun:38000/mp3",
+        "favicon": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/radios/AzuraCast.png",
+        "website": "http://nas.agapec.fun:81/public/agapes_anisong_radio"
+    },
     {
         "name": "Anime Flash",
         "url": "https://stream.zeno.fm/lxnpskbosrlvv",
@@ -2010,7 +2028,7 @@
         "website": "https://internetradiouk.com/fred-film-ch14-japanese/"
     },
     {
-        "name": " FMかほく",
+        "name": " FM Kahoku 78.7 (FMかほく)",
         "url": "http://radio.kahoku.net:8000/;",
         "favicon": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/radios/FMかほく.jpg",
         "website": "https://fm.kahoku.net/"
