@@ -12,6 +12,12 @@
         "tags": "website"
     },
     {
+        "url": "https://utaitedb.net/",
+        "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/utaitedb.ico",
+        "name": "UtaiteDB",
+        "tags": "website"
+    },
+    {
         "url": "https://touhou.kuukunen.net/",
         "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/touhou%20player.png",
         "name": "Touhou Player",

@@ -5,6 +5,11 @@
     "name": "Spotify Mate"
   },
   {
+      "url": "https://doubledouble.top/",
+      "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/downloads/doubledouble.png",
+      "name": "DoubleDouble"
+  },
+  {
     "url": "https://bestmp3converter.com/",
     "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/downloads/YouTube%20to%20MP3%20Converter.png",
     "name": "YouTube to MP3 Converter"
@@ -30,7 +35,7 @@
     "name": "LRC Online Editor"
   },
   {
-    "url": "https://slider.kz/",
+    "url": "https://hayqbhgr.slider.kz/",
     "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/downloads/sliderkz.jpg",
     "name": "Slider.kz"
   },
