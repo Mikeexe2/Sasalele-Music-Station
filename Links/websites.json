@@ -6,6 +6,12 @@
         "tags": "radio"
     },
     {
+        "url": "https://radiooooo.com/",
+        "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/radiooooo.png",
+        "name": "Radiooooo",
+        "tags": "radio"
+    },
+    {
         "url": "https://kara.moe/",
         "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/karamoe.png",
         "name": "kara.moe",
@@ -21,6 +27,18 @@
         "url": "https://touhou.kuukunen.net/",
         "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/touhou%20player.png",
         "name": "Touhou Player",
+        "tags": "website"
+    },
+    {
+        "url": "https://www.squidify.org/",
+        "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/squidify.png",
+        "name": "Squidify",
+        "tags": "website"
+    },
+    {
+        "url": "https://ongaku.js.org/",
+        "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/ongakujs.ico",
+        "name": "Ongaku",
         "tags": "website"
     },
     {
