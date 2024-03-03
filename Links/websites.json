@@ -18,6 +18,12 @@
         "tags": "website"
     },
     {
+        "url": "https://aniplaylist.com/",
+        "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/aniplaylist.ico",
+        "name": "AniPlaylist",
+        "tags": "website"
+    },
+    {
         "url": "https://utaitedb.net/",
         "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/websites/utaitedb.ico",
         "name": "UtaiteDB",
