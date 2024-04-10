@@ -1,107 +1,107 @@
 [
   {
     "url": "https://spotifymate.com/",
-    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/downloads/Spotify%20Mate.png",
+    "imgSrc": "assets/downloads/SpotifyMate.png",
     "name": "Spotify Mate"
   },
   {
       "url": "https://doubledouble.top/",
-      "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/downloads/doubledouble.png",
+      "imgSrc": "assets/downloads/doubledouble.png",
       "name": "DoubleDouble"
   },
   {
     "url": "https://bestmp3converter.com/",
-    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/downloads/YouTube%20to%20MP3%20Converter.png",
+    "imgSrc": "assets/downloads/YouTubetoMP3Converter.png",
     "name": "YouTube to MP3 Converter"
   },
   {
     "url": "https://ytmdl.deepjyoti30.dev/search",
-    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/downloads/ytmdl.png",
+    "imgSrc": "assets/downloads/ytmdl.png",
     "name": "Ytmdl Web"
   },
   {
     "url": "https://free-mp3-download.net/",
-    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/downloads/Free%20MP3%20Download.png",
+    "imgSrc": "assets/downloads/FreeMP3Download.png",
     "name": "Free MP3 Download"
   },
   {
     "url": "https://en.mygomp3.com/",
-    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/downloads/Online%20YouTube%20MP3%20Downloader%20(mygomp3).png",
+    "imgSrc": "assets/downloads/OnlineYouTubeMP3Downloader(mygomp3).png",
     "name": "Online YouTube MP3 Downloader (mygomp3)"
   },
   {
     "url": "https://spotify-downloader.com/",
-    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/downloads/Spotify%20downloader.png",
+    "imgSrc": "assets/downloads/Spotifydownloader.png",
     "name": "Spotify downloader"
   },
   {
     "url": "https://seinopsys.dev/lrc",
-    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/downloads/LRC%20Online%20Editor.png",
+    "imgSrc": "assets/downloads/LRCOnlineEditor.png",
     "name": "LRC Online Editor"
   },
   {
     "url": "https://hayqbhgr.slider.kz/",
-    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/downloads/sliderkz.jpg",
+    "imgSrc": "assets/downloads/sliderkz.jpg",
     "name": "Slider.kz"
   },
   {
     "url": "https://skymus.org/",
-    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/downloads/skymus.ico",
+    "imgSrc": "assets/downloads/skymus.ico",
     "name": "skymus.org"
   },
   {
     "url": "https://alist.thdisc.tk/",
-    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/downloads/Touhou%20Disc%20Download.png",
+    "imgSrc": "assets/downloads/TouhouDiscDownload.png",
     "name": "Touhou Disc Download"
   },
   {
     "url": "https://osanime.com/",
-    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/downloads/Osanime.png",
+    "imgSrc": "assets/downloads/Osanime.png",
     "name": "Osanime"
   },
   {
     "url": "https://www.ostnimeku.com/",
-    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/downloads/Ostnimeku.ico",
+    "imgSrc": "assets/downloads/Ostnimeku.ico",
     "name": "Ostnimeku"
   },
   {
     "url": "https://hikarinoakari.com/",
-    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/downloads/Hikari%20No%20Akari.jpg",
+    "imgSrc": "assets/downloads/HikariNoAkari.jpg",
     "name": "Hikari No Akari"
   },
   {
     "url": "https://alljpopzip.work/",
-    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/downloads/AllJpopZip.png",
+    "imgSrc": "assets/downloads/AllJpopZip.png",
     "name": "AllJpopZip"
   },
   {
     "url": "https://www.sakuraost.com/",
-    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/downloads/SAKURA%20OST.ico",
+    "imgSrc": "assets/downloads/SAKURAOST.ico",
     "name": "SAKURA OST"
   },
   {
     "url": "https://www.sittingonclouds.net/",
-    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/downloads/Sitting%20on%20Clouds.png",
+    "imgSrc": "assets/downloads/SittingonClouds.png",
     "name": "Sitting on Clouds"
   },
   {
     "url": "https://mikudb.moe/",
-    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/downloads/Miku%20DB.jpg",
+    "imgSrc": "assets/downloads/MikuDB.jpg",
     "name": "Miku DB"
   },
   {
     "url": "http://www.2cycd.com/forum-43-1.html",
-    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/downloads/nijigendarkhole.png",
+    "imgSrc": "assets/downloads/nijigendarkhole.png",
     "name": "二次元蟲洞"
   },
   {
     "url": "http://www.acgjc.com/",
-    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/downloads/acgman.png",
+    "imgSrc": "assets/downloads/acgman.png",
     "name": "ACG漫音社"
   },
   {
     "url": "https://sukidesuost.info/",
-    "imgSrc": "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/downloads/sukideost.png",
+    "imgSrc": "assets/downloads/sukideost.png",
     "name": "SUKIDESUOST"
   }
 ]

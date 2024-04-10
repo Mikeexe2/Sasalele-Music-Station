@@ -96,7 +96,7 @@ i {
 
 body {
     animation: blur 0.5s ease-out;
-    background-image: url('https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/sasalele_bg.jpg');
+    background-image: url('assets/sasalele_bg.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -111,6 +111,19 @@ body {
     margin-top: 10px;
     margin-bottom: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 2);
+}
+
+#flag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#flagpic {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
 }
 
 #rad {
@@ -279,7 +292,7 @@ body {
     margin-bottom: 5px;
     background-size: cover;
     background-repeat: no-repeat;
-    background-image: url('https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/wall2.jpg');
+    background-image: url('assets/wall2.jpg');
     background-attachment: fixed;
     background-position: center;
 }
@@ -542,6 +555,7 @@ ul {
     padding: 2px;
     text-align: center;
     letter-spacing: 1px;
+    border-radius: 2em;
     position: relative;
 }
 
@@ -550,7 +564,7 @@ ul {
     width: 48px;
     height: 48px;
     margin-left: 70px;
-    background-image: url('https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/miku.gif');
+    background-image: url('assets/miku.gif');
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -560,7 +574,7 @@ ul {
     width: 48px;
     height: 48px;
     margin-right: 70px;
-    background-image: url('https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/miku.gif');
+    background-image: url('assets/miku.gif');
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -620,7 +634,7 @@ ul {
 }
 
 .content {
-    background-image: url('https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/wall3.jpg');
+    background-image: url('assets/wall3.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -764,11 +778,6 @@ input {
     opacity: 0.8;
 }
 
-.joinform {
-    text-align: center;
-    margin-top: 20px;
-}
-
 @keyframes spin {
     0% {
         transform: rotate(0deg);
@@ -779,19 +788,25 @@ input {
     }
 }
 
-#join_container {
+.joinform {
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 15px;
     width: 100%;
-    height: 200px;
+    height: 100%;
+}
+
+#join_container {
+    width: auto;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    float: left;
-    margin-top: 80px;
 }
 
 #join_inner_container {
-    width: 50%;
-    height: 100%;
+    width: auto;
+    height: auto;
     display: inline-block;
     background-color: #f2f2f2;
     padding: 10px;
@@ -799,19 +814,18 @@ input {
 }
 
 #join_input_container {
-    width: 100%;
-    height: 50px;
+    width: auto;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    float: left;
     margin-bottom: 10px;
 }
 
 #join_input {
     padding: 5px;
-    width: 150px;
-    height: 40px;
+    width: auto;
+    height: auto;
     color: #1D3354;
     font-size: 15px;
     font-weight: bold;
@@ -824,8 +838,8 @@ input {
 }
 
 #join_button_container {
-    width: 100%;
-    height: 50px;
+    width: auto;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -833,8 +847,8 @@ input {
 }
 
 #join_button {
-    width: 60%;
-    height: 40px;
+    width: auto;
+    height: auto;
     padding: 8px 12px;
     cursor: pointer;
     background-color: #4CAF50;
@@ -1484,5 +1498,10 @@ ul#option li button {
         margin-right: 2px;
         padding: 2px;
         font-size: 10px;
+    }
+
+    #flag {
+        width: auto;
+        height: auto;
     }
 }
