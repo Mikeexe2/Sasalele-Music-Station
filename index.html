@@ -9,7 +9,7 @@
         <meta name="Keywords"
             content="Japanese Radio Stations, Japan Music, Internet Radio stream URL, Japanese Music, J-Pop, Japanese Learning, Japanese Internet Radio">
         <meta name="description"
-            content="Listen to your favorite Japan music on 400 internet radios and websites featuring Japanese music. Login and play music files using the Google Drive music player. Identifiy the song from radio with the help of the search engine, and download it using other websites.">
+            content="Listen to your favorite Japan music on 400+ internet radios and websites featuring Japanese music.">
         <link rel="canonical" href="https://basic.pp.ua/">
         <meta property="og:type" content="website">
         <meta property="og:title" content="Sasalele Music Station">
@@ -23,12 +23,14 @@
          "url": "https://basic.pp.ua/"
          }
       </script>
-        <link rel="icon" href="assets/sasalele_logo.png">
-        <link rel="apple-touch-icon" href="assets/sasalele_logo.png">
-        <link rel="shortcut icon" type="x-icon" href="assets/sasalele_logo.png">
+        <link rel="icon" href="assets/sasalele_logo-removebg.png">
+        <link rel="apple-touch-icon" href="assets/sasalele_logo-removebg.png">
+        <link rel="shortcut icon" type="x-icon" href="assets/sasalele_logo-removebg.png">
+        <script src="js/jquery-3.5.1.min.js"></script>
         <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.css">
-        <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.0/dist/APlayer.min.js"></script>
+        <link rel="stylesheet" href="css/APlayer.min.css">
+        <script src="js/APlayer.min.js"></script>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
@@ -36,57 +38,77 @@
     </head>
 
     <body>
-        <nav id="nav">
-            <ul>
-                <li class="logo"><a href="https://basic.pp.ua/"><img
-                            src="assets/sasalele_logo.png"></a>
-                </li>
-                <li><a href="#radios">Radio Stations <i class="fa fa-radio"></i></a></li>
-                <li>
-                    <a href="#websites">Websites <i class="fa fa-globe"></i></a>
-                    <ul>
-                        <li><a href="#radiohere">More Radios <i class="fa fa-satellite"></i></a></li>
-                        <li><a href="#radiojphere">Radios(Japanese) <i class="fa fa-radio"></i></a></li>
-                    </ul>
-                </li>
-                <li><a href="#musik">Music <i class="fa fa-music"></i></a></li>
-                <li><a href="#scrap">Download <i class="fas fa-download"></i></a></li>
-                <li><a href="#drive">Drive Music Player <i class="fa-brands fa-google"></i></a></li>
-                <li><a href="#chat">Chat <i class="far fa-comment"></i></a></li>
-                <li><a href="#search">Search <i class="fas fa-search"></i></a></li>
-            </ul>
+        <nav class="navbar sticky-top navbar-dark bg-dark navbar-expand-md">
+            <a class="navbar-brand" href="https://basic.pp.ua/"><img src="assets/sasalele_logo-removebg.png" width="42"
+                    height="32"></a>
+            <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse"
+                data-target="#main-navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="main-navigation">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#radios">Radio</a></li>
+                    <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown"
+                            aria-expanded="false" href="">Websites</a>
+                        <div class="dropdown-menu"><a class="dropdown-item" href="#radiohere">Radio
+                                Websites</a><a class="dropdown-item" href="#radiojphere">Japanese Radios</a>
+                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#scrap">Download
+                                Sites</a>
+                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#websitehere">Music
+                                Sites</a>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#musik">Playlist</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#drive">Drive Music Player</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#chat">Chat</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#search"><i class="fas fa-search"></i></a></li>
+                </ul>
+            </div>
         </nav>
-        <div class="banner"><img
-                src="assets/sasalele_banner2.png">
+        <div class="banner"><img src="assets/sasalele_banner2.png">
         </div>
         <section id="radios">
             <h2 class="section-title">Enjoy Your Musical Feast Here</h2>
 
-            <details close id="tips">
-                <summary>Tips</summary>
-                <p><strong>Radio not playing? </strong>If you are on a chromium based web browser (chrome, vivaldi,
-                    opera, edge etc …) you are not able to listen to the most of the streams. To resolve this issue,
-                    click on the lock icon in the URL bar, select the 'Site Settings' option, then scroll down to
-                    the
-                    'Insecure content' option at the bottom of the page and select 'Allow'. <a
-                        href="https://support.google.com/chrome/thread/29505473?hl=en&msgid=39996297"
-                        target="_blank">Why this
-                        happens</a><br><strong>OR</strong><br>Use a different browser like
-                    Firefox. For the moment, they haven't blocked unencrypted content on an otherwise encrypted web
-                    page.
-                </p>
-            </details>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Radio not playing?</strong> If you are on a chromium based web browser (chrome, vivaldi,
+                opera, edge etc …) you are not able to listen to the most of the streams. To resolve this issue,
+                click on the lock icon in the URL bar, select the 'Site Settings' option, then scroll down to
+                the
+                'Insecure content' option at the bottom of the page and select 'Allow'.<strong>OR</strong> Use a
+                different browser like
+                Firefox. For the moment, they haven't blocked unencrypted content on an otherwise encrypted web
+                page.
+                <p class="mb-0"><a href="https://support.google.com/chrome/thread/29505473?hl=en&msgid=39996297"
+                        target="_blank">Why
+                        this
+                        happens</a></p>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
 
             <div id="radiostations"></div>
         </section>
-        <section id="musik">
-            <h2 class="section-title">Sasalele Music Station's Playlist</h2>
-            <div id="aplayer"></div>
+        <section id="websites">
+            <h2 class="section-title">More Radios</h2>
+            <div class="flex-container" id="radiohere"></div>
+            <h2 class="section-title">Japanese Radios</h2>
+            <div class="flex-container" id="radiojphere"></div>
+            <h2 class="section-title">More Websites</h2>
+            <div class="flex-container" id="websitehere"></div>
         </section>
         <section id="search">
             <h2 class="section-title">Search</h2>
-            <div class="search-container"><input id="searchInput" placeholder="Enter a song name..."> <button
-                    id="searchButton"><i class="fa fa-search"></i></button></div>
+
+            <div class="d-flex justify-content-center px-5">
+                <div class="search"> <input id="searchInput" type="text" class="search-input"
+                        placeholder="Enter a song name...">
+                    <button type="button" class="search-icon" id="searchButton"><i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+
             <div class="inner" style="display:none">
                 <div class="label">You searched for: <span id="searchTerms"></span></div>
                 <div class="card-panel" id="lastFMInfo"></div>
@@ -293,18 +315,11 @@
                         allowfullscreen></iframe></div>
             </div>
         </section>
-        <section id="websites">
-            <h2 class="section-title">More Websites</h2>
-            <div class="flex-container" id="websitehere"></div>
-            <h2 class="section-title">More Radios</h2>
-            <div class="flex-container" id="radiohere"></div>
-            <h2 class="section-title">Japanese Radios</h2>
-            <div class="flex-container" id="radiojphere"></div>
-        </section>
         <section id="scrap">
             <h2 class="section-title">Download</h2>
             <div class="download"></div>
         </section>
+
         <section id="drive" onload="getFolderId()">
             <h2 class="section-title">Google Drive Music Player</h2>
             <main role="main" class="content">
@@ -333,11 +348,18 @@
                             folder.<br><strong>Note: Trust the website and click on proceed in order to login.</strong>
                         </p>
                     </details>
-                    <form onsubmit="submitFolderId(event)"><label for="parentfolder" class="sr-only">Drive
-                            Folder ID:</label> <input required id="parentfolder" name="parentfolder"
-                            placeholder="google-drive-folder-id"> <button type="submit" class="custom-button"><i
-                                class="fa-brands fa-google"></i> Login</button>
+                    <form onsubmit="submitFolderId(event)">
+                        <div class="form-group mb-2">
+                            <label for="parentfolder" class="sr-only">Drive
+                                Folder ID:</label> <input required id="parentfolder" name="parentfolder"
+                                placeholder="google-drive-folder-id">
+                        </div>
+                        <div class="form-group mx-sm-3 mb-2">
+                            <button type="submit" class="btn btn-primary mb-2"><i class="fa-brands fa-google"></i>
+                                Login</button>
+                        </div>
                     </form>
+                    
                     <div id="demo" class="loaded">
                         <details open>
                             <summary>Collection 1</summary>
@@ -367,7 +389,7 @@
                 </div>
                 <div id="contents"></div>
                 <ul id="option">
-                    <li><button onclick="changeFolder()">Change Folder</button></li>
+                    <li><button onclick="changeFolder()">ChangeFolder</button></li>
                     <li><a href="https://myaccount.google.com/security" target="_blank"><button>Revoke
                                 Access</button></a></li>
                 </ul>
@@ -378,6 +400,10 @@
             <h2 class="section-title">Chat</h2>
             <div class="joinform"></div>
             <div class="chat_container"></div>
+        </section>
+        <section id="musik">
+            <h2 class="section-title">Sasalele Music Station's Playlist</h2>
+            <div id="aplayer"></div>
         </section>
         <div id="flag">
             <a href="https://info.flagcounter.com/NNiX"><img
@@ -391,25 +417,34 @@
             </button>
             <div class="info">
                 <div class="cover">
-                    <img src="assets/miku.gif"
-                        id="miku-gif">
+                    <img src="assets/miku.gif" id="miku-gif">
                     <div id="streamInfo"></div>
                 </div>
                 <div id="stationName">Click miku for a random station</div>
             </div>
-            <audio id="miniPlayer" autoplay controls controlslist="nodownload noplaybackrate"></audio>
+            <audio id="miniPlayer" controls controlslist="nodownload noplaybackrate"></audio>
         </div>
-        <footer id="footer">
-            <section>
-                <p>This is Sasalele Music Station, yet another japanese radio station.</p>
-            </section>
-            <p>&copy; 2023 Sasalele Team. All Rights Reserved.</p>
-            <h5><a href="https://t.me/sasalelemusic" target="_blank"><img
-                        src="https://img.icons8.com/fluency/96/telegram-app.png">Discussion Group</a></h5>
-            <h5><a href="https://github.com/Mikeexe2/Sasalele-Music-Station" target="_blank"><img
-                        src="https://github.com/fluidicon.png">Github</a></h5>
-            <p>Contact Email:<a href="mailto:sasalele-team@basic.pp.ua">sasalele-team@basic.pp.ua</a></p>
+
+        <div class="my-0">
+            <footer class="bg-dark text-center text-white">
+                <div class="p-2 pb-0">
+                    <section class="mb-2">
+                        <p>This is Sasalele Music Station, yet another japanese radio station.</p>
+                        <a class="btn btn-outline-light btn-floating m-1" href="https://t.me/sasalelemusic"
+                            target="_blank" role="button"><i class="fab fa-telegram"></i></a>
+                        <a class="btn btn-outline-light btn-floating m-1"
+                            href="https://github.com/Mikeexe2/Sasalele-Music-Station" target="_blank" role="button"><i
+                                class="fab fa-github"></i></a>
+                    </section>
+                </div>
+                <div class="text-center p-1" style="background-color: rgba(0, 0, 0, 0.2);">
+                    <p class="text-white">© 2023 Copyright: Sasalele-Music-Station</p>
+                </div>
+            </footer>
+        </div>
+
         </footer>
+        <script src="js/bootstrap.min.js"></script>
         <script src="https://kit.fontawesome.com/9e5ba2e3f5.js" crossorigin="anonymous"></script>
         <script src="script.js"></script>
         <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>

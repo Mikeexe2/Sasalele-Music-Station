@@ -1,97 +1,18 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.nav-link,
+.navbar-brand {
+    cursor: pointer;
 }
 
-#nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    background: linear-gradient(to bottom, #333333, #666666);
-    width: 100%;
-    height: 3.25em;
-    line-height: 3.25em;
-    text-align: right;
-    font-weight: 700;
-    cursor: default;
+.nav-link {
+    margin-right: 1em !important;
 }
 
-#nav ul {
-    position: relative;
-    z-index: 1001;
-}
-
-#nav li {
-    display: inline-block;
-    margin: 0 0.5em 0 0.5em;
-    top: 0;
-    position: relative;
-    -moz-transition: top .15s ease-in-out;
-    -webkit-transition: top .15s ease-in-out;
-    -o-transition: top .15s ease-in-out;
-    -ms-transition: top .15s ease-in-out;
-    transition: top .15s ease-in-out;
-}
-
-#nav li a,
-#nav li span {
-    -moz-transition: background-color .2s ease-in-out, color .2s ease-in-out;
-    -webkit-transition: background-color .2s ease-in-out, color .2s ease-in-out;
-    -ms-transition: background-color .2s ease-in-out, color .2s ease-in-out;
-    transition: background-color .2s ease-in-out, color .2s ease-in-out;
-    position: relative;
-    display: block;
-    text-decoration: none;
-    color: #fefffe;
-    top: -6px;
-    padding: 6px;
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px;
-    outline: 0;
-}
-
-#nav li:hover {
-    top: 3px;
-}
-
-#nav li:hover a,
-#nav li:hover span {
-    background: #3b3939;
-    color: #fff;
-}
-
-#nav li.logo:hover a,
-#nav li.logo:hover span {
-    background: none;
-}
-
-.logo {
-    float: left;
-}
-
-.logo img {
-    width: 72px;
-    height: 50px;
+.navbar-collapse {
+    justify-content: flex-end;
 }
 
 i {
     margin-left: 1px;
-}
-
-#nav ul ul {
-    display: none;
-    position: absolute;
-    padding: 0 1.25em;
-    border-radius: 6px;
-    line-height: 1em;
-    text-align: left;
-    padding-left: 0;
-}
-
-#nav ul li:hover>ul {
-    display: block;
 }
 
 body {
@@ -102,7 +23,12 @@ body {
     background-attachment: fixed;
     background-position: center;
     font-family: Arial, Helvetica, 'Heiti SC', 'Microsoft Yahei', simsun, sans-serif;
-    padding: 3.25em 0 10em 0;
+    padding: 0 0 0 0;
+}
+
+.alert {
+    width: 80%;
+    margin: 0 auto;
 }
 
 #aplayer {
@@ -193,52 +119,52 @@ body {
     text-decoration: underline;
 }
 
-.search-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 1rem auto;
+.search {
     width: 80%;
-    max-width: 600px;
-    position: relative;
-}
-
-#searchInput {
-    flex: 1;
+    margin-bottom: 20px;
+    border: 1.0;
+    margin-top: 20px;
+    height: 50px;
+    background-color: #fff;
     padding: 10px;
-    font-size: 16px;
-    border-bottom: 2px solid #555;
-    transition: all 0.3s ease;
-    padding-right: 40px;
+    border-radius: 5px;
 }
 
-#searchInput.error {
-    border-color: rgb(255, 1, 1);
+.search-input {
+    color: white;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 0;
+    margin-top: 5px;
+    caret-color: transparent;
+    line-height: 10px;
+    transition: width 0.4s linear
 }
 
-#searchInput::placeholder {
-    color: #555;
+.search .search-input {
+    padding: 0 10px;
+    width: 100%;
+    caret-color: #536bf6;
+    font-size: 15px;
+    font-weight: 500;
+    color: black;
+    transition: width 0.4s linear;
 }
 
-#searchButton {
-    background-color: transparent;
-    color: #047bff;
-    font-size: 16px;
-    padding: 10px 10px;
-    position: absolute;
-    border: none;
-    right: 0;
-    margin-right: 8px;
-    margin-bottom: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    outline: none;
-}
-
-#searchTerms {
-    font-size: 20px;
-    font-weight: normal;
-    font-style: oblique;
+.search-icon {
+    height: 34px;
+    width: 34px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #536bf6;
+    font-size: 10px;
+    bottom: 30px;
+    position: relative;
+    border-radius: 5px;
 }
 
 .label {
@@ -310,7 +236,7 @@ ul {
 }
 
 .button {
-    border: 2px solid #0d0d0d;
+    border: 0;
     border-radius: 9px;
     height: auto;
     width: auto;
@@ -335,7 +261,6 @@ ul {
 .icon-spotify {
     background-image: url('https://open.spotifycdn.com/cdn/images/favicon32.b64ecc03.png');
 }
-
 
 .icon-apple {
     background-image: url('https://music.apple.com/assets/favicon/favicon-32.png');
@@ -442,11 +367,9 @@ ul {
 }
 
 .banner img {
-    width: 600px;
-    height: 100px;
+    width: auto;
+    height: auto;
     margin-top: 10px;
-    margin-bottom: 10px;
-    box-shadow: 0 10px 10px rgb(73 75 73);
 }
 
 #radiostations {
@@ -548,21 +471,20 @@ ul {
 .section-title {
     display: flex;
     justify-content: space-between;
-    font-size: 25px;
-    color: #ffffff;
-    max-width: 100%;
     margin: 0 auto;
-    padding: 2px;
+    padding: 1em 1em 1em;
+    font-size: 150%;
+    line-height: 1.5;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
     text-align: center;
-    letter-spacing: 1px;
-    border-radius: 2em;
-    position: relative;
 }
 
 .section-title::before {
     content: "";
-    width: 48px;
-    height: 48px;
+    width: 32px;
+    height: 32px;
     margin-left: 70px;
     background-image: url('assets/miku.gif');
     background-size: cover;
@@ -571,8 +493,8 @@ ul {
 
 .section-title::after {
     content: "";
-    width: 48px;
-    height: 48px;
+    width: 32px;
+    height: 32px;
     margin-right: 70px;
     background-image: url('assets/miku.gif');
     background-size: cover;
@@ -656,46 +578,6 @@ ul {
     color: #333;
 }
 
-#tips a {
-    color: #79b3ff;
-    text-decoration: underline;
-    font-weight: bold;
-}
-
-#tips a:hover {
-    color: #b9b9b9;
-}
-
-#footer {
-    bottom: 0;
-    width: 100%;
-    background-color: #383838ef;
-    color: #ffffff;
-    text-align: center;
-    margin-top: 20px;
-    padding: 10px;
-}
-
-#footer p {
-    margin: 0;
-    padding: 2px 0;
-}
-
-#footer a {
-    color: #79b3ff;
-    text-decoration: underline;
-    margin-left: 10px;
-}
-
-#footer a:hover {
-    color: #b4b4b4;
-}
-
-#footer img {
-    vertical-align: middle;
-    width: 20px;
-    height: 20px;
-}
 
 details details {
     margin-left: 25px;
@@ -745,14 +627,6 @@ form {
     margin-top: 10px;
 }
 
-input {
-    text-align: left;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 25px;
-    max-width: 100%;
-}
-
 .custom-button {
     padding: 10px 10px;
     background-color: #4285f4;
@@ -792,44 +666,38 @@ input {
     text-align: center;
     margin-top: 5px;
     margin-bottom: 15px;
-    width: 100%;
-    height: 100%;
+    max-width: 80%;
+    max-height: 80%;
+    margin: 0 auto;
 }
 
 #join_container {
     width: auto;
     height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 #join_inner_container {
-    width: auto;
-    height: auto;
-    display: inline-block;
     background-color: #f2f2f2;
     padding: 10px;
     border-radius: 8px;
+    margin-bottom: 15px;
 }
 
 #join_input_container {
     width: auto;
     height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin: 0 auto;
     margin-bottom: 10px;
 }
 
 #join_input {
     padding: 5px;
+    margin: 0 auto;
     width: auto;
     height: auto;
     color: #1D3354;
     font-size: 15px;
     font-weight: bold;
-    text-align: center;
     background-color: white;
 }
 
@@ -840,21 +708,18 @@ input {
 #join_button_container {
     width: auto;
     height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    float: left;
 }
 
 #join_button {
     width: auto;
     height: auto;
+    margin: 0 auto;
     padding: 8px 12px;
+    border-radius: 20%;
     cursor: pointer;
     background-color: #4CAF50;
     font-size: 15px;
     font-weight: bold;
-    text-align: center;
     color: #111111;
 }
 
@@ -1023,26 +888,28 @@ input {
 #audio-container {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     padding: 10px;
     border-radius: 10px;
+    margin: 0 auto;
+    max-width: 500px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 #prev-btn,
 #next-btn {
-    background-color: #333;
+    background-color: #000000;
     color: #fff;
-    border: none;
-    padding: 5px 10px;
-    margin-right: 10px;
-    margin-left: 10px;
-    border-radius: 50%;
+    border: 1.0;
+    padding: 5px 5px;
+    margin-right: 5px;
+    margin-left: 5px;
+    border-radius: 20%;
     cursor: pointer;
 }
 
 #prev-btn i,
 #next-btn i {
-    font-size: 18px;
+    font-size: 150%;
 }
 
 #prev-btn:hover,
@@ -1052,16 +919,6 @@ input {
 
 #source {
     display: none;
-}
-
-#audio {
-    width: 100%;
-    height: 40px;
-}
-
-audio {
-    width: 100%;
-    height: 50px;
 }
 
 #bars {
@@ -1201,49 +1058,7 @@ ul#option li button {
 
 @media only screen and (max-width: 600px) {
     body {
-        padding: 2.7em 0 10em 0;
-    }
-
-    #nav {
-        height: 4.25em;
-        line-height: 0.3em;
-        font-size: 10px;
-    }
-
-    #nav li {
-        margin: 0;
-        top: 0;
-    }
-
-    #nav li a,
-    #nav li span {
-        top: -1px;
-        padding: 5px;
-    }
-
-    #nav li:hover {
-        top: 1px;
-    }
-
-    .logo img {
-        width: 30px;
-        height: 30px;
-    }
-
-    i {
-        margin-left: 1px;
-    }
-
-    #nav ul ul {
-        display: none;
-        position: absolute;
-        padding: 0 1.25em;
-        border-radius: 6px;
-        line-height: 1em;
-    }
-
-    #nav ul li:hover>ul {
-        display: block;
+        padding: 0 0 5em 0;
     }
 
     #parentfolder {
@@ -1259,7 +1074,6 @@ ul#option li button {
         font-size: 12px;
         max-width: 100%;
         padding: 5px;
-        letter-spacing: 0.3px;
     }
 
     .section-title::before,
@@ -1319,27 +1133,6 @@ ul#option li button {
         margin-right: 5px;
     }
 
-    .search-container {
-        display: flex;
-        align-items: center;
-        margin: 1rem auto;
-        width: 80%;
-    }
-
-    #searchInput {
-        padding: 9px;
-        font-size: 11px;
-    }
-
-    #searchButton {
-        padding: 5px 6px;
-        margin-left: 5px;
-    }
-
-    #searchTerms {
-        font-size: 13px;
-    }
-
     .label {
         margin-top: 1px;
         font-size: 13px;
@@ -1394,7 +1187,7 @@ ul#option li button {
     #player {
         padding: 2px;
         border-radius: 2%;
-        margin-bottom: 10px;
+        margin-bottom: 2px;
         margin-left: 10px;
     }
 
@@ -1436,10 +1229,6 @@ ul#option li button {
         height: 48px;
     }
 
-    #footer {
-        font-size: 10px;
-    }
-
     .custom-button {
         border-radius: 20px;
         font-size: 10px;
@@ -1460,11 +1249,6 @@ ul#option li button {
 
     form button {
         width: 30%;
-    }
-
-    #tips {
-        padding: 4px;
-        font-size: 10px;
     }
 
     ul#option li a,
