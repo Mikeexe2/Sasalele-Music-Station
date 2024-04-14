@@ -47,7 +47,7 @@
             </button>
             <div class="collapse navbar-collapse" id="main-navigation">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="#radios">Radio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#radios">Radios</a></li>
                     <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown"
                             aria-expanded="false" href="">Websites</a>
                         <div class="dropdown-menu"><a class="dropdown-item" href="#radiohere">Radio
@@ -90,13 +90,606 @@
 
             <div id="radiostations"></div>
         </section>
+        <link rel="stylesheet" href="styless.css">
+
         <section id="websites">
-            <h2 class="section-title">More Radios</h2>
-            <div class="flex-container" id="radiohere"></div>
+            <h2 class="section-title">Radio Websites</h2>
+            <aside class="LinksListBlock" id="radiohere">
+                <div class="LinksListInner">
+                    <ul class="LinksList">
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://yggdrasilradio.com/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/yggdrasilradio.webp">Yggdrasil Radio<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://radiooooo.com/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/radiooooo.png">Radiooooo<svg xmlns="http://www.w3.org/2000/svg"
+                                    width="16" height="16" fill="currentColor" viewBox="0 0 24 24" role="img"
+                                    class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://player.boxradio.net/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/boxradioplayer.png">Box Radio Player<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://bigbradio.net/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/bigbradio.png">Big B Radio<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink"
+                                href="https://asiadreamradio.torontocast.stream/stations/jp.html"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/asiadreamradio.png">Asia Dream Radio<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink"
+                                href="https://somafm.com/player/#/now-playing/vaporwaves" rel="noreferrer noopener"
+                                target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/vaporwares.jpg">Vaporwaves<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="http://radio.garden/visit/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/radiogarden.png">Radio Garden<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                    </ul>
+                </div>
+            </aside>
             <h2 class="section-title">Japanese Radios</h2>
-            <div class="flex-container" id="radiojphere"></div>
-            <h2 class="section-title">More Websites</h2>
-            <div class="flex-container" id="websitehere"></div>
+            <aside class="LinksListBlock" id="radiojphere">
+                <div class="LinksListInner">
+                    <ul class="LinksList">
+                        <li class="LinksItem"><a class="LinksItemLink"
+                                href="https://mytuner-radio.com/radio/fmna-ba-fm-naha-462029/" rel="noreferrer noopener"
+                                target="_blank"><img alt="" class="LinksLogo" src="assets/websites/fmnaha.jpg">FM那覇 (FM
+                                Naha)<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink"
+                                href="https://mytuner-radio.com/radio/radiomorioka-radio-morioka-412040/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/radiomorioka.jpg">ラヂオもりおか (Radio Morioka)<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink"
+                                href="https://mytuner-radio.com/radio/kocorazi-jun-shan-komiyuniteifang-song-412035/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/koco.png">KOCOラジ (郡山コミュニティ放送) live<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink"
+                                href="https://radio.menu/stations/global-superradio-cc-fm-sun/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/FMSUN.jpg">FM SUN<svg xmlns="http://www.w3.org/2000/svg"
+                                    width="16" height="16" fill="currentColor" viewBox="0 0 24 24" role="img"
+                                    class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink"
+                                href="https://radio.menu/stations/superradio-cc-fm78-1/" rel="noreferrer noopener"
+                                target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/ラジオカロスサッポロFM78.1.jpg">ラジオカロスサッポロ FM78.1<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink"
+                                href="https://mytuner-radio.com/radio/maebashicityehuemu-m-wave-410790/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/まえばしCITYエフエム(M-wave)live.png">まえばしCITYエフエム (M-wave)
+                                live<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink"
+                                href="https://radio.menu/stations/global-superradio-cc-egao/" rel="noreferrer noopener"
+                                target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/エフエムEGAO.png">エフエムEGAO<svg xmlns="http://www.w3.org/2000/svg"
+                                    width="16" height="16" fill="currentColor" viewBox="0 0 24 24" role="img"
+                                    class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink"
+                                href="https://mytuner-radio.com/radio/wi-radio-480137/" rel="noreferrer noopener"
+                                target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/wi-radiO.png">wi-radio 77.6MHz<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink"
+                                href="https://mytuner-radio.com/radio/tokyo-star-radio-ba-wang-zi-fm-480147/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/TokyoStarRadio(八王子FM).png">Tokyo Star Radio
+                                (八王子FM)<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink"
+                                href="http://e.mytuner-radio.com/embed/reds-wave-412042" rel="noreferrer noopener"
+                                target="_blank"><img alt="" class="LinksLogo" src="assets/websites/REDSWAVE.png">REDS
+                                WAVE<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink"
+                                href="https://radio.menu/stations/world-kbs-co-kr-kbs-world-tv/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/KBSworldtv.png">KBS World TV<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink"
+                                href="https://mytuner-radio.com/radio/natorazi-fm-801-412037/" rel="noreferrer noopener"
+                                target="_blank"><img alt="" class="LinksLogo" src="assets/websites/なとらじFM80.1.png">なとらじ
+                                FM 80.1<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink"
+                                href="https://mytuner-radio.com/radio/fmuruma-fm-uruma-417177/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/FMうるま.jpg">FMうるま.jpg<svg xmlns="http://www.w3.org/2000/svg"
+                                    width="16" height="16" fill="currentColor" viewBox="0 0 24 24" role="img"
+                                    class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink"
+                                href="http://e.mytuner-radio.com/embed/dada-more-radio-417290" rel="noreferrer noopener"
+                                target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/DadaMoreRadio.png">Dada More Radio<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink"
+                                href="http://e.mytuner-radio.com/embed/ban-banrazio-411994" rel="noreferrer noopener"
+                                target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/BAN-BANラジオ.png">BAN-BANラジオ<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink"
+                                href="https://mytuner-radio.com/radio/baywave-beiuebu-411995/" rel="noreferrer noopener"
+                                target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/BAYWAVE(ベイウェーブ).png">BAYWAVE (ベイウェーブ)<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink"
+                                href="http://e.mytuner-radio.com/embed/daraz-fm-410013" rel="noreferrer noopener"
+                                target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/DARAZFM（だらずFM）.png">DARAZ FM（だらずFM）<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink"
+                                href="https://mytuner-radio.com/radio/775-lively-fm-nanakoraiburiehuemu-480144/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/77.5LivelyFM.png">77.5 Lively FM (ナナコライブリーエフエム)<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink"
+                                href="http://e.mytuner-radio.com/embed/air-station-hibikieasuteshiyonhibiki-417174"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/AirStationHibiki（エアーステーションひびき）.jpg">Air Station
+                                Hibiki（エアーステーションひびき）<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink"
+                                href="https://radio.menu/stations/global-superradio-cc-b-fm791/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/%E3%82%A8%E3%83%95%E3%82%A8%E3%83%A0%E3%81%B3%E3%81%96%E3%82%93%EF%BC%88B%E3%83%BBFM791%EF%BC%89.png"
+                                    width="16">エフエムびざん（B・FM791）<svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                    height="16" fill="currentColor" viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink"
+                                href="http://e.mytuner-radio.com/embed/lu-jiao-kiritanpofm-kiritampo-fm-417144"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/kiritamporadio.png">鹿角きりたんぽFM (Kiritampo FM)<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink"
+                                href="http://e.mytuner-radio.com/embed/reinbotaunfm-rainbowtown-fm-399785"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/rainbowtownradio.png">レインボータウンFM (Rainbowtown
+                                FM)<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink"
+                                href="https://radio.menu/stations/global-superradio-cc-heart-fm/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/fmnanjo.png">FM Nanjo - Heart FM Nanjo - 77.2 FM<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink"
+                                href="https://mytuner-radio.com/radio/radio3-fm-762-412038/" rel="noreferrer noopener"
+                                target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/仙台のコミュニティFMRADIO3(ラジオ3)76.2MH.png">仙台のコミュニティFM
+                                RADIO3
+                                (ラジオ3) 76.2MHz<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink"
+                                href="http://e.mytuner-radio.com/embed/ehuemu-motsutokomu-fm-motcom-412018"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/FMMOT.com.png">エフエム モットコム (FM Mot.com)<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink"
+                                href="https://mytuner-radio.com/radio/ehuemuenuwan-fm-n1-417156/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/fmn1.png">えふえむ・エヌ・ワン (FM N1)<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink"
+                                href="http://e.mytuner-radio.com/embed/zhong-yang-ehuemu-radio-city-417149"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/中央エフエム(RadioCity).jpg">中央エフエム (Radio City)<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                    </ul>
+                </div>
+            </aside>
+            <h2 class="section-title">Music Sites</h2>
+            <aside class="LinksListBlock" id="websitehere">
+                <div class="LinksListInner">
+                    <ul class="LinksList">
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://kara.moe/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/karamoe.png">kara.moe<svg xmlns="http://www.w3.org/2000/svg"
+                                    width="16" height="16" fill="currentColor" viewBox="0 0 24 24" role="img"
+                                    class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://aniplaylist.com/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/aniplaylist.ico">AniPlaylist<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://utaitedb.net/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/utaitedb.ico">UtaiteDB<svg xmlns="http://www.w3.org/2000/svg"
+                                    width="16" height="16" fill="currentColor" viewBox="0 0 24 24" role="img"
+                                    class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://touhou.kuukunen.net/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/touhouplayer.png">Touhou Player<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://www.squidify.org/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/squidify.png">Squidify<svg xmlns="http://www.w3.org/2000/svg"
+                                    width="16" height="16" fill="currentColor" viewBox="0 0 24 24" role="img"
+                                    class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://ongaku.js.org/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/ongakujs.ico">Ongaku<svg xmlns="http://www.w3.org/2000/svg"
+                                    width="16" height="16" fill="currentColor" viewBox="0 0 24 24" role="img"
+                                    class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://tlmc.pf-n.co/tlmc"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/touhoulossless.svg">Touhou Lossless Music
+                                Collection<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://animethemes.moe/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/animethemesmoe.png">AnimeThemes.moe<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://themes.moe/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/themesmoe.png">Themes.moe<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://www.jcbasimul.com/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/jcba.png">JCBAインターネットサイマルラジオ<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://fmplapla.com/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/fmpurapura.ico">エフエムプラプラ (FM++)<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink"
+                                href="https://tunein.com/radio/Stream-Japanese-Talk-g349/" rel="noreferrer noopener"
+                                target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/japanpodcasts.webp">Japanese Talk Podcasts List on
+                                TuneIn<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://www.simulradio.info/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/simulradio.png">サイマルラジオ (SimulRadio)<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://radiko.jp/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/radiko.png">ラジコ (radiko)<svg xmlns="http://www.w3.org/2000/svg"
+                                    width="16" height="16" fill="currentColor" viewBox="0 0 24 24" role="img"
+                                    class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://www.j-wave.co.jp/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/jwave.jpg">J-WAVE 81.3 FM RADIO<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://www.tfm.co.jp/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/tokyofm.png">TOKYO FM 80.0MHz<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://www.nhk.or.jp/radio/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/nhkradio.png">NHKラジオ らじる★らじる<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink"
+                                href="https://open.spotify.com/show/5uxD2MB2xTgl5gwQIA0Et2" rel="noreferrer noopener"
+                                target="_blank"><img alt="" class="LinksLogo" src="assets/websites/fmradio3.png">FM
+                                RADIO3 (ラジオ3)ポッドキャストチャンネル<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://www.1.fm/stations"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/radios/1.FMHIP.png">All stations from 1.FM<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://www.onsen.ag/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/onsenag.png">Internet Radio Station＜音泉＞<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://www.at-x.com/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/ATX.png">AT-X<svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                    height="16" fill="currentColor" viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://www.joqr.co.jp/ag/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/chouagzone.png">文化放送A&amp;Gゾーン<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://www.animatetimes.com/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/animatetimes.ico">animate Times<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink"
+                                href="https://tunein.com/radio/Stream-Anime-g2752/" rel="noreferrer noopener"
+                                target="_blank"><img alt="" class="LinksLogo" src="assets/websites/tuneIn.webp">Anime
+                                Radio Station on TuneIn<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://onlineradiobox.com/genre/anime/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/animeradiostation.png">Anime Radio Stations<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://www.rcast.net/dir/anime/page1"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/rcastanime.png">RCAST anime genre<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://instant.audio/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo"
+                                    src="assets/websites/instantaudio.ico">Instant Audio<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                    </ul>
+                </div>
+            </aside>
         </section>
         <section id="search">
             <h2 class="section-title">Search</h2>
@@ -311,13 +904,209 @@
                 <a href="https://chrome.google.com/webstore/detail/shazam-find-song-names-fr/mmioliijnhnoblpgimnlajmefafdfilb"
                     target="_blank"><strong>Use Shazam extension on your browser <i
                             class="fas fa-search"></i></strong></a><br>
-                <div class="video-container" id="videoContainer"><iframe id="YouTubeVideo" style="display:none"
-                        allowfullscreen></iframe></div>
+                <div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item"
+                        id="YouTubeVideo" style="display:none" allowfullscreen></iframe></div>
+
             </div>
         </section>
         <section id="scrap">
-            <h2 class="section-title">Download</h2>
-            <div class="download"></div>
+            <h2 class="section-title">Download Sites</h2>
+            <aside class="LinksListBlock">
+                <div class="LinksListInner">
+                    <ul class="LinksList">
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://spotifymate.com/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo" height="16"
+                                    src="assets/downloads/SpotifyMate.png" width="16">Spotify Mate<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://doubledouble.top/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo" height="16"
+                                    src="assets/downloads/doubledouble.png" width="16">DoubleDouble<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://bestmp3converter.com/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo" height="16"
+                                    src="assets/downloads/YouTubetoMP3Converter.png" width="16">YouTube to MP3
+                                Converter<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://ytmdl.deepjyoti30.dev/search"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo" height="16"
+                                    src="assets/downloads/ytmdl.png" width="16">Ytmdl Web<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://free-mp3-download.net/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo" height="16"
+                                    src="assets/downloads/FreeMP3Download.png" width="16">Free MP3 Download<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://en.mygomp3.com/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo" height="16"
+                                    src="assets/downloads/OnlineYouTubeMP3Downloader(mygomp3).png" width="16">Online
+                                YouTube MP3 Downloader (mygomp3)<svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                    height="16" fill="currentColor" viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://spotify-downloader.com/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo" height="16"
+                                    src="assets/downloads/Spotifydownloader.png" width="16">Spotify downloader<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://seinopsys.dev/lrc"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo" height="16"
+                                    src="assets/downloads/LRCOnlineEditor.png" width="16">LRC Online Editor<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://hayqbhgr.slider.kz/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo" height="16"
+                                    src="assets/downloads/sliderkz.jpg" width="16">Slider.kz<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://skymus.org/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo" height="16"
+                                    src="assets/downloads/skymus.ico" width="16">skymus.org<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://alist.thdisc.tk/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo" height="16"
+                                    src="assets/downloads/TouhouDiscDownload.png" width="16">Touhou Disc Download<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://osanime.com/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo" height="16"
+                                    src="assets/downloads/Osanime.png" width="16">Osanime<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://www.ostnimeku.com/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo" height="16"
+                                    src="assets/downloads/Ostnimeku.ico" width="16">Ostnimeku<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://hikarinoakari.com/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo" height="16"
+                                    src="assets/downloads/HikariNoAkari.jpg" width="16">Hikari No Akari<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://alljpopzip.work/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo" height="16"
+                                    src="assets/downloads/AllJpopZip.png" width="16">AllJpopZip<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://www.sakuraost.com/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo" height="16"
+                                    src="assets/downloads/SAKURAOST.ico" width="16">SAKURA OST<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://www.sittingonclouds.net/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo" height="16"
+                                    src="assets/downloads/SittingonClouds.png" width="16">Sitting on Clouds<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://mikudb.moe/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo" height="16"
+                                    src="assets/downloads/MikuDB.jpg" width="16">Miku DB<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="http://www.2cycd.com/forum-43-1.html"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo" height="16"
+                                    src="assets/downloads/nijigendarkhole.png" width="16">二次元蟲洞<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="http://www.acgjc.com/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo" height="16"
+                                    src="assets/downloads/acgman.png" width="16">ACG漫音社<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                        <li class="LinksItem"><a class="LinksItemLink" href="https://sukidesuost.info/"
+                                rel="noreferrer noopener" target="_blank"><img alt="" class="LinksLogo" height="16"
+                                    src="assets/downloads/sukideost.png" width="16">SUKIDESUOST<svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    viewBox="0 0 24 24" role="img" class="LinksIcon">
+                                    <path
+                                        d="M18 3H9.5c-1.65 0-3 1.35-3 3v.5H6c-1.65 0-3 1.35-3 3V18c0 1.65 1.35 3 3 3h8.5c1.65 0 3-1.35 3-3v-.5h.5c1.65 0 3-1.35 3-3V6c0-1.65-1.35-3-3-3Zm-2.5 15c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1V9.5c0-.55.45-1 1-1h.5v6c0 1.65 1.35 3 3 3h6v.5Zm3.5-3.5c0 .55-.45 1-1 1H9.5c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v8.5Zm-1.75-6.25v4.5c0 .55-.45 1-1 1s-1-.45-1-1v-2.59l-3.2 3.2c-.2.2-.45.29-.71.29-.26 0-.51-.1-.71-.29a.996.996 0 0 1 0-1.41l3.2-3.2h-2.59c-.55 0-1-.45-1-1s.45-1 1-1h4.5c.84 0 1.51.67 1.51 1.5Z">
+                                    </path>
+                                </svg></a></li>
+                    </ul>
+                </div>
+            </aside>
+
         </section>
 
         <section id="drive" onload="getFolderId()">
@@ -354,12 +1143,21 @@
                                 Folder ID:</label> <input required id="parentfolder" name="parentfolder"
                                 placeholder="google-drive-folder-id">
                         </div>
-                        <div class="form-group mx-sm-3 mb-2">
-                            <button type="submit" class="btn btn-primary mb-2"><i class="fa-brands fa-google"></i>
-                                Login</button>
+                        <div class="row justify-content-center">
+                            <div class="col-auto">
+                                <form>
+                                    <div class="form-group">
+                                        <div class="input-group mb-2">
+                                            <button type="submit" class="btn btn-primary"><i class="fab fa-google"></i>
+                                                Login</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
+
                     </form>
-                    
+
                     <div id="demo" class="loaded">
                         <details open>
                             <summary>Collection 1</summary>

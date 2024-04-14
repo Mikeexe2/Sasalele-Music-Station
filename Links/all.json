@@ -1362,12 +1362,6 @@
         "website": "https://zeno.fm/radio/radio-reset/"
     },
     {
-        "name": "Night Scans Radio",
-        "url": "https://stream.zeno.fm/7t7lkbcgjrnuv",
-        "favicon": "assets/radios/NightScansRadio.webp",
-        "website": "https://zeno.fm/radio/night-scans-radio/"
-    },
-    {
         "name": "Radio Koneko",
         "url": "https://stream.zeno.fm/kn3v4vwhwf9uv",
         "favicon": "assets/radios/RadioKoneko.webp",
@@ -1432,12 +1426,6 @@
         "url": "https://stream-151.zeno.fm/36kpdc4qn18uv",
         "favicon": "assets/radios/MizarFM.webp",
         "website": "https://zeno.fm/radio/mizarfm/"
-    },
-    {
-        "name": "JJSE Japan Radio",
-        "url": "https://stream.zeno.fm/rotfckpnfi3vv",
-        "favicon": "assets/radios/JJSEJapanRadio.webp",
-        "website": "https://zeno.fm/radio/jjse-japan-radio/"
     },
     {
         "name": "Weebio",
