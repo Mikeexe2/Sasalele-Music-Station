@@ -37,7 +37,7 @@ Portions of this site use code from open source projects including:
 •<a href="https://github.com/dandalpiaz/drive-music-player" target="_blank">Drive Music Player</a>  
 •  <a href="https://github.com/DIYgod/APlayer" target="_blank">APlayer</a>  
 
-API used:
+API used:  
 •<a href="https://www.last.fm/api" target="_blank">LastFM API</a>  
 •<a href="https://api.radio-browser.info/" target="_blank">RadioBrowser API</a>  
 •<a href="https://developers.google.com/youtube/v3" target="_blank">YouTube Data API</a>  
