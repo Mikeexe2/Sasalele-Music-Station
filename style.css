@@ -177,18 +177,37 @@
     --animation-easing-ease-in-out: cubic-bezier(0.5, 0, 0.5, 1);
 }
 
+a[target="_blank"]::after {
+    content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==);
+    margin: 0 3px 0 5px;
+}
+
+a,
+.wl-action[target="_blank"]::after,
+.m-2[target="_blank"]::after {
+    content: none;
+}
+
 .nav-link,
 .navbar-brand {
     cursor: pointer;
-    padding-left: 5px !important;
+    text-align: center !important;
 }
 
 .navbar-collapse {
     justify-content: flex-end
 }
 
-.navbar {
-    padding: 2px 1px !important;
+.nav-link {
+    margin-right: 0.45em !important
+}
+
+.nav-item {
+    color: var(--apple-white);
+}
+
+.nav-link i {
+    margin-left: 0.5em;
 }
 
 .navbar-toggler {
@@ -196,24 +215,141 @@
     border: 0 !important;
 }
 
-i {
-    margin-left: 1px
+#loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
 }
 
-.nav-link {
-    margin-right: 1em !important
+#loading h1 {
+    color: white;
+    font-size: 2em;
 }
+
+#contents {
+    display: none;
+    min-height: 100vh;
+}
+
+.pace {
+    -webkit-pointer-events: none;
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.pace-inactive {
+    display: none;
+}
+
+.pace .pace-progress {
+    background-color: rgba(0, 0, 0, 0.19999999999999996);
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    right: 100%;
+    bottom: 0;
+    width: 100%;
+}
+
+@keyframes flowingGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
 
 body {
-    animation: blur 0.5s ease-out;
+    margin: 0;
+    padding: 0;
+    height: 100%;
     /*background-image: url('https://img.8845.top/good');*/
-    background-image: url('assets/sasalele_bg.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    font-family: "Noto Sans Display" !important;
+    background-image: linear-gradient(to right, rgba(0, 111, 207, 1), rgba(241, 183, 255, 1)95%);
+    background-size: 200% 200%;
+    animation: flowingGradient 10s ease infinite;
     cursor: url(assets/Arrow.cur), auto;
+}
+
+#video-list {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 1px;
+    background-color: var(--white-60-alpha);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 0 10px;
+}
+
+#video-list li {
+    cursor: pointer;
+    padding: 10px;
+    list-style: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#video-list li:hover {
+    background-color: var(--white-60-alpha);
+    color: var(--focus-blue-100);
+}
+
+#vplayer {
+    border-radius: 5px;
+}
+
+#vplayer video {
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.genre-link {
+    cursor: pointer;
+    color: var(--facebook-blue);
+    text-decoration: none;
+    display: block;
+    padding: 0.3rem 1.5rem;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.genre-link:hover {
+    color: var(--focus-blue-100);
+    text-decoration: none;
+    background-color: #f8f9fa;
+}
+
+#genre-info {
+    background-color: #fff;
+    padding: 1px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.input-group-prepend .btn {
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+
+#searchChannel {
+    margin-bottom: 10px;
+    border-radius: 0;
 }
 
 .radiodynamic {
@@ -223,6 +359,8 @@ body {
 
 .count {
     margin: 0 auto;
+    margin-bottom: 0.5em;
+    border-radius: 8px;
     width: 50%;
     text-align: center;
     background: var(--expressive-green);
@@ -230,13 +368,27 @@ body {
 
 .radiostations {
     padding: 10px;
-    max-width: 90%;
+    max-width: 95%;
     margin: 0 auto;
+}
+
+#jpradiocontainer {
+    padding: 10px;
+    max-width: 90%;
+    max-height: 300px;
+    overflow-y: auto;
+    margin: 0 auto;
+}
+
+.radio-result-container {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
 }
 
 .genre-section {
     margin-bottom: 10px;
-    background-color: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red);
 }
 
 .genre-header {
@@ -244,24 +396,27 @@ body {
     font-weight: bold;
     cursor: pointer;
     color: var(--apple-white);
-    background: var(--apple-black);
+    background: var(--black-50-alpha);
     padding: 10px;
     border: 1px solid var(--gray-40);
     border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.genre-div {
+    margin-bottom: 20px;
 }
 
 .genre-content {
     gap: 10px;
     max-height: 200px;
     overflow-y: auto;
+    transition: max-height 0.3s ease;
 }
 
 .genre-content.close {
-    display: none;
-    padding: 10px;
-    border: 1px solid var(--gray-40);
-    border-radius: 4px;
-    margin-top: 5px;
+    max-height: 0;
+    overflow: hidden;
 }
 
 @keyframes rotate {
@@ -275,7 +430,7 @@ body {
 }
 
 .rotating {
-    animation: rotate 2s linear infinite;
+    animation: rotate 5s linear infinite;
 }
 
 .rad-icon {
@@ -315,7 +470,8 @@ body {
 }
 
 .main-play-button:hover {
-    background-color: var(--gray-60)
+    background-color: var(--black-50-alpha);
+    border: 0.2em solid var(--apple-white);
 }
 
 .player-radio-name {
@@ -335,6 +491,16 @@ body {
     flex-grow: 1;
 }
 
+#waline {
+    max-width: 90%;
+    border-radius: 8px;
+    margin: 5px auto 5px;
+    padding: 5px 10px;
+    background: var(--white-90-alpha);
+    outline: 0;
+    border: none
+}
+
 #disable_msg {
     display: none;
     min-width: 250px;
@@ -352,7 +518,8 @@ body {
 }
 
 #aplayer {
-    width: 70%;
+    max-height: 300px;
+    width: 90%;
     margin: 0.742em auto 0.742em auto;
     justify-content: center
 }
@@ -399,10 +566,10 @@ body {
 }
 
 .search-results {
-    padding: 10px;
+    padding: 5px;
     text-align: center;
     max-width: 90%;
-    margin: 0 auto;
+    margin: 0 auto 10px;
     background-color: var(--color-border-medium-emphasis);
     justify-content: center
 }
@@ -445,47 +612,47 @@ body {
 }
 
 .icon-spotify {
-    background-image: url('assets/covers/spotify.png')
+    background-image: url('assets/covers/spotify.webp')
 }
 
 .icon-apple {
-    background-image: url('assets/covers/applemusic.png')
+    background-image: url('assets/covers/applemusic.webp')
 }
 
 .icon-amazon {
-    background-image: url('assets/covers/amazonmusic.png')
+    background-image: url('assets/covers/amazonmusic.webp')
 }
 
 .icon-youtube {
-    background-image: url('assets/covers/youtube.png')
+    background-image: url('assets/covers/youtube.webp')
 }
 
 .icon-youtubemusic {
-    background-image: url('assets/covers/youtubemusic.png')
+    background-image: url('assets/covers/youtubemusic.webp')
 }
 
 .icon-netease {
-    background-image: url('assets/covers/netease.ico')
+    background-image: url('assets/covers/netease.webp')
 }
 
 .icon-vgmdb {
-    background-image: url('assets/covers/vgmdb.ico')
+    background-image: url('assets/covers/vgmdb.webp')
 }
 
 .icon-musicenc {
-    background-image: url('assets/covers/musicenc.jpg')
+    background-image: url('assets/covers/musicenc.webp')
 }
 
 .icon-jlyric {
-    background-image: url('assets/covers/jlyric.ico')
+    background-image: url('assets/covers/jlyric.webp')
 }
 
 .icon-followlyrics {
-    background-image: url('assets/covers/followlyrics.png')
+    background-image: url('assets/covers/followlyrics.webp')
 }
 
 .icon-kugeci {
-    background-image: url('assets/covers/kugeci.png')
+    background-image: url('assets/covers/kugeci.webp')
 }
 
 .icon-baha {
@@ -493,59 +660,59 @@ body {
 }
 
 .icon-kkbox {
-    background-image: url('assets/covers/kkbox.ico')
+    background-image: url('assets/covers/kkbox.webp')
 }
 
 .icon-audarchive {
-    background-image: url('assets/covers/audioarchive.ico')
+    background-image: url('assets/covers/audioarchive.webp')
 }
 
 .icon-soundcloud {
-    background-image: url('assets/covers/soundcloud.ico')
+    background-image: url('assets/covers/soundcloud.webp')
 }
 
 .icon-lastfm {
-    background-image: url('assets/covers/lastfm.png')
+    background-image: url('assets/covers/lastfm.webp')
 }
 
 .icon-google {
-    background-image: url('assets/covers/google.ico')
+    background-image: url('assets/covers/google.webp')
 }
 
 .icon-utanet {
-    background-image: url('assets/covers/utanet.png')
+    background-image: url('assets/covers/utanet.webp')
 }
 
 .icon-petitlyrics {
-    background-image: url('assets/covers/petitlyrics.ico')
+    background-image: url('assets/covers/petitlyrics.webp')
 }
 
 .icon-musicbrainz {
-    background-image: url('assets/covers/musicbrainz.png')
+    background-image: url('assets/covers/musicbrainz.webp')
 }
 
 .icon-gnudb {
-    background-image: url('assets/covers/gnudb.ico')
+    background-image: url('assets/covers/gnudb.webp')
 }
 
 .icon-niconico {
-    background-image: url('assets/covers/niconico.png')
+    background-image: url('assets/covers/niconico.webp')
 }
 
 .icon-vocadb {
-    background-image: url('assets/covers/vocadb.ico')
+    background-image: url('assets/covers/vocadb.webp')
 }
 
 .icon-jplyrics {
-    background-image: url('assets/covers/jplyrics.png')
+    background-image: url('assets/covers/jplyrics.webp')
 }
 
 .icon-touhoudb {
-    background-image: url('assets/covers/touhoudb.png')
+    background-image: url('assets/covers/touhoudb.webp')
 }
 
 .icon-mikudb {
-    background-image: url('assets/covers/mikudb.jpg')
+    background-image: url('assets/covers/mikudb.webp')
 }
 
 .button-label {
@@ -556,7 +723,7 @@ body {
 }
 
 .LinksListBlock {
-    padding: 10px auto 10px;
+    padding: 10px;
     border-radius: 8px;
     background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray);
     max-width: 90%;
@@ -564,8 +731,7 @@ body {
 }
 
 .LinksItem {
-    display: list-item;
-    padding: 10px auto 10px;
+    display: flex;
     text-align: -webkit-match-parent;
     unicode-bidi: isolate;
     width: 100%
@@ -580,7 +746,7 @@ body {
 
 .LinksItemLink {
     position: relative;
-    display: inline-block;
+    display: flex;
     min-height: 60px;
     align-items: center;
     padding: 10px auto 10px;
@@ -636,23 +802,99 @@ screen and (min-width: 1152px) {
 
 #player {
     position: fixed;
-    padding: 10px 10px 10px 10px;
-    bottom: 10px;
-    z-index: 9999;
-    left: 10px;
-    text-align: left;
-    border-radius: 10px;
-    background: var(--wp--preset--gradient--pale-ocean);
-    height: fit-content;
-    width: fit-content;
-    overflow: hidden
-}
-
-#gdmp {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    flex: 1;
+    flex-wrap: wrap;
+    text-align: left;
+    bottom: 10px;
+    z-index: 9999;
+    left: 10px;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 0 10px 2px rgb(0, 0, 0);
+    background-image: linear-gradient(to right, #24bfff, #4481eb, #04befe, #3f86ed);
+    background-size: 200% 200%;
+    color: var(--white-100);
+    height: fit-content;
+    width: fit-content;
+    overflow: hidden;
+    animation: flowingGradient 5s ease infinite;
+}
+
+#sasaleleplayer {
+    display: block;
+    margin-left: 0.6em;
+}
+
+#audio-wrapper {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    background: rgb(60, 60, 60) !important;
+}
+
+#audio-container {
+    max-width: 1130px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#next-btn,
+#prev-btn {
+    background: none;
+    border: none;
+    width: auto;
+    margin: 0px;
+    padding: 17px;
+    padding-left: 20px;
+    padding-right: 20px;
+    z-index: 2;
+    font-size: 14px;
+}
+
+#next-btn {
+    float: right;
+}
+
+#prev-btn {
+    float: left;
+}
+
+#video {
+    filter: sepia(20%) saturate(70%) grayscale(1) contrast(99%) invert(12%);
+    height: 30px;
+    width: 200px;
+}
+
+#next-btn {
+    float: right;
+}
+
+#prev-btn {
+    float: left;
+}
+
+#prev-btn,
+#next-btn {
+    width: auto;
+    margin: 0px;
+    padding: 17px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+#prev-btn i,
+#next-btn i {
+    font-size: 16px;
+    color: var(--apple-white)
 }
 
 #miniPlayer,
@@ -660,6 +902,11 @@ screen and (min-width: 1152px) {
     filter: sepia(20%) saturate(70%) grayscale(1) contrast(99%) invert(12%);
     height: 30px;
     width: 200px;
+}
+
+#audio {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 audio::-webkit-media-controls-enclosure {
@@ -670,7 +917,6 @@ audio::-webkit-media-controls-enclosure {
     transform: scale(1.1);
 }
 
-#miku-gif,
 #default,
 #ip {
     height: 20px;
@@ -681,25 +927,18 @@ audio::-webkit-media-controls-enclosure {
     text-align: left;
 }
 
-#cover a {
-    display: inline-block;
-    transition: transform 0.2s, box-shadow 0.2s
-}
-
-#cover a:hover {
-    transform: scale(1.1);
-}
-
 #cover img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     margin-left: 5px;
-    margin-right: 20px
+    margin-bottom: 5px;
 }
 
 #stationName {
     font-size: 16px;
+    flex: 1;
+    text-align: left;
     font-weight: bold;
     padding: 2px 2px 2px 2px;
     color: var(--apple-black)
@@ -707,36 +946,29 @@ audio::-webkit-media-controls-enclosure {
 
 #togglePlayer {
     position: absolute;
-    top: 1px;
-    right: 3px;
+    top: 5px;
+    right: 5px;
+    z-index: 999;
 }
 
 #toggleRandom {
     position: absolute;
-    top: 27px;
-    right: 0px;
+    top: 5px;
+    right: 40px;
+    z-index: 999;
 }
 
 #togglePlayer,
-#toggleRandom,
-#prev-btn,
-#next-btn {
+#toggleRandom {
     background: none;
-    background-color: transparent;
     border: none;
     outline: none;
     cursor: pointer;
 }
 
 #togglePlayer i {
-    font-size: 14px;
-    color: var(--apple-black)
-}
-
-#prev-btn i,
-#next-btn i {
     font-size: 16px;
-    color: var(--apple-white)
+    color: var(--apple-black)
 }
 
 #togglePlayer .fas {
@@ -765,16 +997,32 @@ audio::-webkit-media-controls-enclosure {
     display: none
 }
 
+#player.minimized {
+    padding-left: 45px;
+    padding-top: 45px;
+    overflow: hidden;
+}
+
 #player.minimized #stationName {
-    display: none;
+    display: none
 }
 
 #player.minimized #miniPlayer {
-    display: none;
+    display: none
+}
+
+
+#clock {
+    color: var(--expressive-yellow);
+    font-weight: 400;
+    margin: 0 auto;
+    text-align: center;
+    padding: 1px;
 }
 
 #up-button {
     display: inline-flex;
+    z-index: 100;
     appearance: none;
     -webkit-box-align: center;
     align-items: center;
@@ -802,17 +1050,32 @@ audio::-webkit-media-controls-enclosure {
     visibility: visible;
 }
 
+#up-button:hover {
+    background-color: var(--expressive-purple);
+}
+
 .section-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 0 auto;
-    padding: 0.5em 0em;
-    border-radius: 8px;
+    text-align: center;
     max-width: 90%;
     font-family: "Noto Sans" !important;
     line-height: 1.5;
     font-weight: 700;
-    font-size: var(--wp--preset--font-size--x-large);
+    padding: 0.5em;
+    font-size: var(--wp--preset--font-size--large);
+    height: fit-content;
+    background-color: var(--color-border-medium-emphasis);
     color: var(--white-100);
-    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.section-title i {
+    padding: 0 0.3em;
 }
 
 .content {
@@ -820,6 +1083,7 @@ audio::-webkit-media-controls-enclosure {
     max-width: 90%;
     margin: 0.742em auto 0.742em auto;
     padding: 10px;
+    margin-bottom: 75px;
     justify-content: center;
     color: var(--apple-white)
 }
@@ -881,7 +1145,7 @@ audio::-webkit-media-controls-enclosure {
     margin: 5px auto 5px;
     padding: 5px 10px;
     height: 450px;
-    background: url(assets/comment-bg.png) right top/20% no-repeat var(--apple-white);
+    background: url(assets/comment-bg.webp) right top/20% no-repeat var(--apple-white);
     outline: 0;
     border: none
 }
@@ -1006,41 +1270,8 @@ button {
     border-right: 6px solid var(--apple-white)
 }
 
-@keyframes blur {
-    0% {
-        filter: blur(5px)
-    }
-
-    100% {}
-}
-
-* {
-    scrollbar-width: thin;
-    scrollbar-color: var(--expressive-pink) var(--gray-50);
-}
-
-*::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
-}
-
-*::-webkit-scrollbar-track {
-    background: var(--caution-red-vivid-100);
-    border-radius: 10px;
-}
-
-*::-webkit-scrollbar-thumb {
-    background-color: var(--expressive-pink);
-    border-radius: 10px;
-    border: 3px solid var(--gray-50);
-}
-
-*::-webkit-scrollbar-thumb:hover {
-    background-color: #ff80ab;
-}
-
 #tips {
-    width: 80%;
+    width: 90%;
     border-radius: 8px;
     font-size: 16px;
     line-height: 1.4;
@@ -1245,11 +1476,38 @@ summary {
     text-decoration: none
 }
 
+.icon:before {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+}
+
+#footer {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--apple-white);
+    padding-top: 1rem;
+    padding: 1rem 0 1rem 0;
+    background-attachment: fixed, fixed;
+    background: var(--black-80-alpha);
+    background-position: center, center;
+    background-repeat: repeat, no-repeat;
+    background-size: auto, cover;
+}
+
+.m-2 {
+    text-decoration: none;
+    display: inline-block;
+}
 
 @media only screen and (max-width: 575.98px) {
     .section-title {
         font-size: var(--wp--preset--font-size--medium);
-        line-height: 1.0
     }
 
     .genre-header {
@@ -1297,7 +1555,10 @@ summary {
         width: 25px;
         height: 25px;
         margin-right: 3px;
-        font-size: 9px
+    }
+
+    .main-play-button i {
+        font-size: 11px;
     }
 
     .player-radio-name {
@@ -1319,7 +1580,7 @@ summary {
     }
 
     .search-results {
-        padding: 15px
+        padding: 3px
     }
 
     .search-terms,
@@ -1343,6 +1604,7 @@ summary {
     }
 
     #player {
+        padding: 3px;
         bottom: 5px;
         left: 5px
     }
@@ -1355,13 +1617,22 @@ summary {
         font-size: 14px
     }
 
+    #miku-gif {
+        font-size: 14px
+    }
+
+    #player.minimized {
+        padding-left: 10px;
+        padding-top: 40px;
+    }
+
     #player #cover {
         margin-left: 1px;
         margin-right: 20px
     }
 
     #aplayer {
-        width: 80%;
+        max-height: 200px;
     }
 
     #cover img {
@@ -1380,8 +1651,6 @@ summary {
     #prev-btn,
     #next-btn {
         font-size: var(--wp--preset--font-size--small);
-        padding: 5px;
-        margin: 0 1px
     }
 
     input {
@@ -1391,11 +1660,6 @@ summary {
     option li a,
     option li button {
         font-size: 10px
-    }
-
-    .content {
-        margin: 0.2em auto;
-        padding: 5px;
     }
 
     details details {
@@ -1408,9 +1672,5 @@ summary {
     p,
     summary {
         font-size: 12px
-    }
-
-    button {
-        font-size: 10px
     }
 }

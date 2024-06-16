@@ -1,6 +1,6 @@
 # <img src="assets/sasalele_logo-removebg.png" width="40px"> Sasalele Music Station
 
-Welcome to Sasalele Music Station! Listen to over 300 radio channels featuring a variety of anime OST and more.   
+Welcome to Sasalele Music Station! Listen to over 400 radio channels featuring a variety of anime OST and more.   
 This website compiles all your favorite stations, making it easy to find and listen to them.  
 
 <p align="center">
@@ -14,7 +14,7 @@ This website compiles all your favorite stations, making it easy to find and lis
 ✔️ Easy search function: Search stations by name or search using Radio Browser's API.  
 ✔️ Enjoy your personal collection using Google Drive player.   
 ✔️ Quickly search for song names and find results across your preferred search engines.  
-✔️ Discover new music.  
+✔️ Play M3u8 streams and watch a collection of them.  
 ✔️ Access a range of tools for downloading, editing, and managing your MP3 files.  
 ✔️ Join the chat and share your playing song.  
 ✔️ Immerse yourself in Japanese language and culture by tuning into radio talk shows.
@@ -36,6 +36,8 @@ ALL the owners of these amazing radio stations, without you, none of this would 
 Portions of this site use code from open source projects including:  
 •<a href="https://github.com/dandalpiaz/drive-music-player" target="_blank">Drive Music Player</a>  
 •  <a href="https://github.com/DIYgod/APlayer" target="_blank">APlayer</a>  
+•  <a href="https://github.com/video-dev/hls.js" target="_blank">hls.js</a>  
+•  <a href="https://github.com/walinejs/waline" target="_blank">Waline</a>  
 
 API used:  
 •<a href="https://www.last.fm/api" target="_blank">LastFM API</a>  

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Search Songs - Song Search, Music Discovery, Find Your Favorite Tracks</title>
+        <meta name="robots" content="index, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+        <meta name="Keywords"
+            content="Song search, music discovery, find songs, music search engine, song finder, track search, audio search, song database, song recommendations">
+        <meta name="description"
+            content="Discover and search for songs using our powerful music search engine. Find your favorite tracks, explore new music, and uncover hidden gems. Our comprehensive song database provides accurate and relevant results. Start your music discovery journey today!">
+        <link rel="canonical" href="https://basic.pp.ua/search.html">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Sasalele Music Station">
+        <meta property="og:url" content="https://basic.pp.ua/">
+        <meta property="og:site_name" content="Sasalele Music Station">
+        <script type="application/ld+json">{
+                         "@context": "https://schema.org",
+                         "@type": "WebSite",
+                         "name": "Sasalele Music Station",
+                         "alternateName": ["Sasalele Radio", "Sasa lele Music station", "Sasa Lele", "sasalele"],
+                         "url": "https://basic.pp.ua/"
+                         }
+                      </script>
+        <link rel="icon" href="assets/sasalele_logo-removebg.webp">
+        <link rel="apple-touch-icon" href="assets/sasalele_logo-removebg.webp">
+        <link rel="shortcut icon" type="x-icon" href="assets/sasalele_logo-removebg.webp">
+        <script src="js/jquery-3.5.1.min.js"></script>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-LDY4BC680M"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+
+            gtag('config', 'G-LDY4BC680M');
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@latest/pace-theme-default.min.css">
+    </head>
+
+    <body>
+        <nav class="navbar sticky-top navbar-dark bg-dark navbar-expand-md">
+            <a class="navbar-brand" href="https://basic.pp.ua/"><img class="" src="assets/sasalele_logo-removebg.webp"
+                    width="auto" height="32"></a>
+            <div class="navbar-text d-flex justify-content-center align-items-center text-white">Sasalele Music Station
+            </div>
+            <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse"
+                data-target="#main-navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="main-navigation">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Radios<i
+                                class="fa-solid fa-radio"></i></a>
+                    </li>
+                    <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown"
+                            aria-expanded="false" href="#">Websites<i class="fa-fw fas fa-link"></i></a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="website.html#radiohere">Radio
+                                Websites <i class="fa-solid fa-tower-broadcast"></i></a>
+                            <a class="dropdown-item" href="website.html#radiojppodcast">Japanese
+                                Radios / Podcasts <i class="fa-solid fa-podcast"></i></a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="website.html#websitehere">Music
+                                Sites <i class="fa-solid fa-headset"></i></a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="website.html#scrap">Download / Tools <i
+                                    class="fa-solid fa-download"></i></a>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="video.html">Videos<i
+                                class="fa-solid fa-video"></i></a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="chat.html">Chat<i
+                                class="fa-solid fa-comment"></i></a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="search.html">Search<i
+                                class="fa-solid fa-magnifying-glass"></i></a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="drive.html">Drive Music Player<i
+                                class="fa-brands fa-google-drive"></i></a></li>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <div id="clock">
+                            <span id="clockTime"></span>
+                            <span id="clockDay"></span>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+        </nav>
+        <section id="search">
+            <div class="section-title"><i class="fa-solid fa-magnifying-glass"></i>Search<i
+                    class="fa-solid fa-magnifying-glass"></i></div>
+            <details close id="tips">
+                <summary><span class="badge badge-info">Search Tips</span></summary>
+                <strong>Explore the Options</strong>
+                <p>Explore top 5 music results from LastFM. Also, use Google Programmable
+                    Search for interactive search experience. Click on the websites in the list for more options.
+                    The
+                    embedded video is the most relevance results on YouTube.</p>
+            </details>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-6 searchsong">
+                        <div class="input-group">
+                            <input type="search" id="searchInput" class="form-control"
+                                placeholder="Enter a song name...">
+                            <button type="button" class="btn btn-primary" id="searchButton">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="search-results" style="display:none">
+                <div class="search-terms">
+                    <p>Possible matches for: <mark class="highlight" id="searchTerms"></mark></p>
+                    <h6 class="display-6 m-3" id="noresult">No results has been found on LastFM :(</h6>
+                </div>
+                <script data-cfasync="false" src="https://cse.google.com/cse.js?cx=53e18594a81454c71">
+                </script>
+                <div class="gcse-search"></div>
+                <div id="lastFMInfo" class="info-container">
+                </div>
+                <div class="container mt-3">
+                    <div class="table-responsive">
+                        <table class="searchwebsite">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <button class="togglesearch">
+                                            <div class="button-icon icon-google"></div>
+                                            <span class="button-label">Google</span>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="togglesearch">
+                                            <div class="button-icon icon-youtube"></div>
+                                            <span class="button-label">YouTube</span>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="togglesearch">
+                                            <div class="button-icon icon-youtubemusic"></div>
+                                            <span class="button-label">YouTube Music</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <button class="togglesearch">
+                                            <div class="button-icon icon-spotify"></div>
+                                            <span class="button-label">Spotify</span>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="togglesearch">
+                                            <div class="button-icon icon-apple"></div>
+                                            <span class="button-label">Apple Music</span>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="togglesearch">
+                                            <div class="button-icon icon-netease"></div>
+                                            <span class="button-label">网易云</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr></tr>
+                                <tr>
+                                    <td>
+                                        <button class="togglesearch">
+                                            <div class="button-icon icon-soundcloud"></div>
+                                            <span class="button-label">Soundcloud</span>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="togglesearch">
+                                            <div class="button-icon icon-amazon"></div>
+                                            <span class="button-label">Amazon Music</span>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="togglesearch">
+                                            <div class="button-icon icon-amazon"></div>
+                                            <span class="button-label">Amazon Japan</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <button class="togglesearch">
+                                            <div class="button-icon icon-audarchive"></div>
+                                            <span class="button-label">Audio Archive</span>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="togglesearch">
+                                            <div class="button-icon icon-vgmdb"></div>
+                                            <span class="button-label">VGMdb</span>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="togglesearch">
+                                            <div class="button-icon icon-kkbox"></div>
+                                            <span class="button-label">KKBOX</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <button class="togglesearch">
+                                            <div class="button-icon icon-musicbrainz"></div>
+                                            <span class="button-label">MusicBrainz</span>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="togglesearch">
+                                            <div class="button-icon icon-lastfm"></div>
+                                            <span class="button-label">last.fm</span>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="togglesearch">
+                                            <div class="button-icon icon-gnudb"></div>
+                                            <span class="button-label">Gnudb</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <button class="togglesearch">
+                                            <div class="button-icon icon-musicenc"></div>
+                                            <span class="button-label">MusicEnc</span>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="togglesearch">
+                                            <div class="button-icon icon-jlyric"></div>
+                                            <span class="button-label">J-Lyric.net</span>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="togglesearch">
+                                            <div class="button-icon icon-followlyrics"></div>
+                                            <span class="button-label">FollowLyrics</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <button class="togglesearch">
+                                            <div class="button-icon icon-kugeci"></div>
+                                            <span class="button-label">Kugeci</span>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="togglesearch">
+                                            <div class="button-icon icon-google"></div>
+                                            <span class="button-label">Google(Lyrics)</span>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="togglesearch">
+                                            <div class="button-icon icon-baha"></div>
+                                            <span class="button-label">巴哈姆特</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <button class="togglesearch">
+                                            <div class="button-icon icon-utanet"></div>
+                                            <span class="button-label">Uta-net</span>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="togglesearch">
+                                            <div class="button-icon icon-jplyrics"></div>
+                                            <span class="button-label">Japanese Song Lyrics</span>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="togglesearch">
+                                            <div class="button-icon icon-petitlyrics"></div>
+                                            <span class="button-label">PetitLyrics</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <button class="togglesearch">
+                                            <div class="button-icon icon-mikudb"></div>
+                                            <span class="button-label">MikuDB</span>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="togglesearch">
+                                            <div class="button-icon icon-vocadb"></div>
+                                            <span class="button-label">VocaDB</span>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="togglesearch">
+                                            <div class="button-icon icon-touhoudb"></div>
+                                            <span class="button-label">TouhouDB</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <button class="togglesearch">
+                                            <div class="button-icon icon-niconico"></div>
+                                            <span class="button-label">ニコニコ動画</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item"
+                        id="YouTubeVideo" style="display:none" allowfullscreen></iframe></div>
+            </div>
+        </section>
+    </body>
+    <script src="js/search.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/9e5ba2e3f5.js"></script>
+    <script src="js/stats.js"></script>
+
+</html>

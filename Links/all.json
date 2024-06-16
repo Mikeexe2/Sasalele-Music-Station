@@ -1,64 +1,78 @@
 [
     {
-        "name": "LISTEN.MOE",
+        "name": "LISTEN.MOE JPOP",
         "url": "https://listen.moe/stream",
-        "favicon": "assets/radios/LISTEN.MOE.png",
+        "favicon": "assets/radios/LISTEN.MOE.webp",
         "genre": "jmusic",
         "website": "https://listen.moe/"
     },
     {
         "name": "LISTEN.MOE KPOP",
         "url": "https://listen.moe/kpop/stream",
-        "favicon": "assets/radios/LISTEN.MOE.png",
+        "favicon": "assets/radios/LISTEN.MOE.webp",
         "genre": "kmusic",
         "website": "https://listen.moe/"
     },
     {
         "name": "R/a/dio",
         "url": "https://stream.r-a-d.io/main.mp3",
-        "favicon": "assets/radios/Rad.io.png",
+        "favicon": "assets/radios/Rad.io.webp",
         "genre": "jmusic",
         "website": "https://r-a-d.io/"
     },
     {
         "name": "Patchwork Archive",
         "url": "https://a4.asurahosting.com/listen/patchworkarchive/radio.mp3",
-        "favicon": "assets/radios/patchworkarchive.png",
+        "favicon": "assets/radios/patchworkarchive.webp",
         "genre": "vocaloid",
         "website": "https://patchwork.moekyun.me/radio"
     },
     {
+        "name": "TJS Japanese Radio Station",
+        "url": "http://s8.citrus3.com:8200/stream",
+        "favicon": "assets/radios/tjsradio.webp",
+        "genre": "jmusic",
+        "website": "https://www.tjsla.com/"
+    },
+    {
+        "name": "Neko-Network Live Platform",
+        "url": "https://listen.nekonetwork.moe:8400/anime.mp3",
+        "favicon": "assets/radios/nekonetworklive.webp",
+        "genre": "jmusic",
+        "website": "https://listen.nekonetwork.moe/"
+    },
+    {
         "name": "Radio Otaku's Dream",
         "url": "http://serv.1fm.me:8004/;",
-        "favicon": "assets/radios/RadioOtaku'sDream.png",
+        "favicon": "assets/radios/RadioOtaku'sDream.webp",
         "genre": "jmusic",
         "website": "https://www.otakus-dream.com/"
     },
     {
         "name": "Vocaloid Radio VRX (192kbps)",
         "url": "https://vrx.piro.moe/stream-192",
-        "favicon": "assets/radios/VocaloidRadioVRX(192kbps).png",
+        "favicon": "assets/radios/VocaloidRadioVRX(192kbps).webp",
         "genre": "vocaloid",
         "website": "https://vrx.piro.moe/"
     },
     {
         "name": "Vocaloid Radio VRX (256kbps)",
         "url": "https://vrx.piro.moe/stream-256",
-        "favicon": "assets/radios/VocaloidRadioVRX(256kbps).png",
+        "favicon": "assets/radios/VocaloidRadioVRX(256kbps).webp",
         "genre": "vocaloid",
         "website": "https://vrx.piro.moe/"
     },
     {
         "name": "Vocaloid Radio (320kbps)",
         "url": "https://vocaloid.radioca.st/stream",
-        "favicon": "assets/radios/VocaloidRadio(320kbps).jpg",
+        "favicon": "assets/radios/VocaloidRadio(320kbps).webp",
         "genre": "vocaloid",
         "website": "https://vocaloidradio.com/"
     },
     {
         "name": "V家电台·Vocaloid Radio",
         "url": "http://curiosity.shoutca.st:8019/stream&type=mp3&quot",
-        "favicon": "assets/radios/V家电台·VocaloidRadio.jpg",
+        "favicon": "assets/radios/V家电台·VocaloidRadio.webp",
         "genre": "vocaloid",
         "website": "https://vocaloidradio.com/"
     },
@@ -72,105 +86,105 @@
     {
         "name": "WAP-FM",
         "url": "https://radio.wapchan.org/wapfm",
-        "favicon": "assets/radios/wapfm.ico",
+        "favicon": "assets/radios/Unidentified2.webp",
         "genre": "jmusic",
         "website": "https://radio.wapchan.org/"
     },
     {
         "name": "GOTANNO RADIO 89.2",
         "url": "https://gotanno.love:8443/;",
-        "favicon": "assets/radios/GOTANNORADIO.png",
+        "favicon": "assets/radios/GOTANNORADIO.webp",
         "genre": "jmusic",
         "website": "https://stcat.com/"
     },
     {
         "name": "PianetaB WebRadio",
         "url": "https://listen.pianetabwebradio.it:8000/radio.mp3",
-        "favicon": "assets/radios/pianetabwebradio.png",
+        "favicon": "assets/radios/pianetabwebradio.webp",
         "genre": "jmusic",
         "website": "https://www.pianetabwebradio.it/"
     },
     {
         "name": "Tsubaki Web Radio",
         "url": "http://stream.tsubakianimeradio.com:9000/stream/1/",
-        "favicon": "assets/radios/TsubakiWebRadio.jpg",
+        "favicon": "assets/radios/TsubakiWebRadio.webp",
         "genre": "jmusic",
         "website": "http://tsubakianimeradio.com/"
     },
     {
         "name": "CALMRADIO.COM - J Pop",
         "url": "http://23.82.11.87:21928/stream;stream.nsv&type=mp3&quot",
-        "favicon": "assets/radios/CALMRADIO.COM-JPop.png",
+        "favicon": "assets/radios/CALMRADIO.COM-JPop.webp",
         "genre": "jmusic",
         "website": "https://online-radio.eu/radio/5446-calm-radio-j-pop"
     },
     {
         "name": "Radio Nami",
         "url": "http://80.252.130.250:8000/radionami",
-        "favicon": "assets/radios/RadioNami.png",
+        "favicon": "assets/radios/RadioNami.webp",
         "genre": "jmusic",
         "website": "https://radionami.com/"
     },
     {
         "name": "Radio Nami(320kbps)",
         "url": "http://5.9.2.139:8000/any-anime.ru",
-        "favicon": "assets/radios/RadioNami-MP3320k(Home).png",
+        "favicon": "assets/radios/RadioNami-MP3320k(Home).webp",
         "genre": "jmusic",
         "website": "https://radionami.com/"
     },
     {
         "name": "Radio J-Hero",
         "url": "http://stm1.radiojhero.com:8008/;",
-        "favicon": "assets/radios/RadioJ-Hero.png",
+        "favicon": "assets/radios/RadioJ-Hero.webp",
         "genre": "jmusic",
         "website": "https://radiojhero.com/"
     },
     {
         "name": "Radio Caprice J-Pop",
         "url": "http://79.111.119.111:8002/jpop",
-        "favicon": "assets/radios/RadioCapriceJ-Pop.jpg",
+        "favicon": "assets/radios/RadioCapriceJ-Pop.webp",
         "genre": "jmusic",
         "website": "http://radcap.ru/jpop.html"
     },
     {
         "name": "Radio Caprice J-Rock",
         "url": "http://79.111.119.111:8002/jrock",
-        "favicon": "assets/radios/RadioCapriceJ-Pop.jpg",
+        "favicon": "assets/radios/RadioCapriceJ-Pop.webp",
         "genre": "jmusic",
         "website": "http://radcap.ru/jrock.html"
     },
     {
         "name": "Radio Caprice Anime",
         "url": "http://79.111.119.111:8002/anime",
-        "favicon": "assets/radios/RadioCapriceJ-Pop.jpg",
+        "favicon": "assets/radios/RadioCapriceJ-Pop.webp",
         "genre": "jmusic",
         "website": "http://radcap.ru/anime.html"
     },
     {
         "name": "JPHiP Radio",
         "url": "http://radio.jphip.com:8800/;stream.nsv&type=mp3&quot",
-        "favicon": "assets/radios/JPHiPRadio.png",
+        "favicon": "assets/radios/JPHiPRadio.webp",
         "genre": "jmusic",
         "website": "http://radio.jphip.com:8800/"
     },
     {
         "name": "Radio UP!",
         "url": "https://saber.intra.antbr.com:8443/radio",
-        "favicon": "assets/radios/RadioUP!.png",
+        "favicon": "assets/radios/RadioUP!.webp",
         "genre": "jmusic",
         "website": "https://www.antbr.com/"
     },
     {
         "name": "JapanNext",
         "url": "http://perseus.shoutca.st:8803/stream",
-        "favicon": "assets/radios/JapanNext.png",
+        "favicon": "assets/radios/JapanNext.webp",
         "genre": "jmusic",
         "website": "https://japan-next.blogspot.com/"
     },
     {
         "name": "Radio Portal Animediv",
         "url": "https://stream.zeno.fm/gzbardet05wtv",
-        "favicon": "assets/radios/radioportalanimediv.jpeg",
+        "favicon": "assets/radios/radioportalanimediv.webp",
         "genre": "jmusic",
         "website": "https://zeno.fm/radio/radio-portal-animediv/"
     },
@@ -184,42 +198,42 @@
     {
         "name": "Greek Otaku Radio",
         "url": "http://192.99.4.210:3684/stream;stream.nsv&type=mp3&quot",
-        "favicon": "assets/radios/GreekOtakuRadio.png",
+        "favicon": "assets/radios/GreekOtakuRadio.webp",
         "genre": "jmusic",
         "website": "http://goradio.gr/"
     },
     {
         "name": "Final Fantasy Radio",
         "url": "http://finalfantasystation.com:8000/stream",
-        "favicon": "assets/radios/FinalFantasyRadio.png",
+        "favicon": "assets/radios/FinalFantasyRadio.webp",
         "genre": "jmusic",
         "website": "http://finalfantasyradio.co/"
     },
     {
         "name": "City Pop One radio",
         "url": "https://m.radio.fm:8443/citypopone-192",
-        "favicon": "assets/radios/CityPopOneradio.jpg",
+        "favicon": "assets/radios/CityPopOneradio.webp",
         "genre": "jmusic",
         "website": "https://tokyo.citypop.one/two"
     },
     {
         "name": "BOX:City Pop Radio",
         "url": "https://boxradio-edge-10.streamafrica.net/jpopchill",
-        "favicon": "assets/radios/BOXCityPopRadio.jpg",
+        "favicon": "assets/radios/BOXCityPopRadio.webp",
         "genre": "jmusic",
         "website": "https://player.boxradio.net/"
     },
     {
         "name": "BOX:J-POP  Radio",
         "url": "https://boxradio-edge-04.streamafrica.net/jpop",
-        "favicon": "assets/radios/BOXJ-POPRadio.jpg",
+        "favicon": "assets/radios/BOXJ-POPRadio.webp",
         "genre": "jmusic",
         "website": "https://player.boxradio.net/"
     },
     {
         "name": "BOX:Weeb Anime Network",
         "url": "http://play.streamafrica.net/weebanimeradio",
-        "favicon": "assets/radios/BOXWeebAnimeNetwork.jpg",
+        "favicon": "assets/radios/BOXWeebAnimeNetwork.webp",
         "genre": "anime",
         "website": "https://player.boxradio.net/"
     },
@@ -233,336 +247,350 @@
     {
         "name": "CALMRADIO.COM - Shakuhachi",
         "url": "http://23.82.11.87:20328/stream;stream.nsv&type=mp3&quot",
-        "favicon": "assets/radios/CALMRADIO.COM-Shakuhachi.png",
+        "favicon": "assets/radios/CALMRADIO.COM-Shakuhachi.webp",
         "genre": "jmusic",
         "website": "https://mytuner-radio.com/radio/calm-radio-shakuhachi-465630/"
     },
     {
         "name": "Anytime Anime Radio",
         "url": "https://stream.zeno.fm/6yd3qscm9rhvv",
-        "favicon": "assets/radios/AnytimeAnimeRadioV3.jpeg",
+        "favicon": "assets/radios/AnytimeAnimeRadioV3.webp",
         "genre": "anime",
         "website": "https://zeno.fm/radio/anytime-anime-radio/"
     },
     {
         "name": "Anytime Anime Radio V3",
         "url": "http://65.109.81.84:7868/stream;stream.nsv&type=mp3&quot",
-        "favicon": "assets/radios/AnytimeAnimeRadioV3.jpeg",
+        "favicon": "assets/radios/AnytimeAnimeRadioV3.webp",
         "genre": "anime",
         "website": "https://zeno.fm/radio/anytime-anime-radio/"
     },
     {
         "name": "Anime Nexus",
         "url": "http://radio.animenexus.mx:8000/animenexus",
-        "favicon": "assets/radios/AnimeNexus.jpg",
+        "favicon": "assets/radios/AnimeNexus.webp",
         "genre": "anime",
         "website": "https://www.animenexusla.com/"
     },
     {
         "name": "Kawaii Anime Radio",
         "url": "http://91.121.110.129:8030/radio.mp3/;stream.nsv&type=mp3&quot",
-        "favicon": "assets/radios/KawaiiAnimeRadio.png",
+        "favicon": "assets/radios/KawaiiAnimeRadio.webp",
         "genre": "anime",
         "website": "https://tunein.com/radio/Kawaii-Anime-Radio-s232606/"
     },
     {
         "name": "Radio AOI",
         "url": "http://54.37.73.148:8000/stream",
-        "favicon": "assets/radios/RadioAOI.png",
+        "favicon": "assets/radios/RadioAOI.webp",
         "genre": "jmusic",
         "website": "https://radioaoi.pl/"
     },
     {
         "name": "Radio Akiba Brasil",
         "url": "http://stm24.srvstm.com:9526/;stream.nsv&type=mp3&quot",
-        "favicon": "assets/radios/RadioAkibaBrasil.png",
+        "favicon": "assets/radios/RadioAkibaBrasil.webp",
         "genre": "jmusic",
         "website": "http://stm24.srvstm.com:9526/index.html?sid=1"
     },
     {
+        "name": "Japanese Music ID",
+        "url": "http://live.japanesemusicid.com:8000/jmusicid-backend?type=http&nocache=2",
+        "favicon": "assets/radios/japanesemusicid.webp",
+        "genre": "jmusic",
+        "website": "http://live.japanesemusicid.com:8000/index.html"
+    },
+    {
         "name": "ADBT Radio",
         "url": "http://217.79.181.61:8000/listen.pls/;stream.nsv&type=mp3&quot",
-        "favicon": "assets/radios/ADBTRadio.gif",
+        "favicon": "assets/radios/Unidentified2.webp",
         "genre": "jmusic",
         "website": "https://adbt.it.cx/"
     },
     {
         "name": "JPopsuki Radio!",
         "url": "http://65.21.170.149:8000/stream",
-        "favicon": "assets/radios/JPopsukiRadio!.ico",
+        "favicon": "assets/radios/JPopsukiRadio!.webp",
         "genre": "jmusic",
         "website": "http://jpopsuki.fm:2199/start/jpopsuki/"
     },
     {
         "name": "Japanimradio",
-        "url": "http://streaming.radionomy.com/JamendoLounge",
-        "favicon": "assets/radios/Japanimradio(ManganimeRadio).jpg",
-        "genre": "jmusic",
+        "url": "https://streaming.brol.tech/jamendolounge",
+        "favicon": "assets/radios/Japanimradio(ManganimeRadio).webp",
+        "genre": "bgm",
         "website": "https://onlineradiobox.com/jp/japanimradio/?cs=jp.japanimradio&played=1"
     },
     {
         "name": "Friends Forever Internet Radio",
         "url": "https://s5.radio.co/s6140c7241/listen",
-        "favicon": "assets/radios/FriendsForeverInternetRadio.ico",
+        "favicon": "assets/radios/FriendsForeverInternetRadio.webp",
         "genre": "jmusic",
         "website": "https://www.grahambaster.com/"
     },
     {
+        "name": "Dada More Radio - 東京",
+        "url": "http://dadamore2.ddo.jp:8000/;&type=mp3",
+        "favicon": "assets/radios/DadaMoreRadio.webp",
+        "genre": "jmusic",
+        "website": "http://dadamore2.ddo.jp:8000/"
+    },
+    {
         "name": "DoujinStyle Radio",
         "url": "https://streams.radio.co/s5ff57669c/listen",
-        "favicon": "assets/radios/DoujinStyleRadio.png",
+        "favicon": "assets/radios/DoujinStyleRadio.webp",
         "genre": "jmusic",
         "website": "https://doujinstyle.com/?p=home&page=1"
     },
     {
         "name": "Anison.FM(128Kbs)",
         "url": "https://pool.anison.fm/AniSonFM(128)",
-        "favicon": "assets/radios/Anison.FM.png",
+        "favicon": "assets/radios/Anison.FM.webp",
         "genre": "anime",
         "website": "https://en.anison.fm/"
     },
     {
         "name": "Anison.FM(256Kbs)",
         "url": "https://pool.anison.fm/AniSonFM(256)",
-        "favicon": "assets/radios/Anison.FM.png",
+        "favicon": "assets/radios/Anison.FM.webp",
         "genre": "anime",
         "website": "https://en.anison.fm/"
     },
     {
         "name": "Anison.FM(320Kbs)",
         "url": "https://pool.anison.fm/AniSonFM(320)",
-        "favicon": "assets/radios/Anison.FM.png",
+        "favicon": "assets/radios/Anison.FM.webp",
         "genre": "anime",
         "website": "https://en.anison.fm/"
     },
     {
         "name": "Big B Radio - J Pop",
         "url": "https://antares.dribbcast.com/proxy/jpop?mp=/s",
-        "favicon": "assets/radios/BigBRadio.png",
+        "favicon": "assets/radios/BigBRadio.webp",
         "genre": "jmusic",
         "website": "https://bigbradio.net/jpop#display_current"
     },
     {
         "name": "Big B Radio - Asian Pop",
         "url": "https://antares.dribbcast.com/proxy/apop?mp=/s",
-        "favicon": "assets/radios/BigBRadio.png",
+        "favicon": "assets/radios/BigBRadio.webp",
         "genre": "kmusic",
         "website": "https://bigbradio.net/apop#display_current"
     },
     {
         "name": "Big B Radio - C Pop",
         "url": "https://antares.dribbcast.com/proxy/cpop?mp=/s",
-        "favicon": "assets/radios/BigBRadio.png",
+        "favicon": "assets/radios/BigBRadio.webp",
         "genre": "cmusic",
         "website": "https://bigbradio.net/cpop#display_current"
     },
     {
         "name": "Big B Radio - K Pop",
         "url": "https://antares.dribbcast.com/proxy/kpop?mp=/s",
-        "favicon": "assets/radios/BigBRadio.png",
+        "favicon": "assets/radios/BigBRadio.webp",
         "genre": "kmusic",
         "website": "https://bigbradio.net/kpop#display_current"
     },
     {
         "name": "80s",
         "url": "https://snkazuracast5.com:8000/radio.mp3",
-        "favicon": "assets/radios/AzuraCast.png",
+        "favicon": "assets/radios/AzuraCast.webp",
         "genre": "jmusic",
         "website": "https://www.azuracast.com/"
     },
     {
         "name": "90s",
         "url": "https://snkazuracast5.com:8010/radio.mp3",
-        "favicon": "assets/radios/AzuraCast.png",
+        "favicon": "assets/radios/AzuraCast.webp",
         "genre": "jmusic",
         "website": "https://www.azuracast.com/"
     },
     {
         "name": "Anime Emotional",
         "url": "https://snkazuracast5.com:8020/radio.mp3",
-        "favicon": "assets/radios/AzuraCast.png",
+        "favicon": "assets/radios/AzuraCast.webp",
         "genre": "bgm",
         "website": "https://www.azuracast.com/"
     },
     {
         "name": "Anime Ending",
         "url": "https://snkazuracast5.com:8030/radio.mp3",
-        "favicon": "assets/radios/AzuraCast.png",
+        "favicon": "assets/radios/AzuraCast.webp",
         "genre": "bgm",
         "website": "https://www.azuracast.com/"
     },
     {
         "name": "Anime J-Pop",
         "url": "https://snkazuracast5.com:8040/radio.mp3",
-        "favicon": "assets/radios/AzuraCast.png",
+        "favicon": "assets/radios/AzuraCast.webp",
         "genre": "jmusic",
         "website": "https://www.azuracast.com/"
     },
     {
         "name": "Anime J-Rock",
         "url": "https://snkazuracast5.com:8050/radio.mp3",
-        "favicon": "assets/radios/AzuraCast.png",
+        "favicon": "assets/radios/AzuraCast.webp",
         "genre": "jmusic",
         "website": "https://www.azuracast.com/"
     },
     {
         "name": "Anime Openings",
         "url": "https://snkazuracast5.com:8060/radio.mp3",
-        "favicon": "assets/radios/AzuraCast.png",
+        "favicon": "assets/radios/AzuraCast.webp",
         "genre": "jmusic",
         "website": "https://www.azuracast.com/"
     },
     {
         "name": "Anime Soundtrack",
         "url": "https://snkazuracast5.com:8070/radio.mp3",
-        "favicon": "assets/radios/AzuraCast.png",
+        "favicon": "assets/radios/AzuraCast.webp",
         "genre": "bgm",
         "website": "https://www.azuracast.com/"
     },
     {
         "name": "Anime Themes",
         "url": "https://snkazuracast5.com:8090/radio.mp3",
-        "favicon": "assets/radios/AzuraCast.png",
+        "favicon": "assets/radios/AzuraCast.webp",
         "genre": "anime",
         "website": "https://www.azuracast.com/"
     },
     {
         "name": "Anime Metal",
         "url": "https://snkazuracast5.com:8100/radio.mp3",
-        "favicon": "assets/radios/AzuraCast.png",
+        "favicon": "assets/radios/AzuraCast.webp",
         "genre": "anime",
         "website": "https://www.azuracast.com/"
     },
     {
         "name": "Anime Beats",
         "url": "https://snkazuracast5.com:8110/radio.mp3",
-        "favicon": "assets/radios/AzuraCast.png",
+        "favicon": "assets/radios/AzuraCast.webp",
         "genre": "anime",
         "website": "https://www.azuracast.com/"
     },
     {
         "name": "Anime Lo Fi Mix",
         "url": "https://snkazuracast5.com:8120/radio.mp3",
-        "favicon": "assets/radios/AzuraCast.png",
+        "favicon": "assets/radios/AzuraCast.webp",
         "genre": "bgm",
         "website": "https://www.azuracast.com/"
     },
     {
         "name": "Anime Vibes",
         "url": "https://snkazuracast5.com:8130/radio.mp3",
-        "favicon": "assets/radios/AzuraCast.png",
+        "favicon": "assets/radios/AzuraCast.webp",
         "genre": "bgm",
         "website": "https://www.azuracast.com/"
     },
     {
         "name": "Asian Beats",
         "url": "https://snkazuracast5.com:8140/radio.mp3",
-        "favicon": "assets/radios/AzuraCast.png",
+        "favicon": "assets/radios/AzuraCast.webp",
         "genre": "bgm",
         "website": "https://www.azuracast.com/"
     },
     {
         "name": "Chill Opening",
         "url": "https://snkazuracast5.com:8150/radio.mp3",
-        "favicon": "assets/radios/AzuraCast.png",
+        "favicon": "assets/radios/AzuraCast.webp",
         "genre": "bgm",
         "website": "https://www.azuracast.com/"
     },
     {
         "name": "Chill Session",
         "url": "https://snkazuracast5.com:8160/radio.mp3",
-        "favicon": "assets/radios/AzuraCast.png",
+        "favicon": "assets/radios/AzuraCast.webp",
         "genre": "bgm",
         "website": "https://www.azuracast.com/"
     },
     {
         "name": "ChillHop Music",
         "url": "https://snkazuracast5.com:8170/radio.mp3",
-        "favicon": "assets/radios/AzuraCast.png",
+        "favicon": "assets/radios/AzuraCast.webp",
         "genre": "bgm",
         "website": "https://www.azuracast.com/"
     },
     {
         "name": "Lo-fi Mix",
         "url": "https://snkazuracast5.com:8180/radio.mp3",
-        "favicon": "assets/radios/AzuraCast.png",
+        "favicon": "assets/radios/AzuraCast.webp",
         "genre": "bgm",
         "website": "https://www.azuracast.com/"
     },
     {
         "name": "Otaku Tunes",
         "url": "https://snkazuracast5.com:8190/radio.mp3",
-        "favicon": "assets/radios/AzuraCast.png",
+        "favicon": "assets/radios/AzuraCast.webp",
         "genre": "bgm",
         "website": "https://www.azuracast.com/"
     },
     {
         "name": "Sunday Tunes",
         "url": "https://snkazuracast5.com:8200/radio.mp3",
-        "favicon": "assets/radios/AzuraCast.png",
+        "favicon": "assets/radios/AzuraCast.webp",
         "genre": "bgm",
         "website": "https://www.azuracast.com/"
     },
     {
         "name": "ANIME FM",
         "url": "http://stream.laut.fm/animefm",
-        "favicon": "assets/radios/ANIMEFM.jpg",
+        "favicon": "assets/radios/ANIMEFM.webp",
         "genre": "anime",
         "website": "https://laut.fm/animefm"
     },
     {
         "name": "ILOVEANIMEMANGA",
         "url": "http://stream.laut.fm/iloveanimemanga",
-        "favicon": "assets/radios/ILOVEANIMEMANGA.jpg",
+        "favicon": "assets/radios/ILOVEANIMEMANGA.webp",
         "genre": "anime",
         "website": "https://laut.fm/iloveanimemanga"
     },
     {
         "name": "EVIL ANIME FM",
         "url": "http://stream.laut.fm/evil-animefm",
-        "favicon": "assets/radios/EVILANIMEFM.jpg",
+        "favicon": "assets/radios/EVILANIMEFM.webp",
         "genre": "anime",
         "website": "https://laut.fm/evil-animefm"
     },
     {
         "name": "ANIME ACADEMY",
         "url": "http://stream.laut.fm/animeacademy",
-        "favicon": "assets/radios/ANIMEACADEMY.jpg",
+        "favicon": "assets/radios/ANIMEACADEMY.webp",
         "genre": "anime",
         "website": "https://laut.fm/animeacademy"
     },
     {
         "name": "J NATION",
         "url": "http://stream.laut.fm/j-nation",
-        "favicon": "assets/radios/JNATION.jpg",
+        "favicon": "assets/radios/JNATION.webp",
         "genre": "jmusic",
         "website": "https://laut.fm/j-nation"
     },
     {
         "name": "KAWAII MUSIC",
         "url": "http://stream.laut.fm/kawaii-music",
-        "favicon": "assets/radios/KAWAIIMUSIC.jpg",
+        "favicon": "assets/radios/KAWAIIMUSIC.webp",
         "genre": "jmusic",
         "website": "https://laut.fm/kawaii-music"
     },
     {
         "name": "OTAKU WORLD",
         "url": "http://stream.laut.fm/otaku-world",
-        "favicon": "assets/radios/OTAKUWORLD.jpg",
+        "favicon": "assets/radios/OTAKUWORLD.webp",
         "genre": "anime",
         "website": "https://laut.fm/otaku-world"
     },
     {
         "name": "PUREPURE",
         "url": "http://stream.laut.fm/purepure",
-        "favicon": "assets/radios/PUREPURE.jpg",
+        "favicon": "assets/radios/PUREPURE.webp",
         "genre": "jmusic",
         "website": "https://laut.fm/purepure"
     },
     {
         "name": "ANIMEKLATU",
         "url": "http://stream.laut.fm/animklatu",
-        "favicon": "assets/radios/ANIMEKLATU.jpg",
+        "favicon": "assets/radios/ANIMEKLATU.webp",
         "genre": "anime",
         "website": "https://laut.fm/animklatu"
     },
@@ -667,469 +695,469 @@
     {
         "name": "FREECALL",
         "url": "http://stream.laut.fm/freecall",
-        "favicon": "assets/radios/FREECALL.jpg",
+        "favicon": "assets/radios/FREECALL.webp",
         "genre": "variety",
         "website": "https://laut.fm/freecall"
     },
     {
         "name": "ANIMEALIVE",
         "url": "http://stream.laut.fm/animealive",
-        "favicon": "assets/radios/ANIMEALIVE.jpg",
+        "favicon": "assets/radios/ANIMEALIVE.webp",
         "genre": "anime",
         "website": "https://laut.fm/animealive"
     },
     {
         "name": "ANIME RADIO SWITZERLAND",
         "url": "http://stream.laut.fm/anime-radio-switzerland",
-        "favicon": "assets/radios/ANIMERADIOSWITZERLAND.jpg",
+        "favicon": "assets/radios/ANIMERADIOSWITZERLAND.webp",
         "genre": "anime",
         "website": "https://laut.fm/anime-radio-switzerland"
     },
     {
         "name": "FLUFFYLANDRPG",
         "url": "http://stream.laut.fm/fluffylandrpg",
-        "favicon": "assets/radios/FLUFFYLANDRPG.jpg",
+        "favicon": "assets/radios/FLUFFYLANDRPG.webp",
         "genre": "bgm",
         "website": "https://laut.fm/fluffylandrpg"
     },
     {
         "name": "GEHEIMWELT",
         "url": "http://stream.laut.fm/geheimwelt",
-        "favicon": "assets/radios/GEHEIMWELT.jpg",
+        "favicon": "assets/radios/GEHEIMWELT.webp",
         "genre": "variety",
         "website": "https://laut.fm/geheimwelt"
     },
     {
         "name": "JUSTPLAY",
         "url": "http://stream.laut.fm/justplay",
-        "favicon": "assets/radios/JUSTPLAY.jpg",
+        "favicon": "assets/radios/JUSTPLAY.webp",
         "genre": "variety",
         "website": "https://laut.fm/justplay"
     },
     {
         "name": "SACREDINC",
         "url": "http://stream.laut.fm/sacredinc",
-        "favicon": "assets/radios/SACREDINC.jpg",
+        "favicon": "assets/radios/SACREDINC.webp",
         "genre": "variety",
         "website": "https://laut.fm/sacredinc"
     },
     {
         "name": "DRYSTAN",
         "url": "http://stream.laut.fm/drystan",
-        "favicon": "assets/radios/DRYSTAN.jpg",
+        "favicon": "assets/radios/DRYSTAN.webp",
         "genre": "variety",
         "website": "https://laut.fm/drystan"
     },
     {
         "name": "AKV 1",
         "url": "http://stream.laut.fm/akv1",
-        "favicon": "assets/radios/AKV1.jpg",
+        "favicon": "assets/radios/AKV1.webp",
         "genre": "bgm",
         "website": "https://laut.fm/akv1"
     },
     {
         "name": "DARKARMY RADIO",
         "url": "http://stream.laut.fm/darkarmyradio",
-        "favicon": "assets/radios/DARKARMYRADIO.jpg",
+        "favicon": "assets/radios/DARKARMYRADIO.webp",
         "genre": "variety",
         "website": "https://laut.fm/darkarmyradio"
     },
     {
         "name": "CREWFIRE FM",
         "url": "http://stream.laut.fm/crewfirefm",
-        "favicon": "assets/radios/CREWFIREFM.jpg",
+        "favicon": "assets/radios/CREWFIREFM.webp",
         "genre": "variety",
         "website": "https://laut.fm/crewfirefm"
     },
     {
         "name": "TOTALGENIAL",
         "url": "http://stream.laut.fm/totalgenial",
-        "favicon": "assets/radios/TOTALGENIAL.jpg",
+        "favicon": "assets/radios/TOTALGENIAL.webp",
         "genre": "variety",
         "website": "https://laut.fm/totalgenial"
     },
     {
         "name": "ACW",
         "url": "http://stream.laut.fm/acw",
-        "favicon": "assets/radios/ACW.jpg",
+        "favicon": "assets/radios/ACW.webp",
         "genre": "variety",
         "website": "https://laut.fm/acw"
     },
     {
         "name": "VARVIA",
         "url": "http://stream.laut.fm/varvia",
-        "favicon": "assets/radios/VARVIA.jpg",
+        "favicon": "assets/radios/VARVIA.webp",
         "genre": "variety",
         "website": "https://laut.fm/varvia"
     },
     {
         "name": "MELOVOX",
         "url": "http://stream.laut.fm/melovox",
-        "favicon": "assets/radios/MELOVOX.jpg",
+        "favicon": "assets/radios/MELOVOX.webp",
         "genre": "variety",
         "website": "https://laut.fm/melovox"
     },
     {
         "name": "MYSTERY",
         "url": "http://stream.laut.fm/mystery",
-        "favicon": "assets/radios/MYSTERY.jpg",
+        "favicon": "assets/radios/MYSTERY.webp",
         "genre": "variety",
         "website": "https://laut.fm/mystery"
     },
     {
         "name": "AZURCRAFTNET",
         "url": "http://stream.laut.fm/azurcraftnet",
-        "favicon": "assets/radios/AZURCRAFTNET.jpg",
+        "favicon": "assets/radios/AZURCRAFTNET.webp",
         "genre": "variety",
         "website": "https://laut.fm/azurcraftnet"
     },
     {
         "name": "NEWMUSICFMANIME",
         "url": "http://stream.laut.fm/newmusicfmanime",
-        "favicon": "assets/radios/NEWMUSICFMANIME.jpg",
+        "favicon": "assets/radios/NEWMUSICFMANIME.webp",
         "genre": "variety",
         "website": "https://laut.fm/newmusicfmanime"
     },
     {
         "name": "FREIZEITPARKCHECK",
         "url": "http://stream.laut.fm/freizeitparkcheck",
-        "favicon": "assets/radios/FREIZEITPARKCHECK.jpg",
+        "favicon": "assets/radios/FREIZEITPARKCHECK.webp",
         "genre": "variety",
         "website": "https://laut.fm/freizeitparkcheck"
     },
     {
         "name": "MOVIEDANCE",
         "url": "http://stream.laut.fm/moviedance",
-        "favicon": "assets/radios/MOVIEDANCE.jpg",
+        "favicon": "assets/radios/MOVIEDANCE.webp",
         "genre": "variety",
         "website": "https://laut.fm/moviedance"
     },
     {
         "name": "RADIO BRAINAFK",
         "url": "http://stream.laut.fm/radio-brainafk",
-        "favicon": "assets/radios/RADIOBRAINAFK.jpg",
+        "favicon": "assets/radios/RADIOBRAINAFK.webp",
         "genre": "variety",
         "website": "https://laut.fm/radio-brainafk"
     },
     {
         "name": "GAMEMUSIC",
         "url": "http://stream.laut.fm/gamemusic",
-        "favicon": "assets/radios/GAMEMUSIC.jpg",
+        "favicon": "assets/radios/GAMEMUSIC.webp",
         "genre": "bgm",
         "website": "https://laut.fm/gamemusic"
     },
     {
         "name": "FLOPSI",
         "url": "http://stream.laut.fm/flopsi",
-        "favicon": "assets/radios/FLOPSI.jpg",
+        "favicon": "assets/radios/FLOPSI.webp",
         "genre": "variety",
         "website": "https://laut.fm/flopsi"
     },
     {
         "name": "HESSENPOP",
         "url": "http://stream.laut.fm/hessenpop",
-        "favicon": "assets/radios/HESSENPOP.jpg",
+        "favicon": "assets/radios/HESSENPOP.webp",
         "genre": "variety",
         "website": "https://laut.fm/hessenpop"
     },
     {
         "name": "DRYFE",
         "url": "http://stream.laut.fm/dryfe",
-        "favicon": "assets/radios/DRYFE.jpg",
+        "favicon": "assets/radios/DRYFE.webp",
         "genre": "variety",
         "website": "https://laut.fm/dryfe"
     },
     {
         "name": "ANIME RADIO DE",
         "url": "http://stream.laut.fm/anime-radio-de",
-        "favicon": "assets/radios/ANIMERADIODE.jpg",
+        "favicon": "assets/radios/ANIMERADIODE.webp",
         "genre": "anime",
         "website": "https://laut.fm/anime-radio-de"
     },
     {
         "name": "LUKASPRODUCTION",
         "url": "http://stream.laut.fm/lukasproduction",
-        "favicon": "assets/radios/LUKASPRODUCTION.jpg",
+        "favicon": "assets/radios/LUKASPRODUCTION.webp",
         "genre": "variety",
         "website": "https://laut.fm/lukasproduction"
     },
     {
         "name": "LEON",
         "url": "http://stream.laut.fm/leon",
-        "favicon": "assets/radios/LEON.jpg",
+        "favicon": "assets/radios/LEON.webp",
         "genre": "variety",
         "website": "https://laut.fm/leon"
     },
     {
         "name": "DELFIN",
         "url": "http://stream.laut.fm/delfin",
-        "favicon": "assets/radios/DELFIN.jpg",
+        "favicon": "assets/radios/DELFIN.webp",
         "genre": "variety",
         "website": "https://laut.fm/delfin"
     },
     {
         "name": "LITE RADIO",
         "url": "http://stream.laut.fm/literadio",
-        "favicon": "assets/radios/LITERADIO.jpg",
+        "favicon": "assets/radios/LITERADIO.webp",
         "genre": "variety",
         "website": "https://laut.fm/literadio"
     },
     {
         "name": "HABBOLOUD",
         "url": "http://stream.laut.fm/habboloud",
-        "favicon": "assets/radios/HABBOLOUD.jpg",
+        "favicon": "assets/radios/HABBOLOUD.webp",
         "genre": "variety",
         "website": "https://laut.fm/habboloud"
     },
     {
         "name": "RADIOTRDFMEXTRA",
         "url": "http://stream.laut.fm/radiotrdfmextra",
-        "favicon": "assets/radios/RADIOTRDFMEXTRA.jpg",
+        "favicon": "assets/radios/RADIOTRDFMEXTRA.webp",
         "genre": "variety",
         "website": "https://laut.fm/radiotrdfmextra"
     },
     {
         "name": "KULTUR ONLINE FM",
         "url": "http://stream.laut.fm/kultur-online-fm",
-        "favicon": "assets/radios/KULTURONLINEFM.jpg",
+        "favicon": "assets/radios/KULTURONLINEFM.webp",
         "genre": "variety",
         "website": "https://laut.fm/kultur-online-fm"
     },
     {
         "name": "JURO FUNK",
         "url": "http://stream.laut.fm/juro-funk",
-        "favicon": "assets/radios/JUROFUNK.jpg",
+        "favicon": "assets/radios/JUROFUNK.webp",
         "genre": "variety",
         "website": "https://laut.fm/juro-funk"
     },
     {
         "name": "RADIO PARANORMAL",
         "url": "http://stream.laut.fm/radio-paranormal",
-        "favicon": "assets/radios/RADIOPARANORMAL.jpg",
+        "favicon": "assets/radios/RADIOPARANORMAL.webp",
         "genre": "variety",
         "website": "https://laut.fm/radio-paranormal"
     },
     {
         "name": "STARTYOUR RADIO",
         "url": "http://stream.laut.fm/startyourradio",
-        "favicon": "assets/radios/STARTYOURRADIO.png",
+        "favicon": "assets/radios/STARTYOURRADIO.webp",
         "genre": "variety",
         "website": "https://laut.fm/startyourradio"
     },
     {
         "name": "NIGHTCORE RADIO",
         "url": "http://stream.laut.fm/nightcoreradio",
-        "favicon": "assets/radios/NIGHTCORERADIO.jpg",
+        "favicon": "assets/radios/NIGHTCORERADIO.webp",
         "genre": "nightcore",
         "website": "https://laut.fm/nightcoreradio"
     },
     {
         "name": "NIGHCORELAND",
         "url": "http://stream.laut.fm/nighcoreland",
-        "favicon": "assets/radios/NIGHCORELAND.jpg",
+        "favicon": "assets/radios/NIGHCORELAND.webp",
         "genre": "nightcore",
         "website": "https://laut.fm/nighcoreland"
     },
     {
         "name": "NIGHTCOREJUNIORLK",
         "url": "http://stream.laut.fm/nightcorejuniorlk",
-        "favicon": "assets/radios/NIGHTCOREJUNIORLK.jpg",
+        "favicon": "assets/radios/NIGHTCOREJUNIORLK.webp",
         "genre": "nightcore",
         "website": "https://laut.fm/nightcorejuniorlk"
     },
     {
         "name": "ALLES",
         "url": "http://stream.laut.fm/alles",
-        "favicon": "assets/radios/ALLES.jpg",
+        "favicon": "assets/radios/ALLES.webp",
         "genre": "nightcore",
         "website": "https://laut.fm/alles"
     },
     {
         "name": "HAPPYFM NIGHTSCORE",
         "url": "http://stream.laut.fm/happyfmnightscore",
-        "favicon": "assets/radios/HAPPYFMNIGHTSCORE.png",
+        "favicon": "assets/radios/HAPPYFMNIGHTSCORE.webp",
         "genre": "nightcore",
         "website": "https://laut.fm/happyfmnightscore"
     },
     {
         "name": "ELITEFMNCS",
         "url": "http://stream.laut.fm/elitefmncs",
-        "favicon": "assets/radios/ELITEFMNCS.jpg",
+        "favicon": "assets/radios/ELITEFMNCS.webp",
         "genre": "nightcore",
         "website": "https://laut.fm/elitefmncs"
     },
     {
         "name": "MIXEDNIGHTCORE",
         "url": "http://stream.laut.fm/mixednightcore",
-        "favicon": "assets/radios/MIXEDNIGHTCORE.jpg",
+        "favicon": "assets/radios/MIXEDNIGHTCORE.webp",
         "genre": "nightcore",
         "website": "https://laut.fm/mixednightcore"
     },
     {
         "name": "F 4 BIX",
         "url": "http://stream.laut.fm/f4bix",
-        "favicon": "assets/radios/F4BIX.jpg",
+        "favicon": "assets/radios/F4BIX.webp",
         "genre": "nightcore",
         "website": "https://laut.fm/f4bix"
     },
     {
         "name": "HAPPY FM",
         "url": "http://stream.laut.fm/happyfm",
-        "favicon": "assets/radios/HAPPYFM.png",
+        "favicon": "assets/radios/HAPPYFM.webp",
         "genre": "nightcore",
         "website": "https://laut.fm/happyfm"
     },
     {
         "name": "NIGHTCOREMUSIC",
         "url": "http://stream.laut.fm/nightcoremusic",
-        "favicon": "assets/radios/NIGHTCOREMUSIC.jpg",
+        "favicon": "assets/radios/NIGHTCOREMUSIC.webp",
         "genre": "nightcore",
         "website": "https://laut.fm/nightcoremusic"
     },
     {
         "name": "RADIOMEGALINE",
         "url": "http://stream.laut.fm/radiomegaline",
-        "favicon": "assets/radios/RADIOMEGALINE.jpg",
+        "favicon": "assets/radios/RADIOMEGALINE.webp",
         "genre": "nightcore",
         "website": "https://laut.fm/radiomegaline"
     },
     {
         "name": "FADENIGHTCORE",
         "url": "http://stream.laut.fm/fadenightcore",
-        "favicon": "assets/radios/FADENIGHTCORE.jpg",
+        "favicon": "assets/radios/FADENIGHTCORE.webp",
         "genre": "nightcore",
         "website": "https://laut.fm/fadenightcore"
     },
     {
         "name": "NIGHTCORE",
         "url": "http://stream.laut.fm/nightcore",
-        "favicon": "assets/radios/NIGHTCORE.jpg",
+        "favicon": "assets/radios/NIGHTCORE.webp",
         "genre": "nightcore",
         "website": "https://laut.fm/nightcore"
     },
     {
         "name": "DJBASEFIGTE-RADIO",
         "url": "http://stream.laut.fm/djbasefigteradio",
-        "favicon": "assets/radios/DJBASEFIGTE-RADIO.jpg",
+        "favicon": "assets/radios/DJBASEFIGTE-RADIO.webp",
         "genre": "nightcore",
         "website": "https://laut.fm/djbasefigteradio"
     },
     {
         "name": "NIGHTCOREMUSIK",
         "url": "http://stream.laut.fm/nightcoremusik",
-        "favicon": "assets/radios/NIGHTCOREMUSIK.jpg",
+        "favicon": "assets/radios/NIGHTCOREMUSIK.webp",
         "genre": "nightcore",
         "website": "https://laut.fm/nightcoremusik"
     },
     {
         "name": "LA CASA DE WEGEH",
         "url": "http://stream.laut.fm/la_casa_de_wegeh",
-        "favicon": "assets/radios/LACASADEWEGEH.jpg",
+        "favicon": "assets/radios/LACASADEWEGEH.webp",
         "genre": "nightcore",
         "website": "https://laut.fm/la_casa_de_wegeh"
     },
     {
         "name": "MATZZTEG",
         "url": "http://stream.laut.fm/matzzteg",
-        "favicon": "assets/radios/MATZZTEG.jpg",
+        "favicon": "assets/radios/MATZZTEG.webp",
         "genre": "nightcore",
         "website": "https://laut.fm/matzzteg"
     },
     {
         "name": "NIGHTCORELENA",
         "url": "http://stream.laut.fm/nightcorelena",
-        "favicon": "assets/radios/NIGHTCORELENA.jpg",
+        "favicon": "assets/radios/NIGHTCORELENA.webp",
         "genre": "nightcore",
         "website": "https://laut.fm/nightcorelena"
     },
     {
         "name": "CYTRADIOGAMING",
         "url": "http://stream.laut.fm/cytradiogaming",
-        "favicon": "assets/radios/CYTRADIOGAMING.png",
+        "favicon": "assets/radios/CYTRADIOGAMING.webp",
         "genre": "nightcore",
         "website": "https://laut.fm/cytradiogaming"
     },
     {
         "name": "NIGHTCOREJERRY",
         "url": "http://stream.laut.fm/nightcorejerry",
-        "favicon": "assets/radios/NIGHTCOREJERRY.jpg",
+        "favicon": "assets/radios/NIGHTCOREJERRY.webp",
         "genre": "nightcore",
         "website": "https://laut.fm/nightcorejerry"
     },
     {
         "name": "COOKIECITY",
         "url": "http://stream.laut.fm/cookiecity",
-        "favicon": "assets/radios/COOKIECITY.jpg",
+        "favicon": "assets/radios/COOKIECITY.webp",
         "genre": "nightcore",
         "website": "https://laut.fm/cookiecity"
     },
     {
         "name": "2 LIVE",
         "url": "http://stream.laut.fm/2live",
-        "favicon": "assets/radios/2LIVE.jpg",
+        "favicon": "assets/radios/2LIVE.webp",
         "genre": "nightcore",
         "website": "https://laut.fm/2live"
     },
     {
         "name": "NXTZONE",
         "url": "http://stream.laut.fm/nxtzone",
-        "favicon": "assets/radios/NXTZONE.jpg",
+        "favicon": "assets/radios/NXTZONE.webp",
         "genre": "nightcore",
         "website": "https://laut.fm/nxtzone"
     },
     {
         "name": "RADIOREVOLUTION 44",
         "url": "http://stream.laut.fm/radiorevolution44",
-        "favicon": "assets/radios/R.ADIOREVOLUTION44.jpg",
+        "favicon": "assets/radios/R.ADIOREVOLUTION44.webp",
         "genre": "nightcore",
         "website": "https://laut.fm/radiorevolution44"
     },
     {
         "name": "RNC",
         "url": "http://stream.laut.fm/rnc",
-        "favicon": "assets/radios/RNC.jpg",
+        "favicon": "assets/radios/RNC.webp",
         "genre": "nightcore",
         "website": "https://laut.fm/rnc"
     },
     {
         "name": "ICE",
         "url": "http://stream.laut.fm/ice",
-        "favicon": "assets/radios/ICE.jpg",
+        "favicon": "assets/radios/ICE.webp",
         "genre": "nightcore",
         "website": "https://laut.fm/ice"
     },
     {
         "name": "DYHNUNITYFM ELECTRO",
         "url": "http://stream.laut.fm/dyhnunityfm-electro",
-        "favicon": "assets/radios/DYHNUNITYFMELECTRO.jpg",
+        "favicon": "assets/radios/DYHNUNITYFMELECTRO.webp",
         "genre": "nightcore",
         "website": "https://laut.fm/dyhnunityfm-electro"
     },
     {
         "name": "NQR",
         "url": "http://stream.laut.fm/nqr",
-        "favicon": "assets/radios/NQR.jpg",
+        "favicon": "assets/radios/NQR.webp",
         "genre": "bgm",
         "website": "https://laut.fm/nqr"
     },
     {
         "name": "CAPRICE 247",
         "url": "http://stream.laut.fm/caprice247",
-        "favicon": "assets/radios/CAPRICE247.jpg",
+        "favicon": "assets/radios/CAPRICE247.webp",
         "genre": "variety",
         "website": "https://laut.fm/caprice247"
     },
     {
         "name": "JF FM",
         "url": "http://stream.laut.fm/jffm",
-        "favicon": "assets/radios/JFFM.jpg",
+        "favicon": "assets/radios/JFFM.webp",
         "genre": "variety",
         "website": "https://laut.fm/jffm"
     },
     {
         "name": "HENTAI-RADIO",
         "url": "http://stream.laut.fm/hentai_radio",
-        "favicon": "assets/radios/HENTAI-RADIO.jpg",
+        "favicon": "assets/radios/HENTAI-RADIO.webp",
         "genre": "variety",
         "website": "https://laut.fm/hentai_radio"
     },
@@ -1150,182 +1178,182 @@
     {
         "name": "Anime Plus Radio",
         "url": "https://stream-156.zeno.fm/rfun7q8bt8quv",
-        "favicon": "assets/radios/AnimePlusRadio.png",
+        "favicon": "assets/radios/AnimePlusRadio.webp",
         "genre": "anime",
         "website": "https://onlineradiobox.com/co/animeplus/?cs=co.animeplus&played=1"
     },
     {
         "name": "Anime Songs",
         "url": "https://stream-150.zeno.fm/3hhp76wdz4zuv",
-        "favicon": "assets/radios/Unidentified2.png",
+        "favicon": "assets/radios/Unidentified2.webp",
         "genre": "anime",
         "website": "https://github.com/Mikeexe2/Sasalele-Music-Station/issues/new"
     },
     {
         "name": "Animecol Radio",
         "url": "http://186.147.235.2:80/animecol",
-        "favicon": "assets/radios/AnimecolRadio.png",
+        "favicon": "assets/radios/AnimecolRadio.webp",
         "genre": "anime",
         "website": "https://onlineradiobox.com/co/animecol/?cs=co.animecol&played=1&lang=en"
     },
     {
         "name": "AnimeNfo Radio",
         "url": "https://stream-152.zeno.fm/xwa8ckz7mzzuv",
-        "favicon": "assets/radios/AnimeNfoRadio.png",
+        "favicon": "assets/radios/AnimeNfoRadio.webp",
         "genre": "anime",
         "website": "https://zeno.fm/radio/animenfo-radio/"
     },
     {
         "name": "AnimeRadio.de",
         "url": "http://stream.animeradio.de/animeradio.mp3",
-        "favicon": "assets/radios/AnimeRadio.de.png",
+        "favicon": "assets/radios/AnimeRadio.de.webp",
         "genre": "anime",
         "website": "https://www.animeradio.de/"
     },
     {
         "name": "Animextre radio",
         "url": "https://stream-153.zeno.fm/tqnyyz5r8neuv",
-        "favicon": "assets/radios/Animextreradio.png",
+        "favicon": "assets/radios/Animextreradio.webp",
         "genre": "anime",
         "website": "https://ugc.production.linktr.ee/n1U7N76ATYKnK6dQO5zn_qxPqwxt3A2LeiE7c?io=true&size=avatar-v1_0"
     },
     {
         "name": "Animu FM",
         "url": "http://cast.animu.com.br:9079/stream",
-        "favicon": "assets/radios/AnimuFM.png",
+        "favicon": "assets/radios/AnimuFM.webp",
         "genre": "anime",
         "website": "https://www.animu.com.br/"
     },
     {
         "name": "Gensokyo Radio | 24/7 Touhou Music Stream",
         "url": "https://stream.gensokyoradio.net/1",
-        "favicon": "assets/radios/Gensokyoradio.png",
+        "favicon": "assets/radios/Gensokyoradio.webp",
         "genre": "vocaloid",
         "website": "https://gensokyoradio.net/playing/"
     },
     {
         "name": "J-Idols Project Radio",
         "url": "http://26453.live.streamtheworld.com/SAM05AAC121.mp3",
-        "favicon": "assets/radios/J-IdolsProjectRadio.png",
+        "favicon": "assets/radios/J-IdolsProjectRadio.webp",
         "genre": "jmusic",
         "website": "https://mytuner-radio.com/radio/j-idols-project-radio-435940/"
     },
     {
         "name": "J-Pop Project Radio",
         "url": "http://13683.live.streamtheworld.com/SAM10AAC139.mp3",
-        "favicon": "assets/radios/J-PopProjectRadio.png",
+        "favicon": "assets/radios/J-PopProjectRadio.webp",
         "genre": "jmusic",
         "website": "https://listen.samcloud.com/w/83273/JPop-Project-Radio#history"
     },
     {
         "name": "J-Club Powerplay HipHop",
         "url": "https://kathy.torontocast.com/jclubhiphop",
-        "favicon": "assets/radios/J-ClubPowerplayHipHop.png",
+        "favicon": "assets/radios/J-ClubPowerplayHipHop.webp",
         "genre": "jmusic",
         "website": "https://asiadreamradio.torontocast.stream/stations/jclubplayer.html"
     },
     {
         "name": "J-Pop Powerplay Kawaii",
         "url": "https://kathy.torontocast.com/kawaii",
-        "favicon": "assets/radios/J-PopPowerplayKawaii.jpg",
+        "favicon": "assets/radios/J-PopPowerplayKawaii.webp",
         "genre": "jmusic",
         "website": "https://asiadreamradio.torontocast.stream/stations/jkawaiiplayer.html"
     },
     {
         "name": "J-Pop Powerplay",
         "url": "https://kathy.torontocast.com/powerplay",
-        "favicon": "assets/radios/J-PopPowerplay.png",
+        "favicon": "assets/radios/J-PopPowerplay.webp",
         "genre": "jmusic",
         "website": "https://asiadreamradio.torontocast.stream/stations/jpowerplayer.html"
     },
     {
         "name": "J-Rock Powerplay",
         "url": "https://kathy.torontocast.com/jrock",
-        "favicon": "assets/radios/J-RockPowerplay.png",
+        "favicon": "assets/radios/J-RockPowerplay.webp",
         "genre": "jmusic",
         "website": "https://asiadreamradio.torontocast.stream/stations/jrockplayer.html"
     },
     {
         "name": "Japan Hits - All J-Pop",
         "url": "http://cast1.torontocast.com:2120/;",
-        "favicon": "assets/radios/JapanHits-AllJ-Pop.png",
+        "favicon": "assets/radios/JapanHits-AllJ-Pop.webp",
         "genre": "jmusic",
         "website": "https://asiadreamradio.torontocast.stream/stations/japanhitsplayer.html"
     },
     {
         "name": "JSakura 懐かしい",
         "url": "http://cast1.torontocast.com:2170/;",
-        "favicon": "assets/radios/JSakura懐かしい.png",
+        "favicon": "assets/radios/JSakura懐かしい.webp",
         "genre": "jmusic",
         "website": "https://asiadreamradio.torontocast.stream/stations/natsukashiiplayer.html"
     },
     {
         "name": "Jazz Sakura",
         "url": "https://kathy.torontocast.com/jazzsakura",
-        "favicon": "assets/radios/JazzSakura.png",
+        "favicon": "assets/radios/JazzSakura.webp",
         "genre": "jmusic",
         "website": "https://asiadreamradio.torontocast.stream/stations/jazzsakuraplayer.html"
     },
     {
         "name": "J-Club Bandstand",
         "url": "http://igor.torontocast.com:3220/;",
-        "favicon": "assets/radios/J-ClubBandstand.png",
+        "favicon": "assets/radios/J-ClubBandstand.webp",
         "genre": "jmusic",
         "website": "https://asiadreamradio.torontocast.stream/stations/jazzbandplayer.html"
     },
     {
         "name": "J1 GOLD",
         "url": "https://jenny.torontocast.com:2000/stream/J1GOLD",
-        "favicon": "assets/radios/J1GOLD.png",
+        "favicon": "assets/radios/J1GOLD.webp",
         "genre": "jmusic",
         "website": "https://www.j1fm.tokyo/player/j1gold/"
     },
     {
         "name": "J1 HITS",
         "url": "https://jenny.torontocast.com:2000/stream/J1HITS",
-        "favicon": "assets/radios/J1HITS.png",
+        "favicon": "assets/radios/J1HITS.webp",
         "genre": "jmusic",
         "website": "https://www.j1fm.tokyo/player/j1hits/"
     },
     {
         "name": "J1 XTRA",
         "url": "https://jenny.torontocast.com:2000/stream/J1XTRA",
-        "favicon": "assets/radios/J1XTRA.png",
+        "favicon": "assets/radios/J1XTRA.webp",
         "genre": "jmusic",
         "website": "https://www.j1fm.tokyo/player/j1xtra/"
     },
     {
         "name": "J1 HD",
         "url": "https://maggie.torontocast.com:2000/stream/J1HD",
-        "favicon": "assets/radios/J1HD.jpg",
+        "favicon": "assets/radios/J1HD.webp",
         "genre": "jmusic",
         "website": "https://www.j1fm.tokyo/player/j1hd/"
     },
     {
         "name": "Japan Fans",
         "url": "http://radyo1.radyo-dinle.tc/8126/stream",
-        "favicon": "assets/radios/JapanFans.ico",
+        "favicon": "assets/radios/JapanFans.webp",
         "genre": "jmusic",
         "website": "http://radyo1.radyo-dinle.tc:8126/index.html?sid=1"
     },
     {
         "name": "Japanisu",
         "url": "http://stream.radioani.me/radio/8000/radio.mp3",
-        "favicon": "assets/radios/Japanisu.png",
+        "favicon": "assets/radios/Japanisu.webp",
         "genre": "jmusic",
         "website": "https://www.radioani.me/"
     },
     {
-        "name": "JMusic Anime Radio",
+        "name": "JMusicAnime Radio",
         "url": "https://stream-157.zeno.fm/g0wsfbbaft5tv",
-        "favicon": "assets/radios/JMusicAnimeRadio.jpg",
+        "favicon": "assets/radios/JMusicAnimeRadio.webp",
         "genre": "jmusic",
         "website": "https://zeno.fm/radio/jmusicanime-radio/"
     },
     {
         "name": "LOVELIVE PROJECT RADIO",
         "url": "https://kathy.torontocast.com:2600/stream",
-        "favicon": "assets/radios/loveliveproject.jpg",
+        "favicon": "assets/radios/loveliveproject.webp",
         "genre": "anime",
         "website": "https://loveliveradio.com/radio.html"
     },
@@ -1339,14 +1367,14 @@
     {
         "name": "Okufm",
         "url": "http://stream.zeno.fm/nrpe1a0n3p8uv",
-        "favicon": "assets/radios/Okufm.png",
+        "favicon": "assets/radios/Okufm.webp",
         "genre": "jmusic",
         "website": "https://onlineradiobox.com/cr/oku/?cs=cr.oku&played=1&lang=en"
     },
     {
         "name": "Only Hit Japan",
         "url": "http://stream.onlyhit.us:80/japan",
-        "favicon": "assets/radios/OnlyHitJapan.png",
+        "favicon": "assets/radios/OnlyHitJapan.webp",
         "genre": "jmusic",
         "website": "https://onlineradiobox.com/us/onlyhitjapan/?cs=us.onlyhitjapan&played=1"
     },
@@ -1360,42 +1388,49 @@
     {
         "name": "Otaku Music Radio",
         "url": "http://kathy.torontocast.com:2880/stream/1/",
-        "favicon": "assets/radios/OtakuMusicRadio.png",
+        "favicon": "assets/radios/OtakuMusicRadio.webp",
         "genre": "anime",
         "website": "https://onlineradiobox.com/es/otakumusic/?cs=mx.3d6gdl&played=1&lang=en"
     },
     {
+        "name": "Radio Animati",
+        "url": "https://stream.radioanimati.it/rasite",
+        "favicon": "assets/radios/radioanimati.webp",
+        "genre": "variety",
+        "website": "https://radioanimati.it/"
+    },
+    {
         "name": "Phate Radio",
         "url": "http://stream.phate.io/phatecc",
-        "favicon": "assets/radios/PhateRadio.png",
+        "favicon": "assets/radios/PhateRadio.webp",
         "genre": "jmusic",
         "website": "https://phate.io/"
     },
     {
         "name": "Radio 3d6 GDL",
         "url": "https://stream-150.zeno.fm/xug9mpg0k2zuv?zs",
-        "favicon": "assets/radios/Radio3d6GDL.png",
+        "favicon": "assets/radios/Radio3d6GDL.webp",
         "genre": "jmusic",
         "website": "https://onlineradiobox.com/mx/3d6gdl/?cs=mx.3d6gdl&played=1"
     },
     {
         "name": "Radio Anime 24",
         "url": "https://ssl-1.radiohost.pl:7028/stream",
-        "favicon": "assets/radios/RadioAnime24.png",
+        "favicon": "assets/radios/RadioAnime24.webp",
         "genre": "anime",
         "website": "https://mytuner-radio.com/radio/radio-anime-24-415247/"
     },
     {
         "name": "Radio Anime Night",
         "url": "http://stm11.srvstm.com:8356/;",
-        "favicon": "assets/radios/RadioAnimeNight.jpg",
+        "favicon": "assets/radios/RadioAnimeNight.webp",
         "genre": "anime",
         "website": "https://mytuner-radio.com/radio/radio-animenight-465064/"
     },
     {
         "name": "Radio Anime Stream",
         "url": "http://radioanime.radioca.st/stream",
-        "favicon": "assets/radios/RadioAnimeStream.ico",
+        "favicon": "assets/radios/RadioAnimeStream.webp",
         "genre": "anime",
         "website": "http://radioanime.radioca.st/index.html?sid=1"
     },
@@ -1409,14 +1444,14 @@
     {
         "name": "Rádio Blast",
         "url": "https://centova4.transmissaodigital.com:20143/principal;",
-        "favicon": "assets/radios/RádioBlast.png",
+        "favicon": "assets/radios/RádioBlast.webp",
         "genre": "jmusic",
         "website": "https://onlineradiobox.com/br/blast/?cs=br.blast&played=1&lang=en"
     },
     {
         "name": "Radio Free Otaku",
         "url": "http://streaming.radio.co/s8267e5edc/listen",
-        "favicon": "assets/radios/RadioFreeOtaku.png",
+        "favicon": "assets/radios/RadioFreeOtaku.webp",
         "genre": "anime",
         "website": "https://onlineradiobox.com/us/freeotaku/?cs=us.freeotaku&played=1"
     },
@@ -1435,44 +1470,65 @@
         "website": "https://www.sbs.com.au/audio/music/popasia"
     },
     {
+        "name": "Retro PC Game Music Streaming Radio",
+        "url": "http://gyusyabu.ddo.jp:8000/;stream.nsv&type=mp3&quot",
+        "favicon": "assets/radios/gyusyabu.webp",
+        "genre": "bgm",
+        "website": "http://gyusyabu.ddo.jp/MP3/MP3.html"
+    },
+    {
+        "name": "No Life Radio.com",
+        "url": "https://listen.nolife-radio.com/",
+        "favicon": "assets/radios/noliferadio.webp ",
+        "genre": "bgm",
+        "website": "https://nolife-radio.com/"
+    },
+    {
+        "name": "Radio Megamix Japan",
+        "url": "https://cc6.streammaximum.com:20010/stream",
+        "favicon": "assets/radios/radiomegamixjp.webp",
+        "genre": "variety",
+        "website": "https://www.radiomegamix.jp/"
+    },
+    {
         "name": "Stereo Anime",
         "url": "https://radio.stereoanime.net/listen/stereoanime/128",
-        "favicon": "assets/radios/StereoAnime.jpg",
+        "favicon": "assets/radios/StereoAnime.webp",
         "genre": "anime",
         "website": "https://www.stereoanime.net/"
     },
     {
         "name": "RadioDoki",
         "url": "http://142.4.216.144:8972/stream",
-        "favicon": "assets/radios/RadioDoki.png",
+        "favicon": "assets/radios/RadioDoki.webp",
         "genre": "jmusic",
         "website": "https://onlineradiobox.com/mx/doki/?cs=mx.doki"
     },
     {
         "name": "Kohina Radio",
         "url": "http://kohina.duckdns.org:8000/stream.ogg",
-        "favicon": "assets/radios/KohinaRadio.png",
+        "favicon": "assets/radios/KohinaRadio.webp",
         "genre": "jmusic",
         "website": "https://player.kohina.com/streamplayer/"
     },
     {
         "name": "Isekai Anime Radio",
         "url": "https://cast.isekaianimeradio.net/radio/8000/radio.mp3",
-        "favicon": "assets/radios/IsekaiAnimeRadio.png",
+        "favicon": "assets/radios/IsekaiAnimeRadio.webp",
         "genre": "anime",
         "website": "https://isekaianimeradio.mx/"
     },
     {
         "name": "Radio Jkanime",
         "url": "https://stream.zeno.fm/4n10t55g4uhvv",
-        "favicon": "assets/radios/RadioJkanime.png",
+        "favicon": "assets/radios/RadioJkanime.webp",
         "genre": "anime",
         "website": "https://jkanime.foroactivo.com/"
     },
     {
         "name": "Lazus anime radio",
         "url": "http://stream.zeno.fm/wwl1pz3upisuv",
-        "favicon": "assets/radios/Lazusanimeradio.png",
+        "favicon": "assets/radios/Lazusanimeradio.webp",
         "genre": "anime",
         "website": "https://onlineradiobox.com/mx/lazusanime/?cs=mx.lazusanime&played=1"
     },
@@ -1493,7 +1549,7 @@
     {
         "name": "Kibo.FM",
         "url": "http://animerad.io:8005/kibofm",
-        "favicon": "assets/radios/Kibo.FM.png",
+        "favicon": "assets/radios/Kibo.FM.webp",
         "genre": "variety",
         "website": "https://kibo.fm/webplayer"
     },
@@ -1521,14 +1577,14 @@
     {
         "name": "Smuglo.li r/a/dio",
         "url": "https://stream.smuglo.li/stream",
-        "favicon": "assets/radios/Smuglo.liradio.ico",
+        "favicon": "assets/radios/Smuglo.liradio.webp",
         "genre": "jmusic",
         "website": "https://zeno.fm/radio/smuglo-li-r-a-dio/"
     },
     {
         "name": "Unidentified",
         "url": "https://stream-149.zeno.fm/mkpenp2uqncvv",
-        "favicon": "assets/radios/Unidentified.png",
+        "favicon": "assets/radios/Unidentified.webp",
         "genre": "jmusic",
         "website": "https://zeno.fm/radio/country-genre/Japan/Music/"
     },
@@ -2018,14 +2074,14 @@
     {
         "name": "Vocaloid Radio on mikupa",
         "url": "http://aska.ru-hoster.com:8093/mikuparu",
-        "favicon": "assets/radios/VocaloidRadioonmikupa.jpg",
+        "favicon": "assets/radios/VocaloidRadioonmikupa.webp",
         "genre": "vocaloid",
         "website": "https://vocaloidradio.mikupa.ru/"
     },
     {
         "name": "All Anime Radio",
         "url": "http://stream.rcast.net/65538",
-        "favicon": "assets/radios/AllAnimeRadio.png",
+        "favicon": "assets/radios/AllAnimeRadio.webp",
         "genre": "anime",
         "website": "https://mytuner-radio.com/radio/all-anime-radio-467661/"
     },
@@ -2053,7 +2109,7 @@
     {
         "name": "RADIO ALFA ANIME",
         "url": "https://stream.rcast.net/67511.m3u",
-        "favicon": "assets/radios/RADIOALFAANIME.png",
+        "favicon": "assets/radios/RADIOALFAANIME.webp",
         "genre": "anime",
         "website": "https://www.radioalfacanavese.it/radio-alfa-anime/"
     },
@@ -2074,35 +2130,35 @@
     {
         "name": "Bitter Sweet Music JP",
         "url": "https://sonicssl.namehost.ro/8520/live.jp",
-        "favicon": "assets/radios/BitterSweetMusicJP.png",
+        "favicon": "assets/radios/BitterSweetMusicJP.webp",
         "genre": "jmusic",
         "website": "https://onlineradiobox.com/jp/bittersweetmusicjp/?cs=jp.bittersweetmusicjp"
     },
     {
         "name": "Unidentified2",
         "url": "ns341468.ip-37-187-126.eu:8000/radio.mp3",
-        "favicon": "assets/radios/Unidentified2.png",
+        "favicon": "assets/radios/Unidentified2.webp",
         "genre": "jmusic",
-        "website": "chrome://global/skin/media/pause-fill.svg)"
+        "website": "chrome://global/skin/media/pause-fill.webp)"
     },
     {
         "name": "BnP Radio",
         "url": "https://radio.bnp-radio.ru/live",
-        "favicon": "assets/radios/BNPRadio.jpg",
+        "favicon": "assets/radios/BNPRadio.webp",
         "genre": "anime",
         "website": "https://bnp-radio.ru/"
     },
     {
         "name": "Cyber Anime Radio",
         "url": "http://cyberanimeradio.ru:9000/",
-        "favicon": "assets/radios/CyberAnimeRadio.png",
+        "favicon": "assets/radios/CyberAnimeRadio.webp",
         "genre": "anime",
         "website": "https://cyberanimeradio.ru/"
     },
     {
         "name": "Agape's JPop/Anisong Radio",
         "url": "http://nas.agapec.fun:38000/mp3",
-        "favicon": "assets/radios/AzuraCast.png",
+        "favicon": "assets/radios/AzuraCast.webp",
         "genre": "jmusic",
         "website": "http://nas.agapec.fun:81/public/agapes_anisong_radio"
     },
@@ -2123,7 +2179,7 @@
     {
         "name": "Radio-AniNeko",
         "url": "https://anip-rs01.anineko.de:8270/R-AniNeko_128kbps.mp3",
-        "favicon": "assets/radios/Radio-AniNeko.png",
+        "favicon": "assets/radios/Radio-AniNeko.webp",
         "genre": "anime",
         "website": "https://radio-anineko.de/"
     },
@@ -2137,147 +2193,154 @@
     {
         "name": "Kodama Station",
         "url": "https://cast.kodamastation.com:8000/radio.mp3",
-        "favicon": "assets/radios/KodamaStation.png",
+        "favicon": "assets/radios/KodamaStation.webp",
         "genre": "jmusic",
         "website": "https://onlineradiobox.com/pe/kodama/?cs=pe.kodama&played=1"
     },
     {
         "name": "Radio Anime AX",
         "url": "https://stream.zeno.fm/c963db7eec9uv",
-        "favicon": "assets/radios/RadioAnimeAX.png",
+        "favicon": "assets/radios/RadioAnimeAX.webp",
         "genre": "anime",
         "website": "https://onlineradiobox.com/co/animeax/?cs=co.animeax&played=1"
     },
     {
         "name": "Anime Tracks",
         "url": "https://centova.listenon.in/proxy/animetracks/stream",
-        "favicon": "assets/radios/AnimeTracks.png",
+        "favicon": "assets/radios/AnimeTracks.webp",
         "genre": "anime",
         "website": "https://www.animetracks.com/"
     },
     {
         "name": "Yumi Co. Radio",
         "url": "http://yumicoradio.net:8000/stream",
-        "favicon": "assets/radios/yumicoradioV2.jpg",
+        "favicon": "assets/radios/yumicoradioV2.webp",
         "genre": "jmusic",
         "website": "http://yumicoradio.net/"
     },
     {
         "name": "Eden Radio",
         "url": "https://edenofthewest.com/listen/eden-radio/radio.mp3",
-        "favicon": "assets/radios/EdenRadio.png",
+        "favicon": "assets/radios/EdenRadio.webp",
         "genre": "jmusic",
         "website": "https://www.edenofthewest.com/public/eden-radio"
     },
     {
         "name": "Power 945 Radio",
         "url": "https://jaynair.radioca.st/stream",
-        "favicon": "assets/radios/Power945Radio.jpg",
+        "favicon": "assets/radios/Power945Radio.webp",
         "genre": "jmusic",
         "website": "https://mytuner-radio.com/radio/power-945-radio-454207/"
     },
     {
         "name": "ビームFM (Beam FM) ",
         "url": "https://ice1.streeemer.com:8030/radio.mp3",
-        "favicon": "assets/radios/ビームFM(BeamFM).png",
+        "favicon": "assets/radios/ビームFM(BeamFM).webp",
         "genre": "variety",
         "website": "https://mytuner-radio.com/radio/bimufm-beam-fm-455988/"
     },
     {
         "name": "Radio Eigekai Indies (ラジオエーゲ海)",
         "url": "https://stream.radiojar.com/66zgtscuc1duv",
-        "favicon": "assets/radios/RadioEigekaiIndies.png",
+        "favicon": "assets/radios/RadioEigekaiIndies.webp",
         "genre": "jmusic",
         "website": "https://onlineradiobox.com/jp/radioeigekaiindies/?cs=jp.radioeigekaiindies"
     },
     {
         "name": "Súper Tokio Radio",
         "url": "https://streamer.radio.co/s83eb8ff39/listen",
-        "favicon": "assets/radios/SúperTokioRadio.jpg",
+        "favicon": "assets/radios/SúperTokioRadio.webp",
         "genre": "variety",
         "website": "https://mytuner-radio.com/es/emisora/super-tokio-radio-464596/"
     },
     {
         "name": "Nonstop Casiopea - Fusion Radio",
         "url": "https://nonstopcasiopea.radioca.st/;",
-        "favicon": "assets/radios/Nonstopcasoi.png",
+        "favicon": "assets/radios/Nonstopcasoi.webp",
         "genre": "jmusic",
         "website": "https://nonstopcasiopea.com/"
     },
     {
         "name": "Japanese Ambient Music Radio",
         "url": "https://server.laradio.online:59009/live",
-        "favicon": "assets/radios/japaneseambientmusic.jpg",
+        "favicon": "assets/radios/japaneseambientmusic.webp",
         "genre": "bgm",
         "website": "https://www.thekyotoconnection.com/radio/"
     },
     {
         "name": "SOMA.FM-Digitalis",
         "url": "http://ice4.somafm.com:80/digitalis-128-mp3",
-        "favicon": "assets/radios/SOMA.FM-Digitalis.ico",
+        "favicon": "assets/radios/SOMA.FM-Digitalis.webp",
         "genre": "variety",
         "website": "https://somafm.com/player/#/now-playing/digitalis"
     },
     {
         "name": "SOMA.FM- drone zone",
         "url": "http://ice6.somafm.com:80/dronezone-128-mp3",
-        "favicon": "assets/radios/SOMA.FM-dronezone.ico",
+        "favicon": "assets/radios/SOMA.FM-dronezone.webp",
         "genre": "variety",
         "website": "https://somafm.com/player/#/now-playing/dronezone"
     },
     {
         "name": "RauteMusik STUDY",
         "url": "http://rautemusik-de-hz-fal-stream17.radiohost.de:80/study",
-        "favicon": "assets/radios/RauteMusikSTUDY.png",
+        "favicon": "assets/radios/RauteMusikSTUDY.webp",
         "genre": "bgm",
         "website": "https://www.rm.fm/study"
     },
     {
         "name": "Nightwave Plaza - Online Vaporwave Radio",
         "url": "http://radio.plaza.one/mp3",
-        "favicon": "assets/radios/nigthwaveplaza.ico",
+        "favicon": "assets/radios/nigthwaveplaza.webp",
         "genre": "bgm",
         "website": "https://plaza.one/"
     },
     {
         "name": "CINEMIX",
         "url": "https://kathy.torontocast.com:1825/stream",
-        "favicon": "assets/radios/CINEMIX.jpg",
+        "favicon": "assets/radios/CINEMIX.webp",
         "genre": "bgm",
         "website": "https://mytuner-radio.com/radio/cinemix-france-442860/"
     },
     {
+        "name": "All Classical Piano Chamber Works and Concertos live",
+        "url": "https://mpc1.mediacp.eu/stream/allchamberwithpiano",
+        "favicon": "assets/radios/allchamberwithpiano.webp",
+        "genre": "bgm",
+        "website": "https://mpc1.mediacp.eu/public/allchamberwithpiano"
+    },
+    {
         "name": "WREP",
         "url": "http://c13.radioboss.fm:8200/stream",
-        "favicon": "assets/radios/WREP.jpg",
+        "favicon": "assets/radios/WREP.webp",
         "genre": "bgm",
         "website": "https://wrep.jp/listen/"
     },
     {
         "name": "Split Infinity Radio 128kbps mp3",
         "url": "http://listen.siradio.fm/listen.pls/;stream.nsv&type=mp3&quot",
-        "favicon": "assets/radios/splitinfinity.png",
+        "favicon": "assets/radios/splitinfinity.webp",
         "genre": "variety",
         "website": "https://siradio.fm/"
     },
     {
         "name": " Moon Mission Recordings",
         "url": "http://uk5.internet-radio.com/proxy/mmr/;stream.nsv&type=mp3&quot",
-        "favicon": "assets/radios/MoonMissionRecordings.png",
+        "favicon": "assets/radios/MoonMissionRecordings.webp",
         "genre": "bgm",
         "website": "https://www.internet-radio.com/station/mmr/"
     },
     {
         "name": "Culture Failure",
         "url": "http://culturefailure.com:8000/listen.pls/;stream.nsv&type=mp3&quot",
-        "favicon": "assets/radios/CultureFailure.png",
+        "favicon": "assets/radios/CultureFailure.webp",
         "genre": "bgm",
         "website": "https://mytuner-radio.com/radio/culture-failure-415928/"
     },
     {
         "name": "Free FM",
         "url": "https://rocafmadrid.radioca.st/",
-        "favicon": "assets/radios/FreeFM.ico",
+        "favicon": "assets/radios/FreeFM.webp",
         "genre": "variety",
         "website": "https://rocafmadrid.radioca.st/index.html?sid=1"
     },
@@ -2298,84 +2361,84 @@
     {
         "name": "shadowfr69",
         "url": "https://radio.shadowfr69.eu/mp3",
-        "favicon": "assets/radios/AzuraCast.png",
+        "favicon": "assets/radios/AzuraCast.webp",
         "genre": "jmusic",
         "website": "https://azuracast.shadowfr69.eu/public/shadowfr69_radio"
     },
     {
         "name": "rainwave",
         "url": "https://relay.rainwave.cc/all.ogg",
-        "favicon": "assets/radios/rainwavecc.png",
+        "favicon": "assets/radios/rainwavecc.webp",
         "genre": "bgm",
         "website": "https://rainwave.cc/all/"
     },
     {
         "name": "Allzic Faire la Fete",
         "url": "http://allzic26.ice.infomaniak.ch/allzic26.mp3",
-        "favicon": "assets/radios/AllzicFairelaFete.jpg",
+        "favicon": "assets/radios/AllzicFairelaFete.webp",
         "genre": "variety",
         "website": "https://www.allzicradio.com/fr/player/listen/1683/allzic-radio-faire-la-fete"
     },
     {
         "name": "A-chan",
         "url": "https://jenny.torontocast.com:8066/;stream.nsv",
-        "favicon": "assets/radios/A-chan.png",
+        "favicon": "assets/radios/A-chan.webp",
         "genre": "variety",
         "website": "https://onlineradiobox.com/jp/achan/?cs=jp.achan"
     },
     {
         "name": "radio.llolo.lol",
         "url": "http://radio.llolo.lol:8000/streambot.mp3",
-        "favicon": "assets/radios/radio.llolo.lol.jpg",
+        "favicon": "assets/radios/radio.llolo.lol.webp",
         "genre": "variety",
         "website": "https://radio.llolo.lol/"
     },
     {
         "name": "Hitlist (Top 40)",
         "url": "http://live.powerhitz.com/hitlist?aw_0_req.gdpr=true",
-        "favicon": "assets/radios/Hitlist(top40).ico",
+        "favicon": "assets/radios/Hitlist(top40).webp",
         "genre": "variety",
         "website": "https://powerhitz.com/Hitlist"
     },
     {
         "name": "TOP 40 - 1.FM",
         "url": "http://185.33.21.112:80/top40_128",
-        "favicon": "assets/radios/1.FMHIP.png",
+        "favicon": "assets/radios/1.FMHIP.webp",
         "genre": "variety",
         "website": "https://www.1.fm/station/top40"
     },
     {
         "name": "Office Mix (Soft Pop)",
         "url": "http://live.powerhitz.com/officemix?aw_0_req.gdpr=true",
-        "favicon": "assets/radios/OfficeMix(SoftPop).png",
+        "favicon": "assets/radios/OfficeMix(SoftPop).webp",
         "genre": "variety",
         "website": "https://powerhitz.com/OfficeMix"
     },
     {
         "name": "1Power (top 40/hip hop)",
         "url": "http://live.powerhitz.com/1power?aw_0_req.gdpr=true",
-        "favicon": "assets/radios/1Power.png",
+        "favicon": "assets/radios/1Power.webp",
         "genre": "variety",
         "website": "https://powerhitz.com/1Power"
     },
     {
         "name": "Hot 108 Jamz (hip hop)",
         "url": "http://live.powerhitz.com/hot108?aw_0_req.gdpr=true",
-        "favicon": "assets/radios/Hot108Jamz.png",
+        "favicon": "assets/radios/Hot108Jamz.webp",
         "genre": "variety",
         "website": "https://powerhitz.com/Jamz"
     },
     {
         "name": "00's Hip Hop",
         "url": "https://strm112.1.fm/top40_mobile_mp3?aw_0_req.gdpr=true",
-        "favicon": "assets/radios/1.FMHIP.png",
+        "favicon": "assets/radios/1.FMHIP.webp",
         "genre": "variety",
         "website": "https://www.1.fm/station/club"
     },
     {
         "name": "Ambient sleeping pill",
         "url": "http://163.172.169.217:80/asp-s",
-        "favicon": "assets/radios/Ambientsleepingpill.png",
+        "favicon": "assets/radios/Ambientsleepingpill.webp",
         "genre": "bgm",
         "website": "https://ambientsleepingpill.com/"
     },
@@ -2389,16 +2452,156 @@
     {
         "name": "Funky Corner Radio",
         "url": "https://ais-sa2.cdnstream1.com/2447_192.mp3",
-        "favicon": "assets/radios/FunkyCornerRadio.png",
+        "favicon": "assets/radios/FunkyCornerRadio.webp",
         "genre": "variety",
         "website": "https://mytuner-radio.com/radio/funky-corner-radio-425321/"
     },
     {
+        "name": "tilderadio",
+        "url": "https://azuracast.tilderadio.org/radio/8000/radio.ogg",
+        "favicon": "assets/radios/Unidentified2.webp",
+        "genre": "bgm",
+        "website": "https://tilderadio.org/"
+    },
+    {
+        "name": "n p r | MPR News",
+        "url": "http://nis.stream.publicradio.org/nis.mp3",
+        "favicon": "assets/radios/Unidentified2.webp",
+        "genre": "variety",
+        "website": "https://www.mprnews.org/"
+    },
+    {
+        "name": "中广音乐网",
+        "url": "https://n03.rcs.revma.com/ks4vsmg3qtzuv",
+        "favicon": "assets/radios/Unidentified2.webp",
+        "genre": "cmusic",
+        "website": "https://www.bcc.com.tw/news3_index.asp"
+    },
+    {
+        "name": "台中广播电台",
+        "url": "http://211.20.119.101:8081/",
+        "favicon": "assets/radios/Unidentified2.webp",
+        "genre": "cmusic",
+        "website": "https://www.radiotaiwan.tw/tai-zhong-guang-bo-fm1007"
+    },
+    {
+        "name": "台北国际小区广播电台",
+        "url": "https://live.leanstream.co/ICRTFM-MP3",
+        "favicon": "assets/radios/Unidentified2.webp",
+        "genre": "cmusic",
+        "website": "https://www.icrt.com.tw/"
+    },
+    {
+        "name": "天津静海区综合广播·交通广播网",
+        "url": "http://starfish.bj.aliyun.001.qingting.fm:8000/jingdianFM1008",
+        "favicon": "assets/radios/Unidentified2.webp",
+        "genre": "cmusic",
+        "website": "http://www.guangbomi.com/live/tj/tj-jiaotong.html"
+    },
+    {
+        "name": "欢乐调频",
+        "url": "http://starfish.bj.aliyun.007.qingting.fm:8000/huanletiaopin",
+        "favicon": "assets/radios/Unidentified2.webp",
+        "genre": "cmusic",
+        "website": "https://m.qingting.fm/channels/15318317/"
+    },
+    {
+        "name": "太阳电台",
+        "url": "http://211.20.119.102:8081/",
+        "favicon": "assets/radios/Unidentified2.webp",
+        "genre": "cmusic",
+        "website": "http://www.sunny891.com.tw/"
+    },
+    {
+        "name": "正义电台",
+        "url": "http://211.20.119.103:8081",
+        "favicon": "assets/radios/Unidentified2.webp",
+        "genre": "cmusic",
+        "website": "https://loveradio889.com.tw/"
+    },
+    {
+        "name": "飞碟电台",
+        "url": "http://stream.rcs.revma.com/em90w4aeewzuv",
+        "favicon": "assets/radios/Unidentified2.webp",
+        "genre": "cmusic",
+        "website": "https://www.uforadio.com.tw/"
+    },
+    {
+        "name": "WHIZ Radio 海口音乐广播",
+        "url": "http://starfish.sz.aliyun.005.qingting.fm:8000/haikouSIMULRADIO",
+        "favicon": "assets/radios/Unidentified2.webp",
+        "genre": "cmusic",
+        "website": "https://m.ximalaya.com/radio/1504"
+    },
+    {
+        "name": "CityFM|大苗栗广播",
+        "url": "http://fm983.cityfm.tw:8080/983.mp3",
+        "favicon": "assets/radios/Unidentified2.webp",
+        "genre": "cmusic",
+        "website": "http://www.cityfm.tw/"
+    },
+    {
+        "name": "CityFM|城市广播",
+        "url": "http://fm929.cityfm.tw:8080/929.mp3",
+        "favicon": "assets/radios/Unidentified2.webp",
+        "genre": "cmusic",
+        "website": "http://www.cityfm.tw/"
+    },
+    {
+        "name": "CityFM|台南之音",
+        "url": "http://fm971.cityfm.tw:8080/971.mp3",
+        "favicon": "assets/radios/Unidentified2.webp",
+        "genre": "cmusic",
+        "website": "http://www.cityfm.tw/"
+    },
+    {
+        "name": "CityFM|台北健康",
+        "url": "http://fm901.cityfm.tw:8080/901.mp3",
+        "favicon": "assets/radios/Unidentified2.webp",
+        "genre": "cmusic",
+        "website": "http://www.cityfm.tw/"
+    },
+    {
+        "name": "80后音怡台",
+        "url": "http://lhttp.qingting.fm/live/20207761/64k.mp3",
+        "favicon": "assets/radios/Unidentified2.webp",
+        "genre": "cmusic",
+        "website": "https://m.qtfm.cn/channels/20207761"
+    },
+    {
+        "name": "法国国际广播电台",
+        "url": "http://rfichinois96k.ice.infomaniak.ch/rfichinois-96k.mp3",
+        "favicon": "assets/radios/Unidentified2.webp",
+        "genre": "cmusic",
+        "website": "https://www.rfi.fr/cn/"
+    },
+    {
+        "name": "台湾古典音乐台",
+        "url": "http://59.120.88.155:8000/live.mp3",
+        "favicon": "assets/radios/Unidentified2.webp",
+        "genre": "cmusic",
+        "website": "https://www.family977.com.tw/"
+    },
+    {
         "name": "Ottava(Voice of the Planet)",
         "url": "http://ottava2.out.airtime.pro:8000/ottava2_a",
-        "favicon": "assets/radios/Ottava(VoiceofthePlanet).png",
+        "favicon": "assets/radios/Ottava(VoiceofthePlanet).webp",
         "genre": "bgm",
         "website": "https://ottava.jp/planet/"
+    },
+    {
+        "name": "RadiCro",
+        "url": "https://radicrojapan.out.airtime.pro/radicrojapan_a",
+        "favicon": "assets/radios/radicro.webp",
+        "genre": "jpradio",
+        "website": "https://www.radicro.com/"
+    },
+    {
+        "name": "KZOO Hawaii Radio",
+        "url": "https://us2.maindigitalstream.com/ssl/KZOO",
+        "favicon": "assets/radios/kzoohawaii.webp",
+        "genre": "jpradio",
+        "website": "https://kzoohawaii.com/"
     },
     {
         "name": "FRED Film Radio Ch14 Japanese",
@@ -2410,63 +2613,63 @@
     {
         "name": " FM Kahoku 78.7 (FMかほく)",
         "url": "http://radio.kahoku.net:8000/;",
-        "favicon": "assets/radios/FMかほく.jpg",
+        "favicon": "assets/radios/FMかほく.webp",
         "genre": "jpradio",
         "website": "https://fm.kahoku.net/"
     },
     {
         "name": "湘南ビーチFM 78.9",
         "url": "http://shonanbeachfm.out.airtime.pro:8000/shonanbeachfm_a",
-        "favicon": "assets/radios/shonanbeach.png",
+        "favicon": "assets/radios/shonanbeach.webp",
         "genre": "jpradio",
         "website": "https://mytuner-radio.com/radio/xiang-nan-bichifm-shonan-beach-fm-412043/"
     },
     {
         "name": "エフエムつやま FM 78.0",
         "url": "http://onair.fm-tsuyama.jp:1080/fmtsuyama_live.ogg",
-        "favicon": "assets/radios/エフエムつやまFM78.0.png",
+        "favicon": "assets/radios/エフエムつやまFM78.0.webp",
         "genre": "jpradio",
         "website": "https://www.fm-tsuyama.jp/"
     },
     {
         "name": "羊飼いラジオHitsujikai Radio",
         "url": "https://streaming.radio.co/se4a8e6a93/listen",
-        "favicon": "assets/radios/hitsujikairadio.jpg",
+        "favicon": "assets/radios/hitsujikairadio.webp",
         "genre": "jpradio",
         "website": "https://www.hitsujikai-radio.com/"
     },
     {
         "name": "Radio Mast Japanese",
         "url": "https://audio-edge-ey5nr.ams.s.radiomast.io/a622d414-52a6-4426-b3b8-ed2a4dbb704b",
-        "favicon": "assets/radios/Unidentified2.png",
+        "favicon": "assets/radios/Unidentified2.webp",
         "genre": "jpradio",
         "website": "https://streams.radiomast.io"
     },
     {
         "name": "ラヂオきしわだ Kishiwada Radio",
         "url": "http://61.89.201.27:8000/radikishi.mp3",
-        "favicon": "assets/radios/KishiwadaRadio.jpg",
+        "favicon": "assets/radios/KishiwadaRadio.webp",
         "genre": "jpradio",
         "website": "https://www.radiokishiwada.jp/"
     },
     {
         "name": "Generation KPop",
         "url": "http://stream9.mexiserver.com:8242/stream",
-        "favicon": "assets/radios/GenerationKPop.png",
+        "favicon": "assets/radios/GenerationKPop.webp",
         "genre": "kmusic",
         "website": "https://mytuner-radio.com/radio/generacion-kpop-peru-464532/"
     },
     {
         "name": "Delta radio - K-Pop",
         "url": "http://streams.deltaradio.de:80/kpop/mp3-192/",
-        "favicon": "assets/radios/Deltaradio-K-Pop.png",
+        "favicon": "assets/radios/Deltaradio-K-Pop.webp",
         "genre": "kmusic",
         "website": "https://webradio.coolstreaming.us/player/?stream=60554"
     },
     {
         "name": "KPOP 4 YOU",
         "url": "http://stream.laut.fm/kpop4you",
-        "favicon": "assets/radios/KPOP4YOU.jpg",
+        "favicon": "assets/radios/KPOP4YOU.webp",
         "genre": "kmusic",
         "website": "https://laut.fm/kpop4you"
     },
@@ -2480,28 +2683,28 @@
     {
         "name": "KPOPHITS",
         "url": "http://stream.laut.fm/kpophits",
-        "favicon": "assets/radios/KPOPHITS.jpg",
+        "favicon": "assets/radios/KPOPHITS.webp",
         "genre": "kmusic",
         "website": "https://laut.fm/kpophits"
     },
     {
         "name": "RADIOKPOP",
         "url": "http://stream.laut.fm/radiokpop",
-        "favicon": "assets/radios/RADIOKPOP.jpg",
+        "favicon": "assets/radios/RADIOKPOP.webp",
         "genre": "kmusic",
         "website": "https://laut.fm/radiokpop"
     },
     {
         "name": "K WORLD",
         "url": "http://stream.laut.fm/k-world",
-        "favicon": "assets/radios/KWORLD.jpg",
+        "favicon": "assets/radios/KWORLD.webp",
         "genre": "kmusic",
         "website": "https://laut.fm/k-world"
     },
     {
         "name": "Omg kpop",
         "url": "http://hyades.shoutca.st:8551/stream",
-        "favicon": "assets/radios/Omgkpop.png",
+        "favicon": "assets/radios/Omgkpop.webp",
         "genre": "kmusic",
         "website": "http://www.omgkpop.com/"
     }

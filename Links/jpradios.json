@@ -1,0 +1,644 @@
+[
+  {
+    "src": "https://nhkwlive-radio.akamaized.net/hls/live/2032384/radio-rs5/index_07.m3u8",
+    "favicon": "assets/websites/nhkworldradio.webp",
+    "name": "NHK World Japan",
+    "homepage": "https://www3.nhk.or.jp/nhkworld/en/live/"
+  },
+  {
+    "src": "https://nhkwlive-radio.akamaized.net/hls/live/2032383/radio-rs4/index_06.m3u8",
+    "favicon": "assets/websites/nhkworldradio.webp",
+    "name": "NHK国际广播（华语时间12: 00）",
+    "homepage": "https://www3.nhk.or.jp/"
+  },
+  {
+    "src": "https://ap.fd6.online/hls/radio-stream.nhk.jp/hls/live/2023229/nhkradiruakr1/master48k.m3u8",
+    "favicon": "assets/websites/nhkworldradio.webp",
+    "name": "NHK Radio 1",
+    "homepage": "https://www3.nhk.or.jp/"
+  },
+  {
+    "src": "https://nhkwlive-radio.akamaized.net/hls/live/2032381/radio-rs1/index_03.m3u8",
+    "favicon": "assets/websites/nhkworldradio.webp",
+    "name": "NHK国际广播（华语时间19: 30、20: 30、21: 30、22: 30）",
+    "homepage": "https://www3.nhk.or.jp/"
+  },
+  {
+    "src": "https://epg.pw/stream/8e7e14c0687efaa5082e847d03833a4749c5716e9d99580785a59a90d1398787.m3u8",
+    "favicon": "assets/websites/nhkworldradio.webp",
+    "name": "nhk bs premium",
+    "homepage": "https://www3.nhk.or.jp/"
+  },
+  {
+    "src": "http://nhkwlive-xjp.akamaized.net/hls/live/2003458/nhkwlive-xjp-en/index_2M.m3u8",
+    "favicon": "assets/websites/nhkworldradio.webp",
+    "name": "NHK World TV",
+    "homepage": "https://www3.nhk.or.jp/"
+  },
+  {
+    "src": "https://nhkworld.webcdn.stream.ne.jp/www11/radiojapan/all/263943/live_s.m3u8",
+    "favicon": "assets/websites/nhkworldradio.webp",
+    "name": "NHK World Radio Japan - Japanese",
+    "homepage": "https://www3.nhk.or.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30058/livestream/playlist.m3u8",
+    "favicon": "assets/websites/abashiri.webp",
+    "name": "FM ABASHIRI [北海道網走市]",
+    "homepage": "https://lia-abashiri.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30044/livestream/playlist.m3u8",
+    "favicon": "assets/websites/radiowonderstorage.webp",
+    "name": "RADIOワンダーストレージFMドラマシティ [北海道札幌市厚別区]",
+    "homepage": "https://776.fm/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30005/livestream/playlist.m3u8",
+    "favicon": "assets/websites/sankakuyama.webp",
+    "name": "三角山放送局 [北海道札幌市西区]",
+    "homepage": "https://www.sankakuyama.co.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30016/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmjaga.webp",
+    "name": "FM JAGA [北海道帯広市]",
+    "homepage": "https://www.jaga.fm/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30074/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmriviere.webp",
+    "name": "FMりべーる [北海道旭川市]",
+    "homepage": "https://fm837.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30045/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmnemuro.webp",
+    "name": "[北海道]FMねむろ",
+    "homepage": "https://www.fmnemuro.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30029/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmkushiro.webp",
+    "name": "FMくしろ [北海道釧路市]",
+    "homepage": "https://www.fm946.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30038/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmwing.webp",
+    "name": "FM WING [北海道帯広市]",
+    "homepage": "https://fmwing.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30034/livestream/playlist.m3u8",
+    "favicon": "assets/websites/ラジオカロスサッポロFM78.1.webp",
+    "name": "ラジオカロスサッポロ [北海道札幌市中央区]",
+    "homepage": "https://radiokaros.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30090/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmapperu.webp",
+    "name": "FMアップル [北海道札幌市豊平区平岸]",
+    "homepage": "http://765fm.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30087/livestream/playlist.m3u8",
+    "favicon": "assets/websites/wi-radiO.webp",
+    "name": "wi-radio [北海道伊達市]",
+    "homepage": "https://date-kanko.jp/wi_radio/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30015/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmmaple.webp",
+    "name": "FMメイプル [北海道北広島市]",
+    "homepage": "https://fm-maple.com/home/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30032/livestream/playlist.m3u8",
+    "favicon": "assets/websites/sapporomura.webp",
+    "name": "さっぽろ村ラジオ [北海道札幌市東区]",
+    "homepage": "https://www.fm813.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30079/livestream/playlist.m3u8",
+    "favicon": "assets/websites/befm.webp",
+    "name": "Be FM [青森県八戸市]",
+    "homepage": "https://www.befm.co.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30050/livestream/playlist.m3u8",
+    "favicon": "assets/websites/cassiopeiafm.webp",
+    "name": "カシオペアFM [岩手県二戸市]",
+    "homepage": "http://779.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30017/livestream/playlist.m3u8",
+    "favicon": "assets/websites/radiomorioka.webp",
+    "name": "ラヂオもりおか [岩手県盛岡市]",
+    "homepage": "https://radiomorioka.co.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30097/livestream/playlist.m3u8",
+    "favicon": "assets/websites/miyakoharbor.webp",
+    "name": "みやこハーバーラジオ [岩手県宮古市]",
+    "homepage": "http://www.miyakofm.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30007/livestream/playlist.m3u8",
+    "favicon": "assets/websites/仙台のコミュニティFMRADIO3(ラジオ3)76.2MH.webp",
+    "name": "FMRADIO3 [宮城県仙台市青葉区]",
+    "homepage": "https://www.radio3.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30094/livestream/playlist.m3u8",
+    "favicon": "assets/websites/radiokesennuma.webp",
+    "name": "ラジオ気仙沼 [宮城県気仙沼市]",
+    "homepage": "https://kfm775.co.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30037/livestream/playlist.m3u8",
+    "favicon": "assets/websites/radioishinomaki.webp",
+    "name": "ラジオ石巻 [宮城県石巻市]",
+    "homepage": "http://www.fm764.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30056/livestream/playlist.m3u8",
+    "favicon": "assets/websites/BAYWAVE(ベイウェーブ).webp",
+    "name": "BAY WAVE [宮城県塩釜市]",
+    "homepage": "http://www.bay-wave.co.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30018/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmizumi.webp",
+    "name": "FMいずみ [宮城県仙台市泉区]",
+    "homepage": "https://www.fm797.co.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30092/livestream/playlist.m3u8",
+    "favicon": "assets/websites/なとらじFM80.1.webp",
+    "name": "なとらじ801 [宮城県名取市]",
+    "homepage": "http://www.natori801.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30030/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmyutopia.webp",
+    "name": "FMゆーとぴあ [秋田県湯沢市]",
+    "homepage": "http://www.yutopia.or.jp/~fm763/index.html"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30076/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmyokote.webp",
+    "name": "横手かまくらFM [秋田県横手市]",
+    "homepage": "https://fmyokote.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30089/livestream/playlist.m3u8",
+    "favicon": "assets/websites/kiritamporadio.webp",
+    "name": "鹿角きりたんぽFM [秋田県鹿角市]",
+    "homepage": "https://fm791.net/category/news/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30014/livestream/playlist.m3u8",
+    "favicon": "assets/websites/akitatsubakidai.webp",
+    "name": "エフエム椿台 [秋田県秋田市]",
+    "homepage": "https://www.fm796.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30025/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmoodate.webp",
+    "name": "[秋田]ラジオおおだて",
+    "homepage": "https://odate-fm.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30009/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmiwaki.webp",
+    "name": "FMいわき [福島県いわき市]",
+    "homepage": "https://www.fm-iwaki.co.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30019/livestream/playlist.m3u8",
+    "favicon": "assets/websites/FMMOT.com.webp",
+    "name": "FM Mot.com [福島県本宮市]",
+    "homepage": "http://www.fm-mot.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30020/livestream/playlist.m3u8",
+    "favicon": "assets/websites/koco.webp",
+    "name": "KOCOラジ [福島県郡山市]",
+    "homepage": "https://www.fm791.co.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30023/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmhitachi.webp",
+    "name": "FMひたち [茨城県日立市]",
+    "homepage": "https://www.fmhitachi.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30022/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmharurun.webp",
+    "name": "FMぱるるん [茨城県水戸市]",
+    "homepage": "https://www.fmpalulun.co.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30075/livestream/playlist.m3u8",
+    "favicon": "assets/websites/takahagifm.webp",
+    "name": "たかはぎFM [茨城県高萩市]",
+    "homepage": "https://www.takahagi-kanko.jp/sp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30021/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmuu.webp",
+    "name": "FMうしくうれしく放送 [茨城県牛久市]",
+    "homepage": "http://fmuu.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30043/livestream/playlist.m3u8",
+    "favicon": "assets/websites/まえばしCITYエフエム(M-wave)live.webp",
+    "name": "まえばしCITYエフエム [群馬県前橋市]",
+    "homepage": "http://www.maebashi.fm/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30031/livestream/playlist.m3u8",
+    "favicon": "assets/websites/katsushikafm.webp",
+    "name": "[東京]かつしかFM",
+    "homepage": "https://kfm789.co.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30027/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmsetagaya.webp",
+    "name": "エフエム世田谷 [東京都世田谷区]",
+    "homepage": "https://fmsetagaya.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30042/livestream/playlist.m3u8",
+    "favicon": "assets/websites/中央エフエム(RadioCity).webp",
+    "name": "RadioCity 中央エフエム [東京都中央区]",
+    "homepage": "http://fm840.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30039/livestream/playlist.m3u8",
+    "favicon": "assets/websites/chofufm.webp",
+    "name": "調布FM [東京都調布市]",
+    "homepage": "https://www.chofu-fm.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30059/livestream/playlist.m3u8",
+    "favicon": "assets/websites/radiofuchues.webp",
+    "name": "ラジオフチューズ [東京都府中市]",
+    "homepage": "https://radio-fuchues.tokyo/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30033/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmtachikawa.webp",
+    "name": "エフエム立川 [東京都立川市]",
+    "homepage": "http://fm844.co.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30081/livestream/playlist.m3u8",
+    "favicon": "assets/websites/TokyoStarRadio(八王子FM).webp",
+    "name": "Tokyo Star Radio(八王子FM) [東京都八王子市]",
+    "homepage": "https://775fm.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30036/livestream/playlist.m3u8",
+    "favicon": "assets/websites/rainbowtownradio.webp",
+    "name": "レインボータウンFM [東京都江東区]",
+    "homepage": "https://www.885fm.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30051/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmkomae.webp",
+    "name": "コマラジ [東京都狛江市]",
+    "homepage": "https://www.komae.fm/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30064/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmtotsuka.webp",
+    "name": "[神奈川]エフエム戸塚",
+    "homepage": "https://www.fm-totsuka.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30080/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmhot.webp",
+    "name": "[神奈川]FMHOT893",
+    "homepage": "https://fm839.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30057/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmkaon.webp",
+    "name": "FMカオン [神奈川県海老名市]",
+    "homepage": "https://www.fmkaon.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30046/livestream/playlist.m3u8",
+    "favicon": "assets/websites/kawasakifm.webp",
+    "name": "かわさきFM [神奈川県川崎市中原区]",
+    "homepage": "https://www.kawasakifm.co.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30061/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmsalus.webp",
+    "name": "[神奈川]FMサルース",
+    "homepage": "https://www.fm-salus.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30028/livestream/playlist.m3u8",
+    "favicon": "assets/websites/shonanbeach.webp",
+    "name": "[神奈川]湘南ビーチ",
+    "homepage": "https://www.beachfm.co.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30065/livestream/playlist.m3u8",
+    "favicon": "assets/websites/marinefm.webp",
+    "name": "マリンFM [神奈川県横浜市]",
+    "homepage": "https://www.marine-fm.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30026/livestream/playlist.m3u8",
+    "favicon": "assets/websites/77.5LivelyFM.webp",
+    "name": "775ライブラリFM [埼玉県朝霞市]",
+    "homepage": "https://775fm.co.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30002/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmflower.webp",
+    "name": "フラワーラジオ [埼玉県鴻巣市]",
+    "homepage": "https://fm767.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30096/livestream/playlist.m3u8",
+    "favicon": "assets/websites/koshigayafm.webp",
+    "name": "ハローハッピー・こしがやエフエム [埼玉県越谷市]",
+    "homepage": "https://koshigayafm.co.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30008/livestream/playlist.m3u8",
+    "favicon": "assets/websites/REDSWAVE.webp",
+    "name": "REDS WAVE [埼玉県さいたま市]",
+    "homepage": "http://redswave.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30047/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmfukaya.webp",
+    "name": "FMふっかちゃん [埼玉県深谷市]",
+    "homepage": "https://www.fukaya-fm.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30035/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmkawaguchi.webp",
+    "name": "FM Kawaguchi [埼玉県川口市]",
+    "homepage": "https://www.fm856.co.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30006/livestream/playlist.m3u8",
+    "favicon": "assets/websites/radiomyu.webp",
+    "name": "ラジオ・ミュー [富山県黒部市]",
+    "homepage": "https://www.fm761.co.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30001/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmn1.webp",
+    "name": "FM N1 [石川県野々市市]",
+    "homepage": "https://www.fmn1.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30012/livestream/playlist.m3u8",
+    "favicon": "assets/websites/harborstation.webp",
+    "name": "敦賀FM [福井県敦賀市]",
+    "homepage": "http://www.harbor779.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30086/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmazumino.webp",
+    "name": "[長野]あづみ野エフエム放送",
+    "homepage": "https://azuminofm.co.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30062/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmciao.webp",
+    "name": "[静岡]Ciao!",
+    "homepage": "https://www.ciao796.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30004/livestream/playlist.m3u8",
+    "favicon": "assets/websites/midfm761.webp",
+    "name": "MID-FM [愛知県名古屋市東区]",
+    "homepage": "https://midfm761.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30040/livestream/playlist.m3u8",
+    "favicon": "assets/websites/エフエムEGAO.webp",
+    "name": "エフエムEGAO [愛知県岡崎市]",
+    "homepage": "https://www.fm-egao.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30082/livestream/playlist.m3u8",
+    "favicon": "assets/websites/radiocafejp.webp",
+    "name": "[京都]京都三条ラジオカフェ",
+    "homepage": "https://radiocafe.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30063/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmotokuni.webp",
+    "name": "FMおとくに [京都府乙訓地域]",
+    "homepage": "https://fm-otokuni.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30071/livestream/playlist.m3u8",
+    "favicon": "assets/websites/radiomixkyoto.webp",
+    "name": "FM87.0 RADIO MIX KYOTO [京都市北区]",
+    "homepage": "https://radiomix.kyoto/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30073/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmtango.webp",
+    "name": "FMたんご [京都府京丹後市]",
+    "homepage": "https://fm-tango.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30041/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmgenki.webp",
+    "name": "[兵庫]FM GENKI",
+    "homepage": "https://fmgenki.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30078/livestream/playlist.m3u8",
+    "favicon": "assets/websites/BAN-BANラジオ.webp",
+    "name": "[兵庫]BAN-BANラジオ",
+    "homepage": "https://www.banban.jp/radio/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30013/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmjungle.webp",
+    "name": "FM ジャングル [兵庫県豊岡市]",
+    "homepage": "http://www.764.fm/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30067/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmaiai.webp",
+    "name": "FM aiai 82.0MHz (エフエムあまがさき) [兵庫県尼崎市]",
+    "homepage": "https://amasaki-fm.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30084/livestream/playlist.m3u8",
+    "favicon": "assets/websites/beachstation.webp",
+    "name": "[和歌山]ビーチステーション",
+    "homepage": "https://www.fm764.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30053/livestream/playlist.m3u8",
+    "favicon": "assets/websites/DARAZFM（だらずFM）.webp",
+    "name": "DARAZ FM [鳥取県米子市]",
+    "homepage": "http://www.darazfm.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30010/livestream/playlist.m3u8",
+    "favicon": "assets/websites/%E3%82%A8%E3%83%95%E3%82%A8%E3%83%A0%E3%81%B3%E3%81%96%E3%82%93%EF%BC%88B%E3%83%BBFM791%EF%BC%89.webp",
+    "name": "エフエムびざん [徳島県徳島市]",
+    "homepage": "http://www.bfm.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30070/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmsun.webp",
+    "name": "FM SUN [香川県坂出市]",
+    "homepage": "https://www.kbn.ne.jp/fm/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30024/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fm815.webp",
+    "name": "FM815 [香川県高松市]",
+    "homepage": "https://www.fm815.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30052/livestream/playlist.m3u8",
+    "favicon": "assets/websites/AirStationHibiki（エアーステーションひびき）.webp",
+    "name": "AIR STATION HIBIKI [福岡県北九州市]",
+    "homepage": "https://hibiki882.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30088/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmnobeoka.webp",
+    "name": "FMのべおか [宮崎県延岡市内]",
+    "homepage": "https://www.fmnobeoka.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30072/livestream/playlist.m3u8",
+    "favicon": "assets/websites/tatsugoradio.webp",
+    "name": "FMたつごう [鹿児島県大島郡龍郷町]",
+    "homepage": "https://tatsugo.fm-s.org/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30066/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmokiraji.webp",
+    "name": "オキラジ [沖縄県沖縄市]",
+    "homepage": "https://fm854.fun/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30077/livestream/playlist.m3u8",
+    "favicon": "assets/websites/comiten.webp",
+    "name": "COMI×TEN [福岡市中央区]",
+    "homepage": "http://fmkumejima.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30068/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmnaha.webp",
+    "name": "fm那覇 [沖縄県那覇市]",
+    "homepage": "https://www.fmnaha.jp/"
+  },
+  {
+    "src": "https://mtist.as.smartstream.ne.jp/30120/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmnanjo.webp",
+    "name": "ハートFM [愛知県名古屋市中区]",
+    "homepage": "https://heartfm.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30085/livestream/playlist.m3u8",
+    "favicon": "assets/websites/choku861jp.webp",
+    "name": "チョクラジ [福岡県直方市]",
+    "homepage": "https://choku861.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30054/livestream/playlist.m3u8",
+    "favicon": "assets/websites/amamifm.webp",
+    "name": "あまみエフエム [鹿児島県奄美市]",
+    "homepage": "https://dwave.amamin.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30069/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmishigaki.webp",
+    "name": "FMいしがきサンサンラジオ [沖縄県石垣市]",
+    "homepage": "https://www.fmishigaki.jp/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30055/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmyonabaru.webp",
+    "name": "FMよなばる [沖縄県島尻郡与那原町]",
+    "homepage": "http://www.fm-yonabaru.site/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30003/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmnirai.webp",
+    "name": "FMニライ [沖縄県北谷町]",
+    "homepage": "https://www.fmnirai.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30093/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmginowan.webp",
+    "name": "FMぎのわん [沖縄県宜野湾市]",
+    "homepage": "https://fmginowan.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30098/livestream/playlist.m3u8",
+    "favicon": "assets/websites/ginowancityfm.webp",
+    "name": "ぎのわんシティFM [沖縄県宜野湾市]",
+    "homepage": "https://gcfm818.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30083/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmtoyomi.webp",
+    "name": "FMとよみ [沖縄県豊見城市]",
+    "homepage": "https://www.fm-toyomi.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30011/livestream/playlist.m3u8",
+    "favicon": "assets/websites/FMうるま.webp",
+    "name": "FMうるま [沖縄県うるま市]",
+    "homepage": "https://fmuruma.com/"
+  },
+  {
+    "src": "http://mtist.as.smartstream.ne.jp/30095/livestream/playlist.m3u8",
+    "favicon": "assets/websites/fmyanbaru.webp",
+    "name": "FMやんばる [沖縄県名護市]",
+    "homepage": "https://fmyanbaru.co.jp/"
+  },
+  {
+    "src": "  https://epg.pw/stream/35da31035d2a832bde931da160bc9ddf987fb7f29a013c48c3faf554e74151cb.m3u8",
+    "favicon": "assets/radios/takarazuka.webp",
+    "name": "takarazuka sky stage",
+    "homepage": "https://www.tca-pictures.net/skystage/"
+  },
+  {
+    "src": "https://epg.pw/stream/05c4e6284ec59f5fe76f32eb012ca712fbc94e6cd48c7853026e12227677be46.m3u8",
+    "favicon": "assets/radios/ginga.webp",
+    "name": "チャンネル銀河",
+    "homepage": "https://www.ch-ginga.jp/"
+  },
+  {
+    "src": "https://epg.pw/stream/7c08c183610740794e0f39e158a44d85e6b400eea9eac7e2aaf09706f05bbf40.m3u8",
+    "favicon": "assets/radios/toeich.webp",
+    "name": "東映チャンネル",
+    "homepage": "https://www.toeich.jp/"
+  },
+  {
+    "src": "http://bluford.torontocast.com:8006/stream",
+    "favicon": "assets/radios/tokyorose.webp",
+    "name": "Tokyo Rose Radio",
+    "homepage": "https://www.tokyoroseradio.torontocast.stream/"
+  },
+  {
+    "src": "http://150.95.174.29:8000/by_the_sea",
+    "favicon": "assets/radios/shonanbeach.webp",
+    "name": "Shonan Beach FM",
+    "homepage": "https://www.beachfm.co.jp/"
+  }
+]

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Sasalele Video Station - Japanese Movies, M3U8 Streams, Live TV</title>
+        <meta name="robots" content="index, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+        <meta name="Keywords"
+            content="Japanese video, m3u8 streams, live streaming, HD video streaming, IPTV, HLS, live TV, streaming media, m3u8 playlist, Japanese movies online, HLS streams">
+        <meta name="description"
+            content="Watch Japanese videos, movies, and live TV with m3u8 streams. Enjoy seamless streaming experiences with our extensive collection of HD videos and live broadcasts.">
+        <link rel="canonical" href="https://basic.pp.ua/video.html">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Sasalele Music Station">
+        <meta property="og:url" content="https://basic.pp.ua/">
+        <meta property="og:site_name" content="Sasalele Music Station">
+        <script type="application/ld+json">{
+                         "@context": "https://schema.org",
+                         "@type": "WebSite",
+                         "name": "Sasalele Music Station",
+                         "alternateName": ["Sasalele Radio", "Sasa lele Music station", "Sasa Lele", "sasalele"],
+                         "url": "https://basic.pp.ua/"
+                         }
+                      </script>
+        <link rel="icon" href="assets/sasalele_logo-removebg.webp">
+        <link rel="apple-touch-icon" href="assets/sasalele_logo-removebg.webp">
+        <link rel="shortcut icon" type="x-icon" href="assets/sasalele_logo-removebg.webp">
+        <script src="js/jquery-3.5.1.min.js"></script>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-LDY4BC680M"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+
+            gtag('config', 'G-LDY4BC680M');
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@latest/pace-theme-default.min.css">
+    </head>
+
+    <body>
+        <nav class="navbar sticky-top navbar-dark bg-dark navbar-expand-md">
+            <a class="navbar-brand" href="https://basic.pp.ua/"><img class="" src="assets/sasalele_logo-removebg.webp"
+                    width="auto" height="32"></a>
+            <div class="navbar-text d-flex justify-content-center align-items-center text-white">Sasalele Music Station
+            </div>
+            <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse"
+                data-target="#main-navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="main-navigation">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Radios<i
+                                class="fa-solid fa-radio"></i></a>
+                    </li>
+                    <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown"
+                            aria-expanded="false" href="#">Websites<i class="fa-fw fas fa-link"></i></a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="website.html#radiohere">Radio
+                                Websites <i class="fa-solid fa-tower-broadcast"></i></a>
+                            <a class="dropdown-item" href="website.html#radiojppodcast">Japanese
+                                Radios / Podcasts <i class="fa-solid fa-podcast"></i></a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="website.html#websitehere">Music
+                                Sites <i class="fa-solid fa-headset"></i></a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="website.html#scrap">Download / Tools <i
+                                    class="fa-solid fa-download"></i></a>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="video.html">Videos<i
+                                class="fa-solid fa-video"></i></a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="chat.html">Chat<i
+                                class="fa-solid fa-comment"></i></a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="search.html">Search<i
+                                class="fa-solid fa-magnifying-glass"></i></a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="drive.html">Drive Music Player<i
+                                class="fa-brands fa-google-drive"></i></a></li>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <div id="clock">
+                            <span id="clockTime"></span>
+                            <span id="clockDay"></span>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+        </nav>
+        <section id="videos">
+            <div class="container-fluid">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-10">
+                        <div class="input-group mb-3 mt-3">
+                            <input type="text" id="m3uURL" class="form-control" placeholder="Enter M3U8 URL">
+                            <div class="input-group-append">
+                                <button id="loadM3U" class="btn btn-primary btn-go">Go</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container mt-2">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div id="vplayer">
+                            <h6 id="selected-video-title"></h6>
+                            <video id="video-player" src="" type="video/mp4" controls autoplay>
+                            </video>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-1">
+                        <div id="genre-info" class="text-center mb-1">
+                            <strong>Genre:</strong> <span id="genre-name">Japan Mix</span> <br>
+                            <strong>Channels:</strong> <span id="channel-count">0</span>
+                        </div>
+                        <div class="input-group mb-1">
+                            <div class="input-group-prepend">
+                                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-bars"></i> Playlist
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a href="" class="genre-link" data-genre="jpvideos">Japan Mix</a>
+                                    <a href="" class="genre-link" data-genre="full">All Mix</a>
+                                    <a href="" class="genre-link" data-genre="lg">LG</a>
+                                    <a href="" class="genre-link" data-genre="roku">Roku</a>
+                                    <a href="" class="genre-link" data-genre="tablo">Tablo</a>
+                                    <a href="" class="genre-link" data-genre="xiaomi">Xiaomi</a>
+                                    <a href="" class="genre-link" data-genre="xumo">Xumo</a>
+                                    <a href="" class="genre-link" data-genre="douyu">Douyu</a>
+                                    <a href="" class="genre-link" data-genre="radiostreams">Radio Streams</a>
+                                    <a href="" class="genre-link" data-genre="cloud">Cloud Videos</a>
+                                </div>
+                            </div>
+                            <input type="text" id="searchChannel" class="form-control" placeholder="Search Channel">
+                        </div>
+                        <div id="video-list" class="list-group"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container mt-4" id="tips">
+            <h3>What is M3U8?</h3>
+            <p>M3U8 is a playlist format used by various audio and video playback programs, it contains a path or URL to
+                a media
+                file or folder of media files, along with information about the playlist. This player downloads the
+                video
+                specified in the M3U8 file and plays within your browser. To get started:</p>
+            <ul>
+                <li>Paste a M3U8 URL into the above input box</li>
+                <li>Click the "Go" button.</li>
+            </ul>
+
+            <h3>What is HLS?</h3>
+            <p>HLS stands for HTTP Live Streaming. It's an HTTP-based media streaming communications protocol
+                implemented by
+                Apple Inc. It works by breaking the overall stream into a sequence of small file downloads, each
+                download
+                loading one short chunk of an overall potentially unbounded transport stream.</p>
+            <p>HLS streams are usually described using M3U8 playlist.</p>
+
+            <h3>Why can't some M3U8 files be played?</h3>
+            <p>"CORS" stands for Cross-Origin Resource Sharing, which is a security feature implemented in web browsers
+                to
+                restrict web pages from making requests to a different domain than the one that served the web page.
+                When the
+                HLS player attempts to load a M3U8 file from a different domain, the browser checks if the server
+                hosting the
+                resource includes the "Access-Control-Allow-Origin" header in its response. If the header is not present
+                or does
+                not include the requesting domain, the browser blocks the request and returns the "No
+                'Access-Control-Allow-Origin' header is present" error.</p>
+            <p>Some of the streams is Geo-blocked, please use VPN.</p>
+            <p class="text-white"><a
+                    href="https://chrome.google.com/webstore/detail/shazam-find-song-names-fr/mmioliijnhnoblpgimnlajmefafdfilb"
+                    target="_blank"><strong>Use Allow CORS extension on your browser to easily add
+                        (Access-Control-Allow-Origin: *) rule to the response header.</a></p>
+            <div class="alert alert-info mt-4" role="alert">
+                <strong>Disclaimer:</strong> All the resources provided on this site are collected from various sources
+                on the
+                internet. We do not host any of the content and we are not responsible for any material shared. If you
+                encounter any
+                issues or have concerns about the content, please contact the respective content hosts.
+            </div>
+        </div>
+
+        <script src="js/9e5ba2e3f5.js"></script>
+        <script src="js/stats.js"></script>
+        <script src="js/m3u8video.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+        <script src="js/bootstrap.min.js"></script>
+    </body>
+
+</html>
