@@ -57,54 +57,57 @@ function filterVideoList(query) {
     return currentVideos.filter(video => video.title.toLowerCase().includes(lowerCaseQuery));
 }
 
-function playVideo(link) {
-    const videoPlayer = document.getElementById("video-player");
-    //special handling for cloud videos
-    if (link.endsWith(".mp4") || link.includes("format=mp4")) {
-        videoPlayer.src = link;
-        videoPlayer.play();
-        if (hlsInstance) {
-            hlsInstance.destroy();
-            hlsInstance = null;
-        }
+function playMedia(link) {
+  const videoPlayer = document.getElementById("video-player");
+
+  // Handle CORS preflight check for HLS streams
+  const checkCors = async (link) => {
+    try {
+      const response = await fetch(link, { method: "HEAD" });
+      return response.ok;
+    } catch (error) {
+      console.error("Error checking CORS:", error);
+      return false;
     }
-    else if (Hls.isSupported()) {
-        if (!hlsInstance) {
-            hlsInstance = new Hls();
-            hlsInstance.attachMedia(videoPlayer);
-        }
+  };
+  
+  const loadAndPlay = async (link) => {
+    if (link.endsWith(".mp4") || link.includes("format=mp4")) {
+      videoPlayer.src = link;
+      videoPlayer.play();
+    } else if (Hls.isSupported()) {
+      const isCorsSupported = await checkCors(link);
+      if (isCorsSupported) {
+        const hlsInstance = new Hls();
+        hlsInstance.attachMedia(videoPlayer);
         hlsInstance.loadSource(link);
         hlsInstance.on(Hls.Events.MANIFEST_PARSED, function () {
-            videoPlayer.play();
+          videoPlayer.play();
         });
+      } else {
+        const proxiedLink = `https://.workers.dev/?url=${encodeURIComponent(link)}`;
+        const hlsInstance = new Hls();
+        hlsInstance.attachMedia(videoPlayer);
+        hlsInstance.loadSource(proxiedLink);
+        hlsInstance.on(Hls.Events.MANIFEST_PARSED, function () {
+          videoPlayer.play();
+        });
+      }
     } else if (videoPlayer.canPlayType('application/vnd.apple.mpegurl')) {
-        videoPlayer.src = link;
-        videoPlayer.addEventListener('loadedmetadata', function () {
-            videoPlayer.play();
-        });
+      videoPlayer.src = link;
+      videoPlayer.addEventListener('loadedmetadata', function () {
+        videoPlayer.play();
+      });
     } else {
-        console.error("Your browser does not support HLS playback.");
+      console.error("Your browser does not support the provided media format.");
     }
-
-}
-
-function playM3u8(url) {
-    if (Hls.isSupported()) {
-        var video = document.getElementById("video-player");
-        video.volume = 1.0;
-        var hls = new Hls();
-        var m3u8Url = decodeURIComponent(url);
-        hls.loadSource(m3u8Url);
-        hls.attachMedia(video);
-        hls.on(Hls.Events.MANIFEST_PARSED, function () {
-            video.play();
-        });
-    }
+  };
+  loadAndPlay(link);
 }
 
 document.getElementById("loadM3U").addEventListener("click", function () {
-    var m3uUrl = document.getElementById("m3uURL").value;
-    playM3u8(m3uUrl);
+  var m3uUrl = document.getElementById("m3uURL").value;
+  playMedia(m3uUrl);
 });
 
 document.querySelectorAll(".genre-link").forEach(link => {
