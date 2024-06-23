@@ -1,20 +1,3 @@
-// Smooth scrolling
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-
-        const targetElement = document.querySelector(this.getAttribute('href'));
-        const offset = 90;
-
-        if (targetElement) {
-            window.scrollTo({
-                top: targetElement.offsetTop - offset,
-                behavior: 'smooth'
-            });
-        }
-    });
-});
-
 // for fun
 var Original = document.title, titleTime;
 document.addEventListener("visibilitychange",

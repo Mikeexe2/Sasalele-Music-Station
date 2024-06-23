@@ -1,987 +1,1813 @@
     [
         {
-            "title": "BBC Radio 1",
-            "link": "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_one/bbc_radio_one.isml/bbc_radio_one-audio%3d96000.norewind.m3u8"
+            "title": "NHK World Japan",
+            "link": "https://nhkwlive-radio.akamaized.net/hls/live/2032384/radio-rs5/index_07.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "NHK国际广播（华语时间12: 00）",
+            "link": "https://nhkwlive-radio.akamaized.net/hls/live/2032383/radio-rs4/index_06.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "NHK Radio 1",
+            "link": "https://ap.fd6.online/hls/radio-stream.nhk.jp/hls/live/2023229/nhkradiruakr1/master48k.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "NHK国际广播（华语时间19: 30、20: 30、21: 30、22: 30）",
+            "link": "https://nhkwlive-radio.akamaized.net/hls/live/2032381/radio-rs1/index_03.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "nhk bs premium",
+            "link": "https://epg.pw/stream/8e7e14c0687efaa5082e847d03833a4749c5716e9d99580785a59a90d1398787.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "NHK World TV",
+            "link": "http://nhkwlive-xjp.akamaized.net/hls/live/2003458/nhkwlive-xjp-en/index_2M.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "NHK World Radio Japan - Japanese",
+            "link": "https://nhkworld.webcdn.stream.ne.jp/www11/radiojapan/all/263943/live_s.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FM ABASHIRI [北海道網走市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30058/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "RADIOワンダーストレージFMドラマシティ [北海道札幌市厚別区]",
+            "link": "http://mtist.as.smartstream.ne.jp/30044/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "三角山放送局 [北海道札幌市西区]",
+            "link": "http://mtist.as.smartstream.ne.jp/30005/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FM JAGA [北海道帯広市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30016/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FMりべーる [北海道旭川市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30074/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "[北海道]FMねむろ",
+            "link": "http://mtist.as.smartstream.ne.jp/30045/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FMくしろ [北海道釧路市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30029/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FM WING [北海道帯広市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30038/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "ラジオカロスサッポロ [北海道札幌市中央区]",
+            "link": "http://mtist.as.smartstream.ne.jp/30034/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FMアップル [北海道札幌市豊平区平岸]",
+            "link": "http://mtist.as.smartstream.ne.jp/30090/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "wi-radio [北海道伊達市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30087/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FMメイプル [北海道北広島市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30015/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "さっぽろ村ラジオ [北海道札幌市東区]",
+            "link": "http://mtist.as.smartstream.ne.jp/30032/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "Be FM [青森県八戸市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30079/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "カシオペアFM [岩手県二戸市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30050/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "ラヂオもりおか [岩手県盛岡市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30017/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "みやこハーバーラジオ [岩手県宮古市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30097/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FMRADIO3 [宮城県仙台市青葉区]",
+            "link": "http://mtist.as.smartstream.ne.jp/30007/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "ラジオ気仙沼 [宮城県気仙沼市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30094/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "ラジオ石巻 [宮城県石巻市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30037/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "BAY WAVE [宮城県塩釜市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30056/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FMいずみ [宮城県仙台市泉区]",
+            "link": "http://mtist.as.smartstream.ne.jp/30018/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "なとらじ801 [宮城県名取市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30092/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FMゆーとぴあ [秋田県湯沢市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30030/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "横手かまくらFM [秋田県横手市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30076/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "鹿角きりたんぽFM [秋田県鹿角市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30089/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "エフエム椿台 [秋田県秋田市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30014/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "[秋田]ラジオおおだて",
+            "link": "http://mtist.as.smartstream.ne.jp/30025/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FMいわき [福島県いわき市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30009/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FM Mot.com [福島県本宮市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30019/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "KOCOラジ [福島県郡山市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30020/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FMひたち [茨城県日立市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30023/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FMぱるるん [茨城県水戸市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30022/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "たかはぎFM [茨城県高萩市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30075/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FMうしくうれしく放送 [茨城県牛久市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30021/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "まえばしCITYエフエム [群馬県前橋市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30043/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "[東京]かつしかFM",
+            "link": "http://mtist.as.smartstream.ne.jp/30031/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "エフエム世田谷 [東京都世田谷区]",
+            "link": "http://mtist.as.smartstream.ne.jp/30027/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "RadioCity 中央エフエム [東京都中央区]",
+            "link": "http://mtist.as.smartstream.ne.jp/30042/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "調布FM [東京都調布市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30039/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "ラジオフチューズ [東京都府中市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30059/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "エフエム立川 [東京都立川市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30033/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "Tokyo Star Radio(八王子FM) [東京都八王子市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30081/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "レインボータウンFM [東京都江東区]",
+            "link": "http://mtist.as.smartstream.ne.jp/30036/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "コマラジ [東京都狛江市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30051/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "[神奈川]エフエム戸塚",
+            "link": "http://mtist.as.smartstream.ne.jp/30064/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "[神奈川]FMHOT893",
+            "link": "http://mtist.as.smartstream.ne.jp/30080/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FMカオン [神奈川県海老名市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30057/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "かわさきFM [神奈川県川崎市中原区]",
+            "link": "http://mtist.as.smartstream.ne.jp/30046/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "[神奈川]FMサルース",
+            "link": "http://mtist.as.smartstream.ne.jp/30061/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "[神奈川]湘南ビーチ",
+            "link": "http://mtist.as.smartstream.ne.jp/30028/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "マリンFM [神奈川県横浜市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30065/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "775ライブラリFM [埼玉県朝霞市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30026/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "フラワーラジオ [埼玉県鴻巣市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30002/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "ハローハッピー・こしがやエフエム [埼玉県越谷市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30096/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "REDS WAVE [埼玉県さいたま市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30008/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FMふっかちゃん [埼玉県深谷市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30047/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FM Kawaguchi [埼玉県川口市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30035/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "ラジオ・ミュー [富山県黒部市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30006/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FM N1 [石川県野々市市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30001/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "敦賀FM [福井県敦賀市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30012/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "[長野]あづみ野エフエム放送",
+            "link": "http://mtist.as.smartstream.ne.jp/30086/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "[静岡]Ciao!",
+            "link": "http://mtist.as.smartstream.ne.jp/30062/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "MID-FM [愛知県名古屋市東区]",
+            "link": "http://mtist.as.smartstream.ne.jp/30004/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "エフエムEGAO [愛知県岡崎市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30040/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "[京都]京都三条ラジオカフェ",
+            "link": "http://mtist.as.smartstream.ne.jp/30082/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FMおとくに [京都府乙訓地域]",
+            "link": "http://mtist.as.smartstream.ne.jp/30063/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FM87.0 RADIO MIX KYOTO [京都市北区]",
+            "link": "http://mtist.as.smartstream.ne.jp/30071/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FMたんご [京都府京丹後市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30073/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "[兵庫]FM GENKI",
+            "link": "http://mtist.as.smartstream.ne.jp/30041/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "[兵庫]BAN-BANラジオ",
+            "link": "http://mtist.as.smartstream.ne.jp/30078/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "link": "http://mtist.as.smartstream.ne.jp/30013/livestream/playlist.m3u8",
+            "title": "FM ジャングル [兵庫県豊岡市]",
+            "lang": "ja"
+        },
+        {
+            "title": "FM aiai 82.0MHz (エフエムあまがさき) [兵庫県尼崎市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30067/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "[和歌山]ビーチステーション",
+            "link": "http://mtist.as.smartstream.ne.jp/30084/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "DARAZ FM [鳥取県米子市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30053/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "エフエムびざん [徳島県徳島市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30010/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FM SUN [香川県坂出市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30070/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FM815 [香川県高松市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30024/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "AIR STATION HIBIKI [福岡県北九州市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30052/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FMのべおか [宮崎県延岡市内]",
+            "link": "http://mtist.as.smartstream.ne.jp/30088/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FMたつごう [鹿児島県大島郡龍郷町]",
+            "link": "http://mtist.as.smartstream.ne.jp/30072/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "オキラジ [沖縄県沖縄市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30066/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "COMI×TEN [福岡市中央区]",
+            "link": "http://mtist.as.smartstream.ne.jp/30077/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "fm那覇 [沖縄県那覇市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30068/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "ハートFM [愛知県名古屋市中区]",
+            "link": "https://mtist.as.smartstream.ne.jp/30120/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "チョクラジ [福岡県直方市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30085/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "あまみエフエム [鹿児島県奄美市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30054/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FMいしがきサンサンラジオ [沖縄県石垣市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30069/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FMよなばる [沖縄県島尻郡与那原町]",
+            "link": "http://mtist.as.smartstream.ne.jp/30055/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FMニライ [沖縄県北谷町]",
+            "link": "http://mtist.as.smartstream.ne.jp/30003/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FMぎのわん [沖縄県宜野湾市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30093/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "ぎのわんシティFM [沖縄県宜野湾市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30098/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FMとよみ [沖縄県豊見城市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30083/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FMうるま [沖縄県うるま市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30011/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "FMやんばる [沖縄県名護市]",
+            "link": "http://mtist.as.smartstream.ne.jp/30095/livestream/playlist.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "takarazuka sky stage",
+            "link": "  https://epg.pw/stream/35da31035d2a832bde931da160bc9ddf987fb7f29a013c48c3faf554e74151cb.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "チャンネル銀河",
+            "link": "https://epg.pw/stream/05c4e6284ec59f5fe76f32eb012ca712fbc94e6cd48c7853026e12227677be46.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "東映チャンネル",
+            "link": "https://epg.pw/stream/7c08c183610740794e0f39e158a44d85e6b400eea9eac7e2aaf09706f05bbf40.m3u8",
+            "lang": "ja"
+        },
+        {
+            "title": "Tokyo Rose Radio",
+            "link": "http://bluford.torontocast.com:8006/stream",
+            "lang": "ja"
+        },
+        {
+            "title": "Shonan Beach FM",
+            "link": "http://150.95.174.29:8000/by_the_sea",
+            "lang": "ja"
         },
         {
             "title": "BBC Radio 1",
-            "link": "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_one/bbc_radio_one.isml/bbc_radio_one-audio=320000.m3u8"
+            "link": "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_one/bbc_radio_one.isml/bbc_radio_one-audio%3d96000.norewind.m3u8",
+            "lang": "en"
+        },
+        {
+            "title": "BBC Radio 1",
+            "link": "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_one/bbc_radio_one.isml/bbc_radio_one-audio=320000.m3u8",
+            "lang": "en"
         },
         {
             "title": "BBC Radio 1 Dance",
-            "link": "https://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_one_dance/bbc_radio_one_dance.isml/bbc_radio_one_dance-audio=320000.m3u8"
+            "link": "https://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_one_dance/bbc_radio_one_dance.isml/bbc_radio_one_dance-audio=320000.m3u8",
+            "lang": "en"
         },
         {
             "title": "BBC Radio 1 relax",
-            "link": "https://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_one_relax/bbc_radio_one_relax.isml/bbc_radio_one_relax-audio=320000.m3u8"
+            "link": "https://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_one_relax/bbc_radio_one_relax.isml/bbc_radio_one_relax-audio=320000.m3u8",
+            "lang": "en"
         },
         {
             "title": "BBC Radio 1Xtra",
-            "link": "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_1xtra/bbc_1xtra.isml/bbc_1xtra-audio=320000.m3u8"
+            "link": "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_1xtra/bbc_1xtra.isml/bbc_1xtra-audio=320000.m3u8",
+            "lang": "en"
         },
         {
             "title": "BBC Radio 1Xtra",
-            "link": "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_1xtra/bbc_1xtra.isml/bbc_1xtra-audio%3d96000.norewind.m3u8"
+            "link": "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_1xtra/bbc_1xtra.isml/bbc_1xtra-audio%3d96000.norewind.m3u8",
+            "lang": "en"
         },
         {
             "title": "BBC Radio 2",
-            "link": "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_two/bbc_radio_two.isml/bbc_radio_two-audio=320000.m3u8"
+            "link": "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_two/bbc_radio_two.isml/bbc_radio_two-audio=320000.m3u8",
+            "lang": "en"
         },
         {
             "title": "BBC Radio 2",
-            "link": "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_two/bbc_radio_two.isml/bbc_radio_two-audio%3d96000.norewind.m3u8"
+            "link": "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_two/bbc_radio_two.isml/bbc_radio_two-audio%3d96000.norewind.m3u8",
+            "lang": "en"
         },
         {
             "title": "BBC Radio 3",
-            "link": "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_three/bbc_radio_three.isml/bbc_radio_three-audio%3d96000.norewind.m3u8"
+            "link": "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_three/bbc_radio_three.isml/bbc_radio_three-audio%3d96000.norewind.m3u8",
+            "lang": "en"
         },
         {
             "title": "BBC Radio 3",
-            "link": "https://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_three/bbc_radio_three.isml/bbc_radio_three-audio=320000.m3u8"
+            "link": "https://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_three/bbc_radio_three.isml/bbc_radio_three-audio=320000.m3u8",
+            "lang": "en"
         },
         {
             "title": "BBC Radio 4",
-            "link": "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_fourfm/bbc_radio_fourfm.isml/bbc_radio_fourfm-audio%3d96000.norewind.m3u8"
+            "link": "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_fourfm/bbc_radio_fourfm.isml/bbc_radio_fourfm-audio%3d96000.norewind.m3u8",
+            "lang": "en"
         },
         {
             "title": "BBC Radio 4",
-            "link": "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_fourfm/bbc_radio_fourfm.isml/bbc_radio_fourfm-audio=320000.m3u8"
+            "link": "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_fourfm/bbc_radio_fourfm.isml/bbc_radio_fourfm-audio=320000.m3u8",
+            "lang": "en"
         },
         {
             "title": "BBC Radio 4 Extra",
-            "link": "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_four_extra/bbc_radio_four_extra.isml/bbc_radio_four_extra-audio=320000.m3u8"
+            "link": "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_four_extra/bbc_radio_four_extra.isml/bbc_radio_four_extra-audio=320000.m3u8",
+            "lang": "en"
         },
         {
             "title": "BBC Radio 4 Extra",
-            "link": "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_four_extra/bbc_radio_four_extra.isml/bbc_radio_four_extra-audio%3d96000.norewind.m3u8"
+            "link": "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_four_extra/bbc_radio_four_extra.isml/bbc_radio_four_extra-audio%3d96000.norewind.m3u8",
+            "lang": "en"
         },
         {
             "title": "BBC Radio 5 Live",
-            "link": "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_five_live/bbc_radio_five_live.isml/bbc_radio_five_live-audio%3d96000.norewind.m3u8"
+            "link": "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_five_live/bbc_radio_five_live.isml/bbc_radio_five_live-audio%3d96000.norewind.m3u8",
+            "lang": "en"
         },
         {
             "title": "BBC Radio 5 live",
-            "link": "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_five_live/bbc_radio_five_live.isml/bbc_radio_five_live-audio=320000.m3u8"
+            "link": "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_five_live/bbc_radio_five_live.isml/bbc_radio_five_live-audio=320000.m3u8",
+            "lang": "en"
         },
         {
             "title": "BBC Radio 5 Sports Extra",
-            "link": "http://as-hls-uk-live.akamaized.net/pool_904/live/uk/bbc_radio_five_live_sports_extra/bbc_radio_five_live_sports_extra.isml/bbc_radio_five_live_sports_extra-audio%3d96000.norewind.m3u8"
+            "link": "http://as-hls-uk-live.akamaized.net/pool_904/live/uk/bbc_radio_five_live_sports_extra/bbc_radio_five_live_sports_extra.isml/bbc_radio_five_live_sports_extra-audio%3d96000.norewind.m3u8",
+            "lang": "en"
         },
         {
             "title": "BBC Radio 6",
-            "link": "https://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_6music/bbc_6music.isml/bbc_6music-audio=320000.m3u8"
+            "link": "https://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_6music/bbc_6music.isml/bbc_6music-audio=320000.m3u8",
+            "lang": "en"
         },
         {
             "title": "BBC Radio 6 Music",
-            "link": "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_6music/bbc_6music.isml/bbc_6music-audio%3d96000.norewind.m3u8"
+            "link": "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_6music/bbc_6music.isml/bbc_6music-audio%3d96000.norewind.m3u8",
+            "lang": "en"
         },
         {
             "title": "BBC World Service",
-            "link": "http://a.files.bbci.co.uk/media/live/manifesto/audio/simulcast/hls/nonuk/sbr_low/ak/bbc_world_service.m3u8"
+            "link": "http://a.files.bbci.co.uk/media/live/manifesto/audio/simulcast/hls/nonuk/sbr_low/ak/bbc_world_service.m3u8",
+            "lang": "en"
         },
         {
             "title": "BBC World Service",
-            "link": "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_world_service/bbc_world_service.isml/bbc_world_service-audio=320000.m3u8"
+            "link": "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_world_service/bbc_world_service.isml/bbc_world_service-audio=320000.m3u8",
+            "lang": "en"
         },
         {
             "title": "n p r | CPR",
-            "link": "https://stream2.cprnetwork.org/2198_256.aac/playlist.m3u8"
+            "link": "https://stream2.cprnetwork.org/2198_256.aac/playlist.m3u8",
+            "lang": "en"
+        },
+        {
+            "title": "YTN FM (YTN라디오 / YTN뉴스FM)",
+            "link": "https://radiolive.ytn.co.kr/radio/_definst_/20211118_fmlive/chunklist.m3u8",
+            "lang": "ko"
+        },
+        {
+            "title": "BeFM (부산영어방송재단)",
+            "link": "https://live.cdn.smilecdn.com/befm905_live/live/chunklist_w1528761902.m3u8",
+            "lang": "ko"
+        },
+        {
+            "title": "CBS Standard FM (CBS 표준FM)",
+            "link": "https://m-aac.cbs.co.kr/mweb_cbs981/_definst_/cbs981.stream/chunklist.m3u8",
+            "lang": "ko"
+        },
+        {
+            "title": "CBS Music FM (CBS 음악FM)",
+            "link": "https://m-aac.cbs.co.kr/mweb_cbs939/_definst_/cbs939.stream/chunklist.m3u8",
+            "lang": "ko"
+        },
+        {
+            "title": "CBS JOY4U",
+            "link": "https://aac.cbs.co.kr/cbscmc/_definst_/cbscmc_96k.stream/chunklist_w327485023.m3u8",
+            "lang": "ko"
+        },
+        {
+            "title": "TBS eFM",
+            "link": "https://cdnefm.tbs.seoul.kr/tbs/_definst_/tbs_efm_web_360.smil/chunklist_b414000.m3u8",
+            "lang": "ko"
+        },
+        {
+            "title": "TBN Korea (한국교통방송)",
+            "link": "https://5cc6beb04faf6.streamlock.net/gyeongin/myStream/chunklist_w1854615825.m3u8",
+            "lang": "ko"
+        },
+        {
+            "title": "TBS FM (Traffic Broadcasting System / 교통방송)",
+            "link": "https://cdnfm.tbs.seoul.kr/tbs/_definst_/tbs_fm_web_360.smil/chunklist_b414000.m3u8",
+            "lang": "ko"
+        },
+        {
+            "title": "Radio Taiwan International (財團法人中央廣播電臺)",
+            "link": "https://streamak0138.akamaized.net/live0138lh-mbm9/_definst_/rti3/chunklist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "广东音乐之声",
-            "link": "https://satellitepull.cnr.cn/live/wxgdyyzs/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxgdyyzs/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "广东音乐广播",
-            "link": "http://ls.qingting.fm/live/1260.m3u8"
+            "link": "http://ls.qingting.fm/live/1260.m3u8",
+            "lang": "zh"
         },
         {
             "title": "江西旅游广播iFM97.4",
-            "link": "http://live02.jxtvcn.com.cn/live-jxtvcn/jxtv_pyhgb_aac.m3u8"
+            "link": "http://live02.jxtvcn.com.cn/live-jxtvcn/jxtv_pyhgb_aac.m3u8",
+            "lang": "zh"
         },
         {
             "title": "电音电台",
-            "link": "http://play.redefine.ltd/Stream3/FM1058-3.m3u8"
+            "link": "http://play.redefine.ltd/Stream3/FM1058-3.m3u8",
+            "lang": "zh"
         },
         {
             "title": "福州交通之声",
-            "link": "http://live.zohi.tv/audio/s10001-FM876/index.m3u8"
+            "link": "http://live.zohi.tv/audio/s10001-FM876/index.m3u8",
+            "lang": "zh"
         },
         {
             "title": "福州左海之声",
-            "link": "http://live.zohi.tv/audio/s10001-FM901/index.m3u8"
+            "link": "http://live.zohi.tv/audio/s10001-FM901/index.m3u8",
+            "lang": "zh"
         },
         {
             "title": "福州新闻广播",
-            "link": "http://live.zohi.tv/audio/s10001-FM944/index.m3u8"
+            "link": "http://live.zohi.tv/audio/s10001-FM944/index.m3u8",
+            "lang": "zh"
         },
         {
             "title": "福州音乐广播",
-            "link": "http://live.zohi.tv/audio/s10001-FM893/index.m3u8"
+            "link": "http://live.zohi.tv/audio/s10001-FM893/index.m3u8",
+            "lang": "zh"
         },
         {
             "title": "电台广播",
-            "link": "http://ngcdn016.cnr.cn/live/gsgljtgb/index.m3u8"
+            "link": "http://ngcdn016.cnr.cn/live/gsgljtgb/index.m3u8",
+            "lang": "zh"
         },
         {
             "title": "Hit FM FM88.7",
-            "link": "http://sk.cri.cn/887.m3u8"
+            "link": "http://sk.cri.cn/887.m3u8",
+            "lang": "zh"
         },
         {
             "title": "HitFM联播网|台北之音",
-            "link": "http://149.129.100.78:8000/hitfm"
+            "link": "http://149.129.100.78:8000/hitfm",
+            "lang": "zh"
         },
         {
             "title": "北京音乐广播",
-            "link": "http://live.xmcdn.com/live/95/64.m3u8"
+            "link": "http://live.xmcdn.com/live/95/64.m3u8",
+            "lang": "zh"
         },
         {
             "title": "华语金曲500首",
-            "link": "http://ls.qingting.fm/live/3412131.m3u8"
+            "link": "http://ls.qingting.fm/live/3412131.m3u8",
+            "lang": "zh"
         },
         {
             "title": "厦门音乐广播",
-            "link": "http://ls.qingting.fm/live/1739.m3u8"
+            "link": "http://ls.qingting.fm/live/1739.m3u8",
+            "lang": "zh"
         },
         {
             "title": "Big Radio",
-            "link": "https://stream.hndt.com/live/gudian/playlist.m3u8"
+            "link": "https://stream.hndt.com/live/gudian/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "天籁之音 Hi-Fi Radio",
-            "link": "http://play-radio-stream3.hndt.com/now/JxkyN5mR/playlist.m3u8"
+            "link": "http://play-radio-stream3.hndt.com/now/JxkyN5mR/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "天籁之音-国风",
-            "link": "http://play-radio-stream3.hndt.com/now/UzPxbRaT/playlist.m3u8"
+            "link": "http://play-radio-stream3.hndt.com/now/UzPxbRaT/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "天籁古典",
-            "link": "http://stream3.hndt.com/now/MdOpB4zP/playlist.m3u8"
+            "link": "http://stream3.hndt.com/now/MdOpB4zP/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "心灵音乐馆",
-            "link": "http://play-radio-stream3.hndt.com/now/AFqvb0VX/playlist.m3u8"
+            "link": "http://play-radio-stream3.hndt.com/now/AFqvb0VX/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "民谣 蓝调",
-            "link": "http://play-radio-stream3.hndt.com/now/XWfN89gh/playlist.m3u8"
+            "link": "http://play-radio-stream3.hndt.com/now/XWfN89gh/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "民谣音乐台",
-            "link": "http://stream3.hndt.com/now/DTK5qc83/playlist.m3u8"
+            "link": "http://stream3.hndt.com/now/DTK5qc83/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "潮流音乐台",
-            "link": "http://play-radio-stream3.hndt.com/now/Or5au0KN/playlist.m3u8"
+            "link": "http://play-radio-stream3.hndt.com/now/Or5au0KN/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "长沙城市之声",
-            "link": "http://115.238.238.218/zhcs_radio/cszs1017__redirect__20573.m3u8"
+            "link": "http://115.238.238.218/zhcs_radio/cszs1017__redirect__20573.m3u8",
+            "lang": "zh"
         },
         {
             "title": "美国之音",
-            "link": "https://voa-ingest.akamaized.net/hls/live/2035206/151_124L/playlist.m3u8"
+            "link": "https://voa-ingest.akamaized.net/hls/live/2035206/151_124L/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "老歌音乐台",
-            "link": "http://live.xmcdn.com:80/live/2628/64.m3u8"
+            "link": "http://live.xmcdn.com:80/live/2628/64.m3u8",
+            "lang": "zh"
         },
         {
             "title": "青岛摩登音乐调频",
-            "link": "http://video11.qtv.com.cn/zhibo886/manifest.m3u8"
+            "link": "http://video11.qtv.com.cn/zhibo886/manifest.m3u8",
+            "lang": "zh"
         },
         {
             "title": "音乐之声",
-            "link": "http://ngcdn003.cnr.cn/live/yyzs/index.m3u8"
+            "link": "http://ngcdn003.cnr.cn/live/yyzs/index.m3u8",
+            "lang": "zh"
         },
         {
             "title": "音乐MusicTop",
-            "link": "http://live-edge01.telecentro.net.ar/live/smil:musictop.smil/chunklist_w538311571_b364000_sleng.m3u8"
+            "link": "http://live-edge01.telecentro.net.ar/live/smil:musictop.smil/chunklist_w538311571_b364000_sleng.m3u8",
+            "lang": "zh"
         },
         {
             "title": "亚洲经典音乐台",
-            "link": "http://live.xmcdn.com:80/live/1005/64.m3u8"
+            "link": "http://live.xmcdn.com:80/live/1005/64.m3u8",
+            "lang": "zh"
         },
         {
             "title": "怀集音乐台",
-            "link": "http://live.xmcdn.com:80/live/966/64.m3u8"
+            "link": "http://live.xmcdn.com:80/live/966/64.m3u8",
+            "lang": "zh"
         },
         {
             "title": "清晨音乐台",
-            "link": "http://live.xmcdn.com:80/live/1011/64.m3u8"
+            "link": "http://live.xmcdn.com:80/live/1011/64.m3u8",
+            "lang": "zh"
         },
         {
             "title": "经典音乐",
-            "link": "http://ngcdn004.cnr.cn/live/dszs/index.m3u8"
+            "link": "http://ngcdn004.cnr.cn/live/dszs/index.m3u8",
+            "lang": "zh"
         },
         {
             "title": "古典音乐台",
-            "link": "http://play.redefine.ltd/Stream2/FM1058-2.m3u8"
+            "link": "http://play.redefine.ltd/Stream2/FM1058-2.m3u8",
+            "lang": "zh"
         },
         {
             "title": "台北广播电台AM1134",
-            "link": "https://stream.ginnet.cloud/live0130lo-yfyo/_definst_/am/playlist.m3u8"
+            "link": "https://stream.ginnet.cloud/live0130lo-yfyo/_definst_/am/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "台北广播电台FM93.1",
-            "link": "https://stream.ginnet.cloud/live0130lo-yfyo/_definst_/fm/playlist.m3u8"
+            "link": "https://stream.ginnet.cloud/live0130lo-yfyo/_definst_/fm/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "浙江动听",
-            "link": "http://ls.qingting.fm/live/4866.m3u8"
+            "link": "http://ls.qingting.fm/live/4866.m3u8",
+            "lang": "zh"
         },
         {
             "title": "深圳飞扬音乐台",
-            "link": "http://ls.qingting.fm/live/1271.m3u8"
+            "link": "http://ls.qingting.fm/live/1271.m3u8",
+            "lang": "zh"
         },
         {
             "title": "轻松调频 FM91.5",
-            "link": "http://sk.cri.cn/915.m3u8"
+            "link": "http://sk.cri.cn/915.m3u8",
+            "lang": "zh"
         },
         {
             "title": "CNR乡村之声",
-            "link": "http://ngcdn017.cnr.cn/live/xczs/index.m3u8"
+            "link": "http://ngcdn017.cnr.cn/live/xczs/index.m3u8",
+            "lang": "zh"
         },
         {
             "title": "CNR台海之声",
-            "link": "http://ngcdn005.cnr.cn/live/zhzs/index.m3u8"
+            "link": "http://ngcdn005.cnr.cn/live/zhzs/index.m3u8",
+            "lang": "zh"
         },
         {
             "title": "CNR大湾区之声",
-            "link": "http://ngcdn007.cnr.cn/live/hxzs/index.m3u8"
+            "link": "http://ngcdn007.cnr.cn/live/hxzs/index.m3u8",
+            "lang": "zh"
         },
         {
             "title": "CNR民族之声",
-            "link": "http://ngcdn009.cnr.cn/live/mzzs/index.m3u8"
+            "link": "http://ngcdn009.cnr.cn/live/mzzs/index.m3u8",
+            "lang": "zh"
         },
         {
             "title": "CNR神州之声",
-            "link": "http://ngcdn006.cnr.cn/live/szzs/index.m3u8"
+            "link": "http://ngcdn006.cnr.cn/live/szzs/index.m3u8",
+            "lang": "zh"
         },
         {
             "title": "CNR经济之声",
-            "link": "http://ngcdn002.cnr.cn/live/jjzs/index.m3u8"
+            "link": "http://ngcdn002.cnr.cn/live/jjzs/index.m3u8",
+            "lang": "zh"
         },
         {
             "title": "CNR老年之声",
-            "link": "http://ngcdn011.cnr.cn/live/lnzs/index.m3u8"
+            "link": "http://ngcdn011.cnr.cn/live/lnzs/index.m3u8",
+            "lang": "zh"
         },
         {
             "title": "CNR阅读之声",
-            "link": "http://ngcdn014.cnr.cn/live/ylgb/index.m3u8"
+            "link": "http://ngcdn014.cnr.cn/live/ylgb/index.m3u8",
+            "lang": "zh"
         },
         {
             "title": "CRI外语教学广播 China Plus Radio",
-            "link": "http://sk.cri.cn/am1008.m3u8"
+            "link": "http://sk.cri.cn/am1008.m3u8",
+            "lang": "zh"
         },
         {
             "title": "CRI环球资讯广播",
-            "link": "https://satellitepull.cnr.cn/live/wxhqzx01/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxhqzx01/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "CRI粤语国际",
-            "link": "http://sk.cri.cn/hxfh.m3u8"
+            "link": "http://sk.cri.cn/hxfh.m3u8",
+            "lang": "zh"
         },
         {
             "title": "CRI英语环球广播 China Plus Radio",
-            "link": "http://sk.cri.cn/am846.m3u8"
+            "link": "http://sk.cri.cn/am846.m3u8",
+            "lang": "zh"
         },
         {
             "title": "自由亚洲电台",
-            "link": "https://rfa-ingest.akamaized.net/hls/live/2040699/RFA_AUDIO_LIVE1/master.m3u8"
+            "link": "https://rfa-ingest.akamaized.net/hls/live/2040699/RFA_AUDIO_LIVE1/master.m3u8",
+            "lang": "zh"
         },
         {
             "title": "国立教育电台",
-            "link": "http://wowza.ner.gov.tw/live/_definst_/1/playlist.m3u8"
+            "link": "http://wowza.ner.gov.tw/live/_definst_/1/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "房山电台",
-            "link": "http://live.funhillrm.com/3/sd/live.m3u8"
+            "link": "http://live.funhillrm.com/3/sd/live.m3u8",
+            "lang": "zh"
         },
         {
             "title": "高清音乐台",
-            "link": "http://live.xmcdn.com:80/live/1427/64.m3u8"
+            "link": "http://live.xmcdn.com:80/live/1427/64.m3u8",
+            "lang": "zh"
         },
         {
             "title": "M-Radio全国广播",
-            "link": "http://stream.rcs.revma.com/044q61ha7a0uv/hls.m3u8"
+            "link": "http://stream.rcs.revma.com/044q61ha7a0uv/hls.m3u8",
+            "lang": "zh"
         },
         {
             "title": "云南国际广播",
-            "link": "https://satellitepull.cnr.cn/live/wxynsegb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxynsegb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "云南教育广播·知道分子频道",
-            "link": "https://satellitepull.cnr.cn/live/wxynjygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxynjygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "云南新闻广播",
-            "link": "https://satellitepull.cnr.cn/live/wxynxwgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxynxwgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "云南旅游广播·香格里拉之声",
-            "link": "https://satellitepull.cnr.cn/live/wxxgllzs/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxxgllzs/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "云南民族广播",
-            "link": "https://satellitepull.cnr.cn/live/wxynmzgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxynmzgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "云南经济广播·私家车电台",
-            "link": "https://satellitepull.cnr.cn/live/wxynjjgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxynjjgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "云南音乐广播",
-            "link": "https://satellitepull.cnr.cn/live/wxynyygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxynyygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "内蒙古农村牧区广播绿野之声",
-            "link": "https://satellitepull.cnr.cn/live/wx32nmglyzs/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32nmglyzs/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "内蒙古新闻广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32nmghyzhxwgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32nmghyzhxwgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "内蒙古经济生活广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32nmgjjgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32nmgjjgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "内蒙古蒙语对外广播草原之声",
-            "link": "https://satellitepull.cnr.cn/live/wx32nmgdwgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32nmgdwgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "内蒙古蒙语新闻综合广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32nmgmygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32nmgmygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "内蒙古评书曲艺广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32nmgpsqy/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32nmgpsqy/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "内蒙古音乐之声",
-            "link": "https://satellitepull.cnr.cn/live/wx32nmgyygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32nmgyygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "北京音乐广播",
-            "link": "http://audiolive2.rbc.cn:1935/live/fm974/96K/tzwj_video.m3u8"
+            "link": "http://audiolive2.rbc.cn:1935/live/fm974/96K/tzwj_video.m3u8",
+            "lang": "zh"
         },
         {
             "title": "厦门音乐广播",
-            "link": "http://live1.kxm.xmtv.cn/aac_xmyy/playlist.m3u8"
+            "link": "http://live1.kxm.xmtv.cn/aac_xmyy/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "呼伦贝尔汉语广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32nmghlbehygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32nmghlbehygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "呼伦贝尔蒙语广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32nmghlbemygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32nmghlbemygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "哈尔滨古典音乐广播",
-            "link": "http://pull.hrbtv.net/tv/12.m3u8"
+            "link": "http://pull.hrbtv.net/tv/12.m3u8",
+            "lang": "zh"
         },
         {
             "title": "哈萨克语广播",
-            "link": "http://ngcdn025.cnr.cn/live/hygb/index.m3u8"
+            "link": "http://ngcdn025.cnr.cn/live/hygb/index.m3u8",
+            "lang": "zh"
         },
         {
             "title": "四川交通广播",
-            "link": "https://satellitepull.cnr.cn/live/wxscjtgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxscjtgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "四川岷江音乐广播",
-            "link": "http://ls.qingting.fm/live/1110.m3u8"
+            "link": "http://ls.qingting.fm/live/1110.m3u8",
+            "lang": "zh"
         },
         {
             "title": "四川旅游生活广播",
-            "link": "https://satellitepull.cnr.cn/live/wxsclyshgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxsclyshgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "四川私家车广播",
-            "link": "https://satellitepull.cnr.cn/live/wxsc925/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxsc925/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "四川综合广播四川之声",
-            "link": "https://satellitepull.cnr.cn/live/wxsczhgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxsczhgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "宁夏新闻广播",
-            "link": "https://satellitepull.cnr.cn/live/wxnxxwgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxnxxwgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "宁夏旅游广播",
-            "link": "https://satellitepull.cnr.cn/live/wxnxdsgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxnxdsgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "宁夏经济广播",
-            "link": "https://satellitepull.cnr.cn/live/wxnxjjgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxnxjjgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "宁夏音乐广播",
-            "link": "https://satellitepull.cnr.cn/live/wxnxyygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxnxyygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "宁波交通广播",
-            "link": "http://ihzlh.linker.cc/ihzlh/zjnb_ts01_939.m3u8"
+            "link": "http://ihzlh.linker.cc/ihzlh/zjnb_ts01_939.m3u8",
+            "lang": "zh"
         },
         {
             "title": "宁波交通广播",
-            "link": "http://ihzlh.linker.cc/ihzlh/zjnb_ts01_939.m3u8"
+            "link": "http://ihzlh.linker.cc/ihzlh/zjnb_ts01_939.m3u8",
+            "lang": "zh"
         },
         {
             "title": "宁波新闻综合广播",
-            "link": "http://ihzlh.linker.cc/ihzlh/zjnb_ts04_920.m3u8"
+            "link": "http://ihzlh.linker.cc/ihzlh/zjnb_ts04_920.m3u8",
+            "lang": "zh"
         },
         {
             "title": "宁波经济广播",
-            "link": "http://ihzlh.linker.cc/ihzlh/zjnb_ts03_1029.m3u8"
+            "link": "http://ihzlh.linker.cc/ihzlh/zjnb_ts03_1029.m3u8",
+            "lang": "zh"
         },
         {
             "title": "宁波老少广播·阳光904",
-            "link": "http://ihzlh.linker.cc/ihzlh/zjnb_ts05_904.m3u8"
+            "link": "http://ihzlh.linker.cc/ihzlh/zjnb_ts05_904.m3u8",
+            "lang": "zh"
         },
         {
             "title": "宁波音乐广播",
-            "link": "http://ihzlh.linker.cc/ihzlh/zjnb_ts02_986.m3u8"
+            "link": "http://ihzlh.linker.cc/ihzlh/zjnb_ts02_986.m3u8",
+            "lang": "zh"
         },
         {
             "title": "安徽交通广播",
-            "link": "https://satellitepull.cnr.cn/live/wxahjtgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxahjtgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "安徽小说评书广播 [Geo-blocked]",
-            "link": "http://stream1.ahrtv.cn/xspsgb/sd/live.m3u8"
+            "link": "http://stream1.ahrtv.cn/xspsgb/sd/live.m3u8",
+            "lang": "zh"
         },
         {
             "title": "安徽戏曲广播 [Geo-blocked]",
-            "link": "http://stream2.ahrtv.cn/xnxq/sd/live.m3u8"
+            "link": "http://stream2.ahrtv.cn/xnxq/sd/live.m3u8",
+            "lang": "zh"
         },
         {
             "title": "安徽戏曲广播·动听995",
-            "link": "https://satellitepull.cnr.cn/live/wxahxqgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxahxqgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "安徽故事广播",
-            "link": "https://satellitepull.cnr.cn/live/wxahxspsgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxahxspsgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "安徽新闻综合广播 [Geo-blocked]",
-            "link": "http://stream2.ahrtv.cn/xnxw/sd/live.m3u8"
+            "link": "http://stream2.ahrtv.cn/xnxw/sd/live.m3u8",
+            "lang": "zh"
         },
         {
             "title": "安徽旅游广播 [Geo-blocked]",
-            "link": "http://stream2.ahrtv.cn/lygb/sd/live.m3u8"
+            "link": "http://stream2.ahrtv.cn/lygb/sd/live.m3u8",
+            "lang": "zh"
         },
         {
             "title": "安徽旅游广播·高速之声",
-            "link": "https://satellitepull.cnr.cn/live/wxahlygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxahlygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "安徽生活广播·城市之声",
-            "link": "https://satellitepull.cnr.cn/live/wxahshgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxahshgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "安徽经济广播",
-            "link": "https://satellitepull.cnr.cn/live/wxahjjgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxahjjgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "安徽音乐广播",
-            "link": "https://satellitepull.cnr.cn/live/wxahyygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxahyygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "宜昌音乐生活广播",
-            "link": "http://playfmaliyun.3xgd.com/fm/qct.m3u8"
+            "link": "http://playfmaliyun.3xgd.com/fm/qct.m3u8",
+            "lang": "zh"
         },
         {
             "title": "山东乡村广播",
-            "link": "https://satellitepull.cnr.cn/live/wxsdxcgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxsdxcgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "山东交通广播",
-            "link": "https://satellitepull.cnr.cn/live/wxsdjtgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxsdjtgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "山东体育休闲广播",
-            "link": "https://satellitepull.cnr.cn/live/wxsdtyxxgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxsdtyxxgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "山东经典音乐广播",
-            "link": "https://satellitepull.cnr.cn/live/wxsdshxxgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxsdshxxgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "山东经济广播",
-            "link": "https://satellitepull.cnr.cn/live/wxsdjjgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxsdjjgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "山东音乐广播",
-            "link": "https://satellitepull.cnr.cn/live/wxsdyygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxsdyygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "广西交通广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32gxjtgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32gxjtgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "广西教育广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32gbjyshgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32gbjyshgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "广西经济广播·女主播电台",
-            "link": "https://satellitepull.cnr.cn/live/wx32gxjjgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32gxjjgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "广西综合广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32gxrmgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32gxrmgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "广西音乐广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32gxwygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32gxwygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "延边文艺生活广播",
-            "link": "https://satellitepull.cnr.cn/live/wxybwyshgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxybwyshgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "惠州综合广播",
-            "link": "http://stream.hztvmg.com/gbtest2/sd/live.m3u8"
+            "link": "http://stream.hztvmg.com/gbtest2/sd/live.m3u8",
+            "lang": "zh"
         },
         {
             "title": "惠州音乐广播",
-            "link": "http://stream.hztvmg.com/test17/playlist.m3u8"
+            "link": "http://stream.hztvmg.com/test17/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "新疆私家车广播",
-            "link": "https://satellitepull.cnr.cn/live/wxxjsjcgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxxjsjcgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "楚天交通广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32hubctjtgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32hubctjtgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "楚天音乐广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32hubctyygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32hubctyygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "武汉交通广播",
-            "link": "http://stream.appwuhan.com/jtpdzb/sd/live.m3u8"
+            "link": "http://stream.appwuhan.com/jtpdzb/sd/live.m3u8",
+            "lang": "zh"
         },
         {
             "title": "武汉青少广播·M-radio",
-            "link": "http://stream.appwuhan.com/sepdzb/sd/live.m3u8"
+            "link": "http://stream.appwuhan.com/sepdzb/sd/live.m3u8",
+            "lang": "zh"
         },
         {
             "title": "武汉音乐广播",
-            "link": "http://stream.appwuhan.com/yypdzb/sd/live.m3u8"
+            "link": "http://stream.appwuhan.com/yypdzb/sd/live.m3u8",
+            "lang": "zh"
         },
         {
             "title": "江苏故事广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32jsgsgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32jsgsgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "江苏故事广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32jsgsgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32jsgsgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "江苏文艺广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32jswygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32jswygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "江苏新闻综合广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32jsxwzhgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32jsxwzhgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "江苏经典流行音乐广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32jsjdlxyy/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32jsjdlxyy/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "江苏财经广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32jscjgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32jscjgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "江苏音乐广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32jsyygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32jsyygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "江西故事广播·潮台969",
-            "link": "http://live02.jxtvcn.com.cn/live-jxtvcn/jxtv_myfm969_aac.m3u8"
+            "link": "http://live02.jxtvcn.com.cn/live-jxtvcn/jxtv_myfm969_aac.m3u8",
+            "lang": "zh"
         },
         {
             "title": "江西都市广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32jiangxdsgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32jiangxdsgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "江西音乐广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32jiangxyygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32jiangxyygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "河北交通广播",
-            "link": "https://satellitepull.cnr.cn/live/wxhebjtgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxhebjtgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "河北文艺广播",
-            "link": "https://satellitepull.cnr.cn/live/wxhebwygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxhebwygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "河北生活广播",
-            "link": "https://satellitepull.cnr.cn/live/wxhebshgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxhebshgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "河北经济广播",
-            "link": "https://satellitepull.cnr.cn/live/wxhebjjgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxhebjjgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "河北综合广播",
-            "link": "https://satellitepull.cnr.cn/live/wxhebzhgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxhebzhgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "河北音乐广播",
-            "link": "https://satellitepull.cnr.cn/live/wxhebyygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxhebyygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "河南交通广播",
-            "link": "https://stream.hndt.com/live/jiaotong/playlist.m3u8"
+            "link": "https://stream.hndt.com/live/jiaotong/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "河南信息广播",
-            "link": "https://stream.hndt.com/live/leling/playlist.m3u8"
+            "link": "https://stream.hndt.com/live/leling/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "河南戏曲广播",
-            "link": "https://stream.hndt.com/live/yule/playlist.m3u8"
+            "link": "https://stream.hndt.com/live/yule/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "河南教育广播",
-            "link": "https://stream.hndt.com/live/jiaoyu/playlist.m3u8"
+            "link": "https://stream.hndt.com/live/jiaoyu/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "河南新闻广播",
-            "link": "https://stream.hndt.com/live/xinwen/playlist.m3u8"
+            "link": "https://stream.hndt.com/live/xinwen/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "河南经济广播",
-            "link": "https://stream.hndt.com/live/jingji/playlist.m3u8"
+            "link": "https://stream.hndt.com/live/jingji/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "河南音乐广播",
-            "link": "https://stream.hndt.com/live/yinyue/playlist.m3u8"
+            "link": "https://stream.hndt.com/live/yinyue/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "浙江民生资讯广播",
-            "link": "https://satellitepull.cnr.cn/live/wxzjmsgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxzjmsgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "浙江经济广播",
-            "link": "https://satellitepull.cnr.cn/live/wxzjjjgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxzjjjgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "海南音乐广播",
-            "link": "https://satellitepull.cnr.cn/live/wxhainyygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxhainyygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "湖北亲子广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32hubfnetgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32hubfnetgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "湖北经典音乐广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32hubyygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32hubyygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "湖北资讯广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32hubzxgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32hubzxgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "湖南文艺广播·摩登音乐台",
-            "link": "https://satellitepull.cnr.cn/live/wx32hunwygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32hunwygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "湖南旅游广播·PoPoPod播客电台",
-            "link": "https://satellitepull.cnr.cn/live/wx32hunlygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32hunlygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "滁州市广播电视台 公共频道 (400p)",
-            "link": "http://live.cztv.cc:85/live/ggpd.m3u8"
+            "link": "http://live.cztv.cc:85/live/ggpd.m3u8",
+            "lang": "zh"
         },
         {
             "title": "滁州市广播电视台 新闻综合频道 (1080p)",
-            "link": "http://live.cztv.cc:85/live/xwpd.m3u8"
+            "link": "http://live.cztv.cc:85/live/xwpd.m3u8",
+            "lang": "zh"
         },
         {
             "title": "环球广播",
-            "link": "http://sk.cri.cn/hyhq.m3u8"
+            "link": "http://sk.cri.cn/hyhq.m3u8",
+            "lang": "zh"
         },
         {
             "title": "环球资讯",
-            "link": "http://sk.cri.cn/905.m3u8"
+            "link": "http://sk.cri.cn/905.m3u8",
+            "lang": "zh"
         },
         {
             "title": "甘肃经济广播",
-            "link": "https://satellitepull.cnr.cn/live/wxgshhzs/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxgshhzs/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "福建汽车音乐广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32fjdnyygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32fjdnyygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "福建东南广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32fjdngb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32fjdngb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "福建都市广播·私家车987",
-            "link": "https://satellitepull.cnr.cn/live/wx32fjdndsgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32fjdndsgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "绍兴交通广播",
-            "link": "http://live.shaoxing.com.cn/audio/s10001-jt2/index.m3u8"
+            "link": "http://live.shaoxing.com.cn/audio/s10001-jt2/index.m3u8",
+            "lang": "zh"
         },
         {
             "title": "维吾尔语广播",
-            "link": "http://ngcdn013.cnr.cn/live/wygb/index.m3u8"
+            "link": "http://ngcdn013.cnr.cn/live/wygb/index.m3u8",
+            "lang": "zh"
         },
         {
             "title": "苏州都市音乐广播",
-            "link": "http://audio-live.radio.cn/live/szyy1/playlist.m3u8"
+            "link": "http://audio-live.radio.cn/live/szyy1/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "藏语广播",
-            "link": "http://ngcdn012.cnr.cn/live/zygb/index.m3u8"
+            "link": "http://ngcdn012.cnr.cn/live/zygb/index.m3u8",
+            "lang": "zh"
         },
         {
             "title": "贵州故事广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32gzgsgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32gzgsgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "贵州旅游广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32gzlygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32gzlygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "贵州经济广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32gzjjgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32gzjjgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "贵州综合广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32gzwxwzhgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32gzwxwzhgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "贵州都市广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32gzqcgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32gzqcgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "贵州音乐广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32gzyygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32gzyygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "辽宁乡村广播",
-            "link": "https://satellitepull.cnr.cn/live/wxlnxcgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxlnxcgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "辽宁交通广播",
-            "link": "https://satellitepull.cnr.cn/live/wxlnjtgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxlnjtgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "辽宁经典音乐广播",
-            "link": "https://satellitepull.cnr.cn/live/wxlnwygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxlnwygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "重庆音乐广播",
-            "link": "https://satellitepull.cnr.cn/live/wxcqyygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxcqyygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "锡林郭勒汉语广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32nmgxlglhygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32nmgxlglhygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "锡林郭勒蒙语广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32nmgxlglmygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32nmgxlglmygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "长沙交通广播",
-            "link": "http://115.238.238.218/zhcs_radio/jtgb1061__redirect__20573.m3u8"
+            "link": "http://115.238.238.218/zhcs_radio/jtgb1061__redirect__20573.m3u8",
+            "lang": "zh"
         },
         {
             "title": "长沙音乐广播",
-            "link": "http://222.186.61.82/zhcs_radio/jjgb886__redirect__20573.m3u8"
+            "link": "http://222.186.61.82/zhcs_radio/jjgb886__redirect__20573.m3u8",
+            "lang": "zh"
         },
         {
             "title": "阿拉善汉语广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32nmgalshygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32nmgalshygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "阿拉善蒙语广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32nmgalsmygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32nmgalsmygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "陕西交通广播",
-            "link": "https://satellitepull.cnr.cn/live/wxsxxjtgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxsxxjtgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "陕西农村广播",
-            "link": "https://satellitepull.cnr.cn/live/wxsxxncgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxsxxncgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "陕西戏曲广播",
-            "link": "https://satellitepull.cnr.cn/live/wxsxxxqgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxsxxxqgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "陕西新闻广播",
-            "link": "https://satellitepull.cnr.cn/live/wxsxxxwgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxsxxxwgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "陕西经济广播·896汽车调频",
-            "link": "https://satellitepull.cnr.cn/live/wxsxxjjgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxsxxjjgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "陕西都市广播·陕广新闻",
-            "link": "https://satellitepull.cnr.cn/live/wxsxxdsgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxsxxdsgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "陕西青少广播·好听1055",
-            "link": "https://satellitepull.cnr.cn/live/wxsxxqcgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxsxxqcgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "陕西音乐广播",
-            "link": "https://satellitepull.cnr.cn/live/wxsxxyygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxsxxyygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "青岛音体广播",
-            "link": "http://video11.qtv.com.cn/zhiboytgb-sd/manifest.m3u8"
+            "link": "http://video11.qtv.com.cn/zhiboytgb-sd/manifest.m3u8",
+            "lang": "zh"
         },
         {
             "title": "青海交通音乐广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32qhjtyygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32qhjtyygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "青海新闻综合广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32qhwxzhgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32qhwxzhgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "青海经济广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32qhjjgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32qhjjgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "黑龙江朝鲜语广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32hljcygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32hljcygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "黑龙江老年少儿广播·爱家调频",
-            "link": "https://satellitepull.cnr.cn/live/wx32hljajgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32hljajgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "黑龙江都市女性广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32hljnxgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32hljnxgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "黑龙江音乐广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32hljyygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32hljyygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "黑龙江高校广播",
-            "link": "https://satellitepull.cnr.cn/live/wx32hljgxgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32hljgxgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "福州广播电视台新闻综合频道 (FZTV-1) (1080p)",
-            "link": "http://live.zohi.tv/video/s10001-fztv-1/index.m3u8"
+            "link": "http://live.zohi.tv/video/s10001-fztv-1/index.m3u8",
+            "lang": "zh"
         },
         {
             "title": "福州广播电视台都市生活频道 (FZTV-3) (1080p)",
-            "link": "http://live.zohi.tv/video/s10001-fztv-3/index.m3u8"
+            "link": "http://live.zohi.tv/video/s10001-fztv-3/index.m3u8",
+            "lang": "zh"
         },
         {
             "title": "CRI HIT FM (北京)",
-            "link": "https://satellitepull.cnr.cn/live/wxgjlxyy/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxgjlxyy/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "CRI HIT FM (广州)",
-            "link": "https://satellitepull.cnr.cn/live/wxhitfm/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxhitfm/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "辽宁经济",
-            "link": "https://satellitepull.cnr.cn/live/wxlnjjtb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxlnjjtb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "SCTV3",
-            "link": "https://satellitepull.cnr.cn/live/wxscjjgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxscjjgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "SCTV5",
-            "link": "https://satellitepull.cnr.cn/live/wxscwygb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxscwygb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "上海长三角之声",
-            "link": "https://satellitepull.cnr.cn/live/wx32dfgbdt/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32dfgbdt/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "云南交通之声",
-            "link": "https://satellitepull.cnr.cn/live/wxynjtgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxynjtgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "四川城市之音",
-            "link": "https://satellitepull.cnr.cn/live/wxsccszs/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxsccszs/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "四川岷江音乐",
-            "link": "https://satellitepull.cnr.cn/live/wxscmjyyt/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxscmjyyt/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "安徽之声",
-            "link": "https://satellitepull.cnr.cn/live/wxahxxgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxahxxgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "广西北部湾之声",
-            "link": "https://satellitepull.cnr.cn/live/wx32gxdwgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32gxdwgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "浙江之声",
-            "link": "https://satellitepull.cnr.cn/live/wxzjzs/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxzjzs/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "浙江交通之声",
-            "link": "https://satellitepull.cnr.cn/live/wxzjjtgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxzjjtgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "浙江城市之声",
-            "link": "https://satellitepull.cnr.cn/live/wxzjcszs/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxzjcszs/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "浙江旅游之声",
-            "link": "https://satellitepull.cnr.cn/live/wxzj1045/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxzj1045/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "浙江音乐调频·动听968",
-            "link": "https://satellitepull.cnr.cn/live/wxzj968/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxzj968/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "深圳生活942",
-            "link": "https://satellitepull.cnr.cn/live/wxszsjcgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxszsjcgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "深圳飞扬971",
-            "link": "https://satellitepull.cnr.cn/live/wxszfy971/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxszfy971/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "湖北之声",
-            "link": "https://satellitepull.cnr.cn/live/wx32hubzsgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32hubzsgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "湖北城市之声",
-            "link": "https://satellitepull.cnr.cn/live/wx32hubjtgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32hubjtgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "湖北生活频道",
-            "link": "https://satellitepull.cnr.cn/live/wx32hubczshgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32hubczshgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "甘肃都市调频",
-            "link": "https://satellitepull.cnr.cn/live/wxgsdstb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxgsdstb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "甘肃青春调频",
-            "link": "https://satellitepull.cnr.cn/live/wxgsqcgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wxgsqcgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "第一财经",
-            "link": "https://satellitepull.cnr.cn/live/wx32dycjgb/playlist.m3u8"
+            "link": "https://satellitepull.cnr.cn/live/wx32dycjgb/playlist.m3u8",
+            "lang": "zh"
         },
         {
             "title": "辽宁之声",

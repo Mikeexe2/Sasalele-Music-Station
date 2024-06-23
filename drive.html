@@ -38,8 +38,6 @@
 
             gtag('config', 'G-LDY4BC680M');
         </script>
-        <script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@latest/pace-theme-default.min.css">
     </head>
 
     <body>
@@ -92,15 +90,15 @@
                 </ul>
             </div>
         </nav>
-        <div id="player">
-            <div id="gdmp">
-                <span id="prev-btn" onclick="prevTrack()"><i class="fas fa-step-backward"></i></span>
-                <audio id="audio" controls controlslist="nodownload noplaybackrate">
-                    <source id="source" src="" type="audio/mpeg">
-                </audio>
-                <span id="next-btn" onclick="nextTrack()"><i class="fas fa-step-forward"></i></span>
-            </div>
+
+        <div id="gdmp">
+            <button id="prev-btn" onclick="prevTrack()"><i class="fas fa-step-backward"></i></button>
+            <audio id="audio" controls controlslist="nodownload noplaybackrate">
+                <source id="source" src="" type="audio/mpeg">
+            </audio>
+            <button id="next-btn" onclick="nextTrack()"><i class="fas fa-step-forward"></i></button>
         </div>
+
         <section id="drive" onload="getFolderId()">
             <div class="section-title"><i class="fa-brands fa-google-drive"></i>Google Drive Music Player<i
                     class="fa-brands fa-google-drive"></i></div>
@@ -108,28 +106,22 @@
                 <summary><span class="badge badge-pill badge-primary">Guide</span></summary>
                 <p>Enter the ID for the <a href="https://drive.google.com" target="_blank">Google
                         Drive</a> folder you would like to use and click the 'Login'
-                    button. The ID can be found by taking that last part of the folder's URL, for example, drive.google.com/drive/folders/1_gbbbbb-aaaaa has an ID of
+                    button. The ID can be found by taking that last part of the folder's URL, for example,
+                    drive.google.com/drive/folders/1_gbbbbb-aaaaa has an ID of
                     "1_gbbbbb-aaaaa".<br>Alternatively,"<strong>root</strong>" can be used to browse from your top-level
-                    folder.<br><strong>Note: Trust the website and click on proceed in order to login.</strong>
+                    folder.<br>
                 <p>For more information, please read our <a href="privacypolicy.html" target="_blank">Privacy
                         Policy</a>.</p>
                 </p>
             </details>
-            <main role="main" class="content">
-                <div id="return" style="display:none">
-                    <form onsubmit="submitFolderId(event)"><button type="submit" class="btn btn-primary mb-3"><i
-                                class="fab fa-google"></i> Log back in</button></form>
-                </div>
+            <main role="main">
                 <div id="intro" style="display:none">
                     <form onsubmit="submitFolderId(event)">
                         <div class="row justify-content-center">
                             <div class="col-md-6">
                                 <div class="input-group mb-3">
-                                    <label for="parentfolder" class="sr-only">Drive
-                                        Folder ID:</label>
                                     <input type="text" class="form-control" required id="parentfolder"
-                                        name="parentfolder" placeholder="google-drive-folder-id"
-                                        aria-describedby="basic-addon2">
+                                        name="parentfolder" placeholder="google-drive-folder-id">
                                     <div class="input-group-append">
                                         <button type="submit" class="btn btn-primary mb-3">
                                             <i class="fab fa-google"></i> Login
@@ -139,44 +131,47 @@
                             </div>
                         </div>
                     </form>
+                    <div id="demo" class="loaded">
+                        <details open>
+                            <summary>Collection 1</summary>
+                            <button class="track" onclick="playTrack('好きにしなよ - Anly', this, 'demo')"><i
+                                    class="fas fa-play"></i>
+                                好きにしなよ -
+                                Anly</button>
+                            <button class="track" onclick="playTrack('紅葉愛唄 - GARNiDELiA', this, 'demo')"><i
+                                    class="fas fa-play"></i>
+                                紅葉愛唄 -
+                                GARNiDELiA</button>
+                            <button class="track" onclick="playTrack('花ハ踊レヤいろはにほ (随花起舞) - チーム・ハナヤマタ', this, 'demo')"><i
+                                    class="fas fa-play"></i> 花ハ踊レヤいろはにほ (随花起舞) - チーム・ハナヤマタ</button>
+                        </details>
+                        <details open>
+                            <summary>Collection 2</summary>
+                            <button class="track" onclick="playTrack('都会っ子田舎っ子 - びわ湖くん', this, 'demo')"><i
+                                    class="fas fa-play"></i>
+                                都会っ子田舎っ子
+                                - びわ湖くん</button>
+                            <button class="track" onclick="playTrack('天空の狂詩曲 - さゆり', this, 'demo')"><i
+                                    class="fas fa-play"></i>
+                                天空の狂詩曲 -
+                                さゆり</button>
+                            <button class="track" onclick="playTrack('ロストワンの号哭Band edition - 周平', this, 'demo')"><i
+                                    class="fas fa-play"></i>
+                                ロストワンの号哭Band edition - 周平</button>
+                        </details>
+                    </div>
                 </div>
-                <div id="demo" class="loaded">
-                    <details open>
-                        <summary>Collection 1</summary>
-                        <button class="track" onclick="playTrack('好きにしなよ - Anly', this, 'demo')"><i
-                                class="fas fa-play"></i>
-                            好きにしなよ -
-                            Anly</button>
-                        <button class="track" onclick="playTrack('紅葉愛唄 - GARNiDELiA', this, 'demo')"><i
-                                class="fas fa-play"></i>
-                            紅葉愛唄 -
-                            GARNiDELiA</button>
-                        <button class="track" onclick="playTrack('花ハ踊レヤいろはにほ (随花起舞) - チーム・ハナヤマタ', this, 'demo')"><i
-                                class="fas fa-play"></i> 花ハ踊レヤいろはにほ (随花起舞) - チーム・ハナヤマタ</button>
-                    </details>
-                    <details open>
-                        <summary>Collection 2</summary>
-                        <button class="track" onclick="playTrack('都会っ子田舎っ子 - びわ湖くん', this, 'demo')"><i
-                                class="fas fa-play"></i>
-                            都会っ子田舎っ子
-                            - びわ湖くん</button>
-                        <button class="track" onclick="playTrack('天空の狂詩曲 - さゆり', this, 'demo')"><i
-                                class="fas fa-play"></i>
-                            天空の狂詩曲 -
-                            さゆり</button>
-                        <button class="track" onclick="playTrack('ロストワンの号哭Band edition - 周平', this, 'demo')"><i
-                                class="fas fa-play"></i>
-                            ロストワンの号哭Band edition - 周平</button>
-                    </details>
-                </div>
+
                 <div id="contents"></div>
+            </main>
+            <div class="gdmpoptions">
                 <li id="option">
-                    <button class="btn btn-secondary mb-3" onclick="changeFolder()">Change Folder</button>
-                    <a class="btn btn-secondary mb-3" href="https://myaccount.google.com/security" target="_blank"
+                    <button class="btn btn-primary mb-1" onclick="changeFolder()">Change Folder / User</button>
+                    <a class="btn btn-primary mb-1" href="https://myaccount.google.com/security" target="_blank"
                         role="button">Revoke
                         Access</a>
                 </li>
-            </main>
+            </div>
         </section>
         <script src="js/gdmp.js"></script>
         <script async defer src="js/api.js" onload="gapiLoaded()"></script>
