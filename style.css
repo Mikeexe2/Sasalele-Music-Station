@@ -264,7 +264,7 @@ body {
     cursor: url(assets/Arrow.cur), auto;
 }
 
-/*VIDEOS*/
+/*VIDEOS/STREAMS*/
 #video-list {
     max-height: 300px;
     overflow-y: auto;
@@ -297,7 +297,8 @@ body {
     border-radius: 5px;
 }
 
-.genre-link {
+.genre-link,
+.lang-link {
     cursor: pointer;
     color: var(--facebook-blue);
     text-decoration: none;
@@ -306,13 +307,15 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
-.genre-link:hover {
+.genre-link:hover,
+.lang-link:hover {
     color: var(--focus-blue-100);
     text-decoration: none;
     background-color: #f8f9fa;
 }
 
-#genre-info {
+#genre-info,
+#lang-info {
     background-color: #fff;
     padding: 1px;
     border-radius: 5px;
@@ -356,8 +359,6 @@ body {
 .genre-group {
     margin-bottom: 10px;
     padding: 10px;
-    background: var(--black-60-alpha);
-    border: 1px solid var(--white-100);
     border-radius: 5px;
 }
 
@@ -890,13 +891,14 @@ screen and (min-width: 1152px) {
 .section-title {
     display: flex;
     justify-content: center;
+    align-items: center;
     margin: 0 auto;
     text-align: center;
-    width: 100%;
+    width: 95%;
     height: fit-content;
     line-height: 1.3;
     font-weight: bold;
-    padding: 10px;
+    padding: 15px;
     font-size: var(--wp--preset--font-size--medium);
     background-image: linear-gradient(to right, #24bfff, #4481eb, #04befe, #3f86ed);
     background-size: 200% 200%;

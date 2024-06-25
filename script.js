@@ -281,8 +281,159 @@ player.addEventListener('pause', () => {
     }
 });
 
-// Fetch radio station data
+// for radio streams
+let currentRadioStreams = [];
+let currentPlayingElement = null;
+let hls = null;
 
+function updateLangInfo(lang, count) {
+    const streamLang = document.getElementById("lang-name");
+    const streamCount = document.getElementById("stream-count");
+
+    streamLang.textContent = lang;
+    streamCount.textContent = count;
+}
+
+function selectRadioStream(element) {
+    const selectedLink = element.dataset.link;
+    const selectedTitle = element.querySelector('span').textContent;
+
+    if (currentPlayingElement) {
+        currentPlayingElement.style.backgroundColor = "";
+        currentPlayingElement.style.color = "";
+    }
+
+    element.style.backgroundColor = "#007bff";
+    element.style.color = "#fff";
+
+    currentPlayingElement = element;
+
+    document.getElementById("selected-video-title").textContent = selectedTitle;
+
+    playRadioStream(selectedLink);
+}
+
+
+function playRadioStream(link) {
+    const m3u8player = document.getElementById("video-player");
+    const proxiedLink = `https://sasalele.api-anycast.workers.dev/${link}`;
+    const hls = new Hls();
+
+    if (Hls.isSupported()) {
+        hls.loadSource(proxiedLink);
+        hls.attachMedia(m3u8player);
+        hls.on(Hls.Events.MANIFEST_PARSED, function () {
+            m3u8player.play();
+        });
+    } else if (m3u8player.canPlayType('application/vnd.apple.mpegurl')) {
+        m3u8player.src = proxiedLink;
+        m3u8player.addEventListener('loadedmetadata', function () {
+            m3u8player.play();
+        });
+    } else {
+        console.error('This browser does not support HLS.js or native HLS playback.');
+    }
+}
+
+function createRadioList(radioStreams) {
+    const videoListElement = document.getElementById("video-list");
+    videoListElement.innerHTML = "";
+
+    radioStreams.forEach((stream) => {
+        const listItem = document.createElement("li");
+        listItem.classList.add("list-group-item", "list-group-item-action", "d-flex", "align-items-center");
+
+        const iconImage = document.createElement("img");
+        iconImage.classList.add("mr-2");
+        iconImage.src = stream.icon || "assets/radios/Unidentified2.webp";
+        iconImage.width = 40;
+        iconImage.title = stream.icon ? "" : "No Homepage Available";
+
+        if (stream.homepage) {
+            const homepageLink = document.createElement("a");
+            homepageLink.href = stream.homepage;
+            homepageLink.target = "_blank";
+            homepageLink.appendChild(iconImage);
+            listItem.appendChild(homepageLink);
+        } else {
+            listItem.appendChild(iconImage);
+        }
+
+        const contentContainer = document.createElement("div");
+        contentContainer.classList.add("d-flex", "align-items-center", "justify-content-between", "flex-grow-1");
+
+        const titleSpan = document.createElement("span");
+        titleSpan.textContent = stream.title;
+        titleSpan.classList.add("ml-2");
+
+        contentContainer.appendChild(titleSpan);
+
+        const downloadIcon = document.createElement("i");
+        downloadIcon.classList.add("fa", "fa-download", "cursor-pointer");
+        downloadIcon.setAttribute("title", "Download");
+
+        downloadIcon.addEventListener("click", (event) => {
+            event.stopPropagation();
+            initiateM3UDownload(stream.link, stream.title);
+        });
+
+        contentContainer.appendChild(downloadIcon);
+
+        listItem.appendChild(contentContainer);
+
+        listItem.dataset.link = stream.link;
+
+        listItem.addEventListener("click", () => selectRadioStream(listItem));
+
+        videoListElement.appendChild(listItem);
+    });
+}
+
+function filterRadioList(query) {
+    const lowerCaseQuery = query.toLowerCase();
+    return currentRadioStreams.filter(stream => stream.title.toLowerCase().includes(lowerCaseQuery));
+}
+
+document.querySelectorAll(".lang-link").forEach(link => {
+    link.addEventListener("click", async function (e) {
+        e.preventDefault();
+        const lang = this.getAttribute("data-lang");
+        const filteredRadioStreams = currentRadioStreams.filter(stream => stream.lang === lang);
+        createRadioList(filteredRadioStreams);
+        updateLangInfo(this.textContent, filteredRadioStreams.length);
+    });
+});
+
+document.getElementById("searchStream").addEventListener("input", function () {
+    const query = this.value;
+    const filteredRadioStreams = filterRadioList(query);
+    createRadioList(filteredRadioStreams);
+});
+
+(async () => {
+    const defaultlang = "ja";
+    const defaultlangName = "Japanese";
+    const response = await fetch('Links/radiostreams.json');
+    if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.statusText}`);
+    }
+    currentRadioStreams = await response.json();
+    const filteredRadioStreams = currentRadioStreams.filter(stream => stream.lang === defaultlang);
+    createRadioList(filteredRadioStreams);
+    updateLangInfo(defaultlangName, filteredRadioStreams.length);
+})();
+
+
+function initiateM3UDownload(streamUrl, streamTitle) {
+    const m3uContent = `#EXTM3U\n#EXTINF:-1,${streamTitle}\n${streamUrl}`;
+    const blob = new Blob([m3uContent], { type: "text/plain;charset=utf-8" });
+    const downloadableUrl = URL.createObjectURL(blob);
+
+    const downloadLink = document.createElement("a");
+    downloadLink.href = downloadableUrl;
+    downloadLink.download = `${streamTitle}.m3u8`;
+    downloadLink.click();
+}
 
 function goTop() {
     window.scrollTo({
