@@ -59,19 +59,19 @@ function selectVideo(element) {
 
 function playMedia(link) {
   const videoPlayer = document.getElementById("video-player");
-
+  const proxiedLink = `https://sasalele.api-anycast.workers.dev/${link}`;
+  
   const loadAndPlay = async (link) => {
     if (link.endsWith(".mp4") || link.includes("format=mp4")) {
       videoPlayer.src = link;
       videoPlayer.play();
     }
     else if (videoPlayer.canPlayType('application/vnd.apple.mpegurl')) {
-      videoPlayer.src = link;
+      videoPlayer.src = proxiedLink;
       videoPlayer.addEventListener('loadedmetadata', function () {
         videoPlayer.play();
       });
     } else {
-      const proxiedLink = `https://sasalele.api-anycast.workers.dev/${link}`;
       const hlsInstance = new Hls();
       hlsInstance.attachMedia(videoPlayer);
       hlsInstance.loadSource(proxiedLink);
