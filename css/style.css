@@ -177,16 +177,16 @@
     --animation-easing-ease-in-out: cubic-bezier(0.5, 0, 0.5, 1);
 }
 
-a[target="_blank"]::after,
-.button-label::after {
-    content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==);
-    margin: 0 3px 0 5px;
+.navbar {
+    background: var(--color-overlay-dark);
 }
 
-a,
-.wl-action[target="_blank"]::after,
-.m-2[target="_blank"]::after {
-    content: none;
+.player-radio-name:hover::after,
+.LinksItemLink:hover::after,
+.homepagelink:hover::after,
+.togglesearch::after {
+    margin: 0 3px 0 5px;
+    content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==);
 }
 
 .nav-link,
@@ -254,14 +254,13 @@ a,
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    background-image: url('assets/vsc-git.jpg');
+    font-family: "Open Sans", sans-serif;
+    background-image: url('../assets/vsc-git.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
-    cursor: url(assets/Arrow.cur), auto;
+    cursor: url(../assets/Arrow.cur), auto;
 }
 
 /*VIDEOS/STREAMS*/
@@ -316,8 +315,8 @@ body {
 
 #genre-info,
 #lang-info {
-    background-color: #fff;
-    padding: 1px;
+    background-color: var(--apple-white);
+    padding: 10px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -329,11 +328,6 @@ body {
 }
 
 /*RADIOS*/
-#searchChannel {
-    margin-bottom: 10px;
-    border-radius: 0;
-}
-
 .count {
     margin: 0.5em auto;
     padding: 0.1em;
@@ -348,73 +342,49 @@ body {
     display: none;
 }
 
-.radioresultsdisplay {
-    margin-top: 0.5em;
-    background: var(--color-border-medium-emphasis);
-    padding: 20px;
-    max-height: 200px;
-    overflow-y: auto;
-}
-
 .genre-group {
     margin-bottom: 10px;
-    padding: 10px;
     border-radius: 5px;
+    background: var(--white-50-alpha);
 }
 
 .genre-content {
-    display: flex;
-    flex-wrap: wrap;
-    max-height: 180px;
-    overflow: auto;
-    justify-content: space-between;
+    max-height: 245px;
+    overflow-y: auto;
 }
 
 .radio-genre {
+    margin: 0 auto;
+    padding: 10px;
+    text-align: center;
     font-size: var(--wp--preset--font-size--medium);
     font-weight: bold;
+    border-radius: 8px;
     background: var(--wp--preset--gradient--pale-ocean);
     color: var(--apple-black);
-    padding: 10px;
 }
 
 .widget {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    background-color: var(--white-60-alpha);
+    background-color: var(--white-50-alpha);
     border: 1px solid var(--gray-100);
-    border-radius: 5px;
     padding: 5px;
     width: 100%;
-    position: relative;
 }
 
-.widget:hover {
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+.download-button {
+    margin-right: 10px;
 }
 
-.widget .rad-icon {
+.rad-icon {
     max-width: 50px;
     height: auto;
+    margin-right: 15px;
 }
 
 .main-play-button {
-    cursor: pointer;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2rem;
-}
-
-.main-play-button:hover {
-    background-color: #0056b3;
+    border-radius: 50% !important;
 }
 
 .player-radio-name {
@@ -430,11 +400,11 @@ body {
 /*SEARCH SONG*/
 .search-terms {
     font-weight: bold;
-    font-size: 18px;
+    font-size: 16px;
     text-align: center;
     color: var(--apple-black);
     background-color: var(--focus-blue-100);
-    padding: 10px
+    padding: 5px;
 }
 
 .gsc-input {
@@ -443,12 +413,6 @@ body {
 
 #noresult {
     display: none;
-}
-
-#lastFMInfo {
-    font-size: 14px;
-    font-weight: normal;
-    background-color: var(--apple-white)
 }
 
 #lastFMInfo ul {
@@ -460,23 +424,16 @@ body {
 
 #lastFMInfo li {
     padding: 0.1em;
-}
-
-.info-container {
-    font-size: 14px
+    font-size: 14px;
+    font-weight: normal;
+    background-color: var(--apple-white)
 }
 
 .search-results {
-    padding: 5px;
     max-width: 90%;
     margin: 0 auto;
     background-color: var(--color-border-medium-emphasis);
     justify-content: center
-}
-
-.searchwebsite {
-    width: 100%;
-    padding: 10px
 }
 
 .togglesearch {
@@ -508,114 +465,114 @@ body {
 }
 
 .icon-spotify {
-    background-image: url('assets/covers/spotify.webp')
+    background-image: url('../assets/covers/spotify.webp')
 }
 
 .icon-apple {
-    background-image: url('assets/covers/applemusic.webp')
+    background-image: url('../assets/covers/applemusic.webp')
 }
 
 .icon-amazon {
-    background-image: url('assets/covers/amazonmusic.webp')
+    background-image: url('../assets/covers/amazonmusic.webp')
 }
 
 .icon-youtube {
-    background-image: url('assets/covers/youtube.webp')
+    background-image: url('../assets/covers/youtube.webp')
 }
 
 .icon-youtubemusic {
-    background-image: url('assets/covers/youtubemusic.webp')
+    background-image: url('../assets/covers/youtubemusic.webp')
 }
 
 .icon-netease {
-    background-image: url('assets/covers/netease.webp')
+    background-image: url('../assets/covers/netease.webp')
 }
 
 .icon-vgmdb {
-    background-image: url('assets/covers/vgmdb.webp')
+    background-image: url('../assets/covers/vgmdb.webp')
 }
 
 .icon-musicenc {
-    background-image: url('assets/covers/musicenc.webp')
+    background-image: url('../assets/covers/musicenc.webp')
 }
 
 .icon-jlyric {
-    background-image: url('assets/covers/jlyric.webp')
+    background-image: url('../assets/covers/jlyric.webp')
 }
 
 .icon-followlyrics {
-    background-image: url('assets/covers/followlyrics.webp')
+    background-image: url('../assets/covers/followlyrics.webp')
 }
 
 .icon-kugeci {
-    background-image: url('assets/covers/kugeci.webp')
+    background-image: url('../assets/covers/kugeci.webp')
 }
 
 .icon-baha {
-    background-image: url('assets/covers/bahamut.webp')
+    background-image: url('../assets/covers/bahamut.webp')
 }
 
 .icon-kkbox {
-    background-image: url('assets/covers/kkbox.webp')
+    background-image: url('../assets/covers/kkbox.webp')
 }
 
 .icon-audarchive {
-    background-image: url('assets/covers/audioarchive.webp')
+    background-image: url('../assets/covers/audioarchive.webp')
 }
 
 .icon-soundcloud {
-    background-image: url('assets/covers/soundcloud.webp')
+    background-image: url('../assets/covers/soundcloud.webp')
 }
 
 .icon-lastfm {
-    background-image: url('assets/covers/lastfm.webp')
+    background-image: url('../assets/covers/lastfm.webp')
 }
 
 .icon-google {
-    background-image: url('assets/covers/google.webp')
+    background-image: url('../assets/covers/google.webp')
 }
 
 .icon-utanet {
-    background-image: url('assets/covers/utanet.webp')
+    background-image: url('../assets/covers/utanet.webp')
 }
 
 .icon-petitlyrics {
-    background-image: url('assets/covers/petitlyrics.webp')
+    background-image: url('../assets/covers/petitlyrics.webp')
 }
 
 .icon-musicbrainz {
-    background-image: url('assets/covers/musicbrainz.webp')
+    background-image: url('../assets/covers/musicbrainz.webp')
 }
 
 .icon-gnudb {
-    background-image: url('assets/covers/gnudb.webp')
+    background-image: url('../assets/covers/gnudb.webp')
 }
 
 .icon-niconico {
-    background-image: url('assets/covers/niconico.webp')
+    background-image: url('../assets/covers/niconico.webp')
 }
 
 .icon-vocadb {
-    background-image: url('assets/covers/vocadb.webp')
+    background-image: url('../assets/covers/vocadb.webp')
 }
 
 .icon-jplyrics {
-    background-image: url('assets/covers/jplyrics.webp')
+    background-image: url('../assets/covers/jplyrics.webp')
 }
 
 .icon-touhoudb {
-    background-image: url('assets/covers/touhoudb.webp')
+    background-image: url('../assets/covers/touhoudb.webp')
 }
 
 .icon-mikudb {
-    background-image: url('assets/covers/mikudb.webp')
+    background-image: url('../assets/covers/mikudb.webp')
 }
 
 .button-label {
     font-size: 14px;
     font-weight: bold;
     line-height: 1;
-    padding-left: 10px
+    padding-left: 5px
 }
 
 /*WEBSITES*/
@@ -712,17 +669,19 @@ screen and (min-width: 1152px) {
 }
 
 #player {
-    position: fixed;
+    position: sticky;
     display: block;
     align-items: center;
     text-align: left;
     bottom: 10px;
-    z-index: 9999;
+    z-index: 2;
     left: 10px;
     border-radius: 10px;
     padding: 10px;
     box-shadow: 0 0 10px 2px rgb(0, 0, 0);
-    background: var(--wp--preset--gradient--pale-ocean);
+    background-image: linear-gradient(to right, rgb(255, 245, 203), rgb(182, 227, 212), rgb(51, 167, 181));
+    background-size: 200% 200%;
+    animation: flowingGradient 5s ease infinite;
     color: var(--white-100);
     height: fit-content;
     width: fit-content;
@@ -841,8 +800,6 @@ screen and (min-width: 1152px) {
 
 #aplayer {
     max-height: 300px;
-    width: 90%;
-    margin: 0.742em auto 0.742em auto;
     justify-content: center
 }
 
@@ -854,63 +811,53 @@ screen and (min-width: 1152px) {
     padding: 1px;
 }
 
-#up-button {
-    display: inline-flex;
-    z-index: 100;
-    appearance: none;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-    user-select: none;
+.back-to-top {
     position: fixed;
-    white-space: nowrap;
-    vertical-align: middle;
-    outline: transparent solid 2px;
-    outline-offset: 2px;
-    width: auto;
-    line-height: 1.2;
-    border-radius: 50%;
-    font-weight: bold;
-    height: 20px;
-    min-width: 20px;
-    font-size: 12px;
-    padding-inline-start: 4px;
-    padding-inline-end: 4px;
-    background: white;
-    padding: 0px;
-    bottom: 25px;
-    right: 4px;
-    visibility: visible;
+    visibility: hidden;
+    opacity: 0;
+    right: 15px;
+    bottom: 15px;
+    z-index: 998;
+    background: #67b0d1;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    transition: all 0.4s;
 }
 
-#up-button:hover {
-    background-color: var(--expressive-purple);
+.back-to-top i {
+    font-size: 24px;
+    color: #fff;
+    line-height: 0;
+}
+
+.back-to-top:hover {
+    background: #86c0da;
+    color: #fff;
+}
+
+.back-to-top.active {
+    visibility: visible;
+    opacity: 1;
 }
 
 .section-title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
     text-align: center;
-    width: 95%;
-    height: fit-content;
-    line-height: 1.3;
-    font-weight: bold;
-    padding: 15px;
-    font-size: var(--wp--preset--font-size--medium);
-    background-image: linear-gradient(to right, #24bfff, #4481eb, #04befe, #3f86ed);
-    background-size: 200% 200%;
-    animation: flowingGradient 12s ease infinite;
-    color: var(--white-100);
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
+    padding-bottom: 10px;
 }
 
-.section-title i {
-    padding: 0 0.3em;
+.section-title h2 {
+    font-size: 13px;
+    letter-spacing: 1px;
+    font-weight: 700;
+    padding: 8px 20px;
+    line-height: 1;
+    margin: 0;
+    background: #fdeff2;
+    color: #e43c5c;
+    display: inline-block;
+    text-transform: uppercase;
+    border-radius: 50px;
 }
 
 #tips {
@@ -925,6 +872,10 @@ screen and (min-width: 1152px) {
     color: var(--apple-black)
 }
 
+.collapse {
+    transition: height 0.3s ease;
+}
+
 #footer {
     position: relative;
     bottom: 0;
@@ -934,20 +885,33 @@ screen and (min-width: 1152px) {
     align-items: center;
     text-align: center;
     color: var(--apple-white);
-    padding: 1rem;
+    padding: 30px 20px;
     background: var(--black-80-alpha);
 }
 
-#footer .m-2 {
+.social-links a {
+    font-size: 18px;
+    display: inline-block;
+    background: #2f425a;
+    color: #fff;
+    line-height: 1;
+    padding: 8px 0;
+    margin-right: 4px;
+    border-radius: 50%;
+    text-align: center;
+    width: 36px;
+    height: 36px;
+    transition: 0.3s;
+}
+
+.social-links a:hover {
+    background: #67b0d1;
+    color: #fff;
     text-decoration: none;
 }
 
 /*CHAT*/
 #waline {
-    max-width: 90%;
-    border-radius: 8px;
-    margin: 5px auto 5px;
-    padding: 5px 10px;
     background: var(--white-90-alpha);
     outline: 0;
     border: none
@@ -955,24 +919,17 @@ screen and (min-width: 1152px) {
 
 .joinform {
     text-align: center;
-    max-width: 50%;
-    margin: 0.742em auto 0.742em auto;
-}
-
-#join_container {
-    width: auto;
-    height: auto;
 }
 
 #join_inner_container {
     background-color: var(--color-surface-accent-primary-light);
     padding: 10px;
     border-radius: 8px;
-    margin: 0.742em auto 0.742em auto;
+    margin: 0.742em auto;
 }
 
 #join_input_container {
-    margin: 0.742em auto 0.742em auto;
+    margin: 0.742em auto;
 }
 
 #join_input {
@@ -989,27 +946,22 @@ screen and (min-width: 1152px) {
     box-shadow: 0 10px 30px -17px var(--gray-90)
 }
 
-#join_button_container {
-    margin: 0.742em auto 0.742em auto;
-}
-
 #join_button {
     margin: 5px auto 5px;
-    padding: 8px auto 8px auto;
+    padding: 10px;
     cursor: pointer;
     background-color: var(--expressive-green);
-    font-size: 12px;
+    font-size: 16px;
     font-weight: bold;
     color: var(--black-100)
 }
 
 #chat_inner_container {
-    max-width: 90%;
     border-radius: 8px;
-    margin: 5px auto 5px;
-    padding: 5px 10px;
+    margin: 5px auto;
+    padding: 10px;
     height: 450px;
-    background: url(assets/comment-bg.webp) right top/20% no-repeat var(--apple-white);
+    background: url(../assets/comment-bg.webp) right top/20% no-repeat var(--white-90-alpha);
     outline: 0;
     border: none
 }
@@ -1067,11 +1019,11 @@ button {
 }
 
 #chat_logout {
-    margin: 5px 0px 1px 0px;
+    margin: 5px;
     color: var(--caution-red-vivid-100);
     cursor: pointer;
     border: 1px solid;
-    padding: .175rem .25rem
+    padding: 0.17em
 }
 
 #chat_logout:hover {
@@ -1413,23 +1365,8 @@ summary {
         height: 350px;
     }
 
-    .widget {
-        margin-bottom: 2px;
-        padding: 5px
-    }
-
     #intro {
         margin: 0.2em auto 0 auto;
-    }
-
-    .main-play-button {
-        width: 25px;
-        height: 25px;
-        margin-right: 3px;
-    }
-
-    .main-play-button i {
-        font-size: 11px;
     }
 
     .player-radio-name {
@@ -1450,19 +1387,15 @@ summary {
         height: 30px
     }
 
-    .search-results {
-        padding: 3px
-    }
-
     #prev-btn,
     #next-btn button.track,
     summary,
     option li a,
     option li button,
     #stationName,
+    .radio-genre,
     .search-terms,
     #lastFMInfo,
-    .info-container,
     .message_user {
         font-size: var(--wp--preset--font-size--small);
     }

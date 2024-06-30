@@ -1,7 +1,7 @@
-# <img src="assets/sasalele_logo-removebg.png" width="40px"> Sasalele Music Station
+# <img src="assets/sasalele_logo-removebg.webp" width="40px"> Sasalele Music Station
 
-Welcome to Sasalele Music Station! Listen to over 400 radio channels featuring a variety of anime OST and more.   
-This website compiles all your favorite stations, making it easy to find and listen to them.  
+Welcome to Sasalele Music Station! Listen to over 400 radio channels featuring a variety of anime OST and more. Watch or listen to over 20000 M3U8 video/radio streams.  
+This website compiles a list of great Japanese contents (websites, radios, podcasts), making it easy to find and listen to them. 
 
 <p align="center">
   <a href="https://basic.pp.ua">
@@ -9,15 +9,16 @@ This website compiles all your favorite stations, making it easy to find and lis
   </a>
 </p>
 
-# What can you find in this website?
+# Features
 ✔️ Explore a huge collection of radio stations categorized into different categories (J-Pop, J-Rock, Anime OST, K-Pop, Vocaloid, Nightcore...)  
-✔️ Easy search function: Search stations by name or search using Radio Browser's API.  
-✔️ Enjoy your personal collection using Google Drive player.   
+✔️ Download M3U or M3U8 files of the radio station and listen on your device.
+✔️ Search stations all  around the world using Radio Browser's API.  
 ✔️ Quickly search for song names and find results across your preferred search engines.  
-✔️ Play M3u8 streams and watch a collection of them.  
-✔️ Access a range of tools for downloading, editing, and managing your MP3 files.  
+✔️ Play M3u8 radio streams and watch video streams.  
+✔️ Login to Google and play your music collection using Google Drive player.   
+✔️ Access a curated list of tools for downloading, editing, and managing your MP3 files.  
 ✔️ Join the chat and share your playing song.  
-✔️ Immerse yourself in Japanese language and culture by tuning into radio talk shows.
+✔️ Quickly find Japanese Podcast to listen with a curated list of good resources.  
 
 # Submitting radio stream links or websites
 Stations are continuously added. If you have any suggestions for additional stations, please let me know.  
@@ -34,7 +35,7 @@ Post in [issue](https://github.com/Mikeexe2/Sasalele-Music-Station/issues/new)
 ALL the owners of these amazing radio stations, without you, none of this would have been possible!  
 
 Portions of this site use code from open source projects including:  
-•<a href="https://github.com/dandalpiaz/drive-music-player" target="_blank">Drive Music Player</a>  
+•  <a href="https://github.com/dandalpiaz/drive-music-player" target="_blank">Drive Music Player</a>  
 •  <a href="https://github.com/DIYgod/APlayer" target="_blank">APlayer</a>  
 •  <a href="https://github.com/video-dev/hls.js" target="_blank">hls.js</a>  
 •  <a href="https://github.com/walinejs/waline" target="_blank">Waline</a>  
