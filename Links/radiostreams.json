@@ -721,20 +721,6 @@
             "lang": "ja"
         },
         {
-            "title": "Tokyo Rose Radio",
-            "link": "http://bluford.torontocast.com:8006/stream",
-            "icon": "assets/radios/tokyorose.webp",
-            "homepage": "https://www.tokyoroseradio.torontocast.stream/",
-            "lang": "ja"
-        },
-        {
-            "title": "Shonan Beach FM",
-            "link": "http://150.95.174.29:8000/by_the_sea",
-            "icon": "assets/radios/shonanbeach.webp",
-            "homepage": "https://www.beachfm.co.jp/",
-            "lang": "ja"
-        },
-        {
             "title": "BBC Radio 1",
             "link": "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_one/bbc_radio_one.isml/bbc_radio_one-audio%3d96000.norewind.m3u8",
             "lang": "en"

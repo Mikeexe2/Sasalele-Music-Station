@@ -1,0 +1,112 @@
+[
+    {
+        "name": "Openings Moe",
+        "url": "https://openings.moe/",
+        "icon": "assets/websites/openingmoe.webp"
+    },
+    {
+        "name": "Music Dex",
+        "url": "https://musicdex.org/",
+        "icon": "assets/websites/musicdex.webp"
+    },
+    {
+        "name": "AuDee(オーディー)",
+        "url": "https://audee.jp/",
+        "icon": "assets/websites/audeejp.webp"
+    },
+    {
+        "name": "ABEMA",
+        "url": "https://abema.tv/",
+        "icon": "assets/websites/abematv.webp"
+    },
+    {
+        "name": "Internet Radio Station <音泉>",
+        "url": "https://www.onsen.ag/",
+        "icon": "assets/websites/onsenag.webp"
+    },
+    {
+        "name": "AT-X",
+        "url": "https://www.at-x.com/",
+        "icon": "assets/websites/ATX.webp"
+    },
+    {
+        "name": "文化放送A&Gゾーン",
+        "url": "https://www.joqr.co.jp/ag/",
+        "icon": "assets/websites/chouagzone.webp"
+    },
+    {
+        "name": "アニメイトタイムズ animate Times",
+        "url": "https://www.animatetimes.com/",
+        "icon": "assets/websites/animatetimes.webp"
+    },
+    {
+        "name": "ASOBI CHANNEL",
+        "url": "https://asobichannel.asobistore.jp/",
+        "icon": "assets/websites/asobichannel.webp"
+    },
+    {
+        "name": "アニたまどっとコム",
+        "url": "http://anitama.com/",
+        "icon": "assets/websites/anitama.webp"
+    },
+    {
+        "name": "Utaite Wiki",
+        "url": "https://utaite.fandom.com/wiki/Utaite_Wiki",
+        "icon": "assets/websites/utaitefandom.webp"
+    },
+    {
+        "name": "kara.moe",
+        "url": "https://kara.moe/",
+        "icon": "assets/websites/karamoe.webp"
+    },
+    {
+        "name": "AniPlaylist",
+        "url": "https://aniplaylist.com/",
+        "icon": "assets/websites/aniplaylist.webp"
+    },
+    {
+        "name": "UtaiteDB",
+        "url": "https://utaitedb.net/",
+        "icon": "assets/websites/utaitedb.webp"
+    },
+    {
+        "name": "Touhou Player",
+        "url": "https://touhou.kuukunen.net/",
+        "icon": "assets/websites/touhouplayer.webp"
+    },
+    {
+        "name": "Squidify",
+        "url": "https://www.squidify.org/",
+        "icon": "assets/websites/squidify.webp"
+    },
+    {
+        "name": "Ongaku",
+        "url": "https://ongaku.js.org/",
+        "icon": "assets/websites/ongakujs.webp"
+    },
+    {
+        "name": "Touhou Lossless Music Collection",
+        "url": "https://tlmc.pf-n.co/tlmc",
+        "icon": "assets/websites/touhoulossless.webp"
+    },
+    {
+        "name": "AnimeThemes.moe",
+        "url": "https://animethemes.moe/",
+        "icon": "assets/websites/animethemesmoe.webp"
+    },
+    {
+        "name": "Themes.moe",
+        "url": "https://themes.moe/",
+        "icon": "assets/websites/themesmoe.webp"
+    },
+    {
+        "name": "Radiooooo",
+        "url": "https://radiooooo.com/",
+        "icon": "assets/websites/radiooooo.webp"
+    },
+    {
+        "name": "Wotaku Music Collection",
+        "url": "https://wotaku.moe/music",
+        "icon": "assets/websites/wotakumusic.webp"
+    }
+]

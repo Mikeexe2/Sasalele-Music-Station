@@ -1,32 +1,15 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const loading = document.getElementById('loading');
-    const contents = document.getElementById('firstpage');
-
-    contents.style.display = 'none';
-
-    setTimeout(function () {
-        loading.style.display = 'none';
-        contents.style.display = 'block';
-    }, 200);
-});
-
 const togglePlayerButton = document.getElementById("togglePlayer");
 const playerContainer = document.getElementById("player");
 const expandIcon = document.querySelector("#togglePlayer .fa-expand");
 const minimizeIcon = document.querySelector("#togglePlayer .fa-compress");
 const cover = document.getElementById('cover');
+const metadataElement = document.getElementById('metadata');
 const player = document.getElementById('miniPlayer');
 const stationName = document.getElementById('stationName');
 const stationCount = document.getElementById('station-count');
 const RandomPlay = document.getElementById('randomplay');
 
-const findRadioBtn = document.getElementById("radiosearch");
-const searchField = document.getElementById('search-field');
-const searchResultContainer = document.querySelector('.radio-result-container');
-const searchResultHeader = document.querySelector('.radio-result-header');
-const findradio = document.querySelector('.radioresultsdisplay');
-const downloadRadio = document.querySelector('.download-button');
-
+let icecastMetadataPlayer;
 let currentPlayingMedia = null;
 
 function startCoverRotation() {
@@ -47,30 +30,81 @@ function updateButtonIcon(button, isPlaying) {
     button.innerHTML = isPlaying ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>';
 }
 
+
 function playMedia(media, playButton) {
+    metadataElement.innerHTML = '';
     document.querySelectorAll('.main-play-button').forEach(button => {
         updateButtonIcon(button, button === playButton && !player.paused);
     });
 
-    if (player.getAttribute('data-link') === media.url) {
-        if (player.paused) {
-            player.play();
-            startCoverRotation();
-        } else {
-            player.pause();
-            stopCoverRotation();
-        }
-    } else {
-        player.src = media.url;
+    // url_resolved is for radio search results
+    const chosenUrl = media.url_resolved || media.url;
+
+    // play the stream without metadata
+    const playStream = () => {
+        player.src = chosenUrl;
         player.play();
-        cover.innerHTML = `<a href="${media.website}" target="_blank" class="homepagelink"><img id="ip" src="${media.favicon}"></a>`;
+        cover.innerHTML = `<a href="${media.homepage}" target="_blank" class="homepagelink"><img id="ip" src="${media.favicon}"></a>`;
         stationName.textContent = media.name;
-        player.setAttribute('data-link', media.url);
+        metadataElement.innerHTML = "Click on icon to go to homepage";
+        player.setAttribute('data-link', chosenUrl);
         startCoverRotation();
+    };
+
+    // play using Icecast metadata
+    const playiceCast = () => {
+        try {
+            if (icecastMetadataPlayer) {
+                icecastMetadataPlayer.detachAudioElement();
+            }
+
+            icecastMetadataPlayer = new IcecastMetadataPlayer(chosenUrl, {
+                audioElement: player,
+                onMetadata: (metadata) => {
+                    metadataElement.innerHTML = metadata.StreamTitle;
+                },
+                metadataTypes: ["icy"],
+                icyDetectionTimeout: 100000,
+                enableLogging: false,
+                onError: (error) => {
+                    console.log(error);
+                    metadataElement.innerHTML = "Click on icon to go to homepage";
+                    playStream(); // Fallback to playing stream without metadata
+                },
+            });
+
+            icecastMetadataPlayer.play();
+            cover.innerHTML = `<a href="${media.homepage}" target="_blank" class="homepagelink"><img id="ip" src="${media.favicon}"></a>`;
+            stationName.textContent = media.name;
+            player.setAttribute('data-link', chosenUrl);
+            startCoverRotation();
+        } catch (error) {
+            console.error('Error initializing Icecast metadata player:', error);
+            playStream(); // Fallback to playing stream without metadata
+        }
+    };
+
+    // Check media.host and decide which function to call
+    switch (media.host) {
+        case 'icecast':
+            playiceCast();
+            break;
+        case 'unknown':
+        case 'zeno':
+        case 'centova':
+        case 'lautfm':
+        case 'torontocast':
+        case 'asura':
+            playStream();
+            break;
+        default:
+            playiceCast();
+            break;
     }
 
     currentPlayingMedia = playButton;
 }
+
 
 function loadAll() {
     fetch("Links/all.json")
@@ -185,7 +219,6 @@ function RadioM3UDownload(stationURL, stationName) {
     downloadRad.click();
 }
 
-
 // search site's station function
 document.getElementById('sasalelesearch').addEventListener('input', function () {
     var searchTerm = this.value.toLowerCase();
@@ -207,30 +240,189 @@ togglePlayerButton.addEventListener("click", () => {
 });
 
 // search station with options using Radio Browser's API
+
+const countries = [
+    "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda",
+    "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain",
+    "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan",
+    "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei Darussalam", "Bulgaria",
+    "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada",
+    "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros",
+    "Congo", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic",
+    "The Democratic Republic Of The Congo", "Denmark", "Djibouti", "Dominica",
+    "Dominican Republic", "East Timor", "Ecuador", "Egypt", "El Salvador",
+    "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji",
+    "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana",
+    "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana",
+    "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran",
+    "Iraq", "Ireland", "Israel", "Italy", "Ivory Coast", "Jamaica", "Japan",
+    "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan",
+    "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein",
+    "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives",
+    "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico",
+    "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco",
+    "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands",
+    "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "North Macedonia",
+    "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea",
+    "Paraguay", "Peru", , "Puerto Rico", "Philippines", "Poland", "Portugal", "Qatar", "Romania",
+    "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia",
+    "Saint Vincent and the Grenadines", "Samoa", "San Marino",
+    "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia",
+    "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia",
+    "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan",
+    "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland",
+    "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo",
+    "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan",
+    "Tuvalu", "Uganda", "Ukraine", "The United Arab Emirates", , "The United Kingdom Of Great Britain And Northern Ireland", "United Kingdom",
+    "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City",
+    "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+];
+
+function populateCountries() {
+    const selectElement = document.getElementById("countrySelect");
+    countries.forEach(function (country) {
+
+        const option = document.createElement("option");
+        option.value = country;
+        option.textContent = country;
+        selectElement.appendChild(option);
+    });
+}
+
+const languages = [
+    "English", "Spanish", "French", "Chinese", "Hindi", "Arabic",
+    "Bengali", "Portuguese", "Russian", "Japanese", "German", "Korean",
+    "Turkish", "Italian", "Dutch", "Polish", "Ukrainian", "Persian",
+    "Malay", "Thai", "Swahili", "Yoruba", "Tagalog", "Sindhi", "Slovak",
+    "Serbian", "Greek", "Hungarian", "Finnish", "Czech", "Croatian",
+    "Danish", "Swedish", "Norwegian", "Lithuanian", "Latvian", "Estonian",
+    "Romanian", "Bulgarian", "Albanian", "Vietnamese", "Indonesian",
+    "Malagasy", "Swazi", "Zulu", "Xhosa", "Tamil", "Telugu", "Marathi",
+    "Kannada", "Gujarati", "Punjabi", "Urdu", "Oromo", "Amharic", "Tigrinya",
+    "Pashto", "Dari", "Farsi", "Kurdish", "Hausa", "Igbo", "Somali", "Fulani",
+    "Akan", "Kinyarwanda", "Kirundi", "Shona", "Tswana", "Kinyamwezi",
+    "Chichewa", "Lingala", "Bemba", "Sesotho", "Wolof", "Twi", "Berber",
+    "Fula", "Wolof", "Berber", "Sotho", "Zarma", "Dinka", "Tigre",
+    "Afrikaans", "Oshiwambo", "Sango", "Tswana", "Setswana", "Kikuyu",
+    "Kongo", "Bambara", "Luganda", "Susu", "Zaghawa", "Mossi", "Khoekhoe"
+];
+
+function populateLanguages() {
+    const selectElement = document.getElementById("languageSelect");
+    languages.forEach(function (language) {
+        const option = document.createElement("option");
+        option.value = language;
+        option.textContent = language;
+        selectElement.appendChild(option);
+    });
+}
+
+const tags = ["pop", "music", "news", "rock", "classical", "talk", "radio", "hits", "community radio", "dance", "electronic", "80s", "oldies", "méxico", "christian", "jazz", "classic hits", "pop music", "top 40", "90s", "adult contemporary", "country", "house", "house", "folk", "chillout", "soul", "top40", "news talk", "metal", "hiphop", "techno", "rap", "sports", "ambient", "lounge", "culture", "disco", "funk", "retro", "electro", "top hits", "world music", "edm", "latino", "international", "relax", "college radio", "catholic", "christmas music", "pop dance", "hip-hop", "00s", "love songs", "club", "various", "mix", "iheart", "bible", "piano", "tech house", "vaporwave", "dj", "anime radio", "anime", "free japan music", "japanese", "japanese music", "japanese idols", "japan", "anime openings", "animegroove"
+];
+
+function populateTags() {
+    const selectElement = document.getElementById("tagSelect");
+    tags.forEach(function (tag) {
+        const option = document.createElement("option");
+        option.value = tag;
+        option.textContent = tag;
+        selectElement.appendChild(option);
+    });
+}
+
+const countrySelectContainer = document.getElementById('countrySelectContainer');
+const countrySelect = document.getElementById('countrySelect');
+const languageSelectContainer = document.getElementById('languageSelectContainer');
+const languageSelect = document.getElementById('languageSelect');
+const tagSelectContainer = document.getElementById('tagSelectContainer');
+const tagSelect = document.getElementById('tagSelect');
+const searchOption = document.getElementById('searchOption');
+const findRadioBtn = document.getElementById("radiosearch");
+const searchField = document.getElementById('search-field');
+const searchResultContainer = document.querySelector('.radio-result-container');
+const searchResultHeader = document.querySelector('.radio-result-header');
+const findradio = document.querySelector('.radioresultsdisplay');
+const downloadRadio = document.querySelector('.download-button');
+
 findRadioBtn.addEventListener('click', radioSearch);
 searchField.addEventListener('keyup', function (event) {
     if (event.key === 'Enter') {
-        findRadioBtn.click();
+        radioSearch();
     }
 });
 
-function radioSearch() {
-    const searchOption = document.getElementById('searchOption').value;
-    const searchRadio = searchField.value.toLowerCase();
+function handleSearchOptionChange() {
+    const selectedOption = searchOption.value;
 
-    if (searchRadio === '' || searchOption === 'Search by') {
+    searchField.style.display = 'none';
+    countrySelectContainer.style.display = 'none';
+    languageSelectContainer.style.display = 'none';
+    tagSelectContainer.style.display = 'none';
+
+    switch (selectedOption) {
+        case 'byname':
+            searchField.style.display = 'inline-block';
+            break;
+        case 'bycountry':
+            countrySelectContainer.style.display = 'inline-block';
+            populateCountries();
+            break;
+        case 'bylanguage':
+            languageSelectContainer.style.display = 'inline-block';
+            populateLanguages();
+            break;
+        case 'bytag':
+            tagSelectContainer.style.display = 'inline-block';
+            populateTags();
+            break;
+        default:
+            break;
+    }
+    clearSearchField();
+}
+
+// Function to clear the search field
+function clearSearchField() {
+    searchField.value = '';
+    countrySelect.value = '';
+    languageSelect.value = '';
+    tagSelect.value = '';
+}
+
+// Function to perform radio search
+function radioSearch() {
+    const searchBy = searchOption.value;
+
+    switch (searchBy) {
+        case 'byname':
+            searchValue = searchField.value.toLowerCase();
+            break;
+        case 'bycountry':
+            searchValue = countrySelect.value.toLowerCase();
+            break;
+        case 'bylanguage':
+            searchValue = languageSelect.value.toLowerCase();
+            break;
+        case 'bytag':
+            searchValue = tagSelect.value.toLowerCase();
+            break;
+        default:
+            break;
+    }
+
+    if (searchValue === '' || searchBy === 'Search by') {
         return;
     }
 
     searchResultContainer.innerHTML = '';
     findradio.style.display = "block";
-
-    fetch(`https://de1.api.radio-browser.info/json/stations/${searchOption}/${searchRadio}`)
+    // add limit to prevent loading forever
+    fetch(`https://de1.api.radio-browser.info/json/stations/${searchBy}/${searchValue}?hidebroken=true&limit=300&order=clickcount&reverse=true`)
         .then(response => response.json())
         .then(data => {
             if (data.length > 0) {
                 searchResultHeader.style.display = "block";
-                searchResultHeader.textContent = `Search results for "${searchRadio}"`;
+                searchResultHeader.innerHTML = `Radio Search Results for: <mark id="searchTerms">${searchValue}</mark>`;
 
                 data.forEach(radio => {
                     const radioDiv = document.createElement('div');
@@ -275,7 +467,7 @@ function radioSearch() {
             console.error('Error fetching data:', error);
         });
 
-    searchField.value = '';
+    clearSearchField();
 }
 
 // Event listener for play/pause events on the player
@@ -291,7 +483,6 @@ player.addEventListener('pause', () => {
 
 // Initialize load all internet radios
 loadAll();
-
 
 // for radio streams
 let currentRadioStreams = [];
@@ -317,17 +508,14 @@ function selectRadioStream(element) {
 
     element.style.backgroundColor = "#007bff";
     element.style.color = "#fff";
-
     currentPlayingElement = element;
-
     document.getElementById("selected-video-title").textContent = selectedTitle;
 
     playRadioStream(selectedLink);
 }
 
-
 function playRadioStream(link) {
-    const m3u8player = document.getElementById("video-player");
+    const m3u8player = document.getElementById("radio-player");
     const proxiedLink = `https://sasalele.api-anycast.workers.dev/${link}`;
     const hls = new Hls();
 
@@ -374,31 +562,28 @@ function createRadioList(radioStreams) {
 
         const contentContainer = document.createElement("div");
         contentContainer.classList.add("d-flex", "align-items-center", "justify-content-between", "flex-grow-1");
-
         const titleSpan = document.createElement("span");
         titleSpan.textContent = stream.title;
         titleSpan.classList.add("ml-2");
-
         contentContainer.appendChild(titleSpan);
-
         const downloadIcon = document.createElement("i");
-        downloadIcon.classList.add("fa", "fa-download", "cursor-pointer");
-        downloadIcon.setAttribute("title", "Download");
-
+        downloadIcon.classList.add("fa", "fa-download");
         downloadIcon.addEventListener("click", (event) => {
             event.stopPropagation();
             initiateM3UDownload(stream.link, stream.title);
         });
 
         contentContainer.appendChild(downloadIcon);
-
         listItem.appendChild(contentContainer);
-
         listItem.dataset.link = stream.link;
-
-        listItem.addEventListener("click", () => selectRadioStream(listItem));
-
         videoListElement.appendChild(listItem);
+    });
+
+    videoListElement.addEventListener("click", (event) => {
+        const listItem = event.target.closest("li");
+        if (listItem) {
+            selectRadioStream(listItem);
+        }
     });
 }
 
@@ -407,36 +592,24 @@ function filterRadioList(query) {
     return currentRadioStreams.filter(stream => stream.title.toLowerCase().includes(lowerCaseQuery));
 }
 
+// change the list based on selected language
 document.querySelectorAll(".lang-link").forEach(link => {
-    link.addEventListener("click", async function (e) {
+    link.addEventListener("click", (e) => {
         e.preventDefault();
-        const lang = this.getAttribute("data-lang");
+        const lang = link.getAttribute("data-lang");
         const filteredRadioStreams = currentRadioStreams.filter(stream => stream.lang === lang);
         createRadioList(filteredRadioStreams);
-        updateLangInfo(this.textContent, filteredRadioStreams.length);
+        updateLangInfo(link.textContent, filteredRadioStreams.length);
     });
 });
 
+// filter stream
 document.getElementById("searchStream").addEventListener("input", function () {
     const query = this.value;
     const filteredRadioStreams = filterRadioList(query);
     createRadioList(filteredRadioStreams);
 });
-
-(async () => {
-    const defaultlang = "ja";
-    const defaultlangName = "Japanese";
-    const response = await fetch('Links/radiostreams.json');
-    if (!response.ok) {
-        throw new Error(`Network response was not ok: ${response.statusText}`);
-    }
-    currentRadioStreams = await response.json();
-    const filteredRadioStreams = currentRadioStreams.filter(stream => stream.lang === defaultlang);
-    createRadioList(filteredRadioStreams);
-    updateLangInfo(defaultlangName, filteredRadioStreams.length);
-})();
-
-
+// download m3u8 stream
 function initiateM3UDownload(streamUrl, streamTitle) {
     const m3uContent = `#EXTM3U\n#EXTINF:-1,${streamTitle}\n${streamUrl}`;
     const blob = new Blob([m3uContent], { type: "text/plain;charset=utf-8" });
@@ -448,50 +621,24 @@ function initiateM3UDownload(streamUrl, streamTitle) {
     downloadLink.click();
 }
 
-// the back to top
-function goTop() {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-}
+(async () => {
+    const defaultLang = "ja";
+    const defaultLangName = "Japanese";
 
-let backtotop = document.querySelector('.back-to-top');
-
-if (backtotop) {
-    const toggleBacktotop = () => {
-        if (window.scrollY > 100) {
-            backtotop.classList.add('active');
-        } else {
-            backtotop.classList.remove('active');
+    try {
+        const response = await fetch('Links/radiostreams.json');
+        if (!response.ok) {
+            throw new Error(`Network response was not ok: ${response.statusText}`);
         }
-    };
+        currentRadioStreams = await response.json();
 
-    backtotop.addEventListener('click', goTop);
-    window.addEventListener('scroll', toggleBacktotop);
-}
-
-
-// How long has the website been running?
-var Sasalele = {
-    liveTime: function (startDate) {
-        var start = new Date(startDate);
-        var now = new Date();
-        var diff = now - start;
-
-        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-        document.getElementById('liveTime').innerText =
-            "Operated for: " + days + " days " + hours + " hours " + minutes + " minutes " + seconds + " seconds";
+        const filteredRadioStreams = currentRadioStreams.filter(stream => stream.lang === defaultLang);
+        createRadioList(filteredRadioStreams);
+        updateLangInfo(defaultLangName, filteredRadioStreams.length);
+    } catch (error) {
+        console.error('Error fetching radio streams:', error);
     }
-};
-
-setInterval(function () {
-    Sasalele.liveTime('2023/10/01');
-}, 1000);
+})();
 
 // Search song function
 const searchInput = document.getElementById('searchInput');
@@ -499,113 +646,212 @@ const searchButton = document.getElementById('searchButton');
 const innerContainer = document.querySelector('.search-results');
 const searchTermsContainer = document.getElementById('searchTerms');
 
+const VideoDisplay = document.getElementById("YouTubeVideo");
+const innerlastfm = document.getElementById('lastfmList');
+const inneritunes = document.getElementById('itunesList');
+const innerdeezer = document.getElementById('deezerList');
+
 function performSearch() {
     const searchTerm = searchInput.value.trim();
     if (searchTerm !== '') {
         innerContainer.style.display = 'block';
         searchTermsContainer.textContent = searchTerm;
+        // autofill into the box
         const gscsearchInput = document.querySelector('.gsc-input input');
         if (gscsearchInput) {
             gscsearchInput.value = searchTerm;
         }
-        YouTubeSearch(searchTerm);
-        lastfmSearch(searchTerm);
+        searchAcrossApis(searchTerm);
     }
     searchInput.value = '';
 }
-
 searchButton.addEventListener('click', performSearch);
-
 searchInput.addEventListener('keyup', function (event) {
     if (event.key === 'Enter') {
         searchButton.click();
     }
 });
 
-// Function that uses the lastFM API to fetch matching song titles
-function lastfmSearch(songTitle) {
-    var baseURL = "https://ws.audioscrobbler.com/2.0/?method=track.search&format=json";
+async function searchAcrossApis(searchTerm) {
+    const lastfmURL = `https://ws.audioscrobbler.com/2.0/?method=track.search&format=json&api_key=b9747c75368b42160af4301c2bf654a1&track=${encodeURIComponent(searchTerm)}`;
+    const youtubeURL = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&type=video&q=${encodeURIComponent(searchTerm)}&key=AIzaSyAwM_RLjqj8dbbMAP5ls4qg1olDsaxSq5s`;
+    const itunesURL = `https://sasalele.api-anycast.workers.dev/https://itunes.apple.com/search?limit=5&media=music&term=${encodeURIComponent(searchTerm)}`;
+    const deezerURL = `https://sasalele.api-anycast.workers.dev/https://api.deezer.com/search?q=${encodeURIComponent(searchTerm)}`;
 
-    var lastfmAPIKey = "b9747c75368b42160af4301c2bf654a1";
-    var parameterssongSearch = `&api_key=${lastfmAPIKey}&track=${songTitle}`;
+    try {
+        const [lastfmResponse, youtubeResponse, itunesResponse, deezerResponse] = await Promise.all([
+            fetch(lastfmURL).then(response => response.json()),
+            fetch(youtubeURL).then(response => response.json()),
+            fetch(itunesURL).then(response => response.json()),
+            fetch(deezerURL).then(response => response.json()),
+        ]);
 
-    baseURL = baseURL + parameterssongSearch;
+        const lastfmResults = formatLastfmResults(lastfmResponse);
+        const youtubeResults = formatYoutubeResults(youtubeResponse);
+        const itunesResults = formatItunesResults(itunesResponse);
+        const deezerResults = formatDeezerResults(deezerResponse);
 
-    var requestOptions = {
-        method: "GET",
-        redirect: "follow",
+        const combinedResults = {
+            lastfm: lastfmResults,
+            youtube: youtubeResults,
+            itunes: itunesResults,
+            deezer: deezerResults,
+        };
+
+        displayResults(combinedResults);
+
+    } catch (error) {
+        console.error('Error searching across APIs:', error);
+    }
+}
+
+function formatLastfmResults(data) {
+    if (!data || !data.results || !data.results.trackmatches) {
+        return [];
+    }
+    return data.results.trackmatches.track.map(track => ({
+        title: track.name,
+        artist: track.artist,
+    }));
+}
+
+function formatItunesResults(data) {
+    if (!data || !data.results || data.results.length === 0) {
+        return [];
+    }
+    return data.results.map(result => ({
+        trackName: result.trackName,
+        artistName: result.artistName,
+        collectionName: result.collectionName,
+        artworkUrl: result.artworkUrl100,
+        previewUrl: result.previewUrl,
+        trackId: result.trackId
+    }));
+}
+
+function formatYoutubeResults(data) {
+    if (!data || !data.items || data.items.length === 0) {
+        return [];
+    }
+    return [{
+        videoId: data.items[0].id.videoId,
+    }];
+}
+
+function formatDeezerResults(data) {
+    if (!data || !data.data || data.data.length === 0) {
+        return [];
+    }
+    return data.data.map(track => ({
+        title: track.title,
+        artist: track.artist.name,
+        cover: track.album.cover,
+        album: track.album.title,
+        preview: track.preview
+    }));
+}
+
+function displayResults(results) {
+    const lastfmResults = results.lastfm;
+    const youtubeResults = results.youtube;
+    const itunesResults = results.itunes;
+    const deezerResults = results.deezer;
+
+    VideoDisplay.style.display = "block";
+    // Clear previous results
+    innerdeezer.innerHTML = '';
+    innerlastfm.innerHTML = '';
+    VideoDisplay.src = '';
+    inneritunes.innerHTML = '';
+
+    // Display LastFM results
+    if (lastfmResults.length > 0) {
+        const fragment = document.createDocumentFragment();
+        const maxResults = Math.min(5, lastfmResults.length);
+
+        for (let i = 0; i < maxResults; i++) {
+            const song = lastfmResults[i];
+            const listItem = document.createElement('li');
+            listItem.className = 'list-group-item';
+            listItem.textContent = `${song.title} - ${song.artist}`;
+            fragment.appendChild(listItem);
+        }
+        document.getElementById('lastfmList').appendChild(fragment);
+    } else {
+        document.getElementById('lastfmList').innerHTML = '<h6 class="noresult">No results found on LastFM :(</h6>';
+    }
+
+    // Display YouTube results
+    VideoDisplay.src = youtubeResults.length > 0
+        ? `https://www.youtube.com/embed/${youtubeResults[0].videoId}`
+        : `https://www.youtube.com/embed/dQw4w9WgXcQ`;
+
+    // Display iTunes results
+    if (itunesResults.length > 0) {
+        const itunesList = document.getElementById('itunesList');
+        const fragment = document.createDocumentFragment();
+        itunesResults.forEach(result => {
+            const listItem = document.createElement('li');
+            listItem.className = 'itunes-item';
+            listItem.innerHTML = `
+                <img class="search-cover" src="${result.artworkUrl}">
+                <div class="info">
+                    <p><strong>${result.trackName} - ${result.artistName}</strong></p>
+                    <p>${result.collectionName}</p>
+                    <audio id="audio-${result.trackId}" src="${result.previewUrl}"></audio>
+                </div>
+                <button class="btn btn-primary" onclick="playPreview('audio-${result.trackId}', this)">Play Preview</button>
+            `;
+            fragment.appendChild(listItem);
+        });
+        itunesList.appendChild(fragment);
+    } else {
+        document.getElementById('itunesList').innerHTML = '<h6 class="noresult">No results found on iTunes :(</h6>';
+    }
+
+    // Display Deezer results
+    if (deezerResults.length > 0) {
+        const deezerList = document.getElementById('deezerList');
+        const fragment = document.createDocumentFragment();
+        const maxResults = Math.min(5, deezerResults.length);
+
+        for (let i = 0; i < maxResults; i++) {
+            const result = deezerResults[i];
+            const listItem = document.createElement('li');
+            listItem.className = 'itunes-item';
+            listItem.innerHTML = `
+            <img class="search-cover" src="${result.cover}">
+            <div class="info">
+                <p><strong>${result.title} - ${result.artist}</strong></p>
+                <p>${result.album}</p>
+            </div>
+            <audio class="deezer-audio" controls>
+            <source src="${result.preview}" type="audio/mp3">
+            </audio>
+            `;
+            fragment.appendChild(listItem);
+        }
+        deezerList.appendChild(fragment);
+    } else {
+        document.getElementById('deezerList').innerHTML = '<h6 class="noresult">No results found on Deezer :(</h6>';
+    }
+}
+
+//play itunes preview
+function playPreview(audioId, button) {
+    const itunesgo = document.getElementById(audioId);
+
+    if (itunesgo.paused) {
+        itunesgo.play();
+        button.textContent = 'Pause Preview';
+    } else {
+        itunesgo.pause();
+        button.textContent = 'Play Preview';
+    }
+    itunesgo.onended = () => {
+        button.textContent = 'Play Preview';
     };
-
-    fetch(baseURL, requestOptions)
-        .then(function (response) {
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error(response.statusText);
-        })
-        .then(function (data) {
-            console.log("song title search:", data);
-            displaysongSearch(data);
-        })
-        .catch(function (error) {
-            console.log("Error from lastfm song title API:", error);
-        });
 }
-
-// Function to display matching song - artist
-function displaysongSearch(data) {
-    searchInput.value.trim(),
-        document.getElementById("lastFMInfo").innerHTML = "";
-
-    var songSearchDiv = document.getElementById("lastFMInfo");
-
-
-    if (!data || data.results.trackmatches.track.length === 0) {
-        document.getElementById("noresult").style.display = "block";
-        return;
-    }
-
-    var songSearchList = document.createElement("ul");
-
-    for (var i = 0; i < Math.min(5, data.results.trackmatches.track.length); i++) {
-        var songTitleName = data.results.trackmatches.track[i].name;
-        var songTitleArtist = data.results.trackmatches.track[i].artist;
-        var result = "<li>" + songTitleName + " - " + songTitleArtist + "</li>";
-        songSearchList.innerHTML += result;
-    }
-    songSearchDiv.appendChild(songSearchList);
-}
-
-// Get YouTube most relevant result
-function YouTubeSearch(data) {
-
-    var VideoDisplay = document.querySelector("#YouTubeVideo");
-
-    if (VideoDisplay.style.display === "none") {
-        VideoDisplay.style.display = "block";
-    }
-
-    var URLpath = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&type=video&q=${data}&key=AIzaSyAwM_RLjqj8dbbMAP5ls4qg1olDsaxSq5s`;
-
-    console.log(URLpath);
-    fetch(URLpath)
-        .then(function (response) {
-            if (response.ok) {
-                return response.json();
-            }
-            throw Error(response.statusText)
-        })
-        .then(function (data) {
-            console.log(data.items[0].id.videoId);
-
-            var UniqueVidId = data.items[0].id.videoId;
-            document.getElementById("YouTubeVideo").src = "https://www.youtube.com/embed/" + UniqueVidId;
-        })
-        .catch(function (error) {
-            console.log("Error from Youtube by song title API:", error);
-        });
-}
-
 
 // Search by website
 const websiteButtons = document.querySelectorAll('.togglesearch');
@@ -662,7 +908,7 @@ function getWebsiteURL(label, searchTerm) {
         case "Google":
             return `https://www.google.com/search?q=${a}`;
         case "Google(Lyrics)":
-            return `https://www.google.com/search?q=${a}+歌詞 `;
+            return `https://www.google.com/search?q=${a}+歌詞+lyrics`;
         case "Uta-net":
             return `https://www.uta-net.com/search/?target=art&type=in&keyword=${a}`;
         case "MusicBrainz":
@@ -930,4 +1176,22 @@ window.onload = function () {
         app.chat()
     }
 }
-const ap = new APlayer({ container: document.getElementById("aplayer"), fixed: !1, mini: !1, autoplay: !1, theme: "#b7daff", loop: "all", order: "list", preload: "none", volume: .7, mutex: !0, listFolded: !1, listMaxHeight: "300px", lrcType: 3, audio: [{ name: "スカイクラッドの観測者", artist: "いとうかなこ", url: "assets/music/スカイクラッドの観測者 - 伊藤加奈子.mp3", cover: "assets/covers/スカイクラッドの観測者-伊藤加奈子.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%82%B9%E3%82%AB%E3%82%A4%E3%82%AF%E3%83%A9%E3%83%83%E3%83%89%E3%81%AE%E8%A6%B3%E6%B8%AC%E8%80%85-%E4%BC%8A%E8%97%A4%E5%8A%A0%E5%A5%88%E5%AD%90.lrc" }, { name: "technovision", artist: "いとうかなこ", url: "assets/music/technovision - 伊藤加奈子.mp3", cover: "assets/covers/technovision-伊藤加奈子.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/technovision-%E4%BC%8A%E8%97%A4%E5%8A%A0%E5%A5%88%E5%AD%90.lrc" }, { name: "Hacking to the Gate", artist: "いとうかなこ", url: "assets/music/Hacking to the Gate.mp3", cover: "assets/covers/HackingtotheGate-伊藤加奈子.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/HackingtotheGate-%E4%BC%8A%E8%97%A4%E5%8A%A0%E5%A5%88%E5%AD%90.lrc" }, { name: "GATE OF STEINER (Bonus Track)", artist: "佐々木恵梨", url: "assets/music/GATE OF STEINER (Bonus Track) - 佐々木恵梨.mp3", cover: "assets/covers/GATEOFSTEINER(BonusTrack)-佐々木恵梨.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/GATEOFSTEINER(BonusTrack)-%E4%BD%90%E3%80%85%E6%9C%A8%E6%81%B5%E6%A2%A8.lrc" }, { name: "いつもこの場所で", artist: "あやね", url: "assets/music/いつもこの場所で (一直在这个地方) - あやね.mp3", cover: "assets/covers/いつもこの場所で-あやね.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%81%84%E3%81%A4%E3%82%82%E3%81%93%E3%81%AE%E5%A0%B4%E6%89%80%E3%81%A7-%E3%81%82%E3%82%84%E3%81%AD.lrc" }, { name: "あなたの選んだこの時を", artist: "いとうかなこ", url: "assets/music/あなたの選んだこの時を - いとうかなこ.mp3", cover: "assets/covers/あなたの選んだこの時を-いとうかなこ.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%81%82%E3%81%AA%E3%81%9F%E3%81%AE%E9%81%B8%E3%82%93%E3%81%A0%E3%81%93%E3%81%AE%E6%99%82%E3%82%92-%E3%81%84%E3%81%A8%E3%81%86%E3%81%8B%E3%81%AA%E3%81%93.lrc" }, { name: "前前前世", artist: "RADWIMPS", url: "assets/music/前前前世.mp3", cover: "assets/covers/前前前世-RADWIMPS.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E5%89%8D%E5%89%8D%E5%89%8D%E4%B8%96-RADWIMPS.lrc" }, { name: "Butter-Fly", artist: "和田光司(By コバソロ & 七穂)", url: "assets/music/Butter-Fly.mp3", cover: "assets/covers/Butter-Fly-和田光司(わだこうじ).webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/Butter-Fly-%E5%92%8C%E7%94%B0%E5%85%89%E5%8F%B8(%E3%82%8F%E3%81%A0%E3%81%93%E3%81%86%E3%81%98).lrc" }, { name: "Catch the Moment", artist: "LiSA", url: "assets/music/Catch the Moment.mp3", cover: "assets/covers/CatchtheMoment-LiSA.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/CatchtheMoment-LiSA.lrc" }, { name: "Baby Don't Know Why", artist: "Ms.OOJA", url: "assets/music/Baby Dont Know Why.mp3", cover: "assets/covers/babydonttknowwhy-Ms.OOJA.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/babydonttknowwhy-Ms.OOJA.lrc" }, { name: "LOSER", artist: "米津玄師", url: "assets/music/LOSER.mp3", cover: "assets/covers/LOSER-米津玄師.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/LOSER-%E7%B1%B3%E6%B4%A5%E7%8E%84%E5%B8%AB.lrc" }, { name: "打上花火", artist: "DAOKO  米津玄師", url: "assets/music/打上花火.mp3", cover: "assets/covers/打上花火-米津玄師.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E6%89%93%E4%B8%8A%E8%8A%B1%E7%81%AB-%E7%B1%B3%E6%B4%A5%E7%8E%84%E5%B8%AB.lrc" }, { name: "終わりの世界から", artist: "麻枝 准  やなぎなぎ", url: "assets/music/終わりの世界から.mp3", cover: "assets/covers/終わりの世界から-やなぎなぎ.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E7%B5%82%E3%82%8F%E3%82%8A%E3%81%AE%E4%B8%96%E7%95%8C%E3%81%8B%E3%82%89-%E3%82%84%E3%81%AA%E3%81%8E%E3%81%AA%E3%81%8E.lrc" }, { name: "Break Beat Bark!", artist: "神田沙也加", url: "assets/music/Break Beat Bark.mp3", cover: "assets/covers/BreakBeatBark!-神田沙也加.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/BreakBeatBark!-%E7%A5%9E%E7%94%B0%E6%B2%99%E4%B9%9F%E5%8A%A0.lrc" }, { name: "ワイルドローズ", artist: "May'n", url: "assets/music/Wild Rose.mp3", cover: "assets/covers/ワイルドローズ-Mayn.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%83%AF%E3%82%A4%E3%83%AB%E3%83%89%E3%83%AD%E3%83%BC%E3%82%BA-Mayn.lrc" }, { name: "My Days", artist: "鈴木このみ", url: "assets/music/My Days.mp3", cover: "assets/covers/MyDays-鈴木このみ.webp", lrc: "assets/lrc/MyDays-鈴木このみ.lrc" }, { name: "Lemon", artist: "米津玄師", url: "assets/music/Lemon.mp3", cover: "assets/covers/Lemon-米津玄師.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/Lemon-%E7%B1%B3%E6%B4%A5%E7%8E%84%E5%B8%AB.lrc" }, { name: "小さな恋のうた", artist: "コバソロ & 杏沙子", url: "assets/music/小さな恋のうた.mp3", cover: "assets/covers/コバソロ.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E5%B0%8F%E3%81%95%E3%81%AA%E6%81%8B%E3%81%AE%E3%81%86%E3%81%9F-Kobasolo(%E3%82%B3%E3%83%90%E3%82%BD%E3%83%AD)%E4%B8%83%E7%A9%82.lrc" }, { name: "あとひとつ", artist: "コバソロ & こぴ", url: "assets/music/あとひとつ.mp3", cover: "assets/covers/コバソロ.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%81%82%E3%81%A8%E3%81%B2%E3%81%A8%E3%81%A4-Kobasolo(%E3%82%B3%E3%83%90%E3%82%BD%E3%83%AD)%E3%81%93%E3%81%B4.lrc" }, { name: "キセキ", artist: "高橋李依", url: "assets/music/キセキ.mp3", cover: "assets/covers/高橋李依Collection.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%82%AD%E3%82%BB%E3%82%AD-%E9%AB%98%E6%A9%8B%E6%9D%8E%E4%BE%9D.lrc" }, { name: "小さな恋のうた", artist: "高橋李依", url: "assets/music/小さな恋のうた_高橋李依.mp3", cover: "assets/covers/高橋李依Collection.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E5%B0%8F%E3%81%95%E3%81%AA%E6%81%8B%E3%81%AE%E3%81%86%E3%81%9F-%E9%AB%98%E6%A9%8B%E6%9D%8E%E4%BE%9D.lrc" }, { name: "言わないけどね。", artist: "高橋李依", url: "assets/music/言わないけどね。.mp3", cover: "assets/covers/高橋李依Collection.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E8%A8%80%E3%82%8F%E3%81%AA%E3%81%84%E3%81%91%E3%81%A9%E3%81%AD%E3%80%82-%E9%AB%98%E6%A9%8B%E6%9D%8E%E4%BE%9D.lrc" }, { name: "愛唄", artist: "高橋李依", url: "assets/music/愛唄.mp3", cover: "assets/covers/高橋李依Collection.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E6%84%9B%E5%94%84-%E9%AB%98%E6%A9%8B%E6%9D%8E%E4%BE%9D.lrc" }, { name: "奏(和聲版)", artist: "高橋李依 x 雨宫天", url: "assets/music/奏.mp3", cover: "assets/covers/高橋李依Collection.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E5%A5%8F(%E3%81%8B%E3%81%AA%E3%81%A7)-%E9%AB%98%E6%A9%8B%E6%9D%8E%E4%BE%9D.lrc" }, { name: "生きていたんだよな", artist: "あいみょん", url: "assets/music/生きていたんだよな.mp3", cover: "assets/covers/生きていたんだよな-あいみょん.webp", lrc: "assets/lrc/生きていたんだよな-あいみょん.lrc" }, { name: "空の青さを知る人よ", artist: "あいみょん", url: "assets/music/空の青さを知る人よ.mp3", cover: "assets/covers/空の青さを知る人よ-あいみょん.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E7%A9%BA%E3%81%AE%E9%9D%92%E3%81%95%E3%82%92%E7%9F%A5%E3%82%8B%E4%BA%BA%E3%82%88-%E3%81%82%E3%81%84%E3%81%BF%E3%82%87%E3%82%93.lrc" }, { name: "心做し", artist: "鹿乃", url: "assets/music/鹿乃 - 心做し.mp3", cover: "assets/covers/心做し-鹿乃.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E5%BF%83%E5%81%9A%E3%81%97-%E9%B9%BF%E4%B9%83.lrc" }, { name: "あの世行きのバスに乗ってさらば。", artist: "ツユ", url: "assets/music/あの世行きのバスに乗ってさらば。.mp3", cover: "assets/covers/あの世行きのバスに乗ってさらば。-ツユ.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%81%82%E3%81%AE%E4%B8%96%E8%A1%8C%E3%81%8D%E3%81%AE%E3%83%90%E3%82%B9%E3%81%AB%E4%B9%97%E3%81%A3%E3%81%A6%E3%81%95%E3%82%89%E3%81%B0%E3%80%82-%E3%83%84%E3%83%A6.lrc" }, { name: "願い～あの頃のキミへ～", artist: "當山みれい", url: "assets/music/願い～あの頃のキミへ～.mp3", cover: "assets/covers/願いあの頃のキミへ-當山みれい..webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E9%A1%98%E3%81%84%E3%81%82%E3%81%AE%E9%A0%83%E3%81%AE%E3%82%AD%E3%83%9F%E3%81%B8-%E7%95%B6%E5%B1%B1%E3%81%BF%E3%82%8C%E3%81%84.lrc" }, { name: "茜さす", artist: "Aimer", url: "assets/music/茜さす.mp3", cover: "assets/covers/茜さす-Aimer.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E8%8C%9C%E3%81%95%E3%81%99-Aimer.lrc" }, { name: "Rain", artist: "秦基博(はたもとひろ)", url: "assets/music/Rain.mp3", cover: "assets/covers/Rain-秦基博(はたもとひろ).webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/Rain-%E7%A7%A6%E5%9F%BA%E5%8D%9A(%E3%81%AF%E3%81%9F%E3%82%82%E3%81%A8%E3%81%B2%E3%82%8D).lrc" }, { name: "remember", artist: "Uru", url: "assets/music/remember.mp3", cover: "assets/covers/remember-uru.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/remember-uru.lrc" }, { name: "AI DO.", artist: "桥本美雪", url: "assets/music/AI DO. - 桥本美雪.mp3", cover: "assets/covers/AIDO.-桥本美雪.webp", lrc: "assets/lrc/AIDO.-桥本美雪.lrc" }, { name: "Apple And Cinnamon", artist: "宇多田ヒカル", url: "assets/music/Apple And Cinnamon - 宇多田ヒカル.mp3", cover: "assets/covers/AppleAndCinnamon-宇多田ヒカル.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/AppleAndCinnamon-%E5%AE%87%E5%A4%9A%E7%94%B0%E3%83%92%E3%82%AB%E3%83%AB.lrc" }, { name: "Keep on Keeping on", artist: "SawanoHiroyuki[nZk],aLIEz.", url: "assets/music/Keep on Keeping on - SawanoHiroyuki[nZk],aLIEz.mp3", cover: "assets/covers/KeeponKeepingon-SawanoHiroyuki_aLIEz.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/KeeponKeepingon-SawanoHiroyuki_aLIEz.lrc" }, { name: "loser", artist: "KANA-BOON", url: "assets/music/loser - KANA-BOON.mp3", cover: "assets/covers/loser-KANA-BOON.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/loser-KANA-BOON.lrc" }, { name: "Moon", artist: "Perfume", url: "assets/music/Moon - Perfume.mp3", cover: "assets/covers/Moon-Perfume.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/Moon-Perfume.lrc" }, { name: "MOON SIGNAL", artist: "Sphere", url: "assets/music/MOON SIGNAL - Sphere.mp3", cover: "assets/covers/MOONSIGNAL-Sphere.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/MOONSIGNAL-Sphere.lrc" }, { name: "One Life", artist: "ナノ", url: "assets/music/One Life - ナノ.mp3", cover: "assets/covers/OneLife-ナノ.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/OneLife-%E3%83%8A%E3%83%8E.lrc" }, { name: "メビウス", artist: "鈴木このみ", url: "assets/music/メビウス (梅比乌斯) - 鈴木このみ.mp3", cover: "assets/covers/メビウス(梅比乌斯)-鈴木このみ.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%83%A1%E3%83%93%E3%82%A6%E3%82%B9(%E6%A2%85%E6%AF%94%E4%B9%8C%E6%96%AF)-%E9%88%B4%E6%9C%A8%E3%81%93%E3%81%AE%E3%81%BF.lrc" }, { name: "Damn Good Day", artist: "星街すいせい", url: "assets/music/Damn Good Day - 星街すいせい.mp3", cover: "assets/covers/DamnGoodDay-星街すいせい.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/DamnGoodDay-%E6%98%9F%E8%A1%97%E3%81%99%E3%81%84%E3%81%9B%E3%81%84.lrc" }, { name: "Necro Fantasia feat. 美里", artist: "Alstroemeria Records,美里", url: "assets/music/Necro Fantasia feat. 美里 - Alstroemeria Records,美里.mp3", cover: "assets/covers/NecroFantasiafeat.美里-AlstroemeriaRecords_美里.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/NecroFantasiafeat.%E7%BE%8E%E9%87%8C-AlstroemeriaRecords_%E7%BE%8E%E9%87%8C.lrc" }, { name: "ぐらでーしょん", artist: "KANA-BOON,北澤ゆうほ", url: "assets/music/ぐらでーしょん (波淡法) - KANA-BOON,北澤ゆうほ.mp3", cover: "assets/covers/ぐらでーしょん-KANA-BOON,北澤ゆうほ.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%81%90%E3%82%89%E3%81%A7%E3%83%BC%E3%81%97%E3%82%87%E3%82%93-KANA-BOON%2C%E5%8C%97%E6%BE%A4%E3%82%86%E3%81%86%E3%81%BB.lrc" }, { name: "チョ・イ・ス", artist: "雨宮天", url: "assets/music/チョ・イ・ス - 雨宮天.mp3", cover: "assets/covers/チョ・イ・ス-雨宮天.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%83%81%E3%83%A7%E3%83%BB%E3%82%A4%E3%83%BB%E3%82%B9-%E9%9B%A8%E5%AE%AE%E5%A4%A9.lrc" }, { name: "ひかり", artist: "Flower Flower", url: "assets/music/ひかり - Flower Flower.mp3", cover: "assets/covers/ひかり-FlowerFlower.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%81%B2%E3%81%8B%E3%82%8A-FlowerFlower.lrc" }, { name: "人形ノ涙", artist: "仲村芽衣子", url: "assets/music/人形ノ涙 - 仲村芽衣子.mp3", cover: "assets/covers/人形ノ涙-仲村芽衣子.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E4%BA%BA%E5%BD%A2%E3%83%8E%E6%B6%99-%E4%BB%B2%E6%9D%91%E8%8A%BD%E8%A1%A3%E5%AD%90.lrc" }, { name: "喋蝶結び", artist: "ななひら", url: "assets/music/喋蝶結び - ななひら.mp3", cover: "assets/covers/喋蝶結び-ななひら.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E5%96%8B%E8%9D%B6%E7%B5%90%E3%81%B3-%E3%81%AA%E3%81%AA%E3%81%B2%E3%82%89.lrc" }, { name: "月に唄えば", artist: "サイダーガール", url: "assets/music/月に唄えば - サイダーガール.mp3", cover: "assets/covers/月に唄えば-サイダーガール.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E6%9C%88%E3%81%AB%E5%94%84%E3%81%88%E3%81%B0-%E3%82%B5%E3%82%A4%E3%83%80%E3%83%BC%E3%82%AC%E3%83%BC%E3%83%AB.lrc" }, { name: "甘いワナ ~Paint It, Black", artist: "宇多田ヒカル", url: "assets/music/甘いワナ ~Paint It, Black - 宇多田ヒカル.mp3", cover: "assets/covers/甘いワナPaintItBlack-宇多田ヒカル.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E7%94%98%E3%81%84%E3%83%AF%E3%83%8APaintItBlack-%E5%AE%87%E5%A4%9A%E7%94%B0%E3%83%92%E3%82%AB%E3%83%AB.lrc" }, { name: "廻廻奇譚", artist: "Eve", url: "assets/music/廻廻奇譚 - Eve.mp3", cover: "assets/covers/廻廻奇譚-Eve.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E5%BB%BB%E5%BB%BB%E5%A5%87%E8%AD%9A-Eve.lrc" }, { name: "足りない音はキミの声", artist: "諸星すみれ", url: "assets/music/足りない音はキミの声 - 諸星すみれ.mp3", cover: "assets/covers/足りない音はキミの声-諸星すみれ.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E8%B6%B3%E3%82%8A%E3%81%AA%E3%81%84%E9%9F%B3%E3%81%AF%E3%82%AD%E3%83%9F%E3%81%AE%E5%A3%B0-%E8%AB%B8%E6%98%9F%E3%81%99%E3%81%BF%E3%82%8C.lrc" }] });
+
+const startDateTime = new Date('2023/10/01');
+
+function updateLiveTime() {
+    const now = new Date();
+    const diff = now - startDateTime;
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    document.getElementById('liveTime').innerText =
+        `Operated for: ${days} days ${hours} hours ${minutes} minutes ${seconds} seconds`;
+}
+
+updateLiveTime();
+
+const ap = new APlayer({ container: document.getElementById("aplayer"), fixed: !1, mini: !1, autoplay: !1, theme: "#b7daff", loop: "all", order: "random", preload: "none", volume: .7, mutex: !0, listFolded: !1, listMaxHeight: "300px", lrcType: 3, audio: [{ name: "スカイクラッドの観測者", artist: "いとうかなこ", url: "assets/music/スカイクラッドの観測者 - 伊藤加奈子.mp3", cover: "assets/covers/スカイクラッドの観測者-伊藤加奈子.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%82%B9%E3%82%AB%E3%82%A4%E3%82%AF%E3%83%A9%E3%83%83%E3%83%89%E3%81%AE%E8%A6%B3%E6%B8%AC%E8%80%85-%E4%BC%8A%E8%97%A4%E5%8A%A0%E5%A5%88%E5%AD%90.lrc" }, { name: "technovision", artist: "いとうかなこ", url: "assets/music/technovision - 伊藤加奈子.mp3", cover: "assets/covers/technovision-伊藤加奈子.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/technovision-%E4%BC%8A%E8%97%A4%E5%8A%A0%E5%A5%88%E5%AD%90.lrc" }, { name: "Hacking to the Gate", artist: "いとうかなこ", url: "assets/music/Hacking to the Gate.mp3", cover: "assets/covers/HackingtotheGate-伊藤加奈子.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/HackingtotheGate-%E4%BC%8A%E8%97%A4%E5%8A%A0%E5%A5%88%E5%AD%90.lrc" }, { name: "GATE OF STEINER (Bonus Track)", artist: "佐々木恵梨", url: "assets/music/GATE OF STEINER (Bonus Track) - 佐々木恵梨.mp3", cover: "assets/covers/GATEOFSTEINER(BonusTrack)-佐々木恵梨.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/GATEOFSTEINER(BonusTrack)-%E4%BD%90%E3%80%85%E6%9C%A8%E6%81%B5%E6%A2%A8.lrc" }, { name: "いつもこの場所で", artist: "あやね", url: "assets/music/いつもこの場所で (一直在这个地方) - あやね.mp3", cover: "assets/covers/いつもこの場所で-あやね.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%81%84%E3%81%A4%E3%82%82%E3%81%93%E3%81%AE%E5%A0%B4%E6%89%80%E3%81%A7-%E3%81%82%E3%82%84%E3%81%AD.lrc" }, { name: "あなたの選んだこの時を", artist: "いとうかなこ", url: "assets/music/あなたの選んだこの時を - いとうかなこ.mp3", cover: "assets/covers/あなたの選んだこの時を-いとうかなこ.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%81%82%E3%81%AA%E3%81%9F%E3%81%AE%E9%81%B8%E3%82%93%E3%81%A0%E3%81%93%E3%81%AE%E6%99%82%E3%82%92-%E3%81%84%E3%81%A8%E3%81%86%E3%81%8B%E3%81%AA%E3%81%93.lrc" }, { name: "前前前世", artist: "RADWIMPS", url: "assets/music/前前前世.mp3", cover: "assets/covers/前前前世-RADWIMPS.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E5%89%8D%E5%89%8D%E5%89%8D%E4%B8%96-RADWIMPS.lrc" }, { name: "Butter-Fly", artist: "和田光司(By コバソロ & 七穂)", url: "assets/music/Butter-Fly.mp3", cover: "assets/covers/Butter-Fly-和田光司(わだこうじ).webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/Butter-Fly-%E5%92%8C%E7%94%B0%E5%85%89%E5%8F%B8(%E3%82%8F%E3%81%A0%E3%81%93%E3%81%86%E3%81%98).lrc" }, { name: "Catch the Moment", artist: "LiSA", url: "assets/music/Catch the Moment.mp3", cover: "assets/covers/CatchtheMoment-LiSA.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/CatchtheMoment-LiSA.lrc" }, { name: "Baby Don't Know Why", artist: "Ms.OOJA", url: "assets/music/Baby Dont Know Why.mp3", cover: "assets/covers/babydonttknowwhy-Ms.OOJA.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/babydonttknowwhy-Ms.OOJA.lrc" }, { name: "LOSER", artist: "米津玄師", url: "assets/music/LOSER.mp3", cover: "assets/covers/LOSER-米津玄師.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/LOSER-%E7%B1%B3%E6%B4%A5%E7%8E%84%E5%B8%AB.lrc" }, { name: "打上花火", artist: "DAOKO  米津玄師", url: "assets/music/打上花火.mp3", cover: "assets/covers/打上花火-米津玄師.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E6%89%93%E4%B8%8A%E8%8A%B1%E7%81%AB-%E7%B1%B3%E6%B4%A5%E7%8E%84%E5%B8%AB.lrc" }, { name: "終わりの世界から", artist: "麻枝 准  やなぎなぎ", url: "assets/music/終わりの世界から.mp3", cover: "assets/covers/終わりの世界から-やなぎなぎ.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E7%B5%82%E3%82%8F%E3%82%8A%E3%81%AE%E4%B8%96%E7%95%8C%E3%81%8B%E3%82%89-%E3%82%84%E3%81%AA%E3%81%8E%E3%81%AA%E3%81%8E.lrc" }, { name: "Break Beat Bark!", artist: "神田沙也加", url: "assets/music/Break Beat Bark.mp3", cover: "assets/covers/BreakBeatBark!-神田沙也加.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/BreakBeatBark!-%E7%A5%9E%E7%94%B0%E6%B2%99%E4%B9%9F%E5%8A%A0.lrc" }, { name: "ワイルドローズ", artist: "May'n", url: "assets/music/Wild Rose.mp3", cover: "assets/covers/ワイルドローズ-Mayn.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%83%AF%E3%82%A4%E3%83%AB%E3%83%89%E3%83%AD%E3%83%BC%E3%82%BA-Mayn.lrc" }, { name: "My Days", artist: "鈴木このみ", url: "assets/music/My Days.mp3", cover: "assets/covers/MyDays-鈴木このみ.webp", lrc: "assets/lrc/MyDays-鈴木このみ.lrc" }, { name: "Lemon", artist: "米津玄師", url: "assets/music/Lemon.mp3", cover: "assets/covers/Lemon-米津玄師.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/Lemon-%E7%B1%B3%E6%B4%A5%E7%8E%84%E5%B8%AB.lrc" }, { name: "小さな恋のうた", artist: "コバソロ & 杏沙子", url: "assets/music/小さな恋のうた.mp3", cover: "assets/covers/コバソロ.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E5%B0%8F%E3%81%95%E3%81%AA%E6%81%8B%E3%81%AE%E3%81%86%E3%81%9F-Kobasolo(%E3%82%B3%E3%83%90%E3%82%BD%E3%83%AD)%E4%B8%83%E7%A9%82.lrc" }, { name: "あとひとつ", artist: "コバソロ & こぴ", url: "assets/music/あとひとつ.mp3", cover: "assets/covers/コバソロ.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%81%82%E3%81%A8%E3%81%B2%E3%81%A8%E3%81%A4-Kobasolo(%E3%82%B3%E3%83%90%E3%82%BD%E3%83%AD)%E3%81%93%E3%81%B4.lrc" }, { name: "キセキ", artist: "高橋李依", url: "assets/music/キセキ.mp3", cover: "assets/covers/高橋李依Collection.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%82%AD%E3%82%BB%E3%82%AD-%E9%AB%98%E6%A9%8B%E6%9D%8E%E4%BE%9D.lrc" }, { name: "小さな恋のうた", artist: "高橋李依", url: "assets/music/小さな恋のうた_高橋李依.mp3", cover: "assets/covers/高橋李依Collection.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E5%B0%8F%E3%81%95%E3%81%AA%E6%81%8B%E3%81%AE%E3%81%86%E3%81%9F-%E9%AB%98%E6%A9%8B%E6%9D%8E%E4%BE%9D.lrc" }, { name: "言わないけどね。", artist: "高橋李依", url: "assets/music/言わないけどね。.mp3", cover: "assets/covers/高橋李依Collection.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E8%A8%80%E3%82%8F%E3%81%AA%E3%81%84%E3%81%91%E3%81%A9%E3%81%AD%E3%80%82-%E9%AB%98%E6%A9%8B%E6%9D%8E%E4%BE%9D.lrc" }, { name: "愛唄", artist: "高橋李依", url: "assets/music/愛唄.mp3", cover: "assets/covers/高橋李依Collection.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E6%84%9B%E5%94%84-%E9%AB%98%E6%A9%8B%E6%9D%8E%E4%BE%9D.lrc" }, { name: "奏(和聲版)", artist: "高橋李依 x 雨宫天", url: "assets/music/奏.mp3", cover: "assets/covers/高橋李依Collection.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E5%A5%8F(%E3%81%8B%E3%81%AA%E3%81%A7)-%E9%AB%98%E6%A9%8B%E6%9D%8E%E4%BE%9D.lrc" }, { name: "生きていたんだよな", artist: "あいみょん", url: "assets/music/生きていたんだよな.mp3", cover: "assets/covers/生きていたんだよな-あいみょん.webp", lrc: "assets/lrc/生きていたんだよな-あいみょん.lrc" }, { name: "空の青さを知る人よ", artist: "あいみょん", url: "assets/music/空の青さを知る人よ.mp3", cover: "assets/covers/空の青さを知る人よ-あいみょん.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E7%A9%BA%E3%81%AE%E9%9D%92%E3%81%95%E3%82%92%E7%9F%A5%E3%82%8B%E4%BA%BA%E3%82%88-%E3%81%82%E3%81%84%E3%81%BF%E3%82%87%E3%82%93.lrc" }, { name: "心做し", artist: "鹿乃", url: "assets/music/鹿乃 - 心做し.mp3", cover: "assets/covers/心做し-鹿乃.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E5%BF%83%E5%81%9A%E3%81%97-%E9%B9%BF%E4%B9%83.lrc" }, { name: "あの世行きのバスに乗ってさらば。", artist: "ツユ", url: "assets/music/あの世行きのバスに乗ってさらば。.mp3", cover: "assets/covers/あの世行きのバスに乗ってさらば。-ツユ.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%81%82%E3%81%AE%E4%B8%96%E8%A1%8C%E3%81%8D%E3%81%AE%E3%83%90%E3%82%B9%E3%81%AB%E4%B9%97%E3%81%A3%E3%81%A6%E3%81%95%E3%82%89%E3%81%B0%E3%80%82-%E3%83%84%E3%83%A6.lrc" }, { name: "願い～あの頃のキミへ～", artist: "當山みれい", url: "assets/music/願い～あの頃のキミへ～.mp3", cover: "assets/covers/願いあの頃のキミへ-當山みれい..webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E9%A1%98%E3%81%84%E3%81%82%E3%81%AE%E9%A0%83%E3%81%AE%E3%82%AD%E3%83%9F%E3%81%B8-%E7%95%B6%E5%B1%B1%E3%81%BF%E3%82%8C%E3%81%84.lrc" }, { name: "茜さす", artist: "Aimer", url: "assets/music/茜さす.mp3", cover: "assets/covers/茜さす-Aimer.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E8%8C%9C%E3%81%95%E3%81%99-Aimer.lrc" }, { name: "Rain", artist: "秦基博(はたもとひろ)", url: "assets/music/Rain.mp3", cover: "assets/covers/Rain-秦基博(はたもとひろ).webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/Rain-%E7%A7%A6%E5%9F%BA%E5%8D%9A(%E3%81%AF%E3%81%9F%E3%82%82%E3%81%A8%E3%81%B2%E3%82%8D).lrc" }, { name: "remember", artist: "Uru", url: "assets/music/remember.mp3", cover: "assets/covers/remember-uru.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/remember-uru.lrc" }, { name: "AI DO.", artist: "桥本美雪", url: "assets/music/AI DO. - 桥本美雪.mp3", cover: "assets/covers/AIDO.-桥本美雪.webp", lrc: "assets/lrc/AIDO.-桥本美雪.lrc" }, { name: "Apple And Cinnamon", artist: "宇多田ヒカル", url: "assets/music/Apple And Cinnamon - 宇多田ヒカル.mp3", cover: "assets/covers/AppleAndCinnamon-宇多田ヒカル.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/AppleAndCinnamon-%E5%AE%87%E5%A4%9A%E7%94%B0%E3%83%92%E3%82%AB%E3%83%AB.lrc" }, { name: "Keep on Keeping on", artist: "SawanoHiroyuki[nZk],aLIEz.", url: "assets/music/Keep on Keeping on - SawanoHiroyuki[nZk],aLIEz.mp3", cover: "assets/covers/KeeponKeepingon-SawanoHiroyuki_aLIEz.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/KeeponKeepingon-SawanoHiroyuki_aLIEz.lrc" }, { name: "loser", artist: "KANA-BOON", url: "assets/music/loser - KANA-BOON.mp3", cover: "assets/covers/loser-KANA-BOON.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/loser-KANA-BOON.lrc" }, { name: "Moon", artist: "Perfume", url: "assets/music/Moon - Perfume.mp3", cover: "assets/covers/Moon-Perfume.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/Moon-Perfume.lrc" }, { name: "MOON SIGNAL", artist: "Sphere", url: "assets/music/MOON SIGNAL - Sphere.mp3", cover: "assets/covers/MOONSIGNAL-Sphere.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/MOONSIGNAL-Sphere.lrc" }, { name: "One Life", artist: "ナノ", url: "assets/music/One Life - ナノ.mp3", cover: "assets/covers/OneLife-ナノ.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/OneLife-%E3%83%8A%E3%83%8E.lrc" }, { name: "メビウス", artist: "鈴木このみ", url: "assets/music/メビウス (梅比乌斯) - 鈴木このみ.mp3", cover: "assets/covers/メビウス(梅比乌斯)-鈴木このみ.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%83%A1%E3%83%93%E3%82%A6%E3%82%B9(%E6%A2%85%E6%AF%94%E4%B9%8C%E6%96%AF)-%E9%88%B4%E6%9C%A8%E3%81%93%E3%81%AE%E3%81%BF.lrc" }, { name: "Damn Good Day", artist: "星街すいせい", url: "assets/music/Damn Good Day - 星街すいせい.mp3", cover: "assets/covers/DamnGoodDay-星街すいせい.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/DamnGoodDay-%E6%98%9F%E8%A1%97%E3%81%99%E3%81%84%E3%81%9B%E3%81%84.lrc" }, { name: "Necro Fantasia feat. 美里", artist: "Alstroemeria Records,美里", url: "assets/music/Necro Fantasia feat. 美里 - Alstroemeria Records,美里.mp3", cover: "assets/covers/NecroFantasiafeat.美里-AlstroemeriaRecords_美里.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/NecroFantasiafeat.%E7%BE%8E%E9%87%8C-AlstroemeriaRecords_%E7%BE%8E%E9%87%8C.lrc" }, { name: "ぐらでーしょん", artist: "KANA-BOON,北澤ゆうほ", url: "assets/music/ぐらでーしょん (波淡法) - KANA-BOON,北澤ゆうほ.mp3", cover: "assets/covers/ぐらでーしょん-KANA-BOON,北澤ゆうほ.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%81%90%E3%82%89%E3%81%A7%E3%83%BC%E3%81%97%E3%82%87%E3%82%93-KANA-BOON%2C%E5%8C%97%E6%BE%A4%E3%82%86%E3%81%86%E3%81%BB.lrc" }, { name: "チョ・イ・ス", artist: "雨宮天", url: "assets/music/チョ・イ・ス - 雨宮天.mp3", cover: "assets/covers/チョ・イ・ス-雨宮天.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%83%81%E3%83%A7%E3%83%BB%E3%82%A4%E3%83%BB%E3%82%B9-%E9%9B%A8%E5%AE%AE%E5%A4%A9.lrc" }, { name: "ひかり", artist: "Flower Flower", url: "assets/music/ひかり - Flower Flower.mp3", cover: "assets/covers/ひかり-FlowerFlower.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%81%B2%E3%81%8B%E3%82%8A-FlowerFlower.lrc" }, { name: "人形ノ涙", artist: "仲村芽衣子", url: "assets/music/人形ノ涙 - 仲村芽衣子.mp3", cover: "assets/covers/人形ノ涙-仲村芽衣子.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E4%BA%BA%E5%BD%A2%E3%83%8E%E6%B6%99-%E4%BB%B2%E6%9D%91%E8%8A%BD%E8%A1%A3%E5%AD%90.lrc" }, { name: "喋蝶結び", artist: "ななひら", url: "assets/music/喋蝶結び - ななひら.mp3", cover: "assets/covers/喋蝶結び-ななひら.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E5%96%8B%E8%9D%B6%E7%B5%90%E3%81%B3-%E3%81%AA%E3%81%AA%E3%81%B2%E3%82%89.lrc" }, { name: "月に唄えば", artist: "サイダーガール", url: "assets/music/月に唄えば - サイダーガール.mp3", cover: "assets/covers/月に唄えば-サイダーガール.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E6%9C%88%E3%81%AB%E5%94%84%E3%81%88%E3%81%B0-%E3%82%B5%E3%82%A4%E3%83%80%E3%83%BC%E3%82%AC%E3%83%BC%E3%83%AB.lrc" }, { name: "甘いワナ ~Paint It, Black", artist: "宇多田ヒカル", url: "assets/music/甘いワナ ~Paint It, Black - 宇多田ヒカル.mp3", cover: "assets/covers/甘いワナPaintItBlack-宇多田ヒカル.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E7%94%98%E3%81%84%E3%83%AF%E3%83%8APaintItBlack-%E5%AE%87%E5%A4%9A%E7%94%B0%E3%83%92%E3%82%AB%E3%83%AB.lrc" }, { name: "廻廻奇譚", artist: "Eve", url: "assets/music/廻廻奇譚 - Eve.mp3", cover: "assets/covers/廻廻奇譚-Eve.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E5%BB%BB%E5%BB%BB%E5%A5%87%E8%AD%9A-Eve.lrc" }, { name: "足りない音はキミの声", artist: "諸星すみれ", url: "assets/music/足りない音はキミの声 - 諸星すみれ.mp3", cover: "assets/covers/足りない音はキミの声-諸星すみれ.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E8%B6%B3%E3%82%8A%E3%81%AA%E3%81%84%E9%9F%B3%E3%81%AF%E3%82%AD%E3%83%9F%E3%81%AE%E5%A3%B0-%E8%AB%B8%E6%98%9F%E3%81%99%E3%81%BF%E3%82%8C.lrc" }] });

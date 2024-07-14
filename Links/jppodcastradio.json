@@ -1,0 +1,127 @@
+[
+    {
+        "name": "Zeno FM Japanese Podcast",
+        "url": "https://zeno.fm/podcasts/languages/Japanese/",
+        "icon": "assets/websites/zenofm.webp"
+    },
+    {
+        "name": "Block FM",
+        "url": "https://block.fm/",
+        "icon": "assets/websites/blockfm.webp"
+    },
+    {
+        "name": "Extreme Anime Radio Podcast",
+        "url": "https://podcasters.spotify.com/pod/show/animeradio",
+        "icon": "assets/websites/extremeanimeradiopodcast.webp"
+    },
+    {
+        "name": "酒田FM Podcast",
+        "url": "https://www.sakatafm.com/podcast/",
+        "icon": "assets/websites/sakatafm.webp"
+    },
+    {
+        "name": "FM Kushiro Podcast",
+        "url": "https://www.fm946.com/podcast/",
+        "icon": "assets/websites/fmkushiro.webp"
+    },
+    {
+        "name": "Japanese Talk Podcasts (TuneIn)",
+        "url": "https://tunein.com/radio/Stream-Japanese-Talk-g349/",
+        "icon": "assets/websites/japanpodcasts.webp"
+    },
+    {
+        "name": "TOKYO FM 80.0MHz ポッドキャスト",
+        "url": "https://www.tfm.co.jp/podcasts/",
+        "icon": "assets/websites/tokyofm.webp"
+    },
+    {
+        "name": "J-WAVE81.3 FM RADIO ポッドキャスト",
+        "url": "https://www.j-wave.co.jp/podcasts/",
+        "icon": "assets/websites/jwave.webp"
+    },
+    {
+        "name": "Podcast - ラジオ大阪 OBC",
+        "url": "https://www.obc1314.co.jp/podcast/",
+        "icon": "assets/websites/radioosaka1314.webp"
+    },
+    {
+        "name": "MBS radio Podcast",
+        "url": "https://www.mbs1179.com/podcast/",
+        "icon": "assets/websites/mbsradio.webp"
+    },
+    {
+        "name": "Shibuya Cross FM",
+        "url": "https://shibuyacrossfm.jp/",
+        "icon": "assets/websites/shibuyacrossfm.webp"
+    },
+    {
+        "name": "FM87.0 RADIO MIX KYOTO Podcast",
+        "url": "https://open.spotify.com/show/6zVddwQQETlbMJLh03E0Ay",
+        "icon": "assets/websites/radiomixkyoto.webp"
+    },
+    {
+        "name": "エフエム青森PODCAST",
+        "url": "https://open.spotify.com/show/4mf6s49E1t5Hi8hLnelv9l",
+        "icon": "assets/websites/afbpodcast.webp"
+    },
+    {
+        "name": "ラジオエフ(Radio-f) | Podcast",
+        "url": "https://fmplapla.com/fmmiyako",
+        "icon": "assets/websites/radiof.webp"
+    },
+    {
+        "name": "FM大阪 85.1 Podcast",
+        "url": "https://www.fmosaka.net/_tags/podcast",
+        "icon": "assets/websites/fmosaka.webp"
+    },
+    {
+        "name": "Nankai Broadcasting Podcast",
+        "url": "https://www.rnb.co.jp/radio/podcast/",
+        "icon": "assets/websites/rnbco.webp"
+    },
+    {
+        "name": "FMみやこ Podcast",
+        "url": "https://open.spotify.com/show/0gkE2xDdsVNWXqCh4r5zb0",
+        "icon": "assets/websites/fmmiyako.webp"
+    },
+    {
+        "name": "FM RADIO3(ラジオ3)ポッドキャストチャンネル",
+        "url": "https://open.spotify.com/show/5uxD2MB2xTgl5gwQIA0Et2",
+        "icon": "assets/websites/fmradio3.webp"
+    },
+    {
+        "name": "MBC Podcast",
+        "url": "https://www.mbc.co.jp/radio/podcast/",
+        "icon": "assets/websites/mbcradio.webp"
+    },
+    {
+        "name": "RKBポッドキャスト",
+        "url": "https://rkb.jp/contents/202310/182917/",
+        "icon": "assets/websites/rkbpodcast.webp"
+    },
+    {
+        "name": "FM NACK5 Podcast",
+        "url": "https://www.nack5.co.jp/podcast/",
+        "icon": "assets/websites/nack5.webp"
+    },
+    {
+        "name": "ラジオNIKKEI",
+        "url": "https://www.radionikkei.jp/",
+        "icon": "assets/websites/radionikkei.webp"
+    },
+    {
+        "name": "Hibiki radio station",
+        "url": "https://hibiki-radio.jp/",
+        "icon": "assets/websites/hibikiradio.webp"
+    },
+    {
+        "name": "SEASIDE STATION シーサイド・コミュニケーションズ",
+        "url": "https://seaside-station.net/",
+        "icon": "assets/websites/seasideradiostation.webp"
+    },
+    {
+        "name": "[和歌山]BananaFM",
+        "url": "https://877.fm/player/",
+        "icon": "assets/websites/bananafm.webp"
+    }
+]

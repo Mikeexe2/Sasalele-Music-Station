@@ -104,72 +104,6 @@
     --highlight-yellow-100: #f5e100;
     --highlight-yellow-30-alpha: rgba(245, 225, 0, .3);
     --color-background: var(--gray-5);
-    --color-surface-primary: var(--white-100);
-    --color-surface-secondary: var(--gray-5-alpha);
-    --color-surface-tertiary: var(--gray-10-alpha);
-    --color-surface-quaternary: var(--gray-20-alpha);
-    --color-surface-accent-primary: var(--primary-green-70);
-    --color-surface-accent-primary-light: var(--primary-green-5);
-    --color-surface-accent-secondary: var(--secondary-green-50);
-    --color-surface-accent-secondary-light: var(--secondary-green-5);
-    --color-surface-accent-neutral-high-emphasis: var(--gray-80);
-    --color-surface-accent-neutral-medium-emphasis: var(--gray-60-alpha);
-    --color-surface-caution: var(--caution-red-100);
-    --color-surface-caution-light: var(--caution-red-5-alpha);
-    --color-text-high-emphasis: var(--gray-100);
-    --color-text-medium-emphasis: var(--gray-70-alpha);
-    --color-text-low-emphasis: var(--gray-60-alpha);
-    --color-text-disabled: var(--gray-30-alpha);
-    --color-text-high-emphasis-inverse: var(--white-100);
-    --color-text-accent-primary: var(--primary-green-80);
-    --color-text-accent-secondary: var(--secondary-green-80);
-    --color-text-caution: var(--caution-red-100);
-    --color-highlight-error: var(--caution-red-20-alpha);
-    --color-highlight-hover: var(--black-30-alpha);
-    --color-highlight-yellow: var(--highlight-yellow-100);
-    --color-object-high-emphasis: var(--gray-100);
-    --color-object-medium-emphasis: var(--gray-70-alpha);
-    --color-object-low-emphasis: var(--gray-60-alpha);
-    --color-object-disable: var(--gray-30-alpha);
-    --color-object-accent-primary: var(--primary-green-70);
-    --color-object-accent-secondary: var(--secondary-green-70);
-    --color-object-caution: var(--caution-red-100);
-    --color-object-high-emphasis-inverse: var(--white-100);
-    --color-object-expressive-pink: var(--expressive-pink);
-    --color-overlay-dark: var(--black-80-alpha);
-    --color-overlay-light: var(--black-20-alpha);
-    --color-overlay-medium: var(--black-60-alpha);
-    --color-focus-clarity: var(--focus-blue-100);
-    --color-focus-ambiguous: var(--focus-blue-30-alpha);
-    --color-border-strong-emphasis: var(--gray-100);
-    --color-border-high-emphasis: var(--gray-60-alpha);
-    --color-border-medium-emphasis: var(--gray-30-alpha);
-    --color-border-low-emphasis: var(--gray-10-alpha);
-    --color-border-accent-primary: var(--primary-green-70);
-    --color-border-high-emphasis-inverse: var(--white-100);
-    --color-border-low-emphasis-inverse: var(--white-20-alpha);
-    --color-border-caution: var(--caution-red-100);
-    --color-third-party-facebook-blue: var(--facebook-blue);
-    --color-third-party-twitter-blue: var(--twitter-blue);
-    --color-third-party-instagram-pink: var(--instagram-pink);
-    --color-system-black: var(--black-100);
-    --color-tap-highlight-base: var(--gray-5-alpha);
-    --animation-move-easing: var(--animation-easing-ease-out);
-    --animation-move-duration: var(--animation-duration-neutral);
-    --animation-appear-in-easing: var(--animation-easing-ease-in-out);
-    --animation-appear-in-duration: var(--animation-duration-neutral);
-    --animation-disappear-easing: var(--animation-easing-ease-in-out);
-    --animation-disappear-duration: var(--animation-duration-fast);
-    --animation-in-view-easing: var(--animation-easing-ease-out);
-    --animation-in-view-duration: var(--animation-duration-neutral);
-    --animation-out-of-view-easing: var(--animation-easing-ease-out);
-    --animation-out-of-view-duration: var(--animation-duration-neutral);
-    --animation-content-change-easing: var(--animation-easing-ease-in-out);
-    --animation-content-change-duration: var(--animation-duration-fast);
-    --animation-scale-up-easing: var(--animation-easing-ease-out);
-    --animation-scale-up-duration: var(--animation-duration-slow);
-    --animation-scale-down-easing: var(--animation-easing-ease-out);
-    --animation-scale-down-duration: var(--animation-duration-neutral);
     --animation-duration-fast: 150ms;
     --animation-duration-neutral: 350ms;
     --animation-duration-slow: 500ms;
@@ -178,7 +112,62 @@
 }
 
 .navbar {
-    background: var(--color-overlay-dark);
+    background: var(--black-90-alpha);
+}
+
+.navbar-text {
+    font-weight: 600;
+}
+
+#content {
+    position: relative;
+    z-index: 3;
+}
+
+#background {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: background-color 1s ease-in-out;
+}
+
+#randomimg {
+    z-index: 2;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    mix-blend-mode: multiply;
+    display: block;
+    margin: 0 auto;
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px) rotate(-2deg);
+    }
+
+    50% {
+        transform: translateX(5px) rotate(2deg);
+    }
+
+    75% {
+        transform: translateX(-5px) rotate(-2deg);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+#randomimg.shake {
+    animation: shake 0.3s ease-in-out;
 }
 
 .player-radio-name:hover::after,
@@ -195,16 +184,27 @@
     text-align: center !important;
 }
 
+.dropdown-menu {
+    background-color: var(--black-90-alpha) !important;
+    text-align: center !important;
+}
+
+
+.dropdown-menu a {
+    color: var(--apple-white) !important;
+}
+
+.dropdown-menu a:hover {
+    background-color: #343a40;
+    color: var(--apple-white);
+}
+
 .navbar-collapse {
     justify-content: flex-end
 }
 
 .nav-link {
-    margin-right: 0.45em !important
-}
-
-.nav-item {
-    color: var(--apple-white);
+    margin-right: 0.3em !important
 }
 
 .nav-link i {
@@ -214,29 +214,6 @@
 .navbar-toggler {
     outline: 0 !important;
     border: 0 !important;
-}
-
-#loading {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-}
-
-#loading h1 {
-    color: white;
-    font-size: 2em;
-}
-
-#firstpage {
-    display: none;
-    min-height: 100vh;
 }
 
 @keyframes flowingGradient {
@@ -255,11 +232,6 @@
 
 body {
     font-family: "Open Sans", sans-serif;
-    background-image: url('../assets/vsc-git.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
     cursor: url(../assets/Arrow.cur), auto;
 }
 
@@ -296,6 +268,15 @@ body {
     border-radius: 5px;
 }
 
+.radioplayerbg {
+    border-radius: 10px;
+    background-image: linear-gradient(to right, rgb(255, 206, 236), rgb(152, 150, 240));
+    background-size: 200% 200%;
+    animation: flowingGradient 5s ease infinite;
+    color: var(--apple-black);
+    overflow: hidden;
+}
+
 .genre-link,
 .lang-link {
     cursor: pointer;
@@ -315,7 +296,7 @@ body {
 
 #genre-info,
 #lang-info {
-    background-color: var(--apple-white);
+    background-color: var(--white-60-alpha);
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -345,7 +326,7 @@ body {
 .genre-group {
     margin-bottom: 10px;
     border-radius: 5px;
-    background: var(--white-50-alpha);
+    background: var(--white-50-alpha) !important;
 }
 
 .genre-content {
@@ -353,15 +334,30 @@ body {
     overflow-y: auto;
 }
 
+.alphabg {
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 10px;
+    background: var(--black-20-alpha) !important;
+}
+
+.radiogenreblock {
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: var(--black-30-alpha);
+}
+
 .radio-genre {
     margin: 0 auto;
     padding: 10px;
     text-align: center;
     font-size: var(--wp--preset--font-size--medium);
-    font-weight: bold;
+    font-weight: 700;
     border-radius: 8px;
     background: var(--wp--preset--gradient--pale-ocean);
-    color: var(--apple-black);
+    color: var(--apple-black)
 }
 
 .widget {
@@ -374,7 +370,13 @@ body {
 }
 
 .download-button {
+    color: var(--focus-blue-100);
     margin-right: 10px;
+    cursor: pointer;
+}
+
+.download-button:hover {
+    transform: scale(1.3);
 }
 
 .rad-icon {
@@ -385,6 +387,10 @@ body {
 
 .main-play-button {
     border-radius: 50% !important;
+}
+
+.main-play-button:hover {
+    transform: scale(1.1);
 }
 
 .player-radio-name {
@@ -401,9 +407,9 @@ body {
 .search-terms {
     font-weight: bold;
     font-size: 16px;
+    background: var(--wp--preset--gradient--pale-ocean);
     text-align: center;
     color: var(--apple-black);
-    background-color: var(--focus-blue-100);
     padding: 5px;
 }
 
@@ -411,34 +417,80 @@ body {
     background: none !important;
 }
 
-#noresult {
-    display: none;
+.noresult {
+    margin: 0 auto;
+    padding: 10px;
+    text-align: center;
+    background: var(--white-60-alpha);
 }
 
-#lastFMInfo ul {
+#resultsContainer ul {
     list-style-type: none;
     text-align: center;
     display: block;
     padding: 1px;
 }
 
-#lastFMInfo li {
+#resultsContainer li {
     padding: 0.1em;
     font-size: 14px;
     font-weight: normal;
-    background-color: var(--apple-white)
+    background-color: var(--white-60-alpha)
+}
+
+.search-header h4 {
+    font-size: var(--wp--preset--font-size--small);
+    letter-spacing: 1px;
+    text-align: center;
+    font-weight: 700;
+    padding: 8px 20px;
+    line-height: 1;
+    background: #fdeff2;
+    color: #e43c5c;
+    text-transform: uppercase;
+    border-radius: 50px;
+}
+
+.search-cover {
+    position: relative;
+    float: left;
+    height: 66px;
+    width: 66px;
+    background-size: cover;
+}
+
+.itunes-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 3px;
+    background-color: #f9f9f9;
+}
+
+.itunes-item img {
+    margin-right: 15px;
+}
+
+.itunes-item .info {
+    flex: 1;
+}
+
+.itunes-item .btn {
+    margin-left: 15px;
 }
 
 .search-results {
-    max-width: 90%;
     margin: 0 auto;
-    background-color: var(--color-border-medium-emphasis);
-    justify-content: center
+    background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple);
+    justify-content: center;
+    padding: 10px;
 }
 
 .togglesearch {
-    background-color: #f8f9fa;
-    border: 1px solid #161616;
+    background-color: var(--white-60-alpha);
+    border: 1px solid var(--apple-black);
     border-radius: 5px;
     padding: 10px 20px;
     cursor: pointer;
@@ -449,7 +501,7 @@ body {
 }
 
 .togglesearch:hover {
-    background-color: #e2e6ea;
+    background-color: var(--white-50-alpha);
     transform: translateY(-2px)
 }
 
@@ -577,35 +629,25 @@ body {
 
 /*WEBSITES*/
 .LinksListBlock {
-    padding: 10px;
+    padding: 5px;
     border-radius: 8px;
-    background: var(--wp--preset--gradient--blush-light-purple);
+    background: var(--white-70-alpha);
     width: 90%;
-    margin: 0.742em auto 0.742em auto;
+    margin: 0.6em auto;
 }
 
 .LinksItem {
     display: flex;
-    text-align: -webkit-match-parent;
-    unicode-bidi: isolate;
-    width: 100%
-}
-
-.LinksListInner {
     width: 100%;
-    margin: auto;
-    display: block;
-    unicode-bidi: isolate
+    margin: 0.3em;
 }
 
 .LinksItemLink {
-    position: relative;
     display: flex;
-    min-height: 60px;
     align-items: center;
     padding: 10px auto 10px;
     color: var(--apple-black);
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
     line-height: 1.2;
     text-decoration: none;
@@ -616,13 +658,6 @@ body {
     display: flex;
     flex-wrap: wrap;
     list-style: none
-}
-
-.LinksLogo {
-    margin-right: 6px;
-    width: 50px;
-    height: 50px;
-    box-shadow: black 0px 0px 3px -1px
 }
 
 .LinksItemLink:focus .LinksIcon,
@@ -679,7 +714,7 @@ screen and (min-width: 1152px) {
     border-radius: 10px;
     padding: 10px;
     box-shadow: 0 0 10px 2px rgb(0, 0, 0);
-    background-image: linear-gradient(to right, rgb(255, 245, 203), rgb(182, 227, 212), rgb(51, 167, 181));
+    background-image: linear-gradient(to right, rgb(255, 206, 236), rgb(152, 150, 240));
     background-size: 200% 200%;
     animation: flowingGradient 5s ease infinite;
     color: var(--white-100);
@@ -718,6 +753,11 @@ screen and (min-width: 1152px) {
     font-weight: bold;
     padding: 2px 2px 2px 2px;
     color: var(--apple-black)
+}
+
+#metadata {
+    color: var(--apple-black);
+    font-size: 13px;
 }
 
 #togglePlayer {
@@ -779,6 +819,10 @@ screen and (min-width: 1152px) {
 
 #player.minimized #miniPlayer {
     display: none
+}
+
+#player.minimized #metadata {
+    display: none;
 }
 
 /*MISC*/
@@ -846,8 +890,8 @@ screen and (min-width: 1152px) {
     padding-bottom: 10px;
 }
 
-.section-title h2 {
-    font-size: 13px;
+.section-title h1 {
+    font-size: var(--wp--preset--font-size--medium);
     letter-spacing: 1px;
     font-weight: 700;
     padding: 8px 20px;
@@ -868,7 +912,7 @@ screen and (min-width: 1152px) {
     margin: 10px auto;
     padding: 5px;
     border-left: 0.4em solid var(--highlight-yellow-100);
-    background-color: var(--gray-5);
+    background-color: var(--white-80-alpha);
     color: var(--apple-black)
 }
 
@@ -912,159 +956,171 @@ screen and (min-width: 1152px) {
 
 /*CHAT*/
 #waline {
-    background: var(--white-90-alpha);
+    background: var(--white-80-alpha);
     outline: 0;
+    padding: 5px;
     border: none
+}
+
+#wl-edit {
+    background: url(../assets/comment-bg.webp) right top/10% no-repeat var(--white-80-alpha);
 }
 
 .joinform {
-    text-align: center;
+    max-width: 400px;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 #join_inner_container {
-    background-color: var(--color-surface-accent-primary-light);
-    padding: 10px;
-    border-radius: 8px;
-    margin: 0.742em auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #join_input_container {
-    margin: 0.742em auto;
+    width: 100%;
+    margin-bottom: 15px;
 }
 
 #join_input {
-    width: 90%;
-    padding: 5px;
-    margin: 0 auto;
-    color: var(--gray-90);
-    font-weight: bold;
-    font-size: var(--wp--preset--font-size--small);
-    background-color: var(--apple-white)
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
 }
 
-#join_input:focus {
-    box-shadow: 0 10px 30px -17px var(--gray-90)
+#join_button_container {
+    width: 100%;
 }
 
 #join_button {
-    margin: 5px auto 5px;
+    width: 100%;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
     padding: 10px;
+    border-radius: 8px;
     cursor: pointer;
-    background-color: var(--expressive-green);
-    font-size: 16px;
-    font-weight: bold;
-    color: var(--black-100)
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#join_button i {
+    margin-left: 5px;
+}
+
+.chat_container {
+    margin: 0.6em auto;
 }
 
 #chat_inner_container {
+    display: flex;
+    padding: 20px;
     border-radius: 8px;
-    margin: 5px auto;
-    padding: 10px;
+    background-color: var(--white-80-alpha);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
     height: 450px;
-    background: url(../assets/comment-bg.webp) right top/20% no-repeat var(--white-90-alpha);
-    outline: 0;
-    border: none
 }
 
 #chat_content_container {
-    width: 100%;
-    height: 80%;
-    float: left;
+    flex-grow: 1;
     overflow-y: auto;
-    padding: 0px 1px 0px 1px
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: var(--white-20-alpha);
+    border-radius: 8px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
 }
 
 #chat_input_container {
-    width: 100%;
-    height: 8%;
-    float: left;
-    background-color: transparent;
-    margin: 5px 10px 0px 0px;
+    display: flex;
+    align-items: center;
 }
 
 #chat_input {
-    width: 90%;
-    height: 100%;
-    float: left;
-    background-color: transparent;
-    color: var(--gray-100);
-    font-size: 14px
+    flex-grow: 1;
+    margin-right: 10px;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
 }
 
-#chat_input_send,
-button {
-    margin-left: 10px;
-    background-color: var(--white-50-alpha);
+#chat_input_send {
+    background-color: #007bff;
     color: var(--apple-black);
-    border-radius: 4px;
-    cursor: pointer;
-    border: 1px solid;
-    padding: .375rem .75rem
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #chat_input_send.enabled {
-    background-color: var(--expressive-blue);
-    cursor: pointer
+    background-color: #007bff;
+    cursor: pointer;
 }
 
 #chat_input_send:disabled {
-    background-color: var(--white-60-alpha);
-    cursor: not-allowed
+    background-color: #6c757d;
+    cursor: not-allowed;
 }
 
 #chat_logout_container {
-    width: 90%;
+    margin-top: 10px;
     display: flex;
-    justify-content: center
+    justify-content: flex-end;
 }
 
 #chat_logout {
-    margin: 5px;
-    color: var(--caution-red-vivid-100);
+    font-size: 14px;
+    margin: 5px auto;
+    color: var(--apple-white);
+    background-color: var(--caution-red-vivid-100);
     cursor: pointer;
-    border: 1px solid;
-    padding: 0.17em
+    border: none;
+    padding: 5px;
+    border-radius: 8px;
 }
 
-#chat_logout:hover {
-    background-color: var(--white-20-alpha);
-    text-decoration: underline
+.message_container {
+    margin-bottom: 10px;
 }
 
 .message_content_container {
-    width: 90%;
+    background-color: var(----white-60-alpha);
+    padding: 10px;
+    border-radius: 8px;
     display: inline-block;
     white-space: pre-wrap;
     word-wrap: break-word;
-    padding: 0px 0px 0px 20px
 }
 
 .message_content {
     font-weight: normal;
-    font-size: 14px;
-}
-
-.message_container {
-    width: 90%;
-    display: inline-block;
-    margin-bottom: 5px;
+    font-size: 16px;
+    margin: 0;
+    color: #495057;
 }
 
 .message_inner_container {
-    width: 90%;
-    display: inline-block;
-    color: var(--apple-black)
+    display: flex;
+    flex-direction: column;
 }
 
 .message_user_container {
-    width: 90%;
-    display: inline-block;
+    margin-bottom: 5px;
 }
 
 .message_user {
+    margin: 0;
+    font-size: 16px;
     font-weight: bold;
-    font-size: 14px;
-    padding-left: 10px
+    color: #007bff;
 }
 
 .loader_container {
@@ -1088,16 +1144,18 @@ button {
 
 /*GDMP*/
 #gdmp {
+    display: flex;
     position: fixed;
     bottom: 10px;
     left: 10px;
-    display: flex;
     justify-content: center;
     align-items: center;
-    background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple);
+    background-image: linear-gradient(to right, rgb(255, 206, 236), rgb(152, 150, 240));
+    background-size: 200% 200%;
+    animation: flowingGradient 5s ease infinite;
     padding: 10px;
     height: fit-content;
-    width: fit-content;
+    width: 90%;
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 0 10px 2px rgb(0, 0, 0);
@@ -1105,10 +1163,8 @@ button {
 
 #prev-btn,
 #next-btn {
-    position: relative;
     width: auto;
-    margin: 0 10px;
-    padding: 10px;
+    margin: 0 5px;
     text-align: center;
     background: none;
     border: none;
@@ -1117,21 +1173,21 @@ button {
     z-index: 2;
     transition: transform 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
     font-size: 1.5em;
-    color: #ffffff;
+    color: var(--apple-white);
     border-radius: 50%;
 }
 
 #prev-btn:hover,
 #next-btn:hover {
     transform: scale(1.2);
-    color: #ffffff;
+    color: var(--apple-white);
     background: rgba(255, 255, 255, 0.2);
 }
 
 #prev-btn:active,
 #next-btn:active {
     transform: scale(1.1);
-    color: #ffffff;
+    color: var(--apple-white);
     background: rgba(255, 255, 255, 0.4);
 }
 
@@ -1142,7 +1198,7 @@ button {
 }
 
 #audio {
-    width: 200px;
+    width: 80%;
     margin: 0 10px;
     border-radius: 5px;
 }
@@ -1196,7 +1252,7 @@ audio::-webkit-media-controls-enclosure {
 
 button.track {
     border: none;
-    background: var(--apple-white);
+    background: var(--white-70-alpha);
     text-align: left;
     color: var(--apple-black);
     margin-left: 15px;
@@ -1333,7 +1389,19 @@ button.track i {
 }
 
 details {
-    margin-bottom: 11px
+    margin-bottom: 11px;
+}
+
+details details {
+    margin-left: 25px;
+}
+
+details details:first-of-type {
+    margin-top: 20px;
+}
+
+details details:last-of-type {
+    border: none;
 }
 
 button.track,
@@ -1343,10 +1411,6 @@ summary {
 }
 
 @media only screen and (max-width: 575.98px) {
-    .section-title {
-        font-size: var(--wp--preset--font-size--small);
-    }
-
     #tips {
         font-size: 12px;
     }
@@ -1369,35 +1433,38 @@ summary {
         margin: 0.2em auto 0 auto;
     }
 
+    .itunes-item {
+        display: block;
+    }
+
     .player-radio-name {
         margin-left: 2px;
         font-size: 10px
     }
 
-    .LinksItemLink {
-        min-height: 40px;
-        font-size: 12px;
-        font-weight: 600;
-        line-height: 1.2
-    }
-
-    .LinksLogo {
-        margin-right: 3px;
-        width: 30px;
-        height: 30px
+    .section-title h1 {
+        font-size: 15px;
     }
 
     #prev-btn,
-    #next-btn button.track,
+    #next-btn,
+    button.track,
     summary,
-    option li a,
-    option li button,
+    #option li a,
+    #option li button,
     #stationName,
     .radio-genre,
-    .search-terms,
-    #lastFMInfo,
+    #resultsContainer,
+    .search-card,
+    .message_user,
+    .LinksItemLink,
+    .message_content,
     .message_user {
         font-size: var(--wp--preset--font-size--small);
+    }
+
+    .search-terms {
+        font-size: var(--wp--preset--font-size--medium);
     }
 
     .button-label {
@@ -1437,10 +1504,5 @@ summary {
     #cover img {
         width: 40px;
         height: 40px
-    }
-
-    details details {
-        margin-left: 0px;
-        width: 100%;
     }
 }

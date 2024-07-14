@@ -1,0 +1,82 @@
+[
+    {
+        "name": "Radio Garden",
+        "url": "http://radio.garden/visit/",
+        "icon": "assets/websites/radiogarden.webp"
+    },
+    {
+        "name": "Instant Audio",
+        "url": "https://instant.audio/",
+        "icon": "assets/websites/instantaudio.webp"
+    },
+    {
+        "name": "JCBAインターネットサイマルラジオ",
+        "url": "https://www.jcbasimul.com/",
+        "icon": "assets/websites/jcba.webp"
+    },
+    {
+        "name": "エフエムプラプラ(FM++)",
+        "url": "https://fmplapla.com/",
+        "icon": "assets/websites/fmpurapura.webp"
+    },
+    {
+        "name": "サイマルラジオ(SimulRadio)",
+        "url": "https://www.simulradio.info/",
+        "icon": "assets/websites/simulradio.webp"
+    },
+    {
+        "name": "ラジコ(radiko)",
+        "url": "https://radiko.jp/",
+        "icon": "assets/websites/radiko.webp"
+    },
+    {
+        "name": "NHKラジオらじる★らじる",
+        "url": "https://www.nhk.or.jp/radio/",
+        "icon": "assets/websites/nhkradio.webp"
+    },
+    {
+        "name": "1.FM",
+        "url": "https://www.1.fm/stations",
+        "icon": "assets/radios/1.FMHIP.webp"
+    },
+    {
+        "name": "TuneIn Anime Radio Station / Podcasts",
+        "url": "https://tunein.com/radio/Stream-Anime-g2752/",
+        "icon": "assets/websites/tuneIn.webp"
+    },
+    {
+        "name": "Online Radio Box (anime)",
+        "url": "https://onlineradiobox.com/genre/anime/",
+        "icon": "assets/websites/animeradiostation.webp"
+    },
+    {
+        "name": "RCAST (anime genre)",
+        "url": "https://www.rcast.net/dir/anime/page1",
+        "icon": "assets/websites/rcastanime.webp"
+    },
+    {
+        "name": "Radio.net",
+        "url": "https://www.radio.net/search?q=japan",
+        "icon": "assets/websites/radionet.webp"
+    },
+    {
+        "name": "Box Radio Player",
+        "url": "https://player.boxradio.net/",
+        "icon": "assets/websites/boxradioplayer.webp"
+    },
+    {
+        "name": "Big B Radio",
+        "url": "https://bigbradio.net/",
+        "icon": "assets/websites/bigbradio.webp"
+    },
+    {
+        "name": "Asia Dream Radio",
+        "url": "https://asiadreamradio.torontocast.stream/stations/jp.html",
+        "icon": "assets/websites/asiadreamradio.webp"
+    },
+    {
+        "name": "SomaFM Player: Vaporwaves",
+        "url": "https://somafm.com/player/#/now-playing/vaporwaves",
+        "icon": "assets/websites/vaporwares.webp"
+    }
+]

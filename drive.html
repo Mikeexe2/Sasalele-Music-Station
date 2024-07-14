@@ -46,17 +46,18 @@
 
     <body>
         <nav class="navbar sticky-top navbar-dark navbar-expand-md">
-            <a class="navbar-brand d-flex justify-content-center align-items-center text-white"
-                href="https://basic.pp.ua/">
-                <img class="mr-2" src="assets/sasalele_logo-removebg.webp" width="auto" height="32" alt="Sasalele Logo">
-                Sasalele Music Station
-            </a>
+            <a class="navbar-brand" href="https://basic.pp.ua/"><img class="" src="assets/sasalele_logo-removebg.webp"
+                    width="auto" height="32"></a>
+            <div class="navbar-text d-flex justify-content-center align-items-center text-white">Sasalele Music Station
+            </div>
             <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse"
                 data-target="#main-navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="main-navigation">
                 <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Radios<i class="fas fa-radio"></i></a>
+                    </li>
                     <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown"
                             aria-expanded="false" href="#">Websites<i class="fas fa-fw fas fa-link"></i></a>
                         <div class="dropdown-menu">
@@ -76,12 +77,6 @@
                     </li>
                     <li class="nav-item"><a class="nav-link" href="#">Drive Music Player<i
                                 class="fa-brands fa-google-drive"></i></a></li>
-                    <li class="nav-item"><a class="nav-link" href="https://basic.pp.ua/#chat">Chat<i
-                                class="fas fa-comment"></i></a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="https://basic.pp.ua/#search">Search<i
-                                class="fas fa-magnifying-glass"></i></a>
-                    </li>
                     <div class="d-flex justify-content-center align-items-center">
                         <div id="clock">
                             <span id="clockTime"></span>
@@ -91,114 +86,123 @@
                 </ul>
             </div>
         </nav>
-
-        <div id="gdmp">
-            <button id="prev-btn" onclick="prevTrack()"><i class="fas fa-step-backward"></i></button>
-            <audio id="audio" controls controlslist="nodownload noplaybackrate">
-                <source id="source" src="" type="audio/mpeg">
-            </audio>
-            <button id="next-btn" onclick="nextTrack()"><i class="fas fa-step-forward"></i></button>
-        </div>
-
-        <section id="drive" onload="getFolderId()">
-            <div class="section-title">
-                <h2>Google Drive Music Player</h2>
+        <div id="background"><img id="randomimg" src="" alt="."></div>
+        <div id="content">
+            <div id="gdmp">
+                <button id="prev-btn" onclick="prevTrack()"><i class="fas fa-step-backward"></i></button>
+                <audio id="audio" controls controlslist="nodownload noplaybackrate">
+                    <source id="source" src="" type="audio/mpeg">
+                </audio>
+                <button id="next-btn" onclick="nextTrack()"><i class="fas fa-step-forward"></i></button>
             </div>
-            <details open id="tips">
-                <summary><span class="badge badge-primary">Guide</span></summary>
-                <p>Enter the ID for the <a href="https://drive.google.com" target="_blank">Google
-                        Drive</a> folder you would like to use and click the 'Login'
-                    button. The ID can be found by taking that last part of the folder's URL, for example,
-                    drive.google.com/drive/folders/1_gbbbbb-aaaaa has an ID of
-                    "1_gbbbbb-aaaaa".<br>Alternatively,"<strong>root</strong>" can be used to browse from your top-level
-                    folder.<br>
-                <p>For more information, please read our <a href="privacypolicy.html" target="_blank">Privacy Policy
-                        <svg aria-labelledby="cds-react-aria-962-title" fill="none" focusable="false" height="16"
-                            role="img" viewBox="0 0 16 16" width="16" class="icon" style="vertical-align: text-bottom;">
-                            <title id="cds-react-aria-962-title">Opens in a new tab</title>
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                d="M1.5 3.5H6v1H2.5v9h9V10h1v4.5h-11v-11zM13.5 2.5H10v-1h4.5V6h-1V2.5z"
-                                fill="currentColor"></path>
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M6.646 8.646l7-7 .708.708-7 7-.708-.708z"
-                                fill="currentColor">
-                            </path>
-                        </svg>
-                    </a>.</p>
 
-                </p>
-            </details>
-            <main role="main">
-                <div id="intro" style="display:none">
-                    <form onsubmit="submitFolderId(event)">
-                        <div class="row justify-content-center">
-                            <div class="col-md-6">
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control" required id="parentfolder"
-                                        name="parentfolder" placeholder="google-drive-folder-id">
-                                    <div class="input-group-append">
-                                        <button type="submit" class="btn btn-primary mb-3">
-                                            <i class="fab fa-google"></i> Login
-                                        </button>
+            <section id="drive" onload="getFolderId()">
+                <div class="section-title">
+                    <h1>Google Drive Music Player</h1>
+                </div>
+                <details open id="tips">
+                    <summary><span class="badge badge-primary">Guide</span></summary>
+                    <p>Enter the ID for the <a href="https://drive.google.com" target="_blank">Google
+                            Drive</a> folder you would like to use and click the 'Login'
+                        button. The ID can be found by taking that last part of the folder's URL, for example,
+                        drive.google.com/drive/folders/1_gbbbbb-aaaaa has an ID of
+                        "1_gbbbbb-aaaaa".<br>Alternatively,"<strong>root</strong>" can be used to browse from your
+                        top-level
+                        folder.<br>
+                    <p>For more information, please read our <a href="privacypolicy.html" target="_blank">Privacy Policy
+                            <svg aria-labelledby="cds-react-aria-962-title" fill="none" focusable="false" height="16"
+                                role="img" viewBox="0 0 16 16" width="16" class="icon"
+                                style="vertical-align: text-bottom;">
+                                <title id="cds-react-aria-962-title">Opens in a new tab</title>
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M1.5 3.5H6v1H2.5v9h9V10h1v4.5h-11v-11zM13.5 2.5H10v-1h4.5V6h-1V2.5z"
+                                    fill="currentColor"></path>
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M6.646 8.646l7-7 .708.708-7 7-.708-.708z" fill="currentColor">
+                                </path>
+                            </svg>
+                        </a>.</p>
+
+                    </p>
+                </details>
+                <main role="main">
+                    <div id="intro" style="display:none">
+                        <form onsubmit="submitFolderId(event)">
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" required id="parentfolder"
+                                            name="parentfolder" placeholder="google-drive-folder-id">
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-primary mb-3">
+                                                <i class="fab fa-google"></i> Login
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                        </form>
+                        <div id="demo" class="loaded">
+                            <details open>
+                                <summary>Demo Folder 1</summary>
+                                <button class="track" onclick="playTrack('好きにしなよ - Anly', this, 'demo')"><i
+                                        class="fas fa-play"></i>
+                                    好きにしなよ -
+                                    Anly</button>
+                                <button class="track" onclick="playTrack('紅葉愛唄 - GARNiDELiA', this, 'demo')"><i
+                                        class="fas fa-play"></i>
+                                    紅葉愛唄 -
+                                    GARNiDELiA</button>
+                                <button class="track"
+                                    onclick="playTrack('花ハ踊レヤいろはにほ (随花起舞) - チーム・ハナヤマタ', this, 'demo')"><i
+                                        class="fas fa-play"></i> 花ハ踊レヤいろはにほ (随花起舞) - チーム・ハナヤマタ</button>
+                            </details>
+                            <details open>
+                                <summary>Demo Folder 2</summary>
+                                <button class="track" onclick="playTrack('都会っ子田舎っ子 - びわ湖くん', this, 'demo')"><i
+                                        class="fas fa-play"></i>
+                                    都会っ子田舎っ子
+                                    - びわ湖くん</button>
+                                <button class="track" onclick="playTrack('天空の狂詩曲 - さゆり', this, 'demo')"><i
+                                        class="fas fa-play"></i>
+                                    天空の狂詩曲 -
+                                    さゆり</button>
+                                <button class="track" onclick="playTrack('ロストワンの号哭Band edition - 周平', this, 'demo')"><i
+                                        class="fas fa-play"></i>
+                                    ロストワンの号哭Band edition - 周平</button>
+                            </details>
                         </div>
-                    </form>
-                    <div id="demo" class="loaded">
-                        <details open>
-                            <summary>Demo Folder 1</summary>
-                            <button class="track" onclick="playTrack('好きにしなよ - Anly', this, 'demo')"><i
-                                    class="fas fa-play"></i>
-                                好きにしなよ -
-                                Anly</button>
-                            <button class="track" onclick="playTrack('紅葉愛唄 - GARNiDELiA', this, 'demo')"><i
-                                    class="fas fa-play"></i>
-                                紅葉愛唄 -
-                                GARNiDELiA</button>
-                            <button class="track" onclick="playTrack('花ハ踊レヤいろはにほ (随花起舞) - チーム・ハナヤマタ', this, 'demo')"><i
-                                    class="fas fa-play"></i> 花ハ踊レヤいろはにほ (随花起舞) - チーム・ハナヤマタ</button>
-                        </details>
-                        <details open>
-                            <summary>Demo Folder 2</summary>
-                            <button class="track" onclick="playTrack('都会っ子田舎っ子 - びわ湖くん', this, 'demo')"><i
-                                    class="fas fa-play"></i>
-                                都会っ子田舎っ子
-                                - びわ湖くん</button>
-                            <button class="track" onclick="playTrack('天空の狂詩曲 - さゆり', this, 'demo')"><i
-                                    class="fas fa-play"></i>
-                                天空の狂詩曲 -
-                                さゆり</button>
-                            <button class="track" onclick="playTrack('ロストワンの号哭Band edition - 周平', this, 'demo')"><i
-                                    class="fas fa-play"></i>
-                                ロストワンの号哭Band edition - 周平</button>
-                        </details>
                     </div>
-                </div>
 
-                <div id="contents"></div>
-            </main>
-            <div class="gdmpoptions">
-                <li id="option">
-                    <button class="btn btn-primary" onclick="changeFolder()">Change Folder / User</button>
-                    <a class="btn btn-primary" href="https://myaccount.google.com/security" target="_blank"
-                        role="button">Revoke
-                        Access <svg aria-labelledby="cds-react-aria-962-title" fill="none" focusable="false" height="16"
-                            role="img" viewBox="0 0 16 16" width="16" class="icon" style="vertical-align: text-bottom;">
-                            <title id="cds-react-aria-962-title">Opens in a new tab</title>
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                d="M1.5 3.5H6v1H2.5v9h9V10h1v4.5h-11v-11zM13.5 2.5H10v-1h4.5V6h-1V2.5z"
-                                fill="currentColor"></path>
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M6.646 8.646l7-7 .708.708-7 7-.708-.708z"
-                                fill="currentColor">
-                            </path>
-                        </svg></a>
-                </li>
-            </div>
-        </section>
+                    <div id="contents"></div>
+                </main>
+                <div class="gdmpoptions">
+                    <li id="option">
+                        <button class="btn btn-primary" onclick="changeFolder()">Change Folder / User</button>
+                        <a class="btn btn-primary" href="https://myaccount.google.com/security" target="_blank"
+                            role="button">Revoke
+                            Access <svg aria-labelledby="cds-react-aria-962-title" fill="none" focusable="false"
+                                height="16" role="img" viewBox="0 0 16 16" width="16" class="icon"
+                                style="vertical-align: text-bottom;">
+                                <title id="cds-react-aria-962-title">Opens in a new tab</title>
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M1.5 3.5H6v1H2.5v9h9V10h1v4.5h-11v-11zM13.5 2.5H10v-1h4.5V6h-1V2.5z"
+                                    fill="currentColor"></path>
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M6.646 8.646l7-7 .708.708-7 7-.708-.708z" fill="currentColor">
+                                </path>
+                            </svg></a>
+                    </li>
+                </div>
+            </section>
+        </div>
+        <div class="back-to-top d-flex align-items-center justify-content-center"><i class="fa-solid fa-arrow-up"></i>
+        </div>
+        <script src="js/stats.js"></script>
         <script src="js/gdmp.js"></script>
         <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
         <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
-        <script src="js/stats.js"></script>
+
     </body>
 
 </html>
