@@ -77,7 +77,6 @@
         "favicon": "assets/radios/mikuhatsune.webp",
         "genre": "vocaloid",
         "homepage": "https://zeno.fm/radio/miku-hatsune/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/0qmy834zm7zuv",
         "host": "zeno"
     },
     {
@@ -102,7 +101,6 @@
         "favicon": "assets/radios/personastation.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/persona/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/hykkzk1c94zuv",
         "host": "zeno"
     },
     {
@@ -111,7 +109,6 @@
         "favicon": "assets/radios/radioanime24hrs.webp",
         "genre": "nightcore",
         "homepage": "https://zeno.fm/radio/radio-anime-24hrs/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/6v2xqm03xqruv",
         "host": "zeno"
     },
     {
@@ -120,7 +117,6 @@
         "favicon": "assets/radios/Japanimradio.webp",
         "genre": "jmusic",
         "homepage": "http://japanimradio.id.st/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/ragwqzxwybrtv",
         "host": "zeno"
     },
     {
@@ -241,7 +237,6 @@
         "favicon": "assets/radios/minorebafm.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/minoreba-fmsffkk5qm9eeuv/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/q34bq5qm9eeuv",
         "host": "zeno"
     },
     {
@@ -258,7 +253,6 @@
         "favicon": "assets/radios/citypopgdl.webp",
         "genre": "jmusic",
         "homepage": "https://citypopgdl.blogspot.com/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/rmksrt451s8uv",
         "host": "zeno"
     },
     {
@@ -267,7 +261,6 @@
         "favicon": "assets/radios/publicradiowashington.webp",
         "genre": "variety",
         "homepage": "https://zeno.fm/radio/public-radio-washington/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/ne45xyh9bkhvv",
         "host": "zeno"
     },
     {
@@ -420,7 +413,6 @@
         "favicon": "assets/radios/japananimesongs.webp",
         "genre": "anime",
         "homepage": "https://zeno.fm/radio/japan-anime-songs/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/e10726wdz4zuv",
         "host": "zeno"
     },
     {
@@ -429,7 +421,6 @@
         "favicon": "assets/radios/nakanofm.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/nakano-fm/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/cdn4mtbrfayv",
         "host": "zeno"
     },
     {
@@ -438,7 +429,6 @@
         "favicon": "assets/radios/imperiokpop.webp",
         "genre": "kmusic",
         "homepage": "https://zeno.fm/radio/imperio-kpop/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/xjz96jxmpk3tv",
         "host": "zeno"
     },
     {
@@ -447,7 +437,6 @@
         "favicon": "assets/radios/ondavital.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/ondavitalfm/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/rik53zbzc1luv",
         "host": "zeno"
     },
     {
@@ -456,7 +445,6 @@
         "favicon": "assets/radios/neoevolution.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/neoevolution-radio/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/mplz3uhg6yovv",
         "host": "zeno"
     },
     {
@@ -465,7 +453,6 @@
         "favicon": "assets/radios/kalavrat.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/kalavratfm/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/nrdwvpzc9huvv",
         "host": "zeno"
     },
     {
@@ -474,7 +461,6 @@
         "favicon": "assets/radios/japan979.webp",
         "genre": "bgm",
         "homepage": "https://zeno.fm/radio/jpn-979/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/r9kzc3geed0uv",
         "host": "zeno"
     },
     {
@@ -483,7 +469,6 @@
         "favicon": "assets/radios/doraemonradio.webp",
         "genre": "anime",
         "homepage": "https://zeno.fm/radio/doraemon-radio-italia/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/uos3rfem2fduv",
         "host": "zeno"
     },
     {
@@ -492,7 +477,6 @@
         "favicon": "assets/radios/golspd.webp",
         "genre": "cmusic",
         "homepage": "https://zeno.fm/radio/golspd/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/5zllkgbr4fvvv",
         "host": "zeno"
     },
     {
@@ -501,7 +485,6 @@
         "favicon": "assets/radios/JogastephinusFM.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/inus935/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/20apx2u5cy8uv",
         "host": "zeno"
     },
     {
@@ -510,7 +493,6 @@
         "favicon": "assets/radios/hyperpopswag.webp",
         "genre": "variety",
         "homepage": "https://zeno.fm/radio/hyperpop-swag/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/91xb4p5mffhvv",
         "host": "zeno"
     },
     {
@@ -519,7 +501,6 @@
         "favicon": "assets/radios/AiMoChi.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/www-aimochi-cf/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/4k6b13s8et5tv",
         "host": "zeno"
     },
     {
@@ -528,7 +509,6 @@
         "favicon": "assets/radios/MikuSpaceRadio.webp",
         "genre": "vocaloid",
         "homepage": "https://zeno.fm/radio/miku-space-radio/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/9vey2o1ky9mvv",
         "host": "zeno"
     },
     {
@@ -537,7 +517,6 @@
         "favicon": "assets/radios/JapaninSoul.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/japan-in-soul/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/up403y21ry8uv",
         "host": "zeno"
     },
     {
@@ -546,7 +525,6 @@
         "favicon": "assets/radios/animezone80s.webp",
         "genre": "anime",
         "homepage": "https://zeno.fm/radio/anime-zone-80s/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/ngqqebacltktv",
         "host": "zeno"
     },
     {
@@ -555,7 +533,6 @@
         "favicon": "assets/radios/Musictoreadmanga.webp",
         "genre": "bgm",
         "homepage": "https://zeno.fm/radio/music-to-read-manga/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/4mr8gknssg0uv",
         "host": "zeno"
     },
     {
@@ -564,7 +541,6 @@
         "favicon": "assets/radios/JRockON.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/jrockon/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/1pnwmxnvhehtv",
         "host": "zeno"
     },
     {
@@ -573,7 +549,6 @@
         "favicon": "assets/radios/SAKURAJIMAFM.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/sakurajima-fm/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/of7hlt41hl0uv",
         "host": "zeno"
     },
     {
@@ -582,7 +557,6 @@
         "favicon": "assets/radios/ModernVocaloidRadio.webp",
         "genre": "vocaloid",
         "homepage": "https://zeno.fm/radio/modern-vocaloid-radio/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/ghsmgkaevkstv",
         "host": "zeno"
     },
     {
@@ -591,7 +565,6 @@
         "favicon": "assets/radios/InitialD.webp",
         "genre": "anime",
         "homepage": "https://zeno.fm/radio/initial-d/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/u8r9xbvr5f0uv",
         "host": "zeno"
     },
     {
@@ -600,7 +573,6 @@
         "favicon": "assets/radios/DragonBallSuper.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/DragonBallSuper/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/wet2bue7sm0uv",
         "host": "zeno"
     },
     {
@@ -609,7 +581,6 @@
         "favicon": "assets/radios/IMPACTODIGITAL.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/impacto-digital-el-salvador/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/t35xtdcadxhvv",
         "host": "zeno"
     },
     {
@@ -618,7 +589,6 @@
         "favicon": "assets/radios/rideontime.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/ride-on-time-live/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/uns1eth93v8uv",
         "host": "zeno"
     },
     {
@@ -627,7 +597,6 @@
         "favicon": "assets/radios/RadioNihon.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/radio-nihon/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/wfzj6hdmkrztv",
         "host": "zeno"
     },
     {
@@ -636,7 +605,6 @@
         "favicon": "assets/radios/MusenRadio.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/musenradio/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/0flt31rgqwcvv",
         "host": "zeno"
     },
     {
@@ -645,7 +613,6 @@
         "favicon": "assets/radios/Animeop.webp",
         "genre": "anime",
         "homepage": "https://zeno.fm/radio/anime-op/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/xv1ga5kxmc9uv",
         "host": "zeno"
     },
     {
@@ -654,7 +621,6 @@
         "favicon": "assets/radios/ZZZRADIO.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/zzz-radio/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/w28wxuq2gc9uv",
         "host": "zeno"
     },
     {
@@ -663,7 +629,6 @@
         "favicon": "assets/radios/ULTIMATERADIOJAPANSOUNDS.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/ultimateradiojapansounds/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/cn2bv9vvyc9uv",
         "host": "zeno"
     },
     {
@@ -672,7 +637,6 @@
         "favicon": "assets/radios/JGSIFM.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/jgsi-fm/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/hxe816tzey8uv",
         "host": "zeno"
     },
     {
@@ -681,7 +645,6 @@
         "favicon": "assets/radios/DoraemonRadioJP.webp",
         "genre": "anime",
         "homepage": "https://zeno.fm/radio/doraemon-radio-jp-0udx/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/a37vuhu2roytv",
         "host": "zeno"
     },
     {
@@ -690,7 +653,6 @@
         "favicon": "assets/radios/NightCityRadio.webp",
         "genre": "bgm",
         "homepage": "https://zeno.fm/radio/NightCityRadio/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/2a68415b7f0uv",
         "host": "zeno"
     },
     {
@@ -699,7 +661,6 @@
         "favicon": "assets/radios/RamenFM.webp",
         "genre": "kmusic",
         "homepage": "https://zeno.fm/radio/ramenfm/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/092xkg9nhxhvv",
         "host": "zeno"
     },
     {
@@ -708,7 +669,6 @@
         "favicon": "assets/radios/KIDELVICE.webp",
         "genre": "kmusic",
         "homepage": "https://zeno.fm/radio/kidelvice/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/2yg1v03ymg8uv",
         "host": "zeno"
     },
     {
@@ -717,7 +677,6 @@
         "favicon": "assets/radios/NimeriseFM.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/nimerise-fm/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/th802tkxa0hvv",
         "host": "zeno"
     },
     {
@@ -726,7 +685,6 @@
         "favicon": "assets/radios/HelloWorld.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/hello-world-streamingworldwide247/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/nguiyi7s44etv",
         "host": "zeno"
     },
     {
@@ -735,7 +693,6 @@
         "favicon": "assets/radios/RadioNippon.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/radionippon/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/9woagoca0pcvv",
         "host": "zeno"
     },
     {
@@ -744,7 +701,6 @@
         "favicon": "assets/radios/RadioAnimead.webp",
         "genre": "anime",
         "homepage": "https://zeno.fm/radio/radioanimehits/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/0w3vz9hzpuhvv",
         "host": "zeno"
     },
     {
@@ -753,7 +709,6 @@
         "favicon": "assets/radios/HouseCityPop.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/house-citypop/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/m0hjxz7lvhjvv",
         "host": "zeno"
     },
     {
@@ -762,7 +717,6 @@
         "favicon": "assets/radios/TwilightJukeBox.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/twilight-jukebox/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/em1ua1fsqvcvv",
         "host": "zeno"
     },
     {
@@ -771,7 +725,6 @@
         "favicon": "assets/radios/Amongis.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/among-is/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/9cu1dm4cnxhvv",
         "host": "zeno"
     },
     {
@@ -780,7 +733,6 @@
         "favicon": "assets/radios/BTSRadio.webp",
         "genre": "kmusic",
         "homepage": "https://zeno.fm/radio/bts-radio/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/eecprp06by8uv",
         "host": "zeno"
     },
     {
@@ -789,7 +741,6 @@
         "favicon": "assets/radios/VersaoKpop.webp",
         "genre": "kmusic",
         "homepage": "https://zeno.fm/radio/versao-kpop/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/ta62atswp0hvv",
         "host": "zeno"
     },
     {
@@ -798,7 +749,6 @@
         "favicon": "assets/radios/K-DAILY.webp",
         "genre": "kmusic",
         "homepage": "https://zeno.fm/radio/k-daily/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/75z3bhhbyf9uv",
         "host": "zeno"
     },
     {
@@ -903,7 +853,6 @@
         "favicon": "assets/radios/WorldHitsRadioJA.webp",
         "genre": "variety",
         "homepage": "https://zeno.fm/radio/worldhitsradio/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/6vytsnbkb8zuv",
         "host": "zeno"
     },
     {
@@ -1072,7 +1021,6 @@
         "favicon": "assets/radios/radioportalanimediv.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/radio-portal-animediv/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/gzbardet05wtv",
         "host": "zeno"
     },
     {
@@ -1081,7 +1029,6 @@
         "favicon": "assets/radios/rutacitypop.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/rutacitypop/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/uenn4pspky8uv",
         "host": "zeno"
     },
     {
@@ -1202,7 +1149,6 @@
         "favicon": "assets/radios/AnytimeAnimeRadioV3.webp",
         "genre": "anime",
         "homepage": "https://zeno.fm/radio/anytime-anime-radio/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/6yd3qscm9rhvv",
         "host": "zeno"
     },
     {
@@ -1227,7 +1173,6 @@
         "favicon": "assets/radios/KawaiiAnimeRadio.webp",
         "genre": "anime",
         "homepage": "https://tunein.com/radio/Kawaii-Anime-Radio-s232606/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/zaa6hw1yznwuv",
         "host": "zeno"
     },
     {
@@ -1276,7 +1221,6 @@
         "favicon": "assets/radios/Japanimradio(ManganimeRadio).webp",
         "genre": "anime",
         "homepage": "https://onlineradiobox.com/jp/japanimradio/?cs=jp.japanimradio&played=1",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/ragwqzxwybrtv",
         "host": "zeno"
     },
     {
@@ -1597,7 +1541,6 @@
         "favicon": "assets/radios/AnimeCommunity.webp",
         "genre": "ANIME",
         "homepage": "https://zeno.fm/radio/anime-community/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/nrxqb8jdyvauv",
         "host": "zeno"
     },
     {
@@ -1606,7 +1549,6 @@
         "favicon": "assets/radios/HuTaosRadio.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/hu-taos-radio/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/p4yjipdmjiktv",
         "host": "zeno"
     },
     {
@@ -1615,7 +1557,6 @@
         "favicon": "assets/radios/jsideradioelectric.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/j-side-radio-electric/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/klcj4oro99vtv",
         "host": "zeno"
     },
     {
@@ -1624,7 +1565,6 @@
         "favicon": "assets/radios/jjsejapanradio.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/jjse-japan-radio/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/rotfckpnfi3vv",
         "host": "zeno"
     },
     {
@@ -1633,7 +1573,6 @@
         "favicon": "assets/radios/lilyraeradio.webp",
         "genre": "variety",
         "homepage": "https://zeno.fm/radio/lillyraemusic/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/blvv2lcsubjuv",
         "host": "zeno"
     },
     {
@@ -1642,7 +1581,6 @@
         "favicon": "assets/radios/radiomangakakalot.webp",
         "genre": "anime",
         "homepage": "https://zeno.fm/radio/radio-mangakakalot/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/9rh1dnknfdrtv",
         "host": "zeno"
     },
     {
@@ -1651,7 +1589,6 @@
         "favicon": "assets/radios/radiokaiscans.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/radio-kaiscans/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/xvs5z5emzy6tv",
         "host": "zeno"
     },
     {
@@ -1660,7 +1597,6 @@
         "favicon": "assets/radios/radioarven.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/radio-arven/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/dzqt6ts9egrtv",
         "host": "zeno"
     },
     {
@@ -2205,7 +2141,6 @@
         "favicon": "assets/radios/AkariRadio.webp",
         "genre": "anime",
         "homepage": "https://radioakari.blogspot.com/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/0t952vqukfeuv",
         "host": "zeno"
     },
     {
@@ -2214,7 +2149,6 @@
         "favicon": "assets/radios/animepowerstation.webp",
         "genre": "anime",
         "homepage": "https://zeno.fm/radio/anime-power-station/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/u7xywvwgmzzuv",
         "host": "zeno"
     },
     {
@@ -2223,7 +2157,6 @@
         "favicon": "assets/radios/animaxvtuberradio.webp",
         "genre": "anime",
         "homepage": "https://zeno.fm/radio/animax-radio-fm/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/hd004xxt3a0uv",
         "host": "zeno"
     },
     {
@@ -2232,7 +2165,6 @@
         "favicon": "assets/radios/AnimePaRaTi.webp",
         "genre": "anime",
         "homepage": "https://zeno.fm/radio/radioanimeparati/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/acnhrkt8c4duv",
         "host": "zeno"
     },
     {
@@ -2241,7 +2173,6 @@
         "favicon": "assets/radios/AnimePlusRadio.webp",
         "genre": "anime",
         "homepage": "https://onlineradiobox.com/co/animeplus/?cs=co.animeplus&played=1",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/rfun7q8bt8quv",
         "host": "zeno"
     },
     {
@@ -2250,7 +2181,6 @@
         "favicon": "assets/radios/Unidentified2.webp",
         "genre": "anime",
         "homepage": "https://zeno.fm/radio/japan-anime-songs/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/3hhp76wdz4zuv",
         "host": "zeno"
     },
     {
@@ -2259,7 +2189,6 @@
         "favicon": "assets/radios/AnimecolRadio.webp",
         "genre": "anime",
         "homepage": "https://onlineradiobox.com/co/animecol/?cs=co.animecol&played=1&lang=en",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/eg9unacxc6quv",
         "host": "zeno"
     },
     {
@@ -2268,7 +2197,6 @@
         "favicon": "assets/radios/AnimeNfoRadio.webp",
         "genre": "anime",
         "homepage": "https://zeno.fm/radio/animenfo-radio/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/xwa8ckz7mzzuv",
         "host": "zeno"
     },
     {
@@ -2285,7 +2213,6 @@
         "favicon": "assets/radios/Animextreradio.webp",
         "genre": "anime",
         "homepage": "https://otaku-world.activoforo.com/t119-la-nueva-radio-animextreme",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/tqnyyz5r8neuv",
         "host": "zeno"
     },
     {
@@ -2438,7 +2365,6 @@
         "favicon": "assets/radios/JMusicAnimeRadio.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/jmusicanime-radio/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/g0wsfbbaft5tv",
         "host": "zeno"
     },
     {
@@ -2455,7 +2381,6 @@
         "favicon": "assets/radios/NichijouShuffle.webp",
         "genre": "anime",
         "homepage": "https://onlineradiobox.com/mm/nichijoushuffle/?cs=mm.nichijoushuffle&played=1&lang=en",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/tncreqmcwnhvv",
         "host": "zeno"
     },
     {
@@ -2464,7 +2389,6 @@
         "favicon": "assets/radios/Okufm.webp",
         "genre": "jmusic",
         "homepage": "https://onlineradiobox.com/cr/oku/?cs=cr.oku&played=1&lang=en",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/nrpe1a0n3p8uv",
         "host": "zeno"
     },
     {
@@ -2481,7 +2405,6 @@
         "favicon": "assets/radios/OpeningRadio.webp",
         "genre": "anime",
         "homepage": "https://zeno.fm/radio/opening-radio/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/tza2ayy47qruv",
         "host": "zeno"
     },
     {
@@ -2514,7 +2437,6 @@
         "favicon": "assets/radios/Radio3d6GDL.webp",
         "genre": "jmusic",
         "homepage": "https://onlineradiobox.com/mx/3d6gdl/?cs=mx.3d6gdl&played=1",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/xug9mpg0k2zuv",
         "host": "zeno"
     },
     {
@@ -2651,7 +2573,6 @@
         "favicon": "assets/radios/RadioJkanime.webp",
         "genre": "anime",
         "homepage": "https://jkanime.foroactivo.com/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/4n10t55g4uhvv",
         "host": "zeno"
     },
     {
@@ -2660,7 +2581,6 @@
         "favicon": "assets/radios/Lazusanimeradio.webp",
         "genre": "anime",
         "homepage": "https://onlineradiobox.com/mx/lazusanime/?cs=mx.lazusanime&played=1",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/wwl1pz3upisuv",
         "host": "zeno"
     },
     {
@@ -2677,7 +2597,6 @@
         "favicon": "assets/radios/ShinnyFM.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/shinny/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/aq6mkfyaxa0uv",
         "host": "zeno"
     },
     {
@@ -2694,7 +2613,6 @@
         "favicon": "assets/radios/AnimeLo-FiRoom.webp",
         "genre": "anime",
         "homepage": "https://zeno.fm/radio/anime-lo-fi-room/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/k2vkgfhkaxhvv",
         "host": "zeno"
     },
     {
@@ -2703,7 +2621,6 @@
         "favicon": "assets/radios/EastJourney.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/east-journey/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/gnicozidx4ytv",
         "host": "zeno"
     },
     {
@@ -2712,7 +2629,6 @@
         "favicon": "assets/radios/Tactac.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/tactac/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/692dbdr067zuv",
         "host": "zeno"
     },
     {
@@ -2729,7 +2645,6 @@
         "favicon": "assets/radios/Unidentified.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/country-genre/Japan/Music/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/mkpenp2uqncvv",
         "host": "zeno"
     },
     {
@@ -2738,7 +2653,6 @@
         "favicon": "assets/radios/AniRadio.webp",
         "genre": "anime",
         "homepage": "https://zeno.fm/radio/aniradio/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/uqtqaymd3k0uv",
         "host": "zeno"
     },
     {
@@ -2747,7 +2661,6 @@
         "favicon": "assets/radios/Kitsune.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/kitsune-b2lg/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/iujwoaxo43auv",
         "host": "zeno"
     },
     {
@@ -2756,7 +2669,6 @@
         "favicon": "assets/radios/982thebeatjapan.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/982thebeatjapan/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/75c2pu6q01zuv",
         "host": "zeno"
     },
     {
@@ -2765,7 +2677,6 @@
         "favicon": "assets/radios/FuryoMaxx.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/furyomaxx/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/hr12au0mky8uv",
         "host": "zeno"
     },
     {
@@ -2774,7 +2685,6 @@
         "favicon": "assets/radios/J-PopandR.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/j-pop-and-r/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/2z4nbuwcrm0uv",
         "host": "zeno"
     },
     {
@@ -2783,7 +2693,6 @@
         "favicon": "assets/radios/Animeradio.webp",
         "genre": "anime",
         "homepage": "https://zeno.fm/radio/animerafiootaku/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/vs06u1e87zhvv",
         "host": "zeno"
     },
     {
@@ -2792,7 +2701,6 @@
         "favicon": "assets/radios/RadioMangago.webp",
         "genre": "anime",
         "homepage": "https://zeno.fm/radio/radio-mangago-5s2i/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/j8mnd53cmcvtv",
         "host": "zeno"
     },
     {
@@ -2801,7 +2709,6 @@
         "favicon": "assets/radios/RadioMangaclash.webp",
         "genre": "anime",
         "homepage": "https://zeno.fm/radio/radio-mangaclash/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/hj40hbufqsqtv",
         "host": "zeno"
     },
     {
@@ -2810,7 +2717,6 @@
         "favicon": "assets/radios/RadioManhua.webp",
         "genre": "anime",
         "homepage": "https://zeno.fm/radio/radio-manhua/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/skroepgdndfuv",
         "host": "zeno"
     },
     {
@@ -2819,7 +2725,6 @@
         "favicon": "assets/radios/RadioKiss.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/radio-kiss-epav/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/tzt3zoqyiiutv",
         "host": "zeno"
     },
     {
@@ -2828,7 +2733,6 @@
         "favicon": "assets/radios/radiocosmic.webp",
         "genre": "variety",
         "homepage": "https://zeno.fm/radio/radio-cosmic-bs9f/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/jphpgtbbpsfvv",
         "host": "zeno"
     },
     {
@@ -2837,7 +2741,6 @@
         "favicon": "assets/radios/RadioHelscans.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/radio-helscans/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/xdsjmwzznkqvv",
         "host": "zeno"
     },
     {
@@ -2846,7 +2749,6 @@
         "favicon": "assets/radios/RadioFreak.webp",
         "genre": "variety",
         "homepage": "https://zeno.fm/radio/radio-freak/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/mtc097mepbhvv",
         "host": "zeno"
     },
     {
@@ -2855,7 +2757,6 @@
         "favicon": "assets/radios/RadioManga.webp",
         "genre": "variety",
         "homepage": "https://zeno.fm/radio/radio-reset/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/ingblqjnlohuv",
         "host": "zeno"
     },
     {
@@ -2864,7 +2765,6 @@
         "favicon": "assets/radios/RadioKoneko.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/konekoradio/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/kn3v4vwhwf9uv",
         "host": "zeno"
     },
     {
@@ -2873,7 +2773,6 @@
         "favicon": "assets/radios/RadioFlashMix.webp",
         "genre": "variety",
         "homepage": "https://zeno.fm/radio/radio-flash-mix/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/1ta75vgwbruv",
         "host": "zeno"
     },
     {
@@ -2882,7 +2781,6 @@
         "favicon": "assets/radios/DMusicRadio.webp",
         "genre": "variety",
         "homepage": "https://zeno.fm/radio/dmusic-radio-at/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/mphk12g0kc9uv",
         "host": "zeno"
     },
     {
@@ -2891,7 +2789,6 @@
         "favicon": "assets/radios/RadioFutureFunk.webp",
         "genre": "variety",
         "homepage": "https://zeno.fm/radio/future-fnk/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/48533y95cnruv",
         "host": "zeno"
     },
     {
@@ -2900,7 +2797,6 @@
         "favicon": "assets/radios/OtakusySantos-Radio.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/otakus-y-santos-radio/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/7ya34wyowbruv",
         "host": "zeno"
     },
     {
@@ -2909,7 +2805,6 @@
         "favicon": "assets/radios/TatsuroYamashitaRadio.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/tatsuro-yamashita-radio/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/p83d0vdp54zuv",
         "host": "zeno"
     },
     {
@@ -2918,7 +2813,6 @@
         "favicon": "assets/radios/JKT48Radio.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/jkt48radio/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/rfmrjm58r5nvv",
         "host": "zeno"
     },
     {
@@ -2927,7 +2821,6 @@
         "favicon": "assets/radios/AnimePopbySoun.webp",
         "genre": "anime",
         "homepage": "https://zeno.fm/radio/animepop-by-soundmasteradio/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/qlrhkrmqp42tv",
         "host": "zeno"
     },
     {
@@ -2936,7 +2829,6 @@
         "favicon": "assets/radios/LoveLiveMusic2.webp",
         "genre": "anime",
         "homepage": "https://zeno.fm/radio/love-live-music-2/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/z7s4pbe9o47uv",
         "host": "zeno"
     },
     {
@@ -2945,7 +2837,6 @@
         "favicon": "assets/radios/FMTXRadio.webp",
         "genre": "anime",
         "homepage": "https://zeno.fm/radio/fmtx-radio-LIVE/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/0gkf48yv7hhvv",
         "host": "zeno"
     },
     {
@@ -2954,7 +2845,6 @@
         "favicon": "assets/radios/MizarFM.webp",
         "genre": "variety",
         "homepage": "https://zeno.fm/radio/mizarfm/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/36kpdc4qn18uv",
         "host": "zeno"
     },
     {
@@ -2963,7 +2853,6 @@
         "favicon": "assets/radios/Weebio.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/weebio/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/9csa2ksv81zuv",
         "host": "zeno"
     },
     {
@@ -2972,7 +2861,6 @@
         "favicon": "assets/radios/TakeutiTownRadio1ch.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/takeuti-town-radio-1ch/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/7y5ay9u44bhvv",
         "host": "zeno"
     },
     {
@@ -2981,7 +2869,6 @@
         "favicon": "assets/radios/EmisoraRioMar.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/emisora-rio-mar/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/ingrlgleg7auv",
         "host": "zeno"
     },
     {
@@ -2990,7 +2877,6 @@
         "favicon": "assets/radios/KizunaRadioColombia.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/kizunaradiocolombia/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/c4r2ds0sasquv",
         "host": "zeno"
     },
     {
@@ -2999,7 +2885,6 @@
         "favicon": "assets/radios/JVerse.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/j-verse-my/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/xtxxu8emnkhvv",
         "host": "zeno"
     },
     {
@@ -3008,7 +2893,6 @@
         "favicon": "assets/radios/FMBROS..webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/bros-channel/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/gankz4m06bhvv",
         "host": "zeno"
     },
     {
@@ -3017,7 +2901,6 @@
         "favicon": "assets/radios/AnimaxRadio.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/animaxradio/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/ep9mpnntsnhvv",
         "host": "zeno"
     },
     {
@@ -3026,7 +2909,6 @@
         "favicon": "assets/radios/JMusicTY.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/jmusicty/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/3stqe5x9tc9uv",
         "host": "zeno"
     },
     {
@@ -3035,7 +2917,6 @@
         "favicon": "assets/radios/FutureFunkRadio.webp",
         "genre": "variety",
         "homepage": "https://zeno.fm/radio/future-funk-radio/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/9th16b9d6zhvv",
         "host": "zeno"
     },
     {
@@ -3044,7 +2925,6 @@
         "favicon": "assets/radios/RadioJapamix.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/radiojapamix/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/vcls0bo2uvvvv",
         "host": "zeno"
     },
     {
@@ -3053,7 +2933,6 @@
         "favicon": "assets/radios/AnimeandJapaneseSongs.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/anime-and-japanese-songs/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/ddetxwuhkpeuv",
         "host": "zeno"
     },
     {
@@ -3062,7 +2941,6 @@
         "favicon": "assets/radios/Vocaloid.webp",
         "genre": "vocaloid",
         "homepage": "https://zeno.fm/radio/vocaloid/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/7fifg2awejquv",
         "host": "zeno"
     },
     {
@@ -3071,7 +2949,6 @@
         "favicon": "assets/radios/SpriteHoloRadio.webp",
         "genre": "vocaloid",
         "homepage": "https://zeno.fm/radio/sprite-holoradio/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/2yu68unk7s8uv",
         "host": "zeno"
     },
     {
@@ -3080,7 +2957,6 @@
         "favicon": "assets/radios/RadioKanimes.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/radiokanimes/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/dpfqxmzcswzuv",
         "host": "zeno"
     },
     {
@@ -3089,7 +2965,6 @@
         "favicon": "assets/radios/RÁDIOANIMEINFOBR.webp",
         "genre": "anime",
         "homepage": "https://zeno.fm/radio/animeinfobr/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/k01037h7h0hvv",
         "host": "zeno"
     },
     {
@@ -3098,7 +2973,6 @@
         "favicon": "assets/radios/LinkedHorizonRadio.webp",
         "genre": "anime",
         "homepage": "https://zeno.fm/radio/linked-horizon-radio/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/bljr3tjfpiuvv",
         "host": "zeno"
     },
     {
@@ -3107,7 +2981,6 @@
         "favicon": "assets/radios/GlobalBeatsFM.webp",
         "genre": "variety",
         "homepage": "https://zeno.fm/radio/global-beats-fm/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/gazgysbgs0hvv",
         "host": "zeno"
     },
     {
@@ -3116,7 +2989,6 @@
         "favicon": "assets/radios/LOFIRADIOYO.webp",
         "genre": "variety",
         "homepage": "https://zeno.fm/radio/underground-railroad-radio-nyc3hwfa6b26bhvv/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/cemea6b26bhvv",
         "host": "zeno"
     },
     {
@@ -3125,7 +2997,6 @@
         "favicon": "assets/radios/RadioDozaAnime.webp",
         "genre": "anime",
         "homepage": "https://zeno.fm/radio/radio-doza-anime/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/x0rgqwv75zhvv",
         "host": "zeno"
     },
     {
@@ -3134,7 +3005,6 @@
         "favicon": "assets/radios/Akiharadio.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/akiharadio/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/dpk0nznyes8uv",
         "host": "zeno"
     },
     {
@@ -3143,7 +3013,6 @@
         "favicon": "assets/radios/ShikonNoTamaRadio.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/shikonnotamaradio/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/whehxaqutvduv",
         "host": "zeno"
     },
     {
@@ -3152,7 +3021,6 @@
         "favicon": "assets/radios/LittleOsakaFM.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/little-osaka-fm/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/pjrprpgelblvv",
         "host": "zeno"
     },
     {
@@ -3161,7 +3029,6 @@
         "favicon": "assets/radios/AniPeruZero.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/aniperu-zero/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/a3hm4n993k0uv",
         "host": "zeno"
     },
     {
@@ -3170,7 +3037,6 @@
         "favicon": "assets/radios/Otaku89.8Fm.webp",
         "genre": "anime",
         "homepage": "https://zeno.fm/radio/otaku88-fmqs1u8247368uv/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/rr0t8247368uv",
         "host": "zeno"
     },
     {
@@ -3179,7 +3045,6 @@
         "favicon": "assets/radios/RadioZen.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/radio-zen/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/765cszwekzzuv",
         "host": "zeno"
     },
     {
@@ -3188,7 +3053,6 @@
         "favicon": "assets/radios/KantoralJapones.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/kantoral-japones/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/muth7kcknrdtv",
         "host": "zeno"
     },
     {
@@ -3197,7 +3061,6 @@
         "favicon": "assets/radios/RetroIdolJapaneseMusic.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/retro-idol-japanese-music/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/qp5vjrxwiyhvv",
         "host": "zeno"
     },
     {
@@ -3206,7 +3069,6 @@
         "favicon": "assets/radios/AnimeLux.webp",
         "genre": "anime",
         "homepage": "https://zeno.fm/radio/anime-lux/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/ms7r8z744hhvv",
         "host": "zeno"
     },
     {
@@ -3215,7 +3077,6 @@
         "favicon": "assets/radios/RADIOMOSHI.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/radio-moshi/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/nq7fdn7wqfhvv",
         "host": "zeno"
     },
     {
@@ -3224,7 +3085,6 @@
         "favicon": "assets/radios/BreezbaeRadio.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/breezbae-radio/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/vqa2reaebchvv",
         "host": "zeno"
     },
     {
@@ -3233,7 +3093,6 @@
         "favicon": "assets/radios/MaidCafé.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/babymetalradio/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/ddpzcuq1ra0uv",
         "host": "zeno"
     },
     {
@@ -3242,7 +3101,6 @@
         "favicon": "assets/radios/VocaloidAR.webp",
         "genre": "vocaloid",
         "homepage": "https://zeno.fm/radio/vocaloid-ar/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/qff0x4wyd5zuv",
         "host": "zeno"
     },
     {
@@ -3251,7 +3109,6 @@
         "favicon": "assets/radios/JMusicAnimeWorld.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/jmusicanime-world/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/04852hp5vy5tv",
         "host": "zeno"
     },
     {
@@ -3260,7 +3117,6 @@
         "favicon": "assets/radios/CooltureJapanMusic.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/coolturejapan/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/se7zynf3srhvv",
         "host": "zeno"
     },
     {
@@ -3269,7 +3125,6 @@
         "favicon": "assets/radios/FNKYRadio.webp",
         "genre": "variety",
         "homepage": "https://zeno.fm/radio/fnky-radio/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/9cbvzc3d6zhvv",
         "host": "zeno"
     },
     {
@@ -3278,7 +3133,6 @@
         "favicon": "assets/radios/RadioKawaii.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/radio-kawaii/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/990u4rrxqnhvv",
         "host": "zeno"
     },
     {
@@ -3287,7 +3141,6 @@
         "favicon": "assets/radios/BansheeRadio.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/bansheeradio/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/0tsswznd7f0uv",
         "host": "zeno"
     },
     {
@@ -3296,7 +3149,6 @@
         "favicon": "assets/radios/RádioMirai.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/radiomirai/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/mfkqstngk5zuv",
         "host": "zeno"
     },
     {
@@ -3305,7 +3157,6 @@
         "favicon": "assets/radios/MerodiMatsuri.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/merodi-matsuri/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/c45cb5sbf2zuv",
         "host": "zeno"
     },
     {
@@ -3314,7 +3165,6 @@
         "favicon": "assets/radios/RadioSeagull.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/radio-seagull/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/s31sbsbonhyuv",
         "host": "zeno"
     },
     {
@@ -3323,7 +3173,6 @@
         "favicon": "assets/radios/PhantasmWar.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/phantasm-war/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/ttdwqybl1rlvv",
         "host": "zeno"
     },
     {
@@ -3364,7 +3213,6 @@
         "favicon": "assets/radios/AnimextreamRadio.webp",
         "genre": "anime",
         "homepage": "https://zeno.fm/radio/animextream-radio/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/9veewz5r8neuv",
         "host": "zeno"
     },
     {
@@ -3389,7 +3237,6 @@
         "favicon": "assets/radios/GeekRadioMusic.webp",
         "genre": "jmusic",
         "homepage": "https://zeno.fm/radio/geekradioM/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/8d0xskxsxxquv",
         "host": "zeno"
     },
     {
@@ -3414,7 +3261,6 @@
         "favicon": "assets/radios/AnimeFlash.webp",
         "genre": "anime",
         "homepage": "https://zeno.fm/radio/anime-flash/?",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/lxnpskbosrlvv",
         "host": "zeno"
     },
     {
@@ -3423,7 +3269,6 @@
         "favicon": "assets/radios/KamehouseStation.webp",
         "genre": "anime",
         "homepage": "https://zeno.fm/radio/kamehouse-station/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/dayuza9yt4zuv",
         "host": "zeno"
     },
     {
@@ -3440,7 +3285,6 @@
         "favicon": "assets/radios/FananpyRadio.webp",
         "genre": "jmusic",
         "homepage": "https://onlineradiobox.com/py/fananpy/?cs=py.fananpy&played=1",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/8p9ypyq537zuv",
         "host": "zeno"
     },
     {
@@ -3457,7 +3301,6 @@
         "favicon": "assets/radios/RadioAnimeAX.webp",
         "genre": "anime",
         "homepage": "https://onlineradiobox.com/co/animeax/?cs=co.animeax&played=1",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/c963db7eec9uv",
         "host": "zeno"
     },
     {
@@ -3626,7 +3469,6 @@
         "favicon": "assets/radios/FreeFMvar.webp",
         "genre": "variety",
         "homepage": "https://zeno.fm/radio/freefmxmas/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/h60er015v68uv",
         "host": "zeno"
     },
     {
@@ -3635,7 +3477,6 @@
         "favicon": "assets/radios/FreeFMvar.webp",
         "genre": "variety",
         "homepage": "https://zeno.fm/radio/freefmlove/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/umsptm6rvy8uv",
         "host": "zeno"
     },
     {
@@ -4004,7 +3845,6 @@
         "favicon": "assets/radios/KOOLFM96.webp",
         "genre": "kmusic",
         "homepage": "https://zeno.fm/radio/kool-fm-96/",
-        "api": "https://api.zeno.fm/mounts/metadata/subscribe/97qzdqafuqzuv",
         "host": "zeno"
     },
     {
