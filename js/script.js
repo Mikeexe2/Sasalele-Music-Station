@@ -9,7 +9,6 @@ const stationName = document.getElementById('stationName');
 const stationCount = document.getElementById('station-count');
 const RandomPlay = document.getElementById('randomplay');
 
-let icecastMetadataPlayer;
 let currentPlayingMedia = null;
 
 function startCoverRotation() {
@@ -30,34 +29,45 @@ function updateButtonIcon(button, isPlaying) {
     button.innerHTML = isPlaying ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>';
 }
 
-
+let metadataInterval = null;
+let eventSource = null;
+let icecastMetadataPlayer = null;
 function playMedia(media, playButton) {
-    metadataElement.innerHTML = '';
+    // update button icon on the radio list
     document.querySelectorAll('.main-play-button').forEach(button => {
         updateButtonIcon(button, button === playButton && !player.paused);
     });
+    metadataElement.innerHTML = '';
+    reloadMetadata();
 
-    // url_resolved is for radio search results
+    // clear intervals and detach event sources when reloading metadata for a new station
+    function reloadMetadata() {
+        if (metadataInterval) {
+            clearInterval(metadataInterval);
+            metadataInterval = null;
+        }
+        if (eventSource) {
+            eventSource.close();
+            eventSource = null;
+        }
+        if (icecastMetadataPlayer) {
+            icecastMetadataPlayer.detachAudioElement();
+        }
+    }
+
+    // url_resolved is for radio browser's search results
     const chosenUrl = media.url_resolved || media.url;
 
     // play the stream without metadata
     const playStream = () => {
         player.src = chosenUrl;
         player.play();
-        cover.innerHTML = `<a href="${media.homepage}" target="_blank" class="homepagelink"><img id="ip" src="${media.favicon}"></a>`;
-        stationName.textContent = media.name;
-        metadataElement.innerHTML = "Click on icon to go to homepage";
-        player.setAttribute('data-link', chosenUrl);
+        updatePlayerUI(media);
         startCoverRotation();
     };
 
-    // play using Icecast metadata
     const playiceCast = () => {
         try {
-            if (icecastMetadataPlayer) {
-                icecastMetadataPlayer.detachAudioElement();
-            }
-
             icecastMetadataPlayer = new IcecastMetadataPlayer(chosenUrl, {
                 audioElement: player,
                 onMetadata: (metadata) => {
@@ -72,39 +82,148 @@ function playMedia(media, playButton) {
                     playStream(); // Fallback to playing stream without metadata
                 },
             });
-
             icecastMetadataPlayer.play();
-            cover.innerHTML = `<a href="${media.homepage}" target="_blank" class="homepagelink"><img id="ip" src="${media.favicon}"></a>`;
-            stationName.textContent = media.name;
-            player.setAttribute('data-link', chosenUrl);
+            updatePlayerUI(media);
             startCoverRotation();
         } catch (error) {
             console.error('Error initializing Icecast metadata player:', error);
             playStream(); // Fallback to playing stream without metadata
         }
     };
+    // fetch metadata of different types
+    function metadataUpdate(apiUrl, type) {
+        const fetchmetadata = () => {
+            if (type === 'lautfm') {
+                fetch(apiUrl)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(jsonData => {
+                        const streamTitle = formatlautTitle(jsonData);
+                        metadataElement.innerHTML = streamTitle;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching or processing data:', error);
+                        metadataElement.innerHTML = 'Stream not active';
+                    });
+            } else if (type === 'zeno') {
+                eventSource = new EventSource(apiUrl);
 
-    // Check media.host and decide which function to call
-    switch (media.host) {
-        case 'icecast':
-            playiceCast();
-            break;
-        case 'unknown':
-        case 'zeno':
-        case 'centova':
-        case 'lautfm':
-        case 'torontocast':
-        case 'asura':
-            playStream();
-            break;
-        default:
-            playiceCast();
-            break;
+                eventSource.addEventListener('message', function (event) {
+                    processData(event.data);
+                });
+
+                eventSource.addEventListener('error', function (event) {
+                    console.error('Stream endpoint not active:', event);
+                    metadataElement.innerHTML = 'Stream endpoint not active';
+                });
+
+                function processData(data) {
+                    try {
+                        const parsedData = JSON.parse(data);
+
+                        if (parsedData.streamTitle) {
+                            const streamTitle = parsedData.streamTitle.trim();
+                            metadataElement.innerHTML = streamTitle;
+                        } else {
+                            metadataElement.innerHTML = 'Metadata not available';
+                        }
+                    } catch (error) {
+                        console.error('Failed to parse JSON:', error);
+                    }
+                }
+            }
+        };
+        fetchmetadata();
+
+        metadataInterval = setInterval(fetchmetadata, 10000);
     }
 
+    function playlautfm() {
+        const lautapiUrl = `http://api.laut.fm/station/${getSpecialID(chosenUrl)}/current_song`;
+        metadataUpdate(lautapiUrl, 'lautfm');
+        playStream();
+    }
+
+    function playzeno() {
+        const zenoapiUrl = `https://api.zeno.fm/mounts/metadata/subscribe/${getSpecialID(chosenUrl)}`;
+        metadataUpdate(zenoapiUrl, 'zeno');
+        playStream();
+    }
+
+    //extract name or ID from chosenUrl
+    function getSpecialID(url) {
+        const parts = url.split('/');
+        return parts[parts.length - 1];
+    }
+
+    function formatlautTitle(jsonData) {
+        try {
+            const title = jsonData.title || '';
+            const artistName = (jsonData.artist && jsonData.artist.name) || '';
+            const streamTitle = `${title} - ${artistName}`;
+            return streamTitle;
+        } catch (error) {
+            console.error('Failed to parse JSON:', error);
+            return 'Metadata not available';
+        }
+    }
+
+    function updatePlayerUI(media) {
+        cover.innerHTML = `<a href="${media.homepage}" target="_blank" class="homepagelink"><img id="ip" src="${media.favicon}"></a>`;
+        stationName.textContent = media.name;
+        player.setAttribute('data-link', chosenUrl);
+    }
+
+    // playback control
+    if (player.getAttribute('data-link') === chosenUrl) {
+        if (player.paused) {
+            player.play();
+            startCoverRotation();
+        } else {
+            player.pause();
+            stopCoverRotation();
+        }
+    } else {
+        // Check media.host and decide which function to call
+        switch (media.host) {
+            case 'icecast':
+                playiceCast();
+                break;
+            case 'zeno':
+                playzeno();
+                break;
+            case 'lautfm':
+                playlautfm();
+                break;
+            case 'unknown':
+            case 'centova':
+            case 'torontocast':
+            case 'asura':
+                playStream();
+                metadataElement.innerHTML = "Click on icon to go to homepage";
+                break;
+            default:
+                playiceCast();
+                break;
+        }
+    }
     currentPlayingMedia = playButton;
 }
 
+// Event listener for play/pause events on the player
+player.addEventListener('play', () => {
+    updateButtonIcon(currentPlayingMedia, true);
+    startCoverRotation();
+});
+
+player.addEventListener('pause', () => {
+    updateButtonIcon(currentPlayingMedia, false);
+    stopCoverRotation();
+});
 
 function loadAll() {
     fetch("Links/all.json")
@@ -138,7 +257,7 @@ function loadAll() {
                 <div class="widget">
                 <img class="rad-icon" src="${station.favicon}">
                 <div class="download-button"><i class="fas fa-download"></i></div>
-                <a href="${station.website}" target="_blank">
+                <a href="${station.homepage}" target="_blank">
                     <span class="player-radio-name">${station.name}</span>
                 </a>   
                 <div class="ml-auto btn btn-primary main-play-button"><i class="fas fa-play"></i></a></div>
@@ -469,17 +588,6 @@ function radioSearch() {
 
     clearSearchField();
 }
-
-// Event listener for play/pause events on the player
-player.addEventListener('play', () => {
-    updateButtonIcon(currentPlayingMedia, true);
-    startCoverRotation();
-});
-
-player.addEventListener('pause', () => {
-    updateButtonIcon(currentPlayingMedia, false);
-    stopCoverRotation();
-});
 
 // Initialize load all internet radios
 loadAll();

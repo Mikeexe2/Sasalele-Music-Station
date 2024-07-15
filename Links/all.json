@@ -53,7 +53,8 @@
         "favicon": "assets/radios/radioamc.webp",
         "genre": "jmusic",
         "homepage": "https://radioamc.com.br/",
-        "host": "unknown"
+        "api": "de.amc",
+        "host": "special"
     },
     {
         "name": "Gameoverse Radio",
@@ -85,7 +86,8 @@
         "favicon": "assets/radios/chiruno.webp",
         "genre": "jmusic",
         "homepage": "https://liveonlineradio.net/chiru",
-        "host": "unknown"
+        "api":"jp.chiru.no",
+        "host": "special"
     },
     {
         "name": "JamendoLounge",
@@ -125,7 +127,8 @@
         "favicon": "assets/radios/futuregroove.webp",
         "genre": "nightcore",
         "homepage": "https://futuregroove.jp/fm/",
-        "host": "unknown"
+        "api": "jp.futuregroove",
+        "host": "special"
     },
     {
         "name": "Hotmix Japan",
@@ -2253,7 +2256,8 @@
         "favicon": "assets/radios/J-ClubPowerplayHipHop.webp",
         "genre": "jmusic",
         "homepage": "https://asiadreamradio.torontocast.stream/stations/jclubplayer.html",
-        "host": "torontocast"
+        "api": "jp.j-clubasiadreamradio",
+        "host": "special"
     },
     {
         "name": "J-Pop Powerplay Kawaii",
@@ -2261,7 +2265,8 @@
         "favicon": "assets/radios/J-PopPowerplayKawaii.webp",
         "genre": "jmusic",
         "homepage": "https://asiadreamradio.torontocast.stream/stations/jkawaiiplayer.html",
-        "host": "torontocast"
+        "api": "jp.jpoppowerplaykawaii",
+        "host": "special"
     },
     {
         "name": "J-Pop Powerplay",
@@ -2269,7 +2274,8 @@
         "favicon": "assets/radios/J-PopPowerplay.webp",
         "genre": "jmusic",
         "homepage": "https://asiadreamradio.torontocast.stream/stations/jpowerplayer.html",
-        "host": "torontocast"
+        "api": "jp.asiadreamradio",
+        "host": "special"
     },
     {
         "name": "J-Rock Powerplay",
@@ -2277,7 +2283,8 @@
         "favicon": "assets/radios/J-RockPowerplay.webp",
         "genre": "jmusic",
         "homepage": "https://asiadreamradio.torontocast.stream/stations/jrockplayer.html",
-        "host": "torontocast"
+        "api": "jp.jrockpowerplay",
+        "host": "special"
     },
     {
         "name": "Japan Hits - All J-Pop",
@@ -2285,7 +2292,8 @@
         "favicon": "assets/radios/JapanHits-AllJ-Pop.webp",
         "genre": "jmusic",
         "homepage": "https://asiadreamradio.torontocast.stream/stations/japanhitsplayer.html",
-        "host": "torontocast"
+        "api": "jp.asiadreamhits",
+        "host": "special"
     },
     {
         "name": "JSakura 懐かしい",
@@ -2293,7 +2301,8 @@
         "favicon": "assets/radios/JSakura懐かしい.webp",
         "genre": "jmusic",
         "homepage": "https://asiadreamradio.torontocast.stream/stations/natsukashiiplayer.html",
-        "host": "torontocast"
+        "api": "jp.jsakura",
+        "host": "special"
     },
     {
         "name": "Jazz Sakura",
@@ -2301,7 +2310,8 @@
         "favicon": "assets/radios/JazzSakura.webp",
         "genre": "jmusic",
         "homepage": "https://asiadreamradio.torontocast.stream/stations/jazzsakuraplayer.html",
-        "host": "torontocast"
+        "api": "jp.christmas15asiadream",
+        "host": "special"
     },
     {
         "name": "J-Club Bandstand",
@@ -2309,7 +2319,8 @@
         "favicon": "assets/radios/J-ClubBandstand.webp",
         "genre": "jmusic",
         "homepage": "https://asiadreamradio.torontocast.stream/stations/jazzbandplayer.html",
-        "host": "torontocast"
+        "api": "ca.jclubbandstand",
+        "host": "special"
     },
     {
         "name": "J1 GOLD",
@@ -2317,7 +2328,8 @@
         "favicon": "assets/radios/J1GOLD.webp",
         "genre": "jmusic",
         "homepage": "https://www.j1fm.tokyo/player/j1gold/",
-        "host": "torontocast"
+        "api": "jp.j1gold",
+        "host": "special"
     },
     {
         "name": "J1 HITS",
@@ -2325,7 +2337,8 @@
         "favicon": "assets/radios/J1HITS.webp",
         "genre": "jmusic",
         "homepage": "https://www.j1fm.tokyo/player/j1hits/",
-        "host": "torontocast"
+        "api": "jp.j1",
+        "host": "special"
     },
     {
         "name": "J1 XTRA",
@@ -2333,7 +2346,8 @@
         "favicon": "assets/radios/J1XTRA.webp",
         "genre": "jmusic",
         "homepage": "https://www.j1fm.tokyo/player/j1xtra/",
-        "host": "torontocast"
+        "api": "jp.j1xtra",
+        "host": "special"
     },
     {
         "name": "J1 HD",
@@ -2341,7 +2355,8 @@
         "favicon": "assets/radios/J1HD.webp",
         "genre": "jmusic",
         "homepage": "https://www.j1fm.tokyo/player/j1hd/",
-        "host": "torontocast"
+        "api": "jp.j1hd",
+        "host": "special"
     },
     {
         "name": "Japan Fans",
@@ -2392,12 +2407,13 @@
         "host": "zeno"
     },
     {
-        "name": "Only Hit Japan (http)",
+        "name": "Only Hit Japan",
         "url": "https://j.onlyhit.us/play",
         "favicon": "assets/radios/OnlyHitJapan.webp",
         "genre": "jmusic",
         "homepage": "https://onlineradiobox.com/us/onlyhitjapan/?cs=us.onlyhitjapan&played=1",
-        "host": "unknown"
+        "api": "us.onlyhitjapan",
+        "host": "special"
     },
     {
         "name": "Opening Radio",
@@ -2413,7 +2429,8 @@
         "favicon": "assets/radios/OtakuMusicRadio.webp",
         "genre": "anime",
         "homepage": "https://onlineradiobox.com/es/otakumusic/?cs=mx.3d6gdl&played=1&lang=en",
-        "host": "torontocast"
+        "api": "mx.3d6gdl",
+        "host": "special"
     },
     {
         "name": "Radio Animati",
@@ -2445,7 +2462,8 @@
         "favicon": "assets/radios/RadioAnime24.webp",
         "genre": "anime",
         "homepage": "https://www.radioanime24.pl/",
-        "host": "unknown"
+        "api": "pl.radioanime24",
+        "host": "special"
     },
     {
         "name": "Radio Anime Night (http)",
@@ -2477,7 +2495,8 @@
         "favicon": "assets/radios/RádioBlast.webp",
         "genre": "jmusic",
         "homepage": "https://onlineradiobox.com/br/blast/?cs=br.blast&played=1&lang=en",
-        "host": "centova"
+        "api": "br.blast",
+        "host": "special"
     },
     {
         "name": "Radio Free Otaku",
@@ -2485,7 +2504,8 @@
         "favicon": "assets/radios/RadioFreeOtaku.webp",
         "genre": "anime",
         "homepage": "https://onlineradiobox.com/us/freeotaku/?cs=us.freeotaku&played=1",
-        "host": "unknown"
+        "api": "us.freeotaku",
+        "host": "special"
     },
     {
         "name": "Ronin Radio",
@@ -2493,7 +2513,8 @@
         "favicon": "assets/radios/RoninRadio.webp",
         "genre": "jmusic",
         "homepage": "https://onlineradiobox.com/us/ronin/?cs=us.ronin&played=1",
-        "host": "unknown"
+        "api": "us.ronin",
+        "host": "special"
     },
     {
         "name": "SBS PopAsia",
@@ -2549,7 +2570,8 @@
         "favicon": "assets/radios/RadioDoki.webp",
         "genre": "jmusic",
         "homepage": "https://onlineradiobox.com/mx/doki/?cs=mx.doki",
-        "host": "unknown"
+        "api": "us.ronin",
+        "host": "special"
     },
     {
         "name": "Kohina Radio",
@@ -3309,7 +3331,8 @@
         "favicon": "assets/radios/AnimeTracks.webp",
         "genre": "anime",
         "homepage": "https://www.animetracks.com/",
-        "host": "centova"
+        "api": "us.animetracks",
+        "host": "special"
     },
     {
         "name": "Yumi Co. Radio",
@@ -3348,8 +3371,9 @@
         "url": "https://stream.radiojar.com/66zgtscuc1duv",
         "favicon": "assets/radios/RadioEigekaiIndies.webp",
         "genre": "jmusic",
-        "homepage": "https://onlineradiobox.com/jp/radioeigekaiindies/?cs=jp.radioeigekaiindies",
-        "host": "unknown"
+        "homepage": "https://on lineradiobox.com/jp/radioeigekaiindies/?cs=jp.radioeigekaiindies",
+        "api": "jp.radioeigekaiindies",
+        "host": "special"
     },
     {
         "name": "Súper Tokio Radio",
@@ -3357,7 +3381,8 @@
         "favicon": "assets/radios/SúperTokioRadio.webp",
         "genre": "variety",
         "homepage": "https://mytuner-radio.com/es/emisora/super-tokio-radio-464596/",
-        "host": "unknown"
+        "api": "jp.supertokio",
+        "host": "special"
     },
     {
         "name": "Nonstop Casiopea - Fusion Radio",
