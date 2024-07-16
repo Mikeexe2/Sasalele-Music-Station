@@ -131,43 +131,106 @@
     left: 0;
     width: 100%;
     height: 100%;
-    transition: background-color 1s ease-in-out;
+    transition: background-color 0.12s ease-in-out;
 }
 
 #randomimg {
     z-index: 2;
     position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     mix-blend-mode: multiply;
-    display: block;
-    margin: 0 auto;
 }
 
 @keyframes shake {
     0% {
-        transform: translateX(0);
+        transform: translateX(0)
     }
 
     25% {
-        transform: translateX(-5px) rotate(-2deg);
+        transform: translateX(-5px) rotate(-2deg)
     }
 
     50% {
-        transform: translateX(5px) rotate(2deg);
+        transform: translateX(5px) rotate(2deg)
     }
 
     75% {
-        transform: translateX(-5px) rotate(-2deg);
+        transform: translateX(-5px) rotate(-2deg)
     }
 
     100% {
-        transform: translateX(0);
+        transform: translateX(0)
     }
 }
 
-#randomimg.shake {
-    animation: shake 0.3s ease-in-out;
+.anim-shake {
+    animation: shake 0.12s ease-in-out
+}
+
+.anim-blur-left {
+    animation: blur-left 0.12s 0s linear;
+    animation-fill-mode: both;
+}
+
+@keyframes blur-left {
+    0% {
+        left: -50px;
+    }
+
+    100% {
+        left: 0;
+    }
+}
+
+.anim-blur-right {
+    animation: blur-right 0.12s 0s linear;
+    animation-fill-mode: both;
+}
+
+@keyframes blur-right {
+    0% {
+        left: 50px;
+    }
+
+    100% {
+        left: 0;
+    }
+}
+
+.anim-blur-top {
+    animation: blur-top 0.12s 0s linear;
+    animation-fill-mode: both;
+}
+
+@keyframes blur-top {
+    0% {
+        top: -50px;
+    }
+
+    100% {
+        top: 0;
+    }
+}
+
+.anim-blur-bottom {
+    animation: blur-bottom 0.12s 0s linear;
+    animation-fill-mode: both;
+}
+
+@keyframes blur-bottom {
+    0% {
+        top: 50px;
+    }
+
+    100% {
+        top: 0;
+    }
 }
 
 .player-radio-name:hover::after,
@@ -232,6 +295,8 @@
 
 body {
     font-family: "Open Sans", sans-serif;
+    width: 100%;
+    min-height: 100%;
     cursor: url(../assets/Arrow.cur), auto;
 }
 

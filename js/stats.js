@@ -79,35 +79,30 @@ updateClock();
 setInterval(updateClock, 1000);
 
 // 0x40 hues animation??
-const hues = Array.from({ length: 64 }, () => Math.floor(Math.random() * 360));
+const hues = Array.from({ length: 128 }, () => Math.floor(Math.random() * 3600 / 10) * 10);
 
 const background = document.getElementById('background');
 const randomimg = document.getElementById('randomimg');
 
 function setRandomBackgroundColor(hue) {
-    const opacity = Math.random() * 0.8 + 0.2; // Random opacity between 0.2 and 0.7
-    background.style.backgroundColor = `hsla(${hue}, 80%, 70%, ${opacity})`;
+    background.style.backgroundColor = `hsla(${hue}, 80%, 70%, 1.0)`;
 }
 
 function setRandomImage() {
     const randomIndex = Math.floor(Math.random() * 296) + 1;
-    randomimg.classList.add('shake');
-
     randomimg.src = `images/image${randomIndex}.png`;
 
-    setTimeout(() => {
-        randomimg.classList.remove('shake');
-    }, 140);
+    const animation = ['anim-shake', 'anim-blur-left', 'anim-blur-right', 'anim-blur-top', 'anim-blur-bottom'];
 
+    const anim = animation[Math.floor(Math.random() * animation.length)];
+
+    randomimg.className = '';
+
+    randomimg.classList.add(anim);
 }
 
 function getRandomInterval(min, max) {
     return Math.random() * (max - min) + min;
-}
-
-function getRandomBlendMode() {
-    const blendModes = ['darken', 'overlay', 'multiply'];
-    return blendModes[Math.floor(Math.random() * blendModes.length)];
 }
 
 function animateHues() {
@@ -116,14 +111,11 @@ function animateHues() {
         setRandomBackgroundColor(hue);
         setRandomImage();
 
-        const blendMode = getRandomBlendMode();
-        randomimg.style.mixBlendMode = blendMode;
-
-        const interval = getRandomInterval(0.5, 1.7) * 1000; // Convert seconds to milliseconds
+        const interval = getRandomInterval(0.5, 1.2) * 1000;
         setTimeout(animate, interval);
     }
 
-    animate(); // Initial call to start animation
+    animate();
 }
 
 animateHues();
