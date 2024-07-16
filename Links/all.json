@@ -3482,7 +3482,7 @@
     },
     {
         "name": "Free FM",
-        "url": "https://rocafmadrid.radioca.st/",
+        "url": "https://rocafmadrid.radioca.st/;?type=http&nocache",
         "favicon": "assets/radios/FreeFM.webp",
         "genre": "variety",
         "homepage": "https://rocafmadrid.radioca.st/index.html?sid=1",

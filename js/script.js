@@ -8,6 +8,7 @@ const player = document.getElementById('miniPlayer');
 const stationName = document.getElementById('stationName');
 const stationCount = document.getElementById('station-count');
 const RandomPlay = document.getElementById('randomplay');
+const volumeSlider = document.getElementById('volumeSlider');
 
 let currentPlayingMedia = null;
 
@@ -28,6 +29,17 @@ function stopCoverRotation() {
 function updateButtonIcon(button, isPlaying) {
     button.innerHTML = isPlaying ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>';
 }
+
+// Event listener for play/pause events on the player
+player.addEventListener('play', () => {
+    updateButtonIcon(currentPlayingMedia, true);
+    startCoverRotation();
+});
+
+player.addEventListener('pause', () => {
+    updateButtonIcon(currentPlayingMedia, false);
+    stopCoverRotation();
+});
 
 let metadataInterval = null;
 let eventSource = null;
@@ -52,6 +64,7 @@ function playMedia(media, playButton) {
         }
         if (icecastMetadataPlayer) {
             icecastMetadataPlayer.detachAudioElement();
+            icecastMetadataPlayer = null;
         }
     }
 
@@ -93,6 +106,11 @@ function playMedia(media, playButton) {
     // fetch metadata of different types
     function metadataUpdate(apiUrl, type) {
         const fetchmetadata = () => {
+            /* if (player.paused) {
+                 clearInterval(metadataInterval);
+                 return;
+             }*/
+
             if (type === 'lautfm') {
                 fetch(apiUrl)
                     .then(response => {
@@ -136,6 +154,9 @@ function playMedia(media, playButton) {
                     }
                 }
             }
+            else if (type == 'special') {
+
+            }
         };
         fetchmetadata();
 
@@ -144,14 +165,42 @@ function playMedia(media, playButton) {
 
     function playlautfm() {
         const lautapiUrl = `http://api.laut.fm/station/${getSpecialID(chosenUrl)}/current_song`;
-        metadataUpdate(lautapiUrl, 'lautfm');
         playStream();
+        metadataUpdate(lautapiUrl, 'lautfm');
     }
 
     function playzeno() {
         const zenoapiUrl = `https://api.zeno.fm/mounts/metadata/subscribe/${getSpecialID(chosenUrl)}`;
-        metadataUpdate(zenoapiUrl, 'zeno');
         playStream();
+        metadataUpdate(zenoapiUrl, 'zeno');
+    }
+
+    function playspecial(alias) {
+        const orbUrl = `https://scraper2.onlineradiobox.com/${alias}`;
+        const fetchmetadata = () => {
+            fetch(orbUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(jsonData => {
+                    try {
+                        const streamTitle = jsonData.title;
+                        metadataElement.innerHTML = streamTitle;
+                    } catch (error) {
+                        console.error('Failed to parse JSON:', error);
+                        metadataElement.innerHTML = 'No metadata';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching or processing data:', error);
+                    metadataElement.innerHTML = 'Stream not active';
+                });
+        }
+        fetchmetadata();
+        metadataInterval = setInterval(fetchmetadata, 10000);
     }
 
     //extract name or ID from chosenUrl
@@ -199,6 +248,8 @@ function playMedia(media, playButton) {
             case 'lautfm':
                 playlautfm();
                 break;
+            case 'special':
+                playspecial(media.api);
             case 'unknown':
             case 'centova':
             case 'torontocast':
@@ -218,11 +269,13 @@ function playMedia(media, playButton) {
 player.addEventListener('play', () => {
     updateButtonIcon(currentPlayingMedia, true);
     startCoverRotation();
+    //metadataUpdate(apiUrl, type);
 });
 
 player.addEventListener('pause', () => {
     updateButtonIcon(currentPlayingMedia, false);
     stopCoverRotation();
+    //clearInterval(metadataInterval);
 });
 
 function loadAll() {
@@ -307,6 +360,8 @@ function loadAll() {
             console.error('There was a problem with the fetch operation:', error);
         });
 }
+// Initialize load all internet radios
+loadAll();
 
 // initiate download of the internet radio's m3u file
 function RadioM3UDownload(stationURL, stationName) {
@@ -588,9 +643,6 @@ function radioSearch() {
 
     clearSearchField();
 }
-
-// Initialize load all internet radios
-loadAll();
 
 // for radio streams
 let currentRadioStreams = [];
