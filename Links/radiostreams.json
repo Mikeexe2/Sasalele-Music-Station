@@ -1,5 +1,12 @@
     [
         {
+            "title": "Vagalume.FM - J-Pop",
+            "link": "https://stream.vagalume.fm/hls/1475776167864381/aac.m3u8",
+            "icon": "assets/radios/vagalumefm.webp",
+            "homepage": "https://vagalume.fm/j-pop/",
+            "lang": "ja"
+        },
+        {
             "title": "NHK World Japan",
             "link": "https://nhkwlive-radio.akamaized.net/hls/live/2032384/radio-rs5/index_07.m3u8",
             "icon": "assets/websites/nhkworldradio.webp",
