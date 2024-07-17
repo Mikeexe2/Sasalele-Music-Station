@@ -913,10 +913,8 @@ screen and (min-width: 1152px) {
 
 #clock {
     color: var(--expressive-yellow);
+    font-size: 13px;
     font-weight: 400;
-    margin: 0 auto;
-    text-align: center;
-    padding: 1px;
 }
 
 .back-to-top {

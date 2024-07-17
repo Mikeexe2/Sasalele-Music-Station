@@ -39,15 +39,6 @@
         <script src="js/icecast-metadata-player-1.17.3.main.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.css" />
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-LDY4BC680M"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag() { dataLayer.push(arguments); }
-            gtag('js', new Date());
-
-            gtag('config', 'G-LDY4BC680M');
-        </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-v4-rtl/4.6.2-1/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
     </head>
@@ -56,7 +47,7 @@
         <nav class="navbar sticky-top navbar-dark navbar-expand-md">
             <a class="navbar-brand" href="https://basic.pp.ua/"><img class="" src="assets/sasalele_logo-removebg.webp"
                     width="auto" height="32"></a>
-            <div class="navbar-text d-flex justify-content-center align-items-center text-white">Sasalele Music Station
+            <div class="justify-content-center align-items-center text-white">Sasalele Music Station
             </div>
             <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse"
                 data-target="#main-navigation">
@@ -172,7 +163,7 @@
                     <div class="card genre-group">
                         <div class="card-body">
                             <h6 class="card-title">Search out of <span class="badge badge-primary"
-                                    id="station-count"></span> Stations</h6>
+                                    id="station-count"></span> stations</h6>
                             <div class="input-group text-center mx-auto mb-3">
                                 <input type="search" id="sasalelesearch" autofocus class="form-control"
                                     placeholder="Search in the station list..." aria-label="Search">
@@ -247,7 +238,7 @@
                         <div class="search-header">
                             <h4>Last.fm</h4>
                         </div>
-                        <ul id="lastfmList" class="list-group mb-1"></ul>
+                        <ul id="lastfmList" class="list-group text-center mb-2"></ul>
                     </div>
                     <div class="col-md-12">
                         <div class="search-header">
