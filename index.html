@@ -28,7 +28,7 @@
         <link rel="apple-touch-icon" href="assets/sasalele_logo-removebg.webp">
         <link rel="shortcut icon" href="assets/sasalele_logo-removebg.webp" type="image/x-icon" />
         <link rel="stylesheet" href="css/style.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-v4-rtl/4.6.2-1/css/bootstrap.min.css">
@@ -39,7 +39,6 @@
         <script src="js/icecast-metadata-player-1.17.3.main.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.css" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-v4-rtl/4.6.2-1/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
     </head>
 
@@ -95,6 +94,12 @@
         <div id="background"></div>
         <img id="randomimg" src="" alt=".">
         <div id="content">
+            <div class="switch-container" title="Animate">
+                <label class="switch">
+                    <input type="checkbox" id="toggleAnimation">
+                    <span class="slider"></span>
+                </label>
+            </div>
             <details close id="tips">
                 <summary><span class="badge badge-primary">Tips</span></summary>
                 <div class="card-body">
@@ -552,41 +557,51 @@
                 <div id="cover">
                     <img src="assets/NezukoYay.gif" id="ip">
                 </div>
-                <button id="toggleRandom" title="Tap to play randomly">
-                    <i class="fas fa-shuffle" id="randomplay"></i>
-                </button>
-                <div id="stationName">Play music</div>
-                <div id="metadata"></div>
-                <button id="copyIcon" class="btn btn-info mt-2">
-                    <i class="fas fa-copy"></i>
-                </button>
-                <audio id="miniPlayer" controls="" controlslist="nodownload noplaybackrate"></audio>
-                <button id="togglePlayer" title="Minimize the player">
-                    <i class="fas fa-expand"></i>
-                    <i class="fas fa-compress"></i>
-                </button>
-                <button id="historyBtn" class="btn btn-info mt-2" data-toggle="modal" data-target="#recentPanel">History
-                </button>
+                <div>
+                    <div class="player-controls">
+                        <button id="historyBtn" class="btn" data-toggle="modal" data-target="#recentPanel"
+                            title="View History">
+                            <i class="fa fa-history"></i>
+                        </button>
+                        <button id="toggleRandom" class="btn" title="Tap to play randomly">
+                            <i class="fas fa-shuffle" id="randomplay"></i>
+                        </button>
+                        <button id="togglePlayer" class="btn" title="Minimize the player">
+                            <i class="fas fa-expand"></i>
+                            <i class="fas fa-compress"></i>
+                        </button>
+                    </div>
+                    <div id="stationName">Play music</div>
+                    <div class="d-flex align-items-center"><span id="metadata">No music playing now
+                        </span>
+                        <button id="copyIcon" class="btn" title="Copy track title">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <audio id="miniPlayer" controls="" controlslist="nodownload noplaybackrate"></audio>
+                </div>
             </div>
-                <div class="modal fade" id="recentPanel" tabindex="-1" role="dialog" aria-labelledby="recent" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="recent">Recent Tracks</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <ul id="recentTracksList" class="list-group">
-                                </ul>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
+
+            <div class="modal fade" id="recentPanel" tabindex="-1" role="dialog" aria-labelledby="recent"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="recent">Recent Tracks</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <ul id="recentTracksList" class="list-group">
+                            </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
+            </div>
             <div id="disable_msg"></div>
 
             <section class="footer text-center" id="footer">
@@ -615,10 +630,6 @@
                     </div>
                 </div>
             </section>
-            <div class="switchContainer form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="animationSwitch" onchange="toggleAnimation();">
-                <label class="form-check-label" for="animationSwitch">Toggle Animation</label>
-            </div>
             <div class="back-to-top d-flex align-items-center justify-content-center"><i
                     class="fa-solid fa-arrow-up"></i>
             </div>
@@ -632,6 +643,7 @@
                 lang: 'en',
             });
         </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-v4-rtl/4.6.2-1/js/bootstrap.min.js"></script>
         <script data-cfasync="false" src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
         <script data-cfasync="false" src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
         <script src="js/stats.js"></script>

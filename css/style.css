@@ -125,7 +125,7 @@
 }
 
 #background {
-    z-index: 1;
+    z-index: -999;
     position: fixed;
     top: 0;
     left: 0;
@@ -135,7 +135,7 @@
 }
 
 #randomimg {
-    z-index: 2;
+    z-index: 1;
     position: fixed;
     top: 0;
     left: 0;
@@ -297,6 +297,11 @@ body {
     font-family: "Open Sans", sans-serif;
     width: 100%;
     min-height: 100%;
+    background-image: url('../assets/sasalele_bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
     cursor: url(../assets/Arrow.cur), auto;
 }
 
@@ -771,84 +776,70 @@ screen and (min-width: 1152px) {
 #player {
     position: sticky;
     display: block;
+    padding: 10px;
     align-items: center;
-    text-align: left;
     bottom: 10px;
     z-index: 2;
     left: 10px;
     border-radius: 10px;
-    padding: 10px;
     box-shadow: 0 0 10px 2px rgb(0, 0, 0);
     background-image: linear-gradient(to right, rgb(255, 206, 236), rgb(152, 150, 240));
     background-size: 200% 200%;
     animation: flowingGradient 5s ease infinite;
-    color: var(--white-100);
     height: fit-content;
     width: fit-content;
-    overflow: hidden;
+    overflow: hidden
 }
 
 #miniPlayer {
     filter: sepia(20%) saturate(70%) grayscale(1) contrast(99%) invert(12%);
-    height: 30px;
-}
-
-#ip {
-    height: 20px;
-    width: auto
-}
-
-#cover {
-    text-align: left;
+    width: 300px;
+    height: 40px;
 }
 
 #cover img {
-    width: 50px;
-    height: 50px;
+    max-width: 50px;
     border-radius: 50%;
-    margin-left: 5px;
-    margin-bottom: 5px;
 }
 
 #stationName {
-    font-size: 16px;
-    flex: 1;
-    text-align: left;
+    font-size: 15px;
     font-weight: bold;
-    padding: 2px 2px 2px 2px;
+    margin-left: 5px;
     color: var(--apple-black)
 }
 
 #metadata {
     color: var(--apple-black);
-    font-size: 16px;
+    font-size: 14px;
+    margin-left: 5px;
 }
 
-#togglePlayer {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    z-index: 999;
+.modal-dialog {
+    margin-top: 6% !important;
 }
 
-#toggleRandom {
+.modal-backdrop {
+    z-index: 2 !important;
+}
+
+#copyIcon {
+    margin-left: 5px;
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
     position: absolute;
-    top: 5px;
-    right: 40px;
-    z-index: 999;
+    top: 10px;
+    right: 10px;
 }
 
 #toggleRandom:hover,
-#togglePlayer:hover {
+#togglePlayer:hover,
+#copyIcon:hover,
+#historyBtn:hover {
     transform: scale(1.1);
-}
-
-#togglePlayer,
-#toggleRandom {
-    background: none;
-    border: none;
-    outline: none;
-    cursor: pointer;
 }
 
 #togglePlayer .fa-expand {
@@ -877,15 +868,10 @@ screen and (min-width: 1152px) {
     overflow: hidden;
 }
 
-#player.minimized #stationName {
-    display: none
-}
-
-#player.minimized #miniPlayer {
-    display: none
-}
-
-#player.minimized #metadata {
+#player.minimized #stationName,
+#player.minimized #miniPlayer,
+#player.minimized #metadata,
+#player.minimized #historyBtn {
     display: none;
 }
 
@@ -908,13 +894,63 @@ screen and (min-width: 1152px) {
 
 #aplayer {
     max-height: 300px;
-    justify-content: center
 }
 
 #clock {
     color: var(--expressive-yellow);
     font-size: 13px;
     font-weight: 400;
+}
+
+.switch-container {
+    position: absolute;
+    top: 40px;
+    right: 5px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: #2196F3;
+}
+
+input:checked+.slider:before {
+    transform: translateX(26px);
 }
 
 .back-to-top {
@@ -1552,11 +1588,6 @@ summary {
     #player.minimized {
         padding-left: 10px;
         padding-top: 40px;
-    }
-
-    #player #cover {
-        margin-left: 1px;
-        margin-right: 20px
     }
 
     .genre-content {

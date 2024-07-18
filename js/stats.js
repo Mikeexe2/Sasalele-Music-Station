@@ -83,6 +83,9 @@ const hues = Array.from({ length: 128 }, () => Math.floor(Math.random() * 3600 /
 
 const background = document.getElementById('background');
 const randomimg = document.getElementById('randomimg');
+const toggleAnimation = document.getElementById('toggleAnimation');
+
+let animationTimeout;
 
 function setRandomBackgroundColor(hue) {
     background.style.backgroundColor = `hsla(${hue}, 80%, 70%, 1.0)`;
@@ -107,17 +110,24 @@ function getRandomInterval(min, max) {
 
 function animateHues() {
     function animate() {
-        const hue = hues[Math.floor(Math.random() * hues.length)];
-        setRandomBackgroundColor(hue);
-        setRandomImage();
+        if (toggleAnimation.checked) {
+            const hue = hues[Math.floor(Math.random() * hues.length)];
+            setRandomBackgroundColor(hue);
+            setRandomImage();
 
-        const interval = getRandomInterval(0.5, 1.2) * 1000;
-        setTimeout(animate, interval);
+            const interval = getRandomInterval(0.5, 1.2) * 1000;
+            animationTimeout = setTimeout(animate, interval);
+        }
     }
 
     animate();
 }
 
-animateHues();
-
+toggleAnimation.addEventListener('change', () => {
+    if (toggleAnimation.checked) {
+        animateHues();
+    } else {
+        clearTimeout(animationTimeout);
+    }
+});
 
