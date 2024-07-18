@@ -557,13 +557,36 @@
                 </button>
                 <div id="stationName">Play music</div>
                 <div id="metadata"></div>
+                <button id="copyIcon" class="btn btn-info mt-2">
+                    <i class="fas fa-copy"></i>
+                </button>
                 <audio id="miniPlayer" controls="" controlslist="nodownload noplaybackrate"></audio>
                 <button id="togglePlayer" title="Minimize the player">
                     <i class="fas fa-expand"></i>
                     <i class="fas fa-compress"></i>
                 </button>
+                <button id="historyBtn" class="btn btn-info mt-2" data-toggle="modal" data-target="#recentPanel">History
+                </button>
             </div>
-
+                <div class="modal fade" id="recentPanel" tabindex="-1" role="dialog" aria-labelledby="recent" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="recent">Recent Tracks</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <ul id="recentTracksList" class="list-group">
+                                </ul>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <div id="disable_msg"></div>
 
             <section class="footer text-center" id="footer">
@@ -592,6 +615,10 @@
                     </div>
                 </div>
             </section>
+            <div class="switchContainer form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="animationSwitch" onchange="toggleAnimation();">
+                <label class="form-check-label" for="animationSwitch">Toggle Animation</label>
+            </div>
             <div class="back-to-top d-flex align-items-center justify-content-center"><i
                     class="fa-solid fa-arrow-up"></i>
             </div>
