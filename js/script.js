@@ -32,14 +32,14 @@ function updateButtonIcon(button, isPlaying) {
 
 // copy stream title
 copyIcon.addEventListener('click', () => {
-const textarea = document.createElement('textarea');
-textarea.value = metadataElement.textContent;
-document.body.appendChild(textarea);
-textarea.select();
-document.execCommand('copy');
-document.body.removeChild(textarea);
+    const textarea = document.createElement('textarea');
+    textarea.value = metadataElement.textContent;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
 
-//alert('Stream title copied to clipboard!');
+    //alert('Stream title copied to clipboard!');
 });
 
 let metadataInterval = null;
@@ -82,8 +82,6 @@ function playMedia(media, playButton) {
                     playSpecial(media.api);
                     break;
                 case 'unknown':
-                case 'centova':
-                case 'torontocast':
                     playStream();
                     metadataElement.innerHTML = "Click on icon to go to homepage";
                     break;
@@ -134,7 +132,6 @@ function playMedia(media, playButton) {
                 onError: (error) => {
                     console.log(error);
                     metadataElement.innerHTML = "Click on icon to go to homepage";
-                    playStream(); // Fallback to playing stream without metadata
                 },
             });
             updatePlayerUI(media);
@@ -142,8 +139,8 @@ function playMedia(media, playButton) {
             icecastMetadataPlayer.play();
         } catch (error) {
             console.error('Error initializing Icecast metadata player:', error);
-            playStream(); // Fallback to playing stream without metadata
         }
+        playStream();
     }
 
     // Play Zeno stream with metadata
@@ -168,16 +165,14 @@ function playMedia(media, playButton) {
                     const streamTitle = parsedData.streamTitle.trim();
                     trackHistory(streamTitle);
                     metadataElement.innerHTML = streamTitle;
-                    playStream();
                 } else {
                     metadataElement.innerHTML = 'Metadata not available';
-                    playStream();
                 }
             } catch (error) {
                 console.error('Failed to parse JSON:', error);
-                playStream();
             }
         }
+        playStream();
     }
 
     // Play LautFM stream with metadata
@@ -193,12 +188,6 @@ function playMedia(media, playButton) {
         startMetadataUpdate(apiUrl, 'special');
         playStream();
     }
-
-    /*function playAsura(alias) {
-        const apiUrl = `https://${alias}/api/nowplaying`;
-        startMetadataUpdate(apiUrl, 'asura');
-        playStream();
-    }*/
 
     // Start fetching metadata updates
     function startMetadataUpdate(apiUrl, type) {
@@ -652,7 +641,7 @@ function radioSearch() {
 
                 data.forEach(radio => {
                     const radioDiv = document.createElement('div');
-                    radioDiv.classList.add('widget', 'd-flex');
+                    radioDiv.classList.add('widget');
                     radioDiv.innerHTML = `
                         <img class="rad-icon" src="${radio.favicon ? radio.favicon : 'assets/radios/Unidentified2.webp'}">
                         <div class="download-button"><i class="fas fa-download"></i></div>

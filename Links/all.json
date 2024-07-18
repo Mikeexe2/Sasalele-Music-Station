@@ -292,7 +292,7 @@
         "favicon": "assets/radios/tokyorose.webp",
         "genre": "variety",
         "homepage": "https://www.tokyoroseradio.torontocast.stream/",
-        "host": "torontocast"
+        "host": "unknown"
     },
     {
         "name": "Shonan Beach FM",
@@ -2407,7 +2407,7 @@
         "favicon": "assets/radios/loveliveproject.webp",
         "genre": "anime",
         "homepage": "https://loveliveradio.com/radio.html",
-        "host": "torontocast"
+        "host": "unknown"
     },
     {
         "name": "Nichijou Shuffle",
