@@ -8,7 +8,7 @@ const player = document.getElementById('miniPlayer');
 const stationName = document.getElementById('stationName');
 const stationCount = document.getElementById('station-count');
 const RandomPlay = document.getElementById('randomplay');
-const volumeSlider = document.getElementById('volumeSlider');
+const copyIcon = document.getElementById('copyIcon');
 
 let currentPlayingMedia = null;
 
@@ -29,6 +29,18 @@ function stopCoverRotation() {
 function updateButtonIcon(button, isPlaying) {
     button.innerHTML = isPlaying ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>';
 }
+
+// copy stream title
+copyIcon.addEventListener('click', () => {
+const textarea = document.createElement('textarea');
+textarea.value = metadataElement.textContent;
+document.body.appendChild(textarea);
+textarea.select();
+document.execCommand('copy');
+document.body.removeChild(textarea);
+
+//alert('Stream title copied to clipboard!');
+});
 
 let metadataInterval = null;
 let eventSource = null;
