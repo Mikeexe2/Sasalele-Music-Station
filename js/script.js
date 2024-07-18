@@ -113,6 +113,7 @@ function playMedia(media, playButton) {
             icecastMetadataPlayer = new IcecastMetadataPlayer(chosenUrl, {
                 audioElement: player,
                 onMetadata: (metadata) => {
+                    trackHistory(metadata.StreamTitle || 'No metadata');
                     metadataElement.innerHTML = metadata.StreamTitle || 'No metadata';
                 },
                 metadataTypes: ["icy"],
@@ -153,6 +154,7 @@ function playMedia(media, playButton) {
 
                 if (parsedData.streamTitle) {
                     const streamTitle = parsedData.streamTitle.trim();
+                    trackHistory(streamTitle);
                     metadataElement.innerHTML = streamTitle;
                     playStream();
                 } else {
@@ -168,7 +170,7 @@ function playMedia(media, playButton) {
 
     // Play LautFM stream with metadata
     function playLautFM() {
-        const apiUrl = `http://api.laut.fm/station/${getSpecialID(chosenUrl)}/current_song`;
+        const apiUrl = `https://api.laut.fm/station/${getSpecialID(chosenUrl)}/current_song`;
         startMetadataUpdate(apiUrl, 'lautfm');
         playStream();
     }
@@ -215,11 +217,13 @@ function playMedia(media, playButton) {
             case 'lautfm':
                 const streamTitle = formatLautTitle(jsonData);
                 metadataElement.innerHTML = streamTitle;
+                trackHistory(streamTitle);
                 break;
             case 'special':
                 try {
                     const streamTitle = jsonData.title || 'No metadata';
                     metadataElement.innerHTML = streamTitle;
+                    trackHistory(streamTitle);
                 } catch (error) {
                     console.error('Failed to parse JSON:', error);
                     metadataElement.innerHTML = 'No metadata';
@@ -262,6 +266,19 @@ function playMedia(media, playButton) {
             updateButtonIcon(button, button === activeButton && !player.paused);
         });
     }
+    // Store track history
+    function trackHistory(trackName) {
+        let recentTracks = JSON.parse(localStorage.getItem('recentTracks')) || [];
+        recentTracks = recentTracks.filter(track => track !== trackName);
+
+        recentTracks.unshift(trackName);
+
+        if (recentTracks.length > 5) {
+            recentTracks = recentTracks.slice(0, 5);
+        }
+
+        localStorage.setItem('recentTracks', JSON.stringify(recentTracks));
+    }
 }
 
 // Event listener for play/pause events on the player
@@ -273,6 +290,32 @@ player.addEventListener('play', () => {
 player.addEventListener('pause', () => {
     updateButtonIcon(currentPlayingMedia, false);
     stopCoverRotation();
+});
+
+function displayRecentTracks() {
+    const recentTracks = JSON.parse(localStorage.getItem('recentTracks')) || [];
+    const recentTracksList = document.getElementById('recentTracksList');
+
+    recentTracksList.innerHTML = '';
+
+    if (recentTracks.length > 0) {
+        recentTracks.forEach(track => {
+            const listItem = document.createElement('li');
+            listItem.textContent = track;
+            listItem.className = 'list-group-item';
+            recentTracksList.appendChild(listItem);
+        });
+    } else {
+        const listItem = document.createElement('li');
+        listItem.textContent = 'No recent tracks found.';
+        listItem.className = 'list-group-item';
+        recentTracksList.appendChild(listItem);
+    }
+}
+
+// click to display track history
+document.getElementById('historyBtn').addEventListener('click', function () {
+    displayRecentTracks();
 });
 
 function loadAll() {
