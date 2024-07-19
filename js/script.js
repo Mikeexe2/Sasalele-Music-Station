@@ -5,8 +5,6 @@ const minimizeIcon = document.querySelector("#togglePlayer .fa-compress");
 const cover = document.getElementById('cover');
 const metadataElement = document.getElementById('metadata');
 const player = document.getElementById('miniPlayer');
-const radioPlayButton = document.getElementById('radioPlayButton');
-const volumeSlider = document.getElementById('volume');
 const stationName = document.getElementById('stationName');
 const stationCount = document.getElementById('station-count');
 const RandomPlay = document.getElementById('randomplay');
@@ -60,7 +58,7 @@ function playMedia(media, playButton) {
     function handlePlayback(chosenUrl, media) {
         if (player.getAttribute('data-link') === chosenUrl) {
             // restart the playback if paused before
-            togglePlay();    
+            togglePlay();
         } else {
             // Clear intervals and detach event sources when reloading metadata for a new station
             clearMetadata();
@@ -278,29 +276,21 @@ function playMedia(media, playButton) {
     }
 }
 
-// Event listener for play/pause events on the player
-radioPlayButton.addEventListener('click', function () {
-    togglePlay();
-});
+player.volume = localStorage.getItem('volumeKey') || 0.3;
 
-// caches user's selection, or default to 0.3
-volumeSlider.value = player.volume = localStorage.getItem('volumeKey') || 0.3;
-
-volumeSlider.addEventListener('input', function () {
-    player.volume = this.value;
-    localStorage.setItem('volumeKey', this.value);
+// Event listener for volume changes
+player.addEventListener('volumechange', function () {
+    localSorage.setItem('volumeKey', player.volume);
 });
 
 
 function togglePlay() {
-   if (player.paused) {
+    if (player.paused) {
         player.play();
         startCoverRotation();
-        radioPlayButton.innerHTML = '<i class="fas fa-pause"></i>';
-    } else { // otherwise pause the player
+    } else {
         player.pause();
         stopCoverRotation();
-        radioPlayButton.innerHTML = '<i class="fas fa-play"></i>';
     }
 }
 

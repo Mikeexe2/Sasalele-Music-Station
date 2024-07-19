@@ -131,7 +131,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    transition: background-color 0.12s ease-in-out;
+    transition: background-color 0.12s var(--animation-easing-ease-in-out);
 }
 
 #randomimg {
@@ -170,7 +170,7 @@
 }
 
 .anim-shake {
-    animation: shake 0.12s ease-in-out
+    animation: shake 0.12s var(--animation-easing-ease-in-out)
 }
 
 .anim-blur-left {
@@ -379,16 +379,6 @@ body {
 }
 
 /*RADIOS*/
-.count {
-    margin: 0.5em auto;
-    padding: 0.1em;
-    font-size: 14px;
-    font-weight: bold;
-    width: fit-content;
-    height: fit-content;
-    background: var(--expressive-green);
-}
-
 .radio-result-header {
     display: none;
 }
@@ -443,10 +433,6 @@ body {
     color: var(--focus-blue-100);
     margin-right: 10px;
     cursor: pointer;
-}
-
-.download-button:hover {
-    transform: scale(1.3);
 }
 
 .rad-icon {
@@ -553,7 +539,7 @@ body {
 
 .search-results {
     margin: 0 auto;
-    background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple);
+    background: var(--black-40-alpha);
     justify-content: center;
     padding: 10px;
 }
@@ -562,7 +548,7 @@ body {
     background-color: var(--white-60-alpha);
     border: 1px solid var(--apple-black);
     border-radius: 5px;
-    padding: 10px 20px;
+    padding: 5px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -576,10 +562,11 @@ body {
 }
 
 .button-icon {
-    height: 40px;
-    width: 40px;
+    height: 50px;
+    width: 50px;
+    background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
-    background-size: contain;
     float: left;
     margin-left: 5px;
     outline: none;
@@ -782,7 +769,6 @@ screen and (min-width: 1152px) {
     z-index: 2;
     left: 10px;
     border-radius: 10px;
-    box-shadow: 0 0 10px 2px rgb(0, 0, 0);
     background-image: linear-gradient(to right, rgb(255, 206, 236), rgb(152, 150, 240));
     background-size: 200% 200%;
     animation: flowingGradient 5s ease infinite;
@@ -792,9 +778,9 @@ screen and (min-width: 1152px) {
 }
 
 #miniPlayer {
-    filter: sepia(20%) saturate(70%) grayscale(1) contrast(99%) invert(12%);
-    width: 300px;
+    filter: sepia(20%) saturate(70%) invert(12%);
     height: 40px;
+    border-radius: 50px;
 }
 
 #cover img {
@@ -803,6 +789,7 @@ screen and (min-width: 1152px) {
 }
 
 #stationName {
+    padding: 2px;
     font-size: 15px;
     font-weight: bold;
     margin-left: 5px;
@@ -838,28 +825,14 @@ screen and (min-width: 1152px) {
 #toggleRandom:hover,
 #togglePlayer:hover,
 #copyIcon:hover,
-#historyBtn:hover {
-    transform: scale(1.1);
+#historyBtn:hover,
+.download-button:hover {
+    transform: scale(1.3);
 }
 
-#togglePlayer .fa-expand {
-    display: none
-}
-
-#togglePlayer .fa-compress {
-    display: initial
-}
-
+#togglePlayer .fa-compress,
 #player.minimized #togglePlayer .fa-expand {
-    display: initial
-}
-
-#player.minimized #togglePlayer .fa-compress {
-    display: none
-}
-
-#togglePlayer .hidden {
-    display: none
+    display: initial;
 }
 
 #player.minimized {
@@ -868,30 +841,18 @@ screen and (min-width: 1152px) {
     overflow: hidden;
 }
 
+#togglePlayer .fa-expand,
+#player.minimized #togglePlayer .fa-compress,
+#togglePlayer .hidden,
 #player.minimized #stationName,
 #player.minimized #miniPlayer,
 #player.minimized #metadata,
-#player.minimized #historyBtn {
+#player.minimized #historyBtn,
+#player.minimized #copyIcon {
     display: none;
 }
 
 /*MISC*/
-#disable_msg {
-    display: none;
-    min-width: 250px;
-    margin-left: -125px;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    border-radius: 2px;
-    padding: 16px;
-    position: fixed;
-    z-index: 999;
-    left: 50%;
-    bottom: 30px;
-    font-size: 17px
-}
-
 #aplayer {
     max-height: 300px;
 }
@@ -1023,11 +984,8 @@ input:checked+.slider:before {
     bottom: 0;
     left: 0;
     width: 100%;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
     color: var(--apple-white);
-    padding: 30px 20px;
+    padding: 30px 10px;
     background: var(--black-80-alpha);
 }
 
@@ -1129,7 +1087,7 @@ input:checked+.slider:before {
     overflow-y: auto;
     margin-bottom: 10px;
     padding: 10px;
-    background-color: var(--white-20-alpha);
+    background-color: var(--);
     border-radius: 8px;
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
 }
