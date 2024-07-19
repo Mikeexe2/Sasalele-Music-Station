@@ -122,41 +122,31 @@
                         </a>, or visit the stream homepage to view the latest tracks in
                         rotation.
                     </p>
-                    <strong>Internet Radio or Radio Streams Not Playing?</strong><br>
-                    The page is served over HTTPS. If the internet radio's URL is HTTP, your browser may
-                    block it due to security settings.
-                    Besides, most stream URLs are HTTP, which can cause loading issues. To resolve
-                    this, you may need to disable web
-                    security in your browser temporarily.
-                    To disable web security:
-                    <li>Click the lock icon in the URL bar.</li>
-                    <li>Go to '<strong>Site Settings</strong>'.</li>
-                    <li>Find 'Insecure Content' settings and allow it.</li>
-                    <a href="https://support.google.com/chrome/thread/29505473?hl=en&msgid=39996297"
-                        target="_blank">Learn
-                        more <svg aria-labelledby="cds-react-aria-962-title" fill="none" focusable="false" height="16"
-                            role="img" viewBox="0 0 16 16" width="16" class="icon" style="vertical-align: text-bottom;">
-                            <title id="cds-react-aria-962-title">Opens in a new tab</title>
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                d="M1.5 3.5H6v1H2.5v9h9V10h1v4.5h-11v-11zM13.5 2.5H10v-1h4.5V6h-1V2.5z"
-                                fill="currentColor">
-                            </path>
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M6.646 8.646l7-7 .708.708-7 7-.708-.708z"
-                                fill="currentColor">
-                            </path>
-                        </svg></a>.
-                    <div class="alert alert-info mt-2" role="alert">
-                        <strong>Disclaimer:</strong>
-                        If you encounter any playback issues, we encourage you to visit the homepage of the stream
-                        provider
-                        to
-                        verify if the
-                        stream is operational. Some streams may be geo-fenced, meaning they are restricted to
-                        specific
-                        regions
-                        or
-                        countries
-                        and may not be available for playback in your current location.
+                    <div class="alert alert-warning" role="alert">
+                        <strong>Internet Radio or Radio Streams Not Playing?</strong><br>
+                        The page is served over HTTPS. If the stream's URL is HTTP, your browser may block it due to
+                        security settings.
+                        Note: Most of the HLS radio streams are HTTP!<br>
+                        To disable web security:
+                        <ul>
+                            <li>Click the lock icon in the URL bar.</li>
+                            <li>Go to '<strong>Site Settings</strong>'.</li>
+                            <li>Find 'Insecure Content' settings and allow it.</li>
+                        </ul>
+                        <a href="https://support.google.com/chrome/thread/29505473?hl=en&msgid=39996297"
+                            target="_blank">Learn more
+                            <svg aria-labelledby="cds-react-aria-962-title" fill="none" focusable="false" height="16"
+                                role="img" viewBox="0 0 16 16" width="16" class="icon"
+                                style="vertical-align: text-bottom;">
+                                <title id="cds-react-aria-962-title">Opens in a new tab</title>
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M1.5 3.5H6v1H2.5v9h9V10h1v4.5h-11v-11zM13.5 2.5H10v-1h4.5V6h-1V2.5z"
+                                    fill="currentColor"></path>
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M6.646 8.646l7-7 .708.708-7 7-.708-.708z" fill="currentColor">
+                                </path>
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </details>
@@ -167,7 +157,7 @@
                 <div class="col-md-8 offset-md-2 mb-3 alphabg">
                     <div class="card genre-group">
                         <div class="card-body">
-                            <h6 class="card-title justify-content-center">Current Stations: <span class="badge badge-primary"
+                            <h6 class="justify-content-center">Current Stations: <span class="badge badge-primary"
                                     id="station-count">-</span></h6>
                             <div class="input-group text-center mx-auto mb-3">
                                 <input type="search" id="sasalelesearch" autofocus class="form-control"
@@ -502,7 +492,8 @@
                 <div class="container text-center">
                     <div id="vplayer" class="container radioplayerbg mb-2">
                         <h6 id="selected-video-title"></h6>
-                        <video id="radio-player" src="" controls autoplay style="max-height: 100px"></video>
+                        <video id="radio-player" src="" controls controlslist="nodownload noplaybackrate nofullscreen"
+                            style="max-height: 100px"></video>
                     </div>
                     <div class="alphabg">
                         <div class="d-flex justify-content-center">
@@ -524,7 +515,7 @@
                             </div>
                         </div>
                         <div class="input-group mb-2 w-100">
-                            <input type="text" id="searchStream" class="form-control" placeholder="Search Stream">
+                            <input type="text" id="searchStream" class="form-control" placeholder="Filter a stream">
                         </div>
                         <div id="video-list"></div>
                     </div>
@@ -557,33 +548,27 @@
                 <div id="cover">
                     <img src="assets/NezukoYay.gif" id="ip">
                 </div>
-                <div>
-                    <div class="player-controls">
-                        <button id="historyBtn" class="btn" data-toggle="modal" data-target="#recentPanel"
-                            title="View History">
-                            <i class="fa fa-history"></i>
-                        </button>
-                        <button id="toggleRandom" class="btn" title="Tap to play randomly">
-                            <i class="fas fa-shuffle" id="randomplay"></i>
-                        </button>
-                        <button id="togglePlayer" class="btn" title="Minimize the player">
-                            <i class="fas fa-expand"></i>
-                            <i class="fas fa-compress"></i>
-                        </button>
-                    </div>
-                    <div id="stationName">Play music</div>
-                    <div class="d-flex align-items-center"><span id="metadata">No music playing now
-                        </span>
-                        <button id="copyIcon" class="btn" title="Copy track title">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-                    <audio id="miniPlayer"></audio>
-                        <button id="radioPlayButton" class="btn" title="Play/Pause">
-                            <i class="fas fa-play"></i>
-                        </button>
-                        <input id="volume" type="range" min="0" max="1" step="0.01" value="0.3">
+                <div class="player-controls">
+                    <button id="historyBtn" class="btn" data-toggle="modal" data-target="#recentPanel"
+                        title="View History">
+                        <i class="fa fa-history"></i>
+                    </button>
+                    <button id="toggleRandom" class="btn" title="Tap to play randomly">
+                        <i class="fas fa-shuffle" id="randomplay"></i>
+                    </button>
+                    <button id="togglePlayer" class="btn" title="Minimize the player">
+                        <i class="fas fa-expand"></i>
+                        <i class="fas fa-compress"></i>
+                    </button>
                 </div>
+                <div id="stationName">Play music</div>
+                <div class="d-flex align-items-center"><span id="metadata">No music playing now
+                    </span>
+                    <button id="copyIcon" class="btn" title="Copy track title">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+                <audio id="miniPlayer" controls controlslist="nodownload noplaybackrate"></audio>
             </div>
 
             <div class="modal fade" id="recentPanel" tabindex="-1" role="dialog" aria-labelledby="recent"
@@ -606,11 +591,10 @@
                     </div>
                 </div>
             </div>
-            <div id="disable_msg"></div>
-
             <section class="footer text-center" id="footer">
-                <p>Wherever you go, let the waves of music find you. Explore endless rhythms in Sasalele Music Station. <i
-                        class="fas fa-heart faa-float animated" style="color:#ff0000"></i></p>
+                <p>Explore endless rhythms in Sasalele Music Station. Wherever you go, let the waves of music find
+                    you. <i class="fas fa-heart faa-float animated" style="color:#ff0000"></i>
+                </p>
                 <div class="container">
                     <div class="social-links mb-3">
                         <a target="_blank" href="https://t.me/sasalelemusic">
@@ -624,14 +608,6 @@
                     <p>Contact: <a href="mailto:sasalele-team@basic.pp.ua">sasalele-team@basic.pp.ua</a>
                     </p>
                     <p id="liveTime"></p>
-                    <div class="row justify-content-center align-items-center">
-                        <div class="col-md-6 text-center">
-                            <a href="https://info.flagcounter.com/NNiX">
-                                <img src="https://s11.flagcounter.com/count2/NNiX/bg_FFFFFF/txt_000000/border_CCCCCC/columns_6/maxflags_12/viewers_0/labels_0/pageviews_0/flags_0/percent_0/"
-                                    class="img-fluid">
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </section>
             <div class="back-to-top d-flex align-items-center justify-content-center"><i
