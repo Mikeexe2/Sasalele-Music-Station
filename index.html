@@ -167,18 +167,18 @@
                 <div class="col-md-8 offset-md-2 mb-3 alphabg">
                     <div class="card genre-group">
                         <div class="card-body">
-                            <h6 class="card-title">Search out of <span class="badge badge-primary"
-                                    id="station-count"></span> stations</h6>
+                            <h6 class="card-title justify-content-center">Current Stations: <span class="badge badge-primary"
+                                    id="station-count">-</span></h6>
                             <div class="input-group text-center mx-auto mb-3">
                                 <input type="search" id="sasalelesearch" autofocus class="form-control"
-                                    placeholder="Search in the station list..." aria-label="Search">
+                                    placeholder="Filter for a station!" aria-label="Search">
                             </div>
                             <h6 class="card-title">Search song</h6>
                             <div class="row justify-content-center">
                                 <div class="col mb-3">
                                     <div class="input-group text-center mx-auto">
                                         <input type="search" id="searchInput" class="form-control"
-                                            placeholder="Enter a song name...">
+                                            placeholder="Enter a song name">
                                         <button type="button" class="btn btn-primary" id="searchButton">
                                             <i class="fas fa-search"></i>
                                         </button>
@@ -190,7 +190,7 @@
                             <div class="row justify-content-center mb-3 mx-auto">
                                 <div class="input-group">
                                     <input type="text" id="search-field" class="form-control"
-                                        placeholder="Search by name..." style="display: none;">
+                                        placeholder="Search by name" style="display: none;">
                                     <div id="countrySelectContainer" style="display: none;">
                                         <select class="custom-select" id="countrySelect">
                                             <option value="">Select Country</option>
@@ -237,7 +237,7 @@
             </div>
 
             <div class="container search-results mb-3" style="display:none">
-                <p class="search-terms">Song Search Results for: <mark id="searchTerms"></mark></p>
+                <p class="search-terms">Possible Results for: <mark id="searchTerms"></mark></p>
                 <div id="resultsContainer mb-3">
                     <div class="col-md-12">
                         <div class="search-header">
@@ -462,7 +462,7 @@
                     <div class="genre-content" id="jmusic"></div>
                 </div>
                 <div class="radiogenreblock">
-                    <h3 class="radio-genre">Anime music</h3>
+                    <h3 class="radio-genre">Anime Music</h3>
                     <div class="genre-content" id="anime"></div>
                 </div>
                 <div class="radiogenreblock">
@@ -478,7 +478,7 @@
                     <div class="genre-content" id="bgm"></div>
                 </div>
                 <div class="radiogenreblock">
-                    <h3 class="radio-genre">Nightcore songs</h3>
+                    <h3 class="radio-genre">Nightcore</h3>
                     <div class="genre-content" id="nightcore"></div>
                 </div>
                 <div class="radiogenreblock">
@@ -486,11 +486,11 @@
                     <div class="genre-content" id="variety"></div>
                 </div>
                 <div class="radiogenreblock">
-                    <h3 class="radio-genre">Korean-Music</h3>
+                    <h3 class="radio-genre">Korean-Music/Radios</h3>
                     <div class="genre-content" id="kmusic"></div>
                 </div>
                 <div class="radiogenreblock">
-                    <h3 class="radio-genre">Chinese-Music</h3>
+                    <h3 class="radio-genre">Chinese-Music/Radios</h3>
                     <div class="genre-content" id="cmusic"></div>
                 </div>
             </div>
@@ -578,7 +578,11 @@
                             <i class="fas fa-copy"></i>
                         </button>
                     </div>
-                    <audio id="miniPlayer" controls="" controlslist="nodownload noplaybackrate"></audio>
+                    <audio id="miniPlayer"></audio>
+                        <button id="radioPlayButton" class="btn" title="Play/Pause">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <input id="volume" type="range" min="0" max="1" step="0.01" value="0.3">
                 </div>
             </div>
 
@@ -605,7 +609,7 @@
             <div id="disable_msg"></div>
 
             <section class="footer text-center" id="footer">
-                <p>This is Sasalele Music Station, yet another japanese radio station. <i
+                <p>Wherever you go, let the waves of music find you. Explore endless rhythms in Sasalele Music Station. <i
                         class="fas fa-heart faa-float animated" style="color:#ff0000"></i></p>
                 <div class="container">
                     <div class="social-links mb-3">
