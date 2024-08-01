@@ -391,6 +391,7 @@ body {
 
 .genre-content {
     max-height: 245px;
+    border-radius: 8px;
     overflow-y: auto;
 }
 
@@ -466,7 +467,10 @@ body {
     background: var(--wp--preset--gradient--pale-ocean);
     text-align: center;
     color: var(--apple-black);
-    padding: 5px;
+    margin: 0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .gsc-input {
@@ -499,7 +503,9 @@ body {
     letter-spacing: 1px;
     text-align: center;
     font-weight: 700;
-    padding: 8px 20px;
+    padding: 10px;
+    margin: 0;
+    margin-bottom: 0.5rem;
     line-height: 1;
     background: #fdeff2;
     color: #e43c5c;
@@ -513,6 +519,10 @@ body {
     height: 66px;
     width: 66px;
     background-size: cover;
+}
+
+#lastfmList {
+    border-radius: 5px;
 }
 
 .itunes-item {
@@ -550,7 +560,7 @@ body {
     border-radius: 5px;
     padding: 5px;
     cursor: pointer;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     transition: background-color 0.3s, transform 0.2s;
     width: 100%
@@ -562,15 +572,14 @@ body {
 }
 
 .button-icon {
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     float: left;
     margin-left: 5px;
     outline: none;
-    box-shadow: black 0px 0px 3px -1px
 }
 
 .icon-spotify {
@@ -680,7 +689,7 @@ body {
 .button-label {
     font-size: 14px;
     font-weight: bold;
-    line-height: 1;
+    text-align: left;
     padding-left: 5px
 }
 
@@ -768,16 +777,17 @@ screen and (min-width: 1152px) {
     bottom: 10px;
     z-index: 2;
     left: 10px;
+    min-width: 200px;
     border-radius: 10px;
     background-image: linear-gradient(to right, rgb(255, 206, 236), rgb(152, 150, 240));
     background-size: 200% 200%;
     animation: flowingGradient 5s ease infinite;
     height: fit-content;
     width: fit-content;
-    overflow: hidden
 }
 
-#miniPlayer {
+#miniPlayer,
+#audio {
     filter: sepia(20%) saturate(70%) invert(12%);
     height: 40px;
     border-radius: 50px;
@@ -838,6 +848,7 @@ screen and (min-width: 1152px) {
 #player.minimized {
     padding-left: 45px;
     padding-top: 45px;
+    min-width: 90px;
     overflow: hidden;
 }
 
@@ -1210,8 +1221,7 @@ input:checked+.slider:before {
     background-size: 200% 200%;
     animation: flowingGradient 5s ease infinite;
     padding: 10px;
-    height: fit-content;
-    width: 90%;
+    width: fit-content;
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 0 10px 2px rgb(0, 0, 0);
@@ -1229,7 +1239,7 @@ input:checked+.slider:before {
     z-index: 2;
     transition: transform 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
     font-size: 1.5em;
-    color: var(--apple-white);
+    color: var(--apple-black);
     border-radius: 50%;
 }
 
@@ -1253,34 +1263,16 @@ input:checked+.slider:before {
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
-#audio {
-    width: 80%;
-    margin: 0 10px;
-    border-radius: 5px;
-}
-
-audio::-webkit-media-controls-enclosure {
-    border-radius: 8px !important;
-}
-
-#contents {
+#contents,
+#demo {
     border-radius: 10px;
     max-width: 90%;
-    margin: 0.742em auto 0.742em auto;
+    margin: 0 auto;
     padding: 10px;
     margin-bottom: 10px;
     justify-content: center;
-    color: var(--apple-white)
-}
-
-#demo {
-    border-radius: 10px;
-    width: 100%;
-    margin: 0.742em auto 0 auto;
-    padding: 10px;
-    margin-bottom: 5px;
-    justify-content: center;
-    color: var(--apple-white)
+    color: var(--apple-white);
+    background-color: var(--black-40-alpha);
 }
 
 .gdmpoptions {
@@ -1357,16 +1349,16 @@ button.track i {
     position: relative;
     float: right;
     right: 15px;
-    top: 5px
+    top: 5px;
 }
 
 .bar {
-    background: var(--gray-30);
+    background: slategray;
     bottom: 0;
     height: .1em;
     position: absolute;
     width: 3px;
-    animation: sound 1s cubic-bezier(.17, .37, .43, .67) infinite alternate
+    animation: sound 1s cubic-bezier(.17, .37, .43, .67) infinite alternate;
 }
 
 @keyframes sound {
@@ -1467,13 +1459,21 @@ summary {
 }
 
 @media only screen and (max-width: 575.98px) {
+
+    #gdmp {
+        width: 90%;
+        left: 5%;
+        bottom: 5px;
+        padding: 8px;
+    }
+
     #tips {
         font-size: 12px;
     }
 
     .rad-icon {
-        max-width: 30px;
-        max-height: 30px;
+        max-width: 40px;
+        height: auto;
     }
 
     #chat_input {
@@ -1506,8 +1506,6 @@ summary {
         font-size: 15px;
     }
 
-    #prev-btn,
-    #next-btn,
     button.track,
     summary,
     #option li a,
@@ -1523,18 +1521,14 @@ summary {
         font-size: var(--wp--preset--font-size--small);
     }
 
+    #prev-btn,
+    #next-btn,
     .search-terms {
         font-size: var(--wp--preset--font-size--medium);
     }
 
     .button-label {
         font-size: 12px;
-        padding-left: 3px
-    }
-
-    .button-icon {
-        height: 20px;
-        width: 20px
     }
 
     #player {
