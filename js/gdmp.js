@@ -1,6 +1,11 @@
 const CLIENT_ID = '993505903479-tk48veqhlu2r1hiu9m2hvaq2l81urnla.apps.googleusercontent.com';
 const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest';
 const SCOPES = 'https://www.googleapis.com/auth/drive.readonly';
+const intro = document.getElementById('intro');
+const content = document.getElementById("contents");
+const parent = document.getElementById('parentfolder');
+const audio = document.getElementById('audio');
+const source = document.getElementById('source');
 
 let tokenClient;
 let gapiInited = false;
@@ -39,7 +44,7 @@ function handleAuthClick(folderId) {
         }
 
         // only load initial contents on first auth
-        if (!document.getElementById("contents").classList.contains("loaded")) {
+        if (!content.classList.contains("loaded")) {
             getContents(folderId, "initial");
         }
 
@@ -77,14 +82,16 @@ function getContents(id, type) {
         'fields': "nextPageToken, files(id, name, mimeType, webContentLink)"
     }).then(function (response) {
 
-        // hide intro
-        document.getElementById('intro').style.display = 'none';
+        // Hide intro and show content
+        intro.style.display = 'none';
+        content.style.display = 'block';
 
         // set location
         if (type == "initial") {
             var location = "contents";
         } else {
             var location = id;
+
             // check for previous load
             if (document.getElementById(location).classList.contains("loaded")) {
                 return;
@@ -93,27 +100,30 @@ function getContents(id, type) {
 
         var files = response.result.files;
         if (files && files.length > 0) {
+
             // loop folders
             for (var i = 0; i < files.length; i++) {
                 var file = files[i];
 
                 if (file.mimeType.includes("application/vnd.google-apps.folder")) {
                     document.getElementById(location).innerHTML += `
-        <details id="${file.id}">
-        <summary onclick="getContents('${file.id}')"><span>${file.name}</span></summary>
-        </details>
-        `;
+                    <details id="${file.id}">
+                        <summary onclick="getContents('${file.id}')"><img src=""/><span>${file.name}</span></summary>
+                    </details>
+                `;
                 }
+
                 document.getElementById(location).classList.add("loaded");
             }
+
             // loop files
             for (var i = 0; i < files.length; i++) {
                 var file = files[i];
 
                 if (file.mimeType.includes("audio")) {
                     document.getElementById(location).innerHTML += `
-    <button class="track" onclick="playTrack('${file.id}', this)"><i class="fas fa-play"></i> ${file.name}</button>
-    `;
+                    <button class="track" onclick="playTrack('${file.id}', this)"><i class="fas fa-play"></i> ${file.name}</button>
+                    `;
                 }
 
                 document.getElementById(location).classList.add("loaded");
@@ -132,20 +142,16 @@ function getContents(id, type) {
     });
 }
 
-//user folder
 function submitFolderId(e) {
-    e.preventDefault(),
-        localStorage.setItem("parentfolder", document.getElementById("parentfolder").value),
-        handleAuthClick(document.getElementById("parentfolder").value)
+    e.preventDefault();
+    localStorage.setItem("parentfolder", parent.value);
+    handleAuthClick(parent.value);
 }
 
 function getFolderId() {
-    document.getElementById("parentfolder").value = localStorage.getItem("parentfolder")
+    parent.value = localStorage.getItem("parentfolder");
 }
 
-//audio control
-audio = document.getElementById('audio');
-source = document.getElementById('source');
 if (document.getElementsByClassName("playing")[0]) {
     playing = document.getElementsByClassName("playing")[0];
 } else {
@@ -153,12 +159,8 @@ if (document.getElementsByClassName("playing")[0]) {
 }
 
 function playTrack(id, element, type) {
-    // Remove spinner if load in progress
-    if (document.getElementById("spinner")) {
-        document.getElementById("spinner").remove();
-    }
 
-    // Check if the clicked track is already 'playing'
+    // check if clicked track is already 'playing'
     if (element == playing) {
         if (audio.paused) {
             audio.play();
@@ -168,27 +170,27 @@ function playTrack(id, element, type) {
         return;
     }
 
-    // Check for something already 'playing'
+    // check for something already 'playing'
     if (playing) {
         resetIconToPlay();
         playing.classList.remove("playing");
     }
 
-    // Set new track
+    // set new track
     element.classList.add("playing");
     playing = document.getElementsByClassName("playing")[0];
     audio.pause();
     source.src = "";
     audio.load();
 
-    const spinner = `
+    spinner = `
     <div id="spinner">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
     </div>
-    `;
+  `;
     playing.innerHTML += spinner;
 
     if (type === 'demo') {
@@ -201,30 +203,28 @@ function playTrack(id, element, type) {
                 document.getElementById("spinner").remove();
             }
         };
-    } else {
-        // Handle user track from Google Drive
-        gapi.client.drive.files.get({
-            'fileId': id,
-            'alt': 'media',
-        }).then(function (response) {
-            const dataArr = Uint8Array.from(response.body.split('').map((chr) => chr.charCodeAt(0)));
-            const file = new File([dataArr], 'audiofilename', { type: response.headers['Content-Type'] });
-            source.src = URL.createObjectURL(file);
-            source.type = response.headers['Content-Type'];
-            audio.load();
-            audio.oncanplay = () => {
-                audio.play();
-                if (document.getElementById("spinner")) {
-                    document.getElementById("spinner").remove();
-                }
-            };
-        }).catch(function (error) {
-            if (error.status === 401) {
-                alert("Sessions are only valid for 1 hour. Session will refresh automatically.");
-                tokenClient.requestAccessToken({ prompt: '', login_hint: localStorage.getItem("email") });
-            }
-        });
+        return;
     }
+    // user track
+    gapi.client.drive.files.get({
+        'fileId': id,
+        'alt': 'media',
+    }).then(function (response) {
+        dataArr = Uint8Array.from(response.body.split('').map((chr) => chr.charCodeAt(0)));
+        file = new File([dataArr], 'audiofilename', { type: response.headers['Content-Type'] });
+        source.src = URL.createObjectURL(file);
+        source.type = response.headers['Content-Type'];
+        audio.load();
+        audio.oncanplay = audio.play();
+        if (document.getElementById("spinner")) {
+            document.getElementById("spinner").remove();
+        }
+    }).catch(function (error) {
+        if (error.status === 401) {
+            alert("Sessions are only valid for 1 hour. Session will refresh automatically.");
+            tokenClient.requestAccessToken({ prompt: '', login_hint: localStorage.getItem("email") });
+        }
+    });
 }
 
 function prevTrack() {
@@ -267,24 +267,24 @@ function resetIconToPause() {
 }
 
 audio.onended = function () {
-    playing.nextElementSibling && playing.nextElementSibling.focus(),
-        nextTrack()
-},
-    audio.onpause = function () {
-        resetIconToPlay()
-    },
-    audio.onplay = function () {
-        resetIconToPause()
-    },
+    if (playing.nextElementSibling) {
+        playing.nextElementSibling.focus();
+    }
+    nextTrack();
+};
 
-    document.getElementById('intro').style.display = 'block';
+audio.onpause = function () {
+    resetIconToPlay();
+}
+audio.onplay = function () {
+    resetIconToPause();
+}
 
 function changeFolder() {
-    document.getElementById('intro').style.display = 'block';
-    document.getElementById('parentfolder').focus();
-    // reset contents div
-    document.getElementById("contents").classList.remove("loaded");
-    document.getElementById("contents").innerHTML = "";
-    // reset localstorage
+    intro.style.display = 'block';
+    parent.focus();
+    content.style.display = 'none';
+    content.classList.remove("loaded");
+    content.innerHTML = "";
     localStorage.removeItem("email");
 }

@@ -280,7 +280,7 @@ player.volume = localStorage.getItem('volumeKey') || 0.3;
 
 // Event listener for volume changes
 player.addEventListener('volumechange', function () {
-    localSorage.setItem('volumeKey', player.volume);
+    localStorage.setItem('volumeKey', player.volume);
 });
 
 
@@ -413,7 +413,9 @@ function loadAll() {
         });
 }
 // Initialize load all internet radios
-loadAll();
+document.addEventListener('DOMContentLoaded', () => {
+    loadAll();
+});
 
 // initiate download of the internet radio's m3u file
 function RadioM3UDownload(stationURL, stationName) {
@@ -869,10 +871,21 @@ function performSearch() {
         innerContainer.style.display = 'block';
         searchTermsContainer.textContent = searchTerm;
         // autofill into the box
-        const gscsearchInput = document.querySelector('.gsc-input input');
-        if (gscsearchInput) {
-            gscsearchInput.value = searchTerm;
+        const gscInput = document.querySelector('.gsc-input input');
+        const gscClearButton = document.querySelector('.gsst_a');
+        if (gscInput && gscClearButton) {
+            gscInput.value = '';
+            gscClearButton.click();
         }
+        if (gscInput) {
+            gscInput.value = searchTerm;
+        }
+        // Clear previous results
+        innerdeezer.innerHTML = '';
+        innerlastfm.innerHTML = '';
+        VideoDisplay.src = '';
+        inneritunes.innerHTML = '';
+
         searchAcrossApis(searchTerm);
     }
     searchInput.value = '';
@@ -970,11 +983,6 @@ function displayResults(results) {
     const deezerResults = results.deezer;
 
     VideoDisplay.style.display = "block";
-    // Clear previous results
-    innerdeezer.innerHTML = '';
-    innerlastfm.innerHTML = '';
-    VideoDisplay.src = '';
-    inneritunes.innerHTML = '';
 
     // Display LastFM results
     if (lastfmResults.length > 0) {
@@ -990,7 +998,7 @@ function displayResults(results) {
         }
         document.getElementById('lastfmList').appendChild(fragment);
     } else {
-        document.getElementById('lastfmList').innerHTML = '<h6 class="noresult">No results found on LastFM :(</h6>';
+        document.getElementById('lastfmList').innerHTML = '<h6 class="noresult mb-2">No results found on LastFM :(</h6>';
     }
 
     // Display YouTube results
@@ -1018,7 +1026,7 @@ function displayResults(results) {
         });
         itunesList.appendChild(fragment);
     } else {
-        document.getElementById('itunesList').innerHTML = '<h6 class="noresult">No results found on iTunes :(</h6>';
+        document.getElementById('itunesList').innerHTML = '<h6 class="noresult mb-2">No results found on iTunes :(</h6>';
     }
 
     // Display Deezer results
@@ -1045,7 +1053,7 @@ function displayResults(results) {
         }
         deezerList.appendChild(fragment);
     } else {
-        document.getElementById('deezerList').innerHTML = '<h6 class="noresult">No results found on Deezer :(</h6>';
+        document.getElementById('deezerList').innerHTML = '<h6 class="noresult mb-2">No results found on Deezer :(</h6>';
     }
 }
 
@@ -1144,7 +1152,7 @@ function getWebsiteURL(label, searchTerm) {
     }
 }
 //Chatting
-window.onload = function () {
+document.addEventListener('DOMContentLoaded', () => {
     const firebaseConfig = {
         apiKey: "AIzaSyBea1r2EXm5MyJItS00eRUIM7XZxt5Uzs8",
         authDomain: "sasalele.firebaseapp.com",
@@ -1156,238 +1164,248 @@ window.onload = function () {
         measurementId: "G-JFENQ5SBN8"
     };
     firebase.initializeApp(firebaseConfig);
-    var db = firebase.database()
-    class sasalele {
+    var db = firebase.database();
+
+    class Sasalele {
         home() {
             var chatContainer = document.querySelector('.chat_container');
             if (chatContainer) {
-                chatContainer.innerHTML = '';  // Clear chat-related content
+                chatContainer.innerHTML = ''; // Clear chat-related content
             }
-            this.create_join_form();
+            this.createJoinForm();
         }
+
         chat() {
-            this.create_chat()
+            this.createChat();
         }
-        create_join_form() {
+
+        createJoinForm() {
             var parent = this;
 
             var joinFormContainer = document.querySelector('.joinform');
-            var join_inner_container = document.createElement('div');
-            join_inner_container.setAttribute('id', 'join_inner_container');
+            var joinInnerContainer = document.createElement('div');
+            joinInnerContainer.setAttribute('id', 'join_inner_container');
 
-            var join_button_container = document.createElement('div');
-            join_button_container.setAttribute('id', 'join_button_container');
+            var joinButtonContainer = document.createElement('div');
+            joinButtonContainer.setAttribute('id', 'join_button_container');
 
-            var join_button = document.createElement('button');
-            join_button.setAttribute('id', 'join_button');
-            join_button.innerHTML = 'Join <i class="fas fa-sign-in-alt"></i>';
+            var joinButton = document.createElement('button');
+            joinButton.setAttribute('id', 'join_button');
+            joinButton.innerHTML = 'Join <i class="fas fa-sign-in-alt"></i>';
 
-            var join_input_container = document.createElement('div');
-            join_input_container.setAttribute('id', 'join_input_container');
+            var joinInputContainer = document.createElement('div');
+            joinInputContainer.setAttribute('id', 'join_input_container');
 
-            var join_input = document.createElement('input');
-            join_input.setAttribute('id', 'join_input');
-            join_input.setAttribute('maxlength', 20);
-            join_input.placeholder = 'Input your name...';
-            join_input.onkeyup = function () {
-                if (join_input.value.length > 0) {
-                    join_button.classList.add('enabled');
-                    join_button.onclick = function () {
-                        parent.save_name(join_input.value);
-                        joinFormContainer.innerHTML = '';  // Clear join form content
-                        parent.create_chat();
+            var joinInput = document.createElement('input');
+            joinInput.setAttribute('id', 'join_input');
+            joinInput.setAttribute('maxlength', 20);
+            joinInput.placeholder = 'Input your name...';
+            joinInput.onkeyup = function () {
+                if (joinInput.value.length > 0) {
+                    joinButton.classList.add('enabled');
+                    joinButton.onclick = function () {
+                        parent.saveName(joinInput.value);
+                        joinFormContainer.innerHTML = ''; // Clear join form content
+                        parent.createChat();
                     };
                 } else {
-                    join_button.classList.remove('enabled');
+                    joinButton.classList.remove('enabled');
                 }
             };
 
-            join_button_container.append(join_button);
-            join_input_container.append(join_input);
-            join_inner_container.append(join_input_container, join_button_container);
-            joinFormContainer.append(join_inner_container);
+            joinButtonContainer.append(joinButton);
+            joinInputContainer.append(joinInput);
+            joinInnerContainer.append(joinInputContainer, joinButtonContainer);
+            joinFormContainer.append(joinInnerContainer);
         }
-        create_load(container_id) {
-            var parent = this;
-            var container = document.getElementById(container_id)
-            container.innerHTML = ''
 
-            var loader_container = document.createElement('div')
-            loader_container.setAttribute('class', 'loader_container')
+        createLoad(containerId) {
+            var container = document.getElementById(containerId);
+            container.innerHTML = '';
 
-            var loader = document.createElement('div')
-            loader.setAttribute('class', 'loader')
+            var loaderContainer = document.createElement('div');
+            loaderContainer.setAttribute('class', 'loader_container');
 
-            loader_container.append(loader)
-            container.append(loader_container)
+            var loader = document.createElement('div');
+            loader.setAttribute('class', 'loader');
 
+            loaderContainer.append(loader);
+            container.append(loaderContainer);
         }
-        create_chat() {
+
+        createChat() {
             var parent = this;
-            var chattContainer = document.querySelector('.chat_container');
-            chattContainer.innerHTML = '';
+            var chatContainer = document.querySelector('.chat_container');
+            chatContainer.innerHTML = '';
 
-            var chat_inner_container = document.createElement('div');
-            chat_inner_container.setAttribute('id', 'chat_inner_container');
+            var chatInnerContainer = document.createElement('div');
+            chatInnerContainer.setAttribute('id', 'chat_inner_container');
 
-            var chat_content_container = document.createElement('div');
-            chat_content_container.setAttribute('id', 'chat_content_container');
+            var chatContentContainer = document.createElement('div');
+            chatContentContainer.setAttribute('id', 'chat_content_container');
 
-            var chat_input_container = document.createElement('div');
-            chat_input_container.setAttribute('id', 'chat_input_container');
+            var chatInputContainer = document.createElement('div');
+            chatInputContainer.setAttribute('id', 'chat_input_container');
 
-            var chat_input_send = document.createElement('button');
-            chat_input_send.setAttribute('id', 'chat_input_send');
-            chat_input_send.setAttribute('disabled', true);
-            chat_input_send.innerHTML = `<i class="far fa-paper-plane"></i>`;
+            var chatInputSend = document.createElement('button');
+            chatInputSend.setAttribute('id', 'chat_input_send');
+            chatInputSend.setAttribute('disabled', true);
+            chatInputSend.innerHTML = `<i class="far fa-paper-plane"></i>`;
 
-            var chat_input = document.createElement('input');
-            chat_input.setAttribute('id', 'chat_input');
-            chat_input.setAttribute('maxlength', 99999);
-            chat_input.placeholder = `Hi ${parent.get_name()}. Say something...`;
-            chat_input.onkeyup = function () {
-                if (chat_input.value.length > 0) {
-                    chat_input_send.removeAttribute('disabled')
-                    chat_input_send.classList.add('enabled')
-                    chat_input_send.onclick = function () {
-                        chat_input_send.setAttribute('disabled', true)
-                        chat_input_send.classList.remove('enabled')
-                        if (chat_input.value.length <= 0) {
-                            return
+            var chatInput = document.createElement('input');
+            chatInput.setAttribute('id', 'chat_input');
+            chatInput.setAttribute('maxlength', 99999);
+            chatInput.placeholder = `Hi ${parent.getName()}. Say something...`;
+            chatInput.onkeyup = function () {
+                if (chatInput.value.length > 0) {
+                    chatInputSend.removeAttribute('disabled');
+                    chatInputSend.classList.add('enabled');
+                    chatInputSend.onclick = function () {
+                        chatInputSend.setAttribute('disabled', true);
+                        chatInputSend.classList.remove('enabled');
+                        if (chatInput.value.length <= 0) {
+                            return;
                         }
-                        parent.create_load('chat_content_container')
-                        parent.send_message(chat_input.value)
-                        chat_input.value = ''
-                        chat_input.focus()
-                    }
+                        parent.createLoad('chat_content_container');
+                        parent.sendMessage(chatInput.value);
+                        chatInput.value = '';
+                        chatInput.focus();
+                    };
                 } else {
-                    chat_input_send.classList.remove('enabled')
+                    chatInputSend.classList.remove('enabled');
                 }
             };
-            chat_input.addEventListener("keyup", function (event) {
+            chatInput.addEventListener("keyup", function (event) {
                 if (event.key === 'Enter') {
                     event.preventDefault();
-                    chat_input_send.click();
+                    chatInputSend.click();
                 }
             });
-            var chat_logout_container = document.createElement('div');
-            chat_logout_container.setAttribute('id', 'chat_logout_container');
 
-            var chat_logout = document.createElement('button');
-            chat_logout.setAttribute('id', 'chat_logout');
-            chat_logout.textContent = `${parent.get_name()} • logout`;
-            chat_logout.onclick = function () {
+            var chatLogoutContainer = document.createElement('div');
+            chatLogoutContainer.setAttribute('id', 'chat_logout_container');
+
+            var chatLogout = document.createElement('button');
+            chatLogout.setAttribute('id', 'chat_logout');
+            chatLogout.textContent = `${parent.getName()} • logout`;
+            chatLogout.onclick = function () {
                 localStorage.clear();
                 parent.home();
-            }
-            chat_logout_container.append(chat_logout);
-            chat_input_container.append(chat_input, chat_input_send);
-            chat_inner_container.append(chat_content_container, chat_input_container, chat_logout_container);
-            chattContainer.append(chat_inner_container);
+            };
 
-            parent.create_load('chat_content_container');
-            parent.refresh_chat();
+            chatLogoutContainer.append(chatLogout);
+            chatInputContainer.append(chatInput, chatInputSend);
+            chatInnerContainer.append(chatContentContainer, chatInputContainer, chatLogoutContainer);
+            chatContainer.append(chatInnerContainer);
+
+            parent.createLoad('chat_content_container');
+            parent.refreshChat();
         }
-        save_name(name) {
-            localStorage.setItem('name', name)
+
+        saveName(name) {
+            localStorage.setItem('name', name);
         }
-        send_message(message) {
-            var parent = this
-            if (parent.get_name() == null && message == null) {
-                return
+
+        sendMessage(message) {
+            var parent = this;
+            if (parent.getName() == null && message == null) {
+                return;
             }
 
-            db.ref('chats/').once('value', function (message_object) {
-                var index = parseFloat(message_object.numChildren()) + 1
+            db.ref('chats/').once('value', function (messageObject) {
+                var index = parseFloat(messageObject.numChildren()) + 1;
                 db.ref('chats/' + `message_${index}`).set({
-                    name: parent.get_name(),
+                    name: parent.getName(),
                     message: message,
                     index: index
-                })
-                    .then(function () {
-                        parent.refresh_chat()
-                    })
-            })
+                }).then(function () {
+                    parent.refreshChat();
+                });
+            });
         }
-        get_name() {
+
+        getName() {
             if (localStorage.getItem('name') != null) {
-                return localStorage.getItem('name')
+                return localStorage.getItem('name');
             } else {
-                this.home()
-                return null
+                this.home();
+                return null;
             }
         }
-        refresh_chat() {
-            var chat_content_container = document.getElementById('chat_content_container')
-            db.ref('chats/').on('value', function (messages_object) {
-                chat_content_container.innerHTML = ''
-                if (messages_object.numChildren() == 0) {
-                    return
+
+        refreshChat() {
+            var chatContentContainer = document.getElementById('chat_content_container');
+            db.ref('chats/').on('value', function (messagesObject) {
+                chatContentContainer.innerHTML = '';
+                if (messagesObject.numChildren() == 0) {
+                    return;
                 }
 
-                var messages = Object.values(messages_object.val());
-                var guide = []
-                var unordered = []
-                var ordered = []
+                var messages = Object.values(messagesObject.val());
+                var guide = [];
+                var unordered = [];
+                var ordered = [];
 
-                for (var i, i = 0; i < messages.length; i++) {
-                    guide.push(i + 1)
+                for (var i = 0; i < messages.length; i++) {
+                    guide.push(i + 1);
                     unordered.push([messages[i], messages[i].index]);
                 }
 
                 guide.forEach(function (key) {
-                    var found = false
+                    var found = false;
                     unordered = unordered.filter(function (item) {
                         if (!found && item[1] == key) {
-                            ordered.push(item[0])
-                            found = true
-                            return false
+                            ordered.push(item[0]);
+                            found = true;
+                            return false;
                         } else {
-                            return true
+                            return true;
                         }
-                    })
-                })
-                ordered.forEach(function (data) {
-                    var name = data.name
-                    var message = data.message
-
-                    var message_container = document.createElement('div')
-                    message_container.setAttribute('class', 'message_container')
-
-                    var message_inner_container = document.createElement('div')
-                    message_inner_container.setAttribute('class', 'message_inner_container')
-
-                    var message_user_container = document.createElement('div')
-                    message_user_container.setAttribute('class', 'message_user_container')
-
-                    var message_user = document.createElement('p')
-                    message_user.setAttribute('class', 'message_user')
-                    message_user.textContent = `${name}`
-
-                    var message_content_container = document.createElement('div')
-                    message_content_container.setAttribute('class', 'message_content_container')
-
-                    var message_content = document.createElement('p')
-                    message_content.setAttribute('class', 'message_content')
-                    message_content.textContent = `${message}`
-
-                    message_user_container.append(message_user)
-                    message_content_container.append(message_content)
-                    message_inner_container.append(message_user_container, message_content_container)
-                    message_container.append(message_inner_container)
-
-                    chat_content_container.append(message_container)
+                    });
                 });
-                chat_content_container.scrollTop = chat_content_container.scrollHeight;
-            })
 
+                ordered.forEach(function (data) {
+                    var name = data.name;
+                    var message = data.message;
+
+                    var messageContainer = document.createElement('div');
+                    messageContainer.setAttribute('class', 'message_container');
+
+                    var messageInnerContainer = document.createElement('div');
+                    messageInnerContainer.setAttribute('class', 'message_inner_container');
+
+                    var messageUserContainer = document.createElement('div');
+                    messageUserContainer.setAttribute('class', 'message_user_container');
+
+                    var messageUser = document.createElement('p');
+                    messageUser.setAttribute('class', 'message_user');
+                    messageUser.textContent = `${name}`;
+
+                    var messageContentContainer = document.createElement('div');
+                    messageContentContainer.setAttribute('class', 'message_content_container');
+
+                    var messageContent = document.createElement('p');
+                    messageContent.setAttribute('class', 'message_content');
+                    messageContent.textContent = `${message}`;
+
+                    messageUserContainer.append(messageUser);
+                    messageContentContainer.append(messageContent);
+                    messageInnerContainer.append(messageUserContainer, messageContentContainer);
+                    messageContainer.append(messageInnerContainer);
+
+                    chatContentContainer.append(messageContainer);
+                });
+                chatContentContainer.scrollTop = chatContentContainer.scrollHeight;
+            });
         }
     }
-    var app = new sasalele()
-    if (app.get_name() != null) {
-        app.chat()
+
+    var app = new Sasalele();
+    if (app.getName() != null) {
+        app.chat();
     }
-}
+});
+
 
 const startDateTime = new Date('2023/10/01');
 
@@ -1405,5 +1423,58 @@ function updateLiveTime() {
 }
 
 updateLiveTime();
+
+// 0x40 hues animation??
+const hues = Array.from({ length: 128 }, () => Math.floor(Math.random() * 3600 / 10) * 10);
+
+const background = document.getElementById('background');
+const randomimg = document.getElementById('randomimg');
+const toggleAnimation = document.getElementById('toggleAnimation');
+
+let animationTimeout;
+
+function setRandomBackgroundColor(hue) {
+    background.style.backgroundColor = `hsla(${hue}, 80%, 70%, 1.0)`;
+}
+
+function setRandomImage() {
+    const randomIndex = Math.floor(Math.random() * 296) + 1;
+    randomimg.src = `images/image${randomIndex}.png`;
+
+    const animation = ['anim-shake', 'anim-blur-left', 'anim-blur-right', 'anim-blur-top', 'anim-blur-bottom'];
+
+    const anim = animation[Math.floor(Math.random() * animation.length)];
+
+    randomimg.className = '';
+
+    randomimg.classList.add(anim);
+}
+
+function getRandomInterval(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
+function animateHues() {
+    function animate() {
+        if (toggleAnimation.checked) {
+            const hue = hues[Math.floor(Math.random() * hues.length)];
+            setRandomBackgroundColor(hue);
+            setRandomImage();
+
+            const interval = getRandomInterval(0.5, 1.2) * 1000;
+            animationTimeout = setTimeout(animate, interval);
+        }
+    }
+
+    animate();
+}
+
+toggleAnimation.addEventListener('change', () => {
+    if (toggleAnimation.checked) {
+        animateHues();
+    } else {
+        clearTimeout(animationTimeout);
+    }
+});
 
 const ap = new APlayer({ container: document.getElementById("aplayer"), fixed: !1, mini: !1, autoplay: !1, theme: "#b7daff", loop: "all", order: "random", preload: "none", volume: .7, mutex: !0, listFolded: !1, listMaxHeight: "300px", lrcType: 3, audio: [{ name: "スカイクラッドの観測者", artist: "いとうかなこ", url: "assets/music/スカイクラッドの観測者 - 伊藤加奈子.mp3", cover: "assets/covers/スカイクラッドの観測者-伊藤加奈子.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%82%B9%E3%82%AB%E3%82%A4%E3%82%AF%E3%83%A9%E3%83%83%E3%83%89%E3%81%AE%E8%A6%B3%E6%B8%AC%E8%80%85-%E4%BC%8A%E8%97%A4%E5%8A%A0%E5%A5%88%E5%AD%90.lrc" }, { name: "technovision", artist: "いとうかなこ", url: "assets/music/technovision - 伊藤加奈子.mp3", cover: "assets/covers/technovision-伊藤加奈子.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/technovision-%E4%BC%8A%E8%97%A4%E5%8A%A0%E5%A5%88%E5%AD%90.lrc" }, { name: "Hacking to the Gate", artist: "いとうかなこ", url: "assets/music/Hacking to the Gate.mp3", cover: "assets/covers/HackingtotheGate-伊藤加奈子.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/HackingtotheGate-%E4%BC%8A%E8%97%A4%E5%8A%A0%E5%A5%88%E5%AD%90.lrc" }, { name: "GATE OF STEINER (Bonus Track)", artist: "佐々木恵梨", url: "assets/music/GATE OF STEINER (Bonus Track) - 佐々木恵梨.mp3", cover: "assets/covers/GATEOFSTEINER(BonusTrack)-佐々木恵梨.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/GATEOFSTEINER(BonusTrack)-%E4%BD%90%E3%80%85%E6%9C%A8%E6%81%B5%E6%A2%A8.lrc" }, { name: "いつもこの場所で", artist: "あやね", url: "assets/music/いつもこの場所で (一直在这个地方) - あやね.mp3", cover: "assets/covers/いつもこの場所で-あやね.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%81%84%E3%81%A4%E3%82%82%E3%81%93%E3%81%AE%E5%A0%B4%E6%89%80%E3%81%A7-%E3%81%82%E3%82%84%E3%81%AD.lrc" }, { name: "あなたの選んだこの時を", artist: "いとうかなこ", url: "assets/music/あなたの選んだこの時を - いとうかなこ.mp3", cover: "assets/covers/あなたの選んだこの時を-いとうかなこ.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%81%82%E3%81%AA%E3%81%9F%E3%81%AE%E9%81%B8%E3%82%93%E3%81%A0%E3%81%93%E3%81%AE%E6%99%82%E3%82%92-%E3%81%84%E3%81%A8%E3%81%86%E3%81%8B%E3%81%AA%E3%81%93.lrc" }, { name: "前前前世", artist: "RADWIMPS", url: "assets/music/前前前世.mp3", cover: "assets/covers/前前前世-RADWIMPS.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E5%89%8D%E5%89%8D%E5%89%8D%E4%B8%96-RADWIMPS.lrc" }, { name: "Butter-Fly", artist: "和田光司(By コバソロ & 七穂)", url: "assets/music/Butter-Fly.mp3", cover: "assets/covers/Butter-Fly-和田光司(わだこうじ).webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/Butter-Fly-%E5%92%8C%E7%94%B0%E5%85%89%E5%8F%B8(%E3%82%8F%E3%81%A0%E3%81%93%E3%81%86%E3%81%98).lrc" }, { name: "Catch the Moment", artist: "LiSA", url: "assets/music/Catch the Moment.mp3", cover: "assets/covers/CatchtheMoment-LiSA.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/CatchtheMoment-LiSA.lrc" }, { name: "Baby Don't Know Why", artist: "Ms.OOJA", url: "assets/music/Baby Dont Know Why.mp3", cover: "assets/covers/babydonttknowwhy-Ms.OOJA.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/babydonttknowwhy-Ms.OOJA.lrc" }, { name: "LOSER", artist: "米津玄師", url: "assets/music/LOSER.mp3", cover: "assets/covers/LOSER-米津玄師.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/LOSER-%E7%B1%B3%E6%B4%A5%E7%8E%84%E5%B8%AB.lrc" }, { name: "打上花火", artist: "DAOKO  米津玄師", url: "assets/music/打上花火.mp3", cover: "assets/covers/打上花火-米津玄師.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E6%89%93%E4%B8%8A%E8%8A%B1%E7%81%AB-%E7%B1%B3%E6%B4%A5%E7%8E%84%E5%B8%AB.lrc" }, { name: "終わりの世界から", artist: "麻枝 准  やなぎなぎ", url: "assets/music/終わりの世界から.mp3", cover: "assets/covers/終わりの世界から-やなぎなぎ.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E7%B5%82%E3%82%8F%E3%82%8A%E3%81%AE%E4%B8%96%E7%95%8C%E3%81%8B%E3%82%89-%E3%82%84%E3%81%AA%E3%81%8E%E3%81%AA%E3%81%8E.lrc" }, { name: "Break Beat Bark!", artist: "神田沙也加", url: "assets/music/Break Beat Bark.mp3", cover: "assets/covers/BreakBeatBark!-神田沙也加.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/BreakBeatBark!-%E7%A5%9E%E7%94%B0%E6%B2%99%E4%B9%9F%E5%8A%A0.lrc" }, { name: "ワイルドローズ", artist: "May'n", url: "assets/music/Wild Rose.mp3", cover: "assets/covers/ワイルドローズ-Mayn.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%83%AF%E3%82%A4%E3%83%AB%E3%83%89%E3%83%AD%E3%83%BC%E3%82%BA-Mayn.lrc" }, { name: "My Days", artist: "鈴木このみ", url: "assets/music/My Days.mp3", cover: "assets/covers/MyDays-鈴木このみ.webp", lrc: "assets/lrc/MyDays-鈴木このみ.lrc" }, { name: "Lemon", artist: "米津玄師", url: "assets/music/Lemon.mp3", cover: "assets/covers/Lemon-米津玄師.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/Lemon-%E7%B1%B3%E6%B4%A5%E7%8E%84%E5%B8%AB.lrc" }, { name: "小さな恋のうた", artist: "コバソロ & 杏沙子", url: "assets/music/小さな恋のうた.mp3", cover: "assets/covers/コバソロ.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E5%B0%8F%E3%81%95%E3%81%AA%E6%81%8B%E3%81%AE%E3%81%86%E3%81%9F-Kobasolo(%E3%82%B3%E3%83%90%E3%82%BD%E3%83%AD)%E4%B8%83%E7%A9%82.lrc" }, { name: "あとひとつ", artist: "コバソロ & こぴ", url: "assets/music/あとひとつ.mp3", cover: "assets/covers/コバソロ.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%81%82%E3%81%A8%E3%81%B2%E3%81%A8%E3%81%A4-Kobasolo(%E3%82%B3%E3%83%90%E3%82%BD%E3%83%AD)%E3%81%93%E3%81%B4.lrc" }, { name: "キセキ", artist: "高橋李依", url: "assets/music/キセキ.mp3", cover: "assets/covers/高橋李依Collection.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%82%AD%E3%82%BB%E3%82%AD-%E9%AB%98%E6%A9%8B%E6%9D%8E%E4%BE%9D.lrc" }, { name: "小さな恋のうた", artist: "高橋李依", url: "assets/music/小さな恋のうた_高橋李依.mp3", cover: "assets/covers/高橋李依Collection.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E5%B0%8F%E3%81%95%E3%81%AA%E6%81%8B%E3%81%AE%E3%81%86%E3%81%9F-%E9%AB%98%E6%A9%8B%E6%9D%8E%E4%BE%9D.lrc" }, { name: "言わないけどね。", artist: "高橋李依", url: "assets/music/言わないけどね。.mp3", cover: "assets/covers/高橋李依Collection.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E8%A8%80%E3%82%8F%E3%81%AA%E3%81%84%E3%81%91%E3%81%A9%E3%81%AD%E3%80%82-%E9%AB%98%E6%A9%8B%E6%9D%8E%E4%BE%9D.lrc" }, { name: "愛唄", artist: "高橋李依", url: "assets/music/愛唄.mp3", cover: "assets/covers/高橋李依Collection.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E6%84%9B%E5%94%84-%E9%AB%98%E6%A9%8B%E6%9D%8E%E4%BE%9D.lrc" }, { name: "奏(和聲版)", artist: "高橋李依 x 雨宫天", url: "assets/music/奏.mp3", cover: "assets/covers/高橋李依Collection.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E5%A5%8F(%E3%81%8B%E3%81%AA%E3%81%A7)-%E9%AB%98%E6%A9%8B%E6%9D%8E%E4%BE%9D.lrc" }, { name: "生きていたんだよな", artist: "あいみょん", url: "assets/music/生きていたんだよな.mp3", cover: "assets/covers/生きていたんだよな-あいみょん.webp", lrc: "assets/lrc/生きていたんだよな-あいみょん.lrc" }, { name: "空の青さを知る人よ", artist: "あいみょん", url: "assets/music/空の青さを知る人よ.mp3", cover: "assets/covers/空の青さを知る人よ-あいみょん.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E7%A9%BA%E3%81%AE%E9%9D%92%E3%81%95%E3%82%92%E7%9F%A5%E3%82%8B%E4%BA%BA%E3%82%88-%E3%81%82%E3%81%84%E3%81%BF%E3%82%87%E3%82%93.lrc" }, { name: "心做し", artist: "鹿乃", url: "assets/music/鹿乃 - 心做し.mp3", cover: "assets/covers/心做し-鹿乃.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E5%BF%83%E5%81%9A%E3%81%97-%E9%B9%BF%E4%B9%83.lrc" }, { name: "あの世行きのバスに乗ってさらば。", artist: "ツユ", url: "assets/music/あの世行きのバスに乗ってさらば。.mp3", cover: "assets/covers/あの世行きのバスに乗ってさらば。-ツユ.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%81%82%E3%81%AE%E4%B8%96%E8%A1%8C%E3%81%8D%E3%81%AE%E3%83%90%E3%82%B9%E3%81%AB%E4%B9%97%E3%81%A3%E3%81%A6%E3%81%95%E3%82%89%E3%81%B0%E3%80%82-%E3%83%84%E3%83%A6.lrc" }, { name: "願い～あの頃のキミへ～", artist: "當山みれい", url: "assets/music/願い～あの頃のキミへ～.mp3", cover: "assets/covers/願いあの頃のキミへ-當山みれい..webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E9%A1%98%E3%81%84%E3%81%82%E3%81%AE%E9%A0%83%E3%81%AE%E3%82%AD%E3%83%9F%E3%81%B8-%E7%95%B6%E5%B1%B1%E3%81%BF%E3%82%8C%E3%81%84.lrc" }, { name: "茜さす", artist: "Aimer", url: "assets/music/茜さす.mp3", cover: "assets/covers/茜さす-Aimer.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E8%8C%9C%E3%81%95%E3%81%99-Aimer.lrc" }, { name: "Rain", artist: "秦基博(はたもとひろ)", url: "assets/music/Rain.mp3", cover: "assets/covers/Rain-秦基博(はたもとひろ).webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/Rain-%E7%A7%A6%E5%9F%BA%E5%8D%9A(%E3%81%AF%E3%81%9F%E3%82%82%E3%81%A8%E3%81%B2%E3%82%8D).lrc" }, { name: "remember", artist: "Uru", url: "assets/music/remember.mp3", cover: "assets/covers/remember-uru.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/remember-uru.lrc" }, { name: "AI DO.", artist: "桥本美雪", url: "assets/music/AI DO. - 桥本美雪.mp3", cover: "assets/covers/AIDO.-桥本美雪.webp", lrc: "assets/lrc/AIDO.-桥本美雪.lrc" }, { name: "Apple And Cinnamon", artist: "宇多田ヒカル", url: "assets/music/Apple And Cinnamon - 宇多田ヒカル.mp3", cover: "assets/covers/AppleAndCinnamon-宇多田ヒカル.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/AppleAndCinnamon-%E5%AE%87%E5%A4%9A%E7%94%B0%E3%83%92%E3%82%AB%E3%83%AB.lrc" }, { name: "Keep on Keeping on", artist: "SawanoHiroyuki[nZk],aLIEz.", url: "assets/music/Keep on Keeping on - SawanoHiroyuki[nZk],aLIEz.mp3", cover: "assets/covers/KeeponKeepingon-SawanoHiroyuki_aLIEz.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/KeeponKeepingon-SawanoHiroyuki_aLIEz.lrc" }, { name: "loser", artist: "KANA-BOON", url: "assets/music/loser - KANA-BOON.mp3", cover: "assets/covers/loser-KANA-BOON.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/loser-KANA-BOON.lrc" }, { name: "Moon", artist: "Perfume", url: "assets/music/Moon - Perfume.mp3", cover: "assets/covers/Moon-Perfume.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/Moon-Perfume.lrc" }, { name: "MOON SIGNAL", artist: "Sphere", url: "assets/music/MOON SIGNAL - Sphere.mp3", cover: "assets/covers/MOONSIGNAL-Sphere.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/MOONSIGNAL-Sphere.lrc" }, { name: "One Life", artist: "ナノ", url: "assets/music/One Life - ナノ.mp3", cover: "assets/covers/OneLife-ナノ.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/OneLife-%E3%83%8A%E3%83%8E.lrc" }, { name: "メビウス", artist: "鈴木このみ", url: "assets/music/メビウス (梅比乌斯) - 鈴木このみ.mp3", cover: "assets/covers/メビウス(梅比乌斯)-鈴木このみ.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%83%A1%E3%83%93%E3%82%A6%E3%82%B9(%E6%A2%85%E6%AF%94%E4%B9%8C%E6%96%AF)-%E9%88%B4%E6%9C%A8%E3%81%93%E3%81%AE%E3%81%BF.lrc" }, { name: "Damn Good Day", artist: "星街すいせい", url: "assets/music/Damn Good Day - 星街すいせい.mp3", cover: "assets/covers/DamnGoodDay-星街すいせい.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/DamnGoodDay-%E6%98%9F%E8%A1%97%E3%81%99%E3%81%84%E3%81%9B%E3%81%84.lrc" }, { name: "Necro Fantasia feat. 美里", artist: "Alstroemeria Records,美里", url: "assets/music/Necro Fantasia feat. 美里 - Alstroemeria Records,美里.mp3", cover: "assets/covers/NecroFantasiafeat.美里-AlstroemeriaRecords_美里.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/NecroFantasiafeat.%E7%BE%8E%E9%87%8C-AlstroemeriaRecords_%E7%BE%8E%E9%87%8C.lrc" }, { name: "ぐらでーしょん", artist: "KANA-BOON,北澤ゆうほ", url: "assets/music/ぐらでーしょん (波淡法) - KANA-BOON,北澤ゆうほ.mp3", cover: "assets/covers/ぐらでーしょん-KANA-BOON,北澤ゆうほ.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%81%90%E3%82%89%E3%81%A7%E3%83%BC%E3%81%97%E3%82%87%E3%82%93-KANA-BOON%2C%E5%8C%97%E6%BE%A4%E3%82%86%E3%81%86%E3%81%BB.lrc" }, { name: "チョ・イ・ス", artist: "雨宮天", url: "assets/music/チョ・イ・ス - 雨宮天.mp3", cover: "assets/covers/チョ・イ・ス-雨宮天.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%83%81%E3%83%A7%E3%83%BB%E3%82%A4%E3%83%BB%E3%82%B9-%E9%9B%A8%E5%AE%AE%E5%A4%A9.lrc" }, { name: "ひかり", artist: "Flower Flower", url: "assets/music/ひかり - Flower Flower.mp3", cover: "assets/covers/ひかり-FlowerFlower.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E3%81%B2%E3%81%8B%E3%82%8A-FlowerFlower.lrc" }, { name: "人形ノ涙", artist: "仲村芽衣子", url: "assets/music/人形ノ涙 - 仲村芽衣子.mp3", cover: "assets/covers/人形ノ涙-仲村芽衣子.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E4%BA%BA%E5%BD%A2%E3%83%8E%E6%B6%99-%E4%BB%B2%E6%9D%91%E8%8A%BD%E8%A1%A3%E5%AD%90.lrc" }, { name: "喋蝶結び", artist: "ななひら", url: "assets/music/喋蝶結び - ななひら.mp3", cover: "assets/covers/喋蝶結び-ななひら.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E5%96%8B%E8%9D%B6%E7%B5%90%E3%81%B3-%E3%81%AA%E3%81%AA%E3%81%B2%E3%82%89.lrc" }, { name: "月に唄えば", artist: "サイダーガール", url: "assets/music/月に唄えば - サイダーガール.mp3", cover: "assets/covers/月に唄えば-サイダーガール.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E6%9C%88%E3%81%AB%E5%94%84%E3%81%88%E3%81%B0-%E3%82%B5%E3%82%A4%E3%83%80%E3%83%BC%E3%82%AC%E3%83%BC%E3%83%AB.lrc" }, { name: "甘いワナ ~Paint It, Black", artist: "宇多田ヒカル", url: "assets/music/甘いワナ ~Paint It, Black - 宇多田ヒカル.mp3", cover: "assets/covers/甘いワナPaintItBlack-宇多田ヒカル.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E7%94%98%E3%81%84%E3%83%AF%E3%83%8APaintItBlack-%E5%AE%87%E5%A4%9A%E7%94%B0%E3%83%92%E3%82%AB%E3%83%AB.lrc" }, { name: "廻廻奇譚", artist: "Eve", url: "assets/music/廻廻奇譚 - Eve.mp3", cover: "assets/covers/廻廻奇譚-Eve.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E5%BB%BB%E5%BB%BB%E5%A5%87%E8%AD%9A-Eve.lrc" }, { name: "足りない音はキミの声", artist: "諸星すみれ", url: "assets/music/足りない音はキミの声 - 諸星すみれ.mp3", cover: "assets/covers/足りない音はキミの声-諸星すみれ.webp", lrc: "https://raw.githubusercontent.com/Mikeexe2/Sasalele-Music-Station/main/assets/lrc/%E8%B6%B3%E3%82%8A%E3%81%AA%E3%81%84%E9%9F%B3%E3%81%AF%E3%82%AD%E3%83%9F%E3%81%AE%E5%A3%B0-%E8%AB%B8%E6%98%9F%E3%81%99%E3%81%BF%E3%82%8C.lrc" }] });
