@@ -62,29 +62,45 @@ function playMedia(link) {
   const proxiedLink = `https://sasalele.api-anycast.workers.dev/${link}`;
 
   const loadAndPlay = async (link) => {
-    if (link.endsWith(".mp4") || link.includes("format=mp4")) {
-      videoPlayer.src = link;
-      videoPlayer.play();
-    }
-    else if (Hls.isSupported()) {
-      const hlsInstance = new Hls();
-      hlsInstance.loadSource(proxiedLink);
-      hlsInstance.attachMedia(videoPlayer);
-      hlsInstance.on(Hls.Events.MANIFEST_PARSED, function () {
-        videoPlayer.play();
-      });
-    } else if (videoPlayer.canPlayType('application/vnd.apple.mpegurl')) {
-      videoPlayer.src = proxiedLink;
-      videoPlayer.addEventListener('loadedmetadata', function () {
-        videoPlayer.play();
-      });
+    if (link.startsWith("http:")) {
+      if (link.endsWith(".mp4") || link.includes("format=mp4")) {
+        window.open(link, '_blank');
+      } else {
+        // Open the HLS player in a new tab
+        //const playerUrl = `hls_player.html?videoUrl=${link}`;
+        window.open(link, '_blank');
+      }
+    } else if (link.startsWith("https:")) {
+      if (link.endsWith(".mp4") || link.includes("format=mp4")) {
+        videoPlayer.src = link;
+        videoPlayer.type = 'video/mp4';
+        videoPlayer.addEventListener('loadedmetadata', function () {
+          videoPlayer.play();
+        });
+      } else if (link.includes(".m3u8")) {
+        if (Hls.isSupported()) {
+          const hlsInstance = new Hls();
+          hlsInstance.loadSource(proxiedLink);
+          hlsInstance.attachMedia(videoPlayer);
+          hlsInstance.on(Hls.Events.MANIFEST_PARSED, function () {
+            videoPlayer.play();
+          });
+        } else if (videoPlayer.canPlayType('application/vnd.apple.mpegurl')) {
+          videoPlayer.src = proxiedLink;
+          videoPlayer.addEventListener('loadedmetadata', function () {
+            videoPlayer.play();
+          });
+        } else {
+          console.error('HLS is not supported on this device.');
+        }
+      }
     } else {
-      console.error('HLS is not supported on this device.');
+      console.error('Unsupported link format.');
     }
   };
+
   loadAndPlay(link);
 }
-
 
 document.getElementById("loadM3U").addEventListener("click", function () {
   var m3uUrl = document.getElementById("m3uURL").value;
