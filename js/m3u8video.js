@@ -1,6 +1,7 @@
 let currentVideos = [];
 let currentPlayingElement = null;
 let hlsInstance = null;
+const titleNow = document.getElementById("selected-video-title");
 
 async function fetchVideoLinks(genre) {
   try {
@@ -53,7 +54,8 @@ function selectVideo(element) {
   element.style.backgroundColor = "#007bff";
   element.style.color = "#fff";
   currentPlayingElement = element;
-  document.getElementById("selected-video-title").textContent = selectedTitle;
+  titleNow.style.display = "block";
+  titleNow.textContent = selectedTitle;
   playMedia(selectedLink);
 }
 
