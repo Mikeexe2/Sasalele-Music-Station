@@ -361,7 +361,7 @@ function loadAll() {
                 const radHTML = `
                 <div class="widget">
                 <img class="rad-icon" src="${station.favicon}">
-                <div class="download-button"><i class="fas fa-download"></i></div>
+                <button class="download-button"><i class="fas fa-download"></i></button>
                 <a href="${station.homepage}" target="_blank">
                     <span class="player-radio-name">${station.name}</span>
                 </a>   
@@ -657,7 +657,7 @@ function radioSearch() {
                     radioDiv.classList.add('widget');
                     radioDiv.innerHTML = `
                         <img class="rad-icon" src="${radio.favicon ? radio.favicon : 'assets/radios/Unidentified2.webp'}">
-                        <div class="download-button"><i class="fas fa-download"></i></div>
+                        <button class="download-button"><i class="fas fa-download"></i></button>
                         <a href="${radio.homepage}" target="_blank">
                             <span class="player-radio-name">${radio.name}</span>
                         </a>
@@ -699,6 +699,7 @@ function radioSearch() {
 }
 
 // for radio streams
+const titleNow = document.getElementById("selected-video-title");
 let currentRadioStreams = [];
 let currentPlayingElement = null;
 let hls = null;
@@ -723,24 +724,25 @@ function selectRadioStream(element) {
     element.style.backgroundColor = "#007bff";
     element.style.color = "#fff";
     currentPlayingElement = element;
-    document.getElementById("selected-video-title").textContent = selectedTitle;
+    titleNow.style.display = "block";
+    titleNow.textContent = selectedTitle;
 
     playRadioStream(selectedLink);
 }
 
 function playRadioStream(link) {
     const m3u8player = document.getElementById("radio-player");
-    const proxiedLink = `https://sasalele.api-anycast.workers.dev/${link}`;
+    //const proxiedLink = `https://sasalele.api-anycast.workers.dev/${link}`;
     const hls = new Hls();
 
     if (Hls.isSupported()) {
-        hls.loadSource(proxiedLink);
+        hls.loadSource(link);
         hls.attachMedia(m3u8player);
         hls.on(Hls.Events.MANIFEST_PARSED, function () {
             m3u8player.play();
         });
     } else if (m3u8player.canPlayType('application/vnd.apple.mpegurl')) {
-        m3u8player.src = proxiedLink;
+        m3u8player.src = link;
         m3u8player.addEventListener('loadedmetadata', function () {
             m3u8player.play();
         });
