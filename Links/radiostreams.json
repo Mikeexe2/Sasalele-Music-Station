@@ -14,34 +14,6 @@
             "lang": "ja"
         },
         {
-            "title": "NHK Radio 1",
-            "link": "https://ap.fd6.online/hls/radio-stream.nhk.jp/hls/live/2023229/nhkradiruakr1/master48k.m3u8",
-            "icon": "assets/websites/nhkworldradio.webp",
-            "homepage": "https://www3.nhk.or.jp/",
-            "lang": "ja"
-        },
-        {
-            "title": "nhk bs premium",
-            "link": "https://epg.pw/stream/8e7e14c0687efaa5082e847d03833a4749c5716e9d99580785a59a90d1398787.m3u8",
-            "icon": "assets/websites/nhkworldradio.webp",
-            "homepage": "https://www3.nhk.or.jp/",
-            "lang": "ja"
-        },
-        {
-            "title": "NHK World TV",
-            "link": "http://nhkwlive-xjp.akamaized.net/hls/live/2003458/nhkwlive-xjp-en/index_2M.m3u8",
-            "icon": "assets/websites/nhkworldradio.webp",
-            "homepage": "https://www3.nhk.or.jp/",
-            "lang": "ja"
-        },
-        {
-            "title": "NHK World Radio Japan - Japanese",
-            "link": "https://nhkworld.webcdn.stream.ne.jp/www11/radiojapan/all/263943/live_s.m3u8",
-            "icon": "assets/websites/nhkworldradio.webp",
-            "homepage": "https://www3.nhk.or.jp/",
-            "lang": "ja"
-        },
-        {
             "title": "FM ABASHIRI [北海道網走市]",
             "link": "http://mtist.as.smartstream.ne.jp/30058/livestream/playlist.m3u8",
             "icon": "assets/websites/abashiri.webp",
