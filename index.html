@@ -32,9 +32,7 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-v4-rtl/4.6.2-1/css/bootstrap.min.css">
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/fontawesome.min.css" />
-        <script src="https://kit.fontawesome.com/9e5ba2e3f5.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <script src="https://cdn.jsdelivr.net/npm/hls.js@latest" type="text/javascript"></script>
         <script src="js/icecast-metadata-player-1.17.3.main.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
@@ -489,36 +487,44 @@
                 <div class="section-title">
                     <h1>Radio Streams</h1>
                 </div>
-                <div class="container text-center">
-                    <div id="vplayer" class="container radioplayerbg mb-2">
-                        <h6 id="selected-video-title"></h6>
-                        <video id="radio-player" src="" controls controlslist="nodownload noplaybackrate nofullscreen"
-                            style="max-height: 100px"></video>
+                <div class="container alphabg text-center">
+                    <h6 id="selected-video-title" style="display:none"></h6>
+                    <div id="vplayer" class="container mb-2">
+                        <media-controller>
+                            <video slot="media" id="radio-player" src="">
+                            </video>
+                            <media-control-bar>
+                                <media-play-button></media-play-button>
+                                <media-mute-button></media-mute-button>
+                                <media-volume-range></media-volume-range>
+                                <media-time-range></media-time-range>
+                                <media-fullscreen-button></media-fullscreen-button>
+                            </media-control-bar>
+                        </media-controller>
                     </div>
-                    <div class="alphabg">
-                        <div class="d-flex justify-content-center">
-                            <div class="dropdown">
-                                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
-                                    aria-expanded="false">
-                                    <i class="fa fa-bars"></i> Streams
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a href="" class="lang-link" data-lang="ja">Japanese</a>
-                                    <a href="" class="lang-link" data-lang="ko">Korean</a>
-                                    <a href="" class="lang-link" data-lang="zh">Chinese</a>
-                                    <a href="" class="lang-link" data-lang="en">English</a>
-                                </div>
-                            </div>
-                            <div id="lang-info" class="ml-auto mb-2">
-                                <strong><span id="lang-name"></span></strong>
-                                <strong>(<span id="stream-count"></span>)</strong>
+                    <div class="d-flex">
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+                                aria-expanded="false">
+                                <i class="fa fa-bars"></i> Streams
+                            </button>
+                            <div class="dropdown-menu">
+                                <a href="" class="lang-link" data-lang="ja">Japanese</a>
+                                <a href="" class="lang-link" data-lang="ko">Korean</a>
+                                <a href="" class="lang-link" data-lang="zh">Chinese</a>
+                                <a href="" class="lang-link" data-lang="en">English</a>
                             </div>
                         </div>
-                        <div class="input-group mb-2 w-100">
-                            <input type="text" id="searchStream" class="form-control" placeholder="Filter a stream">
+                        <div id="lang-info" class="ml-auto mb-2">
+                            <strong><span id="lang-name"></span></strong>
+                            <strong>(<span id="stream-count"></span>)</strong>
                         </div>
-                        <div id="video-list"></div>
                     </div>
+                    <div class="input-group mb-2 w-100">
+                        <input type="text" id="searchStream" class="form-control" placeholder="Filter a stream">
+                    </div>
+                    <div id="video-list"></div>
+
                 </div>
             </section>
 
@@ -568,7 +574,16 @@
                         <i class="fas fa-copy"></i>
                     </button>
                 </div>
-                <audio id="miniPlayer" controls controlslist="nodownload noplaybackrate"></audio>
+                <media-controller audio>
+                    <audio slot="media" id="miniPlayer"></audio>
+                    <media-control-bar>
+                        <media-play-button></media-play-button>
+                        <media-time-display show-duration></media-time-display>
+                        <media-time-range></media-time-range>
+                        <media-mute-button></media-mute-button>
+                        <media-volume-range></media-volume-range>
+                    </media-control-bar>
+                </media-controller>
             </div>
 
             <div class="modal fade" id="recentPanel" tabindex="-1" role="dialog" aria-labelledby="recent"
@@ -624,6 +639,7 @@
             });
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-v4-rtl/4.6.2-1/js/bootstrap.min.js"></script>
+        <script type="module" src="https://unpkg.com/media-chrome@0.6"></script>
         <script data-cfasync="false" src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
         <script data-cfasync="false" src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
         <script src="js/stats.js"></script>
