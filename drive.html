@@ -30,12 +30,10 @@
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-v4-rtl/4.6.2-1/css/bootstrap.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-v4-rtl/4.6.2-1/js/bootstrap.min.js"></script>
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/fontawesome.min.css" />
-        <script src="https://kit.fontawesome.com/9e5ba2e3f5.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     </head>
 
-    <body>
+    <body onload="getFolderId()">
         <nav class="navbar sticky-top navbar-dark navbar-expand-md">
             <a class="navbar-brand" href="https://basic.pp.ua/"><img class="" src="assets/sasalele_logo-removebg.webp"
                     width="auto" height="32"></a>
@@ -47,7 +45,8 @@
             </button>
             <div class="collapse navbar-collapse" id="main-navigation">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="https://basic.pp.ua/">Radios<i class="fas fa-radio"></i></a>
+                    <li class="nav-item"><a class="nav-link" href="https://basic.pp.ua/">Radios<i
+                                class="fas fa-radio"></i></a>
                     </li>
                     <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown"
                             aria-expanded="false" href="#">Websites<i class="fas fa-fw fas fa-link"></i></a>
@@ -81,13 +80,23 @@
         <div id="content">
             <div id="gdmp">
                 <button id="prev-btn" onclick="prevTrack()"><i class="fas fa-step-backward"></i></button>
-                <audio id="audio" controls controlslist="nodownload noplaybackrate">
-                    <source id="source" src="" type="audio/mpeg">
-                </audio>
+                <media-controller audio>
+                    <audio slot="media" id="audio">
+                        <source id="source" src="" type="audio/mpeg">
+                    </audio>
+                    <media-control-bar>
+                        <media-play-button></media-play-button>
+                        <media-time-display show-duration></media-time-display>
+                        <media-time-range></media-time-range>
+                        <media-playback-rate-button></media-playback-rate-button>
+                        <media-mute-button></media-mute-button>
+                        <media-volume-range></media-volume-range>
+                    </media-control-bar>
+                </media-controller>
                 <button id="next-btn" onclick="nextTrack()"><i class="fas fa-step-forward"></i></button>
             </div>
 
-            <section id="drive" onload="getFolderId()">
+            <section id="drive">
                 <div class="section-title">
                     <h1>Google Drive Music Player</h1>
                 </div>
@@ -136,31 +145,35 @@
                         <div id="demo" class="loaded">
                             <details open>
                                 <summary>Demo Folder 1</summary>
-                                <button class="track" onclick="playTrack('好きにしなよ - Anly', this, 'demo')"><i
-                                        class="fas fa-play"></i>
-                                    好きにしなよ -
-                                    Anly</button>
-                                <button class="track" onclick="playTrack('紅葉愛唄 - GARNiDELiA', this, 'demo')"><i
-                                        class="fas fa-play"></i>
-                                    紅葉愛唄 -
-                                    GARNiDELiA</button>
-                                <button class="track"
-                                    onclick="playTrack('花ハ踊レヤいろはにほ (随花起舞) - チーム・ハナヤマタ', this, 'demo')"><i
-                                        class="fas fa-play"></i> 花ハ踊レヤいろはにほ (随花起舞) - チーム・ハナヤマタ</button>
+                                <div class="track-container"><button class="track"
+                                        onclick="playTrack('好きにしなよ - Anly', this, 'demo')"><i class="fas fa-play"></i>
+                                        好きにしなよ -
+                                        Anly</button></div>
+                                <div class="track-container"><button class="track"
+                                        onclick="playTrack('紅葉愛唄 - GARNiDELiA', this, 'demo')"><i
+                                            class="fas fa-play"></i>
+                                        紅葉愛唄 -
+                                        GARNiDELiA</button></div>
+                                <div class="track-container"><button class="track"
+                                        onclick="playTrack('花ハ踊レヤいろはにほ (随花起舞) - チーム・ハナヤマタ', this, 'demo')"><i
+                                            class="fas fa-play"></i>
+                                        花ハ踊レヤいろはにほ - チーム・ハナヤマタ</button></div>
                             </details>
                             <details open>
                                 <summary>Demo Folder 2</summary>
-                                <button class="track" onclick="playTrack('都会っ子田舎っ子 - びわ湖くん', this, 'demo')"><i
-                                        class="fas fa-play"></i>
-                                    都会っ子田舎っ子
-                                    - びわ湖くん</button>
-                                <button class="track" onclick="playTrack('天空の狂詩曲 - さゆり', this, 'demo')"><i
-                                        class="fas fa-play"></i>
-                                    天空の狂詩曲 -
-                                    さゆり</button>
-                                <button class="track" onclick="playTrack('ロストワンの号哭Band edition - 周平', this, 'demo')"><i
-                                        class="fas fa-play"></i>
-                                    ロストワンの号哭Band edition - 周平</button>
+                                <div class="track-container"><button class="track"
+                                        onclick="playTrack('都会っ子田舎っ子 - びわ湖くん', this, 'demo')"><i
+                                            class="fas fa-play"></i>
+                                        都会っ子田舎っ子
+                                        - びわ湖くん</button></div>
+                                <div class="track-container"><button class="track"
+                                        onclick="playTrack('天空の狂詩曲 - さゆり', this, 'demo')"><i class="fas fa-play"></i>
+                                        天空の狂詩曲 -
+                                        さゆり</button></div>
+                                <div class="track-container"><button class="track"
+                                        onclick="playTrack('ロストワンの号哭Band edition - 周平', this, 'demo')"><i
+                                            class="fas fa-play"></i>
+                                        ロストワンの号哭Band edition - 周平</button></div>
                             </details>
                         </div>
                     </div>
@@ -191,6 +204,7 @@
         </div>
         <script src="js/stats.js"></script>
         <script src="js/gdmp.js"></script>
+        <script type="module" src="https://unpkg.com/media-chrome@0.6"></script>
         <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
         <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
 
