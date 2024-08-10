@@ -37,7 +37,7 @@ function handleAuthClick(folderId) {
             throw (resp);
         }
 
-        // set parentfolder as root if nothing set
+        // set parentfolder as root if nothing set  
         if (localStorage.getItem("parentfolder") == "" || localStorage.getItem("parentfolder") == null) {
             localStorage.setItem("parentfolder", "root");
             folderId = "root";
@@ -122,10 +122,12 @@ function getContents(id, type) {
 
                 if (file.mimeType.includes("audio")) {
                     document.getElementById(location).innerHTML += `
-                    <button class="track" onclick="playTrack('${file.id}', this)"><i class="fas fa-play"></i> ${file.name}</button>
+                    <div class="track-container">
+                        <button class="track" onclick="playTrack('${file.id}', this)"><i class="fas fa-play"></i> ${file.name}</button>
+                        <a href="${file.webContentLink}" download="${file.name}" class="download"><i class="fas fa-download"></i></a>
+                    </div>  
                     `;
                 }
-
                 document.getElementById(location).classList.add("loaded");
             }
 
@@ -228,19 +230,21 @@ function playTrack(id, element, type) {
 }
 
 function prevTrack() {
-    if (audio.currentTime > 3 || !playing.previousElementSibling.previousElementSibling) {
+    const prevButton = playing.closest('.track-container').previousElementSibling?.querySelector('.track');
+    if (audio.currentTime > 3 || !prevButton) {
         audio.currentTime = 0;
         audio.play();
-    } else if (playing.previousElementSibling.previousElementSibling) {
+    } else {
         resetIconToPlay();
-        playing.previousElementSibling.click();
+        prevButton.click();
     }
 }
 
 function nextTrack() {
-    if (playing.nextElementSibling) {
+    const nextButton = playing.closest('.track-container').nextElementSibling?.querySelector('.track');
+    if (nextButton) {
         resetIconToPlay();
-        playing.nextElementSibling.click();
+        nextButton.click();
     }
 }
 
