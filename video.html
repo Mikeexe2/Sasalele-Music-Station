@@ -32,9 +32,7 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-v4-rtl/4.6.2-1/css/bootstrap.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-v4-rtl/4.6.2-1/js/bootstrap.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/hls.js@latest" type="text/javascript"></script>
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/fontawesome.min.css" />
-        <script src="https://kit.fontawesome.com/9e5ba2e3f5.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     </head>
 
     <body>
@@ -86,25 +84,21 @@
                 <div class="section-title">
                     <h1>Videos</h1>
                 </div>
-                <div class="container-fluid">
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-md-10">
-                            <div class="input-group mb-3">
-                                <input type="text" id="m3uURL" class="form-control" placeholder="Enter M3U8 URL">
-                                <div class="input-group-append">
-                                    <button id="loadM3U" class="btn btn-primary btn-go">Go</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="container mt-1">
                     <div class="row">
                         <div class="col-lg-8">
+                            <h6 id="selected-video-title" style="display:none;"></h6>
                             <div id="vplayer" class="container mb-3">
-                                <h6 id="selected-video-title" class="text-light p-2"></h6>
-                                <video id="video-player" src="" class="w-100" controls
-                                    autoplay></video>
+                                <media-controller style="max-width: 720px; aspect-ratio: 16 / 9;">
+                                    <video slot="media" id="video-player" src=""></video>
+                                    <media-control-bar>
+                                        <media-play-button></media-play-button>
+                                        <media-mute-button></media-mute-button>
+                                        <media-volume-range></media-volume-range>
+                                        <media-time-range></media-time-range>
+                                        <media-fullscreen-button></media-fullscreen-button>
+                                    </media-control-bar>
+                                </media-controller>
                             </div>
                         </div>
                         <div class="col-lg-4 mb-1">
@@ -136,6 +130,19 @@
                                 <input type="text" id="searchChannel" class="form-control" placeholder="Search Channel">
                             </div>
                             <div id="video-list" class="list-group w-100"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-10">
+                            <div class="input-group mb-3">
+                                <input type="text" id="m3uURL" class="form-control" placeholder="Enter M3U8 URL">
+                                <div class="input-group-append">
+                                    <button id="loadM3U" class="btn btn-primary btn-go">Go</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -213,7 +220,8 @@
                                     <p>By default, the browser downloads any m3u8 files that were requested. This plugin
                                         checks any links to see if they are
                                         m3u8. If that's the case, it opens a new tab on a video player that uses the
-                                        hlsjs library. Extensions may have broader permissions to bypass CORS restrictions or handle authentication differently compared to web
+                                        hlsjs library. Extensions may have broader permissions to bypass CORS
+                                        restrictions or handle authentication differently compared to web
                                         pages.</p>
                                     <p class="text-white"><a
                                             href="https://chromewebstore.google.com/detail/native-hls-playback/emnphkkblegpebimobpbekeedfgemhof"
@@ -229,6 +237,7 @@
         </div>
         <script src="js/stats.js"></script>
         <script src="js/m3u8video.js"></script>
+        <script type="module" src="https://unpkg.com/media-chrome@0.6"></script>
     </body>
 
 </html>
