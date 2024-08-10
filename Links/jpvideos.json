@@ -32,7 +32,23 @@
     "link": "https://cdn.nhkworld.jp/www11/nhkworld-tv/pre/hlscomp.m3u8"
   },
   {
-    "title": "NHK World Premium",
+    "title": "NHK Radio 1 (audio only)",
+    "link": "https://ap.fd6.online/hls/radio-stream.nhk.jp/hls/live/2023229/nhkradiruakr1/master48k.m3u8"
+  },
+  {
+    "title": "nhk bs premium (audio only)",
+    "link": "https://epg.pw/stream/8e7e14c0687efaa5082e847d03833a4749c5716e9d99580785a59a90d1398787.m3u8"
+  },
+  {
+    "title": "NHK World TV (audio only)",
+    "link": "http://nhkwlive-xjp.akamaized.net/hls/live/2003458/nhkwlive-xjp-en/index_2M.m3u8"
+  },
+  {
+    "title": "NHK World Radio Japan - Japanese (audio only)",
+    "link": "https://nhkworld.webcdn.stream.ne.jp/www11/radiojapan/all/263943/live_s.m3u8"
+  },
+  {
+    "title": "NHK World Premium (audio only)",
     "link": "https://cdn.skygo.mn/live/disk1/NHK_World_Premium/HLSv3-FTA/NHK_World_Premium.m3u8"
   },
   {
