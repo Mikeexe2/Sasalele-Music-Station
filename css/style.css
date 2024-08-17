@@ -131,7 +131,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    transition: background-color 0.12s var(--animation-easing-ease-in-out);
+    transition: background-image 0.5s ease-in-out, background-color 0.5s ease-in-out;
 }
 
 #randomimg {
@@ -149,33 +149,32 @@
 
 @keyframes shake {
     0% {
-        transform: translateX(0)
+        transform: translateX(0);
     }
 
     25% {
-        transform: translateX(-5px) rotate(-2deg)
+        transform: translateX(-5px) rotate(-2deg);
     }
 
     50% {
-        transform: translateX(5px) rotate(2deg)
+        transform: translateX(5px) rotate(2deg);
     }
 
     75% {
-        transform: translateX(-5px) rotate(-2deg)
+        transform: translateX(-5px) rotate(-2deg);
     }
 
     100% {
-        transform: translateX(0)
+        transform: translateX(0);
     }
 }
 
 .anim-shake {
-    animation: shake 0.12s var(--animation-easing-ease-in-out)
+    animation: shake 0.5s 1;
 }
 
 .anim-blur-left {
-    animation: blur-left 0.12s 0s linear;
-    animation-fill-mode: both;
+    animation: blur-left 0.5s 1;
 }
 
 @keyframes blur-left {
@@ -189,8 +188,7 @@
 }
 
 .anim-blur-right {
-    animation: blur-right 0.12s 0s linear;
-    animation-fill-mode: both;
+    animation: blur-right 0.5s 1;
 }
 
 @keyframes blur-right {
@@ -204,8 +202,7 @@
 }
 
 .anim-blur-top {
-    animation: blur-top 0.12s 0s linear;
-    animation-fill-mode: both;
+    animation: blur-top 0.5s 1;
 }
 
 @keyframes blur-top {
@@ -219,8 +216,7 @@
 }
 
 .anim-blur-bottom {
-    animation: blur-bottom 0.12s 0s linear;
-    animation-fill-mode: both;
+    animation: blur-bottom 0.5s 1;
 }
 
 @keyframes blur-bottom {
@@ -241,17 +237,9 @@
     content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==);
 }
 
-.nav-link,
-.navbar-brand {
-    cursor: pointer;
-    text-align: center !important;
-}
-
 .dropdown-menu {
-    background-color: var(--black-90-alpha) !important;
-    text-align: center !important;
+    background-color: var(--black-80-alpha) !important;
 }
-
 
 .dropdown-menu a {
     color: var(--apple-white) !important;
@@ -279,25 +267,10 @@
     border: 0 !important;
 }
 
-@keyframes flowingGradient {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
 body {
     font-family: "Open Sans", sans-serif;
     width: 100%;
     min-height: 100%;
-    background-image: url('../assets/sasalele_bg.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -392,42 +365,53 @@ body {
 
 .genre-content {
     max-height: 245px;
-    border-radius: 8px;
-    overflow-y: auto;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.5) transparent;
 }
 
-.alphabg {
-    margin-bottom: 20px;
-    border-radius: 10px;
-    padding: 10px;
-    background: var(--black-20-alpha) !important;
+.genre-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.genre-content::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+}
+
+.genre-content::-webkit-scrollbar-track {
+    background: transparent;
 }
 
 .radiogenreblock {
-    margin-bottom: 20px;
-    border: none;
-    border-radius: 10px;
-    padding: 5px;
-    background-color: var(--black-30-alpha);
+    margin-top: 20px;
 }
 
-.radio-genre {
+.card-bg {
     margin: 0 auto;
     padding: 10px;
     text-align: center;
+    border-radius: 10px;
     font-size: var(--wp--preset--font-size--medium);
-    font-weight: 700;
-    border-radius: 8px;
-    background: var(--wp--preset--gradient--pale-ocean);
+    font-weight: bold;
+    background: hsla(225, 82%, 67%, 0.9);
     color: var(--apple-black)
+}
+
+.search-bg {
+    border-radius: 15px;
+    font-size: var(--wp--preset--font-size--medium);
+    font-weight: bold;
+    background: var(--white-50-alpha);
+    color: #e43c5c;
 }
 
 .widget {
     display: flex;
     align-items: center;
-    background-color: var(--white-50-alpha);
-    border: 1px solid var(--gray-100);
     padding: 5px;
+    border: 1px solid var(--expressive-blue);
+    background-color: var(--white-50-alpha);
     width: 100%;
 }
 
@@ -454,7 +438,7 @@ body {
 
 .player-radio-name {
     font-weight: bold;
-    color: var(--apple-black);
+    color: var(--black-90-alpha);
     text-decoration: none;
 }
 
@@ -777,34 +761,34 @@ screen and (min-width: 1152px) {
     padding: 10px;
     align-items: center;
     bottom: 10px;
-    z-index: 2;
+    z-index: 999;
     left: 10px;
     min-width: 200px;
-    border-radius: 10px;
-    background-image: linear-gradient(to right, rgb(255, 206, 236), rgb(152, 150, 240));
-    background-size: 200% 200%;
-    animation: flowingGradient 5s ease infinite;
+    border-radius: 20px;
+    background-image: linear-gradient(to right, hsla(225, 82%, 67%, 0.9), hsla(254, 45%, 77%, 0.9));
     height: fit-content;
     width: fit-content;
 }
 
+.playing-info {
+    padding: 10px;
+}
+
 #cover img {
-    max-width: 50px;
+    max-width: 60px;
     border-radius: 50%;
 }
 
 #stationName {
-    padding: 2px;
     font-size: 15px;
     font-weight: bold;
-    margin-left: 5px;
+    margin-bottom: 5px;
     color: var(--apple-black)
 }
 
 #metadata {
     color: var(--apple-black);
     font-size: 14px;
-    margin-left: 5px;
 }
 
 .modal-dialog {
@@ -816,7 +800,25 @@ screen and (min-width: 1152px) {
 }
 
 #copyIcon {
-    margin-left: 5px;
+    background: none;
+    border: none;
+    color: var(--black-70-alpha);
+    cursor: pointer;
+    font-size: 14px;
+    transition: color 0.3s ease;
+    margin-left: 8px;
+}
+
+.copy-confirmation {
+    display: none;
+    background-color: #28a745;
+    position: absolute;
+    right: 5px;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    white-space: nowrap;
 }
 
 .player-controls {
@@ -827,9 +829,23 @@ screen and (min-width: 1152px) {
     right: 10px;
 }
 
+.p-btn {
+    background: none;
+    border: none;
+    color: var(--black-70-alpha);
+    cursor: pointer;
+    font-size: 20px;
+    margin-right: 5px;
+    transition: color 0.3s ease;
+}
+
+#copyIcon:hover,
+.p-btn:hover {
+    color: var(--expressive-blue);
+}
+
 #toggleRandom:hover,
 #togglePlayer:hover,
-#copyIcon:hover,
 #historyBtn:hover,
 .download-button:hover {
     transform: scale(1.1);
@@ -869,17 +885,46 @@ screen and (min-width: 1152px) {
     font-weight: 400;
 }
 
+.chat-popup {
+    position: fixed;
+    bottom: 80px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    border: none;
+    z-index: 9999;
+    background-color: var(--primary-green-50);
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.chat-popup:hover {
+    background-color: var(--primary-green-80);
+    transform: scale(1.1);
+}
+
+.fixed-action-bar {
+    top: 0px;
+    padding: -20px;
+    z-index: 1022;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .switch-container {
-    position: absolute;
-    top: 40px;
-    right: 5px;
+    display: flex;
+    align-items: center;
 }
 
 .switch {
     position: relative;
     display: inline-block;
-    width: 60px;
-    height: 34px;
+    width: 50px;
+    height: 30px;
 }
 
 .switch input {
@@ -903,8 +948,8 @@ screen and (min-width: 1152px) {
 .slider:before {
     position: absolute;
     content: "";
-    height: 26px;
-    width: 26px;
+    height: 22px;
+    width: 22px;
     left: 4px;
     bottom: 4px;
     background-color: white;
@@ -917,7 +962,7 @@ input:checked+.slider {
 }
 
 input:checked+.slider:before {
-    transform: translateX(26px);
+    transform: translateX(20px);
 }
 
 .back-to-top {
@@ -970,14 +1015,15 @@ input:checked+.slider:before {
 }
 
 #tips {
-    width: 90%;
+    width: 70%;
     border-radius: 8px;
     font-size: 16px;
+    left: 0;
     line-height: 1.3;
     margin: 10px auto;
     padding: 5px;
     border-left: 0.4em solid var(--highlight-yellow-100);
-    background-color: var(--white-80-alpha);
+    background-color: var(--white-90-alpha);
     color: var(--apple-black)
 }
 
@@ -1018,10 +1064,9 @@ input:checked+.slider:before {
 
 /*CHAT*/
 #waline {
-    background: var(--white-80-alpha);
-    outline: 0;
+    background: var(--white-100);
     padding: 5px;
-    border: none
+    border-radius: 20px;
 }
 
 #wl-edit {
@@ -1498,7 +1543,8 @@ summary {
         font-size: 10px
     }
 
-    #metadata {
+    #metadata,
+    .p-btn {
         font-size: 13px;
     }
 
@@ -1511,7 +1557,7 @@ summary {
     #option li a,
     #option li button,
     #stationName,
-    .radio-genre,
+    .card-bg,
     #resultsContainer,
     .search-card,
     .message_user,
@@ -1532,9 +1578,7 @@ summary {
     }
 
     #player {
-        padding: 3px;
-        bottom: 5px;
-        left: 5px
+        margin: 10px;
     }
 
     #player.minimized {
@@ -1548,6 +1592,5 @@ summary {
 
     #cover img {
         width: 40px;
-        height: 40px
     }
 }
