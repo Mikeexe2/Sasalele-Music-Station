@@ -77,3 +77,62 @@ function getDayAbbreviation(day) {
 
 updateClock();
 setInterval(updateClock, 1000);
+
+// 0x40 hues animation??
+const hues = Array.from({ length: 128 }, (_, i) => (i * 137.6) % 360);
+
+const background = document.getElementById('background');
+const randomimg = document.getElementById('randomimg');
+const toggleAnimation = document.getElementById('toggleAnimation');
+
+let animationTimeout;
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function setRandomBackgroundColor() {
+    const hue = hues[getRandomInt(0, hues.length - 1)];
+    const saturation = getRandomInt(0, 100);
+    const lightness = getRandomInt(40, 70);
+    background.style.backgroundColor = `hsla(${hue}, ${saturation}%, ${lightness}%, 1)`;
+}
+
+function setRandomImage() {
+    const randomIndex = getRandomInt(1, 296);
+    randomimg.src = `images/image${randomIndex}.png`;
+
+    const animations = ['anim-shake', 'anim-blur-left', 'anim-blur-right', 'anim-blur-top', 'anim-blur-bottom'];
+    const anim = animations[getRandomInt(0, animations.length - 1)];
+    randomimg.className = anim;
+}
+
+let debounceTimeout;
+function handleToggleChange() {
+    clearTimeout(debounceTimeout);
+    debounceTimeout = setTimeout(() => {
+        if (toggleAnimation.checked) {
+            animateHues();
+        } else {
+            clearTimeout(animationTimeout);
+        }
+    }, 200);
+}
+
+function animateHues() {
+    function animate() {
+        if (toggleAnimation.checked) {
+            setRandomBackgroundColor();
+            setRandomImage();
+            const interval = getRandomInt(500, 1500);
+            animationTimeout = setTimeout(animate, interval);
+        }
+    }
+
+    animate();
+}
+
+setRandomBackgroundColor();
+setRandomImage();
+
+toggleAnimation.addEventListener('change', handleToggleChange);
