@@ -27,6 +27,7 @@
         <link rel="shortcut icon" href="assets/sasalele_logo-removebg.webp" type="image/x-icon" />
         <link rel="stylesheet" href="css/style.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-v4-rtl/4.6.2-1/css/bootstrap.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-v4-rtl/4.6.2-1/js/bootstrap.min.js"></script>
@@ -116,8 +117,9 @@
                         drive.google.com/drive/folders/1_gbbbbb-aaaaa has an ID of
                         "1_gbbbbb-aaaaa".<br>Alternatively,"<strong>root</strong>" can be used to browse from your
                         top-level
-                        folder.<br>
-                    <p>For more information, please read our <a href="privacypolicy.html" target="_blank">Privacy Policy
+                        folder.<br></p>
+                    <p>For more information, please read our <a href="privacypolicy.html" target="_blank">Privacy
+                            Policy.
                             <svg aria-labelledby="cds-react-aria-962-title" fill="none" focusable="false" height="16"
                                 role="img" viewBox="0 0 16 16" width="16" class="icon"
                                 style="vertical-align: text-bottom;">
@@ -129,65 +131,74 @@
                                     d="M6.646 8.646l7-7 .708.708-7 7-.708-.708z" fill="currentColor">
                                 </path>
                             </svg>
-                        </a>.</p>
-
+                        </a>
                     </p>
                 </details>
-                <main role="main">
-                    <div id="intro">
-                        <form onsubmit="submitFolderId(event)">
-                            <div class="row justify-content-center">
-                                <div class="col-md-6">
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" required id="parentfolder"
-                                            name="parentfolder" placeholder="google-drive-folder-id">
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-primary mb-3">
-                                                <i class="fab fa-google"></i> Login
-                                            </button>
-                                        </div>
-                                    </div>
+
+                <form onsubmit="submitFolderId(event)">
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" required id="parentfolder" name="parentfolder"
+                                    placeholder="google-drive-folder-id">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-primary mb-3">
+                                        <i class="fab fa-google"></i> Login
+                                    </button>
                                 </div>
                             </div>
-                        </form>
-                        <div id="demo" class="loaded">
-                            <details open>
-                                <summary>Demo Folder 1</summary>
-                                <div class="track-container"><button class="track"
-                                        onclick="playTrack('好きにしなよ - Anly', this, 'demo')"><i class="fas fa-play"></i>
-                                        好きにしなよ -
-                                        Anly</button></div>
-                                <div class="track-container"><button class="track"
-                                        onclick="playTrack('紅葉愛唄 - GARNiDELiA', this, 'demo')"><i
-                                            class="fas fa-play"></i>
-                                        紅葉愛唄 -
-                                        GARNiDELiA</button></div>
-                                <div class="track-container"><button class="track"
-                                        onclick="playTrack('花ハ踊レヤいろはにほ (随花起舞) - チーム・ハナヤマタ', this, 'demo')"><i
-                                            class="fas fa-play"></i>
-                                        花ハ踊レヤいろはにほ - チーム・ハナヤマタ</button></div>
-                            </details>
-                            <details open>
-                                <summary>Demo Folder 2</summary>
-                                <div class="track-container"><button class="track"
-                                        onclick="playTrack('都会っ子田舎っ子 - びわ湖くん', this, 'demo')"><i
-                                            class="fas fa-play"></i>
-                                        都会っ子田舎っ子
-                                        - びわ湖くん</button></div>
-                                <div class="track-container"><button class="track"
-                                        onclick="playTrack('天空の狂詩曲 - さゆり', this, 'demo')"><i class="fas fa-play"></i>
-                                        天空の狂詩曲 -
-                                        さゆり</button></div>
-                                <div class="track-container"><button class="track"
-                                        onclick="playTrack('ロストワンの号哭Band edition - 周平', this, 'demo')"><i
-                                            class="fas fa-play"></i>
-                                        ロストワンの号哭Band edition - 周平</button></div>
-                            </details>
+                        </div>
+                        <div class="dropdown mb-4">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="folderDropdown"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Public Links
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="folderDropdown" id="folderDropdownMenu">
+                            </div>
                         </div>
                     </div>
+                </form>
 
-                    <div id="contents" style="display:none"></div>
-                </main>
+                <div id="link" style="display:none">
+                    <ul id="file-tree" class="list-group">
+                    </ul>
+                </div>
+
+                <div id="intro">
+                    <div id="demo" class="loaded">
+                        <details open>
+                            <summary>Demo Folder 1</summary>
+                            <div class="track-container"><button class="track"
+                                    onclick="playTrack('好きにしなよ - Anly', this, 'demo')"><i class="fas fa-play"></i>
+                                    好きにしなよ -
+                                    Anly</button></div>
+                            <div class="track-container"><button class="track"
+                                    onclick="playTrack('紅葉愛唄 - GARNiDELiA', this, 'demo')"><i class="fas fa-play"></i>
+                                    紅葉愛唄 -
+                                    GARNiDELiA</button></div>
+                            <div class="track-container"><button class="track"
+                                    onclick="playTrack('花ハ踊レヤいろはにほ (随花起舞) - チーム・ハナヤマタ', this, 'demo')"><i
+                                        class="fas fa-play"></i>
+                                    花ハ踊レヤいろはにほ - チーム・ハナヤマタ</button></div>
+                        </details>
+                        <details open>
+                            <summary>Demo Folder 2</summary>
+                            <div class="track-container"><button class="track"
+                                    onclick="playTrack('都会っ子田舎っ子 - びわ湖くん', this, 'demo')"><i class="fas fa-play"></i>
+                                    都会っ子田舎っ子
+                                    - びわ湖くん</button></div>
+                            <div class="track-container"><button class="track"
+                                    onclick="playTrack('天空の狂詩曲 - さゆり', this, 'demo')"><i class="fas fa-play"></i>
+                                    天空の狂詩曲 -
+                                    さゆり</button></div>
+                            <div class="track-container"><button class="track"
+                                    onclick="playTrack('ロストワンの号哭Band edition - 周平', this, 'demo')"><i
+                                        class="fas fa-play"></i>
+                                    ロストワンの号哭Band edition - 周平</button></div>
+                        </details>
+                    </div>
+                </div>
+                <div id="contents" style="display:none"></div>
                 <div class="gdmpoptions">
                     <li id="option">
                         <button class="btn btn-primary" onclick="changeFolder()">Change Folder / User</button>

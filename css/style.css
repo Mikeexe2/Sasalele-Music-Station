@@ -1255,6 +1255,7 @@ input:checked+.slider:before {
     position: fixed;
     bottom: 10px;
     left: 10px;
+    z-index: 99999;
     justify-content: center;
     align-items: center;
     background-image: linear-gradient(to right, rgb(255, 206, 236), rgb(152, 150, 240));
@@ -1289,6 +1290,7 @@ input:checked+.slider:before {
 }
 
 #contents,
+#link,
 #demo {
     border-radius: 10px;
     max-width: 90%;

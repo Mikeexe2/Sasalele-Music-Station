@@ -1,4 +1,5 @@
 const CLIENT_ID = '993505903479-tk48veqhlu2r1hiu9m2hvaq2l81urnla.apps.googleusercontent.com';
+const apiKey = 'AIzaSyBpTSeiuR5sajD1Sss4UnjvzCd9hHroK_Y';
 const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest';
 const SCOPES = 'https://www.googleapis.com/auth/drive.readonly';
 const intro = document.getElementById('intro');
@@ -99,38 +100,28 @@ function getContents(id, type) {
         }
 
         var files = response.result.files;
+        var container = document.getElementById(location);
         if (files && files.length > 0) {
-
-            // loop folders
+            var innerHTML = '';
             for (var i = 0; i < files.length; i++) {
                 var file = files[i];
-
                 if (file.mimeType.includes("application/vnd.google-apps.folder")) {
-                    document.getElementById(location).innerHTML += `
-                    <details id="${file.id}">
-                        <summary onclick="getContents('${file.id}')"><img src=""/><span>${file.name}</span></summary>
-                    </details>
-                `;
+                    innerHTML += `
+            <details id="${file.id}">
+                <summary onclick="getContents('${file.id}')"><span>${file.name}</span></summary>
+            </details>
+            `;
+                } else if (file.mimeType.includes("audio")) {
+                    innerHTML += `
+            <div class="track-container">
+                <button class="track" onclick="playTrack('${file.id}', this)"><i class="fas fa-play"></i> ${file.name}</button>
+                <a href="${file.webContentLink}" download="${file.name}" class="download"><i class="fas fa-download"></i></a>
+            </div>  
+            `;
                 }
-
-                document.getElementById(location).classList.add("loaded");
             }
-
-            // loop files
-            for (var i = 0; i < files.length; i++) {
-                var file = files[i];
-
-                if (file.mimeType.includes("audio")) {
-                    document.getElementById(location).innerHTML += `
-                    <div class="track-container">
-                        <button class="track" onclick="playTrack('${file.id}', this)"><i class="fas fa-play"></i> ${file.name}</button>
-                        <a href="${file.webContentLink}" download="${file.name}" class="download"><i class="fas fa-download"></i></a>
-                    </div>  
-                    `;
-                }
-                document.getElementById(location).classList.add("loaded");
-            }
-
+            container.innerHTML = innerHTML;
+            container.classList.add("loaded");
         } else {
             alert('No files found.');
         }
@@ -205,6 +196,35 @@ function playTrack(id, element, type) {
                 document.getElementById("spinner").remove();
             }
         };
+        return;
+    }
+    // public link
+    if (type === 'link') {
+        fetch(`https://www.googleapis.com/drive/v3/files/${id}?alt=media&key=${apiKey}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.blob();
+            })
+            .then(blob => {
+                source.src = URL.createObjectURL(blob);
+                source.type = blob.type;
+                audio.load();
+                audio.oncanplay = () => {
+                    audio.play();
+                    if (document.getElementById("spinner")) {
+                        document.getElementById("spinner").remove();
+                    }
+                };
+            })
+            .catch(error => {
+                console.error('Error fetching the public link track:', error);
+                alert('There was an error playing the track.');
+                if (document.getElementById("spinner")) {
+                    document.getElementById("spinner").remove();
+                }
+            });
         return;
     }
     // user track
@@ -292,3 +312,114 @@ function changeFolder() {
     content.innerHTML = "";
     localStorage.removeItem("email");
 }
+
+
+// Load folders and populate the dropdown
+function loadFolders() {
+    fetch("Links/folders.json")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            populateDropdown(data);
+        })
+        .catch(error => {
+            console.error('Error fetching folder details:', error);
+        });
+}
+
+function populateDropdown(folders) {
+    const dropdownMenu = document.getElementById('folderDropdownMenu');
+    dropdownMenu.innerHTML = '';
+
+    folders.forEach(folder => {
+        const item = document.createElement('a');
+        item.className = 'dropdown-item';
+        item.href = '#';
+        item.textContent = folder.title;
+        item.dataset.folderId = folder.folderId;
+
+        item.addEventListener('click', (event) => {
+            event.preventDefault();
+            fetchDriveFiles(folder.folderId);
+            link.style.display = 'block';
+        });
+
+        dropdownMenu.appendChild(item);
+    });
+}
+
+// Fetch and display files from the selected folder
+function fetchDriveFiles(folderId) {
+    const apiUrl = `https://www.googleapis.com/drive/v3/files?q='${folderId}' in parents&key=${apiKey}`;
+    fetch(apiUrl)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            getPublicContents(data.files);
+        })
+        .catch(error => {
+            console.error('Error fetching files:', error);
+        });
+}
+
+function getPublicContents(files) {
+    const fileTree = document.getElementById("file-tree");
+    fileTree.innerHTML = '';
+
+    if (files && files.length > 0) {
+        files.forEach(file => {
+            // For displaying subfolders
+            if (file.mimeType.includes("application/vnd.google-apps.folder")) {
+                fileTree.innerHTML += `
+                    <details id="${file.id}">
+                        <summary onclick="fetchDriveFiles('${file.id}')"><span>${file.name}</span></summary>
+                    </details>
+                `;
+            }
+            else if (file.mimeType.includes("audio")) {
+                fileTree.innerHTML += `
+                    <div class="track-container">
+                        <button class="track" onclick="playTrack('${file.id}', this, 'link')"><i class="fas fa-play"></i> ${file.name}</button>
+                        <a href="#" onclick="downloadTrack(event, '${file.id}', '${file.name}')" class="download"><i class="fas fa-download"></i></a>
+                    </div>  
+                `;
+            }
+        });
+    } else {
+        alert('No files found.');
+    }
+}
+
+function downloadTrack(event, fileId, fileName) {
+    const apiUrl = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=${apiKey}`;
+    event.preventDefault();
+    fetch(apiUrl)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.blob();
+        })
+        .then(blob => {
+            const url = URL.createObjectURL(blob);
+            const drive = document.createElement("a");
+            drive.href = url;
+            drive.download = fileName;
+            drive.click();
+
+        })
+        .catch(error => {
+            console.error('Error downloading the track:', error);
+            alert('There was an error downloading the track.');
+        });
+}
+
+loadFolders();
