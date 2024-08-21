@@ -108,64 +108,16 @@
                     </label>
                 </div>
             </div>
-            <button class="chat-popup" data-toggle="modal" data-target="#chatModal"><i class="fas fa-comment"></i>
+            <button id="toggleButton" class="toggle-btn">
+                <i class="fas fa-comment"></i>
             </button>
-            <div class="modal fade" id="tipsModal" tabindex="-1" aria-labelledby="tipsModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="tipsModalLabel">Tips</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <strong>Wondering what song is currently playing?</strong>
-                            <p>
-                                <a href="https://chrome.google.com/webstore/detail/shazam-find-song-names-fr/mmioliijnhnoblpgimnlajmefafdfilb"
-                                    target="_blank">
-                                    <strong>Install the Shazam extension to instantly identify the current song <svg
-                                            aria-labelledby="cds-react-aria-962-title" fill="none" focusable="false"
-                                            height="16" role="img" viewBox="0 0 16 16" width="16" class="icon"
-                                            style="vertical-align: text-bottom;">
-                                            <title id="cds-react-aria-962-title">Opens in a new tab</title>
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                d="M1.5 3.5H6v1H2.5v9h9V10h1v4.5h-11v-11zM13.5 2.5H10v-1h4.5V6h-1V2.5z"
-                                                fill="currentColor"></path>
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                d="M6.646 8.646l7-7 .708.708-7 7-.708-.708z" fill="currentColor">
-                                            </path>
-                                        </svg></strong>
-                                </a>, or visit the stream homepage to view the latest tracks in rotation.
-                            </p>
-                            <strong>Internet Radio or Radio Streams Not Playing?</strong><br>
-                            The page is served over HTTPS. If the stream's URL is HTTP, your browser may block it
-                            due to
-                            security settings.
-                            Note: Most of the HLS radio streams are HTTP!<br>
-                            To disable web security:
-                            <ul>
-                                <li>Click the lock icon in the URL bar.</li>
-                                <li>Go to '<strong>Site Settings</strong>'.</li>
-                                <li>Find 'Insecure Content' settings and allow it.</li>
-                            </ul>
-                            <a href="https://support.google.com/chrome/thread/29505473?hl=en&msgid=39996297"
-                                target="_blank">Learn more
-                                <svg aria-labelledby="cds-react-aria-962-title" fill="none" focusable="false"
-                                    height="16" role="img" viewBox="0 0 16 16" width="16" class="icon"
-                                    style="vertical-align: text-bottom;">
-                                    <title id="cds-react-aria-962-title">Opens in a new tab</title>
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M1.5 3.5H6v1H2.5v9h9V10h1v4.5h-11v-11zM13.5 2.5H10v-1h4.5V6h-1V2.5z"
-                                        fill="currentColor"></path>
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M6.646 8.646l7-7 .708.708-7 7-.708-.708z" fill="currentColor"></path>
-                                </svg>
-                            </a>
-
-                        </div>
-                    </div>
+            <div id="sidePanel" class="side-window-panel">
+                <div id="hideButton" class="hide-item"><span aria-hidden="true">&times;</span></div>
+                <div class="container">
+                    <div class="joinform"></div>
+                    <div class="chat_container"></div>
                 </div>
+
             </div>
 
             <section id="search">
@@ -463,7 +415,6 @@
                         <div class="input-group">
                             <input type="search" id="sasalelesearch" autofocus class="form-control"
                                 placeholder="Enter station name" aria-label="Search">
-                            <button class="btn btn-primary" type="button">Search</button>
                         </div>
                     </div>
                 </div>
@@ -555,25 +506,6 @@
                     </div>
                 </div>
             </section>
-
-            <div class="modal fade" id="chatModal" tabindex="-1" aria-labelledby="chatModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Chat</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container">
-                                <div class="joinform"></div>
-                                <div class="chat_container"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="section-title">
                 <h1>Playlist</h1>
             </div>
