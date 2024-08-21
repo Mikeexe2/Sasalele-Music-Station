@@ -93,9 +93,8 @@ function getRandomInt(min, max) {
 
 function setRandomBackgroundColor() {
     const hue = hues[getRandomInt(0, hues.length - 1)];
-    const saturation = getRandomInt(0, 100);
-    const lightness = getRandomInt(40, 70);
-    background.style.backgroundColor = `hsla(${hue}, ${saturation}%, ${lightness}%, 1)`;
+    const saturation = getRandomInt(20, 100);
+    background.style.backgroundColor = `hsla(${hue}, ${saturation}%, 70%, 1)`;
 }
 
 function setRandomImage() {
