@@ -148,22 +148,44 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="dropdown mb-4">
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="folderDropdown"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Public Links
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="folderDropdown" id="folderDropdownMenu">
-                            </div>
-                        </div>
                     </div>
                 </form>
 
-                <div id="link" style="display:none">
-                    <ul id="file-tree" class="list-group">
-                    </ul>
+
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <input type="text" id="shareLinkInput" class="form-control"
+                                placeholder="Paste Google Drive share link here">
+                            <div class="input-group-append">
+                                <button class="btn btn-success" id="loadLinkButton">Load Link</button>
+                            </div>
+                            <div class="input-group-append ml-2">
+                                <button class="btn btn-primary dropdown-toggle" type="button" id="folderDropdown"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Public Links
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="folderDropdown" id="folderDropdownMenu">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
+                <div id="link" style="display: none;">
+                    <div id="loadingSpinner" class="mb-4"></div>
+                    <div class="mb-4">
+                        <div class="input-group">
+                            <input type="text" id="searchInput" class="form-control"
+                                placeholder="Search files and folders">
+                            <div class="input-group-append">
+                                <button id="searchButton" class="btn btn-primary">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                    <ul id="file-tree" class="list-group"></ul>
+                </div>
+                
                 <div id="intro">
                     <div id="demo" class="loaded">
                         <details open>
