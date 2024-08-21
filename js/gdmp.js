@@ -313,8 +313,9 @@ function changeFolder() {
     localStorage.removeItem("email");
 }
 
-
+let navigationHistory = [];
 // Load folders and populate the dropdown
+
 function loadFolders() {
     fetch("Links/folders.json")
         .then(response => {
@@ -344,16 +345,26 @@ function populateDropdown(folders) {
 
         item.addEventListener('click', (event) => {
             event.preventDefault();
+            navigationHistory = [];
             fetchDriveFiles(folder.folderId);
-            link.style.display = 'block';
+            document.getElementById('link').style.display = 'block';
         });
 
         dropdownMenu.appendChild(item);
     });
 }
 
+function showLoadingSpinner() {
+    document.getElementById('loadingSpinner').style.display = 'block';
+}
+
+function hideLoadingSpinner() {
+    document.getElementById('loadingSpinner').style.display = 'none';
+}
+
 // Fetch and display files from the selected folder
 function fetchDriveFiles(folderId) {
+    showLoadingSpinner();
     const apiUrl = `https://www.googleapis.com/drive/v3/files?q='${folderId}' in parents&key=${apiKey}`;
     fetch(apiUrl)
         .then(response => {
@@ -363,28 +374,38 @@ function fetchDriveFiles(folderId) {
             return response.json();
         })
         .then(data => {
-            getPublicContents(data.files);
+            displayFolderContents(data.files, folderId);
         })
         .catch(error => {
             console.error('Error fetching files:', error);
+        })
+        .finally(() => {
+            hideLoadingSpinner();
         });
 }
 
-function getPublicContents(files) {
+function displayFolderContents(files, currentFolderId) {
     const fileTree = document.getElementById("file-tree");
     fileTree.innerHTML = '';
 
+    if (currentFolderId) {
+        // Add a back button if there's a navigation history
+        if (navigationHistory.length > 0) {
+            fileTree.innerHTML += `
+                <button onclick="navigateBack()" class="btn btn-secondary">Back</button>
+            `;
+        }
+    }
+
     if (files && files.length > 0) {
         files.forEach(file => {
-            // For displaying subfolders
             if (file.mimeType.includes("application/vnd.google-apps.folder")) {
                 fileTree.innerHTML += `
                     <details id="${file.id}">
                         <summary onclick="fetchDriveFiles('${file.id}')"><span>${file.name}</span></summary>
                     </details>
                 `;
-            }
-            else if (file.mimeType.includes("audio")) {
+            } else if (file.mimeType.includes("audio")) {
                 fileTree.innerHTML += `
                     <div class="track-container">
                         <button class="track" onclick="playTrack('${file.id}', this, 'link')"><i class="fas fa-play"></i> ${file.name}</button>
@@ -393,10 +414,58 @@ function getPublicContents(files) {
                 `;
             }
         });
+
+        // Save the current folder to the navigation history
+        if (currentFolderId) {
+            navigationHistory.push(currentFolderId);
+        }
     } else {
         alert('No files found.');
     }
 }
+
+function navigateBack() {
+    if (navigationHistory.length > 0) {
+        const previousFolderId = navigationHistory.pop();
+        fetchDriveFiles(previousFolderId);
+    }
+}
+
+// Load and parse the link
+function loadLink() {
+    const link = document.getElementById('shareLinkInput').value;
+    const folderIdMatch = link.match(/folders\/([^/?]+)/);
+
+    if (folderIdMatch) {
+        const folderId = folderIdMatch[1];
+        fetchDriveFiles(folderId);
+    } else {
+        alert('Invalid Google Drive folder link.');
+    }
+}
+document.getElementById('loadLinkButton').addEventListener('click', loadLink);
+
+function searchFiles(query) {
+    const apiUrl = `https://www.googleapis.com/drive/v3/files?q=name contains '${query}'&key=${apiKey}`;
+    fetch(apiUrl)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            displayFolderContents(data.files, null, 'Search Results');
+        })
+        .catch(error => {
+            console.error('Error fetching search results:', error);
+        });
+}
+
+document.getElementById('searchButton').addEventListener('click', () => {
+    const query = document.getElementById('searchInput').value;
+    searchFiles(query);
+});
 
 function downloadTrack(event, fileId, fileName) {
     const apiUrl = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=${apiKey}`;
@@ -422,4 +491,6 @@ function downloadTrack(event, fileId, fileName) {
         });
 }
 
+// Initial call to load folders
 loadFolders();
+
