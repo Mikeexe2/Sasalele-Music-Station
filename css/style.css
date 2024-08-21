@@ -127,23 +127,16 @@
 #background {
     z-index: -999;
     position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
-    transition: background-image 0.5s ease-in-out, background-color 0.5s ease-in-out;
 }
 
 #randomimg {
     z-index: 1;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
     mix-blend-mode: multiply;
 }
 
@@ -360,7 +353,7 @@ body {
 .genre-group {
     margin-bottom: 10px;
     border-radius: 5px;
-    background: var(--white-50-alpha) !important;
+    background: var(--white-60-alpha) !important;
 }
 
 .genre-content {
@@ -402,7 +395,7 @@ body {
     border-radius: 15px;
     font-size: var(--wp--preset--font-size--medium);
     font-weight: bold;
-    background: var(--white-50-alpha);
+    background: var(--white-60-alpha);
     color: #e43c5c;
 }
 
@@ -411,7 +404,7 @@ body {
     align-items: center;
     padding: 5px;
     border: 1px solid var(--expressive-blue);
-    background-color: var(--white-50-alpha);
+    background-color: var(--white-60-alpha);
     width: 100%;
 }
 
@@ -553,7 +546,7 @@ body {
 }
 
 .togglesearch:hover {
-    background-color: var(--white-50-alpha);
+    background-color: var(--white-60-alpha);
     transform: translateY(-2px)
 }
 
@@ -885,7 +878,25 @@ screen and (min-width: 1152px) {
     font-weight: 400;
 }
 
-.chat-popup {
+.side-window-panel {
+    position: fixed;
+    top: 50px;
+    right: -80vw;
+    width: 80vw;
+    height: 80%;
+    border-radius: 10px;
+    background-color: var(--black-80-alpha);
+    box-shadow: -4px 0 6px rgba(0, 0, 0, 0.2);
+    transition: right 0.3s ease-in-out;
+    z-index: 9999;
+    padding: 10px;
+}
+
+.side-window-panel.open {
+    right: 0;
+}
+
+.toggle-btn {
     position: fixed;
     bottom: 80px;
     right: 10px;
@@ -893,7 +904,7 @@ screen and (min-width: 1152px) {
     height: 40px;
     border-radius: 50px;
     border: none;
-    z-index: 9999;
+    z-index: 99999;
     background-color: var(--primary-green-50);
     color: white;
     font-size: 20px;
@@ -901,9 +912,18 @@ screen and (min-width: 1152px) {
     transition: background-color 0.3s, transform 0.3s;
 }
 
-.chat-popup:hover {
+.toggle-btn:hover {
     background-color: var(--primary-green-80);
     transform: scale(1.1);
+}
+
+.hide-item {
+    background-color: var(--apple-black);
+    border-radius: 40px;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
 }
 
 .fixed-action-bar {
@@ -1082,6 +1102,7 @@ input:checked+.slider:before {
 
 #join_inner_container {
     display: flex;
+    padding-top: 80px;
     flex-direction: column;
     align-items: center;
 }
@@ -1268,6 +1289,20 @@ input:checked+.slider:before {
     box-shadow: 0 0 10px 2px rgb(0, 0, 0);
 }
 
+#loadingSpinner {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #3498db;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
 #prev-btn,
 #next-btn {
     width: auto;
@@ -1378,7 +1413,6 @@ a.download {
 
 #parentfolder {
     width: 50%;
-    background-color: var(--white-80-alpha)
 }
 
 @keyframes spin {
