@@ -111,14 +111,21 @@
                 </div>
                 <details open id="tips">
                     <summary><span class="badge badge-primary">Guide</span></summary>
-                    <p>Enter the ID for the <a href="https://drive.google.com" target="_blank">Google
-                            Drive</a> folder you would like to use and click the 'Login'
-                        button. The ID can be found by taking that last part of the folder's URL, for example,
-                        drive.google.com/drive/folders/1_gbbbbb-aaaaa has an ID of
-                        "1_gbbbbb-aaaaa".<br>Alternatively,"<strong>root</strong>" can be used to browse from your
+                    <p>Paste the share link (<a
+                            href="https://global.discourse-cdn.com/business7/uploads/glideapps/original/3X/3/1/31c8434de6f1d7cc408bcaade9a87ab8f92b9281.png"
+                            target="_blank" rel="noopener noreferrer">Example Link</a>) for the <a
+                            href="https://drive.google.com" target="_blank">Google
+                            Drive</a> folder you would like to use and click the 'Load Link'
+                        button. You can try some readily available public links in the dropdown to see how it
+                        works.</p>
+                    <p>Alternatively, login into your Google Account with your folder ID (<a
+                            href="https://i.sstatic.net/YFZPb.png" target="_blank" rel="noopener noreferrer">Example
+                            ID</a>) or use
+                        "<strong>root</strong>" to
+                        browse from your
                         top-level
                         folder.<br></p>
-                    <p>For more information, please read our <a href="privacypolicy.html" target="_blank">Privacy
+                    <p>Read our <a href="privacypolicy.html" target="_blank">Privacy
                             Policy.
                             <svg aria-labelledby="cds-react-aria-962-title" fill="none" focusable="false" height="16"
                                 role="img" viewBox="0 0 16 16" width="16" class="icon"
@@ -135,61 +142,51 @@
                     </p>
                 </details>
 
-                <form onsubmit="submitFolderId(event)">
+                <div class="container">
+                    <form onsubmit="submitFolderId(event)">
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" required id="parentfolder"
+                                        name="parentfolder" placeholder="google-drive-folder-id">
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-primary mb-3">
+                                            <i class="fab fa-google"></i> Login
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
                     <div class="row justify-content-center">
                         <div class="col-md-6">
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" required id="parentfolder" name="parentfolder"
-                                    placeholder="google-drive-folder-id">
+                                <input type="text" id="shareLinkInput" class="form-control"
+                                    placeholder="Paste Google Drive share link here">
                                 <div class="input-group-append">
-                                    <button type="submit" class="btn btn-primary mb-3">
-                                        <i class="fab fa-google"></i> Login
+                                    <button class="btn btn-success" id="loadLinkButton">Load Link</button>
+                                </div>
+                                <div class="input-group-append ml-2">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" id="folderDropdown"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Public Links
                                     </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-
-
-                <div class="row justify-content-center">
-                    <div class="col-md-6">
-                        <div class="input-group mb-3">
-                            <input type="text" id="shareLinkInput" class="form-control"
-                                placeholder="Paste Google Drive share link here">
-                            <div class="input-group-append">
-                                <button class="btn btn-success" id="loadLinkButton">Load Link</button>
-                            </div>
-                            <div class="input-group-append ml-2">
-                                <button class="btn btn-primary dropdown-toggle" type="button" id="folderDropdown"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Public Links
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="folderDropdown" id="folderDropdownMenu">
+                                    <div class="dropdown-menu" aria-labelledby="folderDropdown" id="folderDropdownMenu">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div id="link" style="display: none;">
-                    <div id="loadingSpinner" class="mb-4"></div>
-                    <div class="mb-4">
-                        <div class="input-group">
-                            <input type="text" id="searchInput" class="form-control"
-                                placeholder="Search files and folders">
-                            <div class="input-group-append">
-                                <button id="searchButton" class="btn btn-primary">Search</button>
-                            </div>
-                        </div>
-                    </div>
-                    <ul id="file-tree" class="list-group"></ul>
+                <div id="loadingSpinner" class="mb-4"></div>
+                <div id="file-tree" style="display: none;">
                 </div>
-                
+
                 <div id="intro">
                     <div id="demo" class="loaded">
                         <details open>
-                            <summary>Demo Folder 1</summary>
+                            <summary>Japanese Song Collection 1</summary>
                             <div class="track-container"><button class="track"
                                     onclick="playTrack('好きにしなよ - Anly', this, 'demo')"><i class="fas fa-play"></i>
                                     好きにしなよ -
@@ -204,7 +201,7 @@
                                     花ハ踊レヤいろはにほ - チーム・ハナヤマタ</button></div>
                         </details>
                         <details open>
-                            <summary>Demo Folder 2</summary>
+                            <summary>Japanese Song Collection 2</summary>
                             <div class="track-container"><button class="track"
                                     onclick="playTrack('都会っ子田舎っ子 - びわ湖くん', this, 'demo')"><i class="fas fa-play"></i>
                                     都会っ子田舎っ子
@@ -221,23 +218,29 @@
                     </div>
                 </div>
                 <div id="contents" style="display:none"></div>
-                <div class="gdmpoptions">
-                    <li id="option">
-                        <button class="btn btn-primary" onclick="changeFolder()">Change Folder / User</button>
-                        <a class="btn btn-primary" href="https://myaccount.google.com/security" target="_blank"
-                            role="button">Revoke
-                            Access <svg aria-labelledby="cds-react-aria-962-title" fill="none" focusable="false"
-                                height="16" role="img" viewBox="0 0 16 16" width="16" class="icon"
-                                style="vertical-align: text-bottom;">
-                                <title id="cds-react-aria-962-title">Opens in a new tab</title>
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                    d="M1.5 3.5H6v1H2.5v9h9V10h1v4.5h-11v-11zM13.5 2.5H10v-1h4.5V6h-1V2.5z"
-                                    fill="currentColor"></path>
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                    d="M6.646 8.646l7-7 .708.708-7 7-.708-.708z" fill="currentColor">
-                                </path>
-                            </svg></a>
-                    </li>
+                <div class="container">
+                    <div class="row justify-content-center pb-100">
+                        <div class="col-auto mb-2">
+                            <button class="btn btn-primary" onclick="changeFolder()">Change Folder / User</button>
+                        </div>
+                        <div class="col-auto">
+                            <a class="btn btn-primary" href="https://myaccount.google.com/security" target="_blank"
+                                role="button">
+                                Revoke Access
+                                <svg aria-labelledby="cds-react-aria-962-title" fill="none" focusable="false"
+                                    height="16" role="img" viewBox="0 0 16 16" width="16" class="icon"
+                                    style="vertical-align: text-bottom;">
+                                    <title id="cds-react-aria-962-title">Opens in a new tab</title>
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M1.5 3.5H6v1H2.5v9h9V10h1v4.5h-11v-11zM13.5 2.5H10v-1h4.5V6h-1V2.5z"
+                                        fill="currentColor">
+                                    </path>
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M6.646 8.646l7-7 .708.708-7 7-.708-.708z" fill="currentColor"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>
