@@ -232,6 +232,8 @@
 
 .dropdown-menu {
     background-color: var(--black-80-alpha) !important;
+    max-height: 300px;
+    overflow-y: auto;
 }
 
 .dropdown-menu a {
@@ -239,7 +241,7 @@
 }
 
 .dropdown-menu a:hover {
-    background-color: #343a40;
+    background-color: #4a4c4e;
     color: var(--apple-white);
 }
 
@@ -869,61 +871,12 @@ screen and (min-width: 1152px) {
 
 /*MISC*/
 #aplayer {
-    max-height: 300px;
+    max-height: 500px;
 }
 
 #clock {
     color: var(--expressive-yellow);
-    font-size: 13px;
     font-weight: 400;
-}
-
-.side-window-panel {
-    position: fixed;
-    top: 50px;
-    right: -80vw;
-    width: 80vw;
-    height: 80%;
-    border-radius: 10px;
-    background-color: var(--black-80-alpha);
-    box-shadow: -4px 0 6px rgba(0, 0, 0, 0.2);
-    transition: right 0.3s ease-in-out;
-    z-index: 9999;
-    padding: 10px;
-}
-
-.side-window-panel.open {
-    right: 0;
-}
-
-.toggle-btn {
-    position: fixed;
-    bottom: 80px;
-    right: 10px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50px;
-    border: none;
-    z-index: 99999;
-    background-color: var(--primary-green-50);
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
-}
-
-.toggle-btn:hover {
-    background-color: var(--primary-green-80);
-    transform: scale(1.1);
-}
-
-.hide-item {
-    background-color: var(--apple-black);
-    border-radius: 40px;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    cursor: pointer;
 }
 
 .fixed-action-bar {
@@ -990,7 +943,7 @@ input:checked+.slider:before {
     visibility: hidden;
     opacity: 0;
     right: 15px;
-    bottom: 15px;
+    bottom: 60px;
     z-index: 998;
     background: #67b0d1;
     width: 40px;
@@ -1035,14 +988,11 @@ input:checked+.slider:before {
 }
 
 #tips {
-    width: 70%;
+    width: 90%;
     border-radius: 8px;
-    font-size: 16px;
-    left: 0;
     line-height: 1.3;
     margin: 10px auto;
     padding: 5px;
-    border-left: 0.4em solid var(--highlight-yellow-100);
     background-color: var(--white-90-alpha);
     color: var(--apple-black)
 }
@@ -1083,6 +1033,52 @@ input:checked+.slider:before {
 }
 
 /*CHAT*/
+.side-window-panel {
+    position: fixed;
+    top: 50px;
+    right: -80vw;
+    width: 80vw;
+    height: 80%;
+    border-radius: 10px;
+    background-color: var(--black-80-alpha);
+    box-shadow: -4px 0 6px rgba(0, 0, 0, 0.2);
+    transition: right 0.3s ease-in-out;
+    z-index: 9999;
+}
+
+.side-window-panel.open {
+    right: 0;
+}
+
+.chat-btn {
+    position: fixed;
+    bottom: 120px;
+    right: 15px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    border: none;
+    z-index: 99999;
+    background-color: var(--primary-green-50);
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.chat-btn:hover {
+    background-color: var(--primary-green-80);
+    transform: scale(1.1);
+}
+
+.hide-item {
+    background-color: var(--apple-black);
+    border-radius: 40px;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+}
+
 #waline {
     background: var(--white-100);
     padding: 5px;
@@ -1102,7 +1098,6 @@ input:checked+.slider:before {
 
 #join_inner_container {
     display: flex;
-    padding-top: 80px;
     flex-direction: column;
     align-items: center;
 }
@@ -1272,21 +1267,21 @@ input:checked+.slider:before {
 
 /*GDMP*/
 #gdmp {
-    display: flex;
     position: fixed;
-    bottom: 10px;
-    left: 10px;
-    z-index: 99999;
-    justify-content: center;
-    align-items: center;
-    background-image: linear-gradient(to right, rgb(255, 206, 236), rgb(152, 150, 240));
-    background-size: 200% 200%;
-    animation: flowingGradient 5s ease infinite;
+    display: flex;
+    bottom: 0px;
     padding: 10px;
+    z-index: 999;
+    background-image: linear-gradient(to right, rgb(255, 206, 236), rgb(152, 150, 240));
     width: fit-content;
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 0 10px 2px rgb(0, 0, 0);
+}
+
+#gdmp media-controller {
+    width: fit-content;
+    overflow: hidden;
 }
 
 #loadingSpinner {
@@ -1303,20 +1298,31 @@ input:checked+.slider:before {
     animation: spin 2s linear infinite;
 }
 
+.pb-100 {
+    padding-bottom: 100px !important;
+}
+
+#next-btn {
+    float: right;
+}
+
+#prev-btn {
+    float: left;
+}
+
 #prev-btn,
 #next-btn {
     width: auto;
-    margin: 0 5px;
-    text-align: center;
     background: none;
     border: none;
     outline: none;
     cursor: pointer;
-    z-index: 2;
+    padding-left: 20px;
+    padding-right: 20px;
+    z-index: 9999;
     transition: transform 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
     font-size: 1.5em;
     color: var(--apple-black);
-    border-radius: 50%;
 }
 
 #prev-btn:hover,
@@ -1325,7 +1331,7 @@ input:checked+.slider:before {
 }
 
 #contents,
-#link,
+#file-tree,
 #demo {
     border-radius: 10px;
     max-width: 90%;
@@ -1334,7 +1340,7 @@ input:checked+.slider:before {
     margin-bottom: 10px;
     justify-content: center;
     color: var(--apple-white);
-    background-color: var(--black-40-alpha);
+    background-color: var(--black-60-alpha);
 }
 
 a.download {
@@ -1345,39 +1351,21 @@ a.download {
     color: var(--focus-blue-100);
 }
 
-.gdmpoptions {
-    padding-bottom: 100px;
-}
-
-#option {
-    list-style: none;
-    text-align: center
-}
-
-#option li a,
-#option li button {
-    font-size: 12px;
-    text-decoration: none
-}
-
 #intro {
-    max-width: 90%;
-    margin: 0.742em auto 0 auto;
-    padding: 10px;
     margin-bottom: 5px;
-    justify-content: center;
 }
 
 .track-container {
     display: flex;
     align-items: center;
-    margin-bottom: -1em;
+    margin-bottom: -0.6em;
 }
 
 button.track {
     border: none;
-    background: var(--white-70-alpha);
+    background: none;
     text-align: left;
+    background-color: var(--white-60-alpha);
     color: var(--apple-black);
     margin-left: 15px;
     margin-bottom: 3px;
@@ -1393,17 +1381,17 @@ button.track i {
 }
 
 button.track:last-of-type {
-    margin-bottom: 10px
+    margin-bottom: 15px;
 }
 
 button.track:first-of-type {
-    margin-top: 10px
+    margin-top: 0px;
 }
 
 a.download {
     margin-left: 10px;
     text-decoration: none;
-    color: var(--focus-blue-100);
+    color: var(--expressive-green);
     cursor: pointer;
 }
 
@@ -1517,39 +1505,47 @@ a.download {
     }
 }
 
-details {
-    margin-bottom: 11px;
-}
-
-details details {
-    margin-left: 25px;
-}
-
-details details:first-of-type {
-    margin-top: 20px;
-}
-
-details details:last-of-type {
-    border: none;
+details summary {
+    padding: 10px;
 }
 
 button.track,
+details .p,
 summary {
-    margin-left: 5px;
-    font-size: 14px;
+    font-size: 16px;
+}
+
+summary span {
+    padding-right: 20px;
+    font-weight: 500;
+}
+
+details {
+    border: #28a745 !important;
+    margin-bottom: 10px;
+}
+
+details details {
+    margin-left: 15px;
+}
+
+details details:last-of-type {
+    margin-bottom: 10px;
 }
 
 @media only screen and (max-width: 575.98px) {
-
-    #gdmp {
-        width: 90%;
-        left: 5%;
-        bottom: 5px;
-        padding: 8px;
-    }
-
     #tips {
         font-size: 12px;
+    }
+
+    #gdmp media-controller {
+        width: 50%;
+    }
+
+    .chat-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 15px;
     }
 
     .rad-icon {
@@ -1590,8 +1586,6 @@ summary {
 
     button.track,
     summary,
-    #option li a,
-    #option li button,
     #stationName,
     .card-bg,
     #resultsContainer,
@@ -1611,6 +1605,10 @@ summary {
 
     .button-label {
         font-size: 12px;
+    }
+
+    details details {
+        margin-left: 0px;
     }
 
     #player {

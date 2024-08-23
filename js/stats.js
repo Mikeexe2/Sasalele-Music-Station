@@ -83,7 +83,7 @@ const hues = Array.from({ length: 128 }, (_, i) => (i * 137.6) % 360);
 
 const background = document.getElementById('background');
 const randomimg = document.getElementById('randomimg');
-const toggleAnimation = document.getElementById('toggleAnimation');
+//const toggleAnimation = document.getElementById('toggleAnimation');
 
 let animationTimeout;
 
@@ -133,5 +133,3 @@ function animateHues() {
 
 setRandomBackgroundColor();
 setRandomImage();
-
-toggleAnimation.addEventListener('change', handleToggleChange);

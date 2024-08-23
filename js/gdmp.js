@@ -1,5 +1,4 @@
 const CLIENT_ID = '993505903479-tk48veqhlu2r1hiu9m2hvaq2l81urnla.apps.googleusercontent.com';
-const apiKey = 'AIzaSyBpTSeiuR5sajD1Sss4UnjvzCd9hHroK_Y';
 const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest';
 const SCOPES = 'https://www.googleapis.com/auth/drive.readonly';
 const intro = document.getElementById('intro');
@@ -102,31 +101,28 @@ function getContents(id, type) {
         var files = response.result.files;
         var container = document.getElementById(location);
         if (files && files.length > 0) {
-            var innerHTML = '';
             for (var i = 0; i < files.length; i++) {
                 var file = files[i];
                 if (file.mimeType.includes("application/vnd.google-apps.folder")) {
-                    innerHTML += `
-            <details id="${file.id}">
-                <summary onclick="getContents('${file.id}')"><span>${file.name}</span></summary>
-            </details>
-            `;
+                    container.innerHTML += `
+                    <details id="${file.id}">
+                        <summary onclick="getContents('${file.id}')"><span>${file.name}</span></summary>
+                    </details>
+                    `;
                 } else if (file.mimeType.includes("audio")) {
-                    innerHTML += `
-            <div class="track-container">
-                <button class="track" onclick="playTrack('${file.id}', this)"><i class="fas fa-play"></i> ${file.name}</button>
-                <a href="${file.webContentLink}" download="${file.name}" class="download"><i class="fas fa-download"></i></a>
-            </div>  
-            `;
+                    container.innerHTML += `
+                    <div class="track-container">
+                        <button class="track" onclick="playTrack('${file.id}', this)"><i class="fas fa-play"></i> ${file.name}</button>
+                        <a href="${file.webContentLink}" download="${file.name}" class="download"><i class="fas fa-download"></i></a>
+                    </div>  
+                    `;
                 }
             }
-            container.innerHTML = innerHTML;
             container.classList.add("loaded");
         } else {
             alert('No files found.');
         }
-
-        document.getElementById(location).firstElementChild.focus();
+        container.firstElementChild.focus();
     }).catch(function (error) {
         if (error.status === 401) {
             alert("Sessions are only valid for 1 hour. Session will refresh automatically.");
@@ -312,9 +308,9 @@ function changeFolder() {
     content.innerHTML = "";
     localStorage.removeItem("email");
 }
-
-let navigationHistory = [];
-// Load folders and populate the dropdown
+// Public Link
+const apiKey = 'AIzaSyBpTSeiuR5sajD1Sss4UnjvzCd9hHroK_Y';
+const fileTree = document.getElementById("file-tree");
 
 function loadFolders() {
     fetch("Links/folders.json")
@@ -345,13 +341,16 @@ function populateDropdown(folders) {
 
         item.addEventListener('click', (event) => {
             event.preventDefault();
-            navigationHistory = [];
+            clearFileTree();
             fetchDriveFiles(folder.folderId);
-            document.getElementById('link').style.display = 'block';
+            fileTree.style.display = 'block';
         });
-
         dropdownMenu.appendChild(item);
     });
+}
+
+function clearFileTree() {
+    fileTree.innerHTML = '';
 }
 
 function showLoadingSpinner() {
@@ -362,8 +361,7 @@ function hideLoadingSpinner() {
     document.getElementById('loadingSpinner').style.display = 'none';
 }
 
-// Fetch and display files from the selected folder
-function fetchDriveFiles(folderId) {
+function fetchDriveFiles(folderId, subfolderContent = null) {
     showLoadingSpinner();
     const apiUrl = `https://www.googleapis.com/drive/v3/files?q='${folderId}' in parents&key=${apiKey}`;
     fetch(apiUrl)
@@ -374,7 +372,7 @@ function fetchDriveFiles(folderId) {
             return response.json();
         })
         .then(data => {
-            displayFolderContents(data.files, folderId);
+            displayFolderContents(data.files, subfolderContent);
         })
         .catch(error => {
             console.error('Error fetching files:', error);
@@ -384,88 +382,78 @@ function fetchDriveFiles(folderId) {
         });
 }
 
-function displayFolderContents(files, currentFolderId) {
-    const fileTree = document.getElementById("file-tree");
-    fileTree.innerHTML = '';
-
-    if (currentFolderId) {
-        // Add a back button if there's a navigation history
-        if (navigationHistory.length > 0) {
-            fileTree.innerHTML += `
-                <button onclick="navigateBack()" class="btn btn-secondary">Back</button>
-            `;
-        }
-    }
-
+function displayFolderContents(files, subfolderContent = null) {
     if (files && files.length > 0) {
         files.forEach(file => {
             if (file.mimeType.includes("application/vnd.google-apps.folder")) {
-                fileTree.innerHTML += `
-                    <details id="${file.id}">
-                        <summary onclick="fetchDriveFiles('${file.id}')"><span>${file.name}</span></summary>
-                    </details>
-                `;
+                if (!document.getElementById(file.id)) {
+                    const details = document.createElement("details");
+                    details.id = file.id;
+                    const summary = document.createElement("summary");
+                    summary.textContent = file.name;
+                    summary.addEventListener("click", () => toggleSubfolder(details));
+
+                    details.appendChild(summary);
+                    if (subfolderContent) {
+                        subfolderContent.appendChild(details);
+                    } else {
+                        fileTree.appendChild(details);
+                    }
+                }
             } else if (file.mimeType.includes("audio")) {
-                fileTree.innerHTML += `
-                    <div class="track-container">
-                        <button class="track" onclick="playTrack('${file.id}', this, 'link')"><i class="fas fa-play"></i> ${file.name}</button>
-                        <a href="#" onclick="downloadTrack(event, '${file.id}', '${file.name}')" class="download"><i class="fas fa-download"></i></a>
-                    </div>  
-                `;
+                const trackContainer = document.createElement("div");
+                trackContainer.classList.add("track-container");
+
+                const playButton = document.createElement("button");
+                playButton.classList.add("track");
+                playButton.innerHTML = `<i class="fas fa-play"></i> ${file.name}`;
+                playButton.addEventListener("click", () => playTrack(file.id, playButton, "link"));
+
+                const downloadLink = document.createElement("a");
+                downloadLink.classList.add("download");
+                downloadLink.innerHTML = `<i class="fas fa-download"></i>`;
+                downloadLink.href = "#";
+                downloadLink.addEventListener("click", (event) => downloadTrack(event, file.id, file.name));
+
+                trackContainer.appendChild(playButton);
+                trackContainer.appendChild(downloadLink);
+                if (subfolderContent) {
+                    subfolderContent.appendChild(trackContainer);
+                } else {
+                    fileTree.appendChild(trackContainer);
+                }
             }
         });
-
-        // Save the current folder to the navigation history
-        if (currentFolderId) {
-            navigationHistory.push(currentFolderId);
-        }
     } else {
         alert('No files found.');
     }
 }
 
-function navigateBack() {
-    if (navigationHistory.length > 0) {
-        const previousFolderId = navigationHistory.pop();
-        fetchDriveFiles(previousFolderId);
+function toggleSubfolder(detailsElement) {
+    let subfolderContent = detailsElement.querySelector(".subfolder-content");
+    if (!subfolderContent) {
+        subfolderContent = document.createElement("div");
+        subfolderContent.classList.add("subfolder-content");
+        detailsElement.appendChild(subfolderContent);
+        fetchDriveFiles(detailsElement.id, subfolderContent);
+    } else {
+        return;
     }
 }
 
-// Load and parse the link
 function loadLink() {
     const link = document.getElementById('shareLinkInput').value;
     const folderIdMatch = link.match(/folders\/([^/?]+)/);
 
     if (folderIdMatch) {
         const folderId = folderIdMatch[1];
+        clearFileTree();
         fetchDriveFiles(folderId);
     } else {
         alert('Invalid Google Drive folder link.');
     }
 }
 document.getElementById('loadLinkButton').addEventListener('click', loadLink);
-
-function searchFiles(query) {
-    const apiUrl = `https://www.googleapis.com/drive/v3/files?q=name contains '${query}'&key=${apiKey}`;
-    fetch(apiUrl)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            displayFolderContents(data.files, null, 'Search Results');
-        })
-        .catch(error => {
-            console.error('Error fetching search results:', error);
-        });
-}
-
-document.getElementById('searchButton').addEventListener('click', () => {
-    const query = document.getElementById('searchInput').value;
-    searchFiles(query);
-});
 
 function downloadTrack(event, fileId, fileName) {
     const apiUrl = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=${apiKey}`;
@@ -483,7 +471,6 @@ function downloadTrack(event, fileId, fileName) {
             drive.href = url;
             drive.download = fileName;
             drive.click();
-
         })
         .catch(error => {
             console.error('Error downloading the track:', error);
@@ -493,4 +480,3 @@ function downloadTrack(event, fileId, fileName) {
 
 // Initial call to load folders
 loadFolders();
-

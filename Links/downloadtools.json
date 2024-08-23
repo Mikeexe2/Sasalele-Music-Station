@@ -143,5 +143,10 @@
         "name": "m3u8 online player",
         "url": "http://tool.liumingye.cn/m3u8/",
         "icon": "assets/downloads/m3u8online.webp"
+    },
+    {
+        "name": "Hiraga, Katakana, Romaji",
+        "url": "assets/hirakataroma.html",
+        "icon": "assets/sasalele_logo-removebg.webp"
     }
 ]
