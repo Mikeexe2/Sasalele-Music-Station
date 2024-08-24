@@ -442,17 +442,25 @@ function toggleSubfolder(detailsElement) {
 }
 
 function loadLink() {
-    const link = document.getElementById('shareLinkInput').value;
+    const linkInput = document.getElementById('shareLinkInput');
+    const link = linkInput.value.trim();
+
+    clearFileTree();
+
+    if (link === '') {
+        alert('Please enter a Google Drive folder link.');
+        return;
+    }
     const folderIdMatch = link.match(/folders\/([^/?]+)/);
 
     if (folderIdMatch) {
         const folderId = folderIdMatch[1];
-        clearFileTree();
         fetchDriveFiles(folderId);
     } else {
         alert('Invalid Google Drive folder link.');
     }
 }
+
 document.getElementById('loadLinkButton').addEventListener('click', loadLink);
 
 function downloadTrack(event, fileId, fileName) {

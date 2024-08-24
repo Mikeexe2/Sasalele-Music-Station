@@ -1155,17 +1155,15 @@ function getWebsiteURL(label, searchTerm) {
     }
 }
 //Chatting
-var toggleButton = document.getElementById('toggleButton');
-var panel = document.getElementById('sidePanel');
+const toggleButton = document.getElementById('toggleButton');
+const panel = document.getElementById('sidePanel');
 
-toggleButton.addEventListener('click', function () {
-    panel.classList.toggle('open');
-});
+function togglePanel() {
+    const isOpen = panel.classList.contains('open');
+    panel.classList.toggle('open', !isOpen);
+}
 
-// Hide side panel
-document.getElementById('hideButton').addEventListener('click', function () {
-    panel.classList.remove('open');
-});
+toggleButton.addEventListener('click', togglePanel);
 
 document.addEventListener('DOMContentLoaded', () => {
     const firebaseConfig = {

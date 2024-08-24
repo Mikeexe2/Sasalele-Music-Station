@@ -129,96 +129,80 @@
     position: fixed;
     width: 100%;
     height: 100%;
+    opacity: 0.8;
 }
 
 #randomimg {
     z-index: 1;
+    display: none;
+    width: 100%;
+    height: 100%;
     position: fixed;
-    max-width: 100%;
-    max-height: 100%;
     object-fit: contain;
     mix-blend-mode: multiply;
 }
 
-@keyframes shake {
-    0% {
-        transform: translateX(0);
-    }
-
-    25% {
-        transform: translateX(-5px) rotate(-2deg);
-    }
-
-    50% {
-        transform: translateX(5px) rotate(2deg);
-    }
-
-    75% {
-        transform: translateX(-5px) rotate(-2deg);
-    }
-
-    100% {
-        transform: translateX(0);
-    }
-}
-
-.anim-shake {
-    animation: shake 0.5s 1;
-}
-
 .anim-blur-left {
-    animation: blur-left 0.5s 1;
+    animation: blur-left 0.1s ease-out forwards;
 }
 
 @keyframes blur-left {
     0% {
-        left: -50px;
+        transform: translateX(-50px);
+        opacity: 0;
     }
 
     100% {
-        left: 0;
+        transform: translateX(0);
+        opacity: 1;
     }
 }
 
 .anim-blur-right {
-    animation: blur-right 0.5s 1;
+    animation: blur-right 0.1s ease-out forwards;
 }
 
 @keyframes blur-right {
     0% {
-        left: 50px;
+        transform: translateX(50px);
+        opacity: 0;
     }
 
     100% {
-        left: 0;
+        transform: translateX(0);
+        opacity: 1;
     }
 }
 
 .anim-blur-top {
-    animation: blur-top 0.5s 1;
+    animation: blur-top 0.1s ease-out forwards;
 }
 
 @keyframes blur-top {
     0% {
-        top: -50px;
+        transform: translateY(-50px);
+        opacity: 0;
     }
 
     100% {
-        top: 0;
+        transform: translateY(0);
+        opacity: 1;
     }
 }
 
 .anim-blur-bottom {
-    animation: blur-bottom 0.5s 1;
+    animation: blur-bottom 0.1s ease-out forwards;
 }
 
 @keyframes blur-bottom {
     0% {
-        top: 50px;
+        transform: translateY(50px);
+        opacity: 0;
     }
 
     100% {
-        top: 0;
+        transform: translateY(0);
+        opacity: 1;
     }
 }
 
@@ -266,10 +250,8 @@ body {
     font-family: "Open Sans", sans-serif;
     width: 100%;
     min-height: 100%;
+    background: url(../assets/sasalele_bg.jpg) no-repeat center center fixed;
     background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
     cursor: url(../assets/Arrow.cur), auto;
 }
 
@@ -395,10 +377,8 @@ body {
 
 .search-bg {
     border-radius: 15px;
-    font-size: var(--wp--preset--font-size--medium);
-    font-weight: bold;
+    padding: 10px 0;
     background: var(--white-60-alpha);
-    color: #e43c5c;
 }
 
 .widget {
@@ -458,6 +438,11 @@ body {
     background: none !important;
 }
 
+.gsc-control-cse {
+    border-radius: 8px !important;
+    margin-bottom: 10px !important;
+}
+
 .noresult {
     margin: 0 auto;
     padding: 10px;
@@ -477,21 +462,6 @@ body {
     font-size: 14px;
     font-weight: normal;
     background-color: var(--white-60-alpha)
-}
-
-.search-header h4 {
-    font-size: var(--wp--preset--font-size--small);
-    letter-spacing: 1px;
-    text-align: center;
-    font-weight: 700;
-    padding: 10px;
-    margin: 0;
-    margin-bottom: 0.5rem;
-    line-height: 1;
-    background: #fdeff2;
-    color: #e43c5c;
-    text-transform: uppercase;
-    border-radius: 50px;
 }
 
 .search-cover {
@@ -528,11 +498,11 @@ body {
     margin-left: 15px;
 }
 
-.search-results {
-    margin: 0 auto;
+.search-results,
+.radioresultsdisplay {
     background: var(--black-40-alpha);
-    justify-content: center;
-    padding: 10px;
+    padding: 10px 0;
+    border-radius: 6px;
 }
 
 .togglesearch {
@@ -879,18 +849,8 @@ screen and (min-width: 1152px) {
     font-weight: 400;
 }
 
-.fixed-action-bar {
-    top: 0px;
-    padding: -20px;
-    z-index: 1022;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
 .switch-container {
-    display: flex;
-    align-items: center;
+    margin-left: 10px;
 }
 
 .switch {
@@ -944,7 +904,7 @@ input:checked+.slider:before {
     opacity: 0;
     right: 15px;
     bottom: 60px;
-    z-index: 998;
+    z-index: 99999;
     background: #67b0d1;
     width: 40px;
     height: 40px;
@@ -1038,7 +998,7 @@ input:checked+.slider:before {
     top: 50px;
     right: -80vw;
     width: 80vw;
-    height: 80%;
+    height: 100%;
     border-radius: 10px;
     background-color: var(--black-80-alpha);
     box-shadow: -4px 0 6px rgba(0, 0, 0, 0.2);
@@ -1069,14 +1029,6 @@ input:checked+.slider:before {
 .chat-btn:hover {
     background-color: var(--primary-green-80);
     transform: scale(1.1);
-}
-
-.hide-item {
-    background-color: var(--apple-black);
-    border-radius: 40px;
-    color: white;
-    text-align: center;
-    cursor: pointer;
 }
 
 #waline {
@@ -1136,17 +1088,17 @@ input:checked+.slider:before {
 }
 
 .chat_container {
-    margin: 0.6em auto;
+    margin: 0 auto;
 }
 
 #chat_inner_container {
     display: flex;
-    padding: 20px;
+    padding: 10px;
     border-radius: 8px;
     background-color: var(--white-80-alpha);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     flex-direction: column;
-    height: 450px;
+    height: 80vh;
 }
 
 #chat_content_container {
@@ -1320,7 +1272,7 @@ input:checked+.slider:before {
     padding-left: 20px;
     padding-right: 20px;
     z-index: 9999;
-    transition: transform 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, color 0.3s ease;
     font-size: 1.5em;
     color: var(--apple-black);
 }
@@ -1558,10 +1510,6 @@ details details:last-of-type {
         font-size: 12px
     }
 
-    #chat_inner_container {
-        height: 350px;
-    }
-
     #intro {
         margin: 0.2em auto 0 auto;
     }
@@ -1598,8 +1546,7 @@ details details:last-of-type {
     }
 
     #prev-btn,
-    #next-btn,
-    .search-terms {
+    #next-btn {
         font-size: var(--wp--preset--font-size--medium);
     }
 
