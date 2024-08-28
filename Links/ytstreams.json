@@ -1,0 +1,685 @@
+[
+    {
+        "id": "2gliGzb2_1I",
+        "title": "Lofi - coffee to go",
+        "type": "Lofi"
+    },
+    {
+        "id": "lP26UCnoH9s",
+        "title": "Coffee Shop Radio ☕ - 24/7 lofi & jazzy hip-hop beats",
+        "type": "Lofi"
+    },
+    {
+        "id": "rwionZbOryo",
+        "title": "Lofi Sleep & Rain Radio",
+        "type": "Lofi"
+    },
+    {
+        "id": "5yx6BWlEVcY",
+        "title": "Chillhop Music (jazzy & lofi hip hop beats)",
+        "type": "Lofi"
+    },
+    {
+        "id": "tr77RbnfYIU",
+        "title": "Avex J-Pop 24/7",
+        "type": "Japanese"
+    },
+    {
+        "id": "wBgSH-CGPzg",
+        "title": "Tomorrowland: One World Radio",
+        "type": "Music"
+    },
+    {
+        "id": "mSIr6VppC0o",
+        "title": "JapanesePod101 Live",
+        "type": "Japanese"
+    },
+    {
+        "id": "7sR4ALIggEo",
+        "title": "Korea.net Live",
+        "type": "Korean"
+    },
+    {
+        "id": "UkcHAbq9PVQ",
+        "title": "CGTN Europe",
+        "type": "English"
+    },
+    {
+        "id": "XWq5kBlakcQ",
+        "title": "CNA",
+        "type": "English"
+    },
+    {
+        "id": "-mvUkiILTqI",
+        "title": "ABC News (US)",
+        "type": "English"
+    },
+    {
+        "id": "pykpO5kQJ98",
+        "title": "Euronews",
+        "type": "English"
+    },
+    {
+        "id": "sr2Ry9JVDtU",
+        "title": "NDTV 24x7",
+        "type": "English"
+    },
+    {
+        "id": "gCNeDWCI0vo",
+        "title": "Al Jazeera English",
+        "type": "English"
+    },
+    {
+        "id": "9NyxcX3rhQs",
+        "title": "CNBC Marathon",
+        "type": "English"
+    },
+    {
+        "id": "tZT2MCYu6Zw",
+        "title": "DW News",
+        "type": "English"
+    },
+    {
+        "id": "f0lYkdA-Gtw",
+        "title": "NHK World Japan (Watch on YT)",
+        "type": "Japanese"
+    },
+    {
+        "id": "Dx5qFachd3A",
+        "title": "Relaxing Jazz Piano Radio",
+        "type": "Music"
+    },
+    {
+        "id": "wrEckgZZapI",
+        "title": "Epidemic Pop",
+        "type": "Music"
+    },
+    {
+        "id": "6uddGul0oAc",
+        "title": "TOKYO Cafe",
+        "type": "Japanese"
+    },
+    {
+        "id": "DSGyEsJ17cI",
+        "title": "Rainy Jazz: Relaxing Jazz & Bossa Nova Music Radio",
+        "type": "Music"
+    },
+    {
+        "id": "XstikgbeTPI",
+        "title": "Little Soul: Music to put you in a better mood",
+        "type": "Music"
+    },
+    {
+        "id": "jfKfPfyJRdk",
+        "title": "Lofi Girl: lofi hip hop radio (beats to relax/study to)",
+        "type": "Lofi"
+    },
+    {
+        "id": "rUxyKA_-grg",
+        "title": "Lofi Girl: lofi hip hop radio (beats to sleep/chill to)",
+        "type": "Lofi"
+    },
+    {
+        "id": "AEKtQW93OVg",
+        "title": "Jazz Cafe Ambience",
+        "type": "Music"
+    },
+    {
+        "id": "tGfQYbArQhc",
+        "title": "Abao in Tokyo: jazz/lofi hip hop radio",
+        "type": "Lofi"
+    },
+    {
+        "id": "36YnV9STBqc",
+        "title": "The Good Life Radio",
+        "type": "Music"
+    },
+    {
+        "id": "OxQQsIvJTTU",
+        "title": "KBS KOREA Live (Watch on YT)",
+        "type": "Korean"
+    },
+    {
+        "id": "EIfaYst9ZsY",
+        "title": "KBS World Radio (Watch on YT)",
+        "type": "Korean"
+    },
+    {
+        "id": "CJVBX7KI5nU",
+        "title": "Arirang TV",
+        "type": "Korean"
+    },
+    {
+        "id": "P1fX2GGdVS0",
+        "title": "Arirang Radio",
+        "type": "Korean"
+    },
+    {
+        "id": "i2pC0RRyGMg",
+        "title": "TBS Korea eFM 101.3 Radio",
+        "type": "Korean"
+    },
+    {
+        "id": "Y9q6RYg2Pdg",
+        "title": "Datawave FM",
+        "type": "Music"
+    },
+    {
+        "id": "-XlY-jv7oHA",
+        "title": "VaporFunk Station",
+        "type": "Music"
+    },
+    {
+        "id": "IUT1qAhMY4w",
+        "title": "Korea Underground",
+        "type": "Korean"
+    },
+    {
+        "id": "JVocS7Yftw8",
+        "title": "THE K-POP Live",
+        "type": "Korean"
+    },
+    {
+        "id": "mhJRzQsLZGg",
+        "title": "NASA Starbase Live",
+        "type": "Live Cam"
+    },
+    {
+        "id": "wfAa1GiNdgM",
+        "title": "United Nations Live",
+        "type": "English"
+    },
+    {
+        "id": "Vv3Sbr1lAMg",
+        "title": "渋谷スクランブル交差点",
+        "type": "Live Cam"
+    },
+    {
+        "id": "DxmDPrfinXY",
+        "title": "Bloomberg Quicktake Documentaries",
+        "type": "English"
+    },
+    {
+        "id": "BJ3Yv572V1A",
+        "title": "Nat Geo Wild: Savage Kingdom Documentaries",
+        "type": "English"
+    },
+    {
+        "id": "Na0w3Mz46GA",
+        "title": "Lofi Asian Radio",
+        "image": "https://iili.io/JQxnxZN.jpg",
+        "type": "Lofi"
+    },
+    {
+        "id": "4xDzrJKXOOY",
+        "title": "Lofi Synthwave",
+        "image": "https://iili.io/JQxnxZN.jpg",
+        "type": "Lofi"
+    },
+    {
+        "id": "4oStw0r33so",
+        "title": "Lofi Peaceful Piano",
+        "image": "https://iili.io/JQxnxZN.jpg",
+        "type": "Lofi"
+    },
+    {
+        "id": "S_MOd40zlYU",
+        "title": "Lofi Dark Ambient",
+        "image": "https://iili.io/JQxnxZN.jpg",
+        "type": "Lofi"
+    },
+    {
+        "id": "zPNsuVaqeR8",
+        "title": "Lofi Calm Piano",
+        "image": "https://iili.io/JQxnxZN.jpg",
+        "type": "Lofi"
+    },
+    {
+        "id": "ehTuatSx5Wc",
+        "title": "Lofi Jazz",
+        "image": "https://iili.io/JQxnxZN.jpg",
+        "type": "Lofi"
+    },
+    {
+        "id": "PrV-JtKiwv4",
+        "title": "Lofi Focus",
+        "image": "https://iili.io/JQxnxZN.jpg",
+        "type": "Lofi"
+    },
+    {
+        "id": "WJktfqMP7yY",
+        "title": "Neo Soul Lofi- 24/7 Instrumental music to vibe & work to. (Watch on YT)",
+        "image": "https://iili.io/JQxnxZN.jpg",
+        "type": "Lofi"
+    },
+    {
+        "id": "Vgcp2ZGkyvo",
+        "title": "Lofi Soul",
+        "image": "https://iili.io/JQxnxZN.jpg",
+        "type": "Lofi"
+    },
+    {
+        "id": "UKPK4D4D4zw",
+        "title": "Lofi Roots Reggae",
+        "image": "https://iili.io/JQxnxZN.jpg",
+        "type": "Lofi"
+    },
+    {
+        "id": "jBLapoJrkf8",
+        "title": "Lofi Dub Reggae",
+        "image": "https://iili.io/JQxnxZN.jpg",
+        "type": "Lofi"
+    },
+    {
+        "id": "DSqqIbsDmQY",
+        "title": "SleepyCat - Cat's Favorite Music Golgolsong 😽",
+        "image": "https://iili.io/dF45ojj.jpg",
+        "type": "Music"
+    },
+    {
+        "id": "Mh1_FBQ-KGo",
+        "title": "SleepyCat - Soothing Cat Music 😽 Valley Water Sounds, Birds Sounds 🌱",
+        "image": "https://iili.io/dF45ojj.jpg",
+        "type": "Music"
+    },
+    {
+        "id": "q_8PceBq7yw",
+        "title": "SleepyCat - Cat Lullaby Separation Anxiety Relief Music for Cats",
+        "image": "https://iili.io/dF45ojj.jpg",
+        "type": "Music"
+    },
+    {
+        "id": "PWEcgt_8rHY",
+        "title": "SleepyCat - Sweet Harp Music That Cats Love 😽",
+        "image": "https://iili.io/dF45ojj.jpg",
+        "type": "Music"
+    },
+    {
+        "id": "qxQElyBEPlI",
+        "title": "SleepyCat - Therapy Music for Stressed Cats 🐱",
+        "image": "https://iili.io/dF45ojj.jpg",
+        "type": "Music"
+    },
+    {
+        "id": "A2bpe5EmOCg",
+        "title": "SleepyCat - Therapy Music for Stressed Cats 🐱",
+        "image": "https://iili.io/dF45ojj.jpg",
+        "type": "Music"
+    },
+    {
+        "id": "LK0Nx3u69GI",
+        "title": "SleepyCat - EXTREMELY Soothing Cat Therapy Music",
+        "image": "https://iili.io/dF45ojj.jpg",
+        "type": "Music"
+    },
+    {
+        "id": "BXxT4ma_BEQ",
+        "title": "SleepyCat - Calming Music for Anxious Cats",
+        "image": "https://iili.io/dF45ojj.jpg",
+        "type": "Music"
+    },
+    {
+        "id": "BRXBlGm43ew",
+        "title": "Aqua - In The Aquarium You Can See Huge Sea Creatures 4K ULTRA HD",
+        "image": "https://iili.io/dF4E14f.webp",
+        "type": "Music"
+    },
+    {
+        "id": "trn8zXq1pgM",
+        "title": "Aqua - In The Aquarium You Can See Huge Sea Creatures 4K ULTRA HD",
+        "image": "https://iili.io/dF4E14f.webp",
+        "type": "Music"
+    },
+    {
+        "id": "8v_kKMaq5po",
+        "title": "Phonk Radio | Phonk Music/Chill",
+        "image": "https://i.ytimg.com/vi/8v_kKMaq5po/sddefault.jpg",
+        "type": "Music"
+    },
+    {
+        "id": "4xDzrJKXOOY",
+        "title": "Synthwave Radio | Beats To Chill/Game To",
+        "image": "https://i.ytimg.com/vi/MVPTGNGiI-4/maxresdefault.jpg",
+        "type": "Music"
+    },
+    {
+        "id": "7tNtU5XFwrU",
+        "title": "Copyright Free Music Radio | EDM Gaming Trap House Dubstep",
+        "image": "https://pic.rutube.ru/video/8e/ca/8eca2a1981b7cbada1cd99de80ffdbef.jpg",
+        "type": "Music"
+    },
+    {
+        "id": "Lcdi9O2XB4E",
+        "title": "Tokyo Night Drive Radio | Beats To Sleep/Relax/Study To",
+        "image": "https://i.ytimg.com/vi/rBCmiGZe0Xs/maxresdefault.jpg",
+        "type": "Music"
+    },
+    {
+        "id": "WnQsXCPufyM",
+        "title": "Relaxing Whiskey Blues Radio | Slow Blues/Rock Ballads/The Best of Emotional Blues",
+        "image": "https://i.ytimg.com/vi/LGKlOmnKfpU/maxresdefault.jpg",
+        "type": "Music"
+    },
+    {
+        "id": "4FBW3mkdKOs",
+        "title": "Anime Song Radio | Anime/Japanese",
+        "image": "https://i.ytimg.com/vi/4FYY-fyuNDY/maxresdefault.jpg",
+        "type": "Japanese"
+    },
+    {
+        "id": "MRhplCpkPKE",
+        "title": "PostRock Radio | Post-Rock/Post-Metal",
+        "image": "https://i.ytimg.com/vi/tRUjv98QFAI/hq720.jpg",
+        "type": "Music"
+    },
+    {
+        "id": "WPfPjbOLNfE",
+        "title": "中天新聞2台",
+        "type": "Chinese"
+    },
+    {
+        "id": "oIgbl7t0S_w",
+        "title": "中天新聞",
+        "type": "Chinese"
+    },
+    {
+        "id": "ylYJSBUgaMA",
+        "title": "民視新聞",
+        "type": "Chinese"
+    },
+    {
+        "id": "2mCSYvcfhtc",
+        "title": "TVBS新聞 (Watch on YT)",
+        "type": "Chinese"
+    },
+    {
+        "id": "WHEPzbFA3hw",
+        "title": "東森財經 (Watch on YT)",
+        "type": "Chinese"
+    },
+    {
+        "id": "wM0g8EoUZ_E",
+        "title": "華視新聞 (Watch on YT)",
+        "type": "Chinese"
+    },
+    {
+        "id": "xL0ch83RAK8",
+        "title": "台視新聞 (Watch on YT)",
+        "type": "Chinese"
+    },
+    {
+        "id": "TCnaIE_SAtM",
+        "title": "中視新聞",
+        "type": "Chinese"
+    },
+    {
+        "id": "quwqlazU-c8",
+        "title": "公視新聞",
+        "type": "Chinese"
+    },
+    {
+        "id": "5n0y6b0Q25o",
+        "title": "鏡新聞mnews",
+        "type": "Chinese"
+    },
+    {
+        "id": "dZp87qnWelE",
+        "title": "TaiwanPlus",
+        "type": "Chinese"
+    },
+    {
+        "id": "MIqUplvSRWA",
+        "title": "大愛一臺",
+        "type": "Chinese"
+    },
+    {
+        "id": "FoBfXvlOR6I",
+        "title": "三立新聞",
+        "type": "Chinese"
+    },
+    {
+        "id": "oZdzzvxTfUY",
+        "title": "三立+",
+        "type": "Chinese"
+    },
+    {
+        "id": "8WX6YL9JnLw",
+        "title": "GB News",
+        "type": "English"
+    },
+    {
+        "id": "Z50JFuNgvB0",
+        "title": "東森購物2",
+        "type": "Chinese"
+    },
+    {
+        "id": "ViJ3XiN6Q3M",
+        "title": "東森購物1",
+        "type": "Chinese"
+    },
+    {
+        "id": "PYtGQvNmadg",
+        "title": "中天亞洲",
+        "type": "Chinese"
+    },
+    {
+        "id": "htGDPsz2BYI",
+        "title": "豬哥會社",
+        "type": "Chinese"
+    },
+    {
+        "id": "_Vlzn9qAHD4",
+        "title": "東森購物3",
+        "type": "Chinese"
+    },
+    {
+        "id": "_pZQ1Lk0xMA",
+        "title": "MOMO購物1",
+        "type": "Chinese"
+    },
+    {
+        "id": "xbNWkUyxQGM",
+        "title": "MOMO購物2",
+        "type": "Chinese"
+    },
+    {
+        "id": "4HysYHJ6GkY",
+        "title": "國會頻道１",
+        "type": "Chinese"
+    },
+    {
+        "id": "Owke6Quk7T0",
+        "title": "台灣地震監視",
+        "type": "Chinese"
+    },
+    {
+        "id": "ADDSmXoPDY8",
+        "title": "中視經典綜藝",
+        "type": "Chinese"
+    },
+    {
+        "id": "pqabxBKzZ6M",
+        "title": "DW德國之聲",
+        "type": "Chinese"
+    },
+    {
+        "id": "5VF4aor94gw",
+        "title": "TRTWORLD",
+        "type": "English"
+    },
+    {
+        "id": "dfB0qmJo1eM",
+        "title": "Channels",
+        "type": "English"
+    },
+    {
+        "id": "21X5lGlDOfg",
+        "title": "NASA TV",
+        "type": "English"
+    },
+    {
+        "id": "nA9UZF-SZoQ",
+        "title": "NASA Live",
+        "type": "English"
+    },
+    {
+        "id": "vQP8AwAFzI8",
+        "title": "動物世界",
+        "type": "English"
+    },
+    {
+        "id": "qQkDk7UiwrA",
+        "title": "Leigha Marina",
+        "type": "English"
+    },
+    {
+        "id": "RG6HmfEnXyM",
+        "title": "輕鬆音樂",
+        "type": "Music"
+    },
+    {
+        "id": "o1ipHJUfFTM",
+        "title": "8FM (Watch on YT)",
+        "type": "Chinese"
+    },
+    {
+        "id": "ZxluW--lZpk",
+        "title": "華語經典",
+        "type": "Chinese"
+    },
+    {
+        "id": "6IRjWIqHwAQ",
+        "title": "自然の音",
+        "type": "Japanese"
+    },
+    {
+        "id": "rw7bxTqkYYs",
+        "title": "4K Nature (Watch on YT)",
+        "type": "English"
+    },
+    {
+        "id": "fEvM-OUbaKs",
+        "title": "Coffee Jazz",
+        "type": "Music"
+    },
+    {
+        "id": "tNkZsRW7h2c",
+        "title": "Space Ambient",
+        "type": "Music"
+    },
+    {
+        "id": "ph1vpnYIxJk",
+        "title": "Rolling Cam Venice",
+        "type": "Live Cam"
+    },
+    {
+        "id": "DTNkEm6jaqQ",
+        "title": "大愛二臺",
+        "type": "Chinese"
+    },
+    {
+        "id": "2gO1v2GPMFk",
+        "title": "Baroque Live Music",
+        "type": "Music"
+    },
+    {
+        "id": "OuxruRBfVjo",
+        "title": "Sleeping Music",
+        "type": "Music"
+    },
+    {
+        "id": "jIp4J62aRvY",
+        "title": "Relaxing Piano Collection",
+        "type": "Music"
+    },
+    {
+        "id": "IfNMuFqKBWs",
+        "title": "音樂電台",
+        "type": "Music"
+    },
+    {
+        "id": "Fgm9UAzdzQY",
+        "title": "Global Prayer",
+        "type": "English"
+    },
+    {
+        "id": "CHDb5D0DCkw",
+        "title": "正德電視",
+        "type": "Chinese"
+    },
+    {
+        "id": "ZzWBpGwKoaI",
+        "title": "SupremeMasterTV",
+        "type": "Chinese"
+    },
+    {
+        "id": "TAhHaHsDTkk",
+        "title": "鳥鳴音樂",
+        "type": "Chinese"
+    },
+    {
+        "id": "coYw-eVU0Ks",
+        "title": "JapaNews24",
+        "type": "Japanese"
+    },
+    {
+        "id": "iNPUWKft7hA",
+        "title": "KANSAI News24",
+        "type": "Japanese"
+    },
+    {
+        "id": "-C6FE2m7kX8",
+        "title": "メ～テレNEWS",
+        "type": "Japanese"
+    },
+    {
+        "id": "e2pgLUmaxGs",
+        "title": "広島ニュース",
+        "type": "Japanese"
+    },
+    {
+        "id": "ohI356mwBp8",
+        "title": "TBS NEWS",
+        "type": "Japanese"
+    },
+    {
+        "id": "xWPD8KDHUH8",
+        "title": "HTB北海道",
+        "type": "Japanese"
+    },
+    {
+        "id": "hxBTqmTT5gE",
+        "title": "YTN2 (Watch on YT)",
+        "type": "Korean"
+    },
+    {
+        "id": "FJfwehhzIhw",
+        "title": "YTN (Watch on YT)",
+        "type": "Korean"
+    },
+    {
+        "id": "JVocS7Yftw8",
+        "title": "THE K-POP",
+        "type": "Korean"
+    },
+    {
+        "id": "NJUjU9ALj4A",
+        "title": "한국경제",
+        "type": "Korean"
+    },
+    {
+        "id": "s9xL1DpBsfQ",
+        "title": "매일경제TV",
+        "type": "Korean"
+    },
+    {
+        "id": "2C2WCLhDsR4",
+        "title": "YTN dmb (Watch on YT)",
+        "type": "Korean"
+    },
+    {
+        "id": "xfFa_kcPnCY",
+        "title": "YTN 사이언스 (Watch on YT)",
+        "type": "Korean"
+    }
+]
