@@ -44,60 +44,72 @@
     </head>
 
     <body>
-        <nav class="navbar sticky-top navbar-dark navbar-expand-md">
-            <a class="navbar-brand" href="https://basic.pp.ua/"><img class="" src="assets/sasalele_logo-removebg.webp"
-                    width="auto" height="32"></a>
-            <div class="navbar-text d-flex justify-content-center align-items-center text-white">Sasalele Music Station
-            </div>
-            <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse"
-                data-target="#main-navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="main-navigation">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="https://basic.pp.ua/">Radios<i
-                                class="fas fa-radio"></i></a>
-                    </li>
-                    <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown"
-                            aria-expanded="false" href="#">Websites<i class="fa-fw fas fa-link"></i></a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="website.html#radiohere">Radio
-                                Websites <i class="fas fa-tower-broadcast"></i></a>
-                            <a class="dropdown-item" href="website.html#radiojppodcast">Japanese
-                                Radios/Podcasts <i class="fas fa-podcast"></i></a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="website.html#websitehere">Music
-                                Sites <i class="fas fa-headset"></i></a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="website.html#scrap">Download / Tools <i
-                                    class="fas fa-download"></i></a>
-                        </div>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="#">Videos<i class="fas fa-video"></i></a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="drive.html">Drive Music Player<i
-                                class="fa-brands fa-google-drive"></i></a></li>
-                    <div class="d-flex justify-content-center align-items-center">
-                        <div id="clock">
-                            <span id="clockTime"></span>
-                            <span id="clockDay"></span>
-                        </div>
-                    </div>
-                </ul>
-            </div>
-        </nav>
         <div id="background"><img id="randomimg" src="" alt="."></div>
         <div id="content">
+            <nav class="navbar sticky-top navbar-dark navbar-expand-md">
+                <a class="navbar-brand" href="https://basic.pp.ua/"><img src="assets/sasalele_logo-removebg.webp"
+                        width="30" height="30"></a>
+                <div class="justify-content-center align-items-center text-white">Sasalele Music Station
+                </div>
+                <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse"
+                    data-target="#main-navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="main-navigation">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="https://basic.pp.ua/">Radios<i
+                                    class="fas fa-radio"></i></a>
+                        </li>
+                        <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown"
+                                aria-expanded="false" href="">Websites<i class="fa-fw fas fa-link"></i></a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="website.html#radiohere">Radio
+                                    Websites <i class="fas fa-tower-broadcast"></i></a>
+                                <a class="dropdown-item" href="website.html#radiojppodcast">Japanese
+                                    Radios/Podcasts <i class="fas fa-podcast"></i></a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="website.html#websitehere">Music
+                                    Sites <i class="fas fa-headset"></i></a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="website.html#scrap">Download / Tools <i
+                                        class="fas fa-download"></i></a>
+                            </div>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="">Videos<i class="fas fa-video"></i></a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="drive.html">Drive Music Player<i
+                                    class="fa-brands fa-google-drive"></i></a></li>
+                        <div class="d-flex justify-content-center align-items-center">
+                            <div id="clock">
+                                <span id="clockTime"></span>
+                                <span id="clockDay"></span>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+            </nav>
             <section id="videos">
                 <div class="section-title">
                     <h1>Videos</h1>
                 </div>
-                <div class="container mt-1">
+                <div class="container mt-1 search-bg">
+                    <div class="container-fluid">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-md-10">
+                                <div class="input-group mb-3">
+                                    <input type="text" id="m3uURL" class="form-control" placeholder="Enter M3U8 URL">
+                                    <div class="input-group-append">
+                                        <button id="loadM3U" class="btn btn-primary btn-go">Go</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-lg-8">
-                            <h6 id="selected-video-title" style="display:none;"></h6>
+                            <h6 id="selected-video-title" class="selected-title" style="display:none;"></h6>
                             <div id="vplayer" class="container mb-3">
-                                <media-controller style="max-width: 720px; aspect-ratio: 16 / 9;">
+                                <media-controller style="width: 100%;max-width: 720px; aspect-ratio: 16 / 9;">
                                     <video slot="media" id="video-player" src=""></video>
                                     <media-control-bar>
                                         <media-play-button></media-play-button>
@@ -142,104 +154,116 @@
                     </div>
                 </div>
 
-                <div class="container-fluid">
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-md-10">
-                            <div class="input-group mb-3">
-                                <input type="text" id="m3uURL" class="form-control" placeholder="Enter M3U8 URL">
-                                <div class="input-group-append">
-                                    <button id="loadM3U" class="btn btn-primary btn-go">Go</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="container">
-                    <div class="alert alert-info mt-4" role="alert">
-                        <strong>Disclaimer:</strong> All the resources provided on this page are collected from various
-                        sources on the
-                        internet. If you encounter any playback issues, it may be due to the proxy used by this site
-                        reaching its request
-                        limit. While
-                        it's unlikely due to low traffic, other factors like stream availability or geo-restrictions
-                        could
-                        be the cause.
-                        Consider using a VPN if needed.
+                    <div class="section-title">
+                        <h1>YouTube Live Stream</h1>
                     </div>
-
-                    <div id="accordion">
-                        <div class="card">
-                            <div class="card-header">
-                                <a class="card-link" data-toggle="collapse" href="#collapseOne">
-                                    What is M3U8 link?
-                                </a>
-                            </div>
-                            <div id="collapseOne" class="collapse" data-parent="#accordion">
-                                <div class="card-body">
-                                    <p>M3U8 is a playlist format used by various audio and video playback programs, it
-                                        contains
-                                        a
-                                        path
-                                        or URL to
-                                        a media
-                                        file or folder of media files, along with information about the playlist. This
-                                        player
-                                        downloads
-                                        the
-                                        video
-                                        specified in the M3U8 file and plays within your browser. To get started:</p>
-                                    <ul>
-                                        <li>Paste a M3U8 URL into the above input box</li>
-                                        <li>Click the "Go" button.</li>
-                                    </ul>
-                                </div>
+                    <div class="row search-bg">
+                        <div class="col-md-8">
+                            <h6 id="selectedYT" class="selected-title" style="display:none;"></h6>
+                            <div class="video-container">
+                                <iframe id="yt-iframe" src="https://www.youtube.com/embed?enablejsapi=1" frameborder="0"
+                                    allow="autoplay; encrypted-media" allowfullscreen></iframe>
                             </div>
                         </div>
-                        <div class="card">
-                            <div class="card-header">
-                                <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
-                                    What is HLS?
-                                </a>
+                        <div class="col-md-4">
+                            <div id="filterContainer" class="mb-2">
                             </div>
-                            <div id="collapseTwo" class="collapse" data-parent="#accordion">
-                                <div class="card-body">
-                                    <p>HLS stands for HTTP Live Streaming. It's an HTTP-based media streaming
-                                        communications
-                                        protocol
-                                        implemented by
-                                        Apple Inc. It works by breaking the overall stream into a sequence of small file
-                                        downloads,
-                                        each
-                                        download
-                                        loading one short chunk of an overall potentially unbounded transport stream.
-                                    </p>
-                                    <p>HLS streams are usually described using M3U8 playlist.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header">
-                                <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
-                                    Why can't some M3U8 files be played?
-                                </a>
-                            </div>
-                            <div id="collapseThree" class="collapse" data-parent="#accordion">
-                                <div class="card-body">
-                                    <p>By default, the browser downloads any m3u8 files that were requested. This plugin
-                                        checks any links to see if they are
-                                        m3u8. If that's the case, it opens a new tab on a video player that uses the
-                                        hlsjs library. Extensions may have broader permissions to bypass CORS
-                                        restrictions or handle authentication differently compared to web
-                                        pages.</p>
-                                    <p class="text-white"><a
-                                            href="https://chromewebstore.google.com/detail/native-hls-playback/emnphkkblegpebimobpbekeedfgemhof"
-                                            target="_blank"><strong>Install Extension Plugin</a></p>
-                                </div>
+                            <input id="searchInput" type="text" class="form-control mb-3"
+                                placeholder="Search streams...">
+                            <div id="streamList" class="list-group w-100">
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
+        </div>
+
+        <div class="container">
+            <div class="alert alert-info mt-4" role="alert">
+                <strong>Disclaimer:</strong> All the resources provided on this page are collected from various
+                sources on the
+                internet. If you encounter any playback issues, it may be due to the proxy used by this site
+                reaching its request
+                limit. While
+                it's unlikely due to low traffic, other factors like stream availability or geo-restrictions
+                could
+                be the cause.
+                Consider using a VPN if needed.
+            </div>
+
+            <div id="accordion">
+                <div class="card">
+                    <div class="card-header">
+                        <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                            What is M3U8 link?
+                        </a>
+                    </div>
+                    <div id="collapseOne" class="collapse" data-parent="#accordion">
+                        <div class="card-body">
+                            <p>M3U8 is a playlist format used by various audio and video playback programs, it
+                                contains
+                                a
+                                path
+                                or URL to
+                                a media
+                                file or folder of media files, along with information about the playlist. This
+                                player
+                                downloads
+                                the
+                                video
+                                specified in the M3U8 file and plays within your browser. To get started:</p>
+                            <ul>
+                                <li>Paste a M3U8 URL into the above input box</li>
+                                <li>Click the "Go" button.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+                            What is HLS?
+                        </a>
+                    </div>
+                    <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                        <div class="card-body">
+                            <p>HLS stands for HTTP Live Streaming. It's an HTTP-based media streaming
+                                communications
+                                protocol
+                                implemented by
+                                Apple Inc. It works by breaking the overall stream into a sequence of small file
+                                downloads,
+                                each
+                                download
+                                loading one short chunk of an overall potentially unbounded transport stream.
+                            </p>
+                            <p>HLS streams are usually described using M3U8 playlist.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
+                            Why can't some M3U8 files be played?
+                        </a>
+                    </div>
+                    <div id="collapseThree" class="collapse" data-parent="#accordion">
+                        <div class="card-body">
+                            <p>By default, the browser downloads any m3u8 files that were requested. This plugin
+                                checks any links to see if they are
+                                m3u8. If that's the case, it opens a new tab on a video player that uses the
+                                hlsjs library. Extensions may have broader permissions to bypass CORS
+                                restrictions or handle authentication differently compared to web
+                                pages.</p>
+                            <p class="text-white"><a
+                                    href="https://chromewebstore.google.com/detail/native-hls-playback/emnphkkblegpebimobpbekeedfgemhof"
+                                    target="_blank"><strong>Install Extension Plugin</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </section>
         </div>
         <div class="back-to-top d-flex align-items-center justify-content-center"><i class="fa-solid fa-arrow-up"></i>
         </div>

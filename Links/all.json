@@ -1,6 +1,6 @@
 [
     {
-        "name": "LISTEN.MOE JPOP",
+        "name": "LISTEN.MOE JPOP (MP3)",
         "url": "https://listen.moe/fallback",
         "favicon": "assets/radios/LISTEN.MOE.webp",
         "genre": "jmusic",
@@ -8,12 +8,28 @@
         "host": "icecast"
     },
     {
-        "name": "LISTEN.MOE KPOP",
+        "name": "LISTEN.MOE JPOP (Vorbis)",
+        "url": "https://listen.moe/stream",
+        "favicon": "assets/radios/LISTEN.MOE.webp",
+        "genre": "jmusic",
+        "homepage": "https://listen.moe/",
+        "host": "unknown"
+    },
+    {
+        "name": "LISTEN.MOE KPOP (MP3)",
         "url": "https://listen.moe/kpop/fallback",
         "favicon": "assets/radios/LISTEN.MOE.webp",
         "genre": "kmusic",
         "homepage": "https://listen.moe/",
         "host": "icecast"
+    },
+    {
+        "name": "LISTEN.MOE KPOP (Vorbis)",
+        "url": "https://listen.moe/kpop/stream",
+        "favicon": "assets/radios/LISTEN.MOE.webp",
+        "genre": "kmusic",
+        "homepage": "https://listen.moe/",
+        "host": "unknown"
     },
     {
         "name": "R/a/dio",
@@ -2192,14 +2208,6 @@
         "favicon": "assets/radios/AnimePlusRadio.webp",
         "genre": "anime",
         "homepage": "https://onlineradiobox.com/co/animeplus/",
-        "host": "zeno"
-    },
-    {
-        "name": "Japan Anime Songs",
-        "url": "https://stream.zeno.fm/3hhp76wdz4zuv",
-        "favicon": "assets/radios/Unidentified2.webp",
-        "genre": "anime",
-        "homepage": "https://zeno.fm/radio/japan-anime-songs/",
         "host": "zeno"
     },
     {

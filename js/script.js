@@ -735,7 +735,6 @@ function playRadioStream(link) {
     const m3u8player = document.getElementById("radio-player");
     //const proxiedLink = `https://sasalele.api-anycast.workers.dev/${link}`;
     const hls = new Hls();
-
     if (Hls.isSupported()) {
         hls.loadSource(link);
         hls.attachMedia(m3u8player);
@@ -1155,6 +1154,20 @@ function getWebsiteURL(label, searchTerm) {
     }
 }
 //Chatting
+const toggleButton = document.getElementById('toggleButton');
+const panel = document.getElementById('sidePanel');
+const hideButton = document.getElementById('hideButton');
+
+function togglePanel() {
+    const isOpen = panel.classList.contains('open');
+    panel.classList.toggle('open', !isOpen);
+}
+toggleButton.addEventListener('click', togglePanel);
+
+hideButton.addEventListener('click', function () {
+    panel.classList.remove('open');
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     const firebaseConfig = {
         apiKey: "AIzaSyBea1r2EXm5MyJItS00eRUIM7XZxt5Uzs8",
@@ -1169,11 +1182,21 @@ document.addEventListener('DOMContentLoaded', () => {
     firebase.initializeApp(firebaseConfig);
     var db = firebase.database();
 
+    function createElement(tag, id, innerHTML, attributes = {}) {
+        const element = document.createElement(tag);
+        if (id) element.id = id;
+        if (innerHTML) element.innerHTML = innerHTML;
+        for (const [key, value] of Object.entries(attributes)) {
+            element.setAttribute(key, value);
+        }
+        return element;
+    }
+
     class Sasalele {
         home() {
             var chatContainer = document.querySelector('.chat_container');
             if (chatContainer) {
-                chatContainer.innerHTML = ''; // Clear chat-related content
+                chatContainer.innerHTML = '';
             }
             this.createJoinForm();
         }
@@ -1183,91 +1206,78 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         createJoinForm() {
-            var parent = this;
+            const parent = this;
+            const joinFormContainer = document.querySelector('.joinform');
 
-            var joinFormContainer = document.querySelector('.joinform');
-            var joinInnerContainer = document.createElement('div');
-            joinInnerContainer.setAttribute('id', 'join_inner_container');
+            const joinInnerContainer = createElement('div', 'join_inner_container');
+            const joinButtonContainer = createElement('div', 'join_button_container');
+            const joinButton = createElement('button', 'join_button', 'Join <i class="fas fa-sign-in-alt"></i>');
+            const joinInputContainer = createElement('div', 'join_input_container');
+            const joinInput = createElement('input', 'join_input', null, { maxlength: 20, placeholder: 'Input your name...' });
 
-            var joinButtonContainer = document.createElement('div');
-            joinButtonContainer.setAttribute('id', 'join_button_container');
+            joinButton.classList.add('disabled');
 
-            var joinButton = document.createElement('button');
-            joinButton.setAttribute('id', 'join_button');
-            joinButton.innerHTML = 'Join <i class="fas fa-sign-in-alt"></i>';
+            joinInput.addEventListener('keyup', () => {
+                const isEnabled = joinInput.value.length > 0;
+                joinButton.classList.toggle('enabled', isEnabled);
+                joinButton.classList.toggle('disabled', !isEnabled);
+            });
 
-            var joinInputContainer = document.createElement('div');
-            joinInputContainer.setAttribute('id', 'join_input_container');
-
-            var joinInput = document.createElement('input');
-            joinInput.setAttribute('id', 'join_input');
-            joinInput.setAttribute('maxlength', 20);
-            joinInput.placeholder = 'Input your name...';
-            joinInput.onkeyup = function () {
-                if (joinInput.value.length > 0) {
-                    joinButton.classList.add('enabled');
-                    joinButton.onclick = function () {
-                        parent.saveName(joinInput.value);
-                        joinFormContainer.innerHTML = ''; // Clear join form content
-                        parent.createChat();
-                    };
-                } else {
-                    joinButton.classList.remove('enabled');
+            joinButton.addEventListener('click', () => {
+                if (joinButton.classList.contains('enabled')) {
+                    parent.saveName(joinInput.value);
+                    joinFormContainer.innerHTML = '';
+                    parent.createChat();
                 }
-            };
+            });
 
-            joinButtonContainer.append(joinButton);
-            joinInputContainer.append(joinInput);
+            joinButtonContainer.appendChild(joinButton);
+            joinInputContainer.appendChild(joinInput);
             joinInnerContainer.append(joinInputContainer, joinButtonContainer);
-            joinFormContainer.append(joinInnerContainer);
+            joinFormContainer.appendChild(joinInnerContainer);
         }
+
 
         createLoad(containerId) {
             var container = document.getElementById(containerId);
             container.innerHTML = '';
-
-            var loaderContainer = document.createElement('div');
-            loaderContainer.setAttribute('class', 'loader_container');
-
-            var loader = document.createElement('div');
-            loader.setAttribute('class', 'loader');
+            var loaderContainer = createElement('div', null, null, { class: 'loader_container' });
+            var loader = createElement('div', null, null, { class: 'loader' });
 
             loaderContainer.append(loader);
             container.append(loaderContainer);
         }
 
         createChat() {
-            var parent = this;
-            var chatContainer = document.querySelector('.chat_container');
+            const parent = this;
+            const chatContainer = document.querySelector('.chat_container');
             chatContainer.innerHTML = '';
 
-            var chatInnerContainer = document.createElement('div');
-            chatInnerContainer.setAttribute('id', 'chat_inner_container');
+            const chatInnerContainer = createElement('div', 'chat_inner_container');
+            const chatContentContainer = createElement('div', 'chat_content_container');
+            const chatInputContainer = createElement('div', 'chat_input_container');
 
-            var chatContentContainer = document.createElement('div');
-            chatContentContainer.setAttribute('id', 'chat_content_container');
-
-            var chatInputContainer = document.createElement('div');
-            chatInputContainer.setAttribute('id', 'chat_input_container');
-
-            var chatInputSend = document.createElement('button');
-            chatInputSend.setAttribute('id', 'chat_input_send');
-            chatInputSend.setAttribute('disabled', true);
-            chatInputSend.innerHTML = `<i class="far fa-paper-plane"></i>`;
-
-            var chatInput = document.createElement('input');
-            chatInput.setAttribute('id', 'chat_input');
-            chatInput.setAttribute('maxlength', 2000);
+            const chatInputSend = createElement('button', 'chat_input_send', `<i class="far fa-paper-plane"></i>`, { disabled: true });
+            const chatInput = createElement('input', 'chat_input', '', { maxlength: 2000 });
             chatInput.placeholder = `Hi ${parent.getName()}. Say something...`;
 
+            const chatLogout = createElement('button', 'chat_logout', `${parent.getName()} • logout`);
+            chatLogout.onclick = function () {
+                localStorage.clear();
+                parent.home();
+            };
+
+            const chatLogoutContainer = createElement('div', 'chat_logout_container');
+            chatLogoutContainer.append(chatLogout);
+
+            chatInputContainer.append(chatInput, chatInputSend);
+            chatInnerContainer.append(chatContentContainer, chatInputContainer, chatLogoutContainer);
+            chatContainer.append(chatInnerContainer);
+
             function updateSendButtonState() {
-                if (chatInput.value.length > 0) {
-                    chatInputSend.removeAttribute('disabled');
-                    chatInputSend.classList.add('enabled');
-                } else {
-                    chatInputSend.setAttribute('disabled', true);
-                    chatInputSend.classList.remove('enabled');
-                }
+                const hasValue = chatInput.value.length > 0;
+                chatInputSend.disabled = !hasValue;
+                chatInputSend.classList.toggle('enabled', hasValue);
             }
 
             chatInput.addEventListener("keyup", function (event) {
@@ -1280,7 +1290,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             chatInputSend.addEventListener("click", function () {
                 if (chatInput.value.length > 0) {
-                    chatInputSend.setAttribute('disabled', true);
+                    chatInputSend.disabled = true;
                     chatInputSend.classList.remove('enabled');
                     parent.createLoad('chat_content_container');
                     parent.sendMessage(chatInput.value);
@@ -1288,22 +1298,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     chatInput.focus();
                 }
             });
-
-            var chatLogoutContainer = document.createElement('div');
-            chatLogoutContainer.setAttribute('id', 'chat_logout_container');
-
-            var chatLogout = document.createElement('button');
-            chatLogout.setAttribute('id', 'chat_logout');
-            chatLogout.textContent = `${parent.getName()} • logout`;
-            chatLogout.onclick = function () {
-                localStorage.clear();
-                parent.home();
-            };
-
-            chatLogoutContainer.append(chatLogout);
-            chatInputContainer.append(chatInput, chatInputSend);
-            chatInnerContainer.append(chatContentContainer, chatInputContainer, chatLogoutContainer);
-            chatContainer.append(chatInnerContainer);
 
             parent.createLoad('chat_content_container');
             parent.refreshChat();
@@ -1321,7 +1315,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             db.ref('chats/').once('value', function (messageObject) {
                 var index = parseFloat(messageObject.numChildren()) + 1;
-                db.ref('chats/' + `message_${index}`).set({
+                db.ref(`chats/message_${index}`).set({
                     name: parent.getName(),
                     message: message,
                     index: index
@@ -1341,67 +1335,39 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         refreshChat() {
-            var chatContentContainer = document.getElementById('chat_content_container');
-            db.ref('chats/').on('value', function (messagesObject) {
+            const chatContentContainer = document.getElementById('chat_content_container');
+            const fragment = document.createDocumentFragment();
+
+            db.ref('chats/').on('value', (messagesObject) => {
                 chatContentContainer.innerHTML = '';
-                if (messagesObject.numChildren() == 0) {
+
+                const messages = messagesObject.val();
+                if (!messages || Object.keys(messages).length === 0) {
                     return;
                 }
 
-                var messages = Object.values(messagesObject.val());
-                var guide = [];
-                var unordered = [];
-                var ordered = [];
+                const ordered = Object.values(messages).sort((a, b) => a.index - b.index);
 
-                for (var i = 0; i < messages.length; i++) {
-                    guide.push(i + 1);
-                    unordered.push([messages[i], messages[i].index]);
-                }
+                ordered.forEach((data) => {
+                    const { name, message } = data;
 
-                guide.forEach(function (key) {
-                    var found = false;
-                    unordered = unordered.filter(function (item) {
-                        if (!found && item[1] == key) {
-                            ordered.push(item[0]);
-                            found = true;
-                            return false;
-                        } else {
-                            return true;
-                        }
-                    });
-                });
+                    const messageContainer = createElement('div', null, null, { class: 'message_container' });
+                    const messageInnerContainer = createElement('div', null, null, { class: 'message_inner_container' });
 
-                ordered.forEach(function (data) {
-                    var name = data.name;
-                    var message = data.message;
+                    const messageUserContainer = createElement('div', null, null, { class: 'message_user_container' });
+                    const messageUser = createElement('p', null, name, { class: 'message_user' });
+                    messageUserContainer.appendChild(messageUser);
 
-                    var messageContainer = document.createElement('div');
-                    messageContainer.setAttribute('class', 'message_container');
+                    const messageContentContainer = createElement('div', null, null, { class: 'message_content_container' });
+                    const messageContent = createElement('p', null, message, { class: 'message_content' });
+                    messageContentContainer.appendChild(messageContent);
 
-                    var messageInnerContainer = document.createElement('div');
-                    messageInnerContainer.setAttribute('class', 'message_inner_container');
-
-                    var messageUserContainer = document.createElement('div');
-                    messageUserContainer.setAttribute('class', 'message_user_container');
-
-                    var messageUser = document.createElement('p');
-                    messageUser.setAttribute('class', 'message_user');
-                    messageUser.textContent = `${name}`;
-
-                    var messageContentContainer = document.createElement('div');
-                    messageContentContainer.setAttribute('class', 'message_content_container');
-
-                    var messageContent = document.createElement('p');
-                    messageContent.setAttribute('class', 'message_content');
-                    messageContent.textContent = `${message}`;
-
-                    messageUserContainer.append(messageUser);
-                    messageContentContainer.append(messageContent);
                     messageInnerContainer.append(messageUserContainer, messageContentContainer);
-                    messageContainer.append(messageInnerContainer);
-
-                    chatContentContainer.append(messageContainer);
+                    messageContainer.appendChild(messageInnerContainer);
+                    fragment.appendChild(messageContainer);
                 });
+
+                chatContentContainer.appendChild(fragment);
                 chatContentContainer.scrollTop = chatContentContainer.scrollHeight;
             });
         }
@@ -1412,7 +1378,6 @@ document.addEventListener('DOMContentLoaded', () => {
         app.chat();
     }
 });
-
 
 const startDateTime = new Date('2023/10/01');
 

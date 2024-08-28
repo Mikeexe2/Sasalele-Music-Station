@@ -40,96 +40,100 @@
             gtag('config', 'G-LDY4BC680M');
         </script>
     </head>
-    <nav class="navbar sticky-top navbar-dark navbar-expand-md">
-        <a class="navbar-brand" href="https://basic.pp.ua/"><img class="" src="assets/sasalele_logo-removebg.webp"
-                width="auto" height="32"></a>
-        <div class="navbar-text d-flex justify-content-center align-items-center text-white">Sasalele Music Station
-        </div>
-        <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="main-navigation">
-            <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="https://basic.pp.ua/">Radios<i
-                            class="fas fa-radio"></i></a>
-                </li>
-                <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown"
-                        aria-expanded="false" href="#">Websites<i class="fa-fw fas fa-link"></i></a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="website.html#radiohere">Radio
-                            Websites <i class="fas fa-tower-broadcast"></i></a>
-                        <a class="dropdown-item" href="website.html#radiojppodcast">Japanese
-                            Radios/Podcasts <i class="fas fa-podcast"></i></a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="website.html#websitehere">Music
-                            Sites <i class="fas fa-headset"></i></a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="website.html#scrap">Download/Tools <i
-                                class="fas fa-download"></i></a>
-                    </div>
-                </li>
-                <li class="nav-item"><a class="nav-link" href="video.html">Videos<i class="fas fa-video"></i></a>
-                </li>
-                <li class="nav-item"><a class="nav-link" href="drive.html">Drive Music Player<i
-                            class="fa-brands fa-google-drive"></i></a></li>
-                <div class="d-flex justify-content-center align-items-center">
-                    <div id="clock">
-                        <span id="clockTime"></span>
-                        <span id="clockDay"></span>
-                    </div>
+
+    <body>
+        <div id="background"><img id="randomimg" src="" alt="."></div>
+        <div id="content">
+            <nav class="navbar sticky-top navbar-dark navbar-expand-md">
+                <a class="navbar-brand" href="https://basic.pp.ua/"><img src="assets/sasalele_logo-removebg.webp"
+                        width="30" height="30"></a>
+                <div class="justify-content-center align-items-center text-white">Sasalele Music Station
                 </div>
-            </ul>
+                <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse"
+                    data-target="#main-navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="main-navigation">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="https://basic.pp.ua/">Radios<i
+                                    class="fas fa-radio"></i></a>
+                        </li>
+                        <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown"
+                                aria-expanded="false" href="">Websites<i class="fa-fw fas fa-link"></i></a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#radiohere">Radio
+                                    Websites <i class="fas fa-tower-broadcast"></i></a>
+                                <a class="dropdown-item" href="#radiojppodcast">Japanese
+                                    Radios/Podcasts <i class="fas fa-podcast"></i></a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#websitehere">Music
+                                    Sites <i class="fas fa-headset"></i></a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#scrap">Download/Tools <i
+                                        class="fas fa-download"></i></a>
+                            </div>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="video.html">Videos<i
+                                    class="fas fa-video"></i></a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="drive.html">Drive Music Player<i
+                                    class="fa-brands fa-google-drive"></i></a></li>
+                        <div class="d-flex justify-content-center align-items-center">
+                            <div id="clock">
+                                <span id="clockTime"></span>
+                                <span id="clockDay"></span>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+            </nav>
+            <section id="radiohere">
+                <div class="section-title">
+                    <h1>Radio Websites</h1>
+                </div>
+                <aside class="LinksListBlock">
+                    <ul class="LinksList" id="radiowebsites"></ul>
+                </aside>
+            </section>
+            <section id="radiojppodcast">
+                <div class="section-title">
+                    <h1>Japanese Radios/Podcasts</h1>
+                </div>
+                <details id="tips">
+                    <summary><span class="badge badge-info">Tips</span></summary>
+                    <strong>This section will collect links to the japanese radio's Podcast page, where you can listen
+                        to
+                        them on
+                        Spotify or from their website directly.</strong>
+                </details>
+                <aside class="LinksListBlock">
+                    <ul class="LinksList" id="jppodcastradio"></ul>
+                    </ul>
+                </aside>
+            </section>
+            <section id="websitehere">
+                <div class="section-title">
+                    <h1>Music Sites</h1>
+                </div>
+                <aside class="LinksListBlock">
+                    <ul class="LinksList" id="musicsites">
+                    </ul>
+                </aside>
+            </section>
+            <section id="scrap">
+                <div class="section-title">
+                    <h1>Download/Tools</h1>
+                </div>
+                <aside class="LinksListBlock">
+                    <ul class="LinksList" id="downloadtools">
+                    </ul>
+                </aside>
+            </section>
         </div>
-    </nav>
-    <div id="background"><img id="randomimg" src="" alt="."></div>
-    <div id="content">
-        <section id="radiohere">
-            <div class="section-title">
-                <h1>Radio Websites</h1>
-            </div>
-            <aside class="LinksListBlock">
-                <ul class="LinksList" id="radiowebsites"></ul>
-            </aside>
-        </section>
-        <section id="radiojppodcast">
-            <div class="section-title">
-                <h1>Japanese Radios/Podcasts</h1>
-            </div>
-            <details id="tips">
-                <summary><span class="badge badge-info">Tips</span></summary>
-                <strong>This section will collect links to the japanese radio's Podcast page, where you can listen
-                    to
-                    them on
-                    Spotify or from their website directly.</strong>
-            </details>
-            <aside class="LinksListBlock">
-                <ul class="LinksList" id="jppodcastradio"></ul>
-                </ul>
-            </aside>
-        </section>
-        <section id="websitehere">
-            <div class="section-title">
-                <h1>Music Sites</h1>
-            </div>
-            <aside class="LinksListBlock">
-                <ul class="LinksList" id="musicsites">
-                </ul>
-            </aside>
-        </section>
-        <section id="scrap">
-            <div class="section-title">
-                <h1>Download/Tools</h1>
-            </div>
-            <aside class="LinksListBlock">
-                <ul class="LinksList" id="downloadtools">
-                </ul>
-            </aside>
-        </section>
-    </div>
-    <div class="back-to-top d-flex align-items-center justify-content-center"><i class="fa-solid fa-arrow-up"></i>
-    </div>
-    <script src="js/stats.js"></script>
-    <script src="js/loadwebsites.js"></script>
+        <div class="back-to-top d-flex align-items-center justify-content-center"><i class="fa-solid fa-arrow-up"></i>
+        </div>
+        <script src="js/stats.js"></script>
+        <script src="js/loadwebsites.js"></script>
     </body>
 
 </html>
