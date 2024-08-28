@@ -735,7 +735,6 @@ function playRadioStream(link) {
     const m3u8player = document.getElementById("radio-player");
     //const proxiedLink = `https://sasalele.api-anycast.workers.dev/${link}`;
     const hls = new Hls();
-
     if (Hls.isSupported()) {
         hls.loadSource(link);
         hls.attachMedia(m3u8player);
@@ -1157,13 +1156,17 @@ function getWebsiteURL(label, searchTerm) {
 //Chatting
 const toggleButton = document.getElementById('toggleButton');
 const panel = document.getElementById('sidePanel');
+const hideButton = document.getElementById('hideButton');
 
 function togglePanel() {
     const isOpen = panel.classList.contains('open');
     panel.classList.toggle('open', !isOpen);
 }
-
 toggleButton.addEventListener('click', togglePanel);
+
+hideButton.addEventListener('click', function () {
+    panel.classList.remove('open');
+});
 
 document.addEventListener('DOMContentLoaded', () => {
     const firebaseConfig = {
