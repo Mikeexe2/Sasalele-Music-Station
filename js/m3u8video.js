@@ -132,3 +132,110 @@ document.getElementById("searchChannel").addEventListener("input", function () {
   createVideoList(currentVideos);
   updateGenreInfo(defaultGenreName, currentVideos.length);
 })();
+
+// for youtube streams
+let ytplayer;
+const ytMap = new Map();
+let currentCategory = 'Music';
+let currentPlayingyt = null;
+
+const tag = document.createElement('script');
+tag.src = 'https://www.youtube.com/iframe_api';
+const firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+function onYouTubeIframeAPIReady() {
+  ytplayer = new YT.Player('yt-iframe', {
+    events: {
+      'onReady': onPlayerReady
+    }
+  });
+}
+
+function onPlayerReady(event) {
+  console.log('YouTube Player is ready.');
+}
+
+function loadStream(streamId) {
+  if (ytplayer && streamId) {
+    const url = `https://www.youtube.com/embed/${streamId}?enablejsapi=1&autoplay=1`;
+    document.getElementById('yt-iframe').src = url;
+    ytplayer.loadVideoById(streamId);
+  }
+}
+
+function selectYT(element) {
+  const selectedStreamId = element.dataset.streamId;
+  const selectedTitle = element.textContent;
+  if (currentPlayingyt) {
+    currentPlayingyt.style.backgroundColor = "";
+    currentPlayingyt.style.color = "";
+  }
+  element.style.backgroundColor = "#007bff";
+  element.style.color = "#fff";
+  currentPlayingyt = element;
+  const titleNow = document.getElementById('selectedYT');
+  titleNow.style.display = "block";
+  titleNow.textContent = selectedTitle;
+
+  loadStream(selectedStreamId);
+}
+
+function displayStreams(category, searchQuery = '') {
+  const streamList = document.getElementById('streamList');
+  streamList.innerHTML = '';
+  if (category && ytMap.has(category)) {
+    const streams = ytMap.get(category);
+    streams
+      .filter(stream => stream.title.toLowerCase().includes(searchQuery.toLowerCase()))
+      .forEach(stream => {
+        const listItem = document.createElement('a');
+        listItem.className = 'list-group-item list-group-item-action';
+        listItem.textContent = stream.title;
+        listItem.dataset.streamId = stream.id;
+        listItem.addEventListener('click', () => selectYT(listItem));
+        streamList.appendChild(listItem);
+      });
+  }
+}
+
+fetch('Links/ytstreams.json')
+  .then(response => response.json())
+  .then(data => {
+    const filterContainer = document.getElementById('filterContainer');
+
+    data.forEach(stream => {
+      if (!ytMap.has(stream.type)) {
+        ytMap.set(stream.type, []);
+        const tagElement = document.createElement('span');
+        tagElement.className = 'badge badge-info tag';
+        tagElement.textContent = stream.type;
+        tagElement.dataset.category = stream.type;
+        filterContainer.appendChild(tagElement);
+      }
+      ytMap.get(stream.type).push(stream);
+    });
+
+    const defaultCategory = 'Music';
+    const defaultTag = filterContainer.querySelector(`[data-category="${defaultCategory}"]`);
+    if (defaultTag) {
+      defaultTag.classList.add('active');
+      displayStreams(defaultCategory);
+    }
+
+    filterContainer.addEventListener('click', (event) => {
+      if (event.target.classList.contains('tag')) {
+        const category = event.target.dataset.category;
+        document.querySelectorAll('.tag').forEach(tag => tag.classList.remove('active'));
+        event.target.classList.add('active');
+        currentCategory = category;
+        displayStreams(category, document.getElementById('searchInput').value);
+      }
+    });
+
+    document.getElementById('searchInput').addEventListener('input', (event) => {
+      const searchQuery = event.target.value;
+      displayStreams(currentCategory, searchQuery);
+    });
+  })
+  .catch(error => console.error('Error fetching streams:', error));
