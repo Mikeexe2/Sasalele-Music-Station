@@ -4,7 +4,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         e.preventDefault();
 
         const target = this.getAttribute('href');
-        const offset = 0;
+        const offset = 60;
         const targetElement = document.querySelector(target);
 
         if (targetElement) {
