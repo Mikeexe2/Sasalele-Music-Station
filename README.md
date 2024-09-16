@@ -1,6 +1,6 @@
-# 🎵 Sasalele Music Station
+# <p align="center"><img src="assets/sasalele_logo-removebg.webp" style="width: 40px;"> Sasalele Music Station</p>
 
-Welcome to **Sasalele Music Station**! Discover and enjoy over 500 music radio links, spanning genres like J-Pop, J-Rock, Anime OST, Vocaloid, K-Pop, C-Pop, Nightcore, and more—all from your browser. Bookmark [Sasalele Music Station](https://basic.pp.ua) and star this repository if you like it! Experience music in a new and exciting way every day!
+Welcome to **Sasalele Music Station**! Discover and enjoy over 500 music radio links, including genres like J-Pop, J-Rock, Anime OST, Vocaloid, K-Pop, C-Pop, Nightcore, and more—all from your browser. Bookmark [Sasalele Music Station](https://basic.pp.ua) and star this repository if you like it! Experience music in a new and exciting way every day!
 
 <p align="center">
   <a href="https://basic.pp.ua">
@@ -10,7 +10,7 @@ Welcome to **Sasalele Music Station**! Discover and enjoy over 500 music radio l
 
 ## Features
 
-- 🎶 **Extensive Radio Collection:** Explore a wide array of Japanese, Korean, and Chinese radio stations, categorized by genre, and listen directly in your browser.
+- 🎶 **Extensive Radio Collection:** Explore Japanese, Korean, and Chinese radio stations, categorized by genre, and listen directly in your browser.
 - 🆕 **Playback Information:** View current playback details for supported streams and keep track of recently played tracks.
 - 📥 **Downloadable Playlists:** Download M3U or M3U8 files of radio stations and listen on your device with a supported player.
 - 🔍 **Enhanced Search:** Use the Radio Browser API to discover even more radio stations and quickly [search](https://basic.pp.ua/#search) for songs across LastFM, Deezer, iTunes, YouTube, and your preferred search engines.
@@ -23,7 +23,7 @@ Welcome to **Sasalele Music Station**! Discover and enjoy over 500 music radio l
 
 ## Contributing
 
-We are continually expanding our station library. If you have suggestions or wish to add a new station, please let us know by creating a [GitHub issue](https://github.com/issues/new). We welcome pull requests with improvements!
+The site is under development. Check the changelog [here](CHANGELOG.md). If you have suggestions or wish to add a new station, please let me know by creating a [issue](https://github.com/issues/new).
 
 ## Join Us on Telegram
 
@@ -55,12 +55,5 @@ A huge thank you to all the radio station owners—without you, none of this wou
 - [Chinese (中文)](README-CN.md)
 - [Korean (한국어)](README-KR.md)
 
-<p align="center">
-<a href="https://star-history.com/#Mikeexe2/Sasalele-Music-Station&Date">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Mikeexe2/Sasalele-Music-Station&type=Date&theme=dark" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Mikeexe2/Sasalele-Music-Station&type=Date" />
-    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Mikeexe2/Sasalele-Music-Station&type=Date" />
-  </picture>
-</a>
-</p>
+## Stargazers over time
+[![Stargazers over time](https://starchart.cc/Mikeexe2/Sasalele-Music-Station.svg?variant=adaptive)](https://starchart.cc/Mikeexe2/Sasalele-Music-Station)
