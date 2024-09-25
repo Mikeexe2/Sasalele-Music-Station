@@ -9,7 +9,8 @@ const stationName = document.getElementById('stationName');
 const stationCount = document.getElementById('station-count');
 const RandomPlay = document.getElementById('randomplay');
 const copyIcon = document.getElementById('copyIcon');
-const confirmation = document.querySelector('.copy-confirmation');
+const iconContainer = document.querySelector('#copyIcon .icon-container');
+const confirmation = document.querySelector('#copyIcon .copy-confirmation');
 
 let currentPlayingMedia = null;
 
@@ -39,8 +40,14 @@ copyIcon.addEventListener('click', () => {
     textarea.select();
     document.execCommand('copy');
     document.body.removeChild(textarea);
+
+    iconContainer.style.display = 'none';
     confirmation.style.display = 'flex';
-    setTimeout(() => confirmation.style.display = 'none', 2000);
+
+    setTimeout(() => {
+        confirmation.style.display = 'none';
+        iconContainer.style.display = 'flex';
+    }, 2000);
 });
 
 let metadataInterval = null;
@@ -78,7 +85,7 @@ function playMedia(media, playButton) {
                     break;
                 case 'unknown':
                     playStream();
-                    metadataElement.innerHTML = "Click on icon to go to homepage";
+                    metadataElement.innerHTML = "Visit radio's homepage for playing info";
                     break;
                 default:
                     playIceCast();
@@ -245,8 +252,8 @@ function playMedia(media, playButton) {
 
     // Update player UI
     function updatePlayerUI(media) {
-        cover.innerHTML = `<a href="${media.homepage}" target="_blank" class="homepagelink"><img id="ip" src="${media.favicon}"></a>`;
-        stationName.textContent = media.name;
+        cover.innerHTML = `<img id="ip" src="${media.favicon}">`;
+        stationName.innerHTML = `<a href="${media.homepage}" target="_blank" class="homepagelink">${media.name}</a>`;
         player.setAttribute('data-link', chosenUrl);
     }
 
@@ -277,7 +284,7 @@ function playMedia(media, playButton) {
     }
 }
 
-player.volume = localStorage.getItem('volumeKey') || 0.3;
+player.volume = localStorage.getItem('volumeKey') || 1.0;
 
 // Event listener for volume changes
 player.addEventListener('volumechange', function () {
@@ -331,7 +338,8 @@ document.getElementById('historyBtn').addEventListener('click', function () {
     displayRecentTracks();
 });
 
-function loadAll() {
+const genreSelect = document.getElementById('genre-select');
+document.addEventListener('DOMContentLoaded', () => {
     fetch("Links/all.json")
         .then(response => {
             if (!response.ok) {
@@ -340,124 +348,175 @@ function loadAll() {
             return response.json();
         })
         .then(data => {
-            const genreContainers = {
-                jmusic: document.querySelector('#jmusic'),
-                kmusic: document.querySelector('#kmusic'),
-                cmusic: document.querySelector('#cmusic'),
-                nightcore: document.querySelector('#nightcore'),
-                anime: document.querySelector('#anime'),
-                vocaloid: document.querySelector('#vocaloid'),
-                variety: document.querySelector('#variety'),
-                bgm: document.querySelector('#bgm'),
-                jpradio: document.querySelector('#jpradio')
-            };
-
-            const genreHTML = {
-                jmusic: '', kmusic: '', cmusic: '', nightcore: '', anime: '', vocaloid: '', variety: '', bgm: '', jpradio: ''
-            };
-
-            data.forEach(station => {
-                const genre = station.genre;
-
-                const radHTML = `
-                <div class="widget">
-                <img class="rad-icon" src="${station.favicon}">
-                <button class="download-button"><i class="fas fa-download"></i></button>
-                <a href="${station.homepage}" target="_blank">
-                    <span class="player-radio-name">${station.name}</span>
-                </a>   
-                <div class="ml-auto btn btn-primary main-play-button"><i class="fas fa-play"></i></a></div>
-            </div>   
-                `;
-                genreHTML[genre] += radHTML;
-            });
-
-            Object.keys(genreContainers).forEach(genre => {
-                genreContainers[genre].innerHTML = genreHTML[genre];
-            });
-
+            window.genreData = data;
+            const stationCount = document.getElementById('station-count');
             stationCount.textContent = data.length;
 
-            document.addEventListener('click', function (event) {
-                const downloadButton = event.target.closest('.download-button');
-                const playButton = event.target.closest('.main-play-button');
+            loadGenre('jmusic'); // default
 
-                if (downloadButton) {
-                    event.stopPropagation();
-                    const parentDiv = downloadButton.closest('.widget');
-                    const media = data.find(st => st.name === parentDiv.querySelector('.player-radio-name').textContent);
-                    if (media) {
-                        RadioM3UDownload(media.url, media.name);
-                    }
-                }
+            const defaultGenreButton = genreSelect.querySelector('[data-genre="jmusic"]');
+            if (defaultGenreButton) {
+                defaultGenreButton.classList.add('active');
+            }
 
-                if (playButton) {
-                    const parentDiv = playButton.closest('.widget');
-                    const media = data.find(st => st.name === parentDiv.querySelector('.player-radio-name').textContent);
-                    if (media) {
-                        playMedia(media, playButton);
-                    }
-                }
-            });
+            genreSelect.addEventListener('click', (event) => {
+                const genreButton = event.target.closest('.genre-btn');
+                if (genreButton) {
+                    const genre = genreButton.getAttribute('data-genre');
+                    loadGenre(genre);
 
-            RandomPlay.addEventListener('click', function () {
-                const stations = document.querySelectorAll('.widget');
-                const randomIndex = Math.floor(Math.random() * stations.length);
-                const playButton = stations[randomIndex].querySelector('.main-play-button');
-                if (playButton) {
-                    playButton.click();
+                    document.querySelectorAll('.genre-btn').forEach(button => {
+                        button.classList.remove('active');
+                    });
+
+                    genreButton.classList.add('active');
                 }
             });
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
         });
-}
-// Initialize load all internet radios
-document.addEventListener('DOMContentLoaded', () => {
-    loadAll();
+
+    function loadGenre(genreToLoad) {
+        const genreContainers = document.querySelectorAll('.genre-content');
+        const selectedContainer = document.getElementById(genreToLoad);
+
+        genreContainers.forEach(container => container.classList.remove('active'));
+
+        if (selectedContainer) {
+            const filteredData = window.genreData.filter(station => station.genre === genreToLoad);
+            const genreHTML = filteredData.map(station => `
+                <li>
+                    <img src="${station.favicon}" alt="${station.name}">
+                    <div class="info">
+                        <h5>${station.name}</h5>
+                    </div>
+                    <a href="${station.homepage}" target="_blank" class="btn btn-info"><i class="fas fa-external-link-alt"></i></a>
+                    <button class="btn btn-dark download-button"><i class="fas fa-download"></i></button>
+                    <button class="btn btn-primary main-play-button"><i class="fas fa-play"></i></button>
+                </li>
+            `).join('');
+
+            selectedContainer.innerHTML = genreHTML;
+            selectedContainer.classList.add('active');
+        }
+        document.addEventListener('click', function (event) {
+            const target = event.target.closest('.download-button, .main-play-button');
+            if (!target) return;
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            // Avoid multiple clicks on the same button
+            if (target.classList.contains('download-button')) {
+                handleDownloadClick(target);
+            } else if (target.classList.contains('main-play-button')) {
+                handlePlayClick(target);
+            }
+        });
+
+        RandomPlay.addEventListener('click', function () {
+            const stations = document.querySelectorAll('.genre-content li');
+            const randomIndex = Math.floor(Math.random() * stations.length);
+            const playButton = stations[randomIndex].querySelector('.main-play-button');
+            if (playButton) {
+                playButton.click();
+            }
+        });
+    }
+
+    const debounce = (func, delay) => {
+        let timeout;
+        return function (...args) {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(this, args), delay);
+        };
+    };
+
+    const handleDownloadClick = debounce((button) => {
+        const parentLi = button.closest('li');
+        const stationName = parentLi.querySelector('h5').textContent.trim();
+        const media = window.genreData.find(st => st.name === stationName);
+
+        if (media) {
+            RadioM3UDownload(media.url, media.name);
+        } else {
+            console.error('Media not found:', stationName);
+        }
+    }, 300);
+
+    function handlePlayClick(button) {
+        const parentLi = button.closest('li');
+        const stationName = parentLi.querySelector('h5').textContent.trim();
+        const media = window.genreData.find(st => st.name === stationName);
+
+        if (media) {
+            playMedia(media, button);
+        } else {
+            console.error('Media not found:', stationName);
+        }
+    }
+
+    function RadioM3UDownload(stationURL, stationName) {
+        const patternsToRemove = [
+            /;stream\.nsv&type=mp3&quot;$/,
+            /;&type=mp3$/,
+            /;?type=http&nocache$/,
+            /jmusicid-backend\?type=http&nocache=2$/,
+            /\?type=http$/,
+            /\?nocache$/,
+            /;&type=mp3$/,
+            /;stream\.nsv$/
+        ];
+
+        let cleanedURL = stationURL;
+        patternsToRemove.forEach(pattern => {
+            cleanedURL = cleanedURL.replace(pattern, "");
+        });
+
+        const newStationURL = cleanedURL;
+        const m3uContent = `#EXTM3U\n#EXTINF:-1,${stationName}\n${newStationURL}`;
+        const blob = new Blob([m3uContent], { type: "text/plain;charset=utf-8" });
+
+        const radioURL = URL.createObjectURL(blob);
+        const downloadRad = document.createElement("a");
+        downloadRad.href = radioURL;
+        downloadRad.download = `${stationName}.m3u`;
+        downloadRad.click();
+
+        URL.revokeObjectURL(radioURL);
+    }
 });
-
-// initiate download of the internet radio's m3u file
-function RadioM3UDownload(stationURL, stationName) {
-
-    const patternsToRemove = [
-        /;stream\.nsv&type=mp3&quot;$/,
-        /;&type=mp3$/,
-        /;?type=http&nocache$/,
-        /jmusicid-backend\?type=http&nocache=2$/,
-        /\?type=http$/,
-        /\?nocache$/,
-        /;&type=mp3$/,
-        /;stream\.nsv$/
-    ];
-
-    let cleanedURL = stationURL;
-    patternsToRemove.forEach(pattern => {
-        cleanedURL = cleanedURL.replace(pattern, "");
-    });
-
-    const newStationURL = cleanedURL;
-    const m3uContent = `#EXTM3U\n#EXTINF:-1,${stationName}\n${newStationURL}`;
-    const blob = new Blob([m3uContent], { type: "text/plain;charset=utf-8" });
-
-    const radioURL = URL.createObjectURL(blob);
-    const downloadRad = document.createElement("a");
-    downloadRad.href = radioURL;
-    downloadRad.download = `${stationName}.m3u`;
-    downloadRad.click();
-}
 
 // search site's station function
 document.getElementById('sasalelesearch').addEventListener('input', function () {
-    var searchTerm = this.value.toLowerCase();
-    document.querySelectorAll('.widget').forEach(widget => {
-        var stationName = widget.querySelector('.player-radio-name').textContent.toLowerCase();
-        if (stationName.includes(searchTerm)) {
-            widget.style.display = 'flex';
-        } else {
-            widget.style.display = 'none';
-        }
+    const searchTerm = this.value.toLowerCase();
+    const genreContents = document.querySelectorAll('.genre-content');
+
+    if (searchTerm === '') {
+        genreContents.forEach(genre => {
+            const items = genre.querySelectorAll('li');
+            items.forEach(item => {
+                item.style.display = '';
+            });
+            genre.style.display = '';
+        });
+        return;
+    }
+
+    genreContents.forEach(genre => {
+        const items = genre.querySelectorAll('li');
+        let hasVisibleItem = false;
+
+        items.forEach(item => {
+            const stationName = item.querySelector('h5') ? item.querySelector('h5').textContent.toLowerCase() : '';
+            if (stationName.includes(searchTerm)) {
+                item.style.display = '';
+                hasVisibleItem = true;
+            } else {
+                item.style.display = 'none';
+            }
+        });
     });
 });
 
@@ -471,41 +530,23 @@ togglePlayerButton.addEventListener("click", () => {
 // search station with options using Radio Browser's API
 
 const countries = [
-    "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda",
-    "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain",
-    "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan",
-    "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei Darussalam", "Bulgaria",
-    "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada",
-    "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros",
-    "Congo", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic",
-    "The Democratic Republic Of The Congo", "Denmark", "Djibouti", "Dominica",
-    "Dominican Republic", "East Timor", "Ecuador", "Egypt", "El Salvador",
-    "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji",
-    "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana",
-    "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana",
-    "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran",
-    "Iraq", "Ireland", "Israel", "Italy", "Ivory Coast", "Jamaica", "Japan",
-    "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan",
-    "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein",
-    "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives",
-    "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico",
-    "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco",
-    "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands",
-    "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "North Macedonia",
-    "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea",
-    "Paraguay", "Peru", , "Puerto Rico", "Philippines", "Poland", "Portugal", "Qatar", "Romania",
-    "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia",
-    "Saint Vincent and the Grenadines", "Samoa", "San Marino",
-    "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia",
-    "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia",
-    "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan",
-    "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland",
-    "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo",
-    "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan",
-    "Tuvalu", "Uganda", "Ukraine", "The United Arab Emirates", , "The United Kingdom Of Great Britain And Northern Ireland", "United Kingdom",
-    "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City",
-    "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+    "United States", "Germany", "Russia", "France", "Greece", "China", "United Kingdom",
+    "Mexico", "Italy", "Australia", "Canada", "India", "Spain", "Brazil", "Poland",
+    "Philippines", "Argentina", "Netherlands", "United Arab Emirates", "Uganda",
+    "Switzerland", "Romania", "Colombia", "Turkey", "Indonesia", "Belgium", "Chile",
+    "Serbia", "Austria", "Hungary", "Peru", "Ukraine", "Czechia", "Portugal", "Bulgaria",
+    "Croatia", "Denmark", "New Zealand", "Ireland", "Ecuador", "Sweden", "Japan",
+    "Slovakia", "Afghanistan", "Uruguay", "Malaysia", "Norway", "South Africa",
+    "Bosnia and Herzegovina", "Gibraltar", "Venezuela", "Saudi Arabia", "Dominican Republic",
+    "Finland", "Israel", "Slovenia", "Kenya", "Taiwan", "South Korea", "Morocco",
+    "Thailand", "Estonia", "Bolivia", "Tunisia", "Lithuania", "Latvia", "Guatemala",
+    "Sri Lanka", "Pakistan", "Belarus", "Hong Kong", "Nigeria", "Costa Rica", "Iran",
+    "Algeria", "Egypt", "Montenegro", "Cuba", "Honduras", "El Salvador", "North Macedonia",
+    "Senegal", "Paraguay", "Albania", "Kazakhstan", "Lebanon", "Singapore", "Moldova",
+    "Cyprus", "Ethiopia", "Jamaica", "Puerto Rico", "Macau", "Luxembourg", "Vietnam",
+    "Georgia", "Nepal", "Iraq", "Jordan", "Syria"
 ];
+
 
 function populateCountries() {
     const selectElement = document.getElementById("countrySelect");
@@ -621,7 +662,7 @@ function clearSearchField() {
 // Function to perform radio search
 function radioSearch() {
     const searchBy = searchOption.value;
-
+    let searchValue = '';
     switch (searchBy) {
         case 'byname':
             searchValue = searchField.value.toLowerCase();
@@ -642,46 +683,48 @@ function radioSearch() {
     if (searchValue === '' || searchBy === 'Search by') {
         return;
     }
-
-    searchResultContainer.innerHTML = '';
+    searchResultContainer.classList.remove('active');
     findradio.style.display = "block";
     // add limit to prevent loading forever
     fetch(`https://de1.api.radio-browser.info/json/stations/${searchBy}/${searchValue}?hidebroken=true&limit=300&order=clickcount&reverse=true`)
         .then(response => response.json())
         .then(data => {
             if (data.length > 0) {
-                searchResultHeader.style.display = "block";
                 searchResultHeader.innerHTML = `Radio Search Results for: <mark id="searchTerms">${searchValue}</mark>`;
+                searchResultContainer.classList.add('active');
+                searchResultContainer.innerHTML = '';
 
                 data.forEach(radio => {
-                    const radioDiv = document.createElement('div');
-                    radioDiv.classList.add('widget');
-                    radioDiv.innerHTML = `
-                        <img class="rad-icon" src="${radio.favicon ? radio.favicon : 'assets/radios/Unidentified2.webp'}">
-                        <button class="download-button"><i class="fas fa-download"></i></button>
-                        <a href="${radio.homepage}" target="_blank">
-                            <span class="player-radio-name">${radio.name}</span>
-                        </a>
-                        <div class="ml-auto btn btn-primary main-play-button"><i class="fas fa-play"></i></div>
+                    const radioItem = document.createElement('li');
+                    radioItem.innerHTML = `
+                        <img src="${radio.favicon ? radio.favicon : 'assets/radios/Unidentified2.webp'}">
+                        <div class="info">
+                            <h5>${radio.name}</h5>
+                        </div>
+                        <a href="${radio.homepage}" target="_blank" class="btn btn-info"><i class="fas fa-external-link-alt"></i></a>
+                        <button class="btn btn-dark download-button"><i class="fas fa-download"></i></button>
+                        <button class="btn btn-primary main-play-button"><i class="fas fa-play"></i></button>
                     `;
-                    searchResultContainer.appendChild(radioDiv);
+                    searchResultContainer.appendChild(radioItem);
                 });
 
                 searchResultContainer.addEventListener('click', function (event) {
-                    const button = event.target.closest('.download-button');
-                    if (button) {
+                    const downloadButton = event.target.closest('.download-button');
+                    if (downloadButton) {
                         event.stopPropagation();
-                        const parentDiv = button.closest('.widget');
-                        const media = data.find(st => st.name === parentDiv.querySelector('.player-radio-name').textContent);
+                        const parentLi = downloadButton.closest('li');
+                        const stationName = parentLi.querySelector('h5').textContent;
+                        const media = data.find(st => st.name === stationName);
                         if (media) {
-                            RadioM3UDownload(media.url, media.name);
+                            initiateM3UDownload(media.url, media.name);
                         }
                     }
 
                     const playButton = event.target.closest('.main-play-button');
                     if (playButton) {
-                        const parentDiv = playButton.closest('.widget');
-                        const radio = data.find(st => st.name === parentDiv.querySelector('.player-radio-name').textContent);
+                        const parentLi = playButton.closest('li');
+                        const stationName = parentLi.querySelector('h5').textContent;
+                        const radio = data.find(st => st.name === stationName);
                         if (radio) {
                             playMedia(radio, playButton);
                         }
@@ -763,7 +806,6 @@ function createRadioList(radioStreams) {
         iconImage.classList.add("mr-2");
         iconImage.src = stream.icon || "assets/radios/Unidentified2.webp";
         iconImage.width = 40;
-        iconImage.title = stream.icon ? "" : "No Homepage Available";
 
         if (stream.homepage) {
             const homepageLink = document.createElement("a");
@@ -867,6 +909,10 @@ const innerlastfm = document.getElementById('lastfmList');
 const inneritunes = document.getElementById('itunesList');
 const innerdeezer = document.getElementById('deezerList');
 
+document.querySelector('.nav-link[href="#search"]').addEventListener('click', function (event) {
+    document.getElementById('searchInput').focus();
+});
+
 function performSearch() {
     const searchTerm = searchInput.value.trim();
     if (searchTerm !== '') {
@@ -900,10 +946,11 @@ searchInput.addEventListener('keyup', function (event) {
 });
 
 async function searchAcrossApis(searchTerm) {
-    const lastfmURL = `https://ws.audioscrobbler.com/2.0/?method=track.search&format=json&api_key=b9747c75368b42160af4301c2bf654a1&track=${encodeURIComponent(searchTerm)}`;
+    const proxylink = "https://sasalele.api-anycast.workers.dev/";
+    const lastfmURL = `https://ws.audioscrobbler.com/2.0/?method=track.search&format=json&limit=5&api_key=b9747c75368b42160af4301c2bf654a1&track=${encodeURIComponent(searchTerm)}`;
     const youtubeURL = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&type=video&q=${encodeURIComponent(searchTerm)}&key=AIzaSyAwM_RLjqj8dbbMAP5ls4qg1olDsaxSq5s`;
-    const itunesURL = `https://sasalele.api-anycast.workers.dev/https://itunes.apple.com/search?limit=5&media=music&term=${encodeURIComponent(searchTerm)}`;
-    const deezerURL = `https://sasalele.api-anycast.workers.dev/https://api.deezer.com/search?q=${encodeURIComponent(searchTerm)}`;
+    const itunesURL = `${proxylink}https://itunes.apple.com/search?limit=5&media=music&term=${encodeURIComponent(searchTerm)}`;
+    const deezerURL = `${proxylink}https://api.deezer.com/search?q=${encodeURIComponent(searchTerm)}&limit=5`;
 
     try {
         const [lastfmResponse, youtubeResponse, itunesResponse, deezerResponse] = await Promise.all([
@@ -1274,14 +1321,14 @@ document.addEventListener('DOMContentLoaded', () => {
             chatInnerContainer.append(chatContentContainer, chatInputContainer, chatLogoutContainer);
             chatContainer.append(chatInnerContainer);
 
-            function updateSendButtonState() {
+            // fix pasted content not detected
+            chatInput.addEventListener("input", function () {
                 const hasValue = chatInput.value.length > 0;
                 chatInputSend.disabled = !hasValue;
                 chatInputSend.classList.toggle('enabled', hasValue);
-            }
+            });
 
             chatInput.addEventListener("keyup", function (event) {
-                updateSendButtonState();
                 if (event.key === 'Enter') {
                     event.preventDefault();
                     chatInputSend.click();
@@ -1379,22 +1426,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-const startDateTime = new Date('2023/10/01');
-
-function updateLiveTime() {
-    const now = new Date();
-    const diff = now - startDateTime;
-
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-    document.getElementById('liveTime').innerText =
-        `Operated for: ${days} days ${hours} hours ${minutes} minutes ${seconds} seconds`;
+function siteTime() {
+    window.setTimeout(siteTime, 1000);
+    var seconds = 1000;
+    var minutes = seconds * 60;
+    var hours = minutes * 60;
+    var days = hours * 24;
+    var years = days * 365;
+    var today = new Date();
+    var todayYear = today.getFullYear();
+    var todayMonth = today.getMonth();
+    var todayDate = today.getDate();
+    var todayHour = today.getHours();
+    var todayMinute = today.getMinutes();
+    var todaySecond = today.getSeconds();
+    var t1 = Date.UTC(2023, 9, 1, 0, 0, 0);
+    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+    var diff = t2 - t1;
+    var diffYears = Math.floor(diff / years);
+    var diffDays = Math.floor((diff / days) - diffYears * 365);
+    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
+    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds);
+    document.getElementById("liveTime").innerHTML = diffYears + " Years " + diffDays + " Days " + diffHours + " Hours " + diffMinutes + " Minutes " + diffSeconds + " Seconds";
 }
-
-updateLiveTime();
+siteTime();
 
 const loadPlaylist = document.getElementById('loadAplayer');
 loadPlaylist.addEventListener('click', function () {

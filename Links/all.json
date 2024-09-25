@@ -874,7 +874,7 @@
     },
     {
         "name": "Radio Otaku's Dream",
-        "url": "https://az.panelchs.com:8010/radio.mp3",
+        "url": "https://sp.panelchs.com/8020/stream",
         "favicon": "assets/radios/RadioOtaku'sDream.webp",
         "genre": "jmusic",
         "homepage": "https://www.otakus-dream.com/",
@@ -1084,27 +1084,27 @@
     },
     {
         "name": "BOX:City Pop Radio",
-        "url": "https://boxradio-edge-10.streamafrica.net/jpopchill",
+        "url": "https://stream.zeno.fm/dxbhxaa7bzuuv",
         "favicon": "assets/radios/BOXCityPopRadio.webp",
         "genre": "jmusic",
-        "homepage": "https://player.boxradio.net/",
-        "host": "icecast"
+        "homepage": "https://player.boxradio.net/?id=54443fd4-1d60-48c1-970f-7b40c145113d",
+        "host": "zeno"
     },
     {
         "name": "BOX:J-POP Radio",
-        "url": "https://boxradio-edge-04.streamafrica.net/jpop",
+        "url": "https://stream.zeno.fm/9c3h8ffh2uhvv",
         "favicon": "assets/radios/BOXJ-POPRadio.webp",
         "genre": "jmusic",
-        "homepage": "https://player.boxradio.net/",
-        "host": "icecast"
+        "homepage": "https://player.boxradio.net/?id=8df5c921-b572-4e76-a9b0-49512582e3d4",
+        "host": "zeno"
     },
     {
         "name": "BOX:Weeb Anime Network",
-        "url": "https://boxradio-edge-02.streamafrica.net/anime",
+        "url": "https://stream.zeno.fm/2d764zgh2uhvv",
         "favicon": "assets/radios/BOXWeebAnimeNetwork.webp",
         "genre": "anime",
-        "homepage": "https://player.boxradio.net/",
-        "host": "icecast"
+        "homepage": "https://player.boxradio.net/?id=564db8c5-5143-4d73-8112-b1fe6bea14cc",
+        "host": "zeno"
     },
     {
         "name": "BOX: Zen Radio",
@@ -1116,43 +1116,43 @@
     },
     {
         "name": "BOX: Spirit Radio",
-        "url": "https://boxradio-edge-04.streamafrica.net/spirit",
+        "url": "https://stream.zeno.fm/7059gk6g2uhvv",
         "favicon": "assets/radios/boxspiritradio.webp",
         "genre": "variety",
-        "homepage": "https://player.boxradio.net/",
-        "host": "icecast"
+        "homepage": "https://player.boxradio.net/?id=d9f04811-577e-4c80-8004-f73bc8ff5659",
+        "host": "zeno"
     },
     {
         "name": "BOX: LOFI Radio",
-        "url": "https://boxradio-edge-00.streamafrica.net/lofi",
+        "url": "https://stream.zeno.fm/yrm5355gx3mvv",
         "favicon": "assets/radios/boxlofiradio.webp",
         "genre": "bgm",
-        "homepage": "https://player.boxradio.net/",
-        "host": "icecast"
+        "homepage": "https://player.boxradio.net/?id=70a198a4-c4eb-4f17-82c9-db07cd0361af",
+        "host": "zeno"
     },
     {
         "name": "BOX: KPOP Radio",
-        "url": "https://boxradio-edge-00.streamafrica.net/kpop",
+        "url": "https://stream.zeno.fm/n1xzfukxpuhvv",
         "favicon": "assets/radios/boxkpopradio.webp",
         "genre": "kmusic",
-        "homepage": "https://player.boxradio.net/",
-        "host": "icecast"
+        "homepage": "https://player.boxradio.net/?id=052adfd8-b02b-404f-98c9-4cbf4775f231",
+        "host": "zeno"
     },
     {
         "name": "BOX: NCS Radio",
-        "url": "https://boxradio-edge-00.streamafrica.net/ncs",
+        "url": "https://stream.zeno.fm/hca68918n98uv",
         "favicon": "assets/radios/boxncsradio.webp",
         "genre": "variety",
-        "homepage": "https://player.boxradio.net/",
-        "host": "icecast"
+        "homepage": "https://player.boxradio.net/?id=1891a44b-60ee-4866-99da-a84656c6bd05",
+        "host": "zeno"
     },
     {
         "name": "BOX: GAME Radio",
-        "url": "https://boxradio-edge-00.streamafrica.net/gameradio",
+        "url": "https://stream.zeno.fm/cfhkm5fs1uhvv",
         "favicon": "assets/radios/boxgameradio.webp",
         "genre": "bgm",
-        "homepage": "https://player.boxradio.net/",
-        "host": "icecast"
+        "homepage": "https://player.boxradio.net/?id=51a50466-49b7-444c-9a4a-4caf0a1aff64",
+        "host": "zeno"
     },
     {
         "name": "Cirilo Rádio (http)",
@@ -2253,11 +2253,11 @@
     },
     {
         "name": "Gensokyo Radio | 24/7 Touhou Music Stream",
-        "url": "https://stream.gensokyoradio.net/1",
+        "url": "https://stream.gensokyoradio.net/3/",
         "favicon": "assets/radios/Gensokyoradio.webp",
         "genre": "vocaloid",
         "homepage": "https://gensokyoradio.net/playing/",
-        "host": "unknown"
+        "host": "icecast"
     },
     {
         "name": "J-Idols Project Radio",

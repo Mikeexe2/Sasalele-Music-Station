@@ -7,7 +7,12 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         const offset = 60;
         const targetElement = document.querySelector(target);
 
-        if (targetElement) {
+        if (target === '#search') {
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.focus();
+            }
+        } else if (targetElement) {
             const isInCollapsible = targetElement.closest('.collapse');
 
             if (!isInCollapsible) {
@@ -20,6 +25,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
 
 $(function () {
     $('[data-toggle="tooltip"]').tooltip({
