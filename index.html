@@ -17,6 +17,7 @@
         <meta property="og:url" content="https://basic.pp.ua/">
         <meta property="og:image" content="https://basic.pp.ua/assets/sasalele_banner.png" />
         <meta property="og:site_name" content="Sasalele Music Station">
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
         <script type="application/ld+json">{
          "@context": "https://schema.org",
          "@type": "WebSite",
@@ -182,8 +183,8 @@
             </div>
 
             <div class="section-title">
-                <h1>Internet Radios (<span id="station-count"></span>) <button type="button" class="tips-btn"
-                        data-toggle="modal" title="Tips" data-target="#tipsModal">
+                <h1>Internet Radios (<span id="station-count"></span> Stations Loaded) <button type="button"
+                        class="tips-btn" data-toggle="modal" title="Tips" data-target="#tipsModal">
                         <i class="fas fa-info-circle"></i>
                     </button></h1>
             </div>
@@ -294,7 +295,7 @@
                                 </div>
                                 <div id="lang-info" class="ml-auto mb-2">
                                     <strong><span id="lang-name"></span></strong>
-                                    <strong>(<span id="stream-count"></span>)</strong>
+                                    <strong> (<span id="stream-count"></span> Streams Available)</strong>
                                 </div>
                             </div>
                             <div class="input-group mb-2">
@@ -616,7 +617,8 @@
             <section class="footer text-center" id="footer">
                 <div class="container">
                     <p class="mb-1">
-                        The site is under development, and you many find some features having problems.
+                        This site is currently under development. Some features may experience issues. We appreciate
+                        your understanding.
                         Feedback email: <a href="mailto:sasalele-team@basic.pp.ua"
                             class="text-light">sasalele-team@basic.pp.ua</a>
                     </p>
@@ -628,7 +630,7 @@
                             <i class="fab fa-github"></i>
                         </a>
                     </div>
-                    <p>Last updated: 2024/9/16 </p>
+                    <p>Last updated: 2024/11/29 </p>
                     <p>© 2023-2024 Sasalele-Music-Station</p>
                     <div class="progress-container">
                         <p>Site operated for: <span id="liveTime"></span></p>

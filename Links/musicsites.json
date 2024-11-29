@@ -5,6 +5,11 @@
         "icon": "assets/websites/openingmoe.webp"
     },
     {
+        "name": "AniSongDB",
+        "url": "https://anisongdb.com/",
+        "icon": "https://anisongdb.com/favicon.ico"
+    },
+    {
         "name": "Music Dex",
         "url": "https://musicdex.org/",
         "icon": "assets/websites/musicdex.webp"
@@ -106,7 +111,7 @@
     },
     {
         "name": "Wotaku Music Collection",
-        "url": "https://wotaku.moe/music",
+        "url": "https://wotaku.wiki/music",
         "icon": "assets/websites/wotakumusic.webp"
     }
 ]

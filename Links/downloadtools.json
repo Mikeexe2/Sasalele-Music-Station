@@ -40,6 +40,36 @@
         "icon": "assets/downloads/doubledouble.webp"
     },
     {
+        "name": "MYFREEMP3",
+        "url": "https://new.myfreemp3juices.cc/",
+        "icon": "https://new.myfreemp3juices.cc/apple-icon-57x57.png"
+    },
+    {
+        "name": "放屁音乐网 Fangpi.net",
+        "url": "https://www.fangpi.net/",
+        "icon": "https://www.fangpi.net/favicon.ico"
+    },
+    {
+        "name": "MP3Daddy",
+        "url": "https://mp3-daddy.com/",
+        "icon": "https://mp3-daddy.com/images/favicon.png"
+    },
+    {
+        "name": "Hiyori OST",
+        "url": "https://www.hiyoriost.com/",
+        "icon": "https://www.hiyoriost.com/favicon.ico"
+    },
+    {
+        "name": "Nipponsei - Music Fresh from Japan",
+        "url": "https://nipponsei.minglong.org/tracker/",
+        "icon": "https://nipponsei.minglong.org/images/satallite.jpg"
+    },
+    {
+        "name": "allmp3",
+        "url": "https://allmp3.su/ ",
+        "icon": "https://allmp3.su/templates/mse44/favicons/favicon.ico"
+    },
+    {
         "name": "YouTube to MP3 Converter",
         "url": "https://bestmp3converter.com/",
         "icon": "assets/downloads/YouTubetoMP3Converter.webp"
@@ -70,8 +100,8 @@
         "icon": "assets/downloads/sliderkz.webp"
     },
     {
-        "name": "skymus.org",
-        "url": "https://skymus.org/",
+        "name": "MP3 malina",
+        "url": "https://zvu4no.org/",
         "icon": "assets/downloads/skymus.webp"
     },
     {

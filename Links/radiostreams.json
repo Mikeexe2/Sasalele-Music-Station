@@ -266,7 +266,7 @@
             "lang": "ja"
         },
         {
-            "title": "[東京]かつしかFM",
+            "title": "[東京]かつしかFM (dead)",
             "link": "http://mtist.as.smartstream.ne.jp/30031/livestream/playlist.m3u8",
             "icon": "assets/websites/katsushikafm.webp",
             "homepage": "https://kfm789.co.jp/",
@@ -280,7 +280,7 @@
             "lang": "ja"
         },
         {
-            "title": "RadioCity 中央エフエム [東京都中央区]",
+            "title": "RadioCity 中央エフエム [東京都中央区](dead)",
             "link": "http://mtist.as.smartstream.ne.jp/30042/livestream/playlist.m3u8",
             "icon": "assets/websites/中央エフエム(RadioCity).webp",
             "homepage": "http://fm840.jp/",
@@ -294,7 +294,7 @@
             "lang": "ja"
         },
         {
-            "title": "ラジオフチューズ [東京都府中市]",
+            "title": "ラジオフチューズ [東京都府中市](dead)",
             "link": "http://mtist.as.smartstream.ne.jp/30059/livestream/playlist.m3u8",
             "icon": "assets/websites/radiofuchues.webp",
             "homepage": "https://radio-fuchues.tokyo/",
@@ -322,21 +322,21 @@
             "lang": "ja"
         },
         {
-            "title": "コマラジ [東京都狛江市]",
+            "title": "コマラジ [東京都狛江市](dead)",
             "link": "http://mtist.as.smartstream.ne.jp/30051/livestream/playlist.m3u8",
             "icon": "assets/websites/fmkomae.webp",
             "homepage": "https://www.komae.fm/",
             "lang": "ja"
         },
         {
-            "title": "[神奈川]エフエム戸塚",
+            "title": "[神奈川]エフエム戸塚(dead)",
             "link": "http://mtist.as.smartstream.ne.jp/30064/livestream/playlist.m3u8",
             "icon": "assets/websites/fmtotsuka.webp",
             "homepage": "https://www.fm-totsuka.com/",
             "lang": "ja"
         },
         {
-            "title": "[神奈川]FMHOT893",
+            "title": "[神奈川]FMHOT893(dead)",
             "link": "http://mtist.as.smartstream.ne.jp/30080/livestream/playlist.m3u8",
             "icon": "assets/websites/fmhot.webp",
             "homepage": "https://fm839.com/",
@@ -364,14 +364,14 @@
             "lang": "ja"
         },
         {
-            "title": "[神奈川]湘南ビーチ",
+            "title": "[神奈川]湘南ビーチ(dead)",
             "link": "http://mtist.as.smartstream.ne.jp/30028/livestream/playlist.m3u8",
             "icon": "assets/websites/shonanbeach.webp",
             "homepage": "https://www.beachfm.co.jp/",
             "lang": "ja"
         },
         {
-            "title": "マリンFM [神奈川県横浜市]",
+            "title": "マリンFM [神奈川県横浜市](dead)",
             "link": "http://mtist.as.smartstream.ne.jp/30065/livestream/playlist.m3u8",
             "icon": "assets/websites/marinefm.webp",
             "homepage": "https://www.marine-fm.com/",
@@ -441,14 +441,14 @@
             "lang": "ja"
         },
         {
-            "title": "[長野]あづみ野エフエム放送",
+            "title": "[長野]あづみ野エフエム放送(dead)",
             "link": "http://mtist.as.smartstream.ne.jp/30086/livestream/playlist.m3u8",
             "icon": "assets/websites/fmazumino.webp",
             "homepage": "https://azuminofm.co.jp/",
             "lang": "ja"
         },
         {
-            "title": "[静岡]Ciao!",
+            "title": "[静岡]Ciao!(dead)",
             "link": "http://mtist.as.smartstream.ne.jp/30062/livestream/playlist.m3u8",
             "icon": "assets/websites/fmciao.webp",
             "homepage": "https://www.ciao796.com/",
@@ -525,7 +525,7 @@
             "lang": "ja"
         },
         {
-            "title": "[和歌山]ビーチステーション",
+            "title": "[和歌山]ビーチステーション(dead)",
             "link": "http://mtist.as.smartstream.ne.jp/30084/livestream/playlist.m3u8",
             "icon": "assets/websites/beachstation.webp",
             "homepage": "https://www.fm764.com/",
@@ -546,7 +546,7 @@
             "lang": "ja"
         },
         {
-            "title": "FM SUN [香川県坂出市]",
+            "title": "FM SUN [香川県坂出市](dead)",
             "link": "http://mtist.as.smartstream.ne.jp/30070/livestream/playlist.m3u8",
             "icon": "assets/websites/fmsun.webp",
             "homepage": "https://www.kbn.ne.jp/fm/",
@@ -602,7 +602,7 @@
             "lang": "ja"
         },
         {
-            "title": "ハートFM [愛知県名古屋市中区]",
+            "title": "ハートFM [愛知県名古屋市中区](dead)",
             "link": "https://mtist.as.smartstream.ne.jp/30120/livestream/playlist.m3u8",
             "icon": "assets/websites/fmnanjo.webp",
             "homepage": "https://heartfm.jp/",
@@ -630,14 +630,14 @@
             "lang": "ja"
         },
         {
-            "title": "FMよなばる [沖縄県島尻郡与那原町]",
+            "title": "FMよなばる [沖縄県島尻郡与那原町](dead)",
             "link": "http://mtist.as.smartstream.ne.jp/30055/livestream/playlist.m3u8",
             "icon": "assets/websites/fmyonabaru.webp",
             "homepage": "http://www.fm-yonabaru.site/",
             "lang": "ja"
         },
         {
-            "title": "FMニライ [沖縄県北谷町]",
+            "title": "FMニライ [沖縄県北谷町](dead)",
             "link": "http://mtist.as.smartstream.ne.jp/30003/livestream/playlist.m3u8",
             "icon": "assets/websites/fmnirai.webp",
             "homepage": "https://www.fmnirai.com/",
@@ -665,7 +665,7 @@
             "lang": "ja"
         },
         {
-            "title": "FMうるま [沖縄県うるま市]",
+            "title": "FMうるま [沖縄県うるま市](dead)",
             "link": "http://mtist.as.smartstream.ne.jp/30011/livestream/playlist.m3u8",
             "icon": "assets/websites/FMうるま.webp",
             "homepage": "https://fmuruma.com/",
@@ -676,27 +676,6 @@
             "link": "http://mtist.as.smartstream.ne.jp/30095/livestream/playlist.m3u8",
             "icon": "assets/websites/fmyanbaru.webp",
             "homepage": "https://fmyanbaru.co.jp/",
-            "lang": "ja"
-        },
-        {
-            "title": "takarazuka sky stage",
-            "link": "  https://epg.pw/stream/35da31035d2a832bde931da160bc9ddf987fb7f29a013c48c3faf554e74151cb.m3u8",
-            "icon": "assets/radios/takarazuka.webp",
-            "homepage": "https://www.tca-pictures.net/skystage/",
-            "lang": "ja"
-        },
-        {
-            "title": "チャンネル銀河",
-            "link": "https://epg.pw/stream/05c4e6284ec59f5fe76f32eb012ca712fbc94e6cd48c7853026e12227677be46.m3u8",
-            "icon": "assets/radios/ginga.webp",
-            "homepage": "https://www.ch-ginga.jp/",
-            "lang": "ja"
-        },
-        {
-            "title": "東映チャンネル",
-            "link": "https://epg.pw/stream/7c08c183610740794e0f39e158a44d85e6b400eea9eac7e2aaf09706f05bbf40.m3u8",
-            "icon": "assets/radios/toeich.webp",
-            "homepage": "https://www.toeich.jp/",
             "lang": "ja"
         },
         {

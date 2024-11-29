@@ -32,6 +32,18 @@
     "link": "https://cdn.nhkworld.jp/www11/nhkworld-tv/pre/hlscomp.m3u8"
   },
   {
+    "title": "takarazuka sky stage (audio only)",
+    "link": "https://epg.pw/stream/35da31035d2a832bde931da160bc9ddf987fb7f29a013c48c3faf554e74151cb.m3u8"
+  },
+  {
+    "title": "チャンネル銀河 (audio only)",
+    "link": "https://epg.pw/stream/05c4e6284ec59f5fe76f32eb012ca712fbc94e6cd48c7853026e12227677be46.m3u8"
+  },
+  {
+    "title": "東映チャンネル (audio only)",
+    "link": "https://epg.pw/stream/7c08c183610740794e0f39e158a44d85e6b400eea9eac7e2aaf09706f05bbf40.m3u8"
+  },
+  {
     "title": "NHK Radio 1 (audio only)",
     "link": "https://ap.fd6.online/hls/radio-stream.nhk.jp/hls/live/2023229/nhkradiruakr1/master48k.m3u8"
   },

@@ -28,10 +28,6 @@ function stopCoverRotation() {
     }
 }
 
-function updateButtonIcon(button, isPlaying) {
-    button.innerHTML = isPlaying ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>';
-}
-
 // copy stream title
 copyIcon.addEventListener('click', () => {
     const textarea = document.createElement('textarea');
@@ -141,8 +137,8 @@ function playMedia(media, playButton) {
             icecastMetadataPlayer.play();
         } catch (error) {
             console.error('Error initializing Icecast metadata player:', error);
+            playStream();
         }
-        playStream();
     }
 
     // Play Zeno stream with metadata
@@ -173,8 +169,8 @@ function playMedia(media, playButton) {
             } catch (error) {
                 console.error('Failed to parse JSON:', error);
             }
+            playStream();
         }
-        playStream();
     }
 
     // Play LautFM stream with metadata
@@ -265,10 +261,14 @@ function playMedia(media, playButton) {
 
     // Update button icons
     function UpdatePlayPause(activeButton) {
-        document.querySelectorAll('.main-play-button').forEach(button => {
-            updateButtonIcon(button, button === activeButton && !player.paused);
+        const buttons = document.querySelectorAll('.main-play-button');
+        const isPlaying = !player.paused;
+
+        buttons.forEach(button => {
+            updateButtonIcon(button, button === activeButton && isPlaying);
         });
     }
+
     // Store track history
     function trackHistory(trackName) {
         let recentTracks = JSON.parse(localStorage.getItem('recentTracks')) || [];
@@ -302,15 +302,17 @@ function togglePlay() {
     }
 }
 
-player.addEventListener('play', () => {
-    updateButtonIcon(currentPlayingMedia, true);
-    startCoverRotation();
-});
+function updateButtonIcon(button, isPlaying) {
+    button.innerHTML = isPlaying ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>';
+}
 
-player.addEventListener('pause', () => {
-    updateButtonIcon(currentPlayingMedia, false);
-    stopCoverRotation();
-});
+function handlePlayPause(isPlaying) {
+    updateButtonIcon(currentPlayingMedia, isPlaying);
+    isPlaying ? startCoverRotation() : stopCoverRotation();
+}
+
+player.addEventListener('play', () => handlePlayPause(true));
+player.addEventListener('pause', () => handlePlayPause(false));
 
 function displayRecentTracks() {
     const recentTracks = JSON.parse(localStorage.getItem('recentTracks')) || [];
@@ -447,7 +449,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function handlePlayClick(button) {
         const parentLi = button.closest('li');
-        const stationName = parentLi.querySelector('h5').textContent.trim();
+        const stationName = parentLi.querySelector('h5').textContent;
         const media = window.genreData.find(st => st.name === stationName);
 
         if (media) {
