@@ -53,7 +53,6 @@
 
 - [Japanese (日本語)](README-JP.md)
 - [Chinese (中文)](README-CN.md)
-- [Korean (한국어)](README-KR.md)
 - [English (영어)](README.md)
 
 <p align="center">

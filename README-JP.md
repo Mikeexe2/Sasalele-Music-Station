@@ -4,7 +4,7 @@
 
 <p align="center">
   <a href="https://basic.pp.ua">
-    <img src="assets/example_banner.png" style="width: 400px">
+    <img src="assets/sasalele_banner.png" style="width: 400px">
   </a>
 </p>
 
@@ -51,7 +51,6 @@
 
 ## 翻訳
 
-- [Japanese (日本語)](README-JP.md)
 - [Chinese (中文)](README-CN.md)
 - [Korean (한국어)](README-KR.md)
 - [English](README.md)

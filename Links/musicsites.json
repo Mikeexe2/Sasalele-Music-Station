@@ -7,7 +7,7 @@
     {
         "name": "AniSongDB",
         "url": "https://anisongdb.com/",
-        "icon": "https://anisongdb.com/favicon.ico"
+        "icon": "assets/websites/anisongdb.jpg"
     },
     {
         "name": "Music Dex",
@@ -112,6 +112,6 @@
     {
         "name": "Wotaku Music Collection",
         "url": "https://wotaku.wiki/music",
-        "icon": "assets/websites/wotakumusic.webp"
+        "icon": "assets/websites/wotakumusic.png"
     }
 ]

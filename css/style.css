@@ -94,7 +94,7 @@
     --expressive-yellow: #e6ac5c;
     --expressive-pink: #e6456a;
     --facebook-blue: #1877f2;
-    --twitter-blue: #1da1f2;
+    --twitter-blue: #7d67b2;
     --instagram-pink: #f20076;
     --apple-black: #000;
     --apple-white: #fff;
@@ -400,12 +400,12 @@ body {
     list-style: none;
     padding: 0;
     margin: 0;
-    background-color: var(--white-50-alpha);
+    background-color: var(--black-30-alpha);
     gap: 1rem;
     max-height: 400px;
     overflow-y: auto;
     scrollbar-width: thin;
-    scrollbar-color: rgba(0, 0, 0, 0.5) transparent;
+    scrollbar-color: #f0efef80 transparent;
 }
 
 .genre-content.active,
@@ -437,7 +437,7 @@ body {
 .genre-content .info h5,
 .radio-result-container .info h5 {
     margin: 0;
-    color: var(--apple-black);
+    color: var(--apple-white);
     font-size: 14px;
 }
 
@@ -1129,7 +1129,7 @@ media-mute-button:hover {
 }
 
 .chat-btn {
-    background-color: var(--expressive-green);
+    background-color: #488832;
     border: none;
     border-radius: 50%;
     width: 60px;
@@ -1181,13 +1181,61 @@ media-mute-button:hover {
     cursor: pointer;
 }
 
-#waline {
-    background: var(--white-90-alpha) !important;
+
+.wl-comment,
+.wl-header,
+.wl-editor,
+.wl-panel,
+.wl-header-item {
+    background: none !important;
+
 }
 
+#waline,
+.wl-panel {
+    background: var(--black-40-alpha) !important;
+
+}
+
+.wl-input,
+.wl-header-item label {
+    background: none !important;
+    color: var(--white-100) !important;
+}
+
+.wl-user-avatar {
+    display: none;
+}
+
+.wl-user {
+    position: relative;
+    width: 50px;
+    height: 50px;
+}
+
+.wl-user::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../assets/sasalele_logo-removebg.webp');
+    background-size: cover;
+    background-position: center;
+}
+
+.wl-nick,
+.wl-time,
+.wl-count,
+.wl-content p,
+.wl-btn {
+    color: var(--white-100) !important;
+}
 
 #wl-edit {
-    background: url(../assets/comment-bg.webp) right top/10% no-repeat;
+    background: url(../assets/sasalele_logo-removebg.webp) right top/10% no-repeat;
+    color: var(--white-100) !important;
 }
 
 .joinform {

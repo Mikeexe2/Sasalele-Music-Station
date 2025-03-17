@@ -90,6 +90,11 @@
         "icon": "assets/websites/fmradio3.webp"
     },
     {
+        "name": "TBSラジオ",
+        "url": "https://www.tbsradio.jp/podcast/",
+        "icon": "assets/websites/tbsradio.png"
+    },
+    {
         "name": "MBC Podcast",
         "url": "https://www.mbc.co.jp/radio/podcast/",
         "icon": "assets/websites/mbcradio.webp"

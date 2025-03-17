@@ -17,7 +17,6 @@
         <meta property="og:url" content="https://basic.pp.ua/">
         <meta property="og:image" content="https://basic.pp.ua/assets/sasalele_banner.png" />
         <meta property="og:site_name" content="Sasalele Music Station">
-        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
         <script type="application/ld+json">{
          "@context": "https://schema.org",
          "@type": "WebSite",
@@ -28,6 +27,7 @@
         <link rel="icon" href="assets/sasalele_logo-removebg.webp" type="image/x-icon" />
         <link rel="apple-touch-icon" href="assets/sasalele_logo-removebg.webp">
         <link rel="shortcut icon" href="assets/sasalele_logo-removebg.webp" type="image/x-icon" />
+        <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline-meta.css" />
         <link rel="stylesheet" href="css/style.css">
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
@@ -35,7 +35,7 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-v4-rtl/4.6.2-1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <script src="https://cdn.jsdelivr.net/npm/hls.js@latest" type="text/javascript"></script>
-        <script src="js/icecast-metadata-player-1.17.3.main.min.js"></script>
+        <script src="js/icecast-metadata-player-1.17.9.main.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.css" />
         <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
@@ -260,7 +260,41 @@
             </div>
             <section id="radiostreams">
                 <div class="section-title">
-                    <h1>Radio Streams</h1>
+                    <h1>Radio Streams <button type="button" class="tips-btn" data-toggle="modal" title="Tips"
+                            data-target="#tipsModal0">
+                            <i class="fas fa-info-circle"></i>
+                        </button></h1>
+                </div>
+                <div class="modal fade" id="tipsModal0" tabindex="-1" aria-labelledby="tipsModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="tipsModalLabel">Tips</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p><strong>How the Stream Works</strong></p>
+                                <p>HLS (HTTP Live Streaming) is a technology that divides audio into
+                                    smaller segments, known as "chunks,"
+                                    and transmits them sequentially over the internet. This allows you
+                                    to begin listening almost
+                                    immediately, without having to wait for the entire file to download.</p>
+                                <p>You can control the playback of the stream using the video player, just like using a
+                                    regular audio player.
+                                    You can pause, play, skip,
+                                    and adjust the volume using the player's controls.</p>
+
+                                <p><strong>Why Some Links Might Not Work?</strong></p>
+                                <p>Sometimes, a link might not work because the stream is temporarily unavailable, or
+                                    there may be an issue with the
+                                    streaming service.
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
                 <div class="container text-center mb-1">
                     <div class="row">
@@ -295,7 +329,7 @@
                                 </div>
                                 <div id="lang-info" class="ml-auto mb-2">
                                     <strong><span id="lang-name"></span></strong>
-                                    <strong> (<span id="stream-count"></span> Streams Available)</strong>
+                                    <strong> (<span id="stream-count"></span>)</strong>
                                 </div>
                             </div>
                             <div class="input-group mb-2">
@@ -550,7 +584,7 @@
                     <div class="media-con">
                         <div>
                             <media-controller audio>
-                                <audio slot="media" id="miniPlayer"></audio>
+                                <audio slot="media" id="miniPlayer" autoplay></audio>
                                 <media-control-bar>
                                     <media-play-button></media-play-button>
                                     <media-time-display show-duration></media-time-display>
@@ -576,7 +610,7 @@
                     </div>
                     <div class="playing-info">
                         <div id="cover" class="mt-1">
-                            <img id="ip" style="display: inline;" src="assets/comment-bg.webp">
+                            <img id="ip" style="display: inline;" src="assets/sasalele_logo-removebg.webp">
                         </div>
                         <span class="ml-1">
                             <span id="stationName" class="mr-1">No music playing now</span>
@@ -630,8 +664,8 @@
                             <i class="fab fa-github"></i>
                         </a>
                     </div>
-                    <p>Last updated: 2024/11/29 </p>
-                    <p>© 2023-2024 Sasalele-Music-Station</p>
+                    <p>Last updated: 2025/3/17 </p>
+                    <p>© 2023-2025 Sasalele-Music-Station</p>
                     <div class="progress-container">
                         <p>Site operated for: <span id="liveTime"></span></p>
                         <div class="mdui-progress">
