@@ -968,7 +968,7 @@ searchInput.addEventListener('keyup', function (event) {
 });
 
 async function searchAcrossApis(searchTerm) {
-    const proxyLink = "https://universalsasalele.apnic-anycast.workers.dev/";
+    const proxyLink = "https://sasalele.apnic-anycast.workers.dev/";
 
     const lastfmUrl = `https://ws.audioscrobbler.com/2.0/?method=track.search&format=json&limit=5&api_key=b9747c75368b42160af4301c2bf654a1&track=${encodeURIComponent(searchTerm)}`;
     const youtubeUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&type=video&q=${encodeURIComponent(searchTerm)}&key=AIzaSyAwM_RLjqj8dbbMAP5ls4qg1olDsaxSq5s`;
