@@ -7,6 +7,13 @@
             "lang": "ja"
         },
         {
+            "title": "Shibuya Cross Live Broadcast",
+            "link": "https://c4018-live01.videog.jp/live/_definst_/TtS9ARlkP6Y6/playlist.m3u8",
+            "icon": "assets/websites/shibuyacrossfm.webp",
+            "homepage": "https://shibuyacrossfm.jp/",
+            "lang": "ja"
+        },
+        {
             "title": "NHK World Japan",
             "link": "https://nhkwlive-radio.akamaized.net/hls/live/2032384/radio-rs5/index_07.m3u8",
             "icon": "assets/websites/nhkworldradio.webp",
@@ -787,6 +794,11 @@
             "title": "n p r | CPR",
             "link": "https://stream2.cprnetwork.org/2198_256.aac/playlist.m3u8",
             "lang": "en"
+        },
+        {
+            "title": "KLove",
+            "link": "https://live.insidefm.cl/hls/klove/live.m3u8",
+            "lang": "ko"
         },
         {
             "title": "YTN FM (YTN라디오 / YTN뉴스FM)",

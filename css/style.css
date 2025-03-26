@@ -108,20 +108,20 @@
     --animation-duration-neutral: 350ms;
     --animation-duration-slow: 500ms;
     --animation-easing-ease-out: cubic-bezier(0, 0, 0, 1);
-    --animation-easing-ease-in-out: cubic-bezier(0.5, 0, 0.5, 1);
+    --animation-easing-ease-in-out: cubic-bezier(0.5, 0, 0.5, 1)
 }
 
 .navbar {
-    background: #1a162d;
+    background: #1a162d
 }
 
 .navbar-text {
-    font-weight: 600;
+    font-weight: 600
 }
 
 #content {
     position: relative;
-    z-index: 3;
+    z-index: 3
 }
 
 #background {
@@ -129,7 +129,7 @@
     position: fixed;
     width: 100%;
     height: 100%;
-    opacity: 1.0;
+    opacity: 1
 }
 
 #randomimg {
@@ -139,98 +139,98 @@
     height: 100%;
     position: fixed;
     object-fit: contain;
-    mix-blend-mode: multiply;
+    mix-blend-mode: multiply
 }
 
 .anim-blur-left {
-    animation: blur-left 0.1s ease-out forwards;
+    animation: blur-left .1s ease-out forwards
 }
 
 @keyframes blur-left {
     0% {
         transform: translateX(-50px);
-        opacity: 0;
+        opacity: 0
     }
 
     100% {
         transform: translateX(0);
-        opacity: 1;
+        opacity: 1
     }
 }
 
 .anim-blur-right {
-    animation: blur-right 0.1s ease-out forwards;
+    animation: blur-right .1s ease-out forwards
 }
 
 @keyframes blur-right {
     0% {
         transform: translateX(50px);
-        opacity: 0;
+        opacity: 0
     }
 
     100% {
         transform: translateX(0);
-        opacity: 1;
+        opacity: 1
     }
 }
 
 .anim-blur-top {
-    animation: blur-top 0.1s ease-out forwards;
+    animation: blur-top .1s ease-out forwards
 }
 
 @keyframes blur-top {
     0% {
         transform: translateY(-50px);
-        opacity: 0;
+        opacity: 0
     }
 
     100% {
         transform: translateY(0);
-        opacity: 1;
+        opacity: 1
     }
 }
 
 .anim-blur-bottom {
-    animation: blur-bottom 0.1s ease-out forwards;
+    animation: blur-bottom .1s ease-out forwards
 }
 
 @keyframes blur-bottom {
     0% {
         transform: translateY(50px);
-        opacity: 0;
+        opacity: 0
     }
 
     100% {
         transform: translateY(0);
-        opacity: 1;
+        opacity: 1
     }
 }
 
+.LinksItemLink:hover::after,
 .blank-name::after,
 .homepagelink::after,
-.LinksItemLink:hover::after,
 .togglesearch::after {
     margin: 0 3px 0 5px;
-    content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==);
+    content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==)
 }
 
 .nav-item.dropdown:hover .dropdown-menu {
-    display: block;
+    display: block
 }
 
 .dropdown-menu {
     background-color: var(--black-80-alpha) !important;
     max-height: 300px;
-    overflow-y: auto;
+    overflow-y: auto
 }
 
 .dropdown-menu a {
-    color: var(--apple-white) !important;
+    color: var(--apple-white) !important
 }
 
 .dropdown-menu a:hover {
     background-color: #4a4c4e;
-    color: var(--apple-white);
+    color: var(--apple-white)
 }
 
 .navbar-collapse {
@@ -238,35 +238,34 @@
 }
 
 .nav-link {
-    margin-right: 0.3em !important
+    margin-right: .3em !important
 }
 
 .nav-link i {
-    margin-left: 0.5em;
+    margin-left: .5em
 }
 
 .navbar-toggler {
     outline: 0 !important;
-    border: 0 !important;
+    border: 0 !important
 }
 
 body {
-    font-family: "Open Sans", sans-serif;
+    font-family: "Microsoft YaHei", Helvetica, Arial, sans-serif !important;
     width: 100%;
     min-height: 100%;
     background-size: cover;
-    cursor: url(../assets/Arrow.cur), auto;
+    cursor: url(../assets/Arrow.cur), auto
 }
 
-/*VIDEOS/STREAMS*/
 .tag {
     cursor: pointer;
-    margin-right: 5px;
+    margin-right: 5px
 }
 
 .tag.active {
     color: #000;
-    border: 2px solid var(--highlight-yellow-100);
+    border: 2px solid var(--highlight-yellow-100)
 }
 
 #video-list {
@@ -274,45 +273,34 @@ body {
     overflow-y: auto;
     margin-bottom: 1px;
     background-color: var(--white-60-alpha);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 0 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+    padding: 0 5px
 }
 
 #streamList {
     max-height: 310px;
     overflow-y: auto;
     background-color: var(--white-60-alpha);
-    padding: 0 5px;
+    padding: 0 5px
 }
 
-#video-list li,
-#streamList li {
+#streamList li,
+#video-list li {
     cursor: pointer;
     padding: 10px;
     list-style: none;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color .3s, color .3s
 }
 
-#video-list li:hover,
-#streamList li:hover {
+#streamList li:hover,
+#video-list li:hover {
     background-color: var(--white-60-alpha);
-    color: var(--focus-blue-100);
-}
-
-#vplayer {
-    border-radius: 5px;
-}
-
-#vplayer video {
-    width: 100%;
-    height: auto;
-    margin-top: 10px;
-    border-radius: 5px;
+    color: var(--focus-blue-100)
 }
 
 .video-container {
     position: relative;
-    padding-top: 56.25%;
+    padding-top: 56.25%
 }
 
 .video-container iframe {
@@ -320,7 +308,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100%
 }
 
 .selected-title {
@@ -329,7 +317,7 @@ body {
     padding: 10px;
     border-radius: 5px;
     text-align: center;
-    font-size: var(--font-size--medium);
+    font-size: var(--font-size--medium)
 }
 
 .genre-link,
@@ -338,15 +326,15 @@ body {
     color: var(--facebook-blue);
     text-decoration: none;
     display: block;
-    padding: 0.3rem 1.5rem;
-    transition: background-color 0.3s, color 0.3s;
+    padding: .3rem 1.5rem;
+    transition: background-color .3s, color .3s
 }
 
 .genre-link:hover,
 .lang-link:hover {
     color: var(--focus-blue-100);
     text-decoration: none;
-    background-color: #f8f9fa;
+    background-color: #f8f9fa
 }
 
 #genre-info,
@@ -354,44 +342,44 @@ body {
     background-color: var(--white-60-alpha);
     padding: 10px;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .1)
 }
 
 .input-group-prepend .btn {
     height: 40px;
     display: flex;
-    align-items: center;
+    align-items: center
 }
 
-/*RADIOS*/
 #radio-content {
-    background: var(--black-70-alpha);
+    background: var(--black-70-alpha)
 }
 
 .radio-result-header {
-    display: none;
+    display: none
 }
 
 .genre-btn {
     background-color: #f8f9fa;
     border: 1px solid #ced4da;
+    margin-top: 5px;
     color: var(--gray-80);
-    border-radius: 10px;
+    border-radius: 10px
 }
 
 .genre-btn.active {
     background-color: var(--focus-blue-100);
     color: #fff;
     border-color: #007bff;
-    font-weight: bold;
+    font-weight: 700
 }
 
 .download-button {
     color: var(--focus-blue-100);
-    margin-right: 0.1rem;
+    margin-right: .1rem;
     border: none;
-    background: none;
-    margin: none;
+    background: 0 0;
+    margin: none
 }
 
 .genre-content,
@@ -405,12 +393,12 @@ body {
     max-height: 400px;
     overflow-y: auto;
     scrollbar-width: thin;
-    scrollbar-color: #f0efef80 transparent;
+    scrollbar-color: #f0efef80 transparent
 }
 
 .genre-content.active,
 .radio-result-container.active {
-    display: block;
+    display: block
 }
 
 .genre-content li,
@@ -418,7 +406,7 @@ body {
     display: flex;
     align-items: center;
     padding: 8px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #ddd
 }
 
 .genre-content img,
@@ -426,60 +414,59 @@ body {
     width: 50px;
     height: 50px;
     margin-right: 10px;
-    border-radius: 4px;
+    border-radius: 4px
 }
 
 .genre-content .info,
 .radio-result-container .info {
-    flex: 1;
+    flex: 1
 }
 
 .genre-content .info h5,
 .radio-result-container .info h5 {
     margin: 0;
     color: var(--apple-white);
-    font-size: 14px;
+    font-size: 14px
 }
 
 .genre-content button,
 .radio-result-container button {
-    margin-left: 5px;
+    margin-left: 5px
 }
 
 .genre-content::-webkit-scrollbar,
 .radio-result-container::-webkit-scrollbar {
-    width: 8px;
+    width: 8px
 }
 
 body::-webkit-scrollbar {
     width: 12px;
-    background: var(--black-80-alpha);
+    background: var(--black-80-alpha)
 }
 
 body::-webkit-scrollbar-thumb {
-    background: var(--expressive-green);
+    background: var(--expressive-green)
 }
 
 .genre-content::-webkit-scrollbar-thumb,
 .radio-result-container::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 4px;
+    background-color: rgba(0, 0, 0, .5);
+    border-radius: 4px
 }
 
 .genre-content::-webkit-scrollbar-track,
 .radio-result-container::-webkit-scrollbar-track {
-    background: transparent;
+    background: 0 0
 }
 
-@media (max-width: 576px) {
+@media (max-width:576px) {
 
     .genre-content,
     .radio-result-container {
-        gap: 0.5rem;
+        gap: .5rem
     }
 }
 
-/*SEARCH SONG*/
 .search-terms {
     font-size: 16px;
     margin-bottom: 10px;
@@ -487,28 +474,35 @@ body::-webkit-scrollbar-thumb {
     background: var(--white-80-alpha);
     padding: 5px;
     text-align: center;
-    border-radius: 5px;
+    border-radius: 5px
 }
 
 #searchTerms {
-    font-weight: bold;
-    color: #007BFF;
+    font-weight: 700;
+    color: #007bff
 }
 
 .gsc-input {
-    background: none !important;
+    background: 0 0 !important
 }
 
 .gsc-control-cse {
     border-radius: 8px !important;
-    margin-bottom: 10px !important;
+    margin-bottom: 10px !important
 }
 
 .noresult {
     margin: 0 auto;
     padding: 10px;
     text-align: center;
-    background: var(--white-60-alpha);
+    background: var(--white-60-alpha)
+}
+
+.no-results,
+.no-stations {
+    color: var(--apple-white);
+    text-align: center;
+    padding: 20px;
 }
 
 .search-cover {
@@ -516,44 +510,59 @@ body::-webkit-scrollbar-thumb {
     float: left;
     height: 66px;
     width: 66px;
-    background-size: cover;
+    background-size: cover
 }
 
-#lastfmList {
-    list-style-type: none;
-    text-align: center;
+.lastfm-item {
     display: block;
-    padding: 1px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    border: 1px solid #ccc;
     border-radius: 5px;
+    padding: 3px;
+    background-color: var(--white-60-alpha)
 }
 
 .itunes-item {
     display: flex;
     align-items: center;
-    margin-bottom: 2px;
+    border-bottom: 1px solid #eee;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 3px;
-    background-color: #f9f9f9;
+    background-color: var(--white-60-alpha)
 }
 
 .itunes-item img {
-    margin-right: 15px;
+    margin-right: 15px
+}
+
+.audio-preview {
+    width: 100%;
+    max-width: 250px;
+}
+
+.search-cover {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.album-name {
+    color: var(--apple-black);
+    font-size: 0.9em;
 }
 
 .itunes-item .info {
-    flex: 1;
+    flex: 1
 }
 
-.itunes-item .btn {
-    margin-left: 15px;
-}
-
-.search-results,
-.radioresultsdisplay {
+.radioresultsdisplay,
+.search-results {
     background: var(--black-50-alpha);
     padding: 10px;
-    border-radius: 6px;
+    border-radius: 6px
 }
 
 .togglesearch {
@@ -564,7 +573,7 @@ body::-webkit-scrollbar-thumb {
     cursor: pointer;
     display: inline-flex;
     align-items: center;
-    transition: background-color 0.3s, transform 0.2s;
+    transition: background-color .3s, transform .2s;
     width: 100%
 }
 
@@ -581,133 +590,132 @@ body::-webkit-scrollbar-thumb {
     background-repeat: no-repeat;
     float: left;
     margin-left: 5px;
-    outline: none;
+    outline: 0
 }
 
 .icon-spotify {
-    background-image: url('../assets/covers/spotify.webp')
+    background-image: url(../assets/covers/spotify.webp)
 }
 
 .icon-apple {
-    background-image: url('../assets/covers/applemusic.webp')
+    background-image: url(../assets/covers/applemusic.webp)
 }
 
 .icon-amazon {
-    background-image: url('../assets/covers/amazonmusic.webp')
+    background-image: url(../assets/covers/amazonmusic.webp)
 }
 
 .icon-youtube {
-    background-image: url('../assets/covers/youtube.webp')
+    background-image: url(../assets/covers/youtube.webp)
 }
 
 .icon-youtubemusic {
-    background-image: url('../assets/covers/youtubemusic.webp')
+    background-image: url(../assets/covers/youtubemusic.webp)
 }
 
 .icon-netease {
-    background-image: url('../assets/covers/netease.webp')
+    background-image: url(../assets/covers/netease.webp)
 }
 
 .icon-vgmdb {
-    background-image: url('../assets/covers/vgmdb.webp')
+    background-image: url(../assets/covers/vgmdb.webp)
 }
 
 .icon-musicenc {
-    background-image: url('../assets/covers/musicenc.webp')
+    background-image: url(../assets/covers/musicenc.webp)
 }
 
 .icon-jlyric {
-    background-image: url('../assets/covers/jlyric.webp')
+    background-image: url(../assets/covers/jlyric.webp)
 }
 
 .icon-followlyrics {
-    background-image: url('../assets/covers/followlyrics.webp')
+    background-image: url(../assets/covers/followlyrics.webp)
 }
 
 .icon-kugeci {
-    background-image: url('../assets/covers/kugeci.webp')
+    background-image: url(../assets/covers/kugeci.webp)
 }
 
 .icon-baha {
-    background-image: url('../assets/covers/bahamut.webp')
+    background-image: url(../assets/covers/bahamut.webp)
 }
 
 .icon-kkbox {
-    background-image: url('../assets/covers/kkbox.webp')
+    background-image: url(../assets/covers/kkbox.webp)
 }
 
 .icon-audarchive {
-    background-image: url('../assets/covers/audioarchive.webp')
+    background-image: url(../assets/covers/audioarchive.webp)
 }
 
 .icon-soundcloud {
-    background-image: url('../assets/covers/soundcloud.webp')
+    background-image: url(../assets/covers/soundcloud.webp)
 }
 
 .icon-lastfm {
-    background-image: url('../assets/covers/lastfm.webp')
+    background-image: url(../assets/covers/lastfm.webp)
 }
 
 .icon-google {
-    background-image: url('../assets/covers/google.webp')
+    background-image: url(../assets/covers/google.webp)
 }
 
 .icon-utanet {
-    background-image: url('../assets/covers/utanet.webp')
+    background-image: url(../assets/covers/utanet.webp)
 }
 
 .icon-petitlyrics {
-    background-image: url('../assets/covers/petitlyrics.webp')
+    background-image: url(../assets/covers/petitlyrics.webp)
 }
 
 .icon-musicbrainz {
-    background-image: url('../assets/covers/musicbrainz.webp')
+    background-image: url(../assets/covers/musicbrainz.webp)
 }
 
 .icon-gnudb {
-    background-image: url('../assets/covers/gnudb.webp')
+    background-image: url(../assets/covers/gnudb.webp)
 }
 
 .icon-niconico {
-    background-image: url('../assets/covers/niconico.webp')
+    background-image: url(../assets/covers/niconico.webp)
 }
 
 .icon-vocadb {
-    background-image: url('../assets/covers/vocadb.webp')
+    background-image: url(../assets/covers/vocadb.webp)
 }
 
 .icon-jplyrics {
-    background-image: url('../assets/covers/jplyrics.webp')
+    background-image: url(../assets/covers/jplyrics.webp)
 }
 
 .icon-touhoudb {
-    background-image: url('../assets/covers/touhoudb.webp')
+    background-image: url(../assets/covers/touhoudb.webp)
 }
 
 .icon-mikudb {
-    background-image: url('../assets/covers/mikudb.webp')
+    background-image: url(../assets/covers/mikudb.webp)
 }
 
 .button-label {
     font-size: var(--font-size--small);
-    font-weight: bold;
+    font-weight: 700;
     text-align: left;
     padding-left: 5px
 }
 
-/*WEBSITES*/
 .LinksListBlock {
     padding: 5px;
     border-radius: 8px;
     background: var(--white-70-alpha);
     width: 90%;
-    margin: 0.6em auto;
+    margin: .6em auto
 }
 
 .LinksItem {
     display: flex;
     width: 100%;
-    margin: 0.3em;
+    margin: .3em
 }
 
 .LinksItemLink {
@@ -731,17 +739,17 @@ body::-webkit-scrollbar-thumb {
 .LinksItemLink:focus .LinksIcon,
 .LinksItemLink:hover .LinksIcon {
     color: var(--focus-blue-100);
-    text-decoration: underline;
+    text-decoration: underline
 }
 
 .rad-icon {
     max-width: 60px;
     height: auto;
-    margin-right: 10px;
+    margin-right: 10px
 }
 
 @media print,
-screen and (min-width: 768px) {
+screen and (min-width:768px) {
     .LinksListBlock {
         padding-inline: 10px
     }
@@ -752,7 +760,7 @@ screen and (min-width: 768px) {
 }
 
 @media print,
-screen and (min-width: 1152px) {
+screen and (min-width:1152px) {
     .LinksListBlock {
         padding: 20px 20px
     }
@@ -762,19 +770,18 @@ screen and (min-width: 1152px) {
     }
 }
 
-/*RADIO PLAYER*/
 @keyframes rotate {
     from {
-        transform: rotate(0deg);
+        transform: rotate(0)
     }
 
     to {
-        transform: rotate(360deg);
+        transform: rotate(360deg)
     }
 }
 
 .rotating {
-    animation: rotate 5s linear infinite;
+    animation: rotate 5s linear infinite
 }
 
 #player {
@@ -784,19 +791,19 @@ screen and (min-width: 1152px) {
     z-index: 999;
     background: var(--twitter-blue);
     width: fit-content;
-    border-radius: 10px;
+    border-radius: 15px
 }
 
 .playing-info {
     padding: 0 10px;
     align-items: center;
-    display: flex;
+    display: flex
 }
 
 .media-con {
     padding: 0 10px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between
 }
 
 media-controller {
@@ -808,49 +815,49 @@ media-controller {
     --media-range-thumb-background: hotpink;
     --media-range-bar-color: indianred;
     --media-control-background: var(--twitter-blue);
-    --media-preview-background: mediumslateblue;
+    --media-preview-background: mediumslateblue
 }
 
 media-time-display {
-    color: var(--apple-black);
+    color: var(--apple-black)
 }
 
-media-play-button:hover,
-media-mute-button:hover {
-    --media-icon-color: var(--focus-blue-100);
+media-mute-button:hover,
+media-play-button:hover {
+    --media-icon-color: var(--focus-blue-100)
 }
 
 #cover img {
     max-width: 60px;
-    border-radius: 50%;
+    border-radius: 50%
 }
 
 #stationName .homepagelink {
     font-size: 15px;
     color: var(--apple-black);
-    font-weight: bold;
+    font-weight: 700;
     text-decoration: underline;
-    white-space: normal;
+    white-space: normal
 }
 
 #metadata {
     color: var(--apple-black);
     font-size: 14px;
     margin-right: 8px;
-    white-space: normal;
+    white-space: normal
 }
 
 .modal {
-    margin-top: 2% !important;
+    margin-top: 2% !important
 }
 
 .modal-backdrop {
-    z-index: 2 !important;
+    z-index: 2 !important
 }
 
 .icon-container {
     display: flex;
-    align-items: center;
+    align-items: center
 }
 
 .copy-confirmation {
@@ -861,119 +868,162 @@ media-mute-button:hover {
     border-radius: 3px;
     align-items: center;
     gap: 5px;
-    font-size: var(--font-size--small);
+    font-size: var(--font-size--small)
 }
 
 .copy-confirmation span {
-    margin: 0;
+    margin: 0
 }
 
-.p-btn,
-#copyIcon {
-    background: none;
+#copyIcon,
+.p-btn {
+    background: 0 0;
     border: none;
     color: var(--apple-black);
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 700;
     font-size: var(--font-size--medium);
     margin-left: auto;
-    padding: 6px;
+    padding: 6px
 }
 
 #copyIcon:hover,
 .p-btn:hover {
-    background: rgb(128 0 0 / 0.85);
-    color: var(--focus-blue-100);
+    background: rgb(128 0 0 / .85);
+    color: var(--focus-blue-100)
 }
 
-#toggleRandom:hover,
-#togglePlayer:hover,
 #historyBtn:hover,
+#togglePlayer:hover,
+#toggleRandom:hover,
 .main-play-button:hover {
-    transform: scale(1.1);
+    transform: scale(1.1)
 }
 
-#togglePlayer .fa-compress,
-#player.minimized #togglePlayer .fa-expand {
-    display: flex;
-
+#player.minimized #togglePlayer .fa-expand,
+#togglePlayer .fa-compress {
+    display: flex
 }
 
 #player.minimized {
     max-width: 90px;
     padding: 0 10px 0 10px;
-    overflow: hidden;
+    overflow: hidden
 }
 
-#togglePlayer .fa-expand,
-#player.minimized #togglePlayer .fa-compress,
-#togglePlayer .hidden,
-#player.minimized #stationName,
-#player.minimized #toggleRandom,
-#player.minimized #metadata,
+#player.minimized #copyIcon,
 #player.minimized #historyBtn,
+#player.minimized #metadata,
+#player.minimized #stationName,
+#player.minimized #togglePlayer .fa-compress,
+#player.minimized #toggleRandom,
 #player.minimized media-controller,
-#player.minimized #copyIcon {
-    display: none;
+#togglePlayer .fa-expand,
+#togglePlayer .hidden {
+    display: none
 }
 
-/*MISC*/
-#aplayer {
-    max-height: 500px;
+.aplayer,
+.aplayer .aplayer-body,
+.aplayer .aplayer-list,
+.aplayer .aplayer-list li.aplayer-list-light,
+.aplayer .aplayer-lrc {
+    background: #212121 !important
+}
+
+.aplayer .aplayer-list li .aplayer-list-author,
+.aplayer .aplayer-list li .aplayer-list-index,
+.aplayer .aplayer-lrc p {
+    color: #ddd !important
+}
+
+.aplayer .aplayer-info .aplayer-music .aplayer-author,
+.aplayer .aplayer-info .aplayer-music .aplayer-title,
+.aplayer .aplayer-list li {
+    color: #fff !important
+}
+
+.aplayer .aplayer-list li {
+    border-top-color: #666 !important
+}
+
+.aplayer .aplayer-info {
+    border-bottom-color: #5c5c5c !important
+}
+
+.aplayer .aplayer-miniswitcher,
+.aplayer-miniswitcher {
+    background: #484848 !important
+}
+
+.aplayer .aplayer-lrc {
+    text-shadow: #666 -1px -1px 0 !important
+}
+
+.aplayer .aplayer-lrc::before {
+    background: linear-gradient(#212121 0, rgba(33, 33, 33, 0) 100%) !important
+}
+
+.aplayer .aplayer-lrc::after {
+    background: linear-gradient(rgba(33, 33, 33, 0) 0, rgba(33, 33, 33, .8) 100%) !important
+}
+
+.aplayer .aplayer-list ol li:hover {
+    background: var(--black-80-alpha) !important
 }
 
 #clock {
-    color: var(--apple-white);
+    color: var(--apple-white)
 }
 
 .mdui-progress {
     margin: 10px auto;
     width: 50%;
-    background-color: rgba(33, 150, 243, 0.2);
+    background-color: rgba(33, 150, 243, .2);
     position: relative;
     display: block;
     height: 4px;
     overflow: hidden;
-    border-radius: 2px;
+    border-radius: 2px
 }
 
 .mdui-progress-indeterminate {
-    background-color: rgba(33, 150, 243, 0.7);
+    background-color: rgba(33, 150, 243, .7);
     position: absolute;
     width: 100%;
     height: 100%;
     transform: translateX(-100%);
-    animation: indeterminate 1.5s infinite linear;
+    animation: indeterminate 1.5s infinite linear
 }
 
 @keyframes indeterminate {
     0% {
-        transform: translateX(-100%);
+        transform: translateX(-100%)
     }
 
     100% {
-        transform: translateX(100%);
+        transform: translateX(100%)
     }
 }
 
 .switch-container {
-    margin-top: 0.4rem;
-    margin-left: 10px;
+    margin-top: .4rem;
+    margin-left: 10px
 }
 
 .switch {
     position: relative;
     display: inline-block;
     width: 40px;
-    height: 20px;
+    height: 20px
 }
 
 .switch input {
-    display: none;
+    display: none
 }
 
 .switch input:checked+.slider {
-    background-color: #4CAF50;
+    background-color: #4caf50
 }
 
 .slider {
@@ -985,7 +1035,7 @@ media-mute-button:hover {
     bottom: 0;
     background-color: #ccc;
     transition: .3s;
-    border-radius: 20px;
+    border-radius: 20px
 }
 
 .slider:before {
@@ -995,13 +1045,13 @@ media-mute-button:hover {
     width: 12px;
     left: 4px;
     bottom: 4px;
-    background-color: white;
+    background-color: #fff;
     transition: .3s;
-    border-radius: 50%;
+    border-radius: 50%
 }
 
 .switch input:checked+.slider:before {
-    transform: translateX(20px);
+    transform: translateX(20px)
 }
 
 .back-to-top {
@@ -1015,29 +1065,29 @@ media-mute-button:hover {
     width: 40px;
     height: 40px;
     border-radius: 50px;
-    transition: all 0.4s;
+    transition: all .4s
 }
 
 .back-to-top i {
     font-size: var(--font-size--medium);
     color: #fff;
-    line-height: 0;
+    line-height: 0
 }
 
 .back-to-top:hover {
     background: var(--twitter-blue);
-    color: #fff;
+    color: #fff
 }
 
 .back-to-top.active {
     visibility: visible;
-    opacity: 1;
+    opacity: 1
 }
 
 .section-title {
     text-align: center;
     flex: 1;
-    margin: 10px;
+    margin: 10px
 }
 
 .section-title h1 {
@@ -1051,7 +1101,7 @@ media-mute-button:hover {
     color: var(--apple-white);
     display: inline-block;
     text-transform: uppercase;
-    border-radius: 50px;
+    border-radius: 50px
 }
 
 #tips {
@@ -1065,7 +1115,7 @@ media-mute-button:hover {
 }
 
 .collapse {
-    transition: height 0.3s ease;
+    transition: height .3s ease
 }
 
 #footer {
@@ -1075,7 +1125,11 @@ media-mute-button:hover {
     width: 100%;
     color: var(--apple-white);
     padding: 10px;
-    background: var(--black-70-alpha);
+    background: var(--black-70-alpha)
+}
+
+.page-info {
+    font-family: Arial, sans-serif
 }
 
 .social-links a {
@@ -1090,16 +1144,15 @@ media-mute-button:hover {
     text-align: center;
     width: 36px;
     height: 36px;
-    transition: 0.3s;
+    transition: .3s
 }
 
 .social-links a:hover {
     background: #67b0d1;
     color: #fff;
-    text-decoration: none;
+    text-decoration: none
 }
 
-/*CHAT*/
 .side-window-panel {
     position: fixed;
     top: 50px;
@@ -1108,13 +1161,13 @@ media-mute-button:hover {
     height: 75vh;
     border-radius: 10px;
     background-color: var(--black-80-alpha);
-    box-shadow: -4px 0 6px rgba(0, 0, 0, 0.2);
-    transition: right 0.3s ease-in-out;
-    z-index: 9999;
+    box-shadow: -4px 0 6px rgba(0, 0, 0, .2);
+    transition: right .3s ease-in-out;
+    z-index: 9999
 }
 
 .side-window-panel.open {
-    right: 0;
+    right: 0
 }
 
 .chathold {
@@ -1125,7 +1178,7 @@ media-mute-button:hover {
     position: fixed;
     right: 15px;
     transition: opacity .3s ease-out;
-    z-index: 900;
+    z-index: 900
 }
 
 .chat-btn {
@@ -1137,19 +1190,19 @@ media-mute-button:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, .2);
     cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s;
+    transition: background-color .3s, box-shadow .3s
 }
 
-.chat-btn svg,
-#hideButton svg {
-    fill: rgb(255, 245, 203);
+#hideButton svg,
+.chat-btn svg {
+    fill: #fff5cb
 }
 
 .chat-btn:hover {
     background-color: #0056b3;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .3)
 }
 
 .hide-item {
@@ -1159,11 +1212,11 @@ media-mute-button:hover {
     display: flex;
     left: 0;
     height: fit-content;
-    padding: 0.1rem;
+    padding: .1rem;
     position: relative;
     right: 0;
     top: 0;
-    z-index: 9999;
+    z-index: 9999
 }
 
 #hideButton {
@@ -1176,41 +1229,23 @@ media-mute-button:hover {
     z-index: 1;
     margin: 0;
     padding: 0;
-    background: none;
+    background: 0 0;
     border: none;
-    cursor: pointer;
+    cursor: pointer
 }
 
-
-.wl-comment,
-.wl-header,
-.wl-editor,
-.wl-panel,
-.wl-header-item {
-    background: none !important;
-
-}
-
-#waline,
-.wl-panel {
-    background: var(--black-40-alpha) !important;
-
-}
-
-.wl-input,
-.wl-header-item label {
-    background: none !important;
-    color: var(--white-100) !important;
+#waline {
+    background: #333
 }
 
 .wl-user-avatar {
-    display: none;
+    display: none
 }
 
 .wl-user {
     position: relative;
     width: 50px;
-    height: 50px;
+    height: 50px
 }
 
 .wl-user::before {
@@ -1220,51 +1255,258 @@ media-mute-button:hover {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url('../assets/sasalele_logo-removebg.webp');
+    background-image: url(../assets/sasalele_logo-removebg.webp);
     background-size: cover;
-    background-position: center;
+    background-position: center
 }
 
-.wl-nick,
-.wl-time,
-.wl-count,
-.wl-content p,
+.wl-editor,
+.wl-input {
+    color: #888 !important
+}
+
+.wl-action {
+    color: #888 !important
+}
+
+#wl-image-upload:focus+label {
+    color: #888 !important
+}
+
+.wl-card .wl-delete,
+.wl-card .wl-edit,
+.wl-card .wl-like,
+.wl-card .wl-reply {
+    color: #888 !important
+}
+
+.wl-empty {
+    color: #888 !important
+}
+
+.wl-user-list a,
+.wl-user-list a:hover,
+.wl-user-list a:visited {
+    color: #888 !important
+}
+
 .wl-btn {
-    color: var(--white-100) !important;
+    color: #888 !important;
+    border: 1px solid #333 !important
 }
 
-#wl-edit {
-    background: url(../assets/sasalele_logo-removebg.webp) right top/10% no-repeat;
-    color: var(--white-100) !important;
+.wl-header label {
+    min-width: 40px;
+    padding: .75em .5em;
+    color: #888 !important;
+    font-size: .75em;
+    text-align: center
+}
+
+.wl-btn:disabled {
+    border-color: var(--waline-border-color);
+    background: var(--waline-disable-bg-color);
+    color: var(--waline-disable-color);
+    cursor: not-allowed
+}
+
+.wl-btn.primary:disabled {
+    border-color: var(--waline-border-color);
+    background: var(--waline-disable-bg-color);
+    color: var(--waline-disable-color);
+    cursor: not-allowed
+}
+
+.wl-avatar {
+    position: relative;
+    width: var(--waline-avatar-size);
+    height: var(--waline-avatar-size);
+    margin: 0 auto;
+    border: var(--waline-border);
+    border-radius: var(--waline-avatar-radius)
+}
+
+.wl-btn.primary {
+    color: #000 !important
+}
+
+.wl-btn.primary:active,
+.wl-btn.primary:hover {
+    color: #000 !important
+}
+
+.wl-user-list .wl-user-item:nth-child(1) .wl-user-badge {
+    color: #000 !important
+}
+
+.wl-user-list .wl-user-item:nth-child(2) .wl-user-badge {
+    color: #000 !important
+}
+
+.wl-user-list .wl-user-item:nth-child(3) .wl-user-badge {
+    color: #000 !important
+}
+
+.wl-power {
+    color: #666 !important
+}
+
+[data-waline] hr {
+    border-color: #272727 !important
+}
+
+[data-waline] code,
+[data-waline] pre {
+    background: #272727 !important
+}
+
+[data-waline] p {
+    color: #888 !important
+}
+
+[data-waline] pre code {
+    padding: 0;
+    background: rgba(0, 0, 0, 0);
+    color: #888 !important;
+    white-space: pre-wrap;
+    word-break: keep-all
+}
+
+.wl-panel {
+    border: 1px solid #333 !important;
+    background: #1e1e1e !important
+}
+
+.wl-header {
+    border-bottom: 2px dashed #333 !important
+}
+
+.wl-editor:focus,
+.wl-input:focus {
+    background: #272727 !important
+}
+
+.wl-emoji-popup {
+    border: var(--waline-border);
+    background: #1e1e1e !important
+}
+
+.wl-emoji-popup button:hover {
+    background: #444 !important
+}
+
+.wl-emoji-popup .wl-tab.active {
+    border: 1px solid #333 !important;
+    background: #1e1e1e !important
+}
+
+.wl-emoji-popup .wl-tabs::before {
+    background: #333 !important
+}
+
+.wl-gif-popup {
+    border: 1px solid #333 !important;
+    background: #1e1e1e !important
+}
+
+.wl-gif-popup input {
+    border: 1px solid #333 !important
+}
+
+.wl-close-icon {
+    color: #333 !important
+}
+
+[data-waline] blockquote {
+    border-inline-start: 8px solid #272727 !important;
+    color: #999 !important
+}
+
+.wl-card span.wl-nick {
+    color: #999 !important
+}
+
+.wl-card {
+    border-bottom: 1px dashed #333 !important
+}
+
+.wl-card .wl-meta>span {
+    background: #272727 !important;
+    color: #666 !important
+}
+
+.wl-count,
+.wl-reaction-title {
+    color: #ebeced
+}
+
+.wl-content .wl-tex {
+    background: #272727 !important;
+    color: #666 !important
+}
+
+.wl-user-list .wl-user-badge {
+    background: #272727 !important;
+    color: #666 !important
+}
+
+.wl-cards .wl-user .verified-icon {
+    background: #1e1e1e !important
+}
+
+.wl-reaction-votes {
+    background: #1e1e1e !important
+}
+
+.wl-reaction-item.active .wl-reaction-votes {
+    color: var(--waline-bg-color)
+}
+
+.wl-info .wl-text-number {
+    color: #666 !important
+}
+
+.wl-card .wl-time {
+    color: #666 !important
+}
+
+.wl-sort li {
+    color: #666 !important
+}
+
+@media(max-width:580px) {
+    .wl-header-item:not(:last-child) {
+        border-bottom: 2px dashed #333 !important
+    }
 }
 
 .joinform {
     max-width: 400px;
     margin: 0 auto;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1)
 }
 
 #join_inner_container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center
 }
 
 #join_input_container {
     width: 100%;
-    margin-bottom: 15px;
+    margin-bottom: 15px
 }
 
 #join_input {
     width: 100%;
     padding: 10px;
     border: 1px solid #ced4da;
-    border-radius: 8px;
+    border-radius: 8px
 }
 
 #join_button_container {
-    width: 100%;
+    width: 100%
 }
 
 #join_button {
@@ -1277,15 +1519,15 @@ media-mute-button:hover {
     cursor: pointer;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center
 }
 
 #join_button i {
-    margin-left: 5px;
+    margin-left: 5px
 }
 
 .chat_container {
-    margin: 0 auto;
+    margin: 0 auto
 }
 
 #chat_inner_container {
@@ -1293,9 +1535,9 @@ media-mute-button:hover {
     padding: 10px;
     border-radius: 8px;
     background-color: var(--white-80-alpha);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
     flex-direction: column;
-    height: 60vh;
+    height: 60vh
 }
 
 #chat_content_container {
@@ -1305,12 +1547,12 @@ media-mute-button:hover {
     padding: 10px;
     background-color: var(--);
     border-radius: 8px;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, .05)
 }
 
 #chat_input_container {
     display: flex;
-    align-items: center;
+    align-items: center
 }
 
 #chat_input {
@@ -1318,7 +1560,7 @@ media-mute-button:hover {
     margin-right: 10px;
     padding: 10px;
     border: 1px solid #ced4da;
-    border-radius: 8px;
+    border-radius: 8px
 }
 
 #chat_input_send {
@@ -1329,23 +1571,23 @@ media-mute-button:hover {
     border-radius: 8px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center
 }
 
 #chat_input_send.enabled {
     background-color: #007bff;
-    cursor: pointer;
+    cursor: pointer
 }
 
 #chat_input_send:disabled {
     background-color: #6c757d;
-    cursor: not-allowed;
+    cursor: not-allowed
 }
 
 #chat_logout_container {
     margin-top: 5px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-end
 }
 
 #chat_logout {
@@ -1356,11 +1598,11 @@ media-mute-button:hover {
     cursor: pointer;
     border: none;
     padding: 5px;
-    border-radius: 8px;
+    border-radius: 8px
 }
 
 .message_container {
-    margin-bottom: 10px;
+    margin-bottom: 10px
 }
 
 .message_content_container {
@@ -1369,30 +1611,30 @@ media-mute-button:hover {
     border-radius: 8px;
     display: inline-block;
     white-space: pre-wrap;
-    word-wrap: break-word;
+    word-wrap: break-word
 }
 
 .message_content {
-    font-weight: normal;
+    font-weight: 400;
     font-size: 14px;
     margin: 0;
-    color: #495057;
+    color: #495057
 }
 
 .message_inner_container {
     display: flex;
-    flex-direction: column;
+    flex-direction: column
 }
 
 .message_user_container {
-    margin-bottom: 5px;
+    margin-bottom: 5px
 }
 
 .message_user {
     margin: 0;
     font-size: var(--font-size--small);
-    font-weight: bold;
-    color: #007bff;
+    font-weight: 700;
+    color: #007bff
 }
 
 .loader_container {
@@ -1414,7 +1656,6 @@ media-mute-button:hover {
     border-right: 6px solid var(--apple-white)
 }
 
-/*GDMP*/
 #gdmp {
     position: fixed;
     left: 50%;
@@ -1428,13 +1669,19 @@ media-mute-button:hover {
     max-width: 90%;
     overflow: hidden;
     border-radius: 10px;
-    box-shadow: 0 0 10px 2px rgb(0, 0, 0);
+    box-shadow: 0 0 10px 2px #000
 }
 
 #gdmp media-controller {
     width: auto;
     max-width: 90%;
-    overflow: hidden;
+    overflow: hidden
+}
+
+.loading-spinner {
+    text-align: center;
+    color: var(--apple-white);
+    padding: 20px;
 }
 
 #loadingSpinner {
@@ -1448,50 +1695,50 @@ media-mute-button:hover {
     border-radius: 50%;
     width: 120px;
     height: 120px;
-    animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite
 }
 
 .pb-100 {
-    padding-bottom: 100px !important;
+    padding-bottom: 100px !important
 }
 
 .tips-btn {
     border: none;
-    background: none;
+    background: 0 0;
     color: var(--apple-white)
 }
 
 #next-btn {
-    float: right;
+    float: right
 }
 
 #prev-btn {
-    float: left;
+    float: left
 }
 
-#prev-btn,
-#next-btn {
+#next-btn,
+#prev-btn {
     width: auto;
-    background: none;
+    background: 0 0;
     border: none;
-    outline: none;
+    outline: 0;
     cursor: pointer;
     padding-left: 20px;
     padding-right: 20px;
     z-index: 9999;
-    transition: transform 0.3s ease, color 0.3s ease;
+    transition: transform .3s ease, color .3s ease;
     font-size: var(--font-size--medium);
-    color: var(--apple-black);
+    color: var(--apple-black)
 }
 
-#prev-btn:hover,
-#next-btn:hover {
-    transform: scale(1.2);
+#next-btn:hover,
+#prev-btn:hover {
+    transform: scale(1.2)
 }
 
 #contents,
-#file-tree,
-#demo {
+#demo,
+#file-tree {
     border-radius: 10px;
     max-width: 90%;
     margin: 0 auto;
@@ -1499,7 +1746,7 @@ media-mute-button:hover {
     margin-bottom: 10px;
     justify-content: center;
     color: var(--apple-white);
-    background-color: var(--black-60-alpha);
+    background-color: var(--black-60-alpha)
 }
 
 a.download {
@@ -1507,22 +1754,22 @@ a.download {
     align-items: center;
     margin-left: 10px;
     text-decoration: none;
-    color: var(--focus-blue-100);
+    color: var(--focus-blue-100)
 }
 
 #intro {
-    margin-bottom: 5px;
+    margin-bottom: 5px
 }
 
 .track-container {
     display: flex;
     align-items: center;
-    margin-bottom: -0.6em;
+    margin-bottom: -.6em
 }
 
 button.track {
     border: none;
-    background: none;
+    background: 0 0;
     text-align: left;
     background-color: var(--white-60-alpha);
     color: var(--apple-black);
@@ -1536,22 +1783,22 @@ button.track {
 button.track i {
     margin-right: 10px;
     font-size: var(--font-size--small);
-    vertical-align: middle;
+    vertical-align: middle
 }
 
 button.track:last-of-type {
-    margin-bottom: 15px;
+    margin-bottom: 15px
 }
 
 button.track:first-of-type {
-    margin-top: 0px;
+    margin-top: 0
 }
 
 a.download {
     margin-left: 10px;
     text-decoration: none;
     color: var(--expressive-green);
-    cursor: pointer;
+    cursor: pointer
 }
 
 .playing {
@@ -1559,12 +1806,12 @@ a.download {
 }
 
 #parentfolder {
-    width: 50%;
+    width: 50%
 }
 
 @keyframes spin {
     0% {
-        transform: rotate(0deg)
+        transform: rotate(0)
     }
 
     100% {
@@ -1577,16 +1824,16 @@ a.download {
     position: relative;
     float: right;
     right: 15px;
-    top: 5px;
+    top: 5px
 }
 
 .bar {
-    background: slategray;
+    background: #708090;
     bottom: 0;
     height: .1em;
     position: absolute;
     width: 3px;
-    animation: sound 1s cubic-bezier(.17, .37, .43, .67) infinite alternate;
+    animation: sound 1s cubic-bezier(.17, .37, .43, .67) infinite alternate
 }
 
 @keyframes sound {
@@ -1602,23 +1849,23 @@ a.download {
 }
 
 .bar:nth-child(1) {
-    left: 0em;
-    animation-duration: 0.6s
+    left: 0;
+    animation-duration: .6s
 }
 
 .bar:nth-child(2) {
     left: .25em;
-    animation-duration: 0.4s
+    animation-duration: .4s
 }
 
 .bar:nth-child(3) {
-    left: .50em;
+    left: .5em;
     animation-duration: 1.2s
 }
 
 .bar:nth-child(4) {
     left: .75em;
-    animation-duration: 0.5s
+    animation-duration: .5s
 }
 
 #spinner {
@@ -1635,28 +1882,28 @@ a.download {
     position: absolute;
     width: 22px;
     height: 22px;
-    margin: 0px;
+    margin: 0;
     border: 4px solid var(--gray-20);
     border-radius: 50%;
-    animation: spinner 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    animation: spinner 1.2s cubic-bezier(.5, 0, .5, 1) infinite;
     border-color: var(--gray-20) transparent transparent transparent
 }
 
 #spinner div:nth-child(1) {
-    animation-delay: -0.45s
+    animation-delay: -.45s
 }
 
 #spinner div:nth-child(2) {
-    animation-delay: -0.3s
+    animation-delay: -.3s
 }
 
 #spinner div:nth-child(3) {
-    animation-delay: -0.15s
+    animation-delay: -.15s
 }
 
 @keyframes spinner {
     0% {
-        transform: rotate(0deg)
+        transform: rotate(0)
     }
 
     100% {
@@ -1665,40 +1912,40 @@ a.download {
 }
 
 details summary {
-    padding: 5px;
+    padding: 5px
 }
 
 button.track,
 details .p,
 summary {
-    font-size: var(--font-size--small);
+    font-size: var(--font-size--small)
 }
 
 summary span {
     padding-right: 20px;
-    font-weight: 500;
+    font-weight: 500
 }
 
 details {
     border: #28a745 !important;
-    margin-bottom: 10px;
+    margin-bottom: 10px
 }
 
 details details {
-    margin-left: 15px;
+    margin-left: 15px
 }
 
 details details:last-of-type {
-    margin-bottom: 10px;
+    margin-bottom: 10px
 }
 
-@media only screen and (max-width: 575.98px) {
+@media only screen and (max-width:575.98px) {
     #tips {
-        font-size: 12px;
+        font-size: 12px
     }
 
     .tooltip {
-        display: none !important;
+        display: none !important
     }
 
     media-volume-range {
@@ -1708,22 +1955,22 @@ details details:last-of-type {
     .modal {
         width: 90%;
         margin: 0 auto;
-        padding: 20px;
+        padding: 20px
     }
 
     #gdmp media-controller {
-        width: 50%;
+        width: 50%
     }
 
     .chat-btn {
         width: 30px;
         height: 30px;
-        font-size: 15px;
+        font-size: 15px
     }
 
     .rad-icon {
         max-width: 40px;
-        height: auto;
+        height: auto
     }
 
     #chat_input {
@@ -1732,51 +1979,50 @@ details details:last-of-type {
     }
 
     #intro {
-        margin: 0.2em auto 0 auto;
+        margin: .2em auto 0 auto
     }
 
     .itunes-item {
-        display: block;
+        display: block
     }
 
     #player {
-        width: calc(100% - 70px);
+        width: calc(100% - 70px)
     }
 
-    #stationName,
+    #copyIcon,
     #metadata,
-    #copyIcon {
-        font-size: 13px;
+    #stationName {
+        font-size: 13px
     }
 
     .chat-btn {
         width: 50px;
-        height: 50px;
+        height: 50px
     }
 
-    .section-title h1,
-    .p-btn {
-        font-size: 14px;
+    .p-btn,
+    .section-title h1 {
+        font-size: 14px
     }
 
-    button.track,
-    summary,
-    #stationName,
-    .card-bg,
     #resultsContainer,
-    .search-card,
-    .message_user,
+    #stationName,
     .LinksItemLink,
+    .card-bg,
     .message_content,
-    .message_user {
-        font-size: 12px;
+    .message_user,
+    .search-card,
+    button.track,
+    summary {
+        font-size: 12px
     }
 
     .button-label {
-        font-size: 12px;
+        font-size: 12px
     }
 
     .genre-content {
-        max-height: 300px;
+        max-height: 300px
     }
 }

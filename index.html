@@ -231,15 +231,15 @@
                     </div>
                 </div>
                 <div id="genre-select" class="mb-3">
-                    <button class="genre-btn" data-genre="jmusic">Anime OSTs, J-POP, J-ROCK</button>
+                    <button class="genre-btn" data-genre="jmusic">Japanese-Music</button>
+                    <button class="genre-btn" data-genre="anime">Anime-Music</button>
+                    <button class="genre-btn" data-genre="vocaloid">Vocaloid, Touhou, Vtuber</button>
+                    <button class="genre-btn" data-genre="jpradio">Japanese Radios</button>
                     <button class="genre-btn" data-genre="kmusic">Korean-Music</button>
                     <button class="genre-btn" data-genre="cmusic">Chinese-Music</button>
-                    <button class="genre-btn" data-genre="nightcore">Nightcore</button>
-                    <button class="genre-btn" data-genre="anime">Anime Music</button>
-                    <button class="genre-btn" data-genre="vocaloid">Vocaloid, Touhou, Vtuber</button>
-                    <button class="genre-btn" data-genre="variety">Variety</button>
                     <button class="genre-btn" data-genre="bgm">BGM</button>
-                    <button class="genre-btn" data-genre="jpradio">Japanese Radios</button>
+                    <button class="genre-btn" data-genre="variety">Variety</button>
+                    <button class="genre-btn" data-genre="nightcore">Nightcore</button>
                 </div>
                 <div class="input-group mb-1">
                     <input type="search" id="sasalelesearch" autofocus class="form-control"
@@ -247,14 +247,14 @@
                 </div>
                 <div id="radio-content">
                     <ul id="jmusic" class="genre-content"></ul>
-                    <ul id="kmusic" class="genre-content"></ul>
-                    <ul id="cmusic" class="genre-content"></ul>
-                    <ul id="nightcore" class="genre-content"></ul>
                     <ul id="anime" class="genre-content"></ul>
                     <ul id="vocaloid" class="genre-content"></ul>
-                    <ul id="variety" class="genre-content"></ul>
-                    <ul id="bgm" class="genre-content"></ul>
                     <ul id="jpradio" class="genre-content"></ul>
+                    <ul id="kmusic" class="genre-content"></ul>
+                    <ul id="cmusic" class="genre-content"></ul>
+                    <ul id="bgm" class="genre-content"></ul>
+                    <ul id="variety" class="genre-content"></ul>
+                    <ul id="nightcore" class="genre-content"></ul>
                 </div>
 
             </div>
@@ -327,12 +327,15 @@
                                         <a href="" class="lang-link" data-lang="en">English</a>
                                     </div>
                                 </div>
-                                <div id="lang-info" class="ml-auto mb-2">
-                                    <strong><span id="lang-name"></span></strong>
-                                    <strong> (<span id="stream-count"></span>)</strong>
+                                <div id="lang-info" class="ml-auto">
+                                    <span class="badge badge-light mr-1"><span id="lang-name"></span></span>
+                                    <span class="badge badge-secondary"><span id="stream-count"></span> streams</span>
                                 </div>
                             </div>
                             <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-search"></i></span>
+                                </div>
                                 <input type="text" id="searchStream" class="form-control" placeholder="Filter a stream">
                             </div>
                             <div id="video-list" class="list-group"></div>
@@ -367,7 +370,8 @@
                     <div class="mb-1">
                         <div class="col-md-12">
                             <span class="badge badge-dark">Last.fm</span>
-                            <ul id="lastfmList" class="list-group text-center mb-2"></ul>
+                            <div id="lastfmList" class="list-group mb-2">
+                            </div>
                         </div>
                         <div class="col-md-12">
                             <span class="badge badge-dark">Deezer</span>
@@ -649,7 +653,7 @@
                 </div>
             </div>
             <section class="footer text-center" id="footer">
-                <div class="container">
+                <div class="page-info">
                     <p class="mb-1">
                         This site is currently under development. Some features may experience issues. We appreciate
                         your understanding.
@@ -664,10 +668,12 @@
                             <i class="fab fa-github"></i>
                         </a>
                     </div>
-                    <p>Last updated: 2025/3/17 </p>
+                    <p class="last-updated">Last updated: 2025/3/25</p>
                     <p>© 2023-2025 Sasalele-Music-Station</p>
                     <div class="progress-container">
-                        <p>Site operated for: <span id="liveTime"></span></p>
+                        <p>Site operated for: <span id="liveTime"></span> | Views: <span
+                                class="waline-pageview-count" />
+                        </p>
                         <div class="mdui-progress">
                             <div class="mdui-progress-indeterminate"></div>
                         </div>
@@ -685,6 +691,7 @@
                 el: '#waline',
                 serverURL: 'https://sasalele-comment.vercel.app/',
                 lang: 'en',
+                pageview: true,
             });
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-v4-rtl/4.6.2-1/js/bootstrap.min.js"></script>

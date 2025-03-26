@@ -48,14 +48,6 @@
         "homepage": "https://patchwork.moekyun.me/radio"
     },
     {
-        "url": "http://s8.citrus3.com:8200/stream",
-        "name": "TJS Japanese Radio Station (http)",
-        "host": "icecast",
-        "genre": "jmusic",
-        "favicon": "assets/radios/tjsradio.webp",
-        "homepage": "https://www.tjsla.com/"
-    },
-    {
         "url": "https://listen.nekonetwork.moe:8400/anime.mp3",
         "host": "unknown",
         "name": "Neko-Network Live Platform (Not24/7)",
@@ -79,6 +71,14 @@
         "genre": "bgm",
         "favicon": "assets/radios/gameoverse.webp",
         "homepage": "https://www.gameoverse.com/radio/"
+    },
+    {
+        "url": "https://shsbbs.net:8443/stream",
+        "host": "unknown",
+        "name": "Shurato's Heavenly Sphere",
+        "genre": "bgm",
+        "favicon": "assets/radios/Unidentified2.webp",
+        "homepage": "http://shsbbs.ddns.net/"
     },
     {
         "url": "https://pub0202.101.ru:8443/stream/trust/mp3/128/266",
@@ -148,9 +148,8 @@
         "homepage": "https://futuregroove.jp/fm/"
     },
     {
-        "url": "https://streaming.hotmixradio.fr/hotmix-japan-en-mp3",
-        "api": "fr.hotmixradiojapan",
-        "host": "special",
+        "url": "https://streaming.hotmixradio.com/hotmix-japan-en-mp3",
+        "host": "icecast",
         "name": "Hotmix Japan",
         "genre": "bgm",
         "favicon": "assets/radios/hotmix.webp",
@@ -337,20 +336,28 @@
         "homepage": "https://top-radio.org/china/jilin-music-fm927/"
     },
     {
-        "url": "https://stream2.bbnradio.org:8443/korean",
-        "host": "unknown",
-        "name": "BBN Korean (dead)",
+        "url": "https://streams.radiomast.io/678de728-1691-4eb7-bf37-057bcc9b12f5",
+        "host": "icecast",
+        "name": "BBN Korean",
         "genre": "kmusic",
         "favicon": "assets/radios/bbnkorean.webp",
-        "homepage": "https://bbn1.bbnradio.org/korean/%ED%99%88/"
+        "homepage": "https://bbn1.bbnradio.org/korean/"
     },
     {
-        "url": "https://cast6.asurahosting.com/proxy/kpopreplay/stream",
-        "host": "unknown",
-        "name": "Radio K-Pop Replay",
+        "url": "https://streams.radiomast.io/a622d414-52a6-4426-b3b8-ed2a4dbb704b",
+        "host": "icecast",
+        "name": "BBN Japan",
+        "genre": "jpradio",
+        "favicon": "assets/radios/bbnkorean.webp",
+        "homepage": "https://bbn1.bbnradio.org/japanese/"
+    },
+    {
+        "url": "https://stream.zeno.fm/etuhm2ry72quv",
+        "host": "zeno",
+        "name": "Radio Zero",
         "genre": "kmusic",
-        "favicon": "assets/radios/radiokpopreplay.webp",
-        "homepage": "https://www.kpopreplay.com/?m=1"
+        "favicon": "assets/radios/radiozero.png",
+        "homepage": "https://onlineradiobox.com/pe/oriente983/"
     },
     {
         "url": "https://onair.radiokorea.com/index.html?sid=1",
@@ -499,7 +506,7 @@
     {
         "url": "https://stream.zeno.fm/nrdwvpzc9huvv",
         "host": "zeno",
-        "name": "Kalavrat FM (not active)",
+        "name": "Kalavrat FM (inactive)",
         "genre": "jmusic",
         "favicon": "assets/radios/kalavrat.webp",
         "homepage": "https://zeno.fm/radio/kalavratfm/"
@@ -881,6 +888,14 @@
         "homepage": "http://www.bcc.com.tw/"
     },
     {
+        "url": "https://server10.reliastream.com/proxy/radiohayama?mp=/stream&1742810285360",
+        "name": "Radio Hayama",
+        "host": "unknown",
+        "genre": "jpradio",
+        "favicon": "assets/radios/radiohayama.png",
+        "homepage": "https://radiohayama.com"
+    },
+    {
         "api": "jp.tligjapanese",
         "url": "https://stream.tligradio.org/listen/japanese/radio.mp3",
         "name": "True Life in God Radio Japanese",
@@ -888,6 +903,54 @@
         "genre": "jpradio",
         "favicon": "assets/radios/tligjapanese.webp",
         "homepage": "https://tligradio.org/"
+    },
+    {
+        "url": "http://s8.citrus3.com:8200/stream",
+        "name": "TJS Japanese Radio Station (http)",
+        "host": "icecast",
+        "genre": "jpradio",
+        "favicon": "assets/radios/tjsradio.webp",
+        "homepage": "https://www.tjsla.com/"
+    },
+    {
+        "url": "https://s3.radio.co/sc8d895604/listen",
+        "name": "Ashiya Radio〜アシヤ・ラヂヲ〜",
+        "host": "icecast",
+        "genre": "jpradio",
+        "favicon": "assets/radios/ashiyaradio.png",
+        "homepage": "https://www.ashiya.radio/"
+    },
+    {
+        "url": "https://sv10.hdradios.net:21920/stream",
+        "name": "Radio Shiga",
+        "host": "unknown",
+        "genre": "jpradio",
+        "favicon": "assets/radios/radioshiga.png",
+        "homepage": "https://www.wp.radioshiga.com/"
+    },
+    {
+        "url": "https://stream3.rcast.net/70945",
+        "name": "SOUND UP STATION NFRS",
+        "host": "unknown",
+        "genre": "jpradio",
+        "favicon": "assets/radios/soundup.jpg",
+        "homepage": "https://www.nfrsradio.com/"
+    },
+    {
+        "url": "http://us4.internet-radio.com:8059/live",
+        "name": "エフエムひめ（ＦＭ－ＨＩＭＥ）",
+        "host": "unknown",
+        "genre": "jpradio",
+        "favicon": "assets/radios/fmhime.jpg",
+        "homepage": "http://e.radiojapan.org/embed/ehuemuhimefm-hime-475146"
+    },
+    {
+        "url": "https://fmsetagaya834.out.airtime.pro/fmsetagaya834_a",
+        "name": "83.4MHz FMSETAGAYA（ｴﾌｴﾑ世田谷）",
+        "host": "unknown",
+        "genre": "jpradio",
+        "favicon": "assets/websites/fmsetagaya.webp",
+        "homepage": "https://fmsetagaya834.airtime.pro/#"
     },
     {
         "url": "https://stream.zeno.fm/6vytsnbkb8zuv",
@@ -972,7 +1035,7 @@
     {
         "url": "http://shsbbs.net:8888/;?type=http&nocache=3",
         "host": "unknown",
-        "name": "Shurato's Anime OST Radio (not active)",
+        "name": "Shurato's Anime OST Radio (inactive)",
         "genre": "anime",
         "favicon": "assets/radios/Unidentified.webp",
         "homepage": "http://shsbbs.net:8888/index.html?sid=1"
@@ -984,14 +1047,6 @@
         "genre": "anime",
         "favicon": "assets/radios/Unidentified.webp",
         "homepage": "https://178.132.0.27:8020/stream"
-    },
-    {
-        "url": "https://listen.pianetabwebradio.it:8000/radio.mp3",
-        "name": "PianetaB WebRadio (dead)",
-        "host": "icecast",
-        "genre": "bgm",
-        "favicon": "assets/radios/pianetabwebradio.webp",
-        "homepage": "https://www.pianetabwebradio.it/"
     },
     {
         "url": "http://stream.tsubakianimeradio.com:9000/play.mp3",
@@ -1018,7 +1073,7 @@
         "homepage": "https://radionami.com/"
     },
     {
-        "url": "http://5.9.2.139:8000/any-anime.ru",
+        "url": "https://theonestopradio.com/stream?url=http://radionami.com:8000/any-anime.ru",
         "host": "unknown",
         "name": "Radio Nami(320kbps) (open in new tab)",
         "genre": "jmusic",
@@ -1244,12 +1299,12 @@
         "homepage": "https://www.animenexusla.com/"
     },
     {
-        "url": "https://stream.zeno.fm/zaa6hw1yznwuv",
-        "host": "zeno",
+        "url": "https://canada1.reliastream.com/proxy/danser?mp=/stream&nocache=1",
+        "host": "unknown",
         "name": "Kawaii Anime Radio",
         "genre": "anime",
         "favicon": "assets/radios/KawaiiAnimeRadio.webp",
-        "homepage": "https://tunein.com/radio/Kawaii-Anime-Radio-s232606/"
+        "homepage": "https://www.150141.xyz/"
     },
     {
         "url": "https://radioaoi.stream/stream?nocache",
@@ -1373,9 +1428,9 @@
     {
         "url": "https://stream.laut.fm/animefm",
         "host": "lautfm",
-        "name": "EIN HERZ FÜR MANGA UND ANIME",
+        "name": "Anime KN",
         "genre": "anime",
-        "favicon": "assets/radios/ANIMEFM.webp",
+        "favicon": "assets/radios/animekn.jpg",
         "homepage": "https://laut.fm/animefm"
     },
     {
@@ -1899,14 +1954,6 @@
         "homepage": "https://laut.fm/la_casa_de_wegeh"
     },
     {
-        "url": "https://stream.laut.fm/matzzteg",
-        "name": "MATZZTEG (not active)",
-        "host": "lautfm",
-        "genre": "nightcore",
-        "favicon": "assets/radios/MATZZTEG.webp",
-        "homepage": "https://laut.fm/matzzteg"
-    },
-    {
         "url": "https://stream.laut.fm/nightcorelena",
         "name": "NIGHTCORELENA",
         "host": "lautfm",
@@ -2041,6 +2088,958 @@
         "genre": "anime",
         "favicon": "assets/radios/animaxvtuberradio.webp",
         "homepage": "https://zeno.fm/radio/animax-radio-fm/"
+    },
+    {
+        "url": "https://stream.zeno.fm/u21krkwhqc9uv",
+        "host": "zeno",
+        "name": "Angelwing",
+        "genre": "jmusic",
+        "favicon": "assets/radios/angelwing.webp",
+        "homepage": "https://zeno.fm/radio/angelwing/"
+    },
+    {
+        "url": "https://stream.zeno.fm/ck6qp0y3qxhvv",
+        "host": "zeno",
+        "name": "Classic Jp Songs",
+        "genre": "jmusic",
+        "favicon": "assets/radios/classicjp.webp",
+        "homepage": "https://zeno.fm/radio/classic-jp-songs/"
+    },
+    {
+        "url": "https://stream.zeno.fm/jpnfkqtehiiuv",
+        "host": "zeno",
+        "name": "For prep and review of Holy",
+        "genre": "vocaloid",
+        "favicon": "assets/radios/forprep.webp",
+        "homepage": "https://zeno.fm/radio/for-prep-and-review-of-holy-pnrc/"
+    },
+    {
+        "url": "https://stream.zeno.fm/dvseorx3juhuv",
+        "host": "zeno",
+        "name": "J-POP CHANNEL",
+        "genre": "jmusic",
+        "favicon": "assets/radios/jpop-channel.jpg",
+        "homepage": "https://zeno.fm/radio/j-pop-channel-ewyh/"
+    },
+    {
+        "url": "https://stream.zeno.fm/1h0dt522fchvv",
+        "host": "zeno",
+        "name": "kaori.odriscoll",
+        "genre": "anime",
+        "favicon": "assets/radios/kaori.webp",
+        "homepage": "https://zeno.fm/radio/kaori-odriscoll/"
+    },
+    {
+        "url": "https://stream.zeno.fm/3tgiqle0bdpvv",
+        "host": "zeno",
+        "name": "Kobo FM",
+        "genre": "vocaloid",
+        "favicon": "assets/radios/kobofm.webp",
+        "homepage": "https://zeno.fm/radio/kobo-fm/"
+    },
+    {
+        "url": "https://stream.zeno.fm/fx4wy0596zhvv",
+        "host": "zeno",
+        "name": "Nightmare ナイトメア Web Radio",
+        "genre": "anime",
+        "favicon": "assets/radios/nightmareradio.webp",
+        "homepage": "https://zeno.fm/radio/ny5wy0596zhvv/"
+    },
+    {
+        "url": "https://stream.zeno.fm/vctanf5yeeivv",
+        "host": "zeno",
+        "name": "Radwimps Radio",
+        "genre": "anime",
+        "favicon": "assets/radios/radwimpsradio.webp",
+        "homepage": "https://zeno.fm/radio/radwimps-radio/"
+    },
+    {
+        "url": "https://stream.zeno.fm/fikt91bftwauv",
+        "host": "zeno",
+        "name": "smack baby smack2",
+        "genre": "anime",
+        "favicon": "assets/radios/smackradio.webp",
+        "homepage": "https://zeno.fm/radio/smack-baby-smack2/"
+    },
+    {
+        "url": "https://stream.laut.fm/abw-radio",
+        "host": "lautfm",
+        "name": "ABW-Radio",
+        "genre": "anime",
+        "favicon": "assets/radios/abwradio.jpg",
+        "homepage": "https://laut.fm/abw-radio"
+    },
+    {
+        "url": "https://stream.zeno.fm/samx2y3qbv8uv",
+        "host": "zeno",
+        "name": "Rádio KANIME - A rádio que ANIMA",
+        "genre": "anime",
+        "favicon": "assets/radios/kanime.webp",
+        "homepage": "https://zeno.fm/radio/kanime/"
+    },
+    {
+        "url": "https://stream.zeno.fm/ku1dzpwbxgpvv",
+        "host": "zeno",
+        "name": "Anime Music",
+        "genre": "anime",
+        "favicon": "assets/radios/animemusic.webp",
+        "homepage": "https://zeno.fm/radio/anime-music-vxct/"
+    },
+    {
+        "url": "https://stream.zeno.fm/h6k99379ka0uv",
+        "host": "zeno",
+        "name": "Anime Music (Animy)LIVE",
+        "genre": "anime",
+        "favicon": "assets/radios/animy.webp",
+        "homepage": "https://zeno.fm/radio/ani-my/"
+    },
+    {
+        "url": "https://stream.zeno.fm/7kzzqb4d2ltuv",
+        "host": "zeno",
+        "name": "Anime Radio R-K LIVE",
+        "genre": "anime",
+        "favicon": "assets/radios/animeradiork.webp",
+        "homepage": "https://zeno.fm/radio/anime-radio-r-k/"
+    },
+    {
+        "url": "https://stream.zeno.fm/99d8y4haw81uv",
+        "host": "zeno",
+        "name": "Anime Stars Stream",
+        "genre": "anime",
+        "favicon": "assets/radios/animestars.webp",
+        "homepage": "https://zeno.fm/radio/anime-stars-stream/"
+    },
+    {
+        "url": "https://stream.zeno.fm/egt5sgfgzs8uv",
+        "host": "zeno",
+        "name": "Asian World Radio Latina",
+        "genre": "vocaloid",
+        "favicon": "assets/radios/asianradiolatina.webp",
+        "homepage": "https://zeno.fm/radio/asian-world-radio-latina/"
+    },
+    {
+        "url": "https://streamingv2.shoutcast.com/BlueAnimeIvana",
+        "host": "unknown",
+        "name": "Blue Anime Ivana",
+        "genre": "anime",
+        "favicon": "assets/radios/blueanimeivana.jpg",
+        "homepage": "https://www.facebook.com/BlueAnimeIvana/"
+    },
+    {
+        "url": "https://stream.zeno.fm/6cyjqwlkz4ptv",
+        "host": "zeno",
+        "name": "Cinz Net",
+        "genre": "jmusic",
+        "favicon": "assets/radios/cinznet.webp",
+        "homepage": "https://cinz.net/"
+    },
+    {
+        "url": "https://stream.zeno.fm/a3obszgguyvvv",
+        "host": "zeno",
+        "name": "Tokyo radio",
+        "genre": "jmusic",
+        "favicon": "assets/radios/tokyoradio.webp",
+        "homepage": "https://zeno.fm/radio/tokyo-radio/"
+    },
+    {
+        "url": "https://s5.radio.co/se9b1b7728/listen",
+        "host": "unknown",
+        "name": "Crystal Tokyo Radio",
+        "genre": "anime",
+        "favicon": "assets/radios/sailorsoap.webp",
+        "homepage": "https://sailorsoapbox.com/crystaltokyoradio/"
+    },
+    {
+        "url": "https://stream.zeno.fm/g52qhzccy7uuv",
+        "host": "zeno",
+        "name": "Ev_s Anime and J-Pop mix",
+        "genre": "anime",
+        "favicon": "assets/radios/Ev_sAnime.webp",
+        "homepage": "https://zeno.fm/radio/ev_s-anime-and-j-pop-mix/"
+    },
+    {
+        "url": "https://tunein-live-b.cdnstream1.com/3960_128.mp3",
+        "host": "unknown",
+        "name": "CALM RADIO - JPOP",
+        "genre": "jmusic",
+        "favicon": "assets/radios/calmradiojpop.jpg",
+        "homepage": "https://tunein.com/radio/J-POP-s290626/"
+    },
+    {
+        "url": "https://streams.calmradio.com:22028/stream/1/",
+        "host": "unknown",
+        "name": "CALM RADIO - KPOP",
+        "genre": "kmusic",
+        "favicon": "assets/radios/calmradiokpop.jpg",
+        "homepage": "https://tunein.com/radio/K-POP-s290627/"
+    },
+    {
+        "url": "https://stream.zeno.fm/kandgeolb2wtv",
+        "host": "zeno",
+        "name": "Clásica Kpop",
+        "genre": "kmusic",
+        "favicon": "assets/websites/zenofm.webp",
+        "homepage": "https://zeno.fm/radio/clasica-fm-radio/"
+    },
+    {
+        "url": "https://stream.zeno.fm/szkjrz1cuwdtv",
+        "host": "zeno",
+        "name": "My Music K-pop",
+        "genre": "anime",
+        "favicon": "assets/radios/mymusickpop.webp",
+        "homepage": "https://zeno.fm/radio/my-music-k-pop/"
+    },
+    {
+        "url": "https://stream.zeno.fm/myyz6vr4qa0uv",
+        "host": "zeno",
+        "name": "ESENCIA KPop",
+        "genre": "anime",
+        "favicon": "assets/radios/esenciakpop2.webp",
+        "homepage": "https://zeno.fm/radio/esencia-kpop/"
+    },
+    {
+        "url": "https://ascl.denial.cl:2020/stream/8026",
+        "host": "unknown",
+        "name": "Fanática KPOP",
+        "genre": "kmusic",
+        "favicon": "assets/radios/fanatica.png",
+        "homepage": "https://www.fanatica.cl/radiochannel/kpop/"
+    },
+    {
+        "url": "https://altair.streamerr.co/stream/gamersoundradio",
+        "host": "icecast",
+        "name": "Gamer Sound Radio",
+        "genre": "bgm",
+        "favicon": "assets/radios/gamersound.jpg",
+        "homepage": "https://gamersoundradio.com/"
+    },
+    {
+        "url": "https://radio.gamesboro.org/listen/gamesboro_radio/radio.mp3",
+        "host": "icecast",
+        "name": "Gamesboro Radio",
+        "genre": "bgm",
+        "favicon": "assets/radios/gamesboro.jpg",
+        "homepage": "https://radio.gamesboro.org/public/gamesboro_radio"
+    },
+    {
+        "url": "https://stream.zeno.fm/h4hpqkxsxxquv",
+        "host": "zeno",
+        "name": "GEEK RADIO LATINO AMERICA",
+        "genre": "anime",
+        "favicon": "assets/radios/geekradioamerica.webp",
+        "homepage": "https://zeno.fm/radio/geekradioM/"
+    },
+    {
+        "url": "https://stream.zeno.fm/mdqlmcnm4oyvv",
+        "host": "zeno",
+        "name": "Haru Radio Music",
+        "genre": "anime",
+        "favicon": "assets/radios/haruradio.webp",
+        "homepage": "https://zeno.fm/radio/haru-radio-music/"
+    },
+    {
+        "url": "https://streaming.hotmixradio.com/hotmix-gaming-en-mp3",
+        "host": "icecast",
+        "name": "Hotmix Gaming",
+        "genre": "bgm",
+        "favicon": "assets/radios/hotmixgaming.webp",
+        "homepage": "https://zeno.fm/radio/hotmix-gaming/"
+    },
+    {
+        "url": "https://stream.zeno.fm/wp5znzgw768uv",
+        "host": "zeno",
+        "name": "Naruto Music Radio",
+        "genre": "anime",
+        "favicon": "assets/radios/narutomusic.webp",
+        "homepage": "https://zeno.fm/radio/naruto-music-radio/"
+    },
+    {
+        "url": "https://streaming.hotmixradio.com/hotmix-k-pop-en-mp3",
+        "host": "icecast",
+        "name": "Hotmix K-Pop",
+        "genre": "kmusic",
+        "favicon": "assets/radios/hotmixkpop.webp",
+        "homepage": "https://web.hotmixradio.com/en"
+    },
+    {
+        "url": "https://stream.zeno.fm/dfagfsqxmtmuv",
+        "host": "zeno",
+        "name": "Isekai Anime Radio",
+        "genre": "anime",
+        "favicon": "assets/radios/isekaianimeradio.webp",
+        "homepage": "https://zeno.fm/radio/isekai-anime-radio-2ea3/"
+    },
+    {
+        "url": "https://stream.zeno.fm/qv9qmnsqxkztv",
+        "host": "zeno",
+        "name": "Japan pop-Music Concert",
+        "genre": "anime",
+        "favicon": "assets/radios/japanpop.webp",
+        "homepage": "https://zeno.fm/radio/japan-pop-music-concert/"
+    },
+    {
+        "url": "https://stream.zeno.fm/ut9b5nuwejotv",
+        "host": "zeno",
+        "name": "JavWorld-AnimeMusic",
+        "genre": "jmusic",
+        "favicon": "assets/radios/javworld.webp",
+        "homepage": "https://zeno.fm/radio/javworld-animemusic/"
+    },
+    {
+        "url": "https://stream.zeno.fm/xytn45srp7zuv",
+        "host": "zeno",
+        "name": "JOVEM KPOP",
+        "genre": "kmusic",
+        "favicon": "assets/radios/jovemkpop.webp",
+        "homepage": "https://zeno.fm/radio/jovem-kpop/"
+    },
+    {
+        "url": "https://stream.zeno.fm/24y9zac7kfhvv",
+        "host": "zeno",
+        "name": "Jpop Jrock",
+        "genre": "anime",
+        "favicon": "assets/radios/jpopjrock.webp",
+        "homepage": "https://zeno.fm/radio/jpop-jrock/"
+    },
+    {
+        "url": "https://s67.radiolize.com/radio/8130/radio.mp3",
+        "host": "icecast",
+        "name": "K-Drama OST Radio",
+        "genre": "kmusic",
+        "favicon": "assets/radios/kdramaost.jpg",
+        "homepage": "https://kdramaradio.com/"
+    },
+    {
+        "url": "https://server.dacsolution.com.br/shoutcast3/listen.mp3",
+        "host": "unknown",
+        "name": "K-Pop Brasil",
+        "genre": "kmusic",
+        "favicon": "assets/radios/kpopbrasil.jpg",
+        "homepage": "https://kpopbrasil.com.br/"
+    },
+    {
+        "url": "https://stream.zeno.fm/k6uhaebgpxhvv",
+        "host": "zeno",
+        "name": "K-pop DTC Radio",
+        "genre": "kmusic",
+        "favicon": "assets/radios/kpopdtc.webp",
+        "homepage": "https://zeno.fm/radio/DTCKPOP/"
+    },
+    {
+        "url": "https://stream.zeno.fm/qgznmhs0pp8uv",
+        "host": "zeno",
+        "name": "K-POP GALAXY",
+        "genre": "kmusic",
+        "favicon": "assets/radios/kpopgalaxy.webp",
+        "homepage": "https://zeno.fm/radio/kpopgalaxy/"
+    },
+    {
+        "url": "https://listen.radioking.com/radio/677089/stream/741367",
+        "host": "unknown",
+        "name": "K-Pop Highway Radio",
+        "genre": "kmusic",
+        "favicon": "assets/radios/kpophighway.webp",
+        "homepage": "https://kpophighwayradio.com/"
+    },
+    {
+        "url": "https://ice-1.streamhoster.com/lv_kpophrusa--broadcast1",
+        "host": "unknown",
+        "name": "K-Pop Highway USA",
+        "genre": "kmusic",
+        "favicon": "assets/radios/kpophighway.webp",
+        "homepage": "https://kpophighwayradio.com/"
+    },
+    {
+        "url": "https://stream.zeno.fm/aebyki1euhmvv",
+        "host": "zeno",
+        "name": "K-pop Radio",
+        "genre": "kmusic",
+        "favicon": "assets/radios/kpoprad.png",
+        "homepage": "https://zeno.fm/radio/k-pop-radio/"
+    },
+    {
+        "url": "https://stream.zeno.fm/fw039tkxpuhvv",
+        "host": "zeno",
+        "name": "KPOP Radio - 케이팝",
+        "genre": "kmusic",
+        "favicon": "assets/radios/KPOPRADIO2.webp",
+        "homepage": "https://zeno.fm/radio/boxkpop/"
+    },
+    {
+        "url": "https://stream.zeno.fm/jbyg6yefs10vv",
+        "host": "zeno",
+        "name": "Kpop Radio chile",
+        "genre": "kmusic",
+        "favicon": "assets/radios/kpopchile.webp",
+        "homepage": "https://zeno.fm/radio/kpop-radio-pkqc/"
+    },
+    {
+        "url": "https://stream.zeno.fm/5p97ktpxcfhvv",
+        "host": "zeno",
+        "name": "Kpop Radio south africa",
+        "genre": "kmusic",
+        "favicon": "assets/radios/kpopsa.webp",
+        "homepage": "https://zeno.fm/radio/kpop-radiot278ktpxcfhvv/"
+    },
+    {
+        "url": "https://stream.zeno.fm/ng859c6wa0hvv",
+        "host": "zeno",
+        "name": "KPop Radio South Korean",
+        "genre": "kmusic",
+        "favicon": "assets/radios/kpopks.webp",
+        "homepage": "https://zeno.fm/radio/k-pop-fm/"
+    },
+    {
+        "url": "https://stream.zeno.fm/4rprufcp6e9uv",
+        "host": "zeno",
+        "name": "K-Pop Music",
+        "genre": "kmusic",
+        "favicon": "assets/radios/Unidentified2.webp",
+        "homepage": "https://zeno.fm/radio/k-pop-musicku5uufcp6e9uv/"
+    },
+    {
+        "url": "https://stream.zeno.fm/5hpzhz9sz7zuv",
+        "host": "zeno",
+        "name": "Animerockradio",
+        "genre": "anime",
+        "favicon": "assets/radios/Animerockradio.webp",
+        "homepage": "https://zeno.fm/radio/animerockradio/"
+    },
+    {
+        "url": "https://stream.zeno.fm/5gx6tc5tn8quv",
+        "host": "zeno",
+        "name": "Radio Animes z",
+        "genre": "anime",
+        "favicon": "assets/radios/radioanimez.webp",
+        "homepage": "https://zeno.fm/radio/radio-animes-z/"
+    },
+    {
+        "url": "https://stream.zeno.fm/stbkeky5d4duv",
+        "host": "zeno",
+        "name": "Kpop Radio PN",
+        "genre": "kmusic",
+        "favicon": "assets/radios/kpoppn.webp",
+        "homepage": "https://zeno.fm/radio/KpopRadioPN/"
+    },
+    {
+        "url": "https://stream.zeno.fm/grzipgtdf0luv",
+        "host": "zeno",
+        "name": "k-popped",
+        "genre": "kmusic",
+        "favicon": "assets/radios/k-popped.webp",
+        "homepage": "https://zeno.fm/radio/k-popped/"
+    },
+    {
+        "url": "https://dijimedya.radyotvonline.net/kpop",
+        "host": "icecast",
+        "name": "Kiss K-Pop",
+        "genre": "kmusic",
+        "favicon": "assets/radios/kisskpop.png",
+        "homepage": "https://zeno.fm/"
+    },
+    {
+        "url": "https://stream.zeno.fm/0phhicoudtvuv",
+        "host": "zeno",
+        "name": "Korean",
+        "genre": "kmusic",
+        "favicon": "assets/radios/korean.webp",
+        "homepage": "https://zeno.fm/radio/korean/"
+    },
+    {
+        "url": "https://stream.zeno.fm/m82t62nxbuhvv",
+        "host": "zeno",
+        "name": "Korean Pop",
+        "genre": "kmusic",
+        "favicon": "assets/radios/koreanpop.webp",
+        "homepage": "https://zeno.fm/radio/korean-pop/"
+    },
+    {
+        "url": "https://stream.zeno.fm/3xqdxg2rqp8uv",
+        "host": "zeno",
+        "name": "KPOP",
+        "genre": "kmusic",
+        "favicon": "assets/radios/sobreosidol.webp",
+        "homepage": "https://zeno.fm/"
+    },
+    {
+        "url": "https://s140.radiolize.com/radio/8110/radio.mp3",
+        "host": "icecast",
+        "name": "Kpop Girl Groups Radio",
+        "genre": "kmusic",
+        "favicon": "assets/radios/kpopgirlgroup.webp",
+        "homepage": "https://u550250.wixsite.com/kpopgirlgroupradio"
+    },
+    {
+        "url": "https://stream.zeno.fm/gnagffwhbfcvv",
+        "host": "zeno",
+        "name": "KPOP GIRLS CHART",
+        "genre": "kmusic",
+        "favicon": "assets/radios/kpop-girls-chart.webp",
+        "homepage": "https://zeno.fm/radio/kpop-girls-chart/"
+    },
+    {
+        "url": "https://stream.zeno.fm/rlv8rmzzz5qvv",
+        "host": "zeno",
+        "name": "kpop radio peru",
+        "genre": "kmusic",
+        "favicon": "assets/radios/kpopradioperu.webp",
+        "homepage": "https://zeno.fm/radio/kpop-radio-fegp/"
+    },
+    {
+        "url": "https://stream.zeno.fm/bovjaksvooytv",
+        "host": "zeno",
+        "name": "Kpop Radio canada",
+        "genre": "kmusic",
+        "favicon": "assets/websites/zenofm.webp",
+        "homepage": "https://zeno.fm/radio/kpop-radio-ufnz/"
+    },
+    {
+        "url": "https://stream.zeno.fm/vm5mq7p62k8uv",
+        "host": "zeno",
+        "name": "LATAM OTAKUS FM",
+        "genre": "jmusic",
+        "favicon": "assets/radios/latamotakus.webp",
+        "homepage": "https://zeno.fm/radio/latam-otakus-fm/"
+    },
+    {
+        "url": "https://live.m40radio.fr/listen/m40-j-pop/m40-j-pop-128.mp3",
+        "host": "icecast",
+        "name": "M40 J-Pop",
+        "genre": "jmusic",
+        "favicon": "assets/radios/M4OJPOP.jpg",
+        "homepage": "https://m40radio.fr/webradios/toutes-les-radios/"
+    },
+    {
+        "url": "https://live.m40radio.fr/listen/m40-k-pop/m40-k-pop-128.mp3",
+        "host": "icecast",
+        "name": "M40 K-Pop",
+        "genre": "kmusic",
+        "favicon": "assets/radios/M40KPOP.jpg",
+        "homepage": "https://m40radio.fr/webradios/toutes-les-radios/"
+    },
+    {
+        "url": "https://stream.zeno.fm/ljvla7jvinkvv",
+        "host": "zeno",
+        "name": "MANGA OTAKU",
+        "genre": "variety",
+        "favicon": "assets/radios/mangaotaku.webp",
+        "homepage": "https://zeno.fm/radio/manga-otaku/"
+    },
+    {
+        "url": "https://stream.zeno.fm/btpvxpndf18uv",
+        "host": "zeno",
+        "name": "Más Radio Kpop",
+        "genre": "kmusic",
+        "favicon": "assets/radios/Masradiokp.webp",
+        "homepage": "https://zeno.fm/radio/mas-kpop7s5vxpndf18uv/"
+    },
+    {
+        "url": "https://stream.mexradio.hu:8014/kpop",
+        "host": "unknown",
+        "name": "Mex Rádió - K-Pop",
+        "genre": "kmusic",
+        "favicon": "assets/radios/MexKPOP.webp",
+        "homepage": "https://zeno.fm/radio/mex-radio-k-pop-online/"
+    },
+    {
+        "url": "https://stream.zeno.fm/mh5b8qx82k0uv",
+        "host": "zeno",
+        "name": "Mix 96",
+        "genre": "kmusic",
+        "favicon": "assets/radios/mix96.webp",
+        "homepage": "https://zeno.fm/radio/mix-96/"
+    },
+    {
+        "url": "https://stream.zeno.fm/a59xxze9t18uv",
+        "host": "zeno",
+        "name": "Moon Music 4K",
+        "genre": "kmusic",
+        "favicon": "assets/radios/moonmusic4k.jpg",
+        "homepage": "https://onlineradiobox.com/kr/moonmusickpop/"
+    },
+    {
+        "url": "https://stream.zeno.fm/0vni80kgt5ctv",
+        "host": "zeno",
+        "name": "Radio Anime Music",
+        "genre": "variety",
+        "favicon": "assets/radios/radioanimemusic.webp",
+        "homepage": "https://zeno.fm/radio/radio-anime-music/"
+    },
+    {
+        "url": "https://stream.zeno.fm/zifpyfabkaxuv",
+        "host": "zeno",
+        "name": "Neko Radio",
+        "genre": "kmusic",
+        "favicon": "assets/radios/nekoradio.webp",
+        "homepage": "https://zeno.fm/radio/neko-radio/"
+    },
+    {
+        "url": "https://stream.zeno.fm/4dtngnyxgrhvv",
+        "host": "zeno",
+        "name": "Ninetysix KPop",
+        "genre": "kmusic",
+        "favicon": "assets/radios/ninetysixkpop2.webp",
+        "homepage": "https://zeno.fm/radio/ninetysix-kpop/"
+    },
+    {
+        "url": "https://stream.zeno.fm/w1vz87pgx4zuv",
+        "host": "zeno",
+        "name": "NyaRadio Anime",
+        "genre": "anime",
+        "favicon": "assets/radios/nyaradioanime.webp",
+        "homepage": "https://zeno.fm/radio/chitogeRadio/"
+    },
+    {
+        "url": "https://stream.zeno.fm/1q3q30xcu68uv",
+        "host": "zeno",
+        "name": "NyaRadio KPOP",
+        "genre": "anime",
+        "favicon": "assets/radios/nyaradiokpop.webp",
+        "homepage": "https://zeno.fm/radio/nyaradio-kpop/"
+    },
+    {
+        "url": "https://stream.zeno.fm/tza2ayy47qruv",
+        "host": "zeno",
+        "name": "Unidentified",
+        "genre": "anime",
+        "favicon": "assets/radios/Unidentified.webp",
+        "homepage": "https://zeno.fm/"
+    },
+    {
+        "url": "https://stream.zeno.fm/rr0t8247368uv",
+        "host": "zeno",
+        "name": "Otaku 89.8 FM",
+        "genre": "anime",
+        "favicon": "assets/radios/Otaku89.8.webp",
+        "homepage": "https://zeno.fm/radio/otaku88-fmqs1u8247368uv/"
+    },
+    {
+        "url": "https://stream.zeno.fm/b3b242btezzuv",
+        "host": "zeno",
+        "name": "Otaku Music Radio",
+        "genre": "anime",
+        "favicon": "assets/radios/otakumusicradio2.webp",
+        "homepage": "https://zeno.fm/radio/otaku-music-radio/"
+    },
+    {
+        "url": "https://stream.zeno.fm/b3b242btezzuv",
+        "host": "zeno",
+        "name": "Otaku Visual Radio",
+        "genre": "jmusic",
+        "favicon": "assets/radios/otakuvisualradio.webp",
+        "homepage": "https://zeno.fm/radio/otaku-visual-radio/"
+    },
+    {
+        "url": "https://stream.zeno.fm/uv63fy1tvlbvv",
+        "host": "zeno",
+        "name": "Radio Power Kpop",
+        "genre": "kmusic",
+        "favicon": "assets/radios/radiopowerkpop2.webp",
+        "homepage": "https://zeno.fm/radio/radio-power-kpop-o8nt/"
+    },
+    {
+        "url": "https://stream.zeno.fm/cfkr6vdd5zhvv",
+        "host": "zeno",
+        "name": "Princess Kawaii Anime",
+        "genre": "anime",
+        "favicon": "assets/radios/princesskawaii.webp",
+        "homepage": "https://zeno.fm/radio/princess-kawaii-anime/"
+    },
+    {
+        "url": "https://on.yamato.cl/radio/8010/play",
+        "host": "icecast",
+        "name": "Proyecto Yamato",
+        "genre": "anime",
+        "favicon": "assets/radios/yamato.png",
+        "homepage": "https://www.yamato.cl/"
+    },
+    {
+        "url": "https://stm16.painelcast.com:6728/default",
+        "host": "unknown",
+        "name": "Rádio AMC",
+        "genre": "jmusic",
+        "favicon": "assets/radios/radioamc.jpg",
+        "homepage": "https://www.radioamc.com.br/"
+    },
+    {
+        "url": "https://centova4.transmissaodigital.com:20143/principal",
+        "host": "unknown",
+        "name": "Radio Blast",
+        "genre": "jmusic",
+        "favicon": "assets/radios/radioblast.jpg",
+        "homepage": "https://redeblast.com/"
+    },
+    {
+        "url": "https://elfen-tchat.fr:8443/elfen",
+        "host": "unknown",
+        "name": "Radio Elfen-Tchat",
+        "genre": "variety",
+        "favicon": "assets/radios/radio-elfen-tchat.jpg",
+        "homepage": "https://kserv-tchat.fr"
+    },
+    {
+        "url": "https://antonyokumura.radioca.st/;?nocache=1",
+        "host": "icecast",
+        "name": "Radio GO!",
+        "genre": "anime",
+        "favicon": "assets/radios/radiogo.jpg",
+        "homepage": "https://radiogolatino.blogspot.com/"
+    },
+    {
+        "url": "https://stream.zeno.fm/dpjpxmiwm8yvv",
+        "host": "zeno",
+        "name": "Radio Idol (Anime)",
+        "genre": "anime",
+        "favicon": "assets/radios/radioidol.webp",
+        "homepage": "https://zeno.fm/radio/radio-idol-anime/"
+    },
+    {
+        "url": "https://ec5.yesstreaming.net:1360/stream",
+        "host": "unknown",
+        "name": "Rádio Mais",
+        "genre": "kmusic",
+        "favicon": "assets/radios/radiomais.jpg",
+        "homepage": "https://rmaisbr.com/"
+    },
+    {
+        "url": "https://stream.zeno.fm/76kkytuq98quv",
+        "host": "zeno",
+        "name": "Radio Kpop chile",
+        "genre": "kmusic",
+        "favicon": "assets/radios/radiokpopchile.webp",
+        "homepage": "https://zeno.fm/radio/radio-k-pop-music/"
+    },
+    {
+        "url": "https://hs1.radiolibertymp.ro/listen/lmpkpop/stream.mp3",
+        "host": "icecast",
+        "name": "radioliterty mp kpop",
+        "genre": "kmusic",
+        "favicon": "assets/radios/radiolitertympkpop.jpg",
+        "homepage": "https://radiolibertymp.ro/"
+    },
+    {
+        "url": "https://stream.zeno.fm/vzfg2p64wp8uv",
+        "host": "zeno",
+        "name": "Radio Otaku-Station",
+        "genre": "jmusic",
+        "favicon": "assets/radios/radiootakusts.webp",
+        "homepage": "https://zeno.fm/radio/radio-otaku-station/"
+    },
+    {
+        "url": "https://kuronegai.radioca.st/stream",
+        "host": "icecast",
+        "name": "RadioDoki",
+        "genre": "vocaloid",
+        "favicon": "assets/radios/radiodoki.jpg",
+        "homepage": "https://www.radiodoki.com/"
+    },
+    {
+        "url": "https://nos.radio.br/stream/15/;",
+        "host": "unknown",
+        "name": "RadioNOS - Chiptune Channel",
+        "genre": "bgm",
+        "favicon": "assets/radios/Unidentified2.webp",
+        "homepage": "https://radionos.com.br/site/chiptune-channel/"
+    },
+    {
+        "url": "https://rs103-krk.rmfstream.pl/GAMEMUSIC",
+        "host": "unknown",
+        "name": "RMF GameMusic",
+        "genre": "bgm",
+        "favicon": "assets/radios/rmfgamemusic.jpg",
+        "homepage": "https://fmstream.org/rmf-gamemusic-live"
+    },
+    {
+        "url": "https://streamer.radio.co/s5d7f2937d/listen?",
+        "host": "unknown",
+        "name": "Sakura Radio",
+        "genre": "jpradio",
+        "favicon": "assets/radios/sakuraradio.jpg",
+        "homepage": "https://sakuraradio.com/"
+    },
+    {
+        "url": "https://stream.zeno.fm/inwcl4kygfmuv",
+        "host": "zeno",
+        "name": "Sweet K-POP FM",
+        "genre": "kmusic",
+        "favicon": "assets/radios/sweetkpop.jpg",
+        "homepage": "https://zeno.fm/"
+    },
+    {
+        "url": "https://stream.zeno.fm/e6y99sgetc9uv",
+        "host": "zeno",
+        "name": "The New Korean Pop Radio",
+        "genre": "kmusic",
+        "favicon": "assets/radios/newkoreanpop.webp",
+        "homepage": "https://zeno.fm/radio/the-new-korean-pop-radio/"
+    },
+    {
+        "url": "https://kpop-jakeradiomasterserver.radioca.st/stream",
+        "host": "icecast",
+        "name": "The plug - kpop",
+        "genre": "kmusic",
+        "favicon": "assets/radios/theplugkpop.jpg",
+        "homepage": "https://onlineradiobox.com/kr/theplugk-pop/"
+    },
+    {
+        "url": "https://stream.zeno.fm/pcym7wjhcxeuv",
+        "host": "zeno",
+        "name": "Yamato",
+        "genre": "bgm",
+        "favicon": "assets/radios/yamotochina.webp",
+        "homepage": "https://zeno.fm/radio/yamato-1n2y/"
+    },
+    {
+        "url": "https://live-bauerdk.sharp-stream.com/RP36_premium_96.aac?nocache=1",
+        "host": "unknown",
+        "name": "The Voice K-Pop",
+        "genre": "kmusic",
+        "favicon": "assets/radios/thevoicekpop.jpg",
+        "homepage": "https://radioplay.dk/the-voice-k-pop/"
+    },
+    {
+        "url": "https://28153.live.streamtheworld.com/TOFU_POP_RADIOAAC_128.aac;",
+        "host": "unknown",
+        "name": "Tofu Pop Radio",
+        "genre": "kmusic",
+        "favicon": "assets/radios/tofupop.png",
+        "homepage": "https://tofupopradio.teroradio.com/"
+    },
+    {
+        "url": "https://stream.zeno.fm/typtfbad508uv",
+        "host": "zeno",
+        "name": "Vocaloid",
+        "genre": "vocaloid",
+        "favicon": "assets/radios/vocaloids.webp",
+        "homepage": "https://zeno.fm/"
+    },
+    {
+        "url": "https://stream.zeno.fm/lagvkkuks1lvv",
+        "host": "zeno",
+        "name": "Vocaloid by New",
+        "genre": "vocaloid",
+        "favicon": "assets/radios/vocaloidbynew.webp",
+        "homepage": "https://zeno.fm/radio/vocaloid-by-new/"
+    },
+    {
+        "url": "https://stream.zeno.fm/lz76plut0fwuv",
+        "host": "zeno",
+        "name": "Vocaloid Nostalgia",
+        "genre": "vocaloid",
+        "favicon": "assets/radios/VocaloidNostalgia.webp",
+        "homepage": "https://zeno.fm/radio/vocaloid-nostalgia/"
+    },
+    {
+        "url": "https://stream.zeno.fm/f8bqguf6bvtuv",
+        "host": "zeno",
+        "name": "Volcaloid2",
+        "genre": "vocaloid",
+        "favicon": "assets/radios/volcaloid2.webp",
+        "homepage": "https://zeno.fm/radio/volcaloid2/"
+    },
+    {
+        "url": "https://cheetah.streemlion.com:3650/;?type=http&nocache=1",
+        "host": "unknown",
+        "name": "West Loves East Radio (WLER)",
+        "genre": "variety",
+        "favicon": "assets/radios/westloveseast.jpg",
+        "homepage": "https://www.westloveseastradio.net/"
+    },
+    {
+        "url": "https://streaming.exclusive.radio/er-app/jpop/icecast.audio",
+        "host": "unknown",
+        "name": "World Music Radio - J-Pop",
+        "genre": "jmusic",
+        "favicon": "assets/radios/worldmusicradiojpop.jpg",
+        "homepage": "https://you.radio/station/258"
+    },
+    {
+        "url": "https://streaming.exclusive.radio/er-app/kpop/icecast.audio",
+        "host": "unknown",
+        "name": "World Music Radio - K-Pop",
+        "genre": "kmusic",
+        "favicon": "assets/radios/worldmusicradiokpop.jpg",
+        "homepage": "https://you.radio/station/259"
+    },
+    {
+        "url": "https://stream.zeno.fm/pveuxumb7f8uv",
+        "host": "zeno",
+        "name": "XenFM- JPOP",
+        "genre": "jmusic",
+        "favicon": "assets/radios/xenfmjpop.webp",
+        "homepage": "https://zeno.fm/radio/xenfm-jpop/"
+    },
+    {
+        "url": "https://radioamc.com.br/stream/yeeaah",
+        "host": "unknown",
+        "name": "POLIDORO FM",
+        "genre": "variety",
+        "favicon": "assets/radios/POLIDOROFM.jpg",
+        "homepage": "https://polidoroplay.yeeaah.com.br/p/polidoro-fm.html"
+    },
+    {
+        "url": "https://streaming.live365.com/a35885",
+        "host": "unknown",
+        "name": "Amanogawa Express",
+        "genre": "jmusic",
+        "favicon": "assets/radios/amanogawaexpress.jpg",
+        "homepage": "https://live365.com/station/Amanogawa-Express-a35885"
+    },
+    {
+        "url": "https://streaming.live365.com/a39214",
+        "host": "unknown",
+        "name": "raste.live (geo-blocked)",
+        "genre": "jmusic",
+        "favicon": "assets/radios/rastelive.jpg",
+        "homepage": "https://live365.com/station/raste-live-a39214"
+    },
+    {
+        "url": "https://113fm-atunwadigital.streamguys1.com/1049",
+        "host": "unknown",
+        "name": "113FM Korean Pop",
+        "genre": "kmusic",
+        "favicon": "assets/radios/113fmkorean.jpg",
+        "homepage": "https://www.113.fm/all-channels"
+    },
+    {
+        "url": "https://radio35.virtualtronics.com:20040/;stream.nsv?nocache=1",
+        "host": "unknown",
+        "name": "Bamm Radio",
+        "genre": "kmusic",
+        "favicon": "assets/radios/bammradio.jpg",
+        "homepage": "https://nekowaves.com/station/bamm-radio/"
+    },
+    {
+        "url": "https://stream.zeno.fm/2a0phqp6yeutv",
+        "host": "zeno",
+        "name": "Radio animé fm",
+        "genre": "anime",
+        "favicon": "assets/radios/radio-anime-fm.webp",
+        "homepage": "https://zeno.fm/radio/radio-anime-fm/"
+    },
+    {
+        "url": "https://stream.zeno.fm/m3q63rd29heuv",
+        "host": "zeno",
+        "name": "Anime Carabobo Radio",
+        "genre": "anime",
+        "favicon": "assets/radios/AnimeCarabobo.webp",
+        "homepage": "https://zeno.fm/radio/anime-carabobo-radio/"
+    },
+    {
+        "url": "https://stream.zeno.fm/khxzvvg0wc9uv",
+        "host": "zeno",
+        "name": "Rádio Desenho Animado",
+        "genre": "anime",
+        "favicon": "assets/radios/desenhoanimado.webp",
+        "homepage": "https://zeno.fm/radio/desenhosanimado/"
+    },
+    {
+        "url": "https://stream.zeno.fm/drzou83ma0avv",
+        "host": "zeno",
+        "name": "Anime Radio chile",
+        "genre": "bgm",
+        "favicon": "assets/radios/animeradchile.webp",
+        "homepage": "https://zeno.fm/radio/anime-radio-wpbu/"
     },
     {
         "url": "https://stream.zeno.fm/acnhrkt8c4duv",
@@ -2236,7 +3235,7 @@
     {
         "url": "https://radyo1.radyo-dinle.tc/8126/stream",
         "host": "unknown",
-        "name": "Japan Fans (dead)",
+        "name": "Japan Fans (offline)",
         "genre": "jmusic",
         "favicon": "assets/radios/JapanFans.webp",
         "homepage": "http://radyo1.radyo-dinle.tc:8126/index.html?sid=1"
@@ -2291,7 +3290,7 @@
         "homepage": "https://onlineradiobox.com/us/onlyhitjapan/"
     },
     {
-        "url": "https://stream.zeno.fm/tza2ayy47qruv",
+        "url": "https://stream.zeno.fm/s6mwnsyp9mruv",
         "host": "zeno",
         "name": "Opening Radio",
         "genre": "anime",
@@ -2369,6 +3368,15 @@
         "api": "us.yggdrasil",
         "url": "http://radio.shirayuki.org:9200/;&type=mp3",
         "name": "Yggdrasil Radio (http)",
+        "host": "special",
+        "genre": "anime",
+        "favicon": "assets/radios/YggdrasilRadio.webp",
+        "homepage": "https://yggdrasilradio.com/"
+    },
+    {
+        "api": "us.yggdrasil",
+        "url": "https://stream.rcast.net/70702",
+        "name": "Yggdrasil Radio",
         "host": "special",
         "genre": "anime",
         "favicon": "assets/radios/YggdrasilRadio.webp",
@@ -2475,6 +3483,14 @@
         "genre": "anime",
         "favicon": "assets/radios/Lazusanimeradio.webp",
         "homepage": "https://onlineradiobox.com/mx/lazusanime/"
+    },
+    {
+        "url": "https://stream.zeno.fm/hunkb8atfm8uv",
+        "host": "zeno",
+        "name": "RADIO ANIME MX",
+        "genre": "anime",
+        "favicon": "assets/radios/radioanimemx.jpg",
+        "homepage": "https://www.radioanime.mx/"
     },
     {
         "url": "https://azuracast.mahoro-net.org/listen/tsumugi/radio.mp3",
@@ -2823,7 +3839,7 @@
     {
         "url": "https://stream.zeno.fm/3hbymgzq1qvvv",
         "host": "zeno",
-        "name": "Vocaloid",
+        "name": "Vocaloid ru",
         "genre": "vocaloid",
         "favicon": "assets/radios/Vocaloid.webp",
         "homepage": "https://zeno.fm/radio/vocaloid/"
@@ -2871,7 +3887,7 @@
     {
         "url": "https://stream.zeno.fm/cemea6b26bhvv",
         "host": "zeno",
-        "name": "LOFIRADIOYO (not active)",
+        "name": "LOFIRADIOYO (inactive)",
         "genre": "bgm",
         "favicon": "assets/radios/LOFIRADIOYO.webp",
         "homepage": "https://zeno.fm/radio/underground-railroad-radio-nyc3hwfa6b26bhvv/"
@@ -2943,7 +3959,7 @@
     {
         "url": "https://stream.zeno.fm/qp5vjrxwiyhvv",
         "host": "zeno",
-        "name": "Retro Idol Japanese Music (not active)",
+        "name": "Retro Idol Japanese Music (inactive)",
         "genre": "jmusic",
         "favicon": "assets/radios/RetroIdolJapaneseMusic.webp",
         "homepage": "https://zeno.fm/radio/retro-idol-japanese-music/"
@@ -3023,7 +4039,7 @@
     {
         "url": "https://stream.zeno.fm/mfkqstngk5zuv",
         "host": "zeno",
-        "name": "Rádio Mirai (not active)",
+        "name": "Rádio Mirai (inactive)",
         "genre": "jpradio",
         "favicon": "assets/radios/RádioMirai.webp",
         "homepage": "https://zeno.fm/radio/radiomirai/"
@@ -3063,7 +4079,7 @@
     {
         "url": "https://free.rcast.net/65538",
         "host": "unknown",
-        "name": "All Anime Radio (dead)",
+        "name": "All Anime Radio",
         "genre": "anime",
         "favicon": "assets/radios/AllAnimeRadio.webp",
         "homepage": "https://mytuner-radio.com/radio/all-anime-radio-467661/"
@@ -3099,14 +4115,6 @@
         "genre": "anime",
         "favicon": "assets/radios/RADIOALFAANIME.webp",
         "homepage": "https://www.radioalfacanavese.it/radio-alfa-anime/"
-    },
-    {
-        "url": "http://184.154.45.106:8461/autodj",
-        "host": "icecast",
-        "name": "Fan World Anime Radio (dead)",
-        "genre": "anime",
-        "favicon": "assets/radios/FanWorldAnimeRadio.webp",
-        "homepage": "https://raddio.net/133785-fan-world-anime-radio/"
     },
     {
         "url": "https://stream-175.zeno.fm/5gf5dcwsvrhvv",
@@ -3315,7 +4323,7 @@
     {
         "url": "https://listen.siradio.fm/listen.pls/;stream.nsv&type=mp3&quot",
         "host": "unknown",
-        "name": "Split Infinity Radio 128kbps mp3",
+        "name": "Split Infinity Radio",
         "genre": "variety",
         "favicon": "assets/radios/splitinfinity.webp",
         "homepage": "https://siradio.fm/"
@@ -3336,6 +4344,14 @@
         "genre": "bgm",
         "favicon": "assets/radios/CultureFailure.webp",
         "homepage": "https://mytuner-radio.com/radio/culture-failure-415928/"
+    },
+    {
+        "url": "https://s97.radiolize.com:8040/radio.mp3",
+        "host": "icecast",
+        "name": "Shopen Anime Radio",
+        "genre": "bgm",
+        "favicon": "assets/radios/shopenanime.jpg",
+        "homepage": "https://tunein.radiohost.online/shopen-pk-anime-radio/"
     },
     {
         "api": "us.free1063",
@@ -3369,6 +4385,22 @@
         "genre": "jmusic",
         "favicon": "assets/radios/AzuraCast.webp",
         "homepage": "https://azuracast.shadowfr69.eu/public/shadowfr69_radio"
+    },
+    {
+        "url": "https://hear.moe/listen/muse/radio.mp3",
+        "name": "Muse",
+        "host": "icecast",
+        "genre": "jmusic",
+        "favicon": "assets/radios/AzuraCast.webp",
+        "homepage": "https://hear.moe/public/muse"
+    },
+    {
+        "url": "https://stm8.voxhd.com.br:7996/stream",
+        "name": "Rádio Nikey",
+        "host": "unknown",
+        "genre": "variety",
+        "favicon": "assets/radios/radionikkey.png",
+        "homepage": "https://www.radionikkeyweb.com.br/"
     },
     {
         "url": "https://relay.rainwave.cc/all.ogg",
@@ -3453,7 +4485,7 @@
         "api": "us.ambientsleepingpill",
         "url": "https://radio.stereoscenic.com/asp-s",
         "host": "special",
-        "name": "Ambient sleeping pill (dead)",
+        "name": "Ambient sleeping pill",
         "genre": "bgm",
         "favicon": "assets/radios/Ambientsleepingpill.webp",
         "homepage": "https://ambientsleepingpill.com/"
@@ -3662,6 +4694,54 @@
         "homepage": "https://www.fm-tsuyama.jp/"
     },
     {
+        "url": "https://d2kz66ab55q61t.cloudfront.net/red",
+        "name": "ゆめのたね レッドch",
+        "host": "unknown",
+        "genre": "jpradio",
+        "favicon": "assets/radios/yumenotane.png",
+        "homepage": "https://www.yumenotane.jp"
+    },
+    {
+        "url": "https://d2kz66ab55q61t.cloudfront.net/purple",
+        "name": "ゆめのたね パープルch",
+        "host": "unknown",
+        "genre": "jpradio",
+        "favicon": "assets/radios/yumenotane.png",
+        "homepage": "https://www.yumenotane.jp"
+    },
+    {
+        "url": "https://d2kz66ab55q61t.cloudfront.net/green",
+        "name": "ゆめのたね グリーンch",
+        "host": "unknown",
+        "genre": "jpradio",
+        "favicon": "assets/radios/yumenotane.png",
+        "homepage": "https://www.yumenotane.jp"
+    },
+    {
+        "url": "https://d2kz66ab55q61t.cloudfront.net/yellow",
+        "name": "ゆめのたね イエローch",
+        "host": "unknown",
+        "genre": "jpradio",
+        "favicon": "assets/radios/yumenotane.png",
+        "homepage": "https://www.yumenotane.jp"
+    },
+    {
+        "url": "https://d2kz66ab55q61t.cloudfront.net/blue",
+        "name": "ゆめのたね ブルーch",
+        "host": "unknown",
+        "genre": "jpradio",
+        "favicon": "assets/radios/yumenotane.png",
+        "homepage": "https://www.yumenotane.jp"
+    },
+    {
+        "url": "https://d2kz66ab55q61t.cloudfront.net/orange",
+        "name": "ゆめのたね オレンジch",
+        "host": "unknown",
+        "genre": "jpradio",
+        "favicon": "assets/radios/yumenotane.png",
+        "homepage": "https://www.yumenotane.jp"
+    },
+    {
         "api": "jp.hitsujikairadio",
         "url": "https://streaming.radio.co/se4a8e6a93/listen",
         "name": "羊飼いラジオHitsujikai Radio",
@@ -3726,10 +4806,10 @@
         "name": "Kpop Rewind",
         "genre": "kmusic",
         "favicon": "assets/radios/kpoprewind.webp",
-        "homepage": "https://onlineradiobox.com/mx/kpoprewind/"
+        "homepage": "https://zeno.fm/radio/KpopRewind/"
     },
     {
-        "url": "https://stream.zeno.fm/hkrivfrongdvv",
+        "url": "https://stream.zeno.fm/g761bky5d4duv",
         "host": "zeno",
         "name": "Kpop Radio PN",
         "genre": "kmusic",
@@ -3847,7 +4927,7 @@
         "homepage": "https://onlineradiobox.com/cr/kpophit/"
     },
     {
-        "url": "https://nl4.mystreaming.net/uber/sportifykpop/icecast.audio",
+        "url": "https://2.mystreaming.net/uber/sportifykpop/icecast.audio",
         "api": "ae.sportifykpop",
         "name": "Sportify - K-Pop Workout",
         "host": "special",
@@ -3939,7 +5019,7 @@
     {
         "url": "https://stream.laut.fm/kpophits",
         "host": "lautfm",
-        "name": "KPOPHITS",
+        "name": "Kpop Hits",
         "genre": "kmusic",
         "favicon": "assets/radios/KPOPHITS.webp",
         "homepage": "https://laut.fm/kpophits"

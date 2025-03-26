@@ -1,7 +1,11 @@
 [
   {
-    "title": "KBS World TV",
+    "title": "KBS World TV (dead)",
     "link": "https://kbsworld-ott.akamaized.net/hls/live/2002341/kbsworld/01.m3u8"
+  },
+  {
+    "title": "Kanade.cl",
+    "link": "https://streaming-cl.sh1ny.space/memfs/0e41fc31-9f44-46d4-8712-0446e2f3dcaa.m3u8"
   },
   {
     "title": "CGNTV Japan (1080p)",
@@ -60,8 +64,12 @@
     "link": "https://nhkworld.webcdn.stream.ne.jp/www11/radiojapan/all/263943/live_s.m3u8"
   },
   {
-    "title": "NHK World Premium (audio only)",
+    "title": "NHK World Premium (480p)",
     "link": "https://cdn.skygo.mn/live/disk1/NHK_World_Premium/HLSv3-FTA/NHK_World_Premium.m3u8"
+  },
+  {
+    "title": "NHK World-Japan (720p)",
+    "link": "https://master.nhkworld.jp/nhkworld-tv/playlist/live.m3u8"
   },
   {
     "title": "日テレNEWS24",
@@ -502,5 +510,121 @@
   {
     "title": "Tulip TV YouTube",
     "link": "https://ythls.armelin.one/channel/UCk4bgav5X0rlbGefFnPcuoQ.m3u8"
+  },
+  {
+    "title": "NHK Kishou Saigai (360p) [Not 24/7]",
+    "link": "https://newssimul-stream.nhk.jp/hls/live/2010561/nhknewssimul/master.m3u8"
+  },
+  {
+    "title": "Nippon TV (540p) [Not 24/7]",
+    "link": "https://ntv4.mov3.co/hls/ntv.m3u8"
+  },
+  {
+    "title": "WOWOW Live-test",
+    "link": "https://luong.utako.moe/wlive/index.m3u8"
+  },
+  {
+    "title": "WOWOW Cinema-test",
+    "link": "https://luong.utako.moe/wcinema/index.m3u8"
+  },
+  {
+    "title": "JSport 4-test",
+    "link": "https://luong.utako.moe/js4/index.m3u8"
+  },
+  {
+    "title": "JSport 3-test",
+    "link": "https://luong.utako.moe/js3/index.m3u8"
+  },
+  {
+    "title": "JSport 2-test",
+    "link": "https://luong.utako.moe/js2/index.m3u8"
+  },
+  {
+    "title": "JSport 1-test",
+    "link": "https://luong.utako.moe/js1/index.m3u8"
+  },
+  {
+    "title": "WOWOW Prime-test",
+    "link": "https://luong.utako.moe/wprime/index.m3u8"
+  },
+  {
+    "title": "BS NTV-test",
+    "link": "https://luong.utako.moe/bsntva11/index.m3u8"
+  },
+  {
+    "title": "NHK BS4K-test",
+    "link": "https://luong.utako.moe/bsp4k_testsignal/index.m3u8"
+  },
+  {
+    "title": "AT-X-test",
+    "link": "https://luong.utako.moe/at-x/index.m3u8"
+  },
+  {
+    "title": "TBS Channel 2-test",
+    "link": "https://luong.utako.moe/tbsch2/index.m3u8"
+  },
+  {
+    "title": "TBS Channel 1-test",
+    "link": "https://luong.utako.moe/tbsch1/index.m3u8"
+  },
+  {
+    "title": "QVC",
+    "link": "https://cdn-live1.qvc.jp/iPhone/1501/1501.m3u8"
+  },
+  {
+    "title": "ATX",
+    "link": "http://vthanh.utako.moe/AT-X/index.m3u8"
+  },
+  {
+    "title": "BS11",
+    "link": "http://vthanh.utako.moe/BS11/index.m3u8"
+  },
+  {
+    "title": "Animax",
+    "link": "http://vthanh.utako.moe/Animax/index.m3u8"
+  },
+  {
+    "title": "NHK BS",
+    "link": "http://vthanh.utako.moe/NHK_BS/index.m3u8"
+  },
+  {
+    "title": "TOKYO MX1",
+    "link": "http://vthanh.utako.moe/Tokyo_MX1/index.m3u8"
+  },
+  {
+    "title": "TV Tokyo",
+    "link": "http://vthanh.utako.moe/TV_Tokyo/index.m3u8"
+  },
+  {
+    "title": "TV Asahi",
+    "link": "http://vthanh.utako.moe/TV_Asahi/index.m3u8"
+  },
+  {
+    "title": "Fuji TV",
+    "link": "http://vthanh.utako.moe/Fuji_TV/index.m3u8"
+  },
+  {
+    "title": "TBS",
+    "link": "http://vthanh.utako.moe/TBS/index.m3u8"
+  },
+  {
+    "title": "NTV",
+    "link": "http://vthanh.utako.moe/Nippon_TV/index.m3u8"
+  },
+  {
+    "title": "NHK E",
+    "link": "http://vthanh.utako.moe/NHK_E/index.m3u8"
+  },
+  {
+    "title": "NHK G",
+    "link": "http://vthanh.utako.moe/NHK_G/index.m3u8"
+  },
+  {
+    "title": "Space Shower TV-test",
+    "link": "https://luong.utako.moe/spaceshower/index.m3u8"
+  },
+  {
+    "title": "Pigoo-test",
+    "link": "https://luong.utako.moe/pigoo/index.m3u8"
   }
 ]

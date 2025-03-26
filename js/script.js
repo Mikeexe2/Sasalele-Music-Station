@@ -382,14 +382,32 @@ document.addEventListener('DOMContentLoaded', () => {
     function loadGenre(genreToLoad) {
         const genreContainers = document.querySelectorAll('.genre-content');
         const selectedContainer = document.getElementById(genreToLoad);
+        const searchInput = document.getElementById('sasalelesearch');
 
-        genreContainers.forEach(container => container.classList.remove('active'));
+        searchInput.value = '';
+
+        genreContainers.forEach(container => {
+            container.classList.remove('active');
+            container.querySelectorAll('li').forEach(li => li.style.display = '');
+            const noResults = container.querySelector('.no-results');
+            if (noResults) noResults.remove();
+        });
 
         if (selectedContainer) {
-            const filteredData = window.genreData.filter(station => station.genre === genreToLoad);
-            const genreHTML = filteredData.map(station => `
-                <li>
-                    <img src="${station.favicon}" alt="${station.name}">
+            selectedContainer.innerHTML = '<div class="loading-spinner">Loading stations...</div>';
+            selectedContainer.classList.add('active');
+
+            setTimeout(() => {
+                const filteredData = window.genreData.filter(station => station.genre === genreToLoad);
+
+                if (filteredData.length === 0) {
+                    selectedContainer.innerHTML = '<p class="no-stations">No stations available in this genre</p>';
+                    return;
+                }
+
+                const genreHTML = filteredData.map(station => `
+                <li data-name="${station.name.toLowerCase()}">
+                    <img src="${station.favicon}" alt="${station.name}" onerror="this.src='default-station.png'">
                     <div class="info">
                         <h5>${station.name}</h5>
                     </div>
@@ -399,43 +417,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 </li>
             `).join('');
 
-            selectedContainer.innerHTML = genreHTML;
-            selectedContainer.classList.add('active');
+                selectedContainer.innerHTML = genreHTML;
+            }, 300);
         }
-        document.addEventListener('click', function (event) {
-            const target = event.target.closest('.download-button, .main-play-button');
-            if (!target) return;
-
-            event.preventDefault();
-            event.stopPropagation();
-
-            // Avoid multiple clicks on the same button
-            if (target.classList.contains('download-button')) {
-                handleDownloadClick(target);
-            } else if (target.classList.contains('main-play-button')) {
-                handlePlayClick(target);
-            }
-        });
-
-        RandomPlay.addEventListener('click', function () {
-            const stations = document.querySelectorAll('.genre-content li');
-            const randomIndex = Math.floor(Math.random() * stations.length);
-            const playButton = stations[randomIndex].querySelector('.main-play-button');
-            if (playButton) {
-                playButton.click();
-            }
-        });
     }
 
-    const debounce = (func, delay) => {
-        let timeout;
-        return function (...args) {
-            clearTimeout(timeout);
-            timeout = setTimeout(() => func.apply(this, args), delay);
-        };
-    };
+    // Improved random play that respects visibility
+    RandomPlay.addEventListener('click', function () {
+        const activeGenre = document.querySelector('.genre-content.active');
+        if (!activeGenre) return;
 
-    const handleDownloadClick = debounce((button) => {
+        const visibleStations = [...activeGenre.querySelectorAll('li:not([style*="display: none"])')];
+        if (visibleStations.length === 0) return;
+
+        const randomIndex = Math.floor(Math.random() * visibleStations.length);
+        const playButton = visibleStations[randomIndex].querySelector('.main-play-button');
+        playButton?.click();
+    });
+
+    function handleDownloadClick(button) {
         const parentLi = button.closest('li');
         const stationName = parentLi.querySelector('h5').textContent.trim();
         const media = window.genreData.find(st => st.name === stationName);
@@ -445,7 +445,23 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             console.error('Media not found:', stationName);
         }
-    }, 300);
+    }
+    // Event delegation for dynamic buttons
+    document.addEventListener('click', function (event) {
+        const target = event.target.closest('.download-button, .main-play-button');
+        if (!target) return;
+
+        // Throttle rapid clicks
+        if (target.hasAttribute('data-processing')) return;
+        target.setAttribute('data-processing', 'true');
+        setTimeout(() => target.removeAttribute('data-processing'), 1000);
+
+        if (target.classList.contains('download-button')) {
+            handleDownloadClick(target);
+        } else if (target.classList.contains('main-play-button')) {
+            handlePlayClick(target);
+        }
+    });
 
     function handlePlayClick(button) {
         const parentLi = button.closest('li');
@@ -465,6 +481,10 @@ document.addEventListener('DOMContentLoaded', () => {
             /;&type=mp3$/,
             /;?type=http&nocache$/,
             /jmusicid-backend\?type=http&nocache=2$/,
+            /\?type=http&nocache=1$/,
+            /stream&nocache=1$/,
+            /\?nocache=1$/,
+            /;stream\.nsv?nocache=$/,
             /\?type=http$/,
             /\?nocache$/,
             /;&type=mp3$/,
@@ -491,35 +511,35 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // search site's station function
+// Modified search function that works with genre loading
 document.getElementById('sasalelesearch').addEventListener('input', function () {
-    const searchTerm = this.value.toLowerCase();
-    const genreContents = document.querySelectorAll('.genre-content');
+    const searchTerm = this.value.toLowerCase().trim();
+    const activeGenre = document.querySelector('.genre-content.active');
 
-    if (searchTerm === '') {
-        genreContents.forEach(genre => {
-            const items = genre.querySelectorAll('li');
-            items.forEach(item => {
-                item.style.display = '';
-            });
-            genre.style.display = '';
-        });
-        return;
-    }
+    if (!activeGenre) return;
 
-    genreContents.forEach(genre => {
-        const items = genre.querySelectorAll('li');
-        let hasVisibleItem = false;
+    const items = activeGenre.querySelectorAll('li');
+    let hasVisibleItems = false;
 
-        items.forEach(item => {
-            const stationName = item.querySelector('h5') ? item.querySelector('h5').textContent.toLowerCase() : '';
-            if (stationName.includes(searchTerm)) {
-                item.style.display = '';
-                hasVisibleItem = true;
-            } else {
-                item.style.display = 'none';
-            }
-        });
+    items.forEach(item => {
+        const stationName = item.querySelector('h5')?.textContent.toLowerCase() || '';
+        const isMatch = searchTerm === '' || stationName.includes(searchTerm);
+        item.style.display = isMatch ? '' : 'none';
+        if (isMatch) hasVisibleItems = true;
     });
+
+    // Show "no results" message if needed
+    const noResultsMsg = activeGenre.querySelector('.no-results');
+    if (!hasVisibleItems && searchTerm) {
+        if (!noResultsMsg) {
+            const msg = document.createElement('p');
+            msg.className = 'no-results';
+            msg.textContent = 'No stations match your search';
+            activeGenre.appendChild(msg);
+        }
+    } else if (noResultsMsg) {
+        noResultsMsg.remove();
+    }
 });
 
 // Expand and minimize player
@@ -802,7 +822,7 @@ function createRadioList(radioStreams) {
 
     radioStreams.forEach((stream) => {
         const listItem = document.createElement("li");
-        listItem.classList.add("list-group-item", "list-group-item-action", "d-flex", "align-items-center");
+        listItem.classList.add("itunes-item", "d-flex", "align-items-center");
 
         const iconImage = document.createElement("img");
         iconImage.classList.add("mr-2");
@@ -948,36 +968,53 @@ searchInput.addEventListener('keyup', function (event) {
 });
 
 async function searchAcrossApis(searchTerm) {
-    const proxylink = "https://sasalele.api-anycast.workers.dev/";
-    const lastfmURL = `https://ws.audioscrobbler.com/2.0/?method=track.search&format=json&limit=5&api_key=b9747c75368b42160af4301c2bf654a1&track=${encodeURIComponent(searchTerm)}`;
-    const youtubeURL = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&type=video&q=${encodeURIComponent(searchTerm)}&key=AIzaSyAwM_RLjqj8dbbMAP5ls4qg1olDsaxSq5s`;
-    const itunesURL = `${proxylink}https://itunes.apple.com/search?limit=5&media=music&term=${encodeURIComponent(searchTerm)}`;
-    const deezerURL = `${proxylink}https://api.deezer.com/search?q=${encodeURIComponent(searchTerm)}&limit=5`;
+    const proxyLink = "https://universalsasalele.apnic-anycast.workers.dev/";
+
+    const lastfmUrl = `https://ws.audioscrobbler.com/2.0/?method=track.search&format=json&limit=5&api_key=b9747c75368b42160af4301c2bf654a1&track=${encodeURIComponent(searchTerm)}`;
+    const youtubeUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&type=video&q=${encodeURIComponent(searchTerm)}&key=AIzaSyAwM_RLjqj8dbbMAP5ls4qg1olDsaxSq5s`;
+    const itunesUrl = `${proxyLink}https://itunes.apple.com/search?limit=5&media=music&term=${encodeURIComponent(searchTerm)}`;
+    const deezerUrl = `${proxyLink}https://api.deezer.com/search?q=${encodeURIComponent(searchTerm)}&limit=5`;
+
+    const safeJsonFetch = async (url, apiName) => {
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                console.warn(`${apiName} API returned status ${response.status}`);
+                return null;
+            }
+            const text = await response.text();
+
+            try {
+                return JSON.parse(text);
+            } catch (parseError) {
+                console.error(`${apiName} API returned invalid JSON:`, parseError);
+                console.debug(`${apiName} response starts with:`, text.substring(0, 100));
+                return null;
+            }
+        } catch (fetchError) {
+            console.error(`Error fetching from ${apiName} API:`, fetchError);
+            return null;
+        }
+    };
 
     try {
-        const [lastfmResponse, youtubeResponse, itunesResponse, deezerResponse] = await Promise.all([
-            fetch(lastfmURL).then(response => response.json()),
-            fetch(youtubeURL).then(response => response.json()),
-            fetch(itunesURL).then(response => response.json()),
-            fetch(deezerURL).then(response => response.json()),
+        const [lastfmData, youtubeData, itunesData, deezerData] = await Promise.all([
+            safeJsonFetch(lastfmUrl, "Last.fm"),
+            safeJsonFetch(youtubeUrl, "YouTube"),
+            safeJsonFetch(itunesUrl, "iTunes"),
+            safeJsonFetch(deezerUrl, "Deezer")
         ]);
-
-        const lastfmResults = formatLastfmResults(lastfmResponse);
-        const youtubeResults = formatYoutubeResults(youtubeResponse);
-        const itunesResults = formatItunesResults(itunesResponse);
-        const deezerResults = formatDeezerResults(deezerResponse);
-
-        const combinedResults = {
-            lastfm: lastfmResults,
-            youtube: youtubeResults,
-            itunes: itunesResults,
-            deezer: deezerResults,
+        const results = {
+            lastfm: lastfmData ? formatLastfmResults(lastfmData) : [],
+            youtube: youtubeData ? formatYoutubeResults(youtubeData) : [],
+            itunes: itunesData ? formatItunesResults(itunesData) : [],
+            deezer: deezerData ? formatDeezerResults(deezerData) : []
         };
 
-        displayResults(combinedResults);
-
+        displayResults(results);
     } catch (error) {
-        console.error('Error searching across APIs:', error);
+        console.error("Error searching across APIs:", error);
+        displayResults({ lastfm: [], youtube: [], itunes: [], deezer: [] });
     }
 }
 
@@ -1032,18 +1069,20 @@ function displayResults(results) {
     const youtubeResults = results.youtube;
     const itunesResults = results.itunes;
     const deezerResults = results.deezer;
+    const MAX_RESULTS = 5;
 
     VideoDisplay.style.display = "block";
 
     // Display LastFM results
     if (lastfmResults.length > 0) {
         const fragment = document.createDocumentFragment();
-        const maxResults = Math.min(5, lastfmResults.length);
+        const resultsCount = Math.min(MAX_RESULTS, lastfmResults.length);
 
-        for (let i = 0; i < maxResults; i++) {
+        for (let i = 0; i < resultsCount; i++) {
             const song = lastfmResults[i];
+            if (!song) continue;
             const listItem = document.createElement('li');
-            listItem.className = 'list-group-item';
+            listItem.className = 'lastfm-item';
             listItem.textContent = `${song.title} - ${song.artist}`;
             fragment.appendChild(listItem);
         }
@@ -1055,27 +1094,39 @@ function displayResults(results) {
     // Display YouTube results
     VideoDisplay.src = youtubeResults.length > 0
         ? `https://www.youtube.com/embed/${youtubeResults[0].videoId}`
-        : `https://www.youtube.com/embed/dQw4w9WgXcQ`;
+        : `https://www.youtube.com/embed/SBQprWeOx8g`;
 
     // Display iTunes results
     if (itunesResults.length > 0) {
         const itunesList = document.getElementById('itunesList');
         const fragment = document.createDocumentFragment();
-        itunesResults.forEach(result => {
+        itunesResults.slice(0, MAX_RESULTS).forEach(result => {
             const listItem = document.createElement('li');
             listItem.className = 'itunes-item';
             listItem.innerHTML = `
-                <img class="search-cover" src="${result.artworkUrl}">
-                <div class="info">
-                    <p><strong>${result.trackName} - ${result.artistName}</strong></p>
-                    <p>${result.collectionName}</p>
-                    <audio id="audio-${result.trackId}" src="${result.previewUrl}"></audio>
-                </div>
-                <button class="btn btn-primary" onclick="playPreview('audio-${result.trackId}', this)">Play Preview</button>
-            `;
+            <img class="search-cover" src="${result.artworkUrl}" alt="${result.trackName} cover art">
+            <div class="info">
+                <p><strong>${result.trackName} - ${result.artistName}</strong></p>
+                <p class="album-name">${result.collectionName}</p>
+            </div>
+            <audio controls class="audio-preview">
+                <source src="${result.previewUrl}" type="audio/mpeg">
+            </audio>
+        `;
             fragment.appendChild(listItem);
         });
         itunesList.appendChild(fragment);
+        const allAudioPlayers = document.querySelectorAll('.audio-preview');
+        allAudioPlayers.forEach(player => {
+            player.addEventListener('play', () => {
+                allAudioPlayers.forEach(otherPlayer => {
+                    if (otherPlayer !== player && !otherPlayer.paused) {
+                        otherPlayer.pause();
+                        otherPlayer.currentTime = 0;
+                    }
+                });
+            });
+        });
     } else {
         document.getElementById('itunesList').innerHTML = '<h6 class="noresult mb-2">No results found on iTunes :(</h6>';
     }
@@ -1084,44 +1135,41 @@ function displayResults(results) {
     if (deezerResults.length > 0) {
         const deezerList = document.getElementById('deezerList');
         const fragment = document.createDocumentFragment();
-        const maxResults = Math.min(5, deezerResults.length);
+        const resultsToShow = Math.min(MAX_RESULTS, deezerResults.length);
 
-        for (let i = 0; i < maxResults; i++) {
+        for (let i = 0; i < resultsToShow; i++) {
             const result = deezerResults[i];
+            if (!result) continue;
             const listItem = document.createElement('li');
             listItem.className = 'itunes-item';
             listItem.innerHTML = `
-            <img class="search-cover" src="${result.cover}">
+            <img class="search-cover" src="${result.cover}" alt="${result.title}" 
+                 onerror="this.src='default-music-cover.png'">
             <div class="info">
                 <p><strong>${result.title} - ${result.artist}</strong></p>
-                <p>${result.album}</p>
+                <p class="album-name">${result.album}</p>
             </div>
-            <audio class="deezer-audio" controls>
-            <source src="${result.preview}" type="audio/mp3">
+            <audio controls class="audio-preview">
+                <source src="${result.preview}" type="audio/mp3">
             </audio>
             `;
             fragment.appendChild(listItem);
         }
         deezerList.appendChild(fragment);
+        const audioPlayers = deezerList.querySelectorAll('audio');
+        audioPlayers.forEach(player => {
+            player.addEventListener('play', () => {
+                audioPlayers.forEach(p => {
+                    if (p !== player && !p.paused) {
+                        p.pause();
+                        p.currentTime = 0;
+                    }
+                });
+            });
+        });
     } else {
         document.getElementById('deezerList').innerHTML = '<h6 class="noresult mb-2">No results found on Deezer :(</h6>';
     }
-}
-
-//play itunes preview
-function playPreview(audioId, button) {
-    const itunesgo = document.getElementById(audioId);
-
-    if (itunesgo.paused) {
-        itunesgo.play();
-        button.textContent = 'Pause Preview';
-    } else {
-        itunesgo.pause();
-        button.textContent = 'Play Preview';
-    }
-    itunesgo.onended = () => {
-        button.textContent = 'Play Preview';
-    };
 }
 
 // Search by website

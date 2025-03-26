@@ -61,7 +61,7 @@ function selectVideo(element) {
 
 function playMedia(link) {
   const videoPlayer = document.getElementById("video-player");
-  const proxiedLink = `https://sasalele.api-anycast.workers.dev/${link}`;
+  const proxiedLink = `https://sasalele.apnic-anycast.workers.dev/${link}`;
 
   const loadAndPlay = async (link) => {
     if (link.startsWith("http:")) {

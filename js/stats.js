@@ -149,7 +149,25 @@ const folderImageCounts = {
     'gif_images6': 6
 };
 
-const colors = ["#ff5a5a", "#ffe7b5", "#c49880", "#4a4a4a", "#e76d68", "#ffa485", "#aaddff", "#4286f4", "#ffede0", "#9e717f", "#42ff33", "#81dc88", "#ffea85", "#b8ffb0", "#b5aea9", "#2cdf98", "#ff4dee", "#c2fc6d", "#7d96eb", "#ffff84", "#ffcce5", "#ffcd98", "#b7bacf", "#ff9253", "#ffcfba", "#3a6896", "#ffb353", "#dac884", "#ff853e", "#ffc8f7", "#61696c", "#ff7e5a", "#3cc9e9", "#e5f0ff", "#ae55a5", "#9452e8", "#f69669", "#ff337b", "#ff304d", "#3feceb", "#9861c9", "#ffabed", "#ff3847", "#bfffdf", "#c5795f", "#aa996d", "#55eeb2", "#ff9eff", "#fffade", "#ff6e63", "#ffb77c", "#ff99bc", "#fdf7f2", "#27a08d", "#97feff", "#ffb099", "#af5cbd", "#ffffff", "#ff53b4", "#ff7c95", "#edc4fe", "#ffff95", "#e5ff94", "#ffc663", "#7072a5", "#787eb2", "#858ebf", "#9494d0", "#9e9edb", "#a3a9e7", "#b7b5f4", "#c2c1fc", "#d5ceff", "#ff3864", "#20e9ff", "#b2ffbd", "#d741ff", "#ff5620", "#33749a", "#9048ff", "#f45fad", "#ff97cb", "#e1e181", "#40fff7", "#279aff", "#ff98fc", "#9dffff", "#a5ffdd", "#ffff9d", "#acf6ff", "#f0e3ff", "#e870e0", "#20b3ff", "#a0f0e7", "#ff7575", "#cbecff", "#b0ffff", "#ee9fff", "#9787ff", "#48ff8f", "#ff97b4", "#ac3bcb", "#ffe28f", "#ffeeff", "#f946ed", "#204681", "#ffcdb2", "#72fff7", "#ea46ff", "#ffff40", "#ffd2ff", "#20ffff"];
+const colors = [
+    "#ff4b4b", "#cfa77d", "#a4826d", "#606060", "#d3615f", "#d48a75", "#9dbce6", "#4a6ef0",
+    "#ffd4a3", "#8c5c69", "#42d639", "#72c977", "#d1c267", "#a0f1b2", "#8c7e7b", "#2aaf80",
+    "#e03acb", "#b1f159", "#6379d3", "#f0f44f", "#fbb7d1", "#f4a26b", "#97a2c9", "#e38531",
+    "#fbd0a3", "#6d4a73", "#f04f25", "#b5b18a", "#ff6b2f", "#c4a8e0", "#4b5159", "#d64f45",
+    "#3a8aa7", "#d9e7ff", "#9b4c97", "#7848db", "#ea855f", "#ff246a", "#e32946", "#4bb5cc",
+    "#8b55bf", "#f0a3e0", "#ff2e6f", "#afffda", "#c46f3c", "#8f7a4c", "#45cda2", "#d085ff",
+    "#fff5db", "#ff624f", "#f0a373", "#d0acb1", "#f7f5f0", "#1d8270", "#8dd9e5", "#d38b8b",
+    "#d36ab5", "#fff1db", "#e5c8fe", "#eed7ff", "#fce379", "#70c5a4", "#7075d1", "#8587b9",
+    "#9494b8", "#9a9cc6", "#a0a9d2", "#c1bff4", "#d0d2ff", "#fb2656", "#1dd0e4", "#96f1bb",
+    "#b91fff", "#e5481f", "#2b577e", "#6a37db", "#c02d96", "#b865b8", "#f6c6a1", "#607fbf",
+    "#2f7b88", "#6fa8f7", "#4f8fe1", "#a2f5ef", "#d6f8f4", "#4766e4", "#7df8d1", "#8bc5a9",
+    "#4c97ff", "#b7f7a2", "#fdffa3", "#3b58bf", "#cc97fd", "#dcbad0", "#b367ef", "#9bffb5",
+    "#6f95ff", "#f27797", "#e5bfe3", "#ffdfd9", "#2c3e74", "#ea56e4", "#ff7421", "#d2b9cf",
+    "#c3f4c7", "#ff4f92", "#97a7f9", "#5bc7eb", "#93f5ef", "#f3bfd9", "#cc61f7", "#39c6fb",
+    "#8fe7d3", "#65eaf5", "#f5c96b", "#f1d8ff", "#d160ff", "#5d3b79", "#4094db", "#c5c6f9",
+    "#baf2f3", "#cd72ff", "#fcd0b3", "#f6c900"
+];
+
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
