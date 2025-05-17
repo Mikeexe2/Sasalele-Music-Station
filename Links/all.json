@@ -2285,7 +2285,7 @@
         "url": "https://stream.zeno.fm/szkjrz1cuwdtv",
         "host": "zeno",
         "name": "My Music K-pop",
-        "genre": "anime",
+        "genre": "kmusic",
         "favicon": "assets/radios/mymusickpop.webp",
         "homepage": "https://zeno.fm/radio/my-music-k-pop/"
     },
@@ -2293,7 +2293,7 @@
         "url": "https://stream.zeno.fm/myyz6vr4qa0uv",
         "host": "zeno",
         "name": "ESENCIA KPop",
-        "genre": "anime",
+        "genre": "kmusic",
         "favicon": "assets/radios/esenciakpop2.webp",
         "homepage": "https://zeno.fm/radio/esencia-kpop/"
     },
@@ -2693,7 +2693,7 @@
         "url": "https://stream.zeno.fm/1q3q30xcu68uv",
         "host": "zeno",
         "name": "NyaRadio KPOP",
-        "genre": "anime",
+        "genre": "kmusic",
         "favicon": "assets/radios/nyaradiokpop.webp",
         "homepage": "https://zeno.fm/radio/nyaradio-kpop/"
     },

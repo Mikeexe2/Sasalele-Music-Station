@@ -35,10 +35,10 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-v4-rtl/4.6.2-1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <script src="https://cdn.jsdelivr.net/npm/hls.js@latest" type="text/javascript"></script>
-        <script src="js/icecast-metadata-player-1.17.9.main.min.js"></script>
+        <script src="js/icecast-metadata-player-1.17.12.main.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.css" />
-        <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@waline/client@3.5.6/dist/waline.min.css">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-LDY4BC680M"></script>
         <script data-cfasync="false" src="https://cse.google.com/cse.js?cx=53e18594a81454c71">
         </script>
@@ -276,18 +276,22 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <p><strong>How the Stream Works</strong></p>
-                                <p>HLS (HTTP Live Streaming) is a technology that divides audio into
-                                    smaller segments, known as "chunks,"
-                                    and transmits them sequentially over the internet. This allows you
-                                    to begin listening almost
-                                    immediately, without having to wait for the entire file to download.</p>
-                                <p>You can control the playback of the stream using the video player, just like using a
-                                    regular audio player.
-                                    You can pause, play, skip,
-                                    and adjust the volume using the player's controls.</p>
-
                                 <p><strong>Why Some Links Might Not Work?</strong></p>
+                                The page is served over HTTPS. If the stream's URL is HTTP, your browser may block it
+                                due to
+                                security settings.
+                                Note: Most of the HLS radio streams are HTTP!<br>
+                                To disable web security:
+                                <ul>
+                                    <li>Click the lock icon in the URL bar.</li>
+                                    <li>Go to '<strong>Site Settings</strong>'.</li>
+                                    <li>Find 'Insecure Content' settings and allow it.</li>
+                                </ul>
+                                <a class="blank-name"
+                                    href="https://support.google.com/chrome/thread/29505473?hl=en&msgid=39996297"
+                                    target="_blank">Learn
+                                    more
+                                </a>
                                 <p>Sometimes, a link might not work because the stream is temporarily unavailable, or
                                     there may be an issue with the
                                     streaming service.
@@ -668,7 +672,7 @@
                             <i class="fab fa-github"></i>
                         </a>
                     </div>
-                    <p class="last-updated">Last updated: 2025/3/25</p>
+                    <p class="last-updated">Last updated: 2025/5/17</p>
                     <p>© 2023-2025 Sasalele-Music-Station</p>
                     <div class="progress-container">
                         <p>Site operated for: <span id="liveTime"></span> | Views: <span
@@ -685,17 +689,17 @@
             </div>
         </div>
         <script type="module">
-            import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+            import { init } from 'https://cdn.jsdelivr.net/npm/@waline/client@3.5.6/dist/waline.js';
 
             init({
                 el: '#waline',
-                serverURL: 'https://sasalele-comment.vercel.app/',
+                serverURL: 'https://sasalele-comment-yo1b.vercel.app/',
                 lang: 'en',
                 pageview: true,
             });
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-v4-rtl/4.6.2-1/js/bootstrap.min.js"></script>
-        <script type="module" src="https://unpkg.com/media-chrome@0.6"></script>
+        <script type="module" src="https://cdn.jsdelivr.net/npm/media-chrome@4/+esm"></script>
         <script data-cfasync="false" src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
         <script data-cfasync="false" src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
         <script src="js/stats.js"></script>
