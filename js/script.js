@@ -133,6 +133,7 @@ function playMedia(media, playButton) {
         if (icecastMetadataPlayer) {
             icecastMetadataPlayer.stop();
             icecastMetadataPlayer.detachAudioElement();
+            icecastMetadataPlayer = null;
         }
     }
 
@@ -312,33 +313,13 @@ function playMedia(media, playButton) {
     }
 }
 
-async function togglePlay() {
-    try {
-        const activePlayer = icecastMetadataPlayer || player;
-
-        if (activePlayer.paused) {
-            if (icecastMetadataPlayer && activePlayer !== icecastMetadataPlayer) {
-                icecastMetadataPlayer.pause();
-            }
-            if (player && activePlayer !== player) {
-                player.pause();
-            }
-
-            await activePlayer.play();
-            startCoverRotation();
-        } else {
-            activePlayer.pause();
-            stopCoverRotation();
-        }
-    } catch (error) {
-        console.error("Playback error:", error);
-
-        if (error.name === 'AbortError' && icecastMetadataPlayer) {
-            console.log("Falling back to regular audio element");
-            icecastMetadataPlayer = null;
-            player.src = chosenUrl;
-            await player.play().catch(e => console.error("Fallback play failed:", e));
-        }
+function togglePlay() {
+    if (player.paused) {
+        player.play();
+        startCoverRotation();
+    } else {
+        player.pause();
+        stopCoverRotation();
     }
 }
 

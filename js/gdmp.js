@@ -6,7 +6,7 @@ const content = document.getElementById("contents");
 const parent = document.getElementById('parentfolder');
 const audio = document.getElementById('audio');
 const source = document.getElementById('source');
-
+document.getElementById('loadLinkButton').addEventListener('click', loadLink);
 let tokenClient;
 let gapiInited = false;
 let gisInited = false;
@@ -350,6 +350,7 @@ function populateDropdown(folders) {
 }
 
 function clearFileTree() {
+    if (!fileTree) return;
     fileTree.innerHTML = '';
 }
 
@@ -456,12 +457,11 @@ function loadLink() {
     if (folderIdMatch) {
         const folderId = folderIdMatch[1];
         fetchDriveFiles(folderId);
+        fileTree.style.display = 'block';
     } else {
         alert('Invalid Google Drive folder link.');
     }
 }
-
-document.getElementById('loadLinkButton').addEventListener('click', loadLink);
 
 function downloadTrack(event, fileId, fileName) {
     const apiUrl = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=${apiKey}`;
