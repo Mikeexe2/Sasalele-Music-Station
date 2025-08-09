@@ -621,14 +621,6 @@ body::-webkit-scrollbar-thumb {
     background-image: url(../assets/covers/vgmdb.webp)
 }
 
-.icon-musicenc {
-    background-image: url(../assets/covers/musicenc.webp)
-}
-
-.icon-jlyric {
-    background-image: url(../assets/covers/jlyric.webp)
-}
-
 .icon-followlyrics {
     background-image: url(../assets/covers/followlyrics.webp)
 }
@@ -639,10 +631,6 @@ body::-webkit-scrollbar-thumb {
 
 .icon-baha {
     background-image: url(../assets/covers/bahamut.webp)
-}
-
-.icon-kkbox {
-    background-image: url(../assets/covers/kkbox.webp)
 }
 
 .icon-audarchive {
@@ -683,10 +671,6 @@ body::-webkit-scrollbar-thumb {
 
 .icon-vocadb {
     background-image: url(../assets/covers/vocadb.webp)
-}
-
-.icon-jplyrics {
-    background-image: url(../assets/covers/jplyrics.webp)
 }
 
 .icon-touhoudb {

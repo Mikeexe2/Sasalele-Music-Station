@@ -1210,14 +1210,8 @@ function getWebsiteURL(label, searchTerm) {
             return `https://music.youtube.com/search?q=${a}`;
         case "网易云":
             return `https://music.163.com/#/search/m/?s=${a}`;
-        case "KKBOX":
-            return `https://www.kkbox.com/my/en/search?q=${a}`;
         case "VGMdb":
             return `https://vgmdb.net/search?q=${a}`;
-        case "MusicEnc":
-            return `https://www.musicenc.com/?search=${a}`;
-        case "J-Lyric.net":
-            return `https://search3.j-lyric.net/index.php?ex=on&ct=2&ca=2&cl=2&kt==${a}`;
         case "FollowLyrics":
             return `https://zh.followlyrics.com/search?name=${a}`;
         case "Kugeci":
@@ -1248,8 +1242,6 @@ function getWebsiteURL(label, searchTerm) {
             return `https://www.nicovideo.jp/search/${a}`;
         case "VocaDB":
             return `https://vocadb.net/Search?filter=${a}`;
-        case "Japanese Song Lyrics":
-            return `https://japanesesonglyrics.com/?s=${a}`;
         case "PetitLyrics":
             return `https://petitlyrics.com/search_lyrics?title=${a}`;
         default:
