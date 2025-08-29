@@ -1,5 +1,21 @@
 # Changelog
 All major changes to this project will be documented in this file. Minor changes (or i would say mistakes) will be documented in the commit history. You will have to clear data and cache in your browser and reload to reflect changes.
+## 2025-08-29
+
+### Added
+- New player style, now all streams (including hls streams) will use one single player to play (with metadata support).
+- Dark themed website.
+
+### Changed
+
+- Used "Artist - Title" convention when displaying the song info instead of "Title - Artist".
+- Removed inactive streams.
+
+### Fixed
+- Fix [issue 21](https://github.com/Mikeexe2/Sasalele-Music-Station/issues/21). Metadata for icecast streams now displayed immediately once station is loaded.
+- Fix [issue 23](https://github.com/Mikeexe2/Sasalele-Music-Station/issues/23). Fixed the audio control logic to prevent pausing issues.
+- Fixed Google Drive public share link loading issue.
+
 
 ## 2024-09-16
 

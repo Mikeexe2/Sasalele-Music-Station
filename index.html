@@ -34,6 +34,7 @@
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-v4-rtl/4.6.2-1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/jsmediatags@3.9.7/dist/jsmediatags.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/hls.js@latest" type="text/javascript"></script>
         <script src="js/icecast-metadata-player-1.17.12.main.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
@@ -53,13 +54,12 @@
 
     <body>
         <div id="background"></div>
-        <img id="randomimg" src="" alt=".">
+        <img id="randomimg" src="" alt="Radio Station Aggregator">
         <div id="content">
             <nav class="navbar sticky-top navbar-dark navbar-expand-md">
                 <a class="navbar-brand" href="https://basic.pp.ua/">
                     <img src="assets/sasalele_logo-removebg.webp" width="30" height="30"
-                        class="d-inline-block align-top" alt="">
-                    Sasalele Music Station
+                        class="d-inline-block align-top" alt="sasalelemusic"> Sasalele Music Station
                 </a>
                 <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse"
                     data-target="#main-navigation">
@@ -183,174 +183,83 @@
             </div>
 
             <div class="section-title">
-                <h1>Internet Radios (<span id="station-count"></span> Stations Loaded) <button type="button"
-                        class="tips-btn" data-toggle="modal" title="Tips" data-target="#tipsModal">
+                <h1>Internet Radios <button type="button" class="tips-btn" data-toggle="modal" title="Tips"
+                        data-target="#tipsModal">
                         <i class="fas fa-info-circle"></i>
                     </button></h1>
+                <div class="station-count">
+                    Total Stations: <span id="station-count">0</span>
+                </div>
             </div>
-            <div class="container mt-1">
-                <div class="container mb-2">
-                    <h6><span class="badge badge-info">Search a radio using Radio Browser's API</span></h6>
-                    <div class="row justify-content-center mb-1 mx-auto">
-                        <div class="input-group">
-                            <div class="input-group-append">
-                                <select class="custom-select" id="searchOption" onchange="handleSearchOptionChange()">
-                                    <option selected>Search by</option>
-                                    <option value="byname">Name</option>
-                                    <option value="bycountry">Country</option>
-                                    <option value="bylanguage">Language</option>
-                                    <option value="bytag">Tag</option>
-                                </select>
-                            </div>
-                            <input type="text" id="search-field" class="form-control" placeholder="Search by name"
-                                style="display: none;">
-                            <div id="countrySelectContainer" style="display: none;">
-                                <select class="custom-select" id="countrySelect">
-                                    <option value="">Select Country</option>
-                                </select>
-                            </div>
-                            <div id="languageSelectContainer" style="display: none;">
-                                <select class="custom-select" id="languageSelect">
-                                    <option value="">Select Language</option>
-                                </select>
-                            </div>
-                            <div id="tagSelectContainer" style="display: none;">
-                                <select class="custom-select" id="tagSelect">
-                                    <option value="">Select Tag</option>
-                                </select>
-                            </div>
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button" id="radiosearch">Search</button>
-                            </div>
-                        </div>
+            <div class="container">
+                <div class="controls">
+                    <div class="col-md-4">
+                        <input type="text" id="sasalelesearch" class="form-control" placeholder="Search stations...">
                     </div>
-                    <div class="radioresultsdisplay mb-3" style="display:none">
-                        <div class="search-terms radio-result-header text-center"></div>
-                        <div class="radio-result-container">
-                        </div>
+                    <div id="genre-select" class="d-flex flex-wrap justify-content-center"> <button class="genre-btn"
+                            data-genre="jmusic">J-Music</button>
+                        <button class="genre-btn" data-genre="anime">Anime</button> <button class="genre-btn"
+                            data-genre="vocaloid">Vocaloid/Touhou</button> <button class="genre-btn"
+                            data-genre="jpradio">J-Radios</button>
+                        <button class="genre-btn" data-genre="kmusic">K-Music</button> <button class="genre-btn"
+                            data-genre="cmusic">C-Radios</button> <button class="genre-btn"
+                            data-genre="bgm">BGM</button> <button class="genre-btn"
+                            data-genre="variety">Variety</button> <button class="genre-btn"
+                            data-genre="nightcore">Nightcore</button>
                     </div>
                 </div>
-                <div id="genre-select" class="mb-3">
-                    <button class="genre-btn" data-genre="jmusic">Japanese-Music</button>
-                    <button class="genre-btn" data-genre="anime">Anime-Music</button>
-                    <button class="genre-btn" data-genre="vocaloid">Vocaloid, Touhou, Vtuber</button>
-                    <button class="genre-btn" data-genre="jpradio">Japanese Radios</button>
-                    <button class="genre-btn" data-genre="kmusic">Korean-Music</button>
-                    <button class="genre-btn" data-genre="cmusic">Chinese-Music</button>
-                    <button class="genre-btn" data-genre="bgm">BGM</button>
-                    <button class="genre-btn" data-genre="variety">Variety</button>
-                    <button class="genre-btn" data-genre="nightcore">Nightcore</button>
+                <div class="stations-container">
+                    <div id="jmusic" class="genre-content"></div>
+                    <div id="anime" class="genre-content"></div>
+                    <div id="vocaloid" class="genre-content"></div>
+                    <div id="jpradio" class="genre-content"></div>
+                    <div id="kmusic" class="genre-content"></div>
+                    <div id="cmusic" class="genre-content"></div>
+                    <div id="bgm" class="genre-content"></div>
+                    <div id="variety" class="genre-content"></div>
+                    <div id="nightcore" class="genre-content">
+                    </div>
                 </div>
-                <div class="input-group mb-1">
-                    <input type="search" id="sasalelesearch" autofocus class="form-control"
-                        placeholder="Enter station name" aria-label="Search">
-                </div>
-                <div id="radio-content">
-                    <ul id="jmusic" class="genre-content"></ul>
-                    <ul id="anime" class="genre-content"></ul>
-                    <ul id="vocaloid" class="genre-content"></ul>
-                    <ul id="jpradio" class="genre-content"></ul>
-                    <ul id="kmusic" class="genre-content"></ul>
-                    <ul id="cmusic" class="genre-content"></ul>
-                    <ul id="bgm" class="genre-content"></ul>
-                    <ul id="variety" class="genre-content"></ul>
-                    <ul id="nightcore" class="genre-content"></ul>
-                </div>
-
             </div>
-            <section id="radiostreams">
-                <div class="section-title">
-                    <h1>Radio Streams <button type="button" class="tips-btn" data-toggle="modal" title="Tips"
-                            data-target="#tipsModal0">
-                            <i class="fas fa-info-circle"></i>
-                        </button></h1>
-                </div>
-                <div class="modal fade" id="tipsModal0" tabindex="-1" aria-labelledby="tipsModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="tipsModalLabel">Tips</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <p><strong>Why Some Links Might Not Work?</strong></p>
-                                The page is served over HTTPS. If the stream's URL is HTTP, your browser may block it
-                                due to
-                                security settings.
-                                Note: Most of the HLS radio streams are HTTP!<br>
-                                To disable web security:
-                                <ul>
-                                    <li>Click the lock icon in the URL bar.</li>
-                                    <li>Go to '<strong>Site Settings</strong>'.</li>
-                                    <li>Find 'Insecure Content' settings and allow it.</li>
-                                </ul>
-                                <a class="blank-name"
-                                    href="https://support.google.com/chrome/thread/29505473?hl=en&msgid=39996297"
-                                    target="_blank">Learn
-                                    more
-                                </a>
-                                <p>Sometimes, a link might not work because the stream is temporarily unavailable, or
-                                    there may be an issue with the
-                                    streaming service.
-                            </div>
-
+            <div class="container mt-2">
+                <h6><span class="badge badge-info">Explore more radios</span></h6>
+                <div class="row justify-content-center mb-1 mx-auto">
+                    <div class="input-group">
+                        <div class="input-group-append"> <select class="custom-select" id="searchOption"
+                                onchange="handleSearchOptionChange()">
+                                <option selected>Search by</option>
+                                <option value="byname">Name</option>
+                                <option value="bycountry">Country</option>
+                                <option value="bylanguage">Language</option>
+                                <option value="bytag">Tag</option>
+                            </select> </div> <input type="text" id="search-field" class="form-control"
+                            placeholder="Search by name" style="display: none;">
+                        <div id="countrySelectContainer" style="display: none;"> <select class="custom-select"
+                                id="countrySelect">
+                                <option value="">Select Country</option>
+                            </select> </div>
+                        <div id="languageSelectContainer" style="display: none;"> <select class="custom-select"
+                                id="languageSelect">
+                                <option value="">Select Language</option>
+                            </select> </div>
+                        <div id="tagSelectContainer" style="display: none;"> <select class="custom-select"
+                                id="tagSelect">
+                                <option value="">Select Tag</option>
+                            </select> </div>
+                        <div class="input-group-append"> <button class="btn btn-primary" type="button"
+                                id="radiosearch">Search</button>
                         </div>
                     </div>
                 </div>
-                <div class="container text-center mb-1">
-                    <div class="row">
-                        <div class="col-lg-4 mb-1">
-                            <h6 id="selected-video-title" class="selected-title" style="display:none"></h6>
-                            <div id="vplayer" class="embed-responsive embed-responsive-16by9">
-                                <media-controller class="embed-responsive-item">
-                                    <video slot="media" id="radio-player" src="" class="w-100"></video>
-                                    <media-control-bar class="media-control-bar">
-                                        <media-play-button></media-play-button>
-                                        <media-time-display show-duration></media-time-display>
-                                        <media-mute-button></media-mute-button>
-                                        <media-volume-range></media-volume-range>
-                                        <media-fullscreen-button></media-fullscreen-button>
-                                    </media-control-bar>
-                                </media-controller>
-                            </div>
-                        </div>
-                        <div class="col-lg-8 mb-1">
-                            <div class="d-flex justify-content-center mb-1">
-                                <div class="dropdown">
-                                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i class="fa fa-bars"></i> Streams
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a href="" class="lang-link" data-lang="ja">Japanese</a>
-                                        <a href="" class="lang-link" data-lang="ko">Korean</a>
-                                        <a href="" class="lang-link" data-lang="zh">Chinese</a>
-                                        <a href="" class="lang-link" data-lang="en">English</a>
-                                    </div>
-                                </div>
-                                <div id="lang-info" class="ml-auto">
-                                    <span class="badge badge-light mr-1"><span id="lang-name"></span></span>
-                                    <span class="badge badge-secondary"><span id="stream-count"></span> streams</span>
-                                </div>
-                            </div>
-                            <div class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-search"></i></span>
-                                </div>
-                                <input type="text" id="searchStream" class="form-control" placeholder="Filter a stream">
-                            </div>
-                            <div id="video-list" class="list-group"></div>
-                        </div>
+                <div class="radioresultsdisplay mb-3" style="display:none">
+                    <div class="search-terms radio-result-header text-center"></div>
+                    <div class="radio-result-container">
                     </div>
                 </div>
-
-            </section>
+            </div>
 
             <section id="search">
-                <div class="section-title">
+                <div class="section-title mt-2">
                     <h1>Search</h1>
                 </div>
                 <div class="container mb-3">
@@ -428,8 +337,20 @@
                                                 <span class="button-label">网易云</span>
                                             </button>
                                         </td>
+                                        <td>
+                                            <button class="togglesearch">
+                                                <div class="button-icon icon-kkbox"></div>
+                                                <span class="button-label">KKBOX</span>
+                                            </button>
+                                        </td>
                                     </tr>
                                     <tr>
+                                        <td>
+                                            <button class="togglesearch">
+                                                <div class="button-icon icon-google"></div>
+                                                <span class="button-label">Google(Lyrics)</span>
+                                            </button>
+                                        </td>
                                         <td>
                                             <button class="togglesearch">
                                                 <div class="button-icon icon-soundcloud"></div>
@@ -470,12 +391,6 @@
                                     <tr>
                                         <td>
                                             <button class="togglesearch">
-                                                <div class="button-icon icon-google"></div>
-                                                <span class="button-label">Google(Lyrics)</span>
-                                            </button>
-                                        </td>
-                                        <td>
-                                            <button class="togglesearch">
                                                 <div class="button-icon icon-kugeci"></div>
                                                 <span class="button-label">Kugeci</span>
                                             </button>
@@ -504,14 +419,14 @@
                                                 <span class="button-label">FollowLyrics</span>
                                             </button>
                                         </td>
-                                    </tr>
-                                    <tr>
                                         <td>
                                             <button class="togglesearch">
                                                 <div class="button-icon icon-baha"></div>
                                                 <span class="button-label">巴哈姆特</span>
                                             </button>
                                         </td>
+                                    </tr>
+                                    <tr>
                                         <td>
                                             <button class="togglesearch">
                                                 <div class="button-icon icon-utanet"></div>
@@ -561,71 +476,55 @@
                 <div id="aplayer"></div>
             </div>
             <div id="waline"></div>
-            <div id="player">
-                <div class="navbar-brand">
-                    <div class="media-con">
-                        <div>
-                            <media-controller audio>
-                                <audio slot="media" id="miniPlayer" autoplay></audio>
-                                <media-control-bar>
-                                    <media-play-button></media-play-button>
-                                    <media-time-display show-duration></media-time-display>
-                                    <media-mute-button></media-mute-button>
-                                    <media-volume-range></media-volume-range>
-                                </media-control-bar>
-                            </media-controller>
-                        </div>
-                        <div><button id="historyBtn" class="p-btn" title="View History" data-toggle="modal"
-                                data-target="#recentPanel">
-                                <i class="fa fa-history"></i>
-                            </button>
-                            <button id="toggleRandom" class="p-btn" data-toggle="tooltip" data-placement="top"
-                                title="Tap to play randomly">
-                                <i class="fas fa-shuffle" id="randomplay"></i>
-                            </button>
-                            <button id="togglePlayer" class="p-btn" data-toggle="tooltip" data-placement="top"
-                                title="Switch Layout">
-                                <i class="fas fa-expand"></i>
-                                <i class="fas fa-compress"></i>
-                            </button>
-                        </div>
+            <div class="player-section" id="playerSection">
+                <div class="player-container">
+                    <div class="player-controls">
+                        <button class="player-btn" id="playBtn"><i class="fas fa-play"></i></button>
+                        <button class="player-btn stop" id="stopBtn"><i class="fas fa-stop"></i></button>
+                        <button id="historyBtn" class="player-btn" data-toggle="modal" data-target="#recentPanel">
+                            <i class="fa fa-history"></i>
+                        </button>
+                        <button id="toggleRandom" class="player-btn">
+                            <i class="fas fa-shuffle" id="randomplay"></i>
+                        </button>
                     </div>
-                    <div class="playing-info">
-                        <div id="cover" class="mt-1">
-                            <img id="ip" style="display: inline;" src="assets/sasalele_logo-removebg.webp">
+                    <div class="now-playing">
+                        <div id="cover">
+                            <img id="ip" src="assets/sasalele_logo-removebg.webp" alt="cover">
                         </div>
-                        <span class="ml-1">
-                            <span id="stationName" class="mr-1">No music playing now</span>
-                            <div class="d-flex align-items-center">
-                                <span id="metadata" class="mr-1">Loading...</span>
-                                <button id="copyIcon" data-toggle="tooltip" data-placement="top"
-                                    title="Copy track title">
-                                    <div class="icon-container">
-                                        <i class="fas fa-copy"></i>
-                                    </div>
-                                    <div class="copy-confirmation" style="display: none;">
-                                        <i class="fas fa-check"></i>
-                                        <span>Copied!</span>
-                                    </div>
+                        <div class="track-info">
+                            <p id="nowPlaying">No station selected</p>
+                            <div class="meta-row">
+                                <p id="metadataDisplay">No metadata</p>
+                                <button id="copyIcon" title="Copy Stream">
+                                    <i class="fas fa-copy"></i>
+                                    <span class="copy-confirmation" style="display: none;">
+                                        <i class="fas fa-check"></i> Copied!
+                                    </span>
                                 </button>
                             </div>
-                        </span>
+                            <div class="extra-info">
+                                <span id="metadataSource" class="metadata-source"></span>
+                                <span id="hlsStatus" class="hls-status"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="modal fade" id="recentPanel" tabindex="-1" role="dialog" aria-labelledby="recent"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="recent">Recent Tracks</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <ul id="recentTracksList" class="list-group">
-                                </ul>
-                            </div>
+            </div>
+
+            <div class="modal fade" id="recentPanel" tabindex="-1" role="dialog" aria-labelledby="recent"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="recent">Recent Tracks</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <ul id="recentTracksList" class="list-group">
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -633,8 +532,7 @@
             <section class="footer text-center" id="footer">
                 <div class="page-info">
                     <p class="mb-1">
-                        This site is currently under development. Some features may experience issues. We appreciate
-                        your understanding.
+                        A huge thank you to all the radio station owners—without you, none of this would be possible!
                         Feedback email: <a href="mailto:sasalele-team@basic.pp.ua"
                             class="text-light">sasalele-team@basic.pp.ua</a>
                     </p>
@@ -646,11 +544,10 @@
                             <i class="fab fa-github"></i>
                         </a>
                     </div>
-                    <p class="last-updated">Last updated: 9/8/2025</p>
-                    <p>© 2023-2025 Sasalele-Music-Station</p>
+                    <p class="last-updated">Last updated: 29 August 2025</p>
+                    <p>&copy; 2023-2025 Sasalele-Music-Station</p>
                     <div class="progress-container">
-                        <p>Site operated for: <span id="liveTime"></span> | Views: <span
-                                class="waline-pageview-count" />
+                        <p>Uptime: <span id="liveTime"></span> | Views: <span class="waline-pageview-count"></span>
                         </p>
                         <div class="mdui-progress">
                             <div class="mdui-progress-indeterminate"></div>
@@ -673,7 +570,6 @@
             });
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-v4-rtl/4.6.2-1/js/bootstrap.min.js"></script>
-        <script type="module" src="https://cdn.jsdelivr.net/npm/media-chrome@4/+esm"></script>
         <script data-cfasync="false" src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
         <script data-cfasync="false" src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
         <script src="js/stats.js"></script>
