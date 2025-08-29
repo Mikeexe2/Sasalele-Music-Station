@@ -1,17 +1,10 @@
-const togglePlayerButton = document.getElementById("togglePlayer");
-const playerContainer = document.getElementById("player");
-const expandIcon = document.querySelector("#togglePlayer .fa-expand");
-const minimizeIcon = document.querySelector("#togglePlayer .fa-compress");
 const cover = document.getElementById('cover');
-const metadataElement = document.getElementById('metadata');
-const player = document.getElementById('miniPlayer');
-const stationName = document.getElementById('stationName');
+const coverImage = document.getElementById('ip');
+const nowPlaying = document.getElementById('nowPlaying');
 const stationCount = document.getElementById('station-count');
-const RandomPlay = document.getElementById('randomplay');
 const historyDisplay = document.getElementById('historyBtn')
-const genreSelect = document.getElementById('genre-select');
 const copyIcon = document.getElementById('copyIcon');
-const iconContainer = document.querySelector('#copyIcon .icon-container');
+const copyIconSymbol = copyIcon.querySelector('i.fas.fa-copy');
 const confirmation = document.querySelector('#copyIcon .copy-confirmation');
 const searchInput = document.getElementById('searchInput');
 const searchButton = document.getElementById('searchButton');
@@ -21,315 +14,60 @@ const VideoDisplay = document.getElementById("YouTubeVideo");
 const innerlastfm = document.getElementById('lastfmList');
 const inneritunes = document.getElementById('itunesList');
 const innerdeezer = document.getElementById('deezerList');
+const metadataElement = document.getElementById('metadataDisplay');
+const genreSelect = document.getElementById('genre-select');
+let hlsPlayer = null;
+let icecastPlayer = null;
+let audioElement = null;
+let currentStation = null;
+let isPlaying = false;
+let metadataInterval = null;
+let metadataEventSource = null;
 
-document.querySelector('.nav-link[href="#search"]').addEventListener('click', function (event) {
-    document.getElementById('searchInput').focus();
-});
+const searchTab = document.querySelector('.nav-link[href="#search"]');
+if (searchTab) {
+    searchTab.addEventListener("click", () => {
+        const si = document.getElementById('searchInput');
+        if (si) si.focus();
+    });
+}
 
-let currentPlayingMedia = null;
-
-player.addEventListener('play', () => handlePlayPause(true));
-player.addEventListener('pause', () => handlePlayPause(false));
-
-player.volume = localStorage.getItem('volumeKey') || 1.0;
-
-// Event listener for volume changes
-player.addEventListener('volumechange', function () {
-    localStorage.setItem('volumeKey', player.volume);
-});
-
-// click to display track history
 historyDisplay.addEventListener('click', function () {
     displayRecentTracks();
 });
 
-function startCoverRotation() {
-    const coverImage = document.getElementById('ip');
-    if (coverImage) {
-        coverImage.classList.add('rotating');
-    }
-}
-
-function stopCoverRotation() {
-    const coverImage = document.getElementById('ip');
-    if (coverImage) {
-        coverImage.classList.remove('rotating');
-    }
-}
-
-// copy stream title
 copyIcon.addEventListener('click', () => {
+
     const textarea = document.createElement('textarea');
-    textarea.value = metadataElement.textContent;
+    textarea.value = metadataElement.textContent.trim();
     document.body.appendChild(textarea);
     textarea.select();
     document.execCommand('copy');
     document.body.removeChild(textarea);
 
-    iconContainer.style.display = 'none';
-    confirmation.style.display = 'flex';
+    copyIconSymbol.style.display = 'none';
+    confirmation.style.display = 'inline-flex';
 
     setTimeout(() => {
         confirmation.style.display = 'none';
-        iconContainer.style.display = 'flex';
+        copyIconSymbol.style.display = 'inline';
     }, 2000);
 });
 
-let metadataInterval = null;
-let eventSource = null;
-let icecastMetadataPlayer = null;
+function updatePlayerUI(media) {
+    coverImage.src = `${media.favicon ? media.favicon : 'assets/radios/Unidentified2.webp'}`;
+    coverImage.classList.add('rotating');
 
-function playMedia(media, playButton) {
-    // Update button icons on the radio list
-    UpdatePlayPause(playButton);
-
-    // url_resolved is for radio browser's search results
-    const chosenUrl = media.url_resolved || media.url;
-
-    handlePlayback(chosenUrl, media);
-
-    function handlePlayback(chosenUrl, media) {
-        if (player.getAttribute('data-link') === chosenUrl) {
-            // restart the playback if paused before
-            togglePlay();
-        } else {
-            // Clear intervals and detach event sources when reloading metadata for a new station
-            clearMetadata();
-            switch (media.host) {
-                case 'icecast':
-                    playIceCast();
-                    break;
-                case 'zeno':
-                    playZeno();
-                    break;
-                case 'lautfm':
-                    playLautFM();
-                    break;
-                case 'special':
-                    playSpecial(media.api);
-                    break;
-                case 'unknown':
-                    playStream();
-                    metadataElement.innerHTML = "Visit radio's homepage for playing info";
-                    break;
-                default:
-                    playIceCast();
-                    break;
-            }
-        }
-        currentPlayingMedia = playButton;
-    }
-
-    function clearMetadata() {
-        metadataElement.innerHTML = '';
-        if (metadataInterval) {
-            clearInterval(metadataInterval);
-            metadataInterval = null;
-        }
-        if (eventSource) {
-            eventSource.close();
-            eventSource = null;
-        }
-        if (icecastMetadataPlayer) {
-            icecastMetadataPlayer.stop();
-            icecastMetadataPlayer.detachAudioElement();
-            icecastMetadataPlayer = null;
-        }
-    }
-
-    // play the stream without metadata
-    function playStream() {
-        player.src = chosenUrl;
-        updatePlayerUI(media);
-        player.play();
-    };
-
-    // Play Icecast stream with metadata
-    function playIceCast() {
-        try {
-            icecastMetadataPlayer = new IcecastMetadataPlayer(chosenUrl, {
-                audioElement: player,
-                onMetadata: (metadata) => {
-                    const title = metadata.StreamTitle || metadata['Stream Title'] || media.name || 'No track information';
-                    trackHistory(title);
-                    metadataElement.innerHTML = title;
-                },
-                metadataTypes: ["icy"],
-                icyDetectionTimeout: 5000,
-                enableLogging: true,
-                onError: (error) => {
-                    console.log(error);
-                    metadataElement.innerHTML = "Click on icon to go to homepage";
-                },
-            });
-            updatePlayerUI(media);
-            icecastMetadataPlayer.play();
-        } catch (error) {
-            console.error('Error initializing Icecast metadata player:', error);
-            playStream();
-        }
-    }
-
-    // Play Zeno stream with metadata
-    function playZeno() {
-        const zenoapiUrl = `https://api.zeno.fm/mounts/metadata/subscribe/${getSpecialID(chosenUrl)}`;
-        eventSource = new EventSource(zenoapiUrl);
-
-        eventSource.addEventListener('message', function (event) {
-            processData(event.data);
-        });
-
-        eventSource.addEventListener('error', function (event) {
-            console.error('Stream endpoint not active:', event);
-            metadataElement.innerHTML = 'Stream endpoint not active';
-        });
-
-        function processData(data) {
-            try {
-                const parsedData = JSON.parse(data);
-
-                if (parsedData.streamTitle) {
-                    const streamTitle = parsedData.streamTitle.trim();
-                    trackHistory(streamTitle);
-                    metadataElement.innerHTML = streamTitle;
-                } else {
-                    metadataElement.innerHTML = 'Metadata not available';
-                }
-            } catch (error) {
-                console.error('Failed to parse JSON:', error);
-            }
-            playStream();
-        }
-    }
-
-    // Play LautFM stream with metadata
-    function playLautFM() {
-        const apiUrl = `https://api.laut.fm/station/${getSpecialID(chosenUrl)}/current_song`;
-        startMetadataUpdate(apiUrl, 'lautfm');
-        playStream();
-    }
-
-    // Play Special stream with metadata
-    function playSpecial(alias) {
-        const apiUrl = `https://scraper2.onlineradiobox.com/${alias}`;
-        startMetadataUpdate(apiUrl, 'special');
-        playStream();
-    }
-
-    // Start fetching metadata updates
-    function startMetadataUpdate(apiUrl, type) {
-        const fetchMetadata = () => {
-            fetch(apiUrl)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(jsonData => {
-                    updateMetadata(jsonData, type);
-                })
-                .catch(error => {
-                    console.error('Error fetching or processing data:', error);
-                    metadataElement.innerHTML = 'Stream not active';
-                });
-        };
-
-        fetchMetadata();
-        metadataInterval = setInterval(fetchMetadata, 10000);
-    }
-
-    // Update metadata display based on type
-    function updateMetadata(jsonData, type) {
-        switch (type) {
-            case 'lautfm':
-                const streamTitle = formatLautTitle(jsonData);
-                metadataElement.innerHTML = streamTitle;
-                trackHistory(streamTitle);
-                break;
-            case 'special':
-                try {
-                    const streamTitle = jsonData.title || 'No metadata';
-                    metadataElement.innerHTML = streamTitle;
-                    trackHistory(streamTitle);
-                } catch (error) {
-                    console.error('Failed to parse JSON:', error);
-                    metadataElement.innerHTML = 'No metadata';
-                }
-                break;
-            default:
-                break;
-        }
-    }
-
-    // Format LautFM title
-    function formatLautTitle(jsonData) {
-        try {
-            const title = jsonData.title || '';
-            const artistName = (jsonData.artist && jsonData.artist.name) || '';
-            const streamTitle = `${title} - ${artistName}`;
-            return streamTitle;
-        } catch (error) {
-            console.error('Failed to parse JSON:', error);
-            return 'Metadata not available';
-        }
-    }
-
-    // Update player UI
-    function updatePlayerUI(media) {
-        cover.innerHTML = `<img id="ip" src="${media.favicon}">`;
-        stationName.innerHTML = `<a href="${media.homepage}" target="_blank" class="homepagelink">${media.name}</a>`;
-        player.setAttribute('data-link', chosenUrl);
-    }
-
-    // extract name or ID from chosenUrl
-    function getSpecialID(chosenUrl) {
-        const parts = chosenUrl.split('/');
-        return parts[parts.length - 1];
-    }
-
-    // Update button icons
-    function UpdatePlayPause(activeButton) {
-        const buttons = document.querySelectorAll('.main-play-button');
-        const isPlaying = !player.paused;
-
-        buttons.forEach(button => {
-            updateButtonIcon(button, button === activeButton && isPlaying);
-        });
-    }
-
-    // Store track history
-    function trackHistory(trackName) {
-        let recentTracks = JSON.parse(localStorage.getItem('recentTracks')) || [];
-        recentTracks = recentTracks.filter(track => track !== trackName);
-
-        recentTracks.unshift(trackName);
-
-        if (recentTracks.length > 5) {
-            recentTracks = recentTracks.slice(0, 5);
-        }
-
-        localStorage.setItem('recentTracks', JSON.stringify(recentTracks));
-    }
+    nowPlaying.innerHTML = `<a href="${media.homepage || media.url}" target="_blank" class="homepagelink">${media.name}</a>`;
+    document.getElementById('metadataSource').textContent = `Stream type: ${media.host}`;
 }
 
-function togglePlay() {
-    if (player.paused) {
-        player.play();
-        startCoverRotation();
-    } else {
-        player.pause();
-        stopCoverRotation();
-    }
+function stopCoverRotation() {
+    coverImage.classList.remove('rotating');
 }
 
-function updateButtonIcon(button, isPlaying) {
-    button.innerHTML = isPlaying ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>';
-}
-
-function handlePlayPause(isPlaying) {
-    updateButtonIcon(currentPlayingMedia, isPlaying);
-    isPlaying ? startCoverRotation() : stopCoverRotation();
+function startCoverRotation() {
+    coverImage.classList.add('rotating');
 }
 
 function displayRecentTracks() {
@@ -353,6 +91,17 @@ function displayRecentTracks() {
     }
 }
 
+function trackHistory(trackName) {
+    let recentTracks = JSON.parse(localStorage.getItem('recentTracks')) || [];
+    recentTracks = recentTracks.filter(track => track !== trackName);
+
+    recentTracks.unshift(trackName);
+
+    if (recentTracks.length > 10) {
+        recentTracks = recentTracks.slice(0, 10);
+    }
+    localStorage.setItem('recentTracks', JSON.stringify(recentTracks));
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     fetch("Links/all.json")
@@ -367,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const stationCount = document.getElementById('station-count');
             stationCount.textContent = data.length;
 
-            loadGenre('jmusic'); // default
+            loadGenre('jmusic');
 
             const defaultGenreButton = genreSelect.querySelector('[data-genre="jmusic"]');
             if (defaultGenreButton) {
@@ -387,10 +136,46 @@ document.addEventListener('DOMContentLoaded', () => {
                     genreButton.classList.add('active');
                 }
             });
+            setupPlayerControls();
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
         });
+
+    const searchInput = document.getElementById('sasalelesearch');
+    searchInput.addEventListener('input', function () {
+        const searchTerm = this.value.toLowerCase();
+        const activeGenre = document.querySelector('.genre-content.active');
+
+        if (!activeGenre) return;
+
+        const items = activeGenre.querySelectorAll('li');
+        let visibleCount = 0;
+
+        items.forEach(item => {
+            const name = item.getAttribute('data-name');
+            if (name.includes(searchTerm)) {
+                item.style.display = '';
+                visibleCount++;
+            } else {
+                item.style.display = 'none';
+            }
+        });
+
+        let noResults = activeGenre.querySelector('.no-results');
+        if (visibleCount === 0 && !noResults) {
+            noResults = document.createElement('p');
+            noResults.className = 'no-results';
+            noResults.textContent = 'No stations found matching your search';
+            noResults.style.gridColumn = '1 / -1';
+            noResults.style.textAlign = 'center';
+            noResults.style.padding = '20px';
+            noResults.style.color = 'white';
+            activeGenre.appendChild(noResults);
+        } else if (visibleCount > 0 && noResults) {
+            noResults.remove();
+        }
+    });
 
     function loadGenre(genreToLoad) {
         const genreContainers = document.querySelectorAll('.genre-content');
@@ -401,7 +186,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         genreContainers.forEach(container => {
             container.classList.remove('active');
-            container.querySelectorAll('li').forEach(li => li.style.display = '');
+            container.querySelectorAll('li').forEach(li => {
+                li.style.display = '';
+                li.classList.remove('active-station');
+            });
             const noResults = container.querySelector('.no-results');
             if (noResults) noResults.remove();
         });
@@ -418,25 +206,46 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
 
-                const genreHTML = filteredData.map(station => `
+                const genreHTML = filteredData.map(station => {
+                    const streamTypeClass = `stream-type-${station.host}`;
+                    return `
                 <li data-name="${station.name.toLowerCase()}">
-                    <img src="${station.favicon}" alt="${station.name}">
-                    <div class="info">
-                        <h5>${station.name}</h5>
+                            <img src="${station.favicon || 'assets/radios/Unidentified2.webp'}" alt="${station.name}">
+                    <div class="flex-grow-1 info">
+                        <h5 class="mb-1 text-truncate">${station.name}</h5>
+                        <small class="stream-type ${streamTypeClass}">${station.host}</small>
                     </div>
-                    <a href="${station.homepage}" target="_blank" class="btn btn-info"><i class="fas fa-external-link-alt"></i></a>
-                    <button class="btn btn-dark download-button"><i class="fas fa-download"></i></button>
-                    <button class="btn btn-primary main-play-button"><i class="fas fa-play"></i></button>
+                    <div class="ms-3 d-flex button-group">
+                        <a href="${station.homepage || station.url}" target="_blank" class="btn btn-sm btn-info">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                        <button class="btn btn-sm btn-dark download-button">
+                            <i class="fas fa-download"></i>
+                        </button>
+                        <button class="btn btn-sm btn-primary main-play-button">
+                            <i class="fas fa-play"></i>
+                        </button>
+                    </div>
                 </li>
-            `).join('');
+            `}).join('');
 
                 selectedContainer.innerHTML = genreHTML;
+
+                if (currentStation) {
+                    const stationElements = selectedContainer.querySelectorAll('li');
+                    stationElements.forEach(el => {
+                        const name = el.querySelector('h5').textContent;
+                        if (name.includes(currentStation.name)) {
+                            el.classList.add('active-station');
+                        }
+                    });
+                }
             }, 300);
         }
     }
 
-    // Improved random play that respects visibility
-    RandomPlay.addEventListener('click', function () {
+    const randomplay = document.getElementById('randomplay');
+    randomplay.addEventListener('click', function () {
         const activeGenre = document.querySelector('.genre-content.active');
         if (!activeGenre) return;
 
@@ -459,12 +268,12 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Media not found:', stationName);
         }
     }
-    // Event delegation for dynamic buttons
+
+
     document.addEventListener('click', function (event) {
         const target = event.target.closest('.download-button, .main-play-button');
         if (!target) return;
 
-        // Throttle rapid clicks
         if (target.hasAttribute('data-processing')) return;
         target.setAttribute('data-processing', 'true');
         setTimeout(() => target.removeAttribute('data-processing'), 1000);
@@ -523,53 +332,408 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// search site's station function
-// Modified search function that works with genre loading
-function debounce(func, wait) {
-    let timeout;
-    return function (...args) {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => func.apply(this, args), wait);
-    };
-}
 
-document.getElementById('sasalelesearch').addEventListener('input', debounce(function () {
-    const searchTerm = this.value.toLowerCase().trim();
-    const activeGenre = document.querySelector('.genre-content.active');
-    if (!activeGenre) return;
+function setupPlayerControls() {
+    const playBtn = document.getElementById('playBtn');
+    const stopBtn = document.getElementById('stopBtn');
 
-    const items = activeGenre.querySelectorAll('li');
-    let hasVisibleItems = false;
+    playBtn.addEventListener('click', () => {
+        stopCoverRotation();
+        if (isPlaying) {
 
-    items.forEach(item => {
-        const stationName = item.querySelector('h5')?.textContent.toLowerCase() || '';
-        const isMatch = searchTerm === '' || stationName.includes(searchTerm);
-        item.style.display = isMatch ? '' : 'none';
-        if (isMatch) hasVisibleItems = true;
+            if (icecastPlayer) {
+                icecastPlayer.stop();
+                metadataElement.textContent = 'Paused';
+            }
+            if (hlsPlayer && audioElement) {
+                audioElement.pause();
+                document.getElementById('hlsStatus').textContent = 'HLS: Paused';
+            }
+            if (audioElement) {
+                audioElement.pause();
+            }
+            playBtn.innerHTML = '<i class="fas fa-play"></i>';
+            isPlaying = false;
+        } else {
+
+            startCoverRotation();
+            if (currentStation) {
+
+                if (currentStation.host === 'icecast') {
+                    playIcecastStream(currentStation);
+                }
+
+                else if (hlsPlayer && audioElement) {
+                    audioElement.play();
+                    document.getElementById('hlsStatus').textContent = 'HLS: Playing';
+                } else if (audioElement) {
+                    audioElement.play();
+                }
+            }
+            playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            isPlaying = true;
+        }
     });
 
-    const noResultsMsg = activeGenre.querySelector('.no-results');
-    if (!hasVisibleItems && searchTerm) {
-        if (!noResultsMsg) {
-            const msg = document.createElement('p');
-            msg.className = 'no-results';
-            msg.textContent = 'No stations match your search';
-            activeGenre.appendChild(msg);
-        }
-    } else if (noResultsMsg) {
-        noResultsMsg.remove();
-    }
-}, 300));
+    stopBtn.addEventListener('click', () => {
+        stopPlayback();
+    });
+}
 
-// Expand and minimize player
-togglePlayerButton.addEventListener("click", () => {
-    playerContainer.classList.toggle("minimized");
-    expandIcon.classList.toggle("hidden");
-    minimizeIcon.classList.toggle("hidden");
-});
+function stopPlayback() {
+    if (icecastPlayer) {
+        icecastPlayer.stop();
+    }
+
+    if (hlsPlayer) {
+        hlsPlayer.stopLoad();
+        hlsPlayer.destroy();
+        hlsPlayer = null;
+    }
+
+    if (audioElement) {
+        audioElement.pause();
+        audioElement = null;
+    }
+
+    if (metadataInterval) {
+        clearInterval(metadataInterval);
+        metadataInterval = null;
+    }
+
+    if (metadataEventSource) {
+        metadataEventSource.close();
+        metadataEventSource = null;
+    }
+
+    document.getElementById('playBtn').innerHTML = '<i class="fas fa-play"></i>';
+    isPlaying = false;
+    document.getElementById('hlsStatus').textContent = '';
+    coverImage.src = "assets/sasalele_logo-removebg.webp";
+    coverImage.classList.remove('rotating');
+
+    document.querySelectorAll('li').forEach(li => {
+        li.classList.remove('active-station');
+    });
+    nowPlaying.textContent = 'No station selected';
+    metadataElement.textContent = '';
+    document.getElementById('metadataSource').textContent = '';
+
+    currentStation = null;
+}
+
+function playMedia(media, button) {
+    stopPlayback();
+
+    document.querySelectorAll('li').forEach(li => {
+        li.classList.remove('active-station');
+    });
+
+    const parentLi = button.closest('li');
+    parentLi.classList.add('active-station');
+
+    updatePlayerUI(media);
+    currentStation = media;
+
+    switch (media.host) {
+        case 'icecast':
+            playIcecastStream(media);
+            break;
+        case 'zeno':
+            playZeno(media);
+            break;
+        case 'lautfm':
+            playLautFM(media);
+            break;
+        case 'special':
+            playSpecial(media);
+            break;
+        case 'hls':
+            playHlsStream(media);
+            break;
+        case 'unknown':
+            playUnknownStream(media);
+            break;
+        default:
+            playIcecastStream(media);
+            break;
+    }
+
+
+    document.getElementById('playBtn').innerHTML = '<i class="fas fa-pause"></i>';
+    isPlaying = true;
+}
+
+function playHlsStream(media) {
+
+    if (Hls.isSupported()) {
+        audioElement = new Audio();
+        hlsPlayer = new Hls({
+
+            debug: false,
+            enableWorker: true,
+            lowLatencyMode: true,
+            backBufferLength: 90
+        });
+
+
+        hlsPlayer.loadSource(media.url);
+        hlsPlayer.attachMedia(audioElement);
+
+        hlsPlayer.on(Hls.Events.MANIFEST_PARSED, (event, data) => {
+            if (data && data.levels && data.levels.length > 0) {
+                const stationName = data.levels[0].name || "Live Stream";
+                metadataElement.textContent = stationName;
+                audioElement.play();
+            }
+        });
+
+        hlsPlayer.on(Hls.Events.FRAG_PARSING_METADATA, (event, data) => {
+            data.samples.forEach(sample => {
+
+                window.jsmediatags.read(new Blob([sample.data]), {
+                    onSuccess: (tag) => {
+                        const tags = tag.tags;
+
+                        const artist = tags.artist || "";
+                        const title = tags.title || "";
+                        const album = tags.album || "";
+                        const genre = tags.genre || "";
+                        const comment = tags.comment ? tags.comment.text : "";
+
+                        let displayText = "";
+
+                        if (artist && title) {
+                            displayText = `${artist} - ${title}`;
+                        } else if (title) {
+                            displayText = `Now Playing: ${title}`;
+                        } else if (artist) {
+                            displayText = `By: ${artist}`;
+                        } else if (album) {
+                            displayText = `Album: ${album}`;
+                        } else if (genre) {
+                            displayText = `Genre: ${genre}`;
+                        } else if (comment) {
+                            displayText = comment;
+                        } else {
+                            displayText = "Stream is live (no metadata)";
+                        }
+
+                        metadataElement.textContent = displayText;
+
+                    },
+                    onError: (error) => {
+                        console.warn("ID3 parse error:", error);
+                        metadataElement.textContent =
+                            "Stream is live (metadata unavailable)";
+                    }
+                });
+            });
+        });
+
+        hlsPlayer.on(Hls.Events.ERROR, (event, data) => {
+            console.error('HLS error:', data);
+            if (data.fatal) {
+                switch (data.type) {
+                    case Hls.ErrorTypes.NETWORK_ERROR:
+                        document.getElementById('hlsStatus').textContent = 'HLS: Network error - trying to recover';
+                        hlsPlayer.startLoad();
+                        break;
+                    case Hls.ErrorTypes.MEDIA_ERROR:
+                        document.getElementById('hlsStatus').textContent = 'HLS: Media error - trying to recover';
+                        hlsPlayer.recoverMediaError();
+                        break;
+                    default:
+                        document.getElementById('hlsStatus').textContent = 'HLS: Unrecoverable error';
+                        stopPlayback();
+                        break;
+                }
+            }
+        });
+    } else if (audio.canPlayType('application/vnd.apple.mpegurl')) {
+
+        audioElement = new Audio(media.url);
+
+
+        document.getElementById('hlsStatus').textContent = 'HLS: Using native support';
+
+
+        audioElement.play();
+    } else {
+        metadataElement.textContent = 'HLS not supported in this browser';
+        document.getElementById('hlsStatus').textContent = 'HLS: Not supported';
+        isPlaying = false;
+        document.getElementById('playBtn').innerHTML = '<i class="fas fa-play"></i>';
+    }
+}
+
+function playIcecastStream(media) {
+    const chosenUrl = media.url_resolved || media.url;
+
+    try {
+        icecastPlayer = new IcecastMetadataPlayer(chosenUrl, {
+            onMetadata: (metadata) => {
+                if (metadata.StreamTitle) {
+                    metadataElement.textContent = metadata.StreamTitle;
+                } else {
+                    metadataElement.textContent = 'No track information available';
+                }
+            },
+            onError: (message) => {
+                metadataElement.textContent = 'Error: ' + message;
+                console.warn("Falling back to playUnknownStream...");
+                icecastPlayer.detachAudioElement();
+                icecastPlayer = null;
+                playUnknownStream(media);
+            },
+            onLoad: () => {
+                metadataElement.textContent = 'Loading...';
+            },
+            onEnd: () => {
+                metadataElement.textContent = 'Stream ended';
+            },
+            enableLogging: true
+        });
+
+        icecastPlayer.play();
+    } catch (err) {
+        console.error("Icecast player initialization failed:", err);
+        icecastPlayer.detachAudioElement();
+        icecastPlayer = null;
+        playUnknownStream(media);
+    }
+}
+
+
+function playLautFM(media) {
+    audioElement = new Audio(media.url);
+    const apiUrl = `https://api.laut.fm/station/${getSpecialID(media.url)}/current_song`;
+    startMetadataUpdate(apiUrl, 'lautfm');
+    audioElement.play();
+}
+
+function playSpecial(media) {
+    audioElement = new Audio(media.url);
+    const apiUrl = `https://scraper2.onlineradiobox.com/${media.api}`;
+    startMetadataUpdate(apiUrl, 'special');
+    audioElement.play();
+}
+
+
+function playZeno(media) {
+    audioElement = new Audio(media.url);
+    const zenoapiUrl = `https://api.zeno.fm/mounts/metadata/subscribe/${getSpecialID(media.url)}`;
+
+    if (metadataEventSource) {
+        metadataEventSource.close();
+    }
+
+    metadataEventSource = new EventSource(zenoapiUrl);
+    metadataEventSource.addEventListener('message', function (event) {
+        processData(event.data);
+    });
+
+    metadataEventSource.addEventListener('error', function (event) {
+        console.error('Stream endpoint not active:', event);
+        metadataElement.textContent = 'Stream endpoint not active';
+    });
+
+    function processData(data) {
+        try {
+            const parsedData = JSON.parse(data);
+
+            if (parsedData.streamTitle) {
+                const streamTitle = parsedData.streamTitle.trim();
+                trackHistory(streamTitle);
+                metadataElement.textContent = streamTitle;
+            } else {
+                metadataElement.textContent = 'Metadata not available';
+            }
+        } catch (error) {
+            console.error('Failed to parse JSON:', error);
+        }
+    }
+    audioElement.play();
+}
+
+function playUnknownStream(media) {
+    const chosenUrl = media.url_resolved || media.url;
+    audioElement = new Audio(chosenUrl);
+
+    metadataElement.textContent = "Visit radio's homepage for playing info";
+
+    audioElement.addEventListener('error', (e) => {
+        console.warn("Unknown stream failed to play, falling back to HLS...", e);
+        playHlsStream(media);
+    });
+
+    audioElement.play().catch((err) => {
+        console.error("Playback failed:", err);
+        playHlsStream(media);
+    });
+}
+
+function startMetadataUpdate(apiUrl, type) {
+    const fetchMetadata = () => {
+        fetch(apiUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(jsonData => {
+                updateMetadata(jsonData, type);
+            })
+            .catch(error => {
+                console.error('Error fetching or processing data:', error);
+                metadataElement.textContent = 'Stream not active';
+            });
+    };
+    fetchMetadata();
+    metadataInterval = setInterval(fetchMetadata, 10000);
+}
+
+function getSpecialID(Url) {
+    const parts = Url.split('/');
+    return parts[parts.length - 1];
+}
+
+function formatLautTitle(jsonData) {
+    try {
+        const title = jsonData.title || '';
+        const artistName = (jsonData.artist && jsonData.artist.name) || '';
+        const streamTitle = `${artistName} - ${title}`;
+        return streamTitle;
+    } catch (error) {
+        console.error('Failed to parse JSON:', error);
+        return 'Metadata not available';
+    }
+}
+
+function updateMetadata(jsonData, type) {
+    switch (type) {
+        case 'lautfm':
+            const streamTitle = formatLautTitle(jsonData);
+            metadataElement.textContent = streamTitle;
+            trackHistory(streamTitle);
+            break;
+        case 'special':
+            try {
+                const streamTitle = jsonData.title || 'No metadata';
+                metadataElement.textContent = streamTitle;
+                trackHistory(streamTitle);
+            } catch (error) {
+                console.error('Failed to parse JSON:', error);
+                metadataElement.textContent = 'No metadata';
+            }
+            break;
+        default:
+            break;
+    }
+}
 
 // search station with options using Radio Browser's API
-
 const countries = [
     "United States", "Germany", "Russia", "France", "Greece", "China", "United Kingdom",
     "Mexico", "Italy", "Australia", "Canada", "India", "Spain", "Brazil", "Poland",
@@ -587,7 +751,6 @@ const countries = [
     "Cyprus", "Ethiopia", "Jamaica", "Puerto Rico", "Macau", "Luxembourg", "Vietnam",
     "Georgia", "Nepal", "Iraq", "Jordan", "Syria"
 ];
-
 
 function populateCountries() {
     const selectElement = document.getElementById("countrySelect");
@@ -692,7 +855,7 @@ function handleSearchOptionChange() {
     clearSearchField();
 }
 
-// Function to clear the search field
+
 function clearSearchField() {
     searchField.value = '';
     countrySelect.value = '';
@@ -700,7 +863,7 @@ function clearSearchField() {
     tagSelect.value = '';
 }
 
-// Function to perform radio search
+
 function radioSearch() {
     const searchBy = searchOption.value;
     let searchValue = '';
@@ -714,7 +877,7 @@ function radioSearch() {
         case 'bylanguage':
             searchValue = languageSelect.value.toLowerCase();
             break;
-        case 'bytag':
+        case 'bytag': info
             searchValue = tagSelect.value.toLowerCase();
             break;
         default:
@@ -726,8 +889,8 @@ function radioSearch() {
     }
     searchResultContainer.classList.remove('active');
     findradio.style.display = "block";
-    // add limit to prevent loading forever
-    fetch(`https://de1.api.radio-browser.info/json/stations/${searchBy}/${searchValue}?hidebroken=true&limit=300&order=clickcount&reverse=true`)
+
+    fetch(`https://de1.api.radio-browser.info/json/stations/${searchBy}/${searchValue}?hidebroken=true&limit=150&order=clickcount&reverse=true`)
         .then(response => response.json())
         .then(data => {
             if (data.length > 0) {
@@ -738,13 +901,21 @@ function radioSearch() {
                 data.forEach(radio => {
                     const radioItem = document.createElement('li');
                     radioItem.innerHTML = `
-                        <img src="${radio.favicon ? radio.favicon : 'assets/radios/Unidentified2.webp'}">
-                        <div class="info">
-                            <h5>${radio.name}</h5>
-                        </div>
-                        <a href="${radio.homepage}" target="_blank" class="btn btn-info"><i class="fas fa-external-link-alt"></i></a>
-                        <button class="btn btn-dark download-button"><i class="fas fa-download"></i></button>
-                        <button class="btn btn-primary main-play-button"><i class="fas fa-play"></i></button>
+                    <img src="${radio.favicon || 'assets/radios/Unidentified2.webp'}">
+                    <div class="flex-grow-1 info">
+                        <h5 class="mb-1 text-truncate">${radio.name}</h5>
+                    </div>
+                    <div class="ms-3 d-flex button-group">
+                        <a href="${radio.homepage || radio.url}" target="_blank" class="btn btn-sm btn-info">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                        <button class="btn btn-sm btn-dark download-button">
+                            <i class="fas fa-download"></i>
+                        </button>
+                        <button class="btn btn-sm btn-primary main-play-button">
+                            <i class="fas fa-play"></i>
+                        </button>
+                    </div>
                     `;
                     searchResultContainer.appendChild(radioItem);
                 });
@@ -783,170 +954,13 @@ function radioSearch() {
     clearSearchField();
 }
 
-// for radio streams
-const titleNow = document.getElementById("selected-video-title");
-let currentRadioStreams = [];
-let currentPlayingElement = null;
-let hls = null;
 
-function updateLangInfo(lang, count) {
-    const streamLang = document.getElementById("lang-name");
-    const streamCount = document.getElementById("stream-count");
-
-    streamLang.textContent = lang;
-    streamCount.textContent = count;
-}
-
-function selectRadioStream(element) {
-    const selectedLink = element.dataset.link;
-    const selectedTitle = element.querySelector('span').textContent;
-
-    if (currentPlayingElement) {
-        currentPlayingElement.style.backgroundColor = "";
-        currentPlayingElement.style.color = "";
-    }
-
-    element.style.backgroundColor = "#007bff";
-    element.style.color = "#fff";
-    currentPlayingElement = element;
-    titleNow.style.display = "block";
-    titleNow.textContent = selectedTitle;
-
-    playRadioStream(selectedLink);
-}
-
-function playRadioStream(link) {
-    const m3u8player = document.getElementById("radio-player");
-
-    if (hls) {
-        hls.destroy();
-        hls = null;
-    }
-
-    if (Hls.isSupported()) {
-        hls = new Hls();
-        hls.loadSource(link);
-        hls.attachMedia(m3u8player);
-        hls.on(Hls.Events.MANIFEST_PARSED, () => m3u8player.play());
-    } else if (m3u8player.canPlayType('application/vnd.apple.mpegurl')) {
-        m3u8player.src = link;
-        m3u8player.addEventListener('loadedmetadata', () => m3u8player.play());
-    } else {
-        console.error('HLS not supported.');
-    }
-}
-
-function createRadioList(radioStreams) {
-    const videoListElement = document.getElementById("video-list");
-    videoListElement.innerHTML = "";
-
-    radioStreams.forEach((stream) => {
-        const listItem = document.createElement("li");
-        listItem.classList.add("itunes-item", "d-flex", "align-items-center");
-
-        const iconImage = document.createElement("img");
-        iconImage.classList.add("mr-2");
-        iconImage.src = stream.icon || "assets/radios/Unidentified2.webp";
-        iconImage.width = 40;
-
-        if (stream.homepage) {
-            const homepageLink = document.createElement("a");
-            homepageLink.classList.add("homepagelink");
-            homepageLink.href = stream.homepage;
-            homepageLink.target = "_blank";
-            homepageLink.appendChild(iconImage);
-            listItem.appendChild(homepageLink);
-        } else {
-            listItem.appendChild(iconImage);
-        }
-
-        const contentContainer = document.createElement("div");
-        contentContainer.classList.add("d-flex", "align-items-center", "justify-content-between", "flex-grow-1");
-        const titleSpan = document.createElement("span");
-        titleSpan.textContent = stream.title;
-        titleSpan.classList.add("ml-2");
-        contentContainer.appendChild(titleSpan);
-        const downloadIcon = document.createElement("i");
-        downloadIcon.classList.add("fa", "fa-download");
-        downloadIcon.addEventListener("click", (event) => {
-            event.stopPropagation();
-            initiateM3UDownload(stream.link, stream.title);
-        });
-
-        contentContainer.appendChild(downloadIcon);
-        listItem.appendChild(contentContainer);
-        listItem.dataset.link = stream.link;
-        videoListElement.appendChild(listItem);
-    });
-
-    videoListElement.addEventListener("click", (event) => {
-        const listItem = event.target.closest("li");
-        if (listItem) {
-            selectRadioStream(listItem);
-        }
-    });
-}
-
-function filterRadioList(query) {
-    const lowerCaseQuery = query.toLowerCase();
-    return currentRadioStreams.filter(stream => stream.title.toLowerCase().includes(lowerCaseQuery));
-}
-
-// change the list based on selected language
-document.querySelectorAll(".lang-link").forEach(link => {
-    link.addEventListener("click", (e) => {
-        e.preventDefault();
-        const lang = link.getAttribute("data-lang");
-        const filteredRadioStreams = currentRadioStreams.filter(stream => stream.lang === lang);
-        createRadioList(filteredRadioStreams);
-        updateLangInfo(link.textContent, filteredRadioStreams.length);
-    });
-});
-
-// filter stream
-document.getElementById("searchStream").addEventListener("input", function () {
-    const query = this.value;
-    const filteredRadioStreams = filterRadioList(query);
-    createRadioList(filteredRadioStreams);
-});
-// download m3u8 stream
-function initiateM3UDownload(streamUrl, streamTitle) {
-    const m3uContent = `#EXTM3U\n#EXTINF:-1,${streamTitle}\n${streamUrl}`;
-    const blob = new Blob([m3uContent], { type: "text/plain;charset=utf-8" });
-    const downloadableUrl = URL.createObjectURL(blob);
-
-    const downloadLink = document.createElement("a");
-    downloadLink.href = downloadableUrl;
-    downloadLink.download = `${streamTitle}.m3u8`;
-    downloadLink.click();
-}
-
-(async () => {
-    const defaultLang = "ja";
-    const defaultLangName = "Japanese";
-
-    try {
-        const response = await fetch('Links/radiostreams.json');
-        if (!response.ok) {
-            throw new Error(`Network response was not ok: ${response.statusText}`);
-        }
-        currentRadioStreams = await response.json();
-
-        const filteredRadioStreams = currentRadioStreams.filter(stream => stream.lang === defaultLang);
-        createRadioList(filteredRadioStreams);
-        updateLangInfo(defaultLangName, filteredRadioStreams.length);
-    } catch (error) {
-        console.error('Error fetching radio streams:', error);
-    }
-})();
-
-// Search song function
 function performSearch() {
     const searchTerm = searchInput.value.trim();
     if (searchTerm !== '') {
         innerContainer.style.display = 'block';
         searchTermsContainer.textContent = searchTerm;
-        // autofill into the box
+
         const gscInput = document.querySelector('.gsc-input input');
         const gscClearButton = document.querySelector('.gsst_a');
         if (gscInput && gscClearButton) {
@@ -956,7 +970,7 @@ function performSearch() {
         if (gscInput) {
             gscInput.value = searchTerm;
         }
-        // Clear previous results
+
         innerdeezer.innerHTML = '';
         innerlastfm.innerHTML = '';
         VideoDisplay.src = '';
@@ -1079,7 +1093,7 @@ function displayResults(results) {
 
     VideoDisplay.style.display = "block";
 
-    // Display LastFM results
+
     if (lastfmResults.length > 0) {
         const fragment = document.createDocumentFragment();
         const resultsCount = Math.min(MAX_RESULTS, lastfmResults.length);
@@ -1089,7 +1103,7 @@ function displayResults(results) {
             if (!song) continue;
             const listItem = document.createElement('li');
             listItem.className = 'lastfm-item';
-            listItem.textContent = `${song.title} - ${song.artist}`;
+            listItem.textContent = `${song.artist} - ${song.title}`;
             fragment.appendChild(listItem);
         }
         document.getElementById('lastfmList').appendChild(fragment);
@@ -1097,12 +1111,12 @@ function displayResults(results) {
         document.getElementById('lastfmList').innerHTML = '<h6 class="noresult mb-2">No results found on LastFM :(</h6>';
     }
 
-    // Display YouTube results
+
     VideoDisplay.src = youtubeResults.length > 0
         ? `https://www.youtube.com/embed/${youtubeResults[0].videoId}`
         : `https://www.youtube.com/embed/SBQprWeOx8g`;
 
-    // Display iTunes results
+
     if (itunesResults.length > 0) {
         const itunesList = document.getElementById('itunesList');
         const fragment = document.createDocumentFragment();
@@ -1112,7 +1126,7 @@ function displayResults(results) {
             listItem.innerHTML = `
             <img class="search-cover" src="${result.artworkUrl}" alt="${result.trackName} cover art">
             <div class="info">
-                <p><strong>${result.trackName} - ${result.artistName}</strong></p>
+                <p><strong>${result.artistName} - ${result.trackName}</strong></p>
                 <p class="album-name">${result.collectionName}</p>
             </div>
             <audio controls class="audio-preview">
@@ -1137,7 +1151,6 @@ function displayResults(results) {
         document.getElementById('itunesList').innerHTML = '<h6 class="noresult mb-2">No results found on iTunes :(</h6>';
     }
 
-    // Display Deezer results
     if (deezerResults.length > 0) {
         const deezerList = document.getElementById('deezerList');
         const fragment = document.createDocumentFragment();
@@ -1152,7 +1165,7 @@ function displayResults(results) {
             <img class="search-cover" src="${result.cover}" alt="${result.title}" 
                  onerror="this.src='default-music-cover.png'">
             <div class="info">
-                <p><strong>${result.title} - ${result.artist}</strong></p>
+                <p><strong>${result.artist} - ${result.title}</strong></p>
                 <p class="album-name">${result.album}</p>
             </div>
             <audio controls class="audio-preview">
@@ -1178,7 +1191,6 @@ function displayResults(results) {
     }
 }
 
-// Search by website
 const websiteButtons = document.querySelectorAll('.togglesearch');
 
 for (let i = 0; i < websiteButtons.length; i++) {
@@ -1192,7 +1204,6 @@ for (let i = 0; i < websiteButtons.length; i++) {
     });
 }
 
-// Generate search query
 function getWebsiteURL(label, searchTerm) {
     let a = encodeURIComponent(searchTerm);
     switch (label) {
@@ -1248,7 +1259,7 @@ function getWebsiteURL(label, searchTerm) {
             return ""
     }
 }
-//Chatting
+
 const toggleButton = document.getElementById('toggleButton');
 const panel = document.getElementById('sidePanel');
 const hideButton = document.getElementById('hideButton');
@@ -1332,17 +1343,6 @@ document.addEventListener('DOMContentLoaded', () => {
             joinFormContainer.appendChild(joinInnerContainer);
         }
 
-
-        createLoad(containerId) {
-            var container = document.getElementById(containerId);
-            container.innerHTML = '';
-            var loaderContainer = createElement('div', null, null, { class: 'loader_container' });
-            var loader = createElement('div', null, null, { class: 'loader' });
-
-            loaderContainer.append(loader);
-            container.append(loaderContainer);
-        }
-
         createChat() {
             const parent = this;
             const chatContainer = document.querySelector('.chat_container');
@@ -1369,7 +1369,7 @@ document.addEventListener('DOMContentLoaded', () => {
             chatInnerContainer.append(chatContentContainer, chatInputContainer, chatLogoutContainer);
             chatContainer.append(chatInnerContainer);
 
-            // fix pasted content not detected
+
             chatInput.addEventListener("input", function () {
                 const hasValue = chatInput.value.length > 0;
                 chatInputSend.disabled = !hasValue;
@@ -1387,37 +1387,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (chatInput.value.length > 0) {
                     chatInputSend.disabled = true;
                     chatInputSend.classList.remove('enabled');
-                    parent.createLoad('chat_content_container');
                     parent.sendMessage(chatInput.value);
                     chatInput.value = '';
                     chatInput.focus();
                 }
             });
-
-            parent.createLoad('chat_content_container');
             parent.refreshChat();
         }
 
         saveName(name) {
             localStorage.setItem('name', name);
-        }
-
-        sendMessage(message) {
-            var parent = this;
-            if (parent.getName() == null && message == null) {
-                return;
-            }
-
-            db.ref('chats/').once('value', function (messageObject) {
-                var index = parseFloat(messageObject.numChildren()) + 1;
-                db.ref(`chats/message_${index}`).set({
-                    name: parent.getName(),
-                    message: message,
-                    index: index
-                }).then(function () {
-                    parent.refreshChat();
-                });
-            });
         }
 
         getName() {
@@ -1429,40 +1408,83 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        sendMessage(message) {
+            const parent = this;
+            if (!parent.getName() || !message) return;
+
+            db.ref('chats/').push({
+                name: parent.getName(),
+                message: message,
+                timestamp: Date.now()
+            });
+        }
+
         refreshChat() {
             const chatContentContainer = document.getElementById('chat_content_container');
-            let lastMessageIndex = -1;
 
-            db.ref('chats/').on('value', (messagesObject) => {
-                const messages = messagesObject.val();
-                if (!messages) return;
+            chatContentContainer.innerHTML = '';
+            let firstLoad = true;
+            const currentUser = this.getName();
 
-                const ordered = Object.values(messages)
-                    .sort((a, b) => a.index - b.index);
+            db.ref('chats/').off(); // avoid multiple listeners
+            db.ref('chats/').orderByChild('timestamp').on('child_added', (snapshot) => {
+                const { name, message, timestamp } = snapshot.val();
+                if (!timestamp) return;
 
-                if (ordered[0]?.index <= lastMessageIndex) return; // Skip if no new messages
+                if (firstLoad) {
+                    chatContentContainer.innerHTML = '';
+                    firstLoad = false;
+                }
 
-                const fragment = document.createDocumentFragment();
-                ordered.forEach((data) => {
-                    const { name, message, index } = data;
-                    lastMessageIndex = Math.max(lastMessageIndex, index);
+                const msgDate = new Date(timestamp);
+                const today = new Date();
+                const yesterday = new Date();
+                yesterday.setDate(today.getDate() - 1);
 
-                    const messageContainer = createElement('div', null, null, { class: 'message_container' });
-                    const messageInnerContainer = createElement('div', null, null, { class: 'message_inner_container' });
-                    const messageUser = createElement('p', null, name, { class: 'message_user' });
-                    const messageContent = createElement('p', null, message, { class: 'message_content' });
+                // format day for separator
+                let dateLabel;
+                if (msgDate.toDateString() === today.toDateString()) {
+                    dateLabel = "Today";
+                } else if (msgDate.toDateString() === yesterday.toDateString()) {
+                    dateLabel = "Yesterday";
+                } else {
+                    dateLabel = msgDate.toLocaleDateString();
+                }
 
-                    messageInnerContainer.append(createElement('div', null, null, { class: 'message_user_container' }).appendChild(messageUser),
-                        createElement('div', null, null, { class: 'message_content_container' }).appendChild(messageContent));
-                    messageContainer.appendChild(messageInnerContainer);
-                    fragment.appendChild(messageContainer);
+                if (this.lastRenderedDate !== dateLabel) {
+                    this.lastRenderedDate = dateLabel;
+                    const separator = createElement('div', null, dateLabel, { class: 'date_separator' });
+                    chatContentContainer.appendChild(separator);
+                }
+
+                const isMine = name === currentUser;
+
+                const messageContainer = createElement('div', null, null, {
+                    class: isMine ? 'message_container my_message' : 'message_container'
                 });
+                const messageInnerContainer = createElement('div', null, null, { class: 'message_inner_container' });
 
-                chatContentContainer.innerHTML = ''; // Clear only once
-                chatContentContainer.appendChild(fragment);
+                if (!isMine) {
+                    const messageUser = createElement('p', null, name, { class: 'message_user' });
+                    messageInnerContainer.append(
+                        createElement('div', null, null, { class: 'message_user_container' })
+                            .appendChild(messageUser)
+                    );
+                }
+
+                const messageContent = createElement('p', null, message, { class: 'message_content' });
+
+                messageInnerContainer.append(
+                    createElement('div', null, null, { class: 'message_content_container' })
+                        .appendChild(messageContent)
+                );
+                messageContainer.appendChild(messageInnerContainer);
+
+                chatContentContainer.appendChild(messageContainer);
                 chatContentContainer.scrollTop = chatContentContainer.scrollHeight;
             });
         }
+
     }
 
     var app = new Sasalele();
