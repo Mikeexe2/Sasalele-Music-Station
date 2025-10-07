@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 
     <head>
         <meta charset="utf-8">
@@ -27,9 +27,7 @@
         <link rel="shortcut icon" href="assets/sasalele_logo-removebg.webp" type="image/x-icon" />
         <link rel="stylesheet" href="css/style.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-v4-rtl/4.6.2-1/css/bootstrap.min.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-v4-rtl/4.6.2-1/js/bootstrap.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-LDY4BC680M"></script>
         <script>
@@ -41,38 +39,25 @@
         </script>
     </head>
 
-    <body>
+    <body class="bg-dark text-light">
         <div id="background"><img id="randomimg" src="" alt="."></div>
         <div id="content">
             <nav class="navbar sticky-top navbar-dark navbar-expand-md">
                 <a class="navbar-brand" href="https://basic.pp.ua/">
                     <img src="assets/sasalele_logo-removebg.webp" width="30" height="30"
-                        class="d-inline-block align-top" alt="">
-                    Sasalele Music Station
+                        class="d-inline-block align-top">
                 </a>
-                <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse"
-                    data-target="#main-navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="main-navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span> </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="https://basic.pp.ua/">Radios<i
+                        <li class="nav-item"><a class="nav-link" href="index.html">Radios<i
                                     class="fas fa-radio"></i></a>
                         </li>
-                        <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown"
-                                aria-expanded="false" href="">Websites<i class="fa-fw fas fa-link"></i></a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#radiohere">Radio
-                                    Websites <i class="fas fa-tower-broadcast"></i></a>
-                                <a class="dropdown-item" href="#radiojppodcast">Japanese
-                                    Radios/Podcasts <i class="fas fa-podcast"></i></a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#websitehere">Music
-                                    Sites <i class="fas fa-headset"></i></a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#scrap">Download/Tools <i
-                                        class="fas fa-download"></i></a>
-                            </div>
+                        <li class="nav-item active"><a class="nav-link" href="website.html">Websites<i
+                                    class="fa-fw fas fa-link"></i></a>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="video.html">Videos<i
                                     class="fas fa-video"></i></a>
@@ -88,105 +73,47 @@
                     </ul>
                 </div>
             </nav>
-            <section id="radiohere">
-                <div class="section-title">
-                    <h1>Radio Websites <button type="button" class="tips-btn" data-toggle="modal" title="Tips"
-                            data-target="#tipsModal2">
-                            <i class="fas fa-info-circle"></i>
-                        </button></h1>
-                </div>
-                <div class="modal fade" id="tipsModal2" tabindex="-1" aria-labelledby="tipsModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="tipsModalLabel">Tips</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <p><strong>Why It's Hard to Listen to Japanese Radio Outside Japan</strong></p>
-                                <p>While there are plenty of Japanese radio stations, the issue is that they are often
-                                    not accessible outside of
-                                    Japan. Here are the main reasons why:</p>
+            <div class="col-12">
+                <div class="card card-xl" id="c-11">
+                    <div
+                        class="card-header d-flex flex-nowrap text-nowrap gap-2 align-items-center bg-dark border-bottom border-secondary">
+                        <ul class="card-tab d-flex flex-nowrap nav text-sm overflow-x-auto" id="siteTabs">
+                            <li class="nav-item"><span class="nav-link active" data-category="musicsite">Music
+                                    Sites</span></li>
+                            <li class="nav-item"><span class="nav-link" data-category="radiosite">Radio Sites</span>
+                            <li class="nav-item"><span class="nav-link" data-category="jppodcast">Japanese
+                                    Podcast</span>
+                            </li>
+                            <li class="nav-item"><span class="nav-link" data-category="jpradio">Japanese Radios</span>
+                            </li>
+                            <li class="nav-item"><span class="nav-link" data-category="jpspotify">Japanese
+                                    Spotify</span>
+                            </li>
+                            <li class="nav-item"><span class="nav-link" data-category="mediatools">Media Tools</span>
+                            </li>
+                            <li class="nav-item"><span class="nav-link"
+                                    data-category="mediadownloader">Downloader</span>
+                            </li>
+                            <li class="nav-item"><span class="nav-link" data-category="downloadsite">Download
+                                    Sites</span>
+                            </li>
+                        </ul>
+                    </div>
 
-                                <ul>
-                                    <li><strong>Cultural and Regulatory Barriers:</strong> Japanese radio is more
-                                        focused on talk shows than music,
-                                        and stations are geofenced to specific regions within Japan. For example,
-                                        someone in Hokkaido can't listen
-                                        to Osaka radio. Overseas listeners are largely ignored.</li>
-                                    <li><strong>Old-Fashioned Business Practices:</strong> The Japanese music industry
-                                        remains traditional, relying
-                                        heavily on CD sales and promoting music within Japan. They have not embraced
-                                        international markets or online
-                                        streaming. Opening up to overseas distributors is complicated due to
-                                        long-standing industry connections.
-                                    </li>
-                                    <li><strong>Strict Copyright Laws:</strong> Japanese copyright law makes it
-                                        difficult for overseas listeners to
-                                        access content. Any song broadcast must be licensed for domestic use only,
-                                        making it easier for stations to
-                                        block all foreign IPs instead of selectively blocking specific songs.</li>
-                                </ul>
-
-                                <p>This often results in a frustrating experience for foreign listeners, who encounter
-                                    messages like "This broadcast
-                                    is not available in your region." Even Japanese news streams on platforms like
-                                    YouTube often display similar
-                                    restrictions.</p>
-                                <p><strong>Conclusion:</strong> Japanese radio is heavily geofenced, and without using
-                                    workarounds like VPNs, it is
-                                    almost impossible to listen outside Japan. For those of us who like specific
-                                    stations, it's a
-                                    real loss.</p>
-                            </div>
-
+                    <div class="card-body">
+                        <div id="loadingSpinner" class="mb-4"></div>
+                        <div id="siteList"
+                            class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3 list-grid list-grid-padding">
                         </div>
                     </div>
                 </div>
-                <aside class="LinksListBlock">
-                    <ul class="LinksList" id="radiowebsites"></ul>
-                </aside>
-            </section>
-            <section id="radiojppodcast">
-                <div class="section-title">
-                    <h1>Japanese Radios/Podcasts</h1>
-                </div>
-                <details id="tips">
-                    <summary><span class="badge badge-info">Tips</span></summary>
-                    <strong>This section will collect links to the japanese radio's Podcast page, where you can listen
-                        to
-                        them on
-                        Spotify or from their website directly.</strong>
-                </details>
-                <aside class="LinksListBlock">
-                    <ul class="LinksList" id="jppodcastradio"></ul>
-                    </ul>
-                </aside>
-            </section>
-            <section id="websitehere">
-                <div class="section-title">
-                    <h1>Music Sites</h1>
-                </div>
-                <aside class="LinksListBlock">
-                    <ul class="LinksList" id="musicsites">
-                    </ul>
-                </aside>
-            </section>
-            <section id="scrap">
-                <div class="section-title">
-                    <h1>Download/Tools</h1>
-                </div>
-                <aside class="LinksListBlock">
-                    <ul class="LinksList" id="downloadtools">
-                    </ul>
-                </aside>
-            </section>
+            </div>
         </div>
+
         <div class="back-to-top d-flex align-items-center justify-content-center"><i class="fa-solid fa-arrow-up"></i>
         </div>
+        <script data-cfasync="false" src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+        <script data-cfasync="false" src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
         <script src="js/stats.js"></script>
         <script src="js/loadwebsites.js"></script>
     </body>

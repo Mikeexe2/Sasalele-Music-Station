@@ -313,32 +313,35 @@ const apiKey = 'AIzaSyBpTSeiuR5sajD1Sss4UnjvzCd9hHroK_Y';
 const fileTree = document.getElementById("file-tree");
 
 function loadFolders() {
-    fetch("Links/folders.json")
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+    const dbRef = firebase.database().ref("/gdpublic");
+    dbRef.once("value")
+        .then(snapshot => {
+            if (!snapshot.exists()) {
+                console.error("No data found at /gdlinks");
+                return;
             }
-            return response.json();
-        })
-        .then(data => {
-            populateDropdown(data);
+            const folders = [];
+            snapshot.forEach(child => {
+                const data = child.val();
+                if (data.title && data.folderId) {
+                    folders.push(data);
+                }
+            });
+            populateDropdown(folders);
         })
         .catch(error => {
-            console.error('Error fetching folder details:', error);
+            console.error("Error loading folders from Firebase:", error);
         });
 }
-
 function populateDropdown(folders) {
     const dropdownMenu = document.getElementById('folderDropdownMenu');
     dropdownMenu.innerHTML = '';
-
     folders.forEach(folder => {
         const item = document.createElement('a');
         item.className = 'dropdown-item';
         item.href = '#';
         item.textContent = folder.title;
         item.dataset.folderId = folder.folderId;
-
         item.addEventListener('click', (event) => {
             event.preventDefault();
             clearFileTree();
@@ -485,6 +488,7 @@ function downloadTrack(event, fileId, fileName) {
             alert('There was an error downloading the track.');
         });
 }
-
-// Initial call to load folders
-loadFolders();
+document.addEventListener('DOMContentLoaded', function () {
+    // Initial call to load folders
+    loadFolders();
+});

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 
     <head>
         <meta charset="utf-8">
@@ -27,9 +27,8 @@
         <link rel="shortcut icon" href="assets/sasalele_logo-removebg.webp" type="image/x-icon" />
         <link rel="stylesheet" href="css/style.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-v4-rtl/4.6.2-1/css/bootstrap.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-v4-rtl/4.6.2-1/js/bootstrap.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/hls.js@latest" type="text/javascript"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -49,34 +48,21 @@
             <nav class="navbar sticky-top navbar-dark navbar-expand-md">
                 <a class="navbar-brand" href="https://basic.pp.ua/">
                     <img src="assets/sasalele_logo-removebg.webp" width="30" height="30"
-                        class="d-inline-block align-top" alt="">
-                    Sasalele Music Station
+                        class="d-inline-block align-top">
                 </a>
-                <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse"
-                    data-target="#main-navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="main-navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span> </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="https://basic.pp.ua/">Radios<i
+                        <li class="nav-item"><a class="nav-link" href="index.html">Radios<i
                                     class="fas fa-radio"></i></a>
                         </li>
-                        <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown"
-                                aria-expanded="false" href="">Websites<i class="fa-fw fas fa-link"></i></a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="website.html#radiohere">Radio
-                                    Websites <i class="fas fa-tower-broadcast"></i></a>
-                                <a class="dropdown-item" href="website.html#radiojppodcast">Japanese
-                                    Radios/Podcasts <i class="fas fa-podcast"></i></a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="website.html#websitehere">Music
-                                    Sites <i class="fas fa-headset"></i></a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="website.html#scrap">Download / Tools <i
-                                        class="fas fa-download"></i></a>
-                            </div>
+                        <li class="nav-item"><a class="nav-link" href="website.html">Websites<i
+                                    class="fa-fw fas fa-link"></i></a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="">Videos<i class="fas fa-video"></i></a>
+                        <li class="nav-item active"><a class="nav-link" href="">Videos<i class="fas fa-video"></i></a>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="drive.html">Drive Music Player<i
                                     class="fa-brands fa-google-drive"></i></a></li>
@@ -99,50 +85,63 @@
                             <div class="col-md-10">
                                 <div class="input-group mb-3">
                                     <input type="text" id="m3uURL" class="form-control" placeholder="Enter M3U8 URL">
-                                    <div class="input-group-append">
-                                        <button id="loadM3U" class="btn btn-primary btn-go">Go</button>
-                                    </div>
+                                    <button id="loadM3U" class="btn btn-primary btn-go">Go</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-8">
-                            <h6 id="selected-video-title" class="selected-title" style="display:none;"></h6>
+                            <h6 id="selected-video-title" class="selected-title mb-2" style="display:none;"></h6>
                             <div id="vplayer" class="container mb-3">
                                 <media-controller style="width: 100%;max-width: 720px; aspect-ratio: 16 / 9;">
                                     <video slot="media" id="video-player" src=""></video>
+                                    <media-loading-indicator slot="centered-chrome"
+                                        noautohide></media-loading-indicator>
                                     <media-control-bar>
                                         <media-play-button></media-play-button>
+                                        <media-seek-backward-button></media-seek-backward-button>
+                                        <media-seek-forward-button></media-seek-forward-button>
                                         <media-mute-button></media-mute-button>
                                         <media-volume-range></media-volume-range>
                                         <media-time-range></media-time-range>
-                                        <media-fullscreen-button></media-fullscreen-button>
-                                    </media-control-bar>
+                                        <media-time-display showduration remaining></media-time-display>
+                                        <media-playback-rate-button></media-playback-rate-button>
+                                        <media-fullscreen-button></media-fullscreen-button> </media-control-bar>
                                 </media-controller>
                             </div>
                         </div>
                         <div class="col-lg-4 mb-1">
                             <div class="d-flex justify-content-center mb-1">
                                 <div class="dropdown">
-                                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+                                    <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown"
                                         aria-expanded="false">
                                         <i class="fa fa-bars"></i> Streams
                                     </button>
-                                    <div class="dropdown-menu">
-                                        <a href="" class="genre-link" data-genre="full">All Mix</a>
-                                        <a href="" class="genre-link" data-genre="jpvideos">Japan Mix</a>
-                                        <a href="" class="genre-link" data-genre="lg">LG Channels</a>
-                                        <a href="" class="genre-link" data-genre="roku">Roku</a>
-                                        <a href="" class="genre-link" data-genre="tablo">Tablo</a>
-                                        <a href="" class="genre-link" data-genre="xiaomi">Xiaomi</a>
-                                        <a href="" class="genre-link" data-genre="xumo">Xumo</a>
-                                        <a href="" class="genre-link" data-genre="douyu">Douyu</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a href="" class="genre-link" data-genre="cloud">Cloud Videos</a>
-                                    </div>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="" class="genre-link" data-genre="jpvideos">Japanese</a></li>
+                                        <li><a href="" class="genre-link" data-genre="cnvideos">Chinese</a>
+                                        </li>
+                                        <li><a href="" class="genre-link" data-genre="krvideos">Korean</a>
+                                        </li>
+                                        <li><a href="" class="genre-link" data-genre="full">All Mix</a></li>
+                                        <li><a href="" class="genre-link" data-genre="lg">LG Channels</a>
+                                        </li>
+                                        <li><a href="" class="genre-link" data-genre="roku">Roku</a>
+                                        </li>
+                                        <li><a href="" class="genre-link" data-genre="tablo">Tablo</a>
+                                        </li>
+                                        <li><a href="" class="genre-link" data-genre="xiaomi">Xiaomi</a>
+                                        </li>
+                                        <li><a href="" class="genre-link" data-genre="xumo">Xumo</a>
+                                        </li>
+                                        <li><a href="" class="genre-link" data-genre="douyu">Douyu</a>
+                                        </li>
+                                        <li><a href="" class="genre-link" data-genre="cloud">Cloud Videos</a>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <div id="genre-info" class="ml-auto mb-2">
+                                <div id="genre-info" class="ms-auto mb-2">
                                     <strong><span id="genre-name"></span></strong>
                                     <strong> (<span id="channel-count"></span>)</strong>
                                 </div>
@@ -150,29 +149,50 @@
                             <div class="input-group mb-2 w-100">
                                 <input type="text" id="searchChannel" class="form-control" placeholder="Search Channel">
                             </div>
+                            <div id="loadingSpinner" class="mb-4"></div>
                             <div id="video-list" class="list-group w-100"></div>
                         </div>
                     </div>
                 </div>
 
-                <div class="container">
-                    <div class="section-title">
-                        <h1>YouTube Live Stream</h1>
+                <div class="section-title">
+                    <h1>YouTube Live Stream</h1>
+                </div>
+                <div class="container py-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div class="d-flex gap-2 align-items-center">
+                            <select id="genreSelect" class="form-select genre-select"></select>
+                        </div>
                     </div>
-                    <div class="row search-bg">
-                        <div class="col-md-8">
-                            <h6 id="selectedYT" class="selected-title" style="display:none;"></h6>
-                            <div class="video-container">
-                                <iframe id="yt-iframe" src="https://www.youtube.com/embed?enablejsapi=1" frameborder="0"
-                                    allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+                    <div class="row g-3">
+                        <div class="col-12 col-md-4">
+                            <div class="app-card p-2">
+                                <div class="d-flex justify-content-between align-items-center px-1 mb-2">
+                                    <strong>Streams</strong>
+                                    <small id="streamCount" class="text-muted">0</small>
+                                </div>
+                                <div id="streamList" class="stream-list list-group"></div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div id="filterContainer" class="mb-2">
-                            </div>
-                            <input id="searchInput" type="text" class="form-control mb-3"
-                                placeholder="Search streams...">
-                            <div id="streamList" class="list-group w-100">
+
+                        <div class="col-12 col-md-8">
+                            <div class="app-card p-3">
+                                <div id="playerTitle" class="mb-2">
+                                    <h5 class="mb-0">Loading...</h5>
+                                    <small id="playerSubtitle" class="text-muted">Select a stream</small>
+                                </div>
+
+                                <div class="player-wrapper mb-3">
+                                    <div id="yt-player"></div>
+                                </div>
+
+                                <div class="d-flex gap-2">
+                                    <a id="openOnYT" class="btn btn-outline-light" target="_blank" rel="noopener">Open
+                                        on
+                                        YouTube</a>
+                                    <button id="playPauseBtn" class="btn btn-primary">Play / Pause</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -268,6 +288,14 @@
         </div>
         <div class="back-to-top d-flex align-items-center justify-content-center"><i class="fa-solid fa-arrow-up"></i>
         </div>
+        <script>
+            var tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            document.head.appendChild(tag);
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"></script>
+        <script data-cfasync="false" src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+        <script data-cfasync="false" src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
         <script src="js/stats.js"></script>
         <script src="js/m3u8video.js"></script>
         <script type="module" src="https://cdn.jsdelivr.net/npm/media-chrome@4/+esm"></script>

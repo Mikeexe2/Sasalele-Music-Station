@@ -27,13 +27,29 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-    const tooltips = document.querySelectorAll('[data-toggle="tooltip"]');
-    tooltips.forEach(function (tooltip) {
-        tooltip.addEventListener('mouseenter', function () {
-            tooltip.setAttribute('title', tooltip.getAttribute('data-original-title'));
-        });
-    });
+    const firebaseConfig = {
+        apiKey: "AIzaSyBea1r2EXm5MyJItS00eRUIM7XZxt5Uzs8",
+        authDomain: "sasalele.firebaseapp.com",
+        databaseURL: "https://sasalele-default-rtdb.firebaseio.com",
+        projectId: "sasalele",
+        storageBucket: "sasalele.appspot.com",
+        messagingSenderId: "993505903479",
+        appId: "1:993505903479:web:1419b55ac1cd5913755772",
+    };
+
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    }
 });
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip({
+        trigger: 'hover'
+    });
+    $('#historyBtn').tooltip({
+        trigger: 'hover'
+    });
+})
 
 function goTop() {
     window.scrollTo({
@@ -63,7 +79,7 @@ document.addEventListener("visibilitychange", function () {
         document.title = "(/≧▽≦/) Welcome back!";
         titleTime = setTimeout(function () {
             document.title = originalTitle;
-        }, 1000);
+        }, 500);
     }
 });
 
@@ -149,10 +165,14 @@ const folderImageCounts = {
     'gif_images6': 6
 };
 
-const colors = [
-    "#2aaf80", "#42d639", "#4a6ef0", "#3a8aa7", "#2b577e",
-    "#4766e4", "#4c97ff", "#6a37db", "#5d3b79", "#8b55bf",
-    "#c02d96", "#e32946", "#d3615f", "#c46f3c", "#8f7a4c"
+const bgimages = [
+    'assets/0.webp',
+    'assets/1.webp',
+    'assets/2.webp',
+    'assets/3.webp',
+    'assets/4.webp',
+    'assets/5.webp',
+    'assets/6.webp'
 ];
 
 function getRandomInt(min, max) {
@@ -171,8 +191,9 @@ function selectRandomGifFolder() {
 }
 
 function setRandomBackgroundColor() {
-    const randomColor = colors[getRandomInt(0, colors.length - 1)];
-    background.style.backgroundColor = randomColor;
+    const randomIndex = getRandomInt(0, bgimages.length - 1);
+    const selectedImage = bgimages[randomIndex];
+    document.body.style.backgroundImage = `url(${selectedImage})`;
 }
 
 function setRandomImage() {
@@ -197,7 +218,7 @@ function setRandomImage() {
 function updateImageAndBackground() {
     if (currentPhase === 'random') {
         setRandomImage();
-        //setRandomBackgroundColor();
+        setRandomBackgroundColor();
 
         let interval = getRandomInt(600, 1200);
         animationTimeout = setTimeout(updateImageAndBackground, interval);
@@ -244,4 +265,4 @@ async function handleToggleChange() {
 }
 
 //setRandomImage();
-//setRandomBackgroundColor();
+setRandomBackgroundColor();

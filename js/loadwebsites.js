@@ -1,44 +1,57 @@
-async function fetchJSON(url) {
-    try {
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return await response.json();
-    } catch (error) {
-        console.error('Error fetching JSON:', error);
-        return null;
-    }
-}
-// hope it will help maintenance easier later
-async function generateLinks(location, jsonfile) {
-    const data = await fetchJSON(jsonfile);
-    if (!data) return;
+document.addEventListener('DOMContentLoaded', function () {
+  const db = firebase.database();
 
-    const linksContainer = document.getElementById(location);
-    data.forEach(link => {
-        const listItem = document.createElement('li');
-        listItem.classList.add('LinksItem');
+  const siteList = document.getElementById("siteList");
+  const siteTabs = document.getElementById("siteTabs");
 
-        const linkElement = document.createElement('a');
-        linkElement.classList.add('LinksItemLink');
-        linkElement.href = link.url;
-        linkElement.target = '_blank';
+  function renderSites(category) {
+    siteList.innerHTML = "";
+    document.getElementById('loadingSpinner').style.display = 'block';
 
-        const iconImage = document.createElement('img');
-        iconImage.classList.add('rad-icon');
-        iconImage.alt = link.name;
-        iconImage.src = link.icon;
+    db.ref(`websites/${category}`).once("value", (snapshot) => {
+      document.getElementById('loadingSpinner').style.display = 'none';
 
-        linkElement.appendChild(iconImage);
-        linkElement.insertAdjacentHTML('beforeend', `${link.name}`);
+      if (!snapshot.exists()) {
+        siteList.innerHTML = `
+          <div class="text-center w-100 py-3">
+            <i class="fas fa-info-circle text-muted"></i><br>
+            No sites found in <b>${category}</b>.
+          </div>`;
+        return;
+      }
 
-        listItem.appendChild(linkElement);
-        linksContainer.appendChild(listItem);
+      snapshot.forEach((child) => {
+        const data = child.val();
+
+        const card = document.createElement("div");
+        card.className = "col";
+        card.innerHTML = `
+          <a role="button" class="list-item" href="${data.url}" target="_blank">
+            <div class="media w-100 rounded">
+              <img src="${data.icon}" alt="${data.name}" class="media-content">
+            </div>
+            <div class="list-content">
+              <div class="list-body">
+                <div class="list-title text-md h-1x">${data.name}</div>
+              </div>
+            </div>
+          </a>
+        `;
+        siteList.appendChild(card);
+      });
     });
-}
+  }
 
-generateLinks('radiowebsites', 'Links/radiowebsites.json');
-generateLinks('jppodcastradio', 'Links/jppodcastradio.json');
-generateLinks('musicsites', 'Links/musicsites.json');
-generateLinks('downloadtools', 'Links/downloadtools.json');
+  siteTabs.addEventListener("click", (e) => {
+    const tab = e.target.closest(".nav-link");
+    if (!tab) return;
+
+    document.querySelectorAll(".nav-link").forEach((el) => el.classList.remove("active"));
+    tab.classList.add("active");
+
+    const category = tab.dataset.category;
+    renderSites(category);
+  });
+
+  renderSites("musicsite");
+});

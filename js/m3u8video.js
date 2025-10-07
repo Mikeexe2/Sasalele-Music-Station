@@ -1,241 +1,395 @@
-let currentVideos = [];
-let currentPlayingElement = null;
-let hlsInstance = null;
-const titleNow = document.getElementById("selected-video-title");
+document.addEventListener("DOMContentLoaded", () => {
+  let currentVideos = [];
+  let currentPlayingElement = null;
+  const titleNow = document.getElementById("selected-video-title");
 
-async function fetchVideoLinks(genre) {
-  try {
-    const response = await fetch(`Links/${genre}.json`);
-    if (!response.ok) {
-      throw new Error(`Network response was not ok: ${response.statusText}`);
+  const defaultGenre = "jpvideos";
+  const defaultGenreName = "Japanese";
+
+  loadGenre(defaultGenre, defaultGenreName);
+
+  async function fetchVideoLinks(genre) {
+    try {
+      const snapshot = await firebase.database().ref(`${genre}`).once("value");
+      document.getElementById('loadingSpinner').style.display = 'none';
+      const data = snapshot.val() || {};
+      const videoLinks = Object.values(data);
+      console.log(`${genre} loaded:`, videoLinks.length, "videos");
+      return videoLinks;
+    } catch (error) {
+      console.error("Error fetching videos:", error);
+      return [];
     }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    return [];
   }
-}
 
-function updateGenreInfo(genre, count) {
-  const genreNameElement = document.getElementById("genre-name");
-  const channelCountElement = document.getElementById("channel-count");
-
-  genreNameElement.textContent = genre;
-  channelCountElement.textContent = count;
-}
-
-function createVideoList(videos) {
-  const videoListElement = document.getElementById("video-list");
-  videoListElement.innerHTML = "";
-
-  videos.forEach((video) => {
-    const listItem = document.createElement("li");
-    listItem.classList.add("list-group-item", "list-group-item-action");
-    listItem.textContent = video.title;
-    listItem.dataset.link = video.link;
-    listItem.addEventListener("click", (event) => selectVideo(event.target));
-    videoListElement.appendChild(listItem);
-  });
-}
-
-function filterVideoList(query) {
-  const lowerCaseQuery = query.toLowerCase();
-  return currentVideos.filter(video => video.title.toLowerCase().includes(lowerCaseQuery));
-}
-
-function selectVideo(element) {
-  const selectedLink = element.dataset.link;
-  const selectedTitle = element.textContent;
-  if (currentPlayingElement) {
-    currentPlayingElement.style.backgroundColor = "";
-    currentPlayingElement.style.color = "";
+  async function loadGenre(genre, genreName) {
+    try {
+      document.getElementById('loadingSpinner').style.display = 'block';
+      const videos = await fetchVideoLinks(genre);
+      currentVideos = videos;
+      createVideoList(currentVideos);
+      updateGenreInfo(genreName, currentVideos.length);
+    } catch (error) {
+      console.error("Error loading genre:", error);
+    }
   }
-  element.style.backgroundColor = "#007bff";
-  element.style.color = "#fff";
-  currentPlayingElement = element;
-  titleNow.style.display = "block";
-  titleNow.textContent = selectedTitle;
-  playMedia(selectedLink);
-}
 
-function playMedia(link) {
-  const videoPlayer = document.getElementById("video-player");
-  const proxiedLink = `https://sasalele.apnic-anycast.workers.dev/${link}`;
+  function updateGenreInfo(genre, count) {
+    const genreNameElement = document.getElementById("genre-name");
+    const channelCountElement = document.getElementById("channel-count");
 
-  const loadAndPlay = async (link) => {
-    if (link.startsWith("http:")) {
-      if (link.endsWith(".mp4") || link.includes("format=mp4")) {
-        window.open(link, '_blank');
+    if (genreNameElement) {
+      genreNameElement.textContent = genre;
+    }
+    if (channelCountElement) {
+      channelCountElement.textContent = count;
+    }
+  }
+
+  function createVideoList(videos) {
+    const videoListElement = document.getElementById("video-list");
+    if (!videoListElement) return;
+
+    videoListElement.innerHTML = "";
+
+    videos.forEach((video) => {
+      const listItem = document.createElement("li");
+      listItem.classList.add("list-group-item", "list-group-item-action");
+      listItem.textContent = video.title;
+      listItem.dataset.link = video.link;
+      listItem.addEventListener("click", (event) => selectVideo(event.target));
+      videoListElement.appendChild(listItem);
+    });
+  }
+
+  function filterVideoList(query) {
+    const lowerCaseQuery = query.toLowerCase();
+    return currentVideos.filter(video =>
+      video.title.toLowerCase().includes(lowerCaseQuery)
+    );
+  }
+
+  function selectVideo(element) {
+    const selectedLink = element.dataset.link;
+    const selectedTitle = element.textContent;
+
+    if (currentPlayingElement) {
+      currentPlayingElement.style.backgroundColor = "";
+      currentPlayingElement.style.color = "";
+    }
+
+    element.style.backgroundColor = "#a1d5a7";
+    element.style.color = "#000";
+    currentPlayingElement = element;
+
+    if (titleNow) {
+      titleNow.style.display = "block";
+      titleNow.textContent = selectedTitle;
+    }
+
+    playMedia(selectedLink);
+  }
+
+  let hlsInstance = null;
+
+  function playMedia(link) {
+    const videoPlayer = document.getElementById("video-player");
+    if (!videoPlayer) return;
+
+    const proxiedLink = `https://sasalele.apnic-anycast.workers.dev/${link}`;
+
+    const loadAndPlay = async (linkToTry, fallbackLink = null) => {
+      const tryPlay = () => {
+        const playPromise = videoPlayer.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(err => {
+            console.warn("Playback failed:", err);
+            if (fallbackLink) {
+              console.log("Retrying with proxied link:", fallbackLink);
+              loadAndPlay(fallbackLink);
+            }
+          });
+        }
+      };
+
+      if (linkToTry.startsWith("https:")) {
+        if (linkToTry.endsWith(".mp4") || linkToTry.includes("format=mp4")) {
+          if (hlsInstance) {
+            hlsInstance.destroy();
+            hlsInstance = null;
+          }
+
+          videoPlayer.src = linkToTry;
+          videoPlayer.type = 'video/mp4';
+          videoPlayer.onloadedmetadata = tryPlay;
+          videoPlayer.onerror = () => {
+            console.error("Error loading video:", linkToTry);
+            if (fallbackLink) loadAndPlay(fallbackLink);
+          };
+        } else if (linkToTry.includes(".m3u8")) {
+          if (Hls.isSupported()) {
+            if (hlsInstance) {
+              hlsInstance.destroy();
+              hlsInstance = null;
+            }
+
+            hlsInstance = new Hls();
+            hlsInstance.loadSource(linkToTry);
+            hlsInstance.attachMedia(videoPlayer);
+            hlsInstance.on(Hls.Events.MANIFEST_PARSED, tryPlay);
+            hlsInstance.on(Hls.Events.ERROR, (event, data) => {
+              console.error("HLS error:", data);
+              if (fallbackLink) {
+                hlsInstance.destroy();
+                hlsInstance = null;
+                loadAndPlay(fallbackLink);
+              }
+            });
+          } else if (videoPlayer.canPlayType('application/vnd.apple.mpegurl')) {
+            if (hlsInstance) {
+              hlsInstance.destroy();
+              hlsInstance = null;
+            }
+
+            videoPlayer.src = linkToTry;
+            videoPlayer.onloadedmetadata = tryPlay;
+            videoPlayer.onerror = () => {
+              console.error("Error loading HLS stream:", linkToTry);
+              if (fallbackLink) loadAndPlay(fallbackLink);
+            };
+          } else {
+            console.error('HLS not supported on this device.');
+          }
+        }
       } else {
-        // Open the HLS player in a new tab
-        //const playerUrl = `hls_player.html?videoUrl=${link}`;
-        window.open(link, '_blank');
+        console.error('Unsupported link format:', linkToTry);
       }
-    } else if (link.startsWith("https:")) {
-      if (link.endsWith(".mp4") || link.includes("format=mp4")) {
-        videoPlayer.src = link;
-        videoPlayer.type = 'video/mp4';
-        videoPlayer.addEventListener('loadedmetadata', function () {
-          videoPlayer.play();
-        });
-      } else if (link.includes(".m3u8")) {
-        if (Hls.isSupported()) {
-          const hlsInstance = new Hls();
-          hlsInstance.loadSource(proxiedLink);
-          hlsInstance.attachMedia(videoPlayer);
-          hlsInstance.on(Hls.Events.MANIFEST_PARSED, function () {
-            videoPlayer.play();
-          });
-        } else if (videoPlayer.canPlayType('application/vnd.apple.mpegurl')) {
-          videoPlayer.src = proxiedLink;
-          videoPlayer.addEventListener('loadedmetadata', function () {
-            videoPlayer.play();
-          });
+    };
+
+    loadAndPlay(link, proxiedLink);
+  }
+
+  const loadM3UButton = document.getElementById("loadM3U");
+  if (loadM3UButton) {
+    loadM3UButton.addEventListener("click", function () {
+      var m3uUrl = document.getElementById("m3uURL").value;
+      if (m3uUrl) {
+        if (m3uUrl.endsWith(".m3u8")) {
+          playMedia(m3uUrl);
         } else {
-          console.error('HLS is not supported on this device.');
+          alert("Warning: Invalid URL.");
         }
       }
-    } else {
-      console.error('Unsupported link format.');
-    }
-  };
-
-  loadAndPlay(link);
-}
-
-document.getElementById("loadM3U").addEventListener("click", function () {
-  var m3uUrl = document.getElementById("m3uURL").value;
-  playMedia(m3uUrl);
-});
-
-document.querySelectorAll(".genre-link").forEach(link => {
-  link.addEventListener("click", async function (e) {
-    e.preventDefault();
-    const genre = this.getAttribute("data-genre");
-    currentVideos = await fetchVideoLinks(genre);
-    createVideoList(currentVideos);
-    updateGenreInfo(this.textContent, currentVideos.length);
-  });
-});
-
-document.getElementById("searchChannel").addEventListener("input", function () {
-  const query = this.value;
-  const filteredVideos = filterVideoList(query);
-  createVideoList(filteredVideos);
-});
-
-(async () => {
-  const defaultGenre = "jpvideos";
-  const defaultGenreName = "Japan Mix";
-  currentVideos = await fetchVideoLinks(defaultGenre);
-  createVideoList(currentVideos);
-  updateGenreInfo(defaultGenreName, currentVideos.length);
-})();
-
-// for youtube streams
-let ytplayer;
-const ytMap = new Map();
-let currentCategory = 'Music';
-let currentPlayingyt = null;
-
-const tag = document.createElement('script');
-tag.src = 'https://www.youtube.com/iframe_api';
-const firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-function onYouTubeIframeAPIReady() {
-  ytplayer = new YT.Player('yt-iframe', {
-    events: {
-      'onReady': onPlayerReady
-    }
-  });
-}
-
-function onPlayerReady(event) {
-  console.log('YouTube Player is ready.');
-}
-
-function loadStream(streamId) {
-  if (ytplayer && streamId) {
-    const url = `https://www.youtube.com/embed/${streamId}?enablejsapi=1&autoplay=1`;
-    document.getElementById('yt-iframe').src = url;
-    ytplayer.loadVideoById(streamId);
+    });
   }
-}
 
-function selectYT(element) {
-  const selectedStreamId = element.dataset.streamId;
-  const selectedTitle = element.textContent;
-  if (currentPlayingyt) {
-    currentPlayingyt.style.backgroundColor = "";
-    currentPlayingyt.style.color = "";
+  document.querySelectorAll(".genre-link").forEach(link => {
+    link.addEventListener("click", async function (e) {
+      e.preventDefault();
+      const genre = this.getAttribute("data-genre");
+      const genreName = this.textContent;
+      await loadGenre(genre, genreName);
+    });
+  });
+
+  const searchChannel = document.getElementById("searchChannel");
+  if (searchChannel) {
+    searchChannel.addEventListener("input", function () {
+      const query = this.value;
+      const filteredVideos = filterVideoList(query);
+      createVideoList(filteredVideos);
+    });
   }
-  element.style.backgroundColor = "#007bff";
-  element.style.color = "#fff";
-  currentPlayingyt = element;
-  const titleNow = document.getElementById('selectedYT');
-  titleNow.style.display = "block";
-  titleNow.textContent = selectedTitle;
 
-  loadStream(selectedStreamId);
-}
-
-function displayStreams(category, searchQuery = '') {
+  // for youtube streams
+  const genreSelect = document.getElementById('genreSelect');
   const streamList = document.getElementById('streamList');
-  streamList.innerHTML = '';
-  if (category && ytMap.has(category)) {
-    const streams = ytMap.get(category);
-    streams
-      .filter(stream => stream.title.toLowerCase().includes(searchQuery.toLowerCase()))
-      .forEach(stream => {
-        const listItem = document.createElement('a');
-        listItem.className = 'list-group-item list-group-item-action';
-        listItem.textContent = stream.title;
-        listItem.dataset.streamId = stream.id;
-        listItem.addEventListener('click', () => selectYT(listItem));
-        streamList.appendChild(listItem);
+  const streamCount = document.getElementById('streamCount');
+  const playerTitle = document.getElementById('playerTitle').querySelector('h5');
+  const playerSubtitle = document.getElementById('playerSubtitle');
+  const openOnYT = document.getElementById('openOnYT');
+  const playPauseBtn = document.getElementById('playPauseBtn');
+
+  let ytPlayer = null;
+  let currentVideoId = null;
+  let isPlaying = false;
+  let genresData = {};
+
+  function onYouTubeIframeAPIReady() {
+    console.log('YouTube API ready');
+  }
+
+  function createPlayer(videoId) {
+    if (ytPlayer) {
+      ytPlayer.loadVideoById(videoId);
+      return;
+    }
+
+    ytPlayer = new YT.Player('yt-player', {
+      height: '360',
+      width: '640',
+      videoId: videoId,
+      playerVars: {
+        autoplay: 0,
+        controls: 1,
+        rel: 0,
+        modestbranding: 1
+      },
+      events: {
+        onReady: (e) => {
+          isPlaying = false;
+          // e.target.playVideo(); // autoplay
+        },
+        onStateChange: (e) => {
+          const state = e.data;
+          isPlaying = (state === YT.PlayerState.PLAYING);
+          playPauseBtn.textContent = isPlaying ? 'Pause' : 'Play';
+        }
+      }
+    });
+  }
+
+  function loadVideo(videoId, title, genreKey) {
+    currentVideoId = videoId;
+    playerTitle.textContent = title || 'Untitled';
+    playerSubtitle.textContent = genreKey ? `Genre: ${genreKey}` : '';
+    openOnYT.href = `https://www.youtube.com/watch?v=${videoId}`;
+
+    if (!ytPlayer && typeof YT !== 'undefined' && YT.Player) {
+      createPlayer(videoId);
+    } else if (ytPlayer) {
+      try {
+        ytPlayer.loadVideoById({ videoId: videoId, startSeconds: 0 });
+      } catch (err) {
+        createPlayer(videoId);
+      }
+    } else {
+      const t = setInterval(() => {
+        if (typeof YT !== 'undefined' && YT.Player) {
+          clearInterval(t);
+          createPlayer(videoId);
+        }
+      }, 200);
+    }
+  }
+
+  // Play/Pause control
+  playPauseBtn.addEventListener('click', () => {
+    if (!ytPlayer) return;
+    const state = ytPlayer.getPlayerState();
+    if (state === YT.PlayerState.PLAYING) ytPlayer.pauseVideo();
+    else ytPlayer.playVideo();
+  });
+
+  const db = firebase.database();
+  function loadGenres() {
+    const ref = db.ref('ytByGenre');
+    ref.once('value')
+      .then(snapshot => {
+        if (!snapshot.exists()) {
+          genreSelect.innerHTML = '<option>No genres</option>';
+          return;
+        }
+
+        genresData = {};
+        const keys = [];
+        snapshot.forEach(child => {
+          keys.push(child.key);
+          const items = [];
+          child.forEach(entry => {
+            const v = entry.val();
+            items.push({
+              id: entry.key,
+              link: v.link,
+              title: v.title
+            });
+          });
+          genresData[child.key] = items;
+        });
+
+        genreSelect.innerHTML = '';
+        keys.forEach(k => {
+          const opt = document.createElement('option');
+          opt.value = k;
+          opt.textContent = k;
+
+          if (k === 'Music') opt.selected = true;
+          genreSelect.appendChild(opt);
+        });
+
+        const defaultKey = genresData['Music'] ? 'Music' : keys[0];
+        genreSelect.value = defaultKey || '';
+        renderStreamsForGenre(defaultKey);
+      })
+      .catch(err => {
+        console.error('Error reading ytByGenre:', err);
       });
   }
-}
 
-fetch('Links/ytstreams.json')
-  .then(response => response.json())
-  .then(data => {
-    const filterContainer = document.getElementById('filterContainer');
-
-    data.forEach(stream => {
-      if (!ytMap.has(stream.type)) {
-        ytMap.set(stream.type, []);
-        const tagElement = document.createElement('span');
-        tagElement.className = 'badge badge-info tag';
-        tagElement.textContent = stream.type;
-        tagElement.dataset.category = stream.type;
-        filterContainer.appendChild(tagElement);
-      }
-      ytMap.get(stream.type).push(stream);
-    });
-
-    const defaultCategory = 'Music';
-    const defaultTag = filterContainer.querySelector(`[data-category="${defaultCategory}"]`);
-    if (defaultTag) {
-      defaultTag.classList.add('active');
-      displayStreams(defaultCategory);
+  function renderStreamsForGenre(genreKey) {
+    streamList.innerHTML = '';
+    if (!genreKey || !genresData[genreKey]) {
+      streamList.innerHTML = '<div class="text-muted px-2">No streams found.</div>';
+      streamCount.textContent = '0';
+      playerTitle.textContent = 'No video';
+      playerSubtitle.textContent = '';
+      return;
     }
 
-    filterContainer.addEventListener('click', (event) => {
-      if (event.target.classList.contains('tag')) {
-        const category = event.target.dataset.category;
-        document.querySelectorAll('.tag').forEach(tag => tag.classList.remove('active'));
-        event.target.classList.add('active');
-        currentCategory = category;
-        displayStreams(category, document.getElementById('searchInput').value);
+    const items = genresData[genreKey];
+    streamCount.textContent = items.length;
+
+    items.forEach((item, idx) => {
+      const li = document.createElement('div');
+      li.className = 'list-group-item list-group-item-action bg-transparent border-0 px-0 py-2 stream-item';
+      li.dataset.videoId = item.link;
+      li.dataset.title = item.title;
+
+      li.innerHTML = `
+          <div class="d-flex gap-2 align-items-center">
+            <div style="width:110px; flex-shrink:0;">
+              <img class="thumb" src="https://img.youtube.com/vi/${item.link}/hqdefault.jpg" alt="${escapeHtml(item.title)}">
+            </div>
+            <div class="flex-grow-1">
+              <div class="stream-title">${escapeHtml(item.title)}</div>
+              <div class="stream-sub">Video ID: ${item.link}</div>
+            </div>
+          </div>
+        `;
+
+      li.addEventListener('click', () => {
+        document.querySelectorAll('.stream-item').forEach(it => it.classList.remove('active'));
+        li.classList.add('active');
+
+        loadVideo(item.link, item.title, genreKey);
+      });
+
+      streamList.appendChild(li);
+
+      // Auto-load the first item by default
+      if (idx === 0) {
+        setTimeout(() => {
+          li.classList.add('active');
+          loadVideo(item.link, item.title, genreKey);
+        }, 20);
       }
     });
+  }
 
-    document.getElementById('searchInput').addEventListener('input', (event) => {
-      const searchQuery = event.target.value;
-      displayStreams(currentCategory, searchQuery);
-    });
-  })
-  .catch(error => console.error('Error fetching streams:', error));
+  genreSelect.addEventListener('change', () => {
+    const g = genreSelect.value;
+    renderStreamsForGenre(g);
+  });
+
+  function escapeHtml(unsafe) {
+    return unsafe
+      ? unsafe.replace(/[&<"'>]/g, function (m) {
+        return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' })[m];
+      })
+      : '';
+  }
+
+  (function init() {
+    loadGenres();
+  })();
+});

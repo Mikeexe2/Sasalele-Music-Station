@@ -1,11 +1,17 @@
 const cover = document.getElementById('cover');
+const playerContainer = document.getElementById("player");
+const expandIcon = document.querySelector("#togglePlayer .fa-expand");
+const minimizeIcon = document.querySelector("#togglePlayer .fa-compress");
 const coverImage = document.getElementById('ip');
 const nowPlaying = document.getElementById('nowPlaying');
 const stationCount = document.getElementById('station-count');
-const historyDisplay = document.getElementById('historyBtn')
+const historyDisplay = document.getElementById('historyBtn');
+const randomplay = document.getElementById('randomplay');
+const togglePlayerButton = document.getElementById("togglePlayer");
 const copyIcon = document.getElementById('copyIcon');
 const copyIconSymbol = copyIcon.querySelector('i.fas.fa-copy');
 const confirmation = document.querySelector('#copyIcon .copy-confirmation');
+const stationSearch = document.getElementById('sasalelesearch');
 const searchInput = document.getElementById('searchInput');
 const searchButton = document.getElementById('searchButton');
 const innerContainer = document.querySelector('.search-results');
@@ -16,9 +22,11 @@ const inneritunes = document.getElementById('itunesList');
 const innerdeezer = document.getElementById('deezerList');
 const metadataElement = document.getElementById('metadataDisplay');
 const genreSelect = document.getElementById('genre-select');
+const mainAudio = document.getElementById('mainAudio');
+
+let genreData = [];
 let hlsPlayer = null;
 let icecastPlayer = null;
-let audioElement = null;
 let currentStation = null;
 let isPlaying = false;
 let metadataInterval = null;
@@ -51,7 +59,7 @@ copyIcon.addEventListener('click', () => {
     setTimeout(() => {
         confirmation.style.display = 'none';
         copyIconSymbol.style.display = 'inline';
-    }, 2000);
+    }, 500);
 });
 
 function updatePlayerUI(media) {
@@ -103,297 +111,260 @@ function trackHistory(trackName) {
     localStorage.setItem('recentTracks', JSON.stringify(recentTracks));
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    fetch("Links/all.json")
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
-            return response.json();
-        })
-        .then(data => {
-            window.genreData = data;
-            const stationCount = document.getElementById('station-count');
-            stationCount.textContent = data.length;
+function loadStations(genre) {
+    const selectedContainer = document.getElementById(genre);
+    if (!selectedContainer) return;
 
-            loadGenre('jmusic');
+    selectedContainer.innerHTML = '<div class="loading-spinner">Loading stations...</div>';
+    selectedContainer.classList.add('active');
 
-            const defaultGenreButton = genreSelect.querySelector('[data-genre="jmusic"]');
-            if (defaultGenreButton) {
-                defaultGenreButton.classList.add('active');
-            }
-
-            genreSelect.addEventListener('click', (event) => {
-                const genreButton = event.target.closest('.genre-btn');
-                if (genreButton) {
-                    const genre = genreButton.getAttribute('data-genre');
-                    loadGenre(genre);
-
-                    document.querySelectorAll('.genre-btn').forEach(button => {
-                        button.classList.remove('active');
-                    });
-
-                    genreButton.classList.add('active');
-                }
-            });
-            setupPlayerControls();
+    firebase.database().ref("stations/" + genre)
+        .once("value")
+        .then(snapshot => {
+            const data = snapshot.val() || {};
+            const stations = Object.values(data);
+            console.log(`[loadStations] Loaded ${stations.length} stations for ${genre}`);
+            renderStations(stations, genre);
         })
         .catch(error => {
-            console.error('There was a problem with the fetch operation:', error);
+            console.error("[loadStations] Error fetching stations:", error);
+            selectedContainer.innerHTML = '<p class="no-stations">Error loading stations</p>';
         });
+}
 
-    const searchInput = document.getElementById('sasalelesearch');
-    searchInput.addEventListener('input', function () {
-        const searchTerm = this.value.toLowerCase();
-        const activeGenre = document.querySelector('.genre-content.active');
-
-        if (!activeGenre) return;
-
-        const items = activeGenre.querySelectorAll('li');
-        let visibleCount = 0;
-
-        items.forEach(item => {
-            const name = item.getAttribute('data-name');
-            if (name.includes(searchTerm)) {
-                item.style.display = '';
-                visibleCount++;
-            } else {
-                item.style.display = 'none';
+function initializeUI() {
+    const defaultGenre = "jmusic";
+    loadStations(defaultGenre);
+    const defaultGenreButton = genreSelect?.querySelector(`[data-genre="${defaultGenre}"]`);
+    if (defaultGenreButton) {
+        defaultGenreButton.classList.add('active');
+    }
+    if (genreSelect) {
+        genreSelect.addEventListener('click', (event) => {
+            const genreButton = event.target.closest('.genre-btn');
+            if (genreButton) {
+                const genre = genreButton.getAttribute('data-genre');
+                document.querySelectorAll('.genre-content').forEach(c => c.classList.remove('active'));
+                loadStations(genre);
+                document.querySelectorAll('.genre-btn').forEach(button => {
+                    button.classList.remove('active');
+                });
+                genreButton.classList.add('active');
             }
         });
+        setupPlayerControls();
+    }
+}
 
-        let noResults = activeGenre.querySelector('.no-results');
-        if (visibleCount === 0 && !noResults) {
-            noResults = document.createElement('p');
-            noResults.className = 'no-results';
-            noResults.textContent = 'No stations found matching your search';
-            noResults.style.gridColumn = '1 / -1';
-            noResults.style.textAlign = 'center';
-            noResults.style.padding = '20px';
-            noResults.style.color = 'white';
-            activeGenre.appendChild(noResults);
-        } else if (visibleCount > 0 && noResults) {
-            noResults.remove();
-        }
-    });
+function renderStations(stations, genre) {
+    const selectedContainer = document.getElementById(genre);
+    if (!selectedContainer) return;
 
-    function loadGenre(genreToLoad) {
-        const genreContainers = document.querySelectorAll('.genre-content');
-        const selectedContainer = document.getElementById(genreToLoad);
-        const searchInput = document.getElementById('sasalelesearch');
+    if (stations.length === 0) {
+        selectedContainer.innerHTML = '<p class="no-stations">No stations available in this genre</p>';
+        return;
+    }
 
-        searchInput.value = '';
+    const genreHTML = stations.map(station => {
+        const streamTypeClass = `stream-type-${station.host}`;
+        const safeData = encodeURIComponent(JSON.stringify(station));
+        return `
+        <li data-station="${safeData}">
+            <img src="${station.favicon || 'assets/radios/Unidentified2.webp'}" alt="${station.name}">
+            <div class="flex-grow-1 info">
+                <h5 class="mb-1 text-truncate">${station.name}</h5>
+                <small class="stream-type ${streamTypeClass}">${station.host}</small>
+            </div>
+            <div class="ms-3 d-flex button-group">
+                <a href="${station.homepage || station.url}" target="_blank" class="btn btn-sm btn-info">
+                    <i class="fas fa-external-link-alt"></i>
+                </a>
+                <button class="btn btn-sm btn-dark download-button">
+                    <i class="fas fa-download"></i>
+                </button>
+                <button class="btn btn-sm btn-primary main-play-button">
+                    <i class="fas fa-play"></i>
+                </button>
+            </div>
+        </li>`;
+    }).join('');
 
-        genreContainers.forEach(container => {
-            container.classList.remove('active');
-            container.querySelectorAll('li').forEach(li => {
-                li.style.display = '';
-                li.classList.remove('active-station');
-            });
-            const noResults = container.querySelector('.no-results');
-            if (noResults) noResults.remove();
+    selectedContainer.innerHTML = genreHTML;
+
+    if (currentStation) {
+        const stationElements = selectedContainer.querySelectorAll('li');
+        stationElements.forEach(el => {
+            const name = el.querySelector('h5').textContent;
+            if (name.toLowerCase() === currentStation.name.toLowerCase()) {
+                el.classList.add('active-station');
+            }
         });
-
-        if (selectedContainer) {
-            selectedContainer.innerHTML = '<div class="loading-spinner">Loading stations...</div>';
-            selectedContainer.classList.add('active');
-
-            setTimeout(() => {
-                const filteredData = window.genreData.filter(station => station.genre === genreToLoad);
-
-                if (filteredData.length === 0) {
-                    selectedContainer.innerHTML = '<p class="no-stations">No stations available in this genre</p>';
-                    return;
-                }
-
-                const genreHTML = filteredData.map(station => {
-                    const streamTypeClass = `stream-type-${station.host}`;
-                    return `
-                <li data-name="${station.name.toLowerCase()}">
-                            <img src="${station.favicon || 'assets/radios/Unidentified2.webp'}" alt="${station.name}">
-                    <div class="flex-grow-1 info">
-                        <h5 class="mb-1 text-truncate">${station.name}</h5>
-                        <small class="stream-type ${streamTypeClass}">${station.host}</small>
-                    </div>
-                    <div class="ms-3 d-flex button-group">
-                        <a href="${station.homepage || station.url}" target="_blank" class="btn btn-sm btn-info">
-                            <i class="fas fa-external-link-alt"></i>
-                        </a>
-                        <button class="btn btn-sm btn-dark download-button">
-                            <i class="fas fa-download"></i>
-                        </button>
-                        <button class="btn btn-sm btn-primary main-play-button">
-                            <i class="fas fa-play"></i>
-                        </button>
-                    </div>
-                </li>
-            `}).join('');
-
-                selectedContainer.innerHTML = genreHTML;
-
-                if (currentStation) {
-                    const stationElements = selectedContainer.querySelectorAll('li');
-                    stationElements.forEach(el => {
-                        const name = el.querySelector('h5').textContent;
-                        if (name.includes(currentStation.name)) {
-                            el.classList.add('active-station');
-                        }
-                    });
-                }
-            }, 300);
-        }
     }
 
-    const randomplay = document.getElementById('randomplay');
-    randomplay.addEventListener('click', function () {
-        const activeGenre = document.querySelector('.genre-content.active');
-        if (!activeGenre) return;
+    if (typeof stationCount !== 'undefined' && stationCount) {
+        stationCount.textContent = stations.length;
+    }
+}
 
-        const visibleStations = [...activeGenre.querySelectorAll('li:not([style*="display: none"])')];
-        if (visibleStations.length === 0) return;
+stationSearch.addEventListener('input', function () {
+    const searchTerm = this.value.toLowerCase();
+    const activeGenre = document.querySelector('.genre-content.active');
 
-        const randomIndex = Math.floor(Math.random() * visibleStations.length);
-        const playButton = visibleStations[randomIndex].querySelector('.main-play-button');
-        playButton?.click();
-    });
+    if (!activeGenre) return;
 
-    function handleDownloadClick(button) {
-        const parentLi = button.closest('li');
-        const stationName = parentLi.querySelector('h5').textContent.trim();
-        const media = window.genreData.find(st => st.name === stationName);
+    const items = activeGenre.querySelectorAll('li');
+    let visibleCount = 0;
 
-        if (media) {
-            RadioM3UDownload(media.url, media.name);
+    items.forEach(item => {
+        const name = item.getAttribute('data-name');
+        if (name.includes(searchTerm)) {
+            item.style.display = '';
+            visibleCount++;
         } else {
-            console.error('Media not found:', stationName);
-        }
-    }
-
-
-    document.addEventListener('click', function (event) {
-        const target = event.target.closest('.download-button, .main-play-button');
-        if (!target) return;
-
-        if (target.hasAttribute('data-processing')) return;
-        target.setAttribute('data-processing', 'true');
-        setTimeout(() => target.removeAttribute('data-processing'), 1000);
-
-        if (target.classList.contains('download-button')) {
-            handleDownloadClick(target);
-        } else if (target.classList.contains('main-play-button')) {
-            handlePlayClick(target);
+            item.style.display = 'none';
         }
     });
 
-    function handlePlayClick(button) {
-        const parentLi = button.closest('li');
-        const stationName = parentLi.querySelector('h5').textContent;
-        const media = window.genreData.find(st => st.name === stationName);
-
-        if (media) {
-            playMedia(media, button);
-        } else {
-            console.error('Media not found:', stationName);
-        }
-    }
-
-    function RadioM3UDownload(stationURL, stationName) {
-        const patternsToRemove = [
-            /;stream\.nsv&type=mp3&quot;$/,
-            /;&type=mp3$/,
-            /;?type=http&nocache$/,
-            /jmusicid-backend\?type=http&nocache=2$/,
-            /\?type=http&nocache=1$/,
-            /stream&nocache=1$/,
-            /\?nocache=1$/,
-            /;stream\.nsv?nocache=$/,
-            /\?type=http$/,
-            /\?nocache$/,
-            /;&type=mp3$/,
-            /;stream\.nsv$/
-        ];
-
-        let cleanedURL = stationURL;
-        patternsToRemove.forEach(pattern => {
-            cleanedURL = cleanedURL.replace(pattern, "");
-        });
-
-        const newStationURL = cleanedURL;
-        const m3uContent = `#EXTM3U\n#EXTINF:-1,${stationName}\n${newStationURL}`;
-        const blob = new Blob([m3uContent], { type: "text/plain;charset=utf-8" });
-
-        const radioURL = URL.createObjectURL(blob);
-        const downloadRad = document.createElement("a");
-        downloadRad.href = radioURL;
-        downloadRad.download = `${stationName}.m3u`;
-        downloadRad.click();
-
-        URL.revokeObjectURL(radioURL);
+    let noResults = activeGenre.querySelector('.no-results');
+    if (visibleCount === 0 && !noResults) {
+        noResults = document.createElement('p');
+        noResults.className = 'no-results';
+        noResults.textContent = 'No stations found matching your search';
+        noResults.style.gridColumn = '1 / -1';
+        noResults.style.textAlign = 'center';
+        noResults.style.padding = '20px';
+        noResults.style.color = 'white';
+        activeGenre.appendChild(noResults);
+    } else if (visibleCount > 0 && noResults) {
+        noResults.remove();
     }
 });
 
+randomplay.addEventListener('click', function () {
+    const activeGenre = document.querySelector('.genre-content.active');
+    if (!activeGenre) return;
+
+    const visibleStations = [...activeGenre.querySelectorAll('li:not([style*="display: none"])')];
+    if (visibleStations.length === 0) return;
+
+    const randomIndex = Math.floor(Math.random() * visibleStations.length);
+    const playButton = visibleStations[randomIndex].querySelector('.main-play-button');
+    playButton?.click();
+});
+
+document.addEventListener('click', function (event) {
+    const target = event.target.closest('.download-button, .main-play-button');
+    if (!target) return;
+
+    if (target.hasAttribute('data-processing')) return;
+    target.setAttribute('data-processing', 'true');
+    setTimeout(() => target.removeAttribute('data-processing'), 1000);
+
+    if (target.classList.contains('download-button')) {
+        handleDownloadClick(target);
+    } else if (target.classList.contains('main-play-button')) {
+        handlePlayClick(target);
+    }
+});
+
+function handlePlayClick(button) {
+    const parentLi = button.closest('li');
+    if (!parentLi) return;
+    try {
+        const media = JSON.parse(decodeURIComponent(parentLi.dataset.station));
+        playMedia(media, button);
+    } catch (err) {
+        console.error("[handlePlayClick] Failed to parse media:", err);
+    }
+}
+
+function handleDownloadClick(button) {
+    const parentLi = button.closest('li');
+    if (!parentLi) return;
+    try {
+        const media = JSON.parse(decodeURIComponent(parentLi.dataset.station));
+        RadioM3UDownload(media.url, media.name);
+    } catch (err) {
+        console.error("[handleDownloadClick] Failed to parse media:", err);
+    }
+}
 
 function setupPlayerControls() {
-    const playBtn = document.getElementById('playBtn');
     const stopBtn = document.getElementById('stopBtn');
-
-    playBtn.addEventListener('click', () => {
-        stopCoverRotation();
-        if (isPlaying) {
-
-            if (icecastPlayer) {
-                icecastPlayer.stop();
-                metadataElement.textContent = 'Paused';
-            }
-            if (hlsPlayer && audioElement) {
-                audioElement.pause();
-                document.getElementById('hlsStatus').textContent = 'HLS: Paused';
-            }
-            if (audioElement) {
-                audioElement.pause();
-            }
-            playBtn.innerHTML = '<i class="fas fa-play"></i>';
-            isPlaying = false;
-        } else {
-
-            startCoverRotation();
-            if (currentStation) {
-
-                if (currentStation.host === 'icecast') {
-                    playIcecastStream(currentStation);
-                }
-
-                else if (hlsPlayer && audioElement) {
-                    audioElement.play();
-                    document.getElementById('hlsStatus').textContent = 'HLS: Playing';
-                } else if (audioElement) {
-                    audioElement.play();
-                }
-            }
-            playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-            isPlaying = true;
-        }
-    });
-
     stopBtn.addEventListener('click', () => {
         stopPlayback();
     });
 }
 
-function stopPlayback() {
+function RadioM3UDownload(stationURL, stationName) {
+    const patternsToRemove = [
+        /;stream\.nsv&type=mp3&quot;$/,
+        /;&type=mp3$/,
+        /;?type=http&nocache$/,
+        /jmusicid-backend\?type=http&nocache=2$/,
+        /\?type=http&nocache=1$/,
+        /stream&nocache=1$/,
+        /\?nocache=1$/,
+        /;stream\.nsv?nocache=$/,
+        /\?type=http$/,
+        /\?nocache$/,
+        /;&type=mp3$/,
+        /;stream\.nsv$/
+    ];
+
+    let cleanedURL = stationURL;
+    patternsToRemove.forEach(pattern => {
+        cleanedURL = cleanedURL.replace(pattern, "");
+    });
+
+    const newStationURL = cleanedURL;
+    const m3uContent = `#EXTM3U\n#EXTINF:-1,${stationName}\n${newStationURL}`;
+    const blob = new Blob([m3uContent], { type: "text/plain;charset=utf-8" });
+
+    const radioURL = URL.createObjectURL(blob);
+    const downloadRad = document.createElement("a");
+    downloadRad.href = radioURL;
+    downloadRad.download = `${stationName}.m3u`;
+    downloadRad.click();
+
+    URL.revokeObjectURL(radioURL);
+}
+
+async function stopPlayback() {
+    try {
+        if (mainAudio && !mainAudio.paused && mainAudio.readyState > 0) {
+            await mainAudio.pause();
+            console.log("[stopPlayback] pause player");
+        } else {
+            console.log("[stopPlayback] mainAudio already paused or not ready");
+        }
+    } catch (err) {
+        console.warn("[stopPlayback] pause() error (ignored):", err);
+    }
+
     if (icecastPlayer) {
-        icecastPlayer.stop();
+        try {
+            icecastPlayer.stop();
+            icecastPlayer.detachAudioElement();
+        } catch (err) {
+            console.error("[cleanupPlayers] icecast cleanup error:", err);
+        }
+        icecastPlayer = null;
     }
 
     if (hlsPlayer) {
-        hlsPlayer.stopLoad();
-        hlsPlayer.destroy();
+        try {
+            hlsPlayer.stopLoad();
+            hlsPlayer.destroy();
+        } catch (err) {
+            console.error("[cleanupPlayers] hls cleanup error:", err);
+        }
         hlsPlayer = null;
     }
 
-    if (audioElement) {
-        audioElement.pause();
-        audioElement = null;
+    if (mainAudio) {
+        mainAudio.removeAttribute("src");
+        mainAudio.load();
     }
 
     if (metadataInterval) {
@@ -406,10 +377,9 @@ function stopPlayback() {
         metadataEventSource = null;
     }
 
-    document.getElementById('playBtn').innerHTML = '<i class="fas fa-play"></i>';
     isPlaying = false;
     document.getElementById('hlsStatus').textContent = '';
-    coverImage.src = "assets/sasalele_logo-removebg.webp";
+    coverImage.src = "assets/radios/Unidentified2.webp";
     coverImage.classList.remove('rotating');
 
     document.querySelectorAll('li').forEach(li => {
@@ -417,74 +387,66 @@ function stopPlayback() {
     });
     nowPlaying.textContent = 'No station selected';
     metadataElement.textContent = '';
-    document.getElementById('metadataSource').textContent = '';
+    document.getElementById('metadataSource').textContent = "If you encounter any playback issues, please press the 'Stop' button before starting another playback.";
 
     currentStation = null;
 }
 
-function playMedia(media, button) {
-    stopPlayback();
+async function playMedia(media, button) {
+    await stopPlayback();
 
     document.querySelectorAll('li').forEach(li => {
         li.classList.remove('active-station');
     });
 
     const parentLi = button.closest('li');
-    parentLi.classList.add('active-station');
-
-    updatePlayerUI(media);
-    currentStation = media;
+    if (parentLi) parentLi.classList.add('active-station');
 
     switch (media.host) {
-        case 'icecast':
+        case "icecast":
             playIcecastStream(media);
             break;
-        case 'zeno':
+        case "zeno":
             playZeno(media);
             break;
-        case 'lautfm':
+        case "lautfm":
             playLautFM(media);
             break;
-        case 'special':
+        case "special":
             playSpecial(media);
             break;
-        case 'hls':
+        case "hls":
             playHlsStream(media);
             break;
-        case 'unknown':
+        case "unknown":
             playUnknownStream(media);
             break;
         default:
             playIcecastStream(media);
             break;
     }
-
-
-    document.getElementById('playBtn').innerHTML = '<i class="fas fa-pause"></i>';
+    currentStation = media;
+    updatePlayerUI(media);
     isPlaying = true;
 }
 
 function playHlsStream(media) {
-
     if (Hls.isSupported()) {
-        audioElement = new Audio();
         hlsPlayer = new Hls({
-
             debug: false,
             enableWorker: true,
             lowLatencyMode: true,
             backBufferLength: 90
         });
 
-
         hlsPlayer.loadSource(media.url);
-        hlsPlayer.attachMedia(audioElement);
+        hlsPlayer.attachMedia(mainAudio);
 
         hlsPlayer.on(Hls.Events.MANIFEST_PARSED, (event, data) => {
             if (data && data.levels && data.levels.length > 0) {
                 const stationName = data.levels[0].name || "Live Stream";
                 metadataElement.textContent = stationName;
-                audioElement.play();
+                mainAudio.play();
             }
         });
 
@@ -494,7 +456,6 @@ function playHlsStream(media) {
                 window.jsmediatags.read(new Blob([sample.data]), {
                     onSuccess: (tag) => {
                         const tags = tag.tags;
-
                         const artist = tags.artist || "";
                         const title = tags.title || "";
                         const album = tags.album || "";
@@ -518,7 +479,6 @@ function playHlsStream(media) {
                         } else {
                             displayText = "Stream is live (no metadata)";
                         }
-
                         metadataElement.textContent = displayText;
 
                     },
@@ -551,27 +511,20 @@ function playHlsStream(media) {
             }
         });
     } else if (audio.canPlayType('application/vnd.apple.mpegurl')) {
-
-        audioElement = new Audio(media.url);
-
-
         document.getElementById('hlsStatus').textContent = 'HLS: Using native support';
-
-
-        audioElement.play();
+        mainAudio.play();
     } else {
         metadataElement.textContent = 'HLS not supported in this browser';
         document.getElementById('hlsStatus').textContent = 'HLS: Not supported';
         isPlaying = false;
-        document.getElementById('playBtn').innerHTML = '<i class="fas fa-play"></i>';
     }
 }
 
 function playIcecastStream(media) {
     const chosenUrl = media.url_resolved || media.url;
-
     try {
         icecastPlayer = new IcecastMetadataPlayer(chosenUrl, {
+            audioElement: mainAudio,
             onMetadata: (metadata) => {
                 if (metadata.StreamTitle) {
                     metadataElement.textContent = metadata.StreamTitle;
@@ -582,6 +535,7 @@ function playIcecastStream(media) {
             onError: (message) => {
                 metadataElement.textContent = 'Error: ' + message;
                 console.warn("Falling back to playUnknownStream...");
+                icecastPlayer.stop();
                 icecastPlayer.detachAudioElement();
                 icecastPlayer = null;
                 playUnknownStream(media);
@@ -594,39 +548,33 @@ function playIcecastStream(media) {
             },
             enableLogging: true
         });
-
         icecastPlayer.play();
     } catch (err) {
         console.error("Icecast player initialization failed:", err);
+        icecastPlayer.stop();
         icecastPlayer.detachAudioElement();
         icecastPlayer = null;
         playUnknownStream(media);
     }
 }
 
-
 function playLautFM(media) {
-    audioElement = new Audio(media.url);
+    mainAudio.src = media.url;
     const apiUrl = `https://api.laut.fm/station/${getSpecialID(media.url)}/current_song`;
     startMetadataUpdate(apiUrl, 'lautfm');
-    audioElement.play();
+    mainAudio.play();
 }
 
 function playSpecial(media) {
-    audioElement = new Audio(media.url);
+    mainAudio.src = media.url;
     const apiUrl = `https://scraper2.onlineradiobox.com/${media.api}`;
     startMetadataUpdate(apiUrl, 'special');
-    audioElement.play();
+    mainAudio.play();
 }
 
-
 function playZeno(media) {
-    audioElement = new Audio(media.url);
+    mainAudio.src = media.url;
     const zenoapiUrl = `https://api.zeno.fm/mounts/metadata/subscribe/${getSpecialID(media.url)}`;
-
-    if (metadataEventSource) {
-        metadataEventSource.close();
-    }
 
     metadataEventSource = new EventSource(zenoapiUrl);
     metadataEventSource.addEventListener('message', function (event) {
@@ -652,23 +600,19 @@ function playZeno(media) {
         } catch (error) {
             console.error('Failed to parse JSON:', error);
         }
+
     }
-    audioElement.play();
+    mainAudio.play();
 }
 
 function playUnknownStream(media) {
     const chosenUrl = media.url_resolved || media.url;
-    audioElement = new Audio(chosenUrl);
-
+    mainAudio.src = chosenUrl;
     metadataElement.textContent = "Visit radio's homepage for playing info";
+    mainAudio.play();
 
-    audioElement.addEventListener('error', (e) => {
+    mainAudio.addEventListener('error', (e) => {
         console.warn("Unknown stream failed to play, falling back to HLS...", e);
-        playHlsStream(media);
-    });
-
-    audioElement.play().catch((err) => {
-        console.error("Playback failed:", err);
         playHlsStream(media);
     });
 }
@@ -733,29 +677,18 @@ function updateMetadata(jsonData, type) {
     }
 }
 
+togglePlayerButton.addEventListener("click", () => {
+    playerContainer.classList.toggle("minimized");
+    expandIcon.classList.toggle("hidden");
+    minimizeIcon.classList.toggle("hidden");
+});
+
 // search station with options using Radio Browser's API
-const countries = [
-    "United States", "Germany", "Russia", "France", "Greece", "China", "United Kingdom",
-    "Mexico", "Italy", "Australia", "Canada", "India", "Spain", "Brazil", "Poland",
-    "Philippines", "Argentina", "Netherlands", "United Arab Emirates", "Uganda",
-    "Switzerland", "Romania", "Colombia", "Turkey", "Indonesia", "Belgium", "Chile",
-    "Serbia", "Austria", "Hungary", "Peru", "Ukraine", "Czechia", "Portugal", "Bulgaria",
-    "Croatia", "Denmark", "New Zealand", "Ireland", "Ecuador", "Sweden", "Japan",
-    "Slovakia", "Afghanistan", "Uruguay", "Malaysia", "Norway", "South Africa",
-    "Bosnia and Herzegovina", "Gibraltar", "Venezuela", "Saudi Arabia", "Dominican Republic",
-    "Finland", "Israel", "Slovenia", "Kenya", "Taiwan", "South Korea", "Morocco",
-    "Thailand", "Estonia", "Bolivia", "Tunisia", "Lithuania", "Latvia", "Guatemala",
-    "Sri Lanka", "Pakistan", "Belarus", "Hong Kong", "Nigeria", "Costa Rica", "Iran",
-    "Algeria", "Egypt", "Montenegro", "Cuba", "Honduras", "El Salvador", "North Macedonia",
-    "Senegal", "Paraguay", "Albania", "Kazakhstan", "Lebanon", "Singapore", "Moldova",
-    "Cyprus", "Ethiopia", "Jamaica", "Puerto Rico", "Macau", "Luxembourg", "Vietnam",
-    "Georgia", "Nepal", "Iraq", "Jordan", "Syria"
-];
+const countries = ["United States", "Germany", "Russia", "France", "Greece", "China", "United Kingdom", "Mexico", "Italy", "Australia", "Canada", "India", "Spain", "Brazil", "Poland", "Philippines", "Argentina", "Netherlands", "United Arab Emirates", "Uganda", "Switzerland", "Romania", "Colombia", "Turkey", "Indonesia", "Belgium", "Chile", "Serbia", "Austria", "Hungary", "Peru", "Ukraine", "Czechia", "Portugal", "Bulgaria", "Croatia", "Denmark", "New Zealand", "Ireland", "Ecuador", "Sweden", "Japan", "Slovakia", "Afghanistan", "Uruguay", "Malaysia", "Norway", "South Africa", "Bosnia and Herzegovina", "Gibraltar", "Venezuela", "Saudi Arabia", "Dominican Republic", "Finland", "Israel", "Slovenia", "Kenya", "Taiwan", "South Korea", "Morocco", "Thailand", "Estonia", "Bolivia", "Tunisia", "Lithuania", "Latvia", "Guatemala", "Sri Lanka", "Pakistan", "Belarus", "Hong Kong", "Nigeria", "Costa Rica", "Iran", "Algeria", "Egypt", "Montenegro", "Cuba", "Honduras", "El Salvador", "North Macedonia", "Senegal", "Paraguay", "Albania", "Kazakhstan", "Lebanon", "Singapore", "Moldova", "Cyprus", "Ethiopia", "Jamaica", "Puerto Rico", "Macau", "Luxembourg", "Vietnam", "Georgia", "Nepal", "Iraq", "Jordan", "Syria"];
 
 function populateCountries() {
     const selectElement = document.getElementById("countrySelect");
     countries.forEach(function (country) {
-
         const option = document.createElement("option");
         option.value = country;
         option.textContent = country;
@@ -763,23 +696,7 @@ function populateCountries() {
     });
 }
 
-const languages = [
-    "English", "Spanish", "French", "Chinese", "Hindi", "Arabic",
-    "Bengali", "Portuguese", "Russian", "Japanese", "German", "Korean",
-    "Turkish", "Italian", "Dutch", "Polish", "Ukrainian", "Persian",
-    "Malay", "Thai", "Swahili", "Yoruba", "Tagalog", "Sindhi", "Slovak",
-    "Serbian", "Greek", "Hungarian", "Finnish", "Czech", "Croatian",
-    "Danish", "Swedish", "Norwegian", "Lithuanian", "Latvian", "Estonian",
-    "Romanian", "Bulgarian", "Albanian", "Vietnamese", "Indonesian",
-    "Malagasy", "Swazi", "Zulu", "Xhosa", "Tamil", "Telugu", "Marathi",
-    "Kannada", "Gujarati", "Punjabi", "Urdu", "Oromo", "Amharic", "Tigrinya",
-    "Pashto", "Dari", "Farsi", "Kurdish", "Hausa", "Igbo", "Somali", "Fulani",
-    "Akan", "Kinyarwanda", "Kirundi", "Shona", "Tswana", "Kinyamwezi",
-    "Chichewa", "Lingala", "Bemba", "Sesotho", "Wolof", "Twi", "Berber",
-    "Fula", "Wolof", "Berber", "Sotho", "Zarma", "Dinka", "Tigre",
-    "Afrikaans", "Oshiwambo", "Sango", "Tswana", "Setswana", "Kikuyu",
-    "Kongo", "Bambara", "Luganda", "Susu", "Zaghawa", "Mossi", "Khoekhoe"
-];
+const languages = ["English", "Spanish", "French", "Chinese", "Hindi", "Arabic", "Bengali", "Portuguese", "Russian", "Japanese", "German", "Korean", "Turkish", "Italian", "Dutch", "Polish", "Ukrainian", "Persian", "Malay", "Thai", "Swahili", "Yoruba", "Tagalog", "Sindhi", "Slovak", "Serbian", "Greek", "Hungarian", "Finnish", "Czech", "Croatian", "Danish", "Swedish", "Norwegian", "Lithuanian", "Latvian", "Estonian", "Romanian", "Bulgarian", "Albanian", "Vietnamese", "Indonesian", "Malagasy", "Swazi", "Zulu", "Xhosa", "Tamil", "Telugu", "Marathi", "Kannada", "Gujarati", "Punjabi", "Urdu", "Oromo", "Amharic", "Tigrinya", "Pashto", "Dari", "Farsi", "Kurdish", "Hausa", "Igbo", "Somali", "Fulani", "Akan", "Kinyarwanda", "Kirundi", "Shona", "Tswana", "Kinyamwezi", "Chichewa", "Lingala", "Bemba", "Sesotho", "Wolof", "Twi", "Berber", "Fula", "Wolof", "Berber", "Sotho", "Zarma", "Dinka", "Tigre", "Afrikaans", "Oshiwambo", "Sango", "Tswana", "Setswana", "Kikuyu", "Kongo", "Bambara", "Luganda", "Susu", "Zaghawa", "Mossi", "Khoekhoe"];
 
 function populateLanguages() {
     const selectElement = document.getElementById("languageSelect");
@@ -791,8 +708,7 @@ function populateLanguages() {
     });
 }
 
-const tags = ["pop", "music", "news", "rock", "classical", "talk", "radio", "hits", "community radio", "dance", "electronic", "80s", "oldies", "méxico", "christian", "jazz", "classic hits", "pop music", "top 40", "90s", "adult contemporary", "country", "house", "house", "folk", "chillout", "soul", "top40", "news talk", "metal", "hiphop", "techno", "rap", "sports", "ambient", "lounge", "culture", "disco", "funk", "retro", "electro", "top hits", "world music", "edm", "latino", "international", "relax", "college radio", "catholic", "christmas music", "pop dance", "hip-hop", "00s", "love songs", "club", "various", "mix", "iheart", "bible", "piano", "tech house", "vaporwave", "dj", "anime radio", "anime", "free japan music", "japanese", "japanese music", "japanese idols", "japan", "anime openings", "animegroove"
-];
+const tags = ["pop", "music", "news", "rock", "classical", "talk", "radio", "hits", "community radio", "dance", "electronic", "80s", "oldies", "méxico", "christian", "jazz", "classic hits", "pop music", "top 40", "90s", "adult contemporary", "country", "house", "house", "folk", "chillout", "soul", "top40", "news talk", "metal", "hiphop", "techno", "rap", "sports", "ambient", "lounge", "culture", "disco", "funk", "retro", "electro", "top hits", "world music", "edm", "latino", "international", "relax", "college radio", "catholic", "christmas music", "pop dance", "hip-hop", "00s", "love songs", "club", "various", "mix", "iheart", "bible", "piano", "tech house", "vaporwave", "dj", "anime radio", "anime", "free japan music", "japanese", "japanese music", "japanese idols", "japan", "anime openings", "animegroove"];
 
 function populateTags() {
     const selectElement = document.getElementById("tagSelect");
@@ -855,14 +771,12 @@ function handleSearchOptionChange() {
     clearSearchField();
 }
 
-
 function clearSearchField() {
     searchField.value = '';
     countrySelect.value = '';
     languageSelect.value = '';
     tagSelect.value = '';
 }
-
 
 function radioSearch() {
     const searchBy = searchOption.value;
@@ -980,6 +894,7 @@ function performSearch() {
     }
     searchInput.value = '';
 }
+
 searchButton.addEventListener('click', performSearch);
 searchInput.addEventListener('keyup', function (event) {
     if (event.key === 'Enter') {
@@ -1102,7 +1017,7 @@ function displayResults(results) {
             const song = lastfmResults[i];
             if (!song) continue;
             const listItem = document.createElement('li');
-            listItem.className = 'lastfm-item';
+            listItem.className = 'list-group-item';
             listItem.textContent = `${song.artist} - ${song.title}`;
             fragment.appendChild(listItem);
         }
@@ -1275,18 +1190,10 @@ hideButton.addEventListener('click', function () {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    const firebaseConfig = {
-        apiKey: "AIzaSyBea1r2EXm5MyJItS00eRUIM7XZxt5Uzs8",
-        authDomain: "sasalele.firebaseapp.com",
-        databaseURL: "https://sasalele-default-rtdb.firebaseio.com",
-        projectId: "sasalele",
-        storageBucket: "sasalele.appspot.com",
-        messagingSenderId: "993505903479",
-        appId: "1:993505903479:web:1419b55ac1cd5913755772",
-        measurementId: "G-JFENQ5SBN8"
-    };
-    firebase.initializeApp(firebaseConfig);
     var db = firebase.database();
+
+    initializeUI();
+    siteTime();
 
     function createElement(tag, id, innerHTML, attributes = {}) {
         const element = document.createElement(tag);
@@ -1426,7 +1333,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let firstLoad = true;
             const currentUser = this.getName();
 
-            db.ref('chats/').off(); // avoid multiple listeners
+            db.ref('chats/').off();
             db.ref('chats/').orderByChild('timestamp').on('child_added', (snapshot) => {
                 const { name, message, timestamp } = snapshot.val();
                 if (!timestamp) return;
@@ -1441,7 +1348,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const yesterday = new Date();
                 yesterday.setDate(today.getDate() - 1);
 
-                // format day for separator
+
                 let dateLabel;
                 if (msgDate.toDateString() === today.toDateString()) {
                     dateLabel = "Today";
@@ -1517,16 +1424,29 @@ function siteTime() {
     var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds);
     document.getElementById("liveTime").innerHTML = diffYears + " Years " + diffDays + " Days " + diffHours + " Hours " + diffMinutes + " Minutes " + diffSeconds + " Seconds";
 }
-siteTime();
 
 const loadPlaylist = document.getElementById('loadAplayer');
 loadPlaylist.addEventListener('click', function () {
     var container = document.getElementById('hugeData');
-    var script = document.createElement('script');
-    script.src = 'js/module.js';
-    script.onload = function () {
-        container.style.display = 'block';
-    };
-    document.body.appendChild(script);
+    container.style.display = 'block';
     loadPlaylist.style.display = 'none';
+    const db = firebase.database();
+    const audioRef = db.ref("audioList");
+
+    audioRef.once("value").then(snapshot => {
+        const data = snapshot.val();
+
+        if (!data) {
+            console.error("No audio data found!");
+            return;
+        }
+        const audioArray = Object.values(data);
+        const ap = new APlayer({
+            container: document.getElementById('aplayer'),
+            lrcType: 1,
+            audio: audioArray
+        });
+    }).catch(error => {
+        console.error("Firebase read error:", error);
+    });
 });
