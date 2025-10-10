@@ -11,6 +11,8 @@ let tokenClient;
 let gapiInited = false;
 let gisInited = false;
 
+let folderId = localStorage.getItem("parentfolder");
+
 function gapiLoaded() {
     gapi.load('client', initializeGapiClient);
 }
@@ -38,9 +40,10 @@ function handleAuthClick(folderId) {
         }
 
         // set parentfolder as root if nothing set  
-        if (localStorage.getItem("parentfolder") == "" || localStorage.getItem("parentfolder") == null) {
+        if (folderId == "" || folderId == null) {
             localStorage.setItem("parentfolder", "root");
             folderId = "root";
+            parent.value = folderId;
         }
 
         // only load initial contents on first auth
@@ -317,7 +320,7 @@ function loadFolders() {
     dbRef.once("value")
         .then(snapshot => {
             if (!snapshot.exists()) {
-                console.error("No data found at /gdlinks");
+                console.error("No data found.");
                 return;
             }
             const folders = [];
@@ -328,11 +331,13 @@ function loadFolders() {
                 }
             });
             populateDropdown(folders);
+            hideLoadingSpinner();
         })
         .catch(error => {
             console.error("Error loading folders from Firebase:", error);
         });
 }
+
 function populateDropdown(folders) {
     const dropdownMenu = document.getElementById('folderDropdownMenu');
     dropdownMenu.innerHTML = '';
@@ -490,5 +495,6 @@ function downloadTrack(event, fileId, fileName) {
 }
 document.addEventListener('DOMContentLoaded', function () {
     // Initial call to load folders
+    showLoadingSpinner();
     loadFolders();
 });

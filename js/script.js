@@ -70,14 +70,6 @@ function updatePlayerUI(media) {
     document.getElementById('metadataSource').textContent = `Stream type: ${media.host}`;
 }
 
-function stopCoverRotation() {
-    coverImage.classList.remove('rotating');
-}
-
-function startCoverRotation() {
-    coverImage.classList.add('rotating');
-}
-
 function displayRecentTracks() {
     const recentTracks = JSON.parse(localStorage.getItem('recentTracks')) || [];
     const recentTracksList = document.getElementById('recentTracksList');
@@ -115,7 +107,7 @@ function loadStations(genre) {
     const selectedContainer = document.getElementById(genre);
     if (!selectedContainer) return;
 
-    selectedContainer.innerHTML = '<div class="loading-spinner">Loading stations...</div>';
+    document.getElementById('loadingSpinner').style.display = 'block';
     selectedContainer.classList.add('active');
 
     firebase.database().ref("stations/" + genre)
@@ -125,6 +117,7 @@ function loadStations(genre) {
             const stations = Object.values(data);
             console.log(`[loadStations] Loaded ${stations.length} stations for ${genre}`);
             renderStations(stations, genre);
+            document.getElementById('loadingSpinner').style.display = 'none';
         })
         .catch(error => {
             console.error("[loadStations] Error fetching stations:", error);
@@ -207,7 +200,7 @@ function renderStations(stations, genre) {
 }
 
 stationSearch.addEventListener('input', function () {
-    const searchTerm = this.value.toLowerCase();
+    const searchTerm = this.value.trim().toLowerCase();
     const activeGenre = document.querySelector('.genre-content.active');
 
     if (!activeGenre) return;
@@ -216,11 +209,19 @@ stationSearch.addEventListener('input', function () {
     let visibleCount = 0;
 
     items.forEach(item => {
-        const name = item.getAttribute('data-name');
-        if (name.includes(searchTerm)) {
-            item.style.display = '';
-            visibleCount++;
-        } else {
+        try {
+            const station = JSON.parse(decodeURIComponent(item.dataset.station));
+            const name = (station.name || '').toLowerCase();
+            const host = (station.host || '').toLowerCase();
+
+            const match =
+                name.includes(searchTerm) ||
+                host.includes(searchTerm)
+
+            item.style.display = match ? '' : 'none';
+            if (match) visibleCount++;
+        } catch (err) {
+            console.warn('[stationSearch] Failed to parse data-station for an item:', err);
             item.style.display = 'none';
         }
     });
@@ -379,15 +380,15 @@ async function stopPlayback() {
 
     isPlaying = false;
     document.getElementById('hlsStatus').textContent = '';
-    coverImage.src = "assets/radios/Unidentified2.webp";
+    coverImage.src = "assets/NezukoYay.gif";
     coverImage.classList.remove('rotating');
 
     document.querySelectorAll('li').forEach(li => {
         li.classList.remove('active-station');
     });
-    nowPlaying.textContent = 'No station selected';
+    nowPlaying.textContent = '';
     metadataElement.textContent = '';
-    document.getElementById('metadataSource').textContent = "If you encounter any playback issues, please press the 'Stop' button before starting another playback.";
+    document.getElementById('metadataSource').textContent = "";
 
     currentStation = null;
 }
@@ -779,6 +780,7 @@ function clearSearchField() {
 }
 
 function radioSearch() {
+    document.getElementById('loadingSpinner').style.display = 'block';
     const searchBy = searchOption.value;
     let searchValue = '';
     switch (searchBy) {
@@ -804,10 +806,11 @@ function radioSearch() {
     searchResultContainer.classList.remove('active');
     findradio.style.display = "block";
 
-    fetch(`https://de1.api.radio-browser.info/json/stations/${searchBy}/${searchValue}?hidebroken=true&limit=150&order=clickcount&reverse=true`)
+    fetch(`https://universalsasalele.apnic-anycast.workers.dev/https://de2.api.radio-browser.info/json/stations/${searchBy}/${searchValue}?hidebroken=true&limit=150&order=clickcount&reverse=true`)
         .then(response => response.json())
         .then(data => {
             if (data.length > 0) {
+                document.getElementById('loadingSpinner').style.display = 'none';
                 searchResultHeader.innerHTML = `Radio Search Results for: <mark id="searchTerms">${searchValue}</mark>`;
                 searchResultContainer.classList.add('active');
                 searchResultContainer.innerHTML = '';
@@ -857,17 +860,18 @@ function radioSearch() {
                     }
                 });
             } else {
+                document.getElementById('loadingSpinner').style.display = 'none';
                 searchResultHeader.style.display = "block";
                 searchResultHeader.textContent = 'No result found.';
             }
         })
         .catch(error => {
+            document.getElementById('loadingSpinner').style.display = 'none';
             console.error('Error fetching data:', error);
         });
 
     clearSearchField();
 }
-
 
 function performSearch() {
     const searchTerm = searchInput.value.trim();
@@ -1425,28 +1429,51 @@ function siteTime() {
     document.getElementById("liveTime").innerHTML = diffYears + " Years " + diffDays + " Days " + diffHours + " Hours " + diffMinutes + " Minutes " + diffSeconds + " Seconds";
 }
 
-const loadPlaylist = document.getElementById('loadAplayer');
-loadPlaylist.addEventListener('click', function () {
-    var container = document.getElementById('hugeData');
-    container.style.display = 'block';
-    loadPlaylist.style.display = 'none';
-    const db = firebase.database();
-    const audioRef = db.ref("audioList");
+const playlistMenu = document.getElementById('playlistMenu');
+const dropdownBtn = document.getElementById('playlistDropdown');
+const container = document.getElementById('hugeData');
 
-    audioRef.once("value").then(snapshot => {
-        const data = snapshot.val();
+let selectedPlaylist = null;
+let ap = null;
 
-        if (!data) {
-            console.error("No audio data found!");
-            return;
-        }
-        const audioArray = Object.values(data);
-        const ap = new APlayer({
-            container: document.getElementById('aplayer'),
-            lrcType: 1,
-            audio: audioArray
-        });
-    }).catch(error => {
-        console.error("Firebase read error:", error);
-    });
+playlistMenu.addEventListener('click', e => {
+    if (!e.target.matches('.dropdown-item')) return;
+    e.preventDefault();
+    const selectedPlaylist = e.target.getAttribute('data-playlist');
+    loadPlaylist(selectedPlaylist);
 });
+
+function loadPlaylist(playlistName) {
+    document.getElementById('loadingSpinner').style.display = 'block';
+    const audioRef = firebase.database().ref(`audioList/${playlistName}`);
+
+    audioRef.once("value")
+        .then(snapshot => {
+            const data = snapshot.val();
+            if (!data) {
+                document.getElementById('loadingSpinner').style.display = 'none';
+                console.warn(`No audio data found for: ${playlistName}`);
+                if (ap) ap.destroy();
+                container.style.display = 'none';
+                return;
+            }
+
+            const audioArray = Object.values(data);
+            container.style.display = 'block';
+
+            if (ap) ap.destroy();
+
+            ap = new APlayer({
+                container: document.getElementById('aplayer'),
+                lrcType: 1,
+                audio: audioArray
+            });
+
+            document.getElementById('loadingSpinner').style.display = 'none';
+        })
+        .catch(error => {
+            console.error("Err:", error);
+            document.getElementById('loadingSpinner').style.display = 'none';
+            alert("Error loading playlist: " + error.message);
+        });
+}

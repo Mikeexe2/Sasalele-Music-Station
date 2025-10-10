@@ -66,7 +66,7 @@
                     <span class="navbar-toggler-icon"></span> </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav">
-                        <li class="nav-item active"><a class="nav-link" href="index.html">Radios<i
+                        <li class="nav-item active"><a class="nav-link" href="https://basic.pp.ua">Radios<i
                                     class="fas fa-radio"></i></a>
                         </li>
                         <li class="nav-item active"><a class="nav-link" href="website.html">Websites<i
@@ -85,21 +85,17 @@
                                 <span id="clockTime"></span>
                                 <span id="clockDay"></span>
                             </div>
-                        </div>
-                        <div class="d-flex justify-content-center align-items-center switch-container"
-                            data-toggle="tooltip" data-placement="top" title="Animate">
-                            <label class="switch">
-                                <input type="checkbox" id="toggleAnimation" onclick="handleToggleChange()">
-                                <span class="slider"></span>
-                            </label>
+                            <div class="switch-container" data-toggle="tooltip" data-placement="bottom" title="Animate">
+                                <label class="switch">
+                                    <input type="checkbox" id="toggleAnimation" onclick="handleToggleChange()">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
                         </div>
                     </ul>
                 </div>
             </nav>
-            <div id="loadingMessage"
-                style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); color: white; padding: 20px; border-radius: 5px;">
-                Please wait, images are loading...
-            </div>
+            <div id="loadingSpinner"></div>
             <div class="modal fade" id="tipsModal" tabindex="-1" aria-labelledby="tipsModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -138,29 +134,21 @@
                 </div>
             </div>
             <div class="chathold">
-                <button id="toggleButton" aria-expanded="false" class="chat-btn">
-                    <svg height="24" width="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path
-                            d="M3 3h18c1.1 0 1.99.9 1.99 2L23 18c0 1.1-.9 2-2 2H7l-4 4v-4H2c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2z">
-                        </path>
-                    </svg>
-                </button>
-            </div>
-
-            <div id="sidePanel" class="side-window-panel">
-                <div class="hide-item">
-                    <div class="section-title">
-                        <h1>Chat</h1>
-                    </div>
-                    <button id="hideButton" aria-label="Close"><svg width="24" height="24" viewBox="0 0 24 24"
-                            focusable="false">
-                            <path
-                                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z">
-                            </path>
-                        </svg>
+                <div class="chathold">
+                    <button id="toggleButton" aria-expanded="false" class="chat-btn">
+                        <i class="fas fa-comment"></i>
                     </button>
                 </div>
-                <div class="container">
+            </div>
+            <div id="sidePanel" class="side-window-panel">
+                <div class="d-flex align-items-center">
+                    <div class="flex-grow-1 text-center">
+                        <h6 class="mb-0">Chat</h6>
+                    </div>
+                    <button id="hideButton" aria-label="Close" class="btn">
+                        <i class="fas fa-xmark"></i> </button>
+                </div>
+                <div class="container-fluid">
                     <div class="joinform"></div>
                     <div class="chat_container"></div>
                 </div>
@@ -458,12 +446,24 @@
                 </div>
             </section>
 
-            <div class="d-flex justify-content-center mb-3">
-                <button id="loadAplayer" class="btn btn-primary">Show Playlist</button>
+            <div class="container py-4">
+                <div class="dropdown mb-3 text-center">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="playlistDropdown"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Select a Playlist
+                    </button>
+                    <ul class="dropdown-menu" id="playlistMenu">
+                        <li><a class="dropdown-item" data-playlist="jpsongs">Japanese Songs</a></li>
+                        <li><a class="dropdown-item" data-playlist="bgm">Game / BGM</a></li>
+                        <li><a class="dropdown-item" data-playlist="maplestory">MapleStory</a></li>
+                    </ul>
+                </div>
+
+                <div class="mb-4 mt-2" id="hugeData" style="display:none">
+                    <div id="aplayer"></div>
+                </div>
             </div>
-            <div class="container mb-4" id="hugeData" style="display:none">
-                <div id="aplayer"></div>
-            </div>
+
             <div id="waline"></div>
             <div id="player">
                 <div class="media-con">
@@ -497,13 +497,15 @@
                 </div>
                 <div class="playing-info">
                     <div id="cover" class="mt-1">
-                        <img id="ip" style="display: inline;" src="assets/radios/Unidentified2.webp">
+                        <img id="ip" style="display: inline;" src="assets/ball.svg">
                     </div>
                     <div class="track-info">
-                        <span class="ml-1"><span id="nowPlaying" class="mr-1">No station selected</span>
+                        <span class="ml-1"><span id="nowPlaying" class="mr-1">If you encounter any playback
+                                issues,</span>
                             <div class="d-flex align-items-center">
-                                <span id="metadataDisplay" class="mr-1">-----</span>
-                                <button id="copyIcon" data-toggle="tooltip" data-placement="top"
+                                <span id="metadataDisplay" class="mr-1"> press the 'Stop' button before starting
+                                    another playback.</span>
+                                <button id="copyIcon" data-toggle="too  ltip" data-placement="top"
                                     title="Copy track title">
                                     <i class="fas fa-copy"></i>
                                     <span class="copy-confirmation" style="display: none;">
@@ -512,8 +514,8 @@
                                 </button>
                             </div>
                             <div class="extra-info">
-                                <span id="metadataSource" class="metadata-source">If you encounter any playback issues,
-                                    please press the 'Stop' button before starting another playback.</span>
+                                <span id="metadataSource" class="metadata-source">
+                                </span>
                                 <span id="hlsStatus" class="hls-status"></span>
                             </div>
                         </span>
@@ -550,7 +552,7 @@
                             <i class="fab fa-github"></i>
                         </a>
                     </div>
-                    <p class="last-updated">Last updated: 7 October 2025</p>
+                    <p class="last-updated">Last updated: 10 October 2025</p>
                     <p>&copy; 2023-2025 Sasalele-Music-Station</p>
                     <div class="progress-container">
                         <p>Uptime: <span id="liveTime"></span> | Views: <span class="waline-pageview-count"></span>

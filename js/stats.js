@@ -130,11 +130,11 @@ function preloadImages(urls) {
 }
 
 function showLoadingMessage() {
-    document.getElementById('loadingMessage').style.display = 'block';
+    document.getElementById('loadingSpinner').style.display = 'block';
 }
 
 function hideLoadingMessage() {
-    document.getElementById('loadingMessage').style.display = 'none';
+    document.getElementById('loadingSpinner').style.display = 'none';
 }
 
 const background = document.getElementById('background');

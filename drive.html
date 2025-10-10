@@ -2,7 +2,10 @@
 <html lang="en" data-bs-theme="dark">
 
     <head>
-        <meta charset="utf-8"><html lang="en" data-bs-theme="dark"></html>
+        <meta charset="utf-8">
+        <html lang="en" data-bs-theme="dark">
+
+        </html>
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <title>Google Drive Music Player</title>
         <meta name="robots" content="index, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
@@ -55,7 +58,7 @@
                     <span class="navbar-toggler-icon"></span> </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="index.html">Radios<i
+                        <li class="nav-item"><a class="nav-link" href="https://basic.pp.ua">Radios<i
                                     class="fas fa-radio"></i></a>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="website.html">Websites<i
@@ -115,10 +118,10 @@
                                 "<strong>root</strong>" to
                                 browse from your
                                 top-level
-                                folder.<br></p>
-                            <p>Read our <a class="blank-name" href="privacypolicy.html" target="_blank">Privacy
-                                    Policy</a>
-                            </p>
+                                folder.<br></p><strong>Your privacy is paramount. This app collects zero user
+                                data.</strong>
+                            <p>Review our <a class="blank-name" href="privacypolicy.html" target="_blank">Privacy
+                                    Policy</a> for more details.</p>
                         </div>
                     </div>
                 </div>
@@ -135,12 +138,21 @@
                     <form onsubmit="submitFolderId(event)">
                         <div class="row justify-content-center">
                             <div class="col-md-6">
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-1">
                                     <input type="text" class="form-control" required id="parentfolder"
                                         name="parentfolder" placeholder="google-drive-folder-id">
                                     <button type="submit" class="btn btn-primary">
                                         <i class="fab fa-google"></i> Login
                                     </button>
+                                </div>
+                                <div class="alert alert-info" role="alert">
+                                    The app needs access to your <a class="blank-name"
+                                        href="https://drive.google.com/drive/my-drive" target="_blank">Google drive</a>
+                                    to play your
+                                    audio
+                                    files.
+                                    Review our <a class="blank-name" href="privacypolicy.html" target="_blank">Privacy
+                                        Policy</a> for more details.
                                 </div>
                             </div>
                         </div>
@@ -152,11 +164,9 @@
                             <div class="input-group mb-3 flex-nowrap">
                                 <input type="text" id="shareLinkInput" class="form-control" required
                                     placeholder="Paste Google Drive share link here">
-
                                 <button class="btn btn-success" id="loadLinkButton" type="button">
                                     Load Link
                                 </button>
-
                                 <div class="btn-group">
                                     <button class="btn btn-primary dropdown-toggle" type="button" id="folderDropdown"
                                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -174,7 +184,6 @@
                 <div id="loadingSpinner" class="mb-4"></div>
                 <div id="file-tree" style="display: none;">
                 </div>
-
                 <div id="intro">
                     <div id="demo" class="loaded">
                         <details open>
