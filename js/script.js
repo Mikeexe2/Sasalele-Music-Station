@@ -806,7 +806,7 @@ function radioSearch() {
     searchResultContainer.classList.remove('active');
     findradio.style.display = "block";
 
-    fetch(`https://universalsasalele.apnic-anycast.workers.dev/https://de2.api.radio-browser.info/json/stations/${searchBy}/${searchValue}?hidebroken=true&limit=150&order=clickcount&reverse=true`)
+    fetch(`https://sasalele.apnic-anycast.workers.dev/https://de2.api.radio-browser.info/json/stations/${searchBy}/${searchValue}?hidebroken=true&limit=150&order=clickcount&reverse=true`)
         .then(response => response.json())
         .then(data => {
             if (data.length > 0) {
