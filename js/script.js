@@ -873,6 +873,18 @@ function radioSearch() {
     clearSearchField();
 }
 
+// download m3u8 stream
+function initiateM3UDownload(streamUrl, streamTitle) {
+    const m3uContent = `#EXTM3U\n#EXTINF:-1,${streamTitle}\n${streamUrl}`;
+    const blob = new Blob([m3uContent], { type: "text/plain;charset=utf-8" });
+    const downloadableUrl = URL.createObjectURL(blob);
+
+    const downloadLink = document.createElement("a");
+    downloadLink.href = downloadableUrl;
+    downloadLink.download = `${streamTitle}.m3u8`;
+    downloadLink.click();
+}
+
 function performSearch() {
     const searchTerm = searchInput.value.trim();
     if (searchTerm !== '') {
