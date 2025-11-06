@@ -873,7 +873,7 @@ function radioSearch() {
     clearSearchField();
 }
 
-// download m3u8 stream
+
 function initiateM3UDownload(streamUrl, streamTitle) {
     const m3uContent = `#EXTM3U\n#EXTINF:-1,${streamTitle}\n${streamUrl}`;
     const blob = new Blob([m3uContent], { type: "text/plain;charset=utf-8" });
@@ -1206,7 +1206,7 @@ hideButton.addEventListener('click', function () {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    var db = firebase.database();
+    const db = firebase.database();
 
     initializeUI();
     siteTime();
@@ -1223,10 +1223,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     class Sasalele {
         home() {
-            var chatContainer = document.querySelector('.chat_container');
-            if (chatContainer) {
-                chatContainer.innerHTML = '';
-            }
+            const chatContainer = document.querySelector('.chat_container');
+            if (chatContainer) chatContainer.innerHTML = '';
             this.createJoinForm();
         }
 
@@ -1237,12 +1235,17 @@ document.addEventListener('DOMContentLoaded', () => {
         createJoinForm() {
             const parent = this;
             const joinFormContainer = document.querySelector('.joinform');
+            joinFormContainer.innerHTML = '';
 
             const joinInnerContainer = createElement('div', 'join_inner_container');
-            const joinButtonContainer = createElement('div', 'join_button_container');
-            const joinButton = createElement('button', 'join_button', 'Join <i class="fas fa-sign-in-alt"></i>');
             const joinInputContainer = createElement('div', 'join_input_container');
-            const joinInput = createElement('input', 'join_input', null, { maxlength: 20, placeholder: 'Input your name...' });
+            const joinButtonContainer = createElement('div', 'join_button_container');
+
+            const joinInput = createElement('input', 'join_input', '', {
+                maxlength: 20,
+                placeholder: 'Input your name...'
+            });
+            const joinButton = createElement('button', 'join_button', 'Join <i class="fas fa-sign-in-alt"></i>');
 
             joinButton.classList.add('disabled');
 
@@ -1260,10 +1263,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            joinButtonContainer.appendChild(joinButton);
-            joinInputContainer.appendChild(joinInput);
+            joinInputContainer.append(joinInput);
+            joinButtonContainer.append(joinButton);
             joinInnerContainer.append(joinInputContainer, joinButtonContainer);
-            joinFormContainer.appendChild(joinInnerContainer);
+            joinFormContainer.append(joinInnerContainer);
         }
 
         createChat() {
@@ -1274,47 +1277,48 @@ document.addEventListener('DOMContentLoaded', () => {
             const chatInnerContainer = createElement('div', 'chat_inner_container');
             const chatContentContainer = createElement('div', 'chat_content_container');
             const chatInputContainer = createElement('div', 'chat_input_container');
+            const chatLogoutContainer = createElement('div', 'chat_logout_container');
 
+            const chatInput = createElement('input', 'chat_input', '', {
+                maxlength: 2000,
+                placeholder: `Hi ${parent.getName()}. Say something...`
+            });
             const chatInputSend = createElement('button', 'chat_input_send', `<i class="far fa-paper-plane"></i>`, { disabled: true });
-            const chatInput = createElement('input', 'chat_input', '', { maxlength: 2000 });
-            chatInput.placeholder = `Hi ${parent.getName()}. Say something...`;
-
             const chatLogout = createElement('button', 'chat_logout', `${parent.getName()} • logout`);
-            chatLogout.onclick = function () {
+
+            chatLogout.onclick = () => {
                 localStorage.clear();
                 parent.home();
             };
 
-            const chatLogoutContainer = createElement('div', 'chat_logout_container');
-            chatLogoutContainer.append(chatLogout);
-
-            chatInputContainer.append(chatInput, chatInputSend);
-            chatInnerContainer.append(chatContentContainer, chatInputContainer, chatLogoutContainer);
-            chatContainer.append(chatInnerContainer);
-
-
-            chatInput.addEventListener("input", function () {
+            chatInput.addEventListener('input', () => {
                 const hasValue = chatInput.value.length > 0;
                 chatInputSend.disabled = !hasValue;
                 chatInputSend.classList.toggle('enabled', hasValue);
             });
 
-            chatInput.addEventListener("keyup", function (event) {
-                if (event.key === 'Enter') {
-                    event.preventDefault();
+            chatInput.addEventListener('keyup', (e) => {
+                if (e.key === 'Enter' && chatInput.value.trim() !== '') {
                     chatInputSend.click();
                 }
             });
 
-            chatInputSend.addEventListener("click", function () {
-                if (chatInput.value.length > 0) {
-                    chatInputSend.disabled = true;
-                    chatInputSend.classList.remove('enabled');
-                    parent.sendMessage(chatInput.value);
+            chatInputSend.addEventListener('click', () => {
+                const message = chatInput.value.trim();
+                if (message) {
+                    parent.sendMessage(message);
                     chatInput.value = '';
                     chatInput.focus();
+                    chatInputSend.disabled = true;
+                    chatInputSend.classList.remove('enabled');
                 }
             });
+
+            chatInputContainer.append(chatInput, chatInputSend);
+            chatLogoutContainer.append(chatLogout);
+            chatInnerContainer.append(chatContentContainer, chatInputContainer, chatLogoutContainer);
+            chatContainer.append(chatInnerContainer);
+
             parent.refreshChat();
         }
 
@@ -1323,97 +1327,112 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         getName() {
-            if (localStorage.getItem('name') != null) {
-                return localStorage.getItem('name');
-            } else {
+            const name = localStorage.getItem('name');
+            if (!name) {
                 this.home();
                 return null;
             }
+            return name;
+        }
+
+        linkify(text) {
+            const urlRegex = /(https?:\/\/[^\s]+)/g;
+            return text.replace(urlRegex, (url) => {
+                const safeURL = url.replace(/"/g, "&quot;");
+                return `<a href="${safeURL}" target="_blank" style="color:#007bff; text-decoration:underline;">${url}</a>`;
+            });
+        }
+
+        formatTime(timestamp) {
+            const date = new Date(timestamp);
+            const now = new Date();
+            const isToday = date.toDateString() === now.toDateString();
+            const timeStr = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            if (isToday) return timeStr;
+            return `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1)
+                .toString()
+                .padStart(2, '0')} ${timeStr}`;
         }
 
         sendMessage(message) {
-            const parent = this;
-            if (!parent.getName() || !message) return;
-
+            const name = this.getName();
+            if (!name) return;
             db.ref('chats/').push({
-                name: parent.getName(),
-                message: message,
+                name,
+                message,
                 timestamp: Date.now()
             });
         }
 
         refreshChat() {
             const chatContentContainer = document.getElementById('chat_content_container');
-
-            chatContentContainer.innerHTML = '';
-            let firstLoad = true;
             const currentUser = this.getName();
 
             db.ref('chats/').off();
-            db.ref('chats/').orderByChild('timestamp').on('child_added', (snapshot) => {
-                const { name, message, timestamp } = snapshot.val();
-                if (!timestamp) return;
+            db.ref('chats/').orderByChild('timestamp').on('value', (snapshot) => {
+                chatContentContainer.innerHTML = '';
+                const chats = snapshot.val() || {};
+                const chatEntries = Object.entries(chats).sort((a, b) => a[1].timestamp - b[1].timestamp);
 
-                if (firstLoad) {
-                    chatContentContainer.innerHTML = '';
-                    firstLoad = false;
+                let lastDateLabel = '';
+
+                for (const [key, { name, message, timestamp }] of chatEntries) {
+                    const msgDate = new Date(timestamp);
+                    const today = new Date();
+                    const yesterday = new Date();
+                    yesterday.setDate(today.getDate() - 1);
+
+                    let dateLabel;
+                    if (msgDate.toDateString() === today.toDateString()) dateLabel = 'Today';
+                    else if (msgDate.toDateString() === yesterday.toDateString()) dateLabel = 'Yesterday';
+                    else dateLabel = msgDate.toLocaleDateString();
+
+                    if (lastDateLabel !== dateLabel) {
+                        lastDateLabel = dateLabel;
+                        const separator = createElement('div', null, dateLabel, { class: 'date_separator' });
+                        chatContentContainer.append(separator);
+                    }
+
+                    const isMine = name === currentUser;
+                    const messageContainer = createElement('div', null, '', {
+                        class: isMine
+                            ? 'message_container my_message'
+                            : 'message_container'
+                    });
+
+                    const messageInnerContainer = createElement('div', null, '', { class: 'message_inner_container' });
+
+                    if (!isMine) {
+                        const messageUser = createElement('p', null, name, { class: 'message_user' });
+                        const userContainer = createElement('div', null, '', { class: 'message_user_container' });
+                        userContainer.append(messageUser);
+                        messageInnerContainer.append(userContainer);
+                    } else {
+                        const messageUser = createElement('p', null, name, { class: 'message_user my_username' });
+                        const userContainer = createElement('div', null, '', { class: 'message_user_container' });
+                        userContainer.append(messageUser);
+                        messageInnerContainer.append(userContainer);
+                    }
+                    
+
+                    const messageContent = createElement('p', null, this.linkify(message), { class: 'message_content' });
+                    const messageTime = createElement('span', null, this.formatTime(timestamp), { class: 'message_time' });
+
+                    const contentContainer = createElement('div', null, '', { class: 'message_content_container' });
+                    contentContainer.append(messageContent, messageTime);
+
+                    messageInnerContainer.append(contentContainer);
+                    messageContainer.append(messageInnerContainer);
+                    chatContentContainer.append(messageContainer);
                 }
 
-                const msgDate = new Date(timestamp);
-                const today = new Date();
-                const yesterday = new Date();
-                yesterday.setDate(today.getDate() - 1);
-
-
-                let dateLabel;
-                if (msgDate.toDateString() === today.toDateString()) {
-                    dateLabel = "Today";
-                } else if (msgDate.toDateString() === yesterday.toDateString()) {
-                    dateLabel = "Yesterday";
-                } else {
-                    dateLabel = msgDate.toLocaleDateString();
-                }
-
-                if (this.lastRenderedDate !== dateLabel) {
-                    this.lastRenderedDate = dateLabel;
-                    const separator = createElement('div', null, dateLabel, { class: 'date_separator' });
-                    chatContentContainer.appendChild(separator);
-                }
-
-                const isMine = name === currentUser;
-
-                const messageContainer = createElement('div', null, null, {
-                    class: isMine ? 'message_container my_message' : 'message_container'
-                });
-                const messageInnerContainer = createElement('div', null, null, { class: 'message_inner_container' });
-
-                if (!isMine) {
-                    const messageUser = createElement('p', null, name, { class: 'message_user' });
-                    messageInnerContainer.append(
-                        createElement('div', null, null, { class: 'message_user_container' })
-                            .appendChild(messageUser)
-                    );
-                }
-
-                const messageContent = createElement('p', null, message, { class: 'message_content' });
-
-                messageInnerContainer.append(
-                    createElement('div', null, null, { class: 'message_content_container' })
-                        .appendChild(messageContent)
-                );
-                messageContainer.appendChild(messageInnerContainer);
-
-                chatContentContainer.appendChild(messageContainer);
                 chatContentContainer.scrollTop = chatContentContainer.scrollHeight;
             });
         }
-
     }
 
-    var app = new Sasalele();
-    if (app.getName() != null) {
-        app.chat();
-    }
+    const app = new Sasalele();
+    if (app.getName()) app.chat();
 });
 
 function siteTime() {

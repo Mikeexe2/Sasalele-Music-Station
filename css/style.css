@@ -1653,7 +1653,11 @@ body {
 .message_content_container {
     padding: 10px;
     border-radius: 8px;
-    display: inline;
+    display: flex;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 8px;
 }
 
 .message_content {
@@ -1663,16 +1667,15 @@ body {
 }
 
 .message_inner_container {
-    width: 90%;
-    padding: 8px;
+    max-width: 90%;
+    padding: 8px 12px;
+    display: flex;
+    flex-direction: column;
     background-color: var(--caution-red-20-alpha);
     border-radius: 15px;
+    gap: 2px;
     white-space: pre-wrap;
     word-wrap: break-word;
-}
-
-.message_container.my_message {
-    justify-content: flex-end
 }
 
 .message_container.my_message .message_inner_container {
@@ -1684,10 +1687,15 @@ body {
 }
 
 .message_user {
-    margin: 0 0 3px;
+    margin: 0;
+    padding: 0;
     font-size: var(--font-size--medium);
     font-weight: 700;
     color: var(--highlight-yellow-100)
+}
+
+.my_username {
+    color: #28a745;
 }
 
 .date_separator {
@@ -1715,6 +1723,24 @@ body {
 
 .date_separator::after {
     right: 0
+}
+
+.message_content a {
+    color: #007bff;
+    text-decoration: underline;
+    word-break: break-all;
+}
+
+.message_content a:hover {
+    color: #0056b3;
+}
+
+.message_time {
+    display: inline-flex;
+    text-align: right;
+    font-size: 0.7em;
+    color: #888;
+    margin-top: 2px;
 }
 
 #chat_input_container {
