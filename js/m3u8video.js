@@ -2,7 +2,11 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentVideos = [];
   let currentPlayingElement = null;
   const titleNow = document.getElementById("selected-video-title");
-
+  const videoPlayer = document.getElementById("video-player");
+  const videoListElement = document.getElementById("video-list");
+  const genreNameElement = document.getElementById("genre-name");
+  const channelCountElement = document.getElementById("channel-count");
+  const searchChannel = document.getElementById("searchChannel");
   const defaultGenre = "jpvideos";
   const defaultGenreName = "Japanese";
 
@@ -35,9 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updateGenreInfo(genre, count) {
-    const genreNameElement = document.getElementById("genre-name");
-    const channelCountElement = document.getElementById("channel-count");
-
     if (genreNameElement) {
       genreNameElement.textContent = genre;
     }
@@ -47,9 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function createVideoList(videos) {
-    const videoListElement = document.getElementById("video-list");
-    if (!videoListElement) return;
-
     videoListElement.innerHTML = "";
 
     videos.forEach((video) => {
@@ -90,15 +88,12 @@ document.addEventListener("DOMContentLoaded", () => {
     playMedia(selectedLink);
   }
 
-  let hlsInstance = null;
-
   function playMedia(link) {
-    const videoPlayer = document.getElementById("video-player");
-    if (!videoPlayer) return;
 
     const proxiedLink = `https://sasalele.apnic-anycast.workers.dev/${link}`;
-
+    let hlsInstance = null;
     const loadAndPlay = async (linkToTry, fallbackLink = null) => {
+
       const tryPlay = () => {
         const playPromise = videoPlayer.play();
         if (playPromise !== undefined) {
@@ -118,21 +113,23 @@ document.addEventListener("DOMContentLoaded", () => {
             hlsInstance.destroy();
             hlsInstance = null;
           }
-
           videoPlayer.src = linkToTry;
           videoPlayer.type = 'video/mp4';
+          videoPlayer.preload = 'auto';
           videoPlayer.onloadedmetadata = tryPlay;
           videoPlayer.onerror = () => {
             console.error("Error loading video:", linkToTry);
-            if (fallbackLink) loadAndPlay(fallbackLink);
+            if (fallbackLink) {
+              console.log("Falling back to proxied link:", fallbackLink);
+              loadAndPlay(fallbackLink);
+            }
           };
-        } else if (linkToTry.includes(".m3u8")) {
+        } else {
           if (Hls.isSupported()) {
             if (hlsInstance) {
               hlsInstance.destroy();
               hlsInstance = null;
             }
-
             hlsInstance = new Hls();
             hlsInstance.loadSource(linkToTry);
             hlsInstance.attachMedia(videoPlayer);
@@ -150,12 +147,15 @@ document.addEventListener("DOMContentLoaded", () => {
               hlsInstance.destroy();
               hlsInstance = null;
             }
-
             videoPlayer.src = linkToTry;
+            videoPlayer.preload = 'auto';
             videoPlayer.onloadedmetadata = tryPlay;
             videoPlayer.onerror = () => {
               console.error("Error loading HLS stream:", linkToTry);
-              if (fallbackLink) loadAndPlay(fallbackLink);
+              if (fallbackLink) {
+                console.log("Falling back to proxied link:", fallbackLink);
+                loadAndPlay(fallbackLink);
+              }
             };
           } else {
             console.error('HLS not supported on this device.');
@@ -165,7 +165,6 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error('Unsupported link format:', linkToTry);
       }
     };
-
     loadAndPlay(link, proxiedLink);
   }
 
@@ -174,11 +173,9 @@ document.addEventListener("DOMContentLoaded", () => {
     loadM3UButton.addEventListener("click", function () {
       var m3uUrl = document.getElementById("m3uURL").value;
       if (m3uUrl) {
-        if (m3uUrl.endsWith(".m3u8")) {
-          playMedia(m3uUrl);
-        } else {
-          alert("Warning: Invalid URL.");
-        }
+        playMedia(m3uUrl);
+      } else {
+        alert("Please enter a URL.");
       }
     });
   }
@@ -192,7 +189,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  const searchChannel = document.getElementById("searchChannel");
   if (searchChannel) {
     searchChannel.addEventListener("input", function () {
       const query = this.value;
@@ -201,7 +197,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // for youtube streams
+
   const genreSelect = document.getElementById('genreSelect');
   const streamList = document.getElementById('streamList');
   const streamCount = document.getElementById('streamCount');
@@ -211,7 +207,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const playPauseBtn = document.getElementById('playPauseBtn');
 
   let ytPlayer = null;
-  let currentVideoId = null;
   let isPlaying = false;
   let genresData = {};
 
@@ -238,7 +233,7 @@ document.addEventListener("DOMContentLoaded", () => {
       events: {
         onReady: (e) => {
           isPlaying = false;
-          // e.target.playVideo(); // autoplay
+
         },
         onStateChange: (e) => {
           const state = e.data;
@@ -250,7 +245,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function loadVideo(videoId, title, genreKey) {
-    currentVideoId = videoId;
     playerTitle.textContent = title || 'Untitled';
     playerSubtitle.textContent = genreKey ? `Genre: ${genreKey}` : '';
     openOnYT.href = `https://www.youtube.com/watch?v=${videoId}`;
@@ -273,7 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Play/Pause control
+
   playPauseBtn.addEventListener('click', () => {
     if (!ytPlayer) return;
     const state = ytPlayer.getPlayerState();
@@ -313,11 +307,11 @@ document.addEventListener("DOMContentLoaded", () => {
           opt.value = k;
           opt.textContent = k;
 
-          if (k === 'Music') opt.selected = true;
+          if (k === 'Japanese') opt.selected = true;
           genreSelect.appendChild(opt);
         });
 
-        const defaultKey = genresData['Music'] ? 'Music' : keys[0];
+        const defaultKey = genresData['Japanese'] ? 'Japanese' : keys[0];
         genreSelect.value = defaultKey || '';
         renderStreamsForGenre(defaultKey);
       })
@@ -366,7 +360,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       streamList.appendChild(li);
 
-      // Auto-load the first item by default
+
       if (idx === 0) {
         setTimeout(() => {
           li.classList.add('active');
