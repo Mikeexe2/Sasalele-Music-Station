@@ -49,6 +49,7 @@
                     <img src="assets/sasalele_logo-removebg.webp" width="30" height="30"
                         class="d-inline-block align-top">
                 </a>
+                <h6 id="selected-video-title" class="selected-title mb-2" style="display:none;"></h6>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -78,27 +79,19 @@
                 <div class="section-title">
                     <h1>Videos</h1>
                 </div>
-                <div class="container mt-1 search-bg">
-                    <div class="container-fluid">
-                        <div class="row d-flex justify-content-center">
-                            <div class="col-md-10">
-                                <div class="input-group mb-3">
-                                    <input type="text" id="m3uURL" class="form-control" placeholder="Enter M3U8 URL">
-                                    <button id="loadM3U" class="btn btn-primary btn-go">Go</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="container">
                     <div class="row">
                         <div class="col-lg-8">
-                            <h6 id="selected-video-title" class="selected-title mb-2" style="display:none;"></h6>
-                            <div id="vplayer" class="container mb-3">
+                            <div id="vplayer" class="container">
                                 <media-controller style="width: 100%;max-width: 720px; aspect-ratio: 16 / 9;">
                                     <video slot="media" id="video-player" src=""></video>
                                     <media-loading-indicator slot="centered-chrome"
                                         noautohide></media-loading-indicator>
                                     <media-control-bar>
                                         <media-play-button></media-play-button>
+                                        <button class="p-btn" data-toggle="tooltip" data-placement="top"
+                                            title="Stop Streaming" id="vidstopBtn"><i class="fas fa-stop"></i>
+                                        </button>
                                         <media-seek-backward-button></media-seek-backward-button>
                                         <media-seek-forward-button></media-seek-forward-button>
                                         <media-mute-button></media-mute-button>
@@ -153,6 +146,16 @@
                         </div>
                     </div>
                 </div>
+                <div class="container-fluid">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-10">
+                            <div class="input-group mb-3">
+                                <input type="text" id="m3uURL" class="form-control" placeholder="Enter M3U8 URL">
+                                <button id="loadM3U" class="btn btn-primary btn-go">Go</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="container">
                     <div class="alert alert-info mt-4" role="alert">
                         <strong>Disclaimer:</strong> All the resources provided on this page are collected from various
@@ -163,12 +166,6 @@
                         it's unlikely due to low traffic, other factors like stream availability or geo-restrictions
                         could
                         be the cause.
-                        <strong>If you're able to, please consider making a donation to <a href="https://utako.moe"
-                                target="_blank">utako.moe</a>
-                            to help support the ongoing costs of maintaining their server and providing access to
-                            Japanese
-                            streams. Your
-                            contribution helps ensure continued service and improvements.</strong>
                     </div>
                 </div>
                 <div class="section-title">
