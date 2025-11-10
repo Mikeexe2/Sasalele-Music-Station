@@ -45,21 +45,22 @@ historyDisplay.addEventListener('click', function () {
 });
 
 copyIcon.addEventListener('click', () => {
-
+    const textContent = metadataElement.textContent.trim();
+    if (!textContent) {
+        return;
+    }
     const textarea = document.createElement('textarea');
-    textarea.value = metadataElement.textContent.trim();
+    textarea.value = textContent;
     document.body.appendChild(textarea);
     textarea.select();
     document.execCommand('copy');
     document.body.removeChild(textarea);
-
     copyIconSymbol.style.display = 'none';
     confirmation.style.display = 'inline-flex';
-
     setTimeout(() => {
         confirmation.style.display = 'none';
         copyIconSymbol.style.display = 'inline';
-    }, 500);
+    }, 300);
 });
 
 function updatePlayerUI(media) {
@@ -332,12 +333,16 @@ function RadioM3UDownload(stationURL, stationName) {
 }
 
 async function stopPlayback() {
+    console.log("[stopPlayback] called");
+    if (!mainAudio) return;
     try {
-        if (mainAudio && !mainAudio.paused && mainAudio.readyState > 0) {
-            await mainAudio.pause();
-            console.log("[stopPlayback] pause player");
-        } else {
-            console.log("[stopPlayback] mainAudio already paused or not ready");
+        if (!mainAudio.paused) {
+            const playPromise = mainAudio.play();
+            if (playPromise !== undefined) {
+                await playPromise.catch(() => { });
+            }
+            mainAudio.pause();
+            console.log("[stopPlayback] mainAudio paused");
         }
     } catch (err) {
         console.warn("[stopPlayback] pause() error (ignored):", err);
@@ -363,9 +368,11 @@ async function stopPlayback() {
         hlsPlayer = null;
     }
 
-    if (mainAudio) {
+    try {
         mainAudio.removeAttribute("src");
         mainAudio.load();
+    } catch (err) {
+        console.warn("[stopPlayback] failed to reset mainAudio:", err);
     }
 
     if (metadataInterval) {
@@ -382,19 +389,16 @@ async function stopPlayback() {
     document.getElementById('hlsStatus').textContent = '';
     coverImage.src = "assets/NezukoYay.gif";
     coverImage.classList.remove('rotating');
-
-    document.querySelectorAll('li').forEach(li => {
-        li.classList.remove('active-station');
-    });
+    document.querySelectorAll('li').forEach(li => li.classList.remove('active-station'));
     nowPlaying.textContent = '';
     metadataElement.textContent = '';
-    document.getElementById('metadataSource').textContent = "";
-
+    document.getElementById('metadataSource').textContent = '';
     currentStation = null;
 }
 
 async function playMedia(media, button) {
     await stopPlayback();
+    await new Promise(r => setTimeout(r, 100)); // delay is needed for icecastmetadata player to stop completely
 
     document.querySelectorAll('li').forEach(li => {
         li.classList.remove('active-station');
@@ -497,7 +501,7 @@ function playHlsStream(media) {
             if (data.fatal) {
                 switch (data.type) {
                     case Hls.ErrorTypes.NETWORK_ERROR:
-                        document.getElementById('hlsStatus').textContent = 'HLS: Network error - trying to recover';
+                        showNotification('HLS: Network error - trying to recover', 'warning');
                         hlsPlayer.startLoad();
                         break;
                     case Hls.ErrorTypes.MEDIA_ERROR:
@@ -614,6 +618,7 @@ function playUnknownStream(media) {
 
     mainAudio.addEventListener('error', (e) => {
         console.warn("Unknown stream failed to play, falling back to HLS...", e);
+        showNotification(`Playing of (http) stream failed due to browser's security settings, retrying...`, 'warning');
         playHlsStream(media);
     });
 }
@@ -1413,7 +1418,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         userContainer.append(messageUser);
                         messageInnerContainer.append(userContainer);
                     }
-                    
+
 
                     const messageContent = createElement('p', null, this.linkify(message), { class: 'message_content' });
                     const messageTime = createElement('span', null, this.formatTime(timestamp), { class: 'message_time' });
