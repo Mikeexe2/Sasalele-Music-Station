@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   let currentVideos = [];
   let currentPlayingElement = null;
+  let hlsInstance = null;
   const titleNow = document.getElementById("selected-video-title");
   const videoPlayer = document.getElementById("video-player");
   const videoListElement = document.getElementById("video-list");
@@ -11,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const defaultGenreName = "Japanese";
 
   loadGenre(defaultGenre, defaultGenreName);
+  document.getElementById("vidstopBtn").addEventListener("click", stopVideoPlayback);
 
   async function fetchVideoLinks(genre) {
     try {
@@ -88,83 +90,116 @@ document.addEventListener("DOMContentLoaded", () => {
     playMedia(selectedLink);
   }
 
-  function playMedia(link) {
+  function detectStreamType(link) {
+    if (link.endsWith(".mp4") || link.endsWith(".flv") || link.includes("video_id") || link.includes("format=mp4")) {
+      return "direct";
+    }
+    else if (link.includes("php") || link.endsWith(".m3u8")) {
+      return "hls";
+    }
+    else {
+      return "direct"
+    }
+  }
 
+  function playMedia(link) {
+    let retrying = false;
     const proxiedLink = `https://sasalele.apnic-anycast.workers.dev/${link}`;
-    let hlsInstance = null;
-    const loadAndPlay = async (linkToTry, fallbackLink = null) => {
+
+    const loadAndPlay = async (linkToTry, fallbackLink = null, triedProxy = false) => {
+      const type = detectStreamType(linkToTry);
+      console.log("Detected stream type:", type);
 
       const tryPlay = () => {
         const playPromise = videoPlayer.play();
         if (playPromise !== undefined) {
           playPromise.catch(err => {
-            console.warn("Playback failed:", err);
-            if (fallbackLink) {
-              console.log("Retrying with proxied link:", fallbackLink);
-              loadAndPlay(fallbackLink);
-            }
+            handlePlaybackError(type, err, linkToTry, fallbackLink, triedProxy);
           });
         }
       };
 
-      if (linkToTry.startsWith("https:")) {
-        if (linkToTry.endsWith(".mp4") || linkToTry.includes("format=mp4")) {
+      if (hlsInstance) {
+        hlsInstance.destroy();
+        hlsInstance = null;
+      }
+
+      if (type === "direct") {
+        videoPlayer.src = linkToTry;
+        videoPlayer.type = "video/mp4";
+        videoPlayer.onloadedmetadata = tryPlay;
+        videoPlayer.onerror = (event) => {
+          const err = videoPlayer.error;
+          handlePlaybackError(type, err || event, linkToTry, fallbackLink, triedProxy);
+        };
+      }
+      else if (type === "hls" && Hls.isSupported()) {
+        if (hlsInstance) {
+          hlsInstance.destroy();
+          hlsInstance = null;
+        }
+
+        hlsInstance = new Hls();
+        hlsInstance.loadSource(linkToTry);
+        hlsInstance.attachMedia(videoPlayer);
+        hlsInstance.on(Hls.Events.MANIFEST_PARSED, tryPlay);
+
+        hlsInstance.on(Hls.Events.ERROR, (event, data) => {
+          console.error("HLS error:", data);
+          handlePlaybackError(type, data, linkToTry, fallbackLink, triedProxy);
+        });
+      } else if (videoPlayer.canPlayType("application/vnd.apple.mpegurl")) {
+        videoPlayer.src = linkToTry;
+        videoPlayer.onloadedmetadata = tryPlay;
+        videoPlayer.onerror = (err) => {
+          console.error("Native HLS error:", err);
+          handlePlaybackError("hls-native", err, linkToTry, fallbackLink, triedProxy);
+        };
+      } else {
+        console.error("HLS not supported on this device.");
+        showNotification("HLS not supported on this device.", "danger");
+        stopVideoPlayback();
+      }
+    };
+
+    function handlePlaybackError(type, err, linkToTry, fallbackLink, triedProxy) {
+      if (retrying) return;
+      retrying = true;
+
+      const msg = err?.message || JSON.stringify(err) || "";
+      const errCode = err?.code || 0;
+
+      const isCritical =
+        msg.includes("403") || msg.includes("CORS") || msg.includes("cross-origin") || msg.includes("Failed to fetch") || msg.includes("decode") || msg.includes("unsupported") || errCode === 3 || errCode === 4;
+
+      // short grace period before declaring fatal
+      setTimeout(() => {
+       const ready = videoPlayer.readyState >= 2;
+        if (!isCritical && ready) {
+          console.log("Non-critical error ignored, playback appears fine.");
+          retrying = false;
+          return;
+        }
+
+        console.error(`Critical playback error on ${type}:`, msg);
+
+        if (!triedProxy && fallbackLink) {
+          console.log("Retrying with proxied link");
+          showNotification("Stream failed. Retrying via proxy...", "warning");
           if (hlsInstance) {
             hlsInstance.destroy();
             hlsInstance = null;
           }
-          videoPlayer.src = linkToTry;
-          videoPlayer.type = 'video/mp4';
-          videoPlayer.preload = 'auto';
-          videoPlayer.onloadedmetadata = tryPlay;
-          videoPlayer.onerror = () => {
-            console.error("Error loading video:", linkToTry);
-            if (fallbackLink) {
-              console.log("Falling back to proxied link:", fallbackLink);
-              loadAndPlay(fallbackLink);
-            }
-          };
+          loadAndPlay(fallbackLink, null, true);
         } else {
-          if (Hls.isSupported()) {
-            if (hlsInstance) {
-              hlsInstance.destroy();
-              hlsInstance = null;
-            }
-            hlsInstance = new Hls();
-            hlsInstance.loadSource(linkToTry);
-            hlsInstance.attachMedia(videoPlayer);
-            hlsInstance.on(Hls.Events.MANIFEST_PARSED, tryPlay);
-            hlsInstance.on(Hls.Events.ERROR, (event, data) => {
-              console.error("HLS error:", data);
-              if (fallbackLink) {
-                hlsInstance.destroy();
-                hlsInstance = null;
-                loadAndPlay(fallbackLink);
-              }
-            });
-          } else if (videoPlayer.canPlayType('application/vnd.apple.mpegurl')) {
-            if (hlsInstance) {
-              hlsInstance.destroy();
-              hlsInstance = null;
-            }
-            videoPlayer.src = linkToTry;
-            videoPlayer.preload = 'auto';
-            videoPlayer.onloadedmetadata = tryPlay;
-            videoPlayer.onerror = () => {
-              console.error("Error loading HLS stream:", linkToTry);
-              if (fallbackLink) {
-                console.log("Falling back to proxied link:", fallbackLink);
-                loadAndPlay(fallbackLink);
-              }
-            };
-          } else {
-            console.error('HLS not supported on this device.');
-          }
+          showNotification("Stream failed to play.", "danger");
+          stopVideoPlayback();
         }
-      } else {
-        console.error('Unsupported link format:', linkToTry);
-      }
-    };
+
+        retrying = false;
+      }, 600);
+    }
+
     loadAndPlay(link, proxiedLink);
   }
 
@@ -174,10 +209,42 @@ document.addEventListener("DOMContentLoaded", () => {
       var m3uUrl = document.getElementById("m3uURL").value;
       if (m3uUrl) {
         playMedia(m3uUrl);
+        if (titleNow) {
+          titleNow.style.display = "none";
+        }
       } else {
-        alert("Please enter a URL.");
+        showNotification('Please enter a URL.', 'warning');
       }
     });
+  }
+
+  function stopVideoPlayback() {
+    try {
+
+      videoPlayer.pause();
+      videoPlayer.removeAttribute('src');
+      videoPlayer.load();
+
+      if (typeof hlsInstance !== 'undefined' && hlsInstance) {
+        hlsInstance.destroy();
+        hlsInstance = null;
+      }
+
+      if (titleNow) {
+        titleNow.textContent = '';
+        titleNow.style.display = "none";
+      }
+
+      if (currentPlayingElement) {
+        currentPlayingElement.style.backgroundColor = '';
+        currentPlayingElement.style.color = '';
+        currentPlayingElement = null;
+      }
+
+      console.log("Playback stopped successfully.");
+    } catch (err) {
+      console.error("Error stopping playback:", err);
+    }
   }
 
   document.querySelectorAll(".genre-link").forEach(link => {
@@ -196,7 +263,6 @@ document.addEventListener("DOMContentLoaded", () => {
       createVideoList(filteredVideos);
     });
   }
-
 
   const genreSelect = document.getElementById('genreSelect');
   const streamList = document.getElementById('streamList');

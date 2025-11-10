@@ -320,8 +320,7 @@ body {
 }
 
 .selected-title {
-    background-color: var(--expressive-green);
-    color: var(--apple-black);
+    color: var(--apple-white);
     width: fit-content;
     border-radius: 5px;
     margin: 0 auto;
@@ -851,7 +850,8 @@ body {
 }
 
 .rotating {
-    animation: rotate 5s linear infinite
+    animation: rotate 3s linear infinite;
+    will-change: transform;
 }
 
 #stationName,
