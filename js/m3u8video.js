@@ -97,8 +97,8 @@ document.addEventListener("DOMContentLoaded", () => {
     else if (link.includes("php") || link.endsWith(".m3u8")) {
       return "hls";
     }
-    else {
-      return "direct"
+    else { // some hls streams redirected from the original one
+      return "hls"
     }
   }
 
@@ -128,21 +128,18 @@ document.addEventListener("DOMContentLoaded", () => {
         videoPlayer.src = linkToTry;
         videoPlayer.type = "video/mp4";
         videoPlayer.onloadedmetadata = tryPlay;
+        showNotification("Loading stream...", "success");
         videoPlayer.onerror = (event) => {
           const err = videoPlayer.error;
           handlePlaybackError(type, err || event, linkToTry, fallbackLink, triedProxy);
         };
       }
       else if (type === "hls" && Hls.isSupported()) {
-        if (hlsInstance) {
-          hlsInstance.destroy();
-          hlsInstance = null;
-        }
-
         hlsInstance = new Hls();
         hlsInstance.loadSource(linkToTry);
         hlsInstance.attachMedia(videoPlayer);
         hlsInstance.on(Hls.Events.MANIFEST_PARSED, tryPlay);
+        showNotification("Loading stream...", "success");
 
         hlsInstance.on(Hls.Events.ERROR, (event, data) => {
           console.error("HLS error:", data);
