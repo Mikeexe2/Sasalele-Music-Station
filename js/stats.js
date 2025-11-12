@@ -13,43 +13,39 @@ document.addEventListener('DOMContentLoaded', function () {
         firebase.initializeApp(firebaseConfig);
     }
 
+    siteTime();
+    fetchLastCommitDate();
 
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
+    const toggle = document.getElementById("toggleAnimation");
 
-            const target = this.getAttribute('href');
-            const offset = 60;
-            const targetElement = document.querySelector(target);
+    if (toggle) {
+        toggle.onclick = null;
+        toggle.addEventListener("change", handleToggleChange);
+    }
 
-            if (target === '#search') {
-                const searchInput = document.getElementById('searchInput');
-                if (searchInput) {
-                    searchInput.focus();
-                }
-            } else if (targetElement) {
-                const isInCollapsible = targetElement.closest('.collapse');
+    const backtotop = document.querySelector('.back-to-top');
+    if (backtotop) {
+        function toggleBacktotop() {
+            backtotop.classList.toggle('active', window.scrollY > 100);
+        }
 
-                if (!isInCollapsible) {
-                    const offsetTop = targetElement.offsetTop - offset;
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
-                }
-            }
+        backtotop.addEventListener('click', goTop);
+        window.addEventListener('scroll', toggleBacktotop);
+    }
+
+    function goTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
         });
-    });
+    }
 
     function showNotification(message, type = 'info') {
         const notificationArea = document.getElementById('notification-area') || createNotificationArea();
 
         const notification = document.createElement('div');
         notification.className = `alert alert-${type} alert-dismissible fade show`;
-        notification.innerHTML = `
-    ${message}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  `;
+        notification.innerHTML = `${message}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`;
 
         notificationArea.appendChild(notification);
 
@@ -81,21 +77,48 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     })
 
-    function goTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+    function siteTime() {
+        window.setTimeout(siteTime, 1000);
+        var seconds = 1000;
+        var minutes = seconds * 60;
+        var hours = minutes * 60;
+        var days = hours * 24;
+        var years = days * 365;
+        var today = new Date();
+        var todayYear = today.getFullYear();
+        var todayMonth = today.getMonth();
+        var todayDate = today.getDate();
+        var todayHour = today.getHours();
+        var todayMinute = today.getMinutes();
+        var todaySecond = today.getSeconds();
+        var t1 = Date.UTC(2023, 9, 1, 0, 0, 0);
+        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+        var diff = t2 - t1;
+        var diffYears = Math.floor(diff / years);
+        var diffDays = Math.floor((diff / days) - diffYears * 365);
+        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
+        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds);
+        document.getElementById("liveTime").innerHTML = diffYears + " Years " + diffDays + " Days " + diffHours + " Hours " + diffMinutes + " Minutes " + diffSeconds + " Seconds";
     }
 
-    const backtotop = document.querySelector('.back-to-top');
-    if (backtotop) {
-        function toggleBacktotop() {
-            backtotop.classList.toggle('active', window.scrollY > 100);
+    async function fetchLastCommitDate() {
+        const apiUrl = `https://api.github.com/repos/Mikeexe2/Sasalele-Music-Station/commits`;
+        try {
+            const response = await fetch(apiUrl);
+            const commits = await response.json();
+            if (commits && commits.length > 0) {
+                const lastCommitDate = commits[0].commit.author.date;
+                const formattedDate = new Date(lastCommitDate).toLocaleDateString('en-GB', {
+                    weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+                });
+                document.getElementById('last-updated-date').textContent = formattedDate;
+            } else {
+                console.error('No commits found for the repository');
+            }
+        } catch (error) {
+            console.error('Error fetching commit data:', error);
         }
-
-        backtotop.addEventListener('click', goTop);
-        window.addEventListener('scroll', toggleBacktotop);
     }
 
     let originalTitle = document.title;
@@ -130,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function getDayAbbreviation(day) {
-        const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+        const days = ["日", "月", "火", "水", "木", "金", "土"];
         return days[day];
     }
 
@@ -168,7 +191,6 @@ document.addEventListener('DOMContentLoaded', function () {
     ];
 
     const phaseDuration = 10 * 1000;
-    const background = document.getElementById('background');
     const randomimg = document.getElementById('randomimg');
     let isAnimating = false;
     let currentPhase = 'random';
