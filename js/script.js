@@ -14,7 +14,11 @@ const confirmation = document.querySelector('#copyIcon .copy-confirmation');
 const stationSearch = document.getElementById('sasalelesearch');
 const searchInput = document.getElementById('searchInput');
 const searchButton = document.getElementById('searchButton');
-const innerContainer = document.querySelector('.search-results');
+const searchResultsWrapper = document.getElementById('searchResultsWrapper');
+const dismissBtn = document.getElementById('dismissSearchResults');
+const collapseBtn = document.querySelector('[data-bs-toggle="collapse"]');
+const collapseIcon = document.getElementById('collapseIcon');
+const searchResultsCollapse = document.getElementById('searchResultsCollapse');
 const searchTermsContainer = document.getElementById('searchTerms');
 const VideoDisplay = document.getElementById("YouTubeVideo");
 const innerlastfm = document.getElementById('lastfmList');
@@ -31,12 +35,27 @@ let currentStation = null;
 let isPlaying = false;
 let metadataInterval = null;
 let metadataEventSource = null;
+let currentSearchTerm = '';
 
-const searchTab = document.querySelector('.nav-link[href="#search"]');
-if (searchTab) {
-    searchTab.addEventListener("click", () => {
+stationSearch.addEventListener('input', function () {
+    currentSearchTerm = this.value;
+    filterStations();
+});
+
+const searchNavLink = document.querySelector('.search-nav-link');
+if (searchNavLink) {
+    searchNavLink.addEventListener('click', function (e) {
+        e.preventDefault();
         const si = document.getElementById('searchInput');
         if (si) si.focus();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            const offset = target.offsetTop - 60;
+            window.scrollTo({
+                top: offset,
+                behavior: 'smooth'
+            });
+        }
     });
 }
 
@@ -119,6 +138,9 @@ function loadStations(genre) {
             console.log(`[loadStations] Loaded ${stations.length} stations for ${genre}`);
             renderStations(stations, genre);
             document.getElementById('loadingSpinner').style.display = 'none';
+            if (currentSearchTerm && currentSearchTerm.trim() !== "") {
+                filterStations();
+            }
         })
         .catch(error => {
             console.error("[loadStations] Error fetching stations:", error);
@@ -200,8 +222,8 @@ function renderStations(stations, genre) {
     }
 }
 
-stationSearch.addEventListener('input', function () {
-    const searchTerm = this.value.trim().toLowerCase();
+function filterStations() {
+    const searchTerm = currentSearchTerm.trim().toLowerCase();
     const activeGenre = document.querySelector('.genre-content.active');
 
     if (!activeGenre) return;
@@ -240,7 +262,7 @@ stationSearch.addEventListener('input', function () {
     } else if (visibleCount > 0 && noResults) {
         noResults.remove();
     }
-});
+};
 
 randomplay.addEventListener('click', function () {
     const activeGenre = document.querySelector('.genre-content.active');
@@ -398,7 +420,7 @@ async function stopPlayback() {
 
 async function playMedia(media, button) {
     await stopPlayback();
-    await new Promise(r => setTimeout(r, 100)); // delay is needed for icecastmetadata player to stop completely
+    await new Promise(r => setTimeout(r, 100));
 
     document.querySelectorAll('li').forEach(li => {
         li.classList.remove('active-station');
@@ -412,7 +434,8 @@ async function playMedia(media, button) {
             playIcecastStream(media);
             break;
         case "zeno":
-            playZeno(media);
+            playIcecastStream(media);
+
             break;
         case "lautfm":
             playLautFM(media);
@@ -443,8 +466,9 @@ function playHlsStream(media) {
             lowLatencyMode: true,
             backBufferLength: 90
         });
+        const chosenUrl = media.url_resolved || media.url; // url_resolved for radio browser API's hls streams
 
-        hlsPlayer.loadSource(media.url);
+        hlsPlayer.loadSource(chosenUrl);
         hlsPlayer.attachMedia(mainAudio);
 
         hlsPlayer.on(Hls.Events.MANIFEST_PARSED, (event, data) => {
@@ -527,6 +551,40 @@ function playHlsStream(media) {
 
 function playIcecastStream(media) {
     const chosenUrl = media.url_resolved || media.url;
+    let fallbackTriggered = false;
+
+    async function triggerFallback(reason) {
+        if (fallbackTriggered) return;
+        fallbackTriggered = true;
+
+        console.warn("Falling back to playUnknownStream:", reason);
+        showNotification(`Please wait, retrying...`, 'warning');
+        try {
+            if (!mainAudio.paused) {
+                const playPromise = mainAudio.play();
+                if (playPromise !== undefined) {
+                    await playPromise.catch(() => { });
+                }
+                mainAudio.pause();
+                console.log("[stopPlayback] mainAudio paused");
+            }
+        } catch (err) {
+            console.warn("[stopPlayback] pause() error (ignored):", err);
+        }
+
+        if (icecastPlayer) {
+            try {
+                icecastPlayer.stop();
+                icecastPlayer.detachAudioElement();
+            } catch (err) {
+                console.error("[cleanupPlayers] icecast cleanup error:", err);
+            }
+            icecastPlayer = null;
+        }
+        await new Promise(r => setTimeout(r, 100));
+        playUnknownStream(media);
+    }
+
     try {
         icecastPlayer = new IcecastMetadataPlayer(chosenUrl, {
             audioElement: mainAudio,
@@ -538,12 +596,8 @@ function playIcecastStream(media) {
                 }
             },
             onError: (message) => {
-                metadataElement.textContent = 'Error: ' + message;
-                console.warn("Falling back to playUnknownStream...");
-                icecastPlayer.stop();
-                icecastPlayer.detachAudioElement();
-                icecastPlayer = null;
-                playUnknownStream(media);
+                console.error("Icecast player error:", message);
+                triggerFallback(message);
             },
             onLoad: () => {
                 metadataElement.textContent = 'Loading...';
@@ -553,13 +607,15 @@ function playIcecastStream(media) {
             },
             enableLogging: true
         });
-        icecastPlayer.play();
+
+        icecastPlayer.play().catch(err => {
+            console.error("Error during icecast play:", err);
+            triggerFallback(err.message || err);
+        });
+
     } catch (err) {
-        console.error("Icecast player initialization failed:", err);
-        icecastPlayer.stop();
-        icecastPlayer.detachAudioElement();
-        icecastPlayer = null;
-        playUnknownStream(media);
+        console.error("Icecast initialization failed:", err);
+        triggerFallback(err.message || err);
     }
 }
 
@@ -612,15 +668,21 @@ function playZeno(media) {
 
 function playUnknownStream(media) {
     const chosenUrl = media.url_resolved || media.url;
-    mainAudio.src = chosenUrl;
     metadataElement.textContent = "Visit radio's homepage for playing info";
-    mainAudio.play();
 
-    mainAudio.addEventListener('error', (e) => {
-        console.warn("Unknown stream failed to play, falling back to HLS...", e);
-        showNotification(`Playing of (http) stream failed due to browser's security settings, retrying...`, 'warning');
+    if (chosenUrl.includes('.m3u8')) {
         playHlsStream(media);
-    });
+    } else {
+        mainAudio.src = chosenUrl;
+        mainAudio.play().catch((e) => {
+            console.warn("Stream failed to play", e);
+            if (e.message && e.message.includes("not allowed") || e.name === 'SecurityError') {
+                showNotification(`Playing of (HTTP) stream failed due to mixed content policy (HTTP on HTTPS)`, 'warning');
+            } else {
+                showNotification(`Unknown stream failed to play: ${e.message}`, 'warning');
+            }
+        });
+    }
 }
 
 function startMetadataUpdate(apiUrl, type) {
@@ -890,10 +952,28 @@ function initiateM3UDownload(streamUrl, streamTitle) {
     downloadLink.click();
 }
 
+dismissBtn.addEventListener('click', () => {
+    searchResultsWrapper.style.display = 'none';
+});
+
+searchResultsCollapse.addEventListener('show.bs.collapse', () => {
+    collapseIcon.querySelector('i').className = 'fas fa-chevron-down';
+});
+
+searchResultsCollapse.addEventListener('hide.bs.collapse', () => {
+    collapseIcon.querySelector('i').className = 'fas fa-chevron-up';
+});
+
+function showSearchResults() {
+    searchResultsWrapper.style.display = 'block';
+    searchResultsCollapse.classList.add('show');
+    collapseIcon.querySelector('i').className = 'fas fa-chevron-down';
+}
+
 function performSearch() {
     const searchTerm = searchInput.value.trim();
     if (searchTerm !== '') {
-        innerContainer.style.display = 'block';
+        showSearchResults();
         searchTermsContainer.textContent = searchTerm;
 
         const gscInput = document.querySelector('.gsc-input input');
@@ -1214,7 +1294,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const db = firebase.database();
 
     initializeUI();
-    siteTime();
 
     function createElement(tag, id, innerHTML, attributes = {}) {
         const element = document.createElement(tag);
@@ -1440,30 +1519,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (app.getName()) app.chat();
 });
 
-function siteTime() {
-    window.setTimeout(siteTime, 1000);
-    var seconds = 1000;
-    var minutes = seconds * 60;
-    var hours = minutes * 60;
-    var days = hours * 24;
-    var years = days * 365;
-    var today = new Date();
-    var todayYear = today.getFullYear();
-    var todayMonth = today.getMonth();
-    var todayDate = today.getDate();
-    var todayHour = today.getHours();
-    var todayMinute = today.getMinutes();
-    var todaySecond = today.getSeconds();
-    var t1 = Date.UTC(2023, 9, 1, 0, 0, 0);
-    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
-    var diff = t2 - t1;
-    var diffYears = Math.floor(diff / years);
-    var diffDays = Math.floor((diff / days) - diffYears * 365);
-    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
-    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
-    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds);
-    document.getElementById("liveTime").innerHTML = diffYears + " Years " + diffDays + " Days " + diffHours + " Hours " + diffMinutes + " Minutes " + diffSeconds + " Seconds";
-}
 
 const playlistMenu = document.getElementById('playlistMenu');
 const dropdownBtn = document.getElementById('playlistDropdown');
