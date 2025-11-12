@@ -31,6 +31,8 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/hls.js@latest" type="text/javascript"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline-meta.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@waline/client@3.5.6/dist/waline.min.css">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-LDY4BC680M"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
@@ -78,6 +80,7 @@
             <section id="videos">
                 <div class="section-title">
                     <h1>Videos</h1>
+                </div>
                 </div>
                 <div class="container">
                     <div class="row">
@@ -140,7 +143,7 @@
                                     </ul>
                                 </div>
                                 <div id="genre-info" class="ms-auto mb-2">
-                                    <strong><span id="genre-name"></span></strong>
+                                    <span id="genre-name"></span>
                                     <strong> (<span id="channel-count"></span>)</strong>
                                 </div>
                             </div>
@@ -156,25 +159,80 @@
                     <div class="row d-flex justify-content-center">
                         <div class="col-md-10">
                             <div class="input-group mb-3">
-                                <input type="text" id="m3uURL" class="form-control" placeholder="Enter M3U8 URL">
+                                <input type="text" id="m3uURL" class="form-control"
+                                    placeholder="Enter M3U8/MP4 stream URL">
                                 <button id="loadM3U" class="btn btn-primary btn-go">Go</button>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="container">
-                    <div class="alert alert-info mt-4" role="alert">
-                        <strong>Disclaimer:</strong> All the resources provided on this page are collected from various
-                        sources on the
-                        internet. If you encounter any playback issues, it may be due to the proxy used by this site
-                        reaching its request
-                        limit. While
-                        it's unlikely due to low traffic, other factors like stream availability or geo-restrictions
-                        could
-                        be the cause. I regularly remove dead links and update streams to ensure the most current
-                        content is available, inform me if I missed any of them. If possible, I
-                        encourage you to support the stream owners through donations to help maintain and improve their
-                        services.
+                    <div class="alert alert-info mt-4" role="alert" style="opacity:0.95;">
+                        <strong>Note:</strong> Video streams are collected from public sources. If playback fails, it
+                        may be due to stream availability or network restrictions. Try refreshing or using a VPN if
+                        needed. Enjoy watching!
+                    </div>
+                    <div class="accordion" id="infoAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                    What is an M3U8 Link?
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                                data-bs-parent="#infoAccordion">
+                                <div class="accordion-body">
+                                    <p>
+                                        M3U8 is a playlist format for streaming audio and video. It contains links to
+                                        media
+                                        files and is commonly used for online video streams.
+                                    </p>
+                                    <ul>
+                                        <li>Paste an M3U8 URL above</li>
+                                        <li>Click "Go" to start streaming</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    What is HLS?
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                                data-bs-parent="#infoAccordion">
+                                <div class="accordion-body">
+                                    <p>
+                                        HLS (HTTP Live Streaming) is a protocol for delivering media over the internet.
+                                        It
+                                        breaks streams into small segments for smooth playback, often described by M3U8
+                                        playlists.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item"></div>
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Why can't some M3U8 files play?
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                            data-bs-parent="#infoAccordion">
+                            <div class="accordion-body">
+                                <p>
+                                    Some streams may not play due to network restrictions or browser limitations. If you
+                                    have
+                                    issues, try refreshing, using a VPN, or installing a browser extension like <a
+                                        href="https://chromewebstore.google.com/detail/native-hls-playback/emnphkkblegpebimobpbekeedfgemhof"
+                                        target="_blank"><strong>Native HLS Playback</strong></a>.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="section-title">
@@ -219,81 +277,43 @@
                         </div>
                     </div>
                 </div>
-        </div>
+            </section>
+            <div id="waline"></div>
 
-        <div class="container">
-            <div id="accordion">
-                <div class="card">
-                    <div class="card-header">
-                        <button class="btn btn-link" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                            What is M3U8 Link? </button>
+            <section class="footer text-center" id="footer">
+                <div class="page-info">
+                    <div class="alert alert-info alert-dismissible fade show mt-2" role="alert">
+                        <strong>Notice:</strong> If updates have been made, please press <kbd>Ctrl</kbd> + <kbd>F5</kbd>
+                        to
+                        hard refresh the page.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                    <div id="collapseOne" class="collapse" data-parent="#accordion">
-                        <div class="card-body">
-                            <p>M3U8 is a playlist format used by various audio and video playback programs, it
-                                contains
-                                a
-                                path
-                                or URL to
-                                a media
-                                file or folder of media files, along with information about the playlist. This
-                                player
-                                downloads
-                                the
-                                video
-                                specified in the M3U8 file and plays within your browser. To get started:</p>
-                            <ul>
-                                <li>Paste a M3U8 URL into the above input box</li>
-                                <li>Click the "Go" button.</li>
-                            </ul>
+                    <p class="mb-1">
+                        This site is currently under development. Some features may experience issues. We appreciate
+                        your understanding.
+                        Feedback email: <a href="mailto:sasalele-team@basic.pp.ua"
+                            class="text-light">sasalele-team@basic.pp.ua</a>
+                    </p>
+                    <div class="social-links mb-1">
+                        <a target="_blank" href="https://t.me/sasalelemusic">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a target="_blank" href="https://github.com/Mikeexe2/Sasalele-Music-Station">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                    <p class="last-updated">Last updated: <span id="last-updated-date"></span></p>
+                    <p>&copy; 2023-2025 Sasalele-Music-Station</p>
+                    <div class="progress-container">
+                        <p>Operated for: <span id="liveTime"></span> | Views: <span
+                                class="waline-pageview-count"></span>
+                        </p>
+                        <div class="mdui-progress">
+                            <div class="mdui-progress-indeterminate"></div>
                         </div>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-header">
-                        <button class="btn btn-link" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            What is HLS?
-                        </button>
-                    </div>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion">
-                        <div class="card-body">
-                            <p>HLS stands for HTTP Live Streaming. It's an HTTP-based media streaming communications
-                                protocol
-                                implemented by Apple Inc. It works by breaking the overall stream into a sequence of
-                                small file
-                                downloads, each download loading one short chunk of an overall potentially unbounded
-                                transport stream.
-                            </p>
-                            <p>HLS streams are usually described using M3U8 playlist.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <button class="btn btn-link" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Why can't some m3u8 files be played? </button>
-                    </div>
-                    <div id="collapseThree" class="collapse" data-parent="#accordion">
-                        <div class="card-body">
-                            <p>By default, the browser downloads any m3u8 files that were requested. This plugin
-                                checks any links to see if they are
-                                m3u8. If that's the case, it opens a new tab on a video player that uses the
-                                hlsjs library. Extensions may have broader permissions to bypass CORS
-                                restrictions or handle authentication differently compared to web
-                                pages.</p>
-                            <p class="text-white"><a
-                                    href="https://chromewebstore.google.com/detail/native-hls-playback/emnphkkblegpebimobpbekeedfgemhof"
-                                    target="_blank"><strong>Install Extension Plugin</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </section>
+            </section>
         </div>
         <div class="back-to-top d-flex align-items-center justify-content-center"><i class="fa-solid fa-arrow-up"></i>
         </div>
@@ -308,6 +328,16 @@
         <script src="js/stats.js"></script>
         <script src="js/m3u8video.js"></script>
         <script type="module" src="https://cdn.jsdelivr.net/npm/media-chrome@4/+esm"></script>
+        <script type="module">
+            import { init } from 'https://cdn.jsdelivr.net/npm/@waline/client@3.5.6/dist/waline.js';
+
+            init({
+                el: '#waline',
+                serverURL: 'https://sasalele-comment-yo1b.vercel.app/',
+                lang: 'en',
+                pageview: true,
+            });
+        </script>
     </body>
 
 </html>

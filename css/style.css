@@ -257,6 +257,11 @@ body {
     height: 100%
 }
 
+.genre-name,
+#channel-count {
+    font-size: var(--font-size--small);
+}
+
 .genre-select {
     max-width: 320px;
     min-width: 160px
@@ -1238,6 +1243,11 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, .2)
 }
 
+.gsc-control-cse {
+    background: none !important;
+    border: none !important;
+}
+
 .collapse {
     transition: height .3s ease
 }
@@ -2139,6 +2149,10 @@ details details:last-of-type {
     .media-content {
         max-width: 40px;
         height: auto
+    }
+
+    .selected-title {
+        font-size: 12px
     }
 
     .chathold {
