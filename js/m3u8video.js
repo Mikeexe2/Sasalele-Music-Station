@@ -1,4 +1,5 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', function () {
+
   let currentVideos = [];
   let currentPlayingElement = null;
   let hlsInstance = null;
@@ -10,6 +11,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchChannel = document.getElementById("searchChannel");
   const defaultGenre = "jpvideos";
   const defaultGenreName = "Japanese";
+  const m3uURLInput = document.getElementById("m3uURL");
+
+  m3uURLInput.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      loadM3UButton.click();
+    }
+  });
 
   loadGenre(defaultGenre, defaultGenreName);
   document.getElementById("vidstopBtn").addEventListener("click", stopVideoPlayback);
@@ -91,15 +100,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function detectStreamType(link) {
-    if (link.endsWith(".mp4") || link.endsWith(".flv") || link.includes("video_id") || link.includes("format=mp4")) {
+    const baseLink = link.split('?')[0];
+
+    if (baseLink.match(/\.(mp4|flv|mov|avi|webm)$/i) || link.includes("video_id") || link.includes("format=mp4")) {
       return "direct";
-    }
-    else if (link.includes("php") || link.endsWith(".m3u8")) {
+    } else if (baseLink.includes("php") || baseLink.endsWith(".m3u8")) {
       return "hls";
     }
-    else { // some hls streams redirected from the original one
-      return "hls"
-    }
+    return "hls";
   }
 
   function playMedia(link) {
@@ -126,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (type === "direct") {
         videoPlayer.src = linkToTry;
-        videoPlayer.type = "video/mp4";
+        //videoPlayer.type = "video/mp4";
         videoPlayer.onloadedmetadata = tryPlay;
         showNotification("Loading stream...", "success");
         videoPlayer.onerror = (event) => {
@@ -153,9 +161,14 @@ document.addEventListener("DOMContentLoaded", () => {
           handlePlaybackError("hls-native", err, linkToTry, fallbackLink, triedProxy);
         };
       } else {
-        console.error("HLS not supported on this device.");
-        showNotification("HLS not supported on this device.", "danger");
-        stopVideoPlayback();
+        videoPlayer.src = linkToTry;
+        //videoPlayer.type = "video/mp4";
+        videoPlayer.onloadedmetadata = tryPlay;
+        showNotification("Loading stream...", "success");
+        videoPlayer.onerror = (event) => {
+          const err = videoPlayer.error;
+          handlePlaybackError(type, err || event, linkToTry, fallbackLink, triedProxy);
+        };
       }
     };
 
@@ -171,7 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // short grace period before declaring fatal
       setTimeout(() => {
-       const ready = videoPlayer.readyState >= 2;
+        const ready = videoPlayer.readyState >= 2;
         if (!isCritical && ready) {
           console.log("Non-critical error ignored, playback appears fine.");
           retrying = false;
@@ -203,9 +216,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const loadM3UButton = document.getElementById("loadM3U");
   if (loadM3UButton) {
     loadM3UButton.addEventListener("click", function () {
-      var m3uUrl = document.getElementById("m3uURL").value;
-      if (m3uUrl) {
-        playMedia(m3uUrl);
+      const Url = m3uURLInput.value
+      if (Url) {
+        playMedia(Url);
         if (titleNow) {
           titleNow.style.display = "none";
         }
@@ -338,8 +351,8 @@ document.addEventListener("DOMContentLoaded", () => {
     else ytPlayer.playVideo();
   });
 
-  const db = firebase.database();
   function loadGenres() {
+    const db = firebase.database();
     const ref = db.ref('ytByGenre');
     ref.once('value')
       .then(snapshot => {
@@ -446,7 +459,5 @@ document.addEventListener("DOMContentLoaded", () => {
       : '';
   }
 
-  (function init() {
-    loadGenres();
-  })();
+  loadGenres();
 });
