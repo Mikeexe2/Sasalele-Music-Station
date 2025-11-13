@@ -592,9 +592,13 @@ function playIcecastStream(media) {
                 if (metadata.StreamTitle) {
                     metadataElement.textContent = metadata.StreamTitle;
                 } else {
-                    metadataElement.textContent = 'No track information available';
+                    metadataElement.textContent = media.name + ' Live';
                 }
+                trackHistory(metadata.StreamTitle);
             },
+            metadataTypes: ["icy"],
+            icyDetectionTimeout: 100000,
+            enableLogging: false,
             onError: (message) => {
                 console.error("Icecast player error:", message);
                 triggerFallback(message);
@@ -605,7 +609,6 @@ function playIcecastStream(media) {
             onEnd: () => {
                 metadataElement.textContent = 'Stream ended';
             },
-            enableLogging: true
         });
 
         icecastPlayer.play().catch(err => {
