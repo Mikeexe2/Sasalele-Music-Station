@@ -2114,8 +2114,8 @@ details details:last-of-type {
 
     .genre-content img,
     .radio-result-container img {
-        width: 30px;
-        height: 30px;
+        width: 40px;
+        height: auto;
         margin-right: 5px
     }
 
