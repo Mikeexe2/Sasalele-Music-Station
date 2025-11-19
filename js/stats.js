@@ -12,6 +12,10 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!firebase.apps.length) {
         firebase.initializeApp(firebaseConfig);
     }
+    
+    const KEY = "6LcwwBAsAAAAAGJLnPjV8GFtEPB448AWWJhAM1lG";
+    const appCheck = firebase.appCheck();
+    appCheck.activate(KEY, true);
 
     siteTime();
     fetchLastCommitDate();
