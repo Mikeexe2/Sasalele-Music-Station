@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
   let currentVideos = [];
   let currentPlayingElement = null;
   let hlsInstance = null;
-  let lastBlobUrl = null;
+  let fallbackHlsInstance = null;
   const titleNow = document.getElementById("selected-video-title");
   const videoPlayer = document.getElementById("video-player");
   const videoListElement = document.getElementById("video-list");
@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const defaultGenre = "jpvideos";
   const defaultGenreName = "Japanese";
   const m3uURLInput = document.getElementById("m3uURL");
+  const channelThumbCache = {};
 
   m3uURLInput.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
@@ -101,7 +102,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   const PROXY_BASE = "https://sasalele.apnic-anycast.workers.dev/";
-  const PROXY_EVERYTHING = true;
   const HLS_OPTIONS = {
     maxBufferLength: 12,
     maxMaxBufferLength: 40,
@@ -115,486 +115,197 @@ document.addEventListener('DOMContentLoaded', function () {
     backBufferLength: 90,
     lowLatencyMode: false,
     xhrSetup: function (xhr, url) {
-      // don't send credentials by default
       xhr.withCredentials = false;
     }
   };
 
-  function isHlsUrl(url) {
-    const lower = url.split("?")[0].toLowerCase();
-    return lower.endsWith(".m3u8") || url.toLowerCase().includes(".m3u8") || lower.includes("playlist") || lower.includes("manifest") || url.startsWith("blob:");
-  }
-
-  function isDirectMedia(url) {
-    const lower = url.split("?")[0].toLowerCase();
-    return /\.(mp4|flv|mov|avi|webm|mkv|aac|mp3|ts)$/i.test(lower) || url.includes("video_id") || url.includes("format=mp4");
-  }
-
-  function isPhpDynamicHLS(url) {
-    console.log("found php");
-    return url.includes(".php");
+  function cleanupHls() {
+    if (hlsInstance) {
+      hlsInstance.destroy();
+      hlsInstance = null;
+    }
+    if (fallbackHlsInstance) {
+      fallbackHlsInstance.destroy();
+      fallbackHlsInstance = null;
+    }
+    videoPlayer.removeAttribute("src");
+    videoPlayer.load();
   }
 
   function proxyUrl(url) {
     return PROXY_BASE + encodeURIComponent(url);
   }
 
-  async function headProbe(url, timeout = 8000) {
+  function isHlsUrl(url) {
+    const lower = url.split("?")[0].toLowerCase();
+    return lower.endsWith(".m3u8") || url.toLowerCase().includes(".m3u8");
+  }
+
+  function isDirectMedia(url) {
+    const lower = url.split("?")[0].toLowerCase();
+    return /\.(mp4)$/i.test(lower) || url.includes("video_id") || url.includes("format=mp4");
+  }
+
+  function isPhpDynamicHLS(url) {
+    return url.includes(".php");
+  }
+
+  async function tryDirect(url) {
+    videoPlayer.pause();
+    videoPlayer.removeAttribute("src");
+    videoPlayer.load();
     try {
-      const controller = new AbortController();
-      const id = setTimeout(() => controller.abort(), timeout);
-      const res = await fetch(url, {
-        method: 'HEAD',
-        mode: 'cors',
-        signal: controller.signal,
-        credentials: 'omit'
-      });
-      clearTimeout(id);
+      videoPlayer.src = url;
+      videoPlayer.muted = true;
+      await videoPlayer.play();
+      setTimeout(() => {
+        if (!videoPlayer.muted) videoPlayer.muted = false;
+      }, 800);
+      showNotification("Playback started (direct)", "success");
       return {
-        ok: res.ok,
-        status: res.status,
-        ctype: res.headers.get('content-type')
+        ok: true
       };
     } catch (err) {
+      if (url.startsWith("http://")) {
+        showNotification(
+          "Browser is blocking http:// stream. Enable insecure content if you want to play it.",
+          "warning"
+        );
+        stopVideoPlayback();
+      }
       return {
         ok: false,
-        status: null,
-        error: err && err.name ? err.name : String(err)
+        reason: err.message || String(err)
       };
     }
   }
 
-  async function fetchAndRewriteManifest(url, proxyManifest = false, proxySegments = PROXY_EVERYTHING) {
-    try {
-      const fetchUrl = proxyManifest ? proxyUrl(url) : url;
-      const res = await fetch(fetchUrl, {
-        method: 'GET',
-        mode: 'cors',
-        credentials: 'omit'
-      });
-      if (!res.ok) throw new Error(`Manifest fetch failed ${res.status}`);
-      const text = await res.text();
-      const base = new URL(url);
-      const lines = text.split(/\r?\n/);
-      const rewritten = lines.map(line => {
-        if (!line || line.startsWith('#')) return line;
-        let abs = line;
+  async function tryHls(url, isFallback = false) {
+    const hlsInst = new Hls(HLS_OPTIONS);
+    if (isFallback) fallbackHlsInstance = hlsInst;
+    else hlsInstance = hlsInst;
+
+    videoPlayer.pause();
+    videoPlayer.removeAttribute("src");
+    videoPlayer.load();
+
+    hlsInst.attachMedia(videoPlayer);
+    hlsInst.loadSource(url);
+
+    return new Promise(resolve => {
+      let resolved = false;
+
+      hlsInst.on(Hls.Events.MANIFEST_PARSED, async () => {
         try {
-          abs = new URL(line, base).toString();
-        } catch {
+          await videoPlayer.play();
+          setTimeout(() => {
+            if (!videoPlayer.muted) videoPlayer.muted = false;
+          }, 800);
+          if (!resolved) {
+            resolved = true;
+            resolve({
+              ok: true
+            });
+          }
+        } catch (err) {
+          if (!resolved) {
+            resolved = true;
+            resolve({
+              ok: false,
+              reason: err.message
+            });
+          }
         }
-        return proxySegments ? proxyUrl(abs) : abs;
-      }).join("\n");
-      const blob = new Blob([rewritten], {
-        type: 'application/vnd.apple.mpegurl'
-      });
-      return URL.createObjectURL(blob);
-    } catch (err) {
-      throw err;
-    }
-  }
-
-  async function sniffUrlType(originalUrl, useProxy = false) {
-    const url = useProxy ? proxyUrl(originalUrl) : originalUrl;
-    try {
-      const controller = new AbortController();
-      const id = setTimeout(() => controller.abort(), 9000);
-
-      const res = await fetch(url, {
-        method: "GET",
-        mode: "cors",
-        credentials: "omit",
-        signal: controller.signal
       });
 
-      clearTimeout(id);
-
-      if (!res.ok) {
-        return {
-          ok: false,
-          error: res.status
-        };
-      }
-
-      const ctype = res.headers.get("content-type") || "";
-      if (ctype.includes("video") || ctype.includes("octet-stream")) {
-        console.log("direct php");
-        return {
-          ok: true,
-          type: "direct",
-          url: originalUrl,
-          fetchUrl: url
-        };
-      }
-
-      if (ctype.includes("mpegurl") || ctype.includes("application/x-mpegURL")) {
-        const text = await res.text();
-        console.log("hls php");
-        return {
-          ok: true,
-          type: "hls",
-          url: originalUrl,
-          fetchUrl: url,
-          manifestText: text
-        };
-      }
-
-      const text = await res.text();
-      if (text.includes("#EXTM3U")) {
-        console.log(text);
-        return {
-          ok: true,
-          type: "hls",
-          url: originalUrl,
-          fetchUrl: url,
-          manifestText: text
-        };
-      }
-      return {
-        ok: true,
-        type: "unknown",
-        url: originalUrl,
-        fetchUrl: url,
-        manifestText: null
-      };
-
-    } catch (err) {
-      return {
-        ok: false,
-        error: err.message
-      };
-    }
-  }
-
-  function buildBlobM3U(text, baseUrl) {
-    const base = new URL(baseUrl);
-
-    const lines = text.split(/\r?\n/);
-    const rewritten = [];
-
-    for (let line of lines) {
-      if (!line || line.startsWith("#")) {
-        rewritten.push(line);
-        continue;
-      }
-
-      if (/^https?:\/\//i.test(line)) {
-        rewritten.push(PROXY_EVERYTHING ? proxyUrl(line) : line);
-        continue;
-      }
-
-      let abs;
-      try {
-        abs = new URL(line, base).toString();
-      } catch {
-        abs = line;
-      }
-
-      if (PROXY_EVERYTHING) {
-        abs = proxyUrl(abs);
-      }
-
-      rewritten.push(abs);
-    }
-
-    const blob = new Blob([rewritten.join("\n")], {
-      type: "application/vnd.apple.mpegurl"
+      hlsInst.on(Hls.Events.ERROR, (event, data) => {
+        console.warn("hls.js error:", data);
+        if (data.fatal && !resolved) {
+          hlsInst.destroy();
+          stopVideoPlayback();
+          resolved = true;
+          resolve({
+            ok: false,
+            reason: data?.details || "Fatal HLS error"
+          });
+        }
+      });
     });
-
-    return URL.createObjectURL(blob);
   }
 
-  function cleanupHls() {
-    try {
-      if (hlsInstance) {
-        hlsInstance.destroy();
-        hlsInstance = null;
-      }
-    } catch (e) { }
-    if (lastBlobUrl) {
-      try {
-        URL.revokeObjectURL(lastBlobUrl);
-      } catch (e) { }
-      lastBlobUrl = null;
-    }
+  function testHttpAllowed(url) {
+    return new Promise(resolve => {
+      const testVideo = document.createElement("video");
+      testVideo.src = url;
+
+      let timeout = setTimeout(() => resolve(false), 2000);
+
+      testVideo.onerror = () => {
+        clearTimeout(timeout);
+        resolve(false);
+      };
+
+      testVideo.onloadedmetadata = () => {
+        clearTimeout(timeout);
+        resolve(true);
+      };
+    });
   }
 
   async function playMedia(originalUrl) {
     cleanupHls();
     showNotification("Preparing playback...", "success");
 
-    let initialMuted = videoPlayer.muted;
-    const ensureUnmutedLater = () => {
-      if (!initialMuted) {
-        videoPlayer.muted = false;
-      }
-    };
-
-    async function tryDirect(link, isProxy = false) {
-      videoPlayer.pause();
-      videoPlayer.removeAttribute('src');
-      videoPlayer.load();
-
-      const probe = await headProbe(link, 7000);
-      if (!probe.ok) {
-        const reason = `HEAD failed: ${probe.status || probe.error}`;
-        return {
-          ok: false,
-          reason
-        };
-      }
-
-      videoPlayer.src = link;
-
-      try {
-        videoPlayer.muted = true;
-        await videoPlayer.play();
-        setTimeout(ensureUnmutedLater, 800);
-        showNotification("Playback started", "success");
-        return {
-          ok: true
-        };
-      } catch (err) {
-        const reason = err.message || String(err);
-        return {
-          ok: false,
-          reason
-        };
-      }
-    }
-
-    async function tryHls(link, manifestProxy = false) {
-      videoPlayer.pause();
-      videoPlayer.removeAttribute('src');
-      videoPlayer.load();
-
-      let sourceToLoad = link;
-      if (manifestProxy) {
-        try {
-          sourceToLoad = await fetchAndRewriteManifest(link, true, PROXY_EVERYTHING);
-          lastBlobUrl = sourceToLoad;
-        } catch (err) {
-          const reason = err.message || String(err);
-          return {
-            ok: false,
-            reason
-          };
-        }
-      }
-
-      hlsInstance = new Hls(HLS_OPTIONS);
-
-      let fatalDetected = false;
-      hlsInstance.on(Hls.Events.ERROR, (event, data) => {
-        console.warn("hls.js error", data);
-        if (data.fatal) {
-          if (data.type === Hls.ErrorTypes.MEDIA_ERROR) {
-            console.log("Attempting media recovery");
-            try {
-              hlsInstance.recoverMediaError();
-            } catch (e) {
-              console.error(e);
-              fatalDetected = true;
-            }
-          } else if (data.type === Hls.ErrorTypes.NETWORK_ERROR) {
-            console.log("Attempting to restart load for network error");
-            try {
-              hlsInstance.startLoad();
-            } catch (e) {
-              console.error(e);
-              fatalDetected = true;
-            }
-          } else {
-            fatalDetected = true;
-          }
-        }
-      });
-
-      // Attach and load
-      hlsInstance.attachMedia(videoPlayer);
-      try {
-        hlsInstance.loadSource(sourceToLoad);
-      } catch (err) {
-        return {
-          ok: false,
-          reason: "hls.loadSource failed: " + (err.message || err)
-        };
-      }
-
-      const manifestParsed = await new Promise(resolve => {
-        const id = setTimeout(() => {
-          resolve({
-            ok: false,
-            reason: "MANIFEST_PARSED timeout"
-          });
-        }, 9000);
-
-        hlsInstance.on(Hls.Events.MANIFEST_PARSED, () => {
-          clearTimeout(id);
-          resolve({
-            ok: true
-          });
-        });
-
-        hlsInstance.on(Hls.Events.ERROR, (event, data) => {
-          // if fatal and we haven't started, report failure
-          if (data && data.fatal && !videoPlayer.currentTime) {
-          }
-        });
-      });
-
-      if (!manifestParsed.ok) {
-        return {
-          ok: false,
-          reason: manifestParsed.reason || "No manifest parsed"
-        };
-      }
-
-      try {
-        videoPlayer.muted = true;
-        await videoPlayer.play();
-        // give it a tick to ensure playback
-        setTimeout(() => ensureUnmutedLater(), 800);
-        showNotification("Playback started (hls.js)", "success");
-        return {
-          ok: true
-        };
-      } catch (err) {
-        await new Promise(r => setTimeout(r, 600));
-        if (!videoPlayer.paused && videoPlayer.currentTime > 0) {
-          setTimeout(() => ensureUnmutedLater(), 800);
-          return {
-            ok: true
-          };
-        }
-        return {
-          ok: false,
-          reason: "hls play failed: " + (err && err.message ? err.message : err)
-        };
-      }
-    }
-
-    let url = originalUrl;
-    let type = "unknown";
-    let useProxyForStream = false;
-    let manifestText = null;
+    const proxiedUrl = proxyUrl(originalUrl);
     let res;
 
-    if (isPhpDynamicHLS(url)) {
-      showNotification("Resolving dynamic PHP stream...", "success");
-      let sniff = await sniffUrlType(url, false);
-      if (!sniff.ok && sniff.error && (sniff.error.includes("Failed to fetch") || sniff.error.toLowerCase().includes("cors"))) {
-        useProxyForStream = true;
-        sniff = await sniffUrlType(url, true);
-      }
-      if (!sniff.ok) {
-        showNotification("Stream resolution failed.", "danger");
-        return stopVideoPlayback();
-      }
-      type = sniff.type;
-      if (type === "direct") {
-        url = sniff.fetchUrl;
-      } else if (type === "hls") {
-        manifestText = sniff.manifestText;
-        if (!manifestText || manifestText.trim().length < 10) {
-          console.warn("Manifest empty or too short — retrying fetch");
-          const refetchUrl = useProxyForStream ? proxyUrl(url) : url;
-          try {
-            const r = await fetch(refetchUrl, {
-              method: 'GET',
-              mode: 'cors',
-              credentials: 'omit'
-            });
-            if (r.ok) manifestText = await r.text();
-          } catch (err) {
-            console.warn("Refetch failed:", err);
-          }
-        }
-        if (manifestText && manifestText.includes("#EXTM3U")) {
-          console.log("PHP resolved to HLS playlist — rewriting...");
-          const blobUrl = buildBlobM3U(manifestText, url);
-          lastBlobUrl = blobUrl;
-          url = blobUrl;
-          type = "hls";
-        } else {
-          showNotification("Invalid HLS manifest from PHP.", "danger");
-          return stopVideoPlayback();
-        }
-      } else {
-        showNotification("Unknown PHP stream type.", "danger");
-        return stopVideoPlayback();
-      }
-    } else if (isDirectMedia(url)) {
-      type = "direct";
-    } else if (isHlsUrl(url)) {
-      type = "hls";
-    } else {
-      showNotification("Probing stream type...", "success");
-      const probe = await headProbe(url);
-      if (probe.ok) {
-        if (probe.ctype.includes("video")) {
-          type = "direct";
-        } else if (probe.ctype.includes("mpegurl")) {
-          type = "hls";
-        }
-      }
-      if (type === "unknown") {
-        const sniff = await sniffUrlType(url, false);
-        if (sniff.ok) type = sniff.type;
+    const attemptOrder = [];
+
+    if (originalUrl.startsWith("http://")) {
+      const allowed = await testHttpAllowed(originalUrl);
+
+      if (!allowed) {
+        showNotification("This stream uses http:// which is normally blocked by your browser. Please allow insecure content in your site settings if you want to play it. Retrying...", "warning");
       }
     }
 
-    if (type === "direct") {
-      showNotification("Detected direct media — attempting native playback", "success");
-      res = await tryDirect(url);
-      if (res.ok) return;
-      console.warn("Direct native failed:", res.reason);
-      if (!useProxyForStream) {
-        const proxiedUrl = proxyUrl(originalUrl);
-        showNotification("Retrying direct via proxy...", "warning");
-        res = await tryDirect(proxiedUrl, true);
-        if (res.ok) return;
-        console.warn("Proxied direct failed:", res.reason);
-      }
-    } else if (type === "hls") {
-      showNotification("Detected HLS stream — attempting playback", "success");
-
-      if (videoPlayer.canPlayType && videoPlayer.canPlayType("application/vnd.apple.mpegurl")) {
-        res = await tryDirect(url);
-        if (res.ok) return;
-        console.warn("Native HLS failed:", res.reason);
-      }
-
+    if (isDirectMedia(originalUrl)) {
+      attemptOrder.push(() => tryDirect(originalUrl));
+      attemptOrder.push(() => tryDirect(proxiedUrl));
+    } else if (isHlsUrl(originalUrl)) {
       if (Hls.isSupported()) {
-        res = await tryHls(url, false);
-        if (res.ok) return;
-        console.warn("hls.js direct failed:", res.reason);
+        attemptOrder.push(() => tryHls(originalUrl));
+        attemptOrder.push(() => tryHls(proxiedUrl, true));
+      } else {
+        attemptOrder.push(() => tryDirect(originalUrl));
+        attemptOrder.push(() => tryDirect(proxiedUrl));
       }
-
-      if (Hls.isSupported() && !url.startsWith("blob:")) { // Skip if already a rewritten blob
-        showNotification("Retrying HLS via proxy (manifest rewrite)...", "warning");
-        res = await tryHls(originalUrl, true);
-        if (res.ok) return;
-        console.warn("Proxied manifest hls failed:", res.reason);
+    } else if (isPhpDynamicHLS(originalUrl)) {
+      if (Hls.isSupported()) {
+        attemptOrder.push(() => tryHls(originalUrl));
+        attemptOrder.push(() => tryHls(proxiedUrl, true));
       }
+      attemptOrder.push(() => tryDirect(originalUrl));
+      attemptOrder.push(() => tryDirect(proxiedUrl));
+    } else {
 
-      if (videoPlayer.canPlayType && videoPlayer.canPlayType("application/vnd.apple.mpegurl") && !url.startsWith("blob:")) {
-        showNotification("Retrying native HLS via proxy...", "warning");
-        try {
-          const blobUrl = await fetchAndRewriteManifest(originalUrl, true, PROXY_EVERYTHING);
-          lastBlobUrl = blobUrl;
-          res = await tryDirect(blobUrl, true);
-          if (res.ok) return;
-          console.warn("Proxied native HLS failed:", res.reason);
-        } catch (err) {
-          console.warn("Proxied manifest fetch failed:", err);
-        }
+      attemptOrder.push(() => tryDirect(originalUrl));
+      attemptOrder.push(() => tryDirect(proxiedUrl));
+      if (Hls.isSupported()) {
+        attemptOrder.push(() => tryHls(originalUrl));
+        attemptOrder.push(() => tryHls(proxiedUrl, true));
       }
     }
-    showNotification("Stream failed to play after multiple attempts.", "danger");
+
+    for (let attempt of attemptOrder) {
+      res = await attempt();
+      if (res.ok) return;
+      console.warn("Attempt failed:", res.reason);
+      showNotification(`Unable to play: ${res.reason}`, "warning");
+    }
+
     stopVideoPlayback();
-    cleanupHls();
-    videoPlayer.muted = initialMuted;
+    showNotification("Stream failed to play after multiple attempts.", "danger");
   }
 
   const loadM3UButton = document.getElementById("loadM3U");
@@ -619,9 +330,14 @@ document.addEventListener('DOMContentLoaded', function () {
       videoPlayer.removeAttribute('src');
       videoPlayer.load();
 
-      if (typeof hlsInstance !== 'undefined' && hlsInstance) {
+      if (hlsInstance) {
         hlsInstance.destroy();
         hlsInstance = null;
+      }
+
+      if (fallbackHlsInstance) {
+        fallbackHlsInstance.destroy();
+        fallbackHlsInstance = null;
       }
 
       if (titleNow) {
@@ -634,8 +350,7 @@ document.addEventListener('DOMContentLoaded', function () {
         currentPlayingElement.style.color = '';
         currentPlayingElement = null;
       }
-
-      console.log("Playback stopped successfully.");
+      showNotification('Playback stopped successfully.', 'success');
     } catch (err) {
       console.error("Error stopping playback:", err);
     }
@@ -783,6 +498,14 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   }
 
+  function isChan2(id) {
+    return /^UC[a-zA-Z0-9-_]{22}$/.test(id);
+  }
+
+  function isVid2(id) {
+    return /^[a-zA-Z0-9_-]{11}$/.test(id);
+  }
+
   function renderStreamsForGenre(genreKey) {
     streamList.innerHTML = '';
     if (!genreKey || !genresData[genreKey]) {
@@ -796,29 +519,58 @@ document.addEventListener('DOMContentLoaded', function () {
     const items = genresData[genreKey];
     streamCount.textContent = items.length;
 
-    items.forEach((item, idx) => {
+    items.forEach(async (item, idx) => {
+      const isChan = isChan2(item.link);
+      const isVid = isVid2(item.link);
       const li = document.createElement('div');
       li.className = 'list-group-item list-group-item-action bg-transparent border-0 px-0 py-2 stream-item';
       li.dataset.videoId = item.link;
       li.dataset.title = item.title;
 
+      let thumbUrl;
+
+      if (isVid) {
+        thumbUrl = `https://img.youtube.com/vi/${item.link}/hqdefault.jpg`;
+      } else {
+        if (!channelThumbCache[item.link]) {
+          channelThumbCache[item.link] = await fetchChannelThumbnail(item.link);
+        }
+        thumbUrl = channelThumbCache[item.link];
+      }
+
       li.innerHTML = `
-        <div class="d-flex gap-2 align-items-center">
+      <div class="d-flex gap-2 align-items-center">
           <div style="width:110px; flex-shrink:0;">
-            <img class="thumb" src="https://img.youtube.com/vi/${item.link}/hqdefault.jpg" alt="${escapeHtml(item.title)}">
+              <img class="thumb" src="${thumbUrl}" alt="${escapeHtml(item.title)}">
           </div>
           <div class="flex-grow-1">
-            <div class="stream-title">${escapeHtml(item.title)}</div>
-            <div class="stream-sub">Video ID: ${item.link}</div>
+              <div class="stream-title">${escapeHtml(item.title)}</div>
+              <div class="stream-sub">
+                  ${isVid ? "Video ID" : "Channel ID"}: ${item.link}
+              </div>
           </div>
-        </div>
-      `;
+      </div>
+  `;
 
-      li.addEventListener('click', () => {
+      li.addEventListener('click', async () => {
         document.querySelectorAll('.stream-item').forEach(it => it.classList.remove('active'));
         li.classList.add('active');
 
-        loadVideo(item.link, item.title, genreKey);
+        if (isVid) {
+          loadVideo(item.link, item.title, genreKey);
+        } else if (isChan) {
+          const liveVideoId = await fetchLiveVideoId(item.link);
+          if (liveVideoId) {
+            loadVideo(liveVideoId, item.title + " (Live)", genreKey);
+          } else {
+            playerTitle.textContent = item.title;
+            playerSubtitle.textContent = "Channel Offline";
+            openOnYT.href = `https://www.youtube.com/channel/${item.link}`;
+            showNotification("Channel is not Live", "warning");
+          }
+        } else {
+          console.error("Unknown YouTube ID:", item.link);
+        }
       });
 
       streamList.appendChild(li);
@@ -837,6 +589,34 @@ document.addEventListener('DOMContentLoaded', function () {
     const g = genreSelect.value;
     renderStreamsForGenre(g);
   });
+
+  async function fetchChannelThumbnail(channelId) {
+    const url = `https://www.googleapis.com/youtube/v3/channels?part=snippet&id=${channelId}&key=AIzaSyAwM_RLjqj8dbbMAP5ls4qg1olDsaxSq5s`;
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if (data.items && data.items[0]) {
+      return data.items[0].snippet.thumbnails.high.url;
+    }
+    return "assets/ball.svg";
+  }
+
+  async function fetchLiveVideoId(channelId) {
+    const url = `https://www.googleapis.com/youtube/v3/search?part=id&channelId=${channelId}&eventType=live&type=video&maxResults=1&key=AIzaSyAwM_RLjqj8dbbMAP5ls4qg1olDsaxSq5s`;
+
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+
+      if (data.items && data.items.length > 0) {
+        return data.items[0].id.videoId;
+      }
+      return null;
+    } catch (error) {
+      console.error("API Call failed (likely CORS issue):", error);
+      return null;
+    }
+  }
 
   function escapeHtml(unsafe) {
     return unsafe ?
