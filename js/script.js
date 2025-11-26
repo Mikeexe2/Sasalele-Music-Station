@@ -27,6 +27,7 @@ const innerdeezer = document.getElementById('deezerList');
 const metadataElement = document.getElementById('metadataDisplay');
 const genreSelect = document.getElementById('genre-select');
 const mainAudio = document.getElementById('mainAudio');
+const proxyLink = "https://sasalele.apnic-anycast.workers.dev/";
 
 let genreData = [];
 let hlsPlayer = null;
@@ -36,6 +37,7 @@ let isPlaying = false;
 let metadataInterval = null;
 let metadataEventSource = null;
 let currentSearchTerm = '';
+let chosenUrl = '';
 
 stationSearch.addEventListener('input', function () {
     currentSearchTerm = this.value;
@@ -435,7 +437,6 @@ async function playMedia(media, button) {
             break;
         case "zeno":
             playIcecastStream(media);
-
             break;
         case "lautfm":
             playLautFM(media);
@@ -466,7 +467,16 @@ function playHlsStream(media) {
             lowLatencyMode: true,
             backBufferLength: 90
         });
-        const chosenUrl = media.url_resolved || media.url; // url_resolved for radio browser API's hls streams
+
+        chosenUrl = media.url_resolved || media.url; // url_resolved for radio browser API's hls streams
+        if (chosenUrl.startsWith('http://') && !chosenUrl.startsWith(proxyLink)) {
+            if (isRawIP(chosenUrl)) {
+                console.warn('Skipping proxy for: ' + chosenUrl);
+                showNotification(`Allow insecure content on your browser to play this stream or download the m3u file to play it`, 'warning');
+            } else {
+                chosenUrl = proxyLink + chosenUrl;
+            }
+        }
 
         hlsPlayer.loadSource(chosenUrl);
         hlsPlayer.attachMedia(mainAudio);
@@ -550,7 +560,15 @@ function playHlsStream(media) {
 }
 
 function playIcecastStream(media) {
-    const chosenUrl = media.url_resolved || media.url;
+    chosenUrl = media.url_resolved || media.url;
+    if (chosenUrl.startsWith('http://') && !chosenUrl.startsWith(proxyLink)) {
+        if (isRawIP(chosenUrl)) {
+            console.warn('Skipping proxy for: ' + chosenUrl);
+            showNotification(`Allow insecure content on your browser to play this stream or download the m3u file to play it`, 'warning');
+        } else {
+            chosenUrl = proxyLink + chosenUrl;
+        }
+    }
     let fallbackTriggered = false;
 
     async function triggerFallback(reason) {
@@ -670,7 +688,15 @@ function playZeno(media) {
 }
 
 function playUnknownStream(media) {
-    const chosenUrl = media.url_resolved || media.url;
+    chosenUrl = media.url_resolved || media.url;
+    if (chosenUrl.startsWith('http://') && !chosenUrl.startsWith(proxyLink)) {
+        if (isRawIP(chosenUrl)) {
+            console.warn('Skipping proxy for: ' + chosenUrl);
+            showNotification(`Allow insecure content on your browser to play this stream or download the m3u file to play it`, 'warning');
+        } else {
+            chosenUrl = proxyLink + chosenUrl;
+        }
+    }
     metadataElement.textContent = "Visit radio's homepage for playing info";
 
     if (chosenUrl.includes('.m3u8')) {
@@ -713,6 +739,11 @@ function getSpecialID(Url) {
     const parts = Url.split('/');
     return parts[parts.length - 1];
 }
+
+const isRawIP = (url) => {
+    const ipRegex = /(?:http|https):\/\/(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/;
+    return ipRegex.test(url);
+};
 
 function formatLautTitle(jsonData) {
     try {
@@ -876,7 +907,7 @@ function radioSearch() {
     searchResultContainer.classList.remove('active');
     findradio.style.display = "block";
 
-    fetch(`https://sasalele.apnic-anycast.workers.dev/https://de2.api.radio-browser.info/json/stations/${searchBy}/${searchValue}?hidebroken=true&limit=150&order=clickcount&reverse=true`)
+    fetch(`${proxyLink}https://de2.api.radio-browser.info/json/stations/${searchBy}/${searchValue}?hidebroken=true&limit=150&order=clickcount&reverse=true`)
         .then(response => response.json())
         .then(data => {
             if (data.length > 0) {
@@ -1007,8 +1038,6 @@ searchInput.addEventListener('keyup', function (event) {
 });
 
 async function searchAcrossApis(searchTerm) {
-    const proxyLink = "https://sasalele.apnic-anycast.workers.dev/";
-
     const lastfmUrl = `https://ws.audioscrobbler.com/2.0/?method=track.search&format=json&limit=5&api_key=b9747c75368b42160af4301c2bf654a1&track=${encodeURIComponent(searchTerm)}`;
     const youtubeUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&type=video&q=${encodeURIComponent(searchTerm)}&key=AIzaSyAwM_RLjqj8dbbMAP5ls4qg1olDsaxSq5s`;
     const itunesUrl = `${proxyLink}https://itunes.apple.com/search?limit=5&media=music&term=${encodeURIComponent(searchTerm)}`;

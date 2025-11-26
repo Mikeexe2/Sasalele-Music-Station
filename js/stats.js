@@ -15,7 +15,9 @@ document.addEventListener('DOMContentLoaded', function () {
     
     const KEY = "6LcwwBAsAAAAAGJLnPjV8GFtEPB448AWWJhAM1lG";
     const appCheck = firebase.appCheck();
-    appCheck.activate(KEY, true);
+    appCheck.activate(KEY, {
+        isTokenAutoRefreshEnabled: true
+    });
 
     siteTime();
     fetchLastCommitDate();
@@ -57,8 +59,8 @@ document.addEventListener('DOMContentLoaded', function () {
             notification.classList.remove('show');
             setTimeout(() => {
                 notificationArea.removeChild(notification);
-            }, 300);
-        }, 3000);
+            }, 2000);
+        }, 1000);
     }
 
     function createNotificationArea() {
