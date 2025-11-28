@@ -7,6 +7,7 @@ const nowPlaying = document.getElementById('nowPlaying');
 const stationCount = document.getElementById('station-count');
 const historyDisplay = document.getElementById('historyBtn');
 const randomplay = document.getElementById('randomplay');
+const stopBtn = document.getElementById('stopBtn');
 const togglePlayerButton = document.getElementById("togglePlayer");
 const copyIcon = document.getElementById('copyIcon');
 const copyIconSymbol = copyIcon.querySelector('i.fas.fa-copy');
@@ -22,12 +23,35 @@ const searchResultsCollapse = document.getElementById('searchResultsCollapse');
 const searchTermsContainer = document.getElementById('searchTerms');
 const VideoDisplay = document.getElementById("YouTubeVideo");
 const innerlastfm = document.getElementById('lastfmList');
-const inneritunes = document.getElementById('itunesList');
-const innerdeezer = document.getElementById('deezerList');
+const inneritunes = document.getElementById('inneritunes');
+const innerdeezer = document.getElementById('innerdeezer');
 const metadataElement = document.getElementById('metadataDisplay');
 const genreSelect = document.getElementById('genre-select');
 const mainAudio = document.getElementById('mainAudio');
 const proxyLink = "https://sasalele.apnic-anycast.workers.dev/";
+const toggleButton = document.getElementById('toggleButton');
+const panel = document.getElementById('sidePanel');
+const hideButton = document.getElementById('hideButton');
+const searchNavLink = document.querySelector('.search-nav-link');
+const defaultGenre = "jmusic";
+const MAX_RETRIES = 3;
+const playlistMenu = document.getElementById('playlistMenu');
+const dropdownBtn = document.getElementById('playlistDropdown');
+const container = document.getElementById('hugeData');
+
+const countrySelectContainer = document.getElementById('countrySelectContainer');
+const countrySelect = document.getElementById('countrySelect');
+const languageSelectContainer = document.getElementById('languageSelectContainer');
+const languageSelect = document.getElementById('languageSelect');
+const tagSelectContainer = document.getElementById('tagSelectContainer');
+const tagSelect = document.getElementById('tagSelect');
+const searchOption = document.getElementById('searchOption');
+const findRadioBtn = document.getElementById("radiosearch");
+const searchField = document.getElementById('search-field');
+const searchResultContainer = document.querySelector('.radio-result-container');
+const searchResultHeader = document.querySelector('.radio-result-header');
+const findradio = document.querySelector('.radioresultsdisplay');
+const downloadRadio = document.querySelector('.download-button');
 
 let genreData = [];
 let hlsPlayer = null;
@@ -38,58 +62,33 @@ let metadataInterval = null;
 let metadataEventSource = null;
 let currentSearchTerm = '';
 let chosenUrl = '';
+let selectedPlaylist = null;
+let ap = null;
 
-stationSearch.addEventListener('input', function () {
-    currentSearchTerm = this.value;
-    filterStations();
+playlistMenu.addEventListener('click', e => {
+    if (!e.target.matches('.dropdown-item')) return;
+    e.preventDefault();
+    const selectedPlaylist = e.target.getAttribute('data-playlist');
+    loadPlaylist(selectedPlaylist);
 });
-
-const searchNavLink = document.querySelector('.search-nav-link');
-if (searchNavLink) {
-    searchNavLink.addEventListener('click', function (e) {
-        e.preventDefault();
-        const si = document.getElementById('searchInput');
-        if (si) si.focus();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            const offset = target.offsetTop - 60;
-            window.scrollTo({
-                top: offset,
-                behavior: 'smooth'
-            });
-        }
-    });
+function showLoading() {
+    document.getElementById('loadingSpinner').style.display = 'block';
 }
 
-historyDisplay.addEventListener('click', function () {
-    displayRecentTracks();
-});
+function hideLoading() {
+    document.getElementById('loadingSpinner').style.display = 'none';
+}
 
-copyIcon.addEventListener('click', () => {
-    const textContent = metadataElement.textContent.trim();
-    if (!textContent) {
-        return;
-    }
-    const textarea = document.createElement('textarea');
-    textarea.value = textContent;
-    document.body.appendChild(textarea);
-    textarea.select();
-    document.execCommand('copy');
-    document.body.removeChild(textarea);
-    copyIconSymbol.style.display = 'none';
-    confirmation.style.display = 'inline-flex';
-    setTimeout(() => {
-        confirmation.style.display = 'none';
-        copyIconSymbol.style.display = 'inline';
-    }, 300);
-});
+function togglePanel() {
+    const isOpen = panel.classList.contains('open');
+    panel.classList.toggle('open', !isOpen);
+}
 
 function updatePlayerUI(media) {
     coverImage.src = `${media.favicon ? media.favicon : 'assets/radios/Unidentified2.webp'}`;
     coverImage.classList.add('rotating');
-
     nowPlaying.innerHTML = `<a href="${media.homepage || media.url}" target="_blank" class="homepagelink">${media.name}</a>`;
-    document.getElementById('metadataSource').textContent = `Stream type: ${media.host}`;
+    document.getElementById('metadataSource').textContent = `Stream type: ${media.host || 'from API'}`;
 }
 
 function displayRecentTracks() {
@@ -115,23 +114,25 @@ function displayRecentTracks() {
 
 function trackHistory(trackName) {
     let recentTracks = JSON.parse(localStorage.getItem('recentTracks')) || [];
-    recentTracks = recentTracks.filter(track => track !== trackName);
-
-    recentTracks.unshift(trackName);
-    if (recentTracks.length > 10) {
-        recentTracks = recentTracks.slice(0, 10);
+    const latestTrack = recentTracks[0];
+    if (trackName !== latestTrack) {
+        recentTracks = recentTracks.filter(track => track !== trackName);
+        recentTracks.unshift(trackName);
+        if (recentTracks.length > 300) {
+            recentTracks = recentTracks.slice(0, 300);
+        }
+        localStorage.setItem('recentTracks', JSON.stringify(recentTracks));
     }
     if (document.hidden) {
         document.title = `${trackName}`;
     }
-    localStorage.setItem('recentTracks', JSON.stringify(recentTracks));
 }
 
 function loadStations(genre) {
     const selectedContainer = document.getElementById(genre);
     if (!selectedContainer) return;
 
-    document.getElementById('loadingSpinner').style.display = 'block';
+    showLoading();
     selectedContainer.classList.add('active');
 
     firebase.database().ref("stations/" + genre)
@@ -140,7 +141,7 @@ function loadStations(genre) {
             const data = snapshot.val() || {};
             const stations = Object.values(data);
             renderStations(stations, genre);
-            document.getElementById('loadingSpinner').style.display = 'none';
+            hideLoading();
             if (currentSearchTerm && currentSearchTerm.trim() !== "") {
                 filterStations();
             }
@@ -152,26 +153,100 @@ function loadStations(genre) {
 }
 
 function initializeUI() {
-    const defaultGenre = "jmusic";
     loadStations(defaultGenre);
     const defaultGenreButton = genreSelect?.querySelector(`[data-genre="${defaultGenre}"]`);
-    if (defaultGenreButton) {
-        defaultGenreButton.classList.add('active');
-    }
-    if (genreSelect) {
-        genreSelect.addEventListener('click', (event) => {
-            const genreButton = event.target.closest('.genre-btn');
-            if (genreButton) {
-                const genre = genreButton.getAttribute('data-genre');
-                document.querySelectorAll('.genre-content').forEach(c => c.classList.remove('active'));
-                loadStations(genre);
-                document.querySelectorAll('.genre-btn').forEach(button => {
-                    button.classList.remove('active');
-                });
-                genreButton.classList.add('active');
+    defaultGenreButton.classList.add('active');
+
+    genreSelect.addEventListener('click', (event) => {
+        const genreButton = event.target.closest('.genre-btn');
+        const genre = genreButton.getAttribute('data-genre');
+        document.querySelectorAll('.genre-content').forEach(c => c.classList.remove('active'));
+        loadStations(genre);
+        document.querySelectorAll('.genre-btn').forEach(button => {
+            button.classList.remove('active');
+        });
+        genreButton.classList.add('active');
+    });
+    toggleButton.addEventListener('click', togglePanel);
+
+    hideButton.addEventListener('click', function () {
+        panel.classList.remove('open');
+    });
+
+    stationSearch.addEventListener('input', function () {
+        currentSearchTerm = this.value;
+        filterStations();
+    });
+
+    stopBtn.addEventListener('click', () => {
+        stopPlayback();
+    });
+
+    searchNavLink.addEventListener('click', function (e) {
+        e.preventDefault();
+        searchInput.focus();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            const offset = target.offsetTop - 60;
+            window.scrollTo({
+                top: offset,
+                behavior: 'smooth'
+            });
+        }
+    });
+
+    historyDisplay.addEventListener('click', function () {
+        displayRecentTracks();
+    });
+
+    copyIcon.addEventListener('click', () => {
+        const textContent = metadataElement.textContent.trim();
+        if (!textContent) {
+            return;
+        }
+        const textarea = document.createElement('textarea');
+        textarea.value = textContent;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        copyIconSymbol.style.display = 'none';
+        confirmation.style.display = 'inline-flex';
+        setTimeout(() => {
+            confirmation.style.display = 'none';
+            copyIconSymbol.style.display = 'inline';
+        }, 300);
+    });
+
+    dismissBtn.addEventListener('click', () => {
+        searchResultsWrapper.style.display = 'none';
+    });
+
+    searchResultsCollapse.addEventListener('show.bs.collapse', () => {
+        collapseIcon.querySelector('i').className = 'fas fa-chevron-down';
+    });
+
+    searchResultsCollapse.addEventListener('hide.bs.collapse', () => {
+        collapseIcon.querySelector('i').className = 'fas fa-chevron-up';
+    });
+
+    findRadioBtn.addEventListener('click', radioSearch);
+    searchField.addEventListener('keyup', function (event) {
+        if (event.key === 'Enter') {
+            radioSearch();
+        }
+    });
+
+    const websiteButtons = document.querySelectorAll('.togglesearch');
+    for (let i = 0; i < websiteButtons.length; i++) {
+        websiteButtons[i].addEventListener('click', function () {
+            const websiteLabel = this.querySelector('.button-label').textContent;
+            const searchTerm = searchTermsContainer.textContent;
+            const websiteURL = getWebsiteURL(websiteLabel, searchTerm);
+            if (websiteURL !== '') {
+                window.open(websiteURL, '_blank');
             }
         });
-        setupPlayerControls();
     }
 }
 
@@ -209,13 +284,15 @@ function renderStations(stations, genre) {
     }).join('');
 
     selectedContainer.innerHTML = genreHTML;
-
     if (currentStation) {
         const stationElements = selectedContainer.querySelectorAll('li');
+        const currentStationData = encodeURIComponent(JSON.stringify(currentStation));
         stationElements.forEach(el => {
-            const name = el.querySelector('h5').textContent;
-            if (name.toLowerCase() === currentStation.name.toLowerCase()) {
+            if (el.dataset.station === currentStationData) {
                 el.classList.add('active-station');
+                window.currentlyActiveLi = el;
+            } else {
+                el.classList.remove('active-station');
             }
         });
     }
@@ -239,10 +316,14 @@ function filterStations() {
             const station = JSON.parse(decodeURIComponent(item.dataset.station));
             const name = (station.name || '').toLowerCase();
             const host = (station.host || '').toLowerCase();
+            const homepage = (station.homepage || '').toLowerCase();
+            const url = (station.url || '').toLowerCase();
 
             const match =
                 name.includes(searchTerm) ||
-                host.includes(searchTerm)
+                host.includes(searchTerm) ||
+                homepage.includes(searchTerm) ||
+                url.includes(searchTerm)
 
             item.style.display = match ? '' : 'none';
             if (match) visibleCount++;
@@ -270,13 +351,22 @@ function filterStations() {
 randomplay.addEventListener('click', function () {
     const activeGenre = document.querySelector('.genre-content.active');
     if (!activeGenre) return;
-
     const visibleStations = [...activeGenre.querySelectorAll('li:not([style*="display: none"])')];
     if (visibleStations.length === 0) return;
-
     const randomIndex = Math.floor(Math.random() * visibleStations.length);
-    const playButton = visibleStations[randomIndex].querySelector('.main-play-button');
-    playButton?.click();
+    const randomStationLi = visibleStations[randomIndex];
+    try {
+        const stationDataString = randomStationLi.dataset.station;
+        if (!stationDataString) {
+            console.error("Random station selected is missing data-station attribute.");
+            return;
+        }
+        const media = JSON.parse(decodeURIComponent(stationDataString));
+        const playButton = randomStationLi.querySelector('.main-play-button');
+        playMedia(media, playButton);
+    } catch (err) {
+        console.error("Failed to start random playback:", err);
+    }
 });
 
 document.addEventListener('click', function (event) {
@@ -296,9 +386,17 @@ document.addEventListener('click', function (event) {
 
 function handlePlayClick(button) {
     const parentLi = button.closest('li');
-    if (!parentLi) return;
+    const stationDataString = parentLi.dataset.station;
+    if (!stationDataString) {
+        console.error("[handlePlayClick] Missing station data on <li> element.");
+        return;
+    }
     try {
-        const media = JSON.parse(decodeURIComponent(parentLi.dataset.station));
+        const media = JSON.parse(decodeURIComponent(stationDataString));
+        if (!media || !media.url) {
+            console.error("[handlePlayClick] Parsed media object is invalid or missing URL.");
+            return;
+        }
         playMedia(media, button);
     } catch (err) {
         console.error("[handlePlayClick] Failed to parse media:", err);
@@ -316,14 +414,13 @@ function handleDownloadClick(button) {
     }
 }
 
-function setupPlayerControls() {
-    const stopBtn = document.getElementById('stopBtn');
-    stopBtn.addEventListener('click', () => {
-        stopPlayback();
-    });
-}
-
 function RadioM3UDownload(stationURL, stationName) {
+    let cleanedURL = stationURL;
+
+    if (cleanedURL.startsWith(proxyLink)) {
+        cleanedURL = cleanedURL.substring(proxyLink.length);
+    }
+
     const patternsToRemove = [
         /;stream\.nsv&type=mp3&quot;$/,
         /;&type=mp3$/,
@@ -339,7 +436,6 @@ function RadioM3UDownload(stationURL, stationName) {
         /;stream\.nsv$/
     ];
 
-    let cleanedURL = stationURL;
     patternsToRemove.forEach(pattern => {
         cleanedURL = cleanedURL.replace(pattern, "");
     });
@@ -417,17 +513,21 @@ async function playMedia(media, button) {
     await stopPlayback();
     await new Promise(r => setTimeout(r, 100));
 
-    document.querySelectorAll('li').forEach(li => {
-        li.classList.remove('active-station');
-    });
+    if (window.currentlyActiveLi) {
+        window.currentlyActiveLi.classList.remove('active-station');
+    }
 
     const parentLi = button.closest('li');
-    if (parentLi) parentLi.classList.add('active-station');
+    if (parentLi) {
+        parentLi.classList.add('active-station');
+        window.currentlyActiveLi = parentLi;
+    } else {
+        window.currentlyActiveLi = null;
+    }
 
     switch (media.host) {
         case "icecast":
             playIcecastStream(media);
-            break;
         case "zeno":
             playIcecastStream(media);
             break;
@@ -653,7 +753,6 @@ function playHlsStreamWithConfig(media, url, retryCount) {
 }
 
 function playIcecastStream(media) {
-    const MAX_RETRIES = 3;
     let retryCount = 0;
     let originalUrl = media.url_resolved || media.url;
     let currentUrl = originalUrl;
@@ -833,7 +932,6 @@ function playZeno(media) {
 }*/
 
 function playUnknownStream(media) {
-    const MAX_RETRIES = 3;
     let streamRetryCount = 0;
     let originalUrl = media.url_resolved || media.url;
     let currentUrl = originalUrl;
@@ -1025,27 +1123,6 @@ function populateTags() {
     });
 }
 
-const countrySelectContainer = document.getElementById('countrySelectContainer');
-const countrySelect = document.getElementById('countrySelect');
-const languageSelectContainer = document.getElementById('languageSelectContainer');
-const languageSelect = document.getElementById('languageSelect');
-const tagSelectContainer = document.getElementById('tagSelectContainer');
-const tagSelect = document.getElementById('tagSelect');
-const searchOption = document.getElementById('searchOption');
-const findRadioBtn = document.getElementById("radiosearch");
-const searchField = document.getElementById('search-field');
-const searchResultContainer = document.querySelector('.radio-result-container');
-const searchResultHeader = document.querySelector('.radio-result-header');
-const findradio = document.querySelector('.radioresultsdisplay');
-const downloadRadio = document.querySelector('.download-button');
-
-findRadioBtn.addEventListener('click', radioSearch);
-searchField.addEventListener('keyup', function (event) {
-    if (event.key === 'Enter') {
-        radioSearch();
-    }
-});
-
 function handleSearchOptionChange() {
     const selectedOption = searchOption.value;
 
@@ -1084,7 +1161,7 @@ function clearSearchField() {
 }
 
 function radioSearch() {
-    document.getElementById('loadingSpinner').style.display = 'block';
+    showLoading();
     const searchBy = searchOption.value;
     let searchValue = '';
     switch (searchBy) {
@@ -1114,13 +1191,15 @@ function radioSearch() {
         .then(response => response.json())
         .then(data => {
             if (data.length > 0) {
-                document.getElementById('loadingSpinner').style.display = 'none';
-                searchResultHeader.innerHTML = `Radio Search Results for: <mark id="searchTerms">${searchValue}</mark>`;
+                hideLoading();
+                searchResultHeader.innerHTML = `Top 150 Radio Search Results for: <mark id="searchTerms">${searchValue}</mark>`;
                 searchResultContainer.classList.add('active');
                 searchResultContainer.innerHTML = '';
 
                 data.forEach(radio => {
                     const radioItem = document.createElement('li');
+                    const safeData = encodeURIComponent(JSON.stringify(radio));
+                    radioItem.setAttribute('data-station', safeData);
                     radioItem.innerHTML = `
                     <img src="${radio.favicon || 'assets/radios/Unidentified2.webp'}">
                     <div class="flex-grow-1 info">
@@ -1140,66 +1219,19 @@ function radioSearch() {
                     `;
                     searchResultContainer.appendChild(radioItem);
                 });
-
-                searchResultContainer.addEventListener('click', function (event) {
-                    const downloadButton = event.target.closest('.download-button');
-                    if (downloadButton) {
-                        event.stopPropagation();
-                        const parentLi = downloadButton.closest('li');
-                        const stationName = parentLi.querySelector('h5').textContent;
-                        const media = data.find(st => st.name === stationName);
-                        if (media) {
-                            initiateM3UDownload(media.url, media.name);
-                        }
-                    }
-
-                    const playButton = event.target.closest('.main-play-button');
-                    if (playButton) {
-                        const parentLi = playButton.closest('li');
-                        const stationName = parentLi.querySelector('h5').textContent;
-                        const radio = data.find(st => st.name === stationName);
-                        if (radio) {
-                            playMedia(radio, playButton);
-                        }
-                    }
-                });
             } else {
-                document.getElementById('loadingSpinner').style.display = 'none';
+                hideLoading();
                 searchResultHeader.style.display = "block";
                 searchResultHeader.textContent = 'No result found.';
             }
         })
         .catch(error => {
-            document.getElementById('loadingSpinner').style.display = 'none';
+            hideLoading();
             console.error('Error fetching data:', error);
         });
 
     clearSearchField();
 }
-
-
-function initiateM3UDownload(streamUrl, streamTitle) {
-    const m3uContent = `#EXTM3U\n#EXTINF:-1,${streamTitle}\n${streamUrl}`;
-    const blob = new Blob([m3uContent], { type: "text/plain;charset=utf-8" });
-    const downloadableUrl = URL.createObjectURL(blob);
-
-    const downloadLink = document.createElement("a");
-    downloadLink.href = downloadableUrl;
-    downloadLink.download = `${streamTitle}.m3u8`;
-    downloadLink.click();
-}
-
-dismissBtn.addEventListener('click', () => {
-    searchResultsWrapper.style.display = 'none';
-});
-
-searchResultsCollapse.addEventListener('show.bs.collapse', () => {
-    collapseIcon.querySelector('i').className = 'fas fa-chevron-down';
-});
-
-searchResultsCollapse.addEventListener('hide.bs.collapse', () => {
-    collapseIcon.querySelector('i').className = 'fas fa-chevron-up';
-});
 
 function showSearchResults() {
     searchResultsWrapper.style.display = 'block';
@@ -1372,7 +1404,6 @@ function displayResults(results) {
 
 
     if (itunesResults.length > 0) {
-        const itunesList = document.getElementById('itunesList');
         const fragment = document.createDocumentFragment();
         itunesResults.slice(0, MAX_RESULTS).forEach(result => {
             const listItem = document.createElement('li');
@@ -1389,7 +1420,7 @@ function displayResults(results) {
         `;
             fragment.appendChild(listItem);
         });
-        itunesList.appendChild(fragment);
+        inneritunes.appendChild(fragment);
         const allAudioPlayers = document.querySelectorAll('.audio-preview');
         allAudioPlayers.forEach(player => {
             player.addEventListener('play', () => {
@@ -1402,11 +1433,10 @@ function displayResults(results) {
             });
         });
     } else {
-        document.getElementById('itunesList').innerHTML = '<h6 class="noresult mb-2">No results found on iTunes :(</h6>';
+        inneritunes.innerHTML = '<h6 class="noresult mb-2">No results found on iTunes :(</h6>';
     }
 
     if (deezerResults.length > 0) {
-        const deezerList = document.getElementById('deezerList');
         const fragment = document.createDocumentFragment();
         const resultsToShow = Math.min(MAX_RESULTS, deezerResults.length);
 
@@ -1428,8 +1458,8 @@ function displayResults(results) {
             `;
             fragment.appendChild(listItem);
         }
-        deezerList.appendChild(fragment);
-        const audioPlayers = deezerList.querySelectorAll('audio');
+        innerdeezer.appendChild(fragment);
+        const audioPlayers = innerdeezer.querySelectorAll('audio');
         audioPlayers.forEach(player => {
             player.addEventListener('play', () => {
                 audioPlayers.forEach(p => {
@@ -1441,21 +1471,8 @@ function displayResults(results) {
             });
         });
     } else {
-        document.getElementById('deezerList').innerHTML = '<h6 class="noresult mb-2">No results found on Deezer :(</h6>';
+        innerdeezer.innerHTML = '<h6 class="noresult mb-2">No results found on Deezer :(</h6>';
     }
-}
-
-const websiteButtons = document.querySelectorAll('.togglesearch');
-
-for (let i = 0; i < websiteButtons.length; i++) {
-    websiteButtons[i].addEventListener('click', function () {
-        const websiteLabel = this.querySelector('.button-label').textContent;
-        const searchTerm = searchTermsContainer.textContent;
-        const websiteURL = getWebsiteURL(websiteLabel, searchTerm);
-        if (websiteURL !== '') {
-            window.open(websiteURL, '_blank');
-        }
-    });
 }
 
 function getWebsiteURL(label, searchTerm) {
@@ -1513,20 +1530,6 @@ function getWebsiteURL(label, searchTerm) {
             return ""
     }
 }
-
-const toggleButton = document.getElementById('toggleButton');
-const panel = document.getElementById('sidePanel');
-const hideButton = document.getElementById('hideButton');
-
-function togglePanel() {
-    const isOpen = panel.classList.contains('open');
-    panel.classList.toggle('open', !isOpen);
-}
-toggleButton.addEventListener('click', togglePanel);
-
-hideButton.addEventListener('click', function () {
-    panel.classList.remove('open');
-});
 
 document.addEventListener('DOMContentLoaded', () => {
     const db = firebase.database();
@@ -1757,30 +1760,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (app.getName()) app.chat();
 });
 
-
-const playlistMenu = document.getElementById('playlistMenu');
-const dropdownBtn = document.getElementById('playlistDropdown');
-const container = document.getElementById('hugeData');
-
-let selectedPlaylist = null;
-let ap = null;
-
-playlistMenu.addEventListener('click', e => {
-    if (!e.target.matches('.dropdown-item')) return;
-    e.preventDefault();
-    const selectedPlaylist = e.target.getAttribute('data-playlist');
-    loadPlaylist(selectedPlaylist);
-});
-
 function loadPlaylist(playlistName) {
-    document.getElementById('loadingSpinner').style.display = 'block';
+    showLoading();
     const audioRef = firebase.database().ref(`audioList/${playlistName}`);
 
     audioRef.once("value")
         .then(snapshot => {
             const data = snapshot.val();
             if (!data) {
-                document.getElementById('loadingSpinner').style.display = 'none';
+                hideLoading();
                 console.warn(`No audio data found for: ${playlistName}`);
                 if (ap) ap.destroy();
                 container.style.display = 'none';
@@ -1798,11 +1786,11 @@ function loadPlaylist(playlistName) {
                 audio: audioArray
             });
 
-            document.getElementById('loadingSpinner').style.display = 'none';
+            hideLoading();
         })
         .catch(error => {
             console.error("Err:", error);
-            document.getElementById('loadingSpinner').style.display = 'none';
+            hideLoading();
             alert("Error loading playlist: " + error.message);
         });
 }

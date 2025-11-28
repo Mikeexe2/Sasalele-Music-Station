@@ -1256,6 +1256,11 @@ media-seek-forward-button:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, .2)
 }
 
+#recentPanel .modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
 .gsc-control-cse {
     background: 0 0 !important;
     border: none !important
