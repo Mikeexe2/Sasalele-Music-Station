@@ -118,9 +118,11 @@ function trackHistory(trackName) {
     recentTracks = recentTracks.filter(track => track !== trackName);
 
     recentTracks.unshift(trackName);
-
     if (recentTracks.length > 10) {
         recentTracks = recentTracks.slice(0, 10);
+    }
+    if (document.hidden) {
+        document.title = `${trackName}`;
     }
     localStorage.setItem('recentTracks', JSON.stringify(recentTracks));
 }
@@ -137,7 +139,6 @@ function loadStations(genre) {
         .then(snapshot => {
             const data = snapshot.val() || {};
             const stations = Object.values(data);
-            console.log(`[loadStations] Loaded ${stations.length} stations for ${genre}`);
             renderStations(stations, genre);
             document.getElementById('loadingSpinner').style.display = 'none';
             if (currentSearchTerm && currentSearchTerm.trim() !== "") {
@@ -359,17 +360,9 @@ function RadioM3UDownload(stationURL, stationName) {
 async function stopPlayback() {
     console.log("[stopPlayback] called");
     if (!mainAudio) return;
-    try {
-        if (!mainAudio.paused) {
-            const playPromise = mainAudio.play();
-            if (playPromise !== undefined) {
-                await playPromise.catch(() => { });
-            }
-            mainAudio.pause();
-            console.log("[stopPlayback] mainAudio paused");
-        }
-    } catch (err) {
-        console.warn("[stopPlayback] pause() error (ignored):", err);
+    if (mainAudio) {
+        mainAudio.pause();
+        console.log("[stopPlayback] mainAudio paused");
     }
 
     if (icecastPlayer) {
@@ -410,7 +403,6 @@ async function stopPlayback() {
     }
 
     isPlaying = false;
-    document.getElementById('hlsStatus').textContent = '';
     coverImage.src = "assets/NezukoYay.gif";
     coverImage.classList.remove('rotating');
     document.querySelectorAll('li').forEach(li => li.classList.remove('active-station'));
@@ -418,6 +410,7 @@ async function stopPlayback() {
     metadataElement.textContent = '';
     document.getElementById('metadataSource').textContent = '';
     currentStation = null;
+    showNotification(`Playback stopped.`, 'success');
 }
 
 async function playMedia(media, button) {
@@ -468,30 +461,73 @@ function playHlsStream(media) {
             backBufferLength: 90
         });
 
-        chosenUrl = media.url_resolved || media.url; // url_resolved for radio browser API's hls streams
+        let retryCount = 0;
+        const maxRetries = 3;
+        let currentUrl = media.url_resolved || media.url;
+        let isUsingProxy = false;
+
+        const loadStream = () => {
+            hlsPlayer.loadSource(currentUrl);
+            hlsPlayer.attachMedia(mainAudio);
+        };
+
+        const handleRetry = (errorType) => {
+            console.error(`HLS Error: ${errorType}`);
+
+            if (isUsingProxy && (errorType === 'NETWORK_ERROR' || errorType === 'HTTP_ERROR')) {
+                retryCount++;
+                if (retryCount <= maxRetries) {
+                    console.log(`Retry ${retryCount}/${maxRetries}: Switching to original URL`);
+                    showNotification(`Proxy failed, retrying with original URL (${retryCount}/${maxRetries})`, 'warning');
+
+                    currentUrl = media.url_resolved || media.url;
+                    isUsingProxy = false;
+
+                    hlsPlayer.destroy();
+                    setTimeout(() => {
+                        playHlsStreamWithConfig(media, currentUrl, retryCount);
+                    }, 1000);
+                    return true;
+                }
+            }
+            if (retryCount >= maxRetries) {
+                showNotification(`Failed to play stream after ${maxRetries} attempts. Stopping playback.`, 'danger');
+                stopPlayback();
+            } else {
+                showNotification('Unrecoverable stream error. Stopping playback.', 'danger');
+                stopPlayback();
+            }
+            return false;
+        };
+
+        const originalUrl = media.url_resolved || media.url;
+        chosenUrl = originalUrl;
+
         if (chosenUrl.startsWith('http://') && !chosenUrl.startsWith(proxyLink)) {
             if (isRawIP(chosenUrl)) {
                 console.warn('Skipping proxy for: ' + chosenUrl);
                 showNotification(`Allow insecure content on your browser to play this stream or download the m3u file to play it`, 'warning');
             } else {
                 chosenUrl = proxyLink + chosenUrl;
+                isUsingProxy = true;
             }
         }
 
-        hlsPlayer.loadSource(chosenUrl);
-        hlsPlayer.attachMedia(mainAudio);
+        currentUrl = chosenUrl;
+        loadStream();
 
         hlsPlayer.on(Hls.Events.MANIFEST_PARSED, (event, data) => {
             if (data && data.levels && data.levels.length > 0) {
                 const stationName = data.levels[0].name || "Live Stream";
                 metadataElement.textContent = stationName;
                 mainAudio.play();
+
+                retryCount = 0;
             }
         });
 
         hlsPlayer.on(Hls.Events.FRAG_PARSING_METADATA, (event, data) => {
             data.samples.forEach(sample => {
-
                 window.jsmediatags.read(new Blob([sample.data]), {
                     onSuccess: (tag) => {
                         const tags = tag.tags;
@@ -519,12 +555,12 @@ function playHlsStream(media) {
                             displayText = "Stream is live (no metadata)";
                         }
                         metadataElement.textContent = displayText;
-
+                        trackHistory(displayText);
                     },
                     onError: (error) => {
                         console.warn("ID3 parse error:", error);
-                        metadataElement.textContent =
-                            "Stream is live (metadata unavailable)";
+                        metadataElement.textContent = "Stream is live (metadata unavailable)";
+                        trackHistory(media.name + ' Live');
                     }
                 });
             });
@@ -535,109 +571,218 @@ function playHlsStream(media) {
             if (data.fatal) {
                 switch (data.type) {
                     case Hls.ErrorTypes.NETWORK_ERROR:
-                        showNotification('HLS: Network error - trying to recover', 'warning');
-                        hlsPlayer.startLoad();
+                        if (data.details === Hls.ErrorDetails.MANIFEST_LOAD_ERROR ||
+                            data.details === Hls.ErrorDetails.LEVEL_LOAD_ERROR ||
+                            data.details === Hls.ErrorDetails.FRAG_LOAD_ERROR) {
+                            if (!handleRetry('NETWORK_ERROR')) {
+                                showNotification('HLS: Network error - trying to recover', 'warning');
+                                hlsPlayer.startLoad();
+                            }
+                        } else {
+                            showNotification('HLS: Network error - trying to recover', 'warning');
+                            hlsPlayer.startLoad();
+                        }
                         break;
                     case Hls.ErrorTypes.MEDIA_ERROR:
-                        document.getElementById('hlsStatus').textContent = 'HLS: Media error - trying to recover';
+                        showNotification('HLS: Media error - trying to recover', 'warning');
                         hlsPlayer.recoverMediaError();
                         break;
                     default:
-                        document.getElementById('hlsStatus').textContent = 'HLS: Unrecoverable error';
-                        stopPlayback();
+                        if (!handleRetry('CRITICAL_ERROR')) {
+                            showNotification('HLS: Unrecoverable Error, stream is not playable. Stopping...', 'warning');
+                            stopPlayback();
+                        }
                         break;
+                }
+            } else {
+
+                if (data.details === Hls.ErrorDetails.MANIFEST_LOAD_ERROR ||
+                    data.details === Hls.ErrorDetails.LEVEL_LOAD_ERROR ||
+                    data.details === Hls.ErrorDetails.FRAG_LOAD_ERROR) {
+                    console.warn(`HLS non-fatal error: ${data.details}`);
+                    if (data.response && data.response.code >= 400) {
+                        setTimeout(() => {
+                            if (!handleRetry('HTTP_ERROR')) {
+                                console.warn('HLS: HTTP error but continuing playback attempt');
+                            }
+                        }, 2000);
+                    }
                 }
             }
         });
-    } else if (audio.canPlayType('application/vnd.apple.mpegurl')) {
-        document.getElementById('hlsStatus').textContent = 'HLS: Using native support';
+    } else if (mainAudio.canPlayType('application/vnd.apple.mpegurl')) {
+        showNotification('HLS: Using native support', 'warning');
+        mainAudio.src = media.url_resolved || media.url;
         mainAudio.play();
     } else {
         metadataElement.textContent = 'HLS not supported in this browser';
-        document.getElementById('hlsStatus').textContent = 'HLS: Not supported';
+        showNotification('HLS: Not supported', 'warning');
         isPlaying = false;
     }
 }
 
-function playIcecastStream(media) {
-    chosenUrl = media.url_resolved || media.url;
-    if (chosenUrl.startsWith('http://') && !chosenUrl.startsWith(proxyLink)) {
-        if (isRawIP(chosenUrl)) {
-            console.warn('Skipping proxy for: ' + chosenUrl);
-            showNotification(`Allow insecure content on your browser to play this stream or download the m3u file to play it`, 'warning');
-        } else {
-            chosenUrl = proxyLink + chosenUrl;
-        }
+function playHlsStreamWithConfig(media, url, retryCount) {
+    if (Hls.isSupported()) {
+        hlsPlayer = new Hls({
+            debug: false,
+            enableWorker: true,
+            lowLatencyMode: true,
+            backBufferLength: 90
+        });
+
+        hlsPlayer.loadSource(url);
+        hlsPlayer.attachMedia(mainAudio);
+
+        hlsPlayer.on(Hls.Events.MANIFEST_PARSED, (event, data) => {
+            if (data && data.levels && data.levels.length > 0) {
+                const stationName = data.levels[0].name || "Live Stream";
+                metadataElement.textContent = stationName;
+                trackHistory(stationName);
+                mainAudio.play();
+            }
+        });
+
+        hlsPlayer.on(Hls.Events.ERROR, (event, data) => {
+            console.error(`HLS error (retry ${retryCount}):`, data);
+            if (data.fatal) {
+                showNotification(`Failed to play stream after ${retryCount} retries. Stopping playback.`, 'danger');
+                stopPlayback();
+            }
+        });
     }
+}
+
+function playIcecastStream(media) {
+    const MAX_RETRIES = 3;
+    let retryCount = 0;
+    let originalUrl = media.url_resolved || media.url;
+    let currentUrl = originalUrl;
+    let isUsingProxy = false;
     let fallbackTriggered = false;
 
-    async function triggerFallback(reason) {
-        if (fallbackTriggered) return;
-        fallbackTriggered = true;
-
-        console.warn("Falling back to playUnknownStream:", reason);
-        showNotification(`Please wait, retrying...`, 'warning');
+    function attemptIcecastPlayback() {
+        showNotification(`Attempting Icecast playback (attempt ${retryCount + 1}/${MAX_RETRIES + 1})`, 'success');
         try {
-            if (!mainAudio.paused) {
-                const playPromise = mainAudio.play();
-                if (playPromise !== undefined) {
-                    await playPromise.catch(() => { });
-                }
-                mainAudio.pause();
-                console.log("[stopPlayback] mainAudio paused");
-            }
+            icecastPlayer = new IcecastMetadataPlayer(currentUrl, {
+                audioElement: mainAudio,
+                onMetadata: (metadata) => {
+                    if (metadata.StreamTitle) {
+                        metadataElement.textContent = metadata.StreamTitle;
+                        trackHistory(metadata.StreamTitle);
+                    } else {
+                        metadataElement.textContent = media.name + ' Live';
+                        trackHistory(media.name + ' Live');
+                    }
+                },
+                metadataTypes: ["icy"],
+                icyDetectionTimeout: 10000,
+                enableLogging: false,
+                onError: (message) => {
+                    console.error("Icecast player error:", message);
+                    handleIcecastError(message);
+                },
+                onLoad: () => {
+                    metadataElement.textContent = 'Loading...';
+                },
+                onEnd: () => {
+                    metadataElement.textContent = 'Stream ended';
+                },
+            });
+
+            icecastPlayer.play().catch(err => {
+                console.error("Error during icecast play:", err);
+                handleIcecastError(err.message || err);
+            });
+
         } catch (err) {
-            console.warn("[stopPlayback] pause() error (ignored):", err);
+            console.error("Icecast initialization failed:", err);
+            handleIcecastError(err.message || err);
         }
+    }
+
+    function handleIcecastError(error) {
+        retryCount++;
+
+        console.log(`Icecast error (attempt ${retryCount}/${MAX_RETRIES + 1}):`, error);
 
         if (icecastPlayer) {
             try {
                 icecastPlayer.stop();
                 icecastPlayer.detachAudioElement();
             } catch (err) {
-                console.error("[cleanupPlayers] icecast cleanup error:", err);
+                console.warn("Icecast cleanup error:", err);
             }
             icecastPlayer = null;
         }
-        await new Promise(r => setTimeout(r, 100));
+
+        if (!isUsingProxy && retryCount <= MAX_RETRIES) {
+            console.log(`Retry ${retryCount}/${MAX_RETRIES}: Trying with proxy`);
+            showNotification(`Icecast stream failed, trying proxy... (${retryCount}/${MAX_RETRIES})`, 'warning');
+
+            currentUrl = proxyLink + originalUrl;
+            isUsingProxy = true;
+
+            setTimeout(() => {
+                attemptIcecastPlayback();
+            }, 1000);
+        }
+        else if (retryCount > MAX_RETRIES || (isUsingProxy && retryCount > 1)) {
+            console.warn("All Icecast attempts failed, falling back to playUnknownStream");
+            triggerFallbackToUnknown(`Icecast failed after ${retryCount} attempts`);
+        }
+        else if (isUsingProxy && retryCount === 1) {
+            console.log(`Retry ${retryCount}/${MAX_RETRIES}: Proxy failed, trying original URL`);
+            showNotification(`Proxy failed, trying original URL... (${retryCount}/${MAX_RETRIES})`, 'warning');
+            currentUrl = originalUrl;
+            isUsingProxy = false;
+
+            setTimeout(() => {
+                attemptIcecastPlayback();
+            }, 1000);
+        }
+    }
+
+    async function triggerFallbackToUnknown(reason) {
+        if (fallbackTriggered) return;
+        fallbackTriggered = true;
+
+        console.warn("Falling back to playUnknownStream:", reason);
+        showNotification(`Icecast failed, trying alternative method...`, 'warning');
+
+        if (icecastPlayer) {
+            try {
+                icecastPlayer.stop();
+                icecastPlayer.detachAudioElement();
+            } catch (err) {
+                console.warn("Icecast cleanup error:", err);
+            }
+            icecastPlayer = null;
+        }
+
+        try {
+            if (!mainAudio.paused) {
+                mainAudio.pause();
+            }
+            mainAudio.currentTime = 0;
+            mainAudio.src = '';
+        } catch (err) {
+            console.warn("Audio cleanup error:", err);
+        }
+
+        await new Promise(r => setTimeout(r, 500));
         playUnknownStream(media);
     }
 
-    try {
-        icecastPlayer = new IcecastMetadataPlayer(chosenUrl, {
-            audioElement: mainAudio,
-            onMetadata: (metadata) => {
-                if (metadata.StreamTitle) {
-                    metadataElement.textContent = metadata.StreamTitle;
-                } else {
-                    metadataElement.textContent = media.name + ' Live';
-                }
-                trackHistory(metadata.StreamTitle);
-            },
-            metadataTypes: ["icy"],
-            icyDetectionTimeout: 100000,
-            enableLogging: false,
-            onError: (message) => {
-                console.error("Icecast player error:", message);
-                triggerFallback(message);
-            },
-            onLoad: () => {
-                metadataElement.textContent = 'Loading...';
-            },
-            onEnd: () => {
-                metadataElement.textContent = 'Stream ended';
-            },
-        });
-
-        icecastPlayer.play().catch(err => {
-            console.error("Error during icecast play:", err);
-            triggerFallback(err.message || err);
-        });
-
-    } catch (err) {
-        console.error("Icecast initialization failed:", err);
-        triggerFallback(err.message || err);
+    if (originalUrl.startsWith('http://') && !originalUrl.startsWith(proxyLink)) {
+        if (isRawIP(originalUrl)) {
+            console.warn('Skipping proxy for: ' + originalUrl);
+            showNotification(`Allow insecure content on your browser to play this stream or download the m3u file to play it`, 'warning');
+        } else {
+            currentUrl = proxyLink + originalUrl;
+            isUsingProxy = true;
+        }
     }
+    attemptIcecastPlayback();
 }
 
 function playLautFM(media) {
@@ -653,7 +798,7 @@ function playSpecial(media) {
     startMetadataUpdate(apiUrl, 'special');
     mainAudio.play();
 }
-
+/*
 function playZeno(media) {
     mainAudio.src = media.url;
     const zenoapiUrl = `https://api.zeno.fm/mounts/metadata/subscribe/${getSpecialID(media.url)}`;
@@ -685,33 +830,91 @@ function playZeno(media) {
 
     }
     mainAudio.play();
-}
+}*/
 
 function playUnknownStream(media) {
-    chosenUrl = media.url_resolved || media.url;
-    if (chosenUrl.startsWith('http://') && !chosenUrl.startsWith(proxyLink)) {
-        if (isRawIP(chosenUrl)) {
-            console.warn('Skipping proxy for: ' + chosenUrl);
+    const MAX_RETRIES = 3;
+    let streamRetryCount = 0;
+    let originalUrl = media.url_resolved || media.url;
+    let currentUrl = originalUrl;
+    let isUsingProxy = false;
+    const attemptPlayback = () => {
+        if (currentUrl.includes('.m3u8')) {
+            playHlsStream(media);
+        } else {
+            mainAudio.src = currentUrl;
+            metadataElement.textContent = "Visit radio's homepage for playing info";
+            trackHistory(media.name + ' Live');
+            mainAudio.play().catch((e) => {
+                console.warn("Stream failed to play", e);
+                handlePlaybackError(e);
+            });
+        }
+    };
+    const handlePlaybackError = (error) => {
+        streamRetryCount++;
+        console.log(`Playback error (attempt ${streamRetryCount}/${MAX_RETRIES}):`, error.name, error.message);
+        const shouldRetryWithOriginal = isUsingProxy && (
+            error.name === 'SecurityError' ||
+            error.message.includes("not allowed") ||
+            error.message.includes("404") ||
+            error.message.includes("403") ||
+            error.message.includes("500") ||
+            error.name === 'NotSupportedError' ||
+            error.message.includes("supported source")
+        );
+        const shouldRetryWithProxy = !isUsingProxy && (
+            error.name === 'SecurityError' ||
+            error.message.includes("not allowed") ||
+            error.message.includes("mixed content")
+        );
+
+        if (shouldRetryWithOriginal) {
+            if (streamRetryCount <= MAX_RETRIES) {
+                console.log(`Retry ${streamRetryCount}/${MAX_RETRIES}: Switching to original URL from proxy`);
+                showNotification(`Proxy failed, retrying with original URL (${streamRetryCount}/${MAX_RETRIES})`, 'warning');
+                currentUrl = originalUrl;
+                isUsingProxy = false;
+                setTimeout(() => {
+                    attemptPlayback();
+                }, 1000);
+                return;
+            }
+        }
+        else if (shouldRetryWithProxy) {
+            if (streamRetryCount <= MAX_RETRIES) {
+                console.log(`Retry ${streamRetryCount}/${MAX_RETRIES}: Trying proxy for mixed content`);
+                showNotification(`Mixed content blocked, trying proxy (${streamRetryCount}/${MAX_RETRIES})`, 'warning');
+                currentUrl = proxyLink + originalUrl;
+                isUsingProxy = true;
+                setTimeout(() => {
+                    attemptPlayback();
+                }, 1000);
+                return;
+            }
+        }
+
+        if (streamRetryCount >= MAX_RETRIES) {
+            showNotification(`Failed to play stream after ${MAX_RETRIES} attempts. Stopping playback.`, 'danger');
+            stopPlayback();
+        } else {
+            showNotification(`Stream failed to play: ${error.message} (Attempt ${streamRetryCount}/${MAX_RETRIES})`, 'warning');
+            if (streamRetryCount >= MAX_RETRIES) {
+                showNotification(`Playback failed after ${MAX_RETRIES} attempts. Stopping playback.`, 'danger');
+                stopPlayback();
+            }
+        }
+    };
+    if (originalUrl.startsWith('http://') && !originalUrl.startsWith(proxyLink)) {
+        if (isRawIP(originalUrl)) {
+            console.warn('Skipping proxy for: ' + originalUrl);
             showNotification(`Allow insecure content on your browser to play this stream or download the m3u file to play it`, 'warning');
         } else {
-            chosenUrl = proxyLink + chosenUrl;
+            currentUrl = proxyLink + originalUrl;
+            isUsingProxy = true;
         }
     }
-    metadataElement.textContent = "Visit radio's homepage for playing info";
-
-    if (chosenUrl.includes('.m3u8')) {
-        playHlsStream(media);
-    } else {
-        mainAudio.src = chosenUrl;
-        mainAudio.play().catch((e) => {
-            console.warn("Stream failed to play", e);
-            if (e.message && e.message.includes("not allowed") || e.name === 'SecurityError') {
-                showNotification(`Playing of (HTTP) stream failed due to mixed content policy (HTTP on HTTPS)`, 'warning');
-            } else {
-                showNotification(`Unknown stream failed to play: ${e.message}`, 'warning');
-            }
-        });
-    }
+    attemptPlayback();
 }
 
 function startMetadataUpdate(apiUrl, type) {
@@ -1120,8 +1323,11 @@ function formatYoutubeResults(data) {
 }
 
 function formatDeezerResults(data) {
-    if (!data || !data.data || data.data.length === 0) {
+    if (!data || !data.data) {
         return [];
+    }
+    else if (data.data.length === 0) {
+        console.log("Blocked by Deezer?");
     }
     return data.data.map(track => ({
         title: track.title,

@@ -66,17 +66,22 @@
                     <span class="navbar-toggler-icon"></span> </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav">
-                        <li class="nav-item active"><a class="nav-link" href="https://basic.pp.ua">Radios<i
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="https://basic.pp.ua">Radios<i
                                     class="fas fa-radio"></i></a>
                         </li>
-                        <li class="nav-item active"><a class="nav-link" href="website.html">Websites<i
-                                    class="fa-fw fas fa-link"></i></a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="website.html">Websites<i class="fa-fw fas fa-link"></i>
+                            </a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="video.html">Videos<i
-                                    class="fas fa-video"></i></a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="video.html">Videos<i class="fas fa-video"></i>
+                            </a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="drive.html">Drive Music Player<i
-                                    class="fa-brands fa-google-drive"></i></a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="drive.html">Drive Music Player<i
+                                    class="fa-brands fa-google-drive"></i></a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link search-nav-link" href="#search">
                                 Search <i class="fas fa-magnifying-glass"></i>
@@ -463,8 +468,11 @@
                         Select a Playlist
                     </button>
                     <ul class="dropdown-menu" id="playlistMenu">
-                        <li><a class="dropdown-item" data-playlist="jpsongs">Japanese Songs</a></li>
+                        <li><a class="dropdown-item" data-playlist="jpsongs">Japanese Songs 1</a></li>
+                        <li><a class="dropdown-item" data-playlist="jpsongs2">Japanese Songs 2</a></li>
+                        <li><a class="dropdown-item" data-playlist="jpsongs3">Japanese Songs 3</a></li>
                         <li><a class="dropdown-item" data-playlist="bgm">Game / BGM</a></li>
+                        <li><a class="dropdown-item" data-playlist="mix">Mix</a></li>
                         <li><a class="dropdown-item" data-playlist="maplestory">MapleStory</a></li>
                     </ul>
                 </div>
@@ -490,13 +498,13 @@
                             <media-time-range></media-time-range>
                             <media-mute-button></media-mute-button>
                             <media-volume-range></media-volume-range>
-                            <button id="historyBtn" class="p-btn" data-bs-toggle="modal" data-bs-target="#recentPanel"
-                                data-bs-placement="top" title="View History">
-                                <i class="fa fa-history"></i> </button>
                             <button id="toggleRandom" class="p-btn" data-toggle="tooltip" data-placement="top"
                                 title="Tap to play randomly">
                                 <i class="fas fa-shuffle" id="randomplay"></i>
                             </button>
+                            <button id="historyBtn" class="p-btn" data-bs-toggle="modal" data-bs-target="#recentPanel"
+                                data-bs-placement="top" title="View History">
+                                <i class="fa fa-history"></i> </button>
                         </media-control-bar>
                     </media-controller>
                     <button id="togglePlayer" class="p-btn" data-toggle="tooltip" data-placement="top"
@@ -513,7 +521,7 @@
                         <span class="ml-1"><span id="nowPlaying" class="mr-1"></span>
                             <div class="d-flex align-items-center">
                                 <span id="metadataDisplay" class="mr-1"></span>
-                                <button id="copyIcon" data-toggle="too  ltip" data-placement="top"
+                                <button id="copyIcon" data-toggle="tooltip" data-placement="top"
                                     title="Copy track title">
                                     <i class="fas fa-copy"></i>
                                     <span class="copy-confirmation" style="display: none;">
@@ -521,11 +529,8 @@
                                     </span>
                                 </button>
                             </div>
-                            <div class="extra-info">
-                                <span id="metadataSource" class="metadata-source">
-                                </span>
-                                <span id="hlsStatus" class="hls-status"></span>
-                            </div>
+                            <span id="metadataSource" class="metadata-source">
+                            </span>
                         </span>
                     </div>
                 </div>
@@ -548,34 +553,37 @@
                 </div>
             </div>
 
-            <section class="footer text-center" id="footer">
-                <div class="page-info">
-                    <div class="alert alert-info alert-dismissible fade show mt-2" role="alert">
-                        <strong>Notice:</strong> If updates have been made, please press <kbd>Ctrl</kbd> + <kbd>F5</kbd>
-                        to
-                        hard refresh the page.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    <p class="mb-1">
-                        This site is currently under development. Some features may experience issues. We appreciate
-                        your understanding.
-                        Feedback email: <a href="mailto:sasalele-team@basic.pp.ua"
-                            class="text-light">sasalele-team@basic.pp.ua</a>
-                    </p>
-                    <div class="social-links mb-1">
-                        <a target="_blank" href="https://t.me/sasalelemusic">
-                            <i class="fab fa-telegram"></i>
-                        </a>
-                        <a target="_blank" href="https://github.com/Mikeexe2/Sasalele-Music-Station">
-                            <i class="fab fa-github"></i>
-                        </a>
-                    </div>
-                    <p class="last-updated">Last updated: <span id="last-updated-date"></span></p>
-                    <p>&copy; 2023-2025 Sasalele-Music-Station</p>
-                    <div class="progress-container">
-                        <p>Operated for: <span id="liveTime"></span> | Views: <span
-                                class="waline-pageview-count"></span>
-                        </p>
+            <section class="footer text-light py-4">
+                <div class="container">
+                    <div class="row justify-content-center text-center">
+                        <div class="col-lg-8">
+                            <p class="mb-1">
+                                This site is currently under development. Some features may experience issues. We
+                                appreciate
+                                your
+                                understanding.
+                            </p>
+                            <div class="social-links mb-1">
+                                <a target="_blank" href="https://t.me/sasalelemusic" class="btn btn-sm mx-1">
+                                    <i class="fab fa-telegram me-1"></i>Telegram
+                                </a>
+                                <a target="_blank" href="https://github.com/Mikeexe2/Sasalele-Music-Station"
+                                    class="btn btn-sm mx-1">
+                                    <i class="fab fa-github me-1"></i>GitHub
+                                </a>
+                            </div>
+                            <p class="mb-1 text-muted">
+                                <small>Last updated: <span id="last-updated-date"
+                                        class="fw-bold">Loading...</span></small>
+                            </p>
+                            <div class="stats mt-1">
+                                <p class="small">
+                                    Operated for: <span id="liveTime">00:00:00</span> |
+                                    Views: <span class="waline-pageview-count">0</span>
+                                </p>
+                                <p class="mb-1">&copy; 2023-present Sasalele-Music-Station</p>
+                            </div>
+                        </div>
                         <div class="mdui-progress">
                             <div class="mdui-progress-indeterminate"></div>
                         </div>

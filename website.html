@@ -58,7 +58,7 @@
                         <li class="nav-item"><a class="nav-link" href="https://basic.pp.ua">Radios<i
                                     class="fas fa-radio"></i></a>
                         </li>
-                        <li class="nav-item active"><a class="nav-link" href="website.html">Websites<i
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Websites<i
                                     class="fa-fw fas fa-link"></i></a>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="video.html">Videos<i
@@ -70,6 +70,11 @@
                             <div id="clock">
                                 <span id="clockTime"></span>
                                 <span id="clockDay"></span>
+                            </div>
+                            <div class="switch-container" data-toggle="tooltip" data-placement="bottom" title="Animate">
+                                <label class="switch">
+                                    <input type="checkbox" id="toggleAnimation">
+                                    <span class="slider"></span> </label>
                             </div>
                         </div>
                     </ul>
@@ -112,37 +117,39 @@
             </div>
             <div id="waline"></div>
         </div>
-        <section class="footer text-center" id="footer">
-            <div class="page-info">
-                <div class="alert alert-info alert-dismissible fade show mt-2" role="alert">
-                    <strong>Notice:</strong> If updates have been made, please press <kbd>Ctrl</kbd> + <kbd>F5</kbd> to
-                    hard refresh the page.
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <section class="footer text-light py-4">
+            <div class="container">
+                <div class="row justify-content-center text-center">
+                    <div class="col-lg-8">
+                        <p class="mb-1">
+                            This site is currently under development. Some features may experience issues. We appreciate
+                            your
+                            understanding.
+                        </p>
+                        <div class="social-links mb-1">
+                            <a target="_blank" href="https://t.me/sasalelemusic" class="btn btn-sm mx-1">
+                                <i class="fab fa-telegram me-1"></i>Telegram
+                            </a>
+                            <a target="_blank" href="https://github.com/Mikeexe2/Sasalele-Music-Station"
+                                class="btn btn-sm mx-1">
+                                <i class="fab fa-github me-1"></i>GitHub
+                            </a>
+                        </div>
+                        <p class="mb-1 text-muted">
+                            <small>Last updated: <span id="last-updated-date" class="fw-bold">Loading...</span></small>
+                        </p>
+                        <div class="stats mt-1">
+                            <p class="small">
+                                Operated for: <span id="liveTime">00:00:00</span> |
+                                Views: <span class="waline-pageview-count">0</span>
+                            </p>
+                        </div>
+                        <p class="mb-1">&copy; 2023-present Sasalele-Music-Station</p>
+                    </div>
+                    <div class="mdui-progress">
+                        <div class="mdui-progress-indeterminate"></div>
+                    </div>
                 </div>
-                <p class="mb-1">
-                    This site is currently under development. Some features may experience issues. We appreciate
-                    your understanding.
-                    Feedback email: <a href="mailto:sasalele-team@basic.pp.ua"
-                        class="text-light">sasalele-team@basic.pp.ua</a>
-                </p>
-                <div class="social-links mb-1">
-                    <a target="_blank" href="https://t.me/sasalelemusic">
-                        <i class="fab fa-telegram"></i>
-                    </a>
-                    <a target="_blank" href="https://github.com/Mikeexe2/Sasalele-Music-Station">
-                        <i class="fab fa-github"></i>
-                    </a>
-                </div>
-                <p class="last-updated">Last updated: <span id="last-updated-date"></span></p>
-            </div>
-            <p>&copy; 2023-2025 Sasalele-Music-Station</p>
-            <div class="progress-container">
-                <p>Operated for: <span id="liveTime"></span> | Views: <span class="waline-pageview-count"></span>
-                </p>
-                <div class="mdui-progress">
-                    <div class="mdui-progress-indeterminate"></div>
-                </div>
-            </div>
             </div>
         </section>
         <div class="back-to-top d-flex align-items-center justify-content-center"><i class="fa-solid fa-arrow-up"></i>
