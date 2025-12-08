@@ -1,3 +1,5 @@
+import { ref, get, onValue } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js';
+
 document.addEventListener('DOMContentLoaded', function () {
 
   let currentVideos = [];
@@ -10,10 +12,11 @@ document.addEventListener('DOMContentLoaded', function () {
   const genreNameElement = document.getElementById("genre-name");
   const channelCountElement = document.getElementById("channel-count");
   const searchChannel = document.getElementById("searchChannel");
-  const defaultGenre = "jpvideos";
+  const defaultGenre = "videos/jpvideos";
   const defaultGenreName = "Japanese";
   const m3uURLInput = document.getElementById("m3uURL");
   const channelThumbCache = {};
+  const db = window.appServices.db;
 
   m3uURLInput.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
@@ -22,15 +25,17 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  loadGenre(defaultGenre, defaultGenreName);
   document.getElementById("vidstopBtn").addEventListener("click", stopVideoPlayback);
 
   async function fetchVideoLinks(genre) {
     try {
-      const snapshot = await firebase.database().ref(`${genre}`).once("value");
+      const videoRef = ref(db, genre);
+      const snapshot = await get(videoRef);
+
       document.getElementById('loadingSpinner').style.display = 'none';
       const data = snapshot.val() || {};
       const videoLinks = Object.values(data);
+
       console.log(`${genre} loaded:`, videoLinks.length, "videos");
       return videoLinks;
     } catch (error) {
@@ -454,48 +459,53 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   function loadGenres() {
-    const db = firebase.database();
-    const ref = db.ref('ytByGenre');
-    ref.once('value')
-      .then(snapshot => {
-        if (!snapshot.exists()) {
-          genreSelect.innerHTML = '<option>No genres</option>';
-          return;
-        }
+    const ytRef = ref(db, 'ytByGenre');
 
-        genresData = {};
-        const keys = [];
-        snapshot.forEach(child => {
-          keys.push(child.key);
-          const items = [];
-          child.forEach(entry => {
-            const v = entry.val();
-            items.push({
-              id: entry.key,
-              link: v.link,
-              title: v.title
-            });
+    onValue(ytRef, snapshot => {
+      if (!snapshot.exists()) {
+        genreSelect.innerHTML = '<option>No genres</option>';
+        return;
+      }
+
+      genresData = {};
+      const keys = [];
+
+      snapshot.forEach(child => {
+        keys.push(child.key);
+
+        const items = [];
+        child.forEach(entry => {
+          const v = entry.val();
+          items.push({
+            id: entry.key,
+            link: v.link,
+            title: v.title
           });
-          genresData[child.key] = items;
         });
 
-        genreSelect.innerHTML = '';
-        keys.forEach(k => {
-          const opt = document.createElement('option');
-          opt.value = k;
-          opt.textContent = k;
-
-          if (k === 'Japanese') opt.selected = true;
-          genreSelect.appendChild(opt);
-        });
-
-        const defaultKey = genresData['Japanese'] ? 'Japanese' : keys[0];
-        genreSelect.value = defaultKey || '';
-        renderStreamsForGenre(defaultKey);
-      })
-      .catch(err => {
-        console.error('Error reading ytByGenre:', err);
+        genresData[child.key] = items;
       });
+
+      genreSelect.innerHTML = '';
+      keys.forEach(k => {
+        const opt = document.createElement('option');
+        opt.value = k;
+        opt.textContent = k;
+
+        if (k === 'Japanese') opt.selected = true;
+        genreSelect.appendChild(opt);
+      });
+
+      const currentSelected = genreSelect.value;
+      const defaultKey = genresData[currentSelected]
+        ? currentSelected
+        : (genresData['Japanese'] ? 'Japanese' : keys[0]);
+
+      genreSelect.value = defaultKey || '';
+      renderStreamsForGenre(defaultKey);
+    }, {
+      onlyOnce: false
+    });
   }
 
   function isChan2(id) {
@@ -631,6 +641,6 @@ document.addEventListener('DOMContentLoaded', function () {
       }) :
       '';
   }
-
+  loadGenre(defaultGenre, defaultGenreName);
   loadGenres();
 });
