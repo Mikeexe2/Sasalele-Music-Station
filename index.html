@@ -39,21 +39,11 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.css" />
         <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline-meta.css" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@waline/client@3.5.6/dist/waline.min.css">
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-LDY4BC680M"></script>
-        <script data-cfasync="false" src="https://cse.google.com/cse.js?cx=53e18594a81454c71">
-        </script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag() { dataLayer.push(arguments); }
-            gtag('js', new Date());
-
-            gtag('config', 'G-LDY4BC680M');
-        </script>
     </head>
 
     <body>
         <div id="background"></div>
-        <img id="randomimg" src="">
+        <img id="randomimg" src="" alt="Sasalele Music Station">
         <div id="content">
             <nav class="navbar sticky-top navbar-dark navbar-expand-md">
                 <a class="navbar-brand" href="https://basic.pp.ua/">
@@ -168,8 +158,7 @@
                 <div class="container my-3">
                     <div class="d-flex flex-wrap gap-2">
                         <div class="input-group flex-nowrap" style="max-width: 600px; width: auto;">
-                            <select class="form-select flex-shrink-0" id="searchOption"
-                                onchange="handleSearchOptionChange()" style="max-width: 300px;">
+                            <select class="form-select flex-shrink-0" id="searchOption" style="max-width: 300px;">
                                 <option selected>Search by Radio Browser API</option>
                                 <option value="byname">Name</option>
                                 <option value="bycountry">Country</option>
@@ -595,21 +584,9 @@
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"></script>
         <script type="module" src="https://cdn.jsdelivr.net/npm/media-chrome@4/+esm"></script>
-        <script data-cfasync="false" src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-        <script data-cfasync="false" src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-        <script data-cfasync="false" src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app-check.js"></script>
+        <script type="module" src="js/utils.js"></script>
         <script src="js/stats.js"></script>
-        <script src="js/script.js"></script>
-        <script type="module">
-            import { init } from 'https://cdn.jsdelivr.net/npm/@waline/client@3.5.6/dist/waline.js';
-
-            init({
-                el: '#waline',
-                serverURL: 'https://sasalele-comment-yo1b.vercel.app/',
-                lang: 'en',
-                pageview: true,
-            });
-        </script>
+        <script type="module" src="js/script.js"></script>
     </body>
 
 </html>

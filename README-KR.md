@@ -35,6 +35,7 @@
 
 ### 오픈 소스 기여
 
+- **icecast-metadata-js** - [GitHub](https://github.com/eshaz/icecast-metadata-js)
 - **Drive Music Player** - [GitHub](https://github.com/dandalpiaz/drive-music-player)
 - **APlayer** - [GitHub](https://github.com/DIYgod/APlayer)
 - **hls.js** - [GitHub](https://github.com/video-dev/hls.js)
