@@ -1,4 +1,5 @@
-const cover = document.getElementById('cover');
+import { ref, get, query, orderByChild, onValue, off } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js';
+
 const playerContainer = document.getElementById("player");
 const expandIcon = document.querySelector("#togglePlayer .fa-expand");
 const minimizeIcon = document.querySelector("#togglePlayer .fa-compress");
@@ -17,18 +18,16 @@ const searchInput = document.getElementById('searchInput');
 const searchButton = document.getElementById('searchButton');
 const searchResultsWrapper = document.getElementById('searchResultsWrapper');
 const dismissBtn = document.getElementById('dismissSearchResults');
-const collapseBtn = document.querySelector('[data-bs-toggle="collapse"]');
 const collapseIcon = document.getElementById('collapseIcon');
 const searchResultsCollapse = document.getElementById('searchResultsCollapse');
 const searchTermsContainer = document.getElementById('searchTerms');
 const VideoDisplay = document.getElementById("YouTubeVideo");
 const innerlastfm = document.getElementById('lastfmList');
-const inneritunes = document.getElementById('inneritunes');
-const innerdeezer = document.getElementById('innerdeezer');
+const inneritunes = document.getElementById('itunesList');
+const innerdeezer = document.getElementById('deezerList');
 const metadataElement = document.getElementById('metadataDisplay');
 const genreSelect = document.getElementById('genre-select');
 const mainAudio = document.getElementById('mainAudio');
-const proxyLink = "https://sasalele.apnic-anycast.workers.dev/";
 const toggleButton = document.getElementById('toggleButton');
 const panel = document.getElementById('sidePanel');
 const hideButton = document.getElementById('hideButton');
@@ -36,7 +35,6 @@ const searchNavLink = document.querySelector('.search-nav-link');
 const defaultGenre = "jmusic";
 const MAX_RETRIES = 3;
 const playlistMenu = document.getElementById('playlistMenu');
-const dropdownBtn = document.getElementById('playlistDropdown');
 const container = document.getElementById('hugeData');
 
 const countrySelectContainer = document.getElementById('countrySelectContainer');
@@ -51,9 +49,8 @@ const searchField = document.getElementById('search-field');
 const searchResultContainer = document.querySelector('.radio-result-container');
 const searchResultHeader = document.querySelector('.radio-result-header');
 const findradio = document.querySelector('.radioresultsdisplay');
-const downloadRadio = document.querySelector('.download-button');
+const db = window.appServices.db;
 
-let genreData = [];
 let hlsPlayer = null;
 let icecastPlayer = null;
 let currentStation = null;
@@ -64,13 +61,8 @@ let currentSearchTerm = '';
 let chosenUrl = '';
 let selectedPlaylist = null;
 let ap = null;
+let originalTitle = document.title;
 
-playlistMenu.addEventListener('click', e => {
-    if (!e.target.matches('.dropdown-item')) return;
-    e.preventDefault();
-    const selectedPlaylist = e.target.getAttribute('data-playlist');
-    loadPlaylist(selectedPlaylist);
-});
 function showLoading() {
     document.getElementById('loadingSpinner').style.display = 'block';
 }
@@ -112,9 +104,50 @@ function displayRecentTracks() {
     }
 }
 
-function trackHistory(trackName) {
+function updateMediaSessionMetadata(title, artist, media) {
+    const favicon = media.favicon;
+    const album = media.name;
+    if ('mediaSession' in navigator) {
+        navigator.mediaSession.metadata = new MediaMetadata({
+            title: title || 'Unknown Track',
+            artist: artist || album,
+            album: album || 'Playing Music',
+            artwork: [{
+                src: favicon || 'assets/sasalele_logo-removebg.webp',
+                sizes: '96x96'
+            }]
+        });
+    }
+}
+
+function trackHistory(trackName, media) {
     let recentTracks = JSON.parse(localStorage.getItem('recentTracks')) || [];
     const latestTrack = recentTracks[0];
+
+    const cleanTrackName = trackName.replace(/\.(mp3|m4a|ogg|wav|flac|aac|wma)$/i, '');
+
+    let trackTitle = cleanTrackName;
+    let trackArtist = '';
+
+    const dashCount = (cleanTrackName.match(/ - /g) || []).length;
+
+    if (dashCount === 1) {
+        const parts = cleanTrackName.split(' - ', 2);
+        if (parts.length === 2) {
+            trackArtist = parts[0].trim();
+            trackTitle = parts[1].trim();
+        }
+    } else {
+        trackArtist = cleanTrackName;
+        trackTitle = cleanTrackName;
+    }
+
+    updateMediaSessionMetadata(trackTitle, trackArtist, media);
+
+    if (document) {
+        document.title = `${cleanTrackName}`;
+    }
+
     if (trackName !== latestTrack) {
         recentTracks = recentTracks.filter(track => track !== trackName);
         recentTracks.unshift(trackName);
@@ -123,38 +156,46 @@ function trackHistory(trackName) {
         }
         localStorage.setItem('recentTracks', JSON.stringify(recentTracks));
     }
-    if (document.hidden) {
-        document.title = `${trackName}`;
-    }
 }
 
-function loadStations(genre) {
+async function loadStations(genre) {
     const selectedContainer = document.getElementById(genre);
     if (!selectedContainer) return;
 
     showLoading();
     selectedContainer.classList.add('active');
+    try {
+        const radref = `stations/${genre}`;
+        const webRef = ref(db, radref);
+        const snapshot = await get(webRef);
+        const data = snapshot.val() || {};
+        const stations = Object.values(data);
+        renderStations(stations, genre);
+        hideLoading();
+        if (currentSearchTerm && currentSearchTerm.trim() !== "") {
+            filterStations();
+        }
+    }
+    catch (err) {
+        console.error("[loadStations] Error fetching stations:", err);
+        selectedContainer.innerHTML = '<p class="no-stations">Error loading stations</p>';
+    }
+}
 
-    firebase.database().ref("stations/" + genre)
-        .once("value")
-        .then(snapshot => {
-            const data = snapshot.val() || {};
-            const stations = Object.values(data);
-            renderStations(stations, genre);
-            hideLoading();
-            if (currentSearchTerm && currentSearchTerm.trim() !== "") {
-                filterStations();
-            }
-        })
-        .catch(error => {
-            console.error("[loadStations] Error fetching stations:", error);
-            selectedContainer.innerHTML = '<p class="no-stations">Error loading stations</p>';
-        });
+function createElement(tag, id, innerHTML, attributes = {}) {
+    const element = document.createElement(tag);
+    if (id) element.id = id;
+    if (innerHTML) element.innerHTML = innerHTML;
+    for (const [key, value] of Object.entries(attributes)) {
+        element.setAttribute(key, value);
+    }
+    return element;
 }
 
 function initializeUI() {
     loadStations(defaultGenre);
     const defaultGenreButton = genreSelect?.querySelector(`[data-genre="${defaultGenre}"]`);
+
     defaultGenreButton.classList.add('active');
 
     genreSelect.addEventListener('click', (event) => {
@@ -167,6 +208,9 @@ function initializeUI() {
         });
         genreButton.classList.add('active');
     });
+
+    searchOption.addEventListener('change', handleSearchOptionChange);
+
     toggleButton.addEventListener('click', togglePanel);
 
     hideButton.addEventListener('click', function () {
@@ -216,6 +260,13 @@ function initializeUI() {
             confirmation.style.display = 'none';
             copyIconSymbol.style.display = 'inline';
         }, 300);
+    });
+
+    playlistMenu.addEventListener('click', e => {
+        if (!e.target.matches('.dropdown-item')) return;
+        e.preventDefault();
+        const selectedPlaylist = e.target.getAttribute('data-playlist');
+        loadPlaylist(selectedPlaylist);
     });
 
     dismissBtn.addEventListener('click', () => {
@@ -417,8 +468,8 @@ function handleDownloadClick(button) {
 function RadioM3UDownload(stationURL, stationName) {
     let cleanedURL = stationURL;
 
-    if (cleanedURL.startsWith(proxyLink)) {
-        cleanedURL = cleanedURL.substring(proxyLink.length);
+    if (cleanedURL.startsWith(appServices.proxyLink)) {
+        cleanedURL = cleanedURL.substring(appServices.proxyLink.length);
     }
 
     const patternsToRemove = [
@@ -506,12 +557,14 @@ async function stopPlayback() {
     metadataElement.textContent = '';
     document.getElementById('metadataSource').textContent = '';
     currentStation = null;
+    document.title = originalTitle;
     showNotification(`Playback stopped.`, 'success');
 }
 
 async function playMedia(media, button) {
     await stopPlayback();
     await new Promise(r => setTimeout(r, 100));
+    showNotification(`Playback started.`, 'success');
 
     if (window.currentlyActiveLi) {
         window.currentlyActiveLi.classList.remove('active-station');
@@ -565,6 +618,7 @@ function playHlsStream(media) {
         const maxRetries = 3;
         let currentUrl = media.url_resolved || media.url;
         let isUsingProxy = false;
+        const liveTrackName = media.name + ' (Live)';
 
         const loadStream = () => {
             hlsPlayer.loadSource(currentUrl);
@@ -603,12 +657,12 @@ function playHlsStream(media) {
         const originalUrl = media.url_resolved || media.url;
         chosenUrl = originalUrl;
 
-        if (chosenUrl.startsWith('http://') && !chosenUrl.startsWith(proxyLink)) {
+        if (chosenUrl.startsWith('http://') && !chosenUrl.startsWith(appServices.proxyLink)) {
             if (isRawIP(chosenUrl)) {
                 console.warn('Skipping proxy for: ' + chosenUrl);
                 showNotification(`Allow insecure content on your browser to play this stream or download the m3u file to play it`, 'warning');
             } else {
-                chosenUrl = proxyLink + chosenUrl;
+                chosenUrl = appServices.proxyLink + chosenUrl;
                 isUsingProxy = true;
             }
         }
@@ -620,6 +674,7 @@ function playHlsStream(media) {
             if (data && data.levels && data.levels.length > 0) {
                 const stationName = data.levels[0].name || "Live Stream";
                 metadataElement.textContent = stationName;
+                trackHistory(liveTrackName, media);
                 mainAudio.play();
 
                 retryCount = 0;
@@ -642,7 +697,7 @@ function playHlsStream(media) {
                         if (artist && title) {
                             displayText = `${artist} - ${title}`;
                         } else if (title) {
-                            displayText = `Now Playing: ${title}`;
+                            displayText = `${title}`;
                         } else if (artist) {
                             displayText = `By: ${artist}`;
                         } else if (album) {
@@ -652,15 +707,15 @@ function playHlsStream(media) {
                         } else if (comment) {
                             displayText = comment;
                         } else {
-                            displayText = "Stream is live (no metadata)";
+                            displayText = liveTrackName;
                         }
                         metadataElement.textContent = displayText;
-                        trackHistory(displayText);
+                        trackHistory(displayText, media);
                     },
                     onError: (error) => {
                         console.warn("ID3 parse error:", error);
                         metadataElement.textContent = "Stream is live (metadata unavailable)";
-                        trackHistory(media.name + ' Live');
+                        trackHistory(liveTrackName, media);
                     }
                 });
             });
@@ -722,6 +777,7 @@ function playHlsStream(media) {
 }
 
 function playHlsStreamWithConfig(media, url, retryCount) {
+    const liveTrackName = media.name + ' (Live)';
     if (Hls.isSupported()) {
         hlsPlayer = new Hls({
             debug: false,
@@ -737,7 +793,7 @@ function playHlsStreamWithConfig(media, url, retryCount) {
             if (data && data.levels && data.levels.length > 0) {
                 const stationName = data.levels[0].name || "Live Stream";
                 metadataElement.textContent = stationName;
-                trackHistory(stationName);
+                trackHistory(liveTrackName, media);
                 mainAudio.play();
             }
         });
@@ -765,12 +821,14 @@ function playIcecastStream(media) {
             icecastPlayer = new IcecastMetadataPlayer(currentUrl, {
                 audioElement: mainAudio,
                 onMetadata: (metadata) => {
-                    if (metadata.StreamTitle) {
-                        metadataElement.textContent = metadata.StreamTitle;
-                        trackHistory(metadata.StreamTitle);
+                    const currentTitle = metadata.StreamTitle ? metadata.StreamTitle.trim() : null;
+                    if (currentTitle) {
+                        metadataElement.textContent = currentTitle;
+                        trackHistory(currentTitle, media);
                     } else {
-                        metadataElement.textContent = media.name + ' Live';
-                        trackHistory(media.name + ' Live');
+                        const liveTrackName = media.name + ' (Live)';
+                        metadataElement.textContent = liveTrackName;
+                        trackHistory(liveTrackName, media);
                     }
                 },
                 metadataTypes: ["icy"],
@@ -818,7 +876,7 @@ function playIcecastStream(media) {
             console.log(`Retry ${retryCount}/${MAX_RETRIES}: Trying with proxy`);
             showNotification(`Icecast stream failed, trying proxy... (${retryCount}/${MAX_RETRIES})`, 'warning');
 
-            currentUrl = proxyLink + originalUrl;
+            currentUrl = appServices.proxyLink + originalUrl;
             isUsingProxy = true;
 
             setTimeout(() => {
@@ -872,12 +930,12 @@ function playIcecastStream(media) {
         playUnknownStream(media);
     }
 
-    if (originalUrl.startsWith('http://') && !originalUrl.startsWith(proxyLink)) {
+    if (originalUrl.startsWith('http://') && !originalUrl.startsWith(appServices.proxyLink)) {
         if (isRawIP(originalUrl)) {
             console.warn('Skipping proxy for: ' + originalUrl);
             showNotification(`Allow insecure content on your browser to play this stream or download the m3u file to play it`, 'warning');
         } else {
-            currentUrl = proxyLink + originalUrl;
+            currentUrl = appServices.proxyLink + originalUrl;
             isUsingProxy = true;
         }
     }
@@ -887,14 +945,14 @@ function playIcecastStream(media) {
 function playLautFM(media) {
     mainAudio.src = media.url;
     const apiUrl = `https://api.laut.fm/station/${getSpecialID(media.url)}/current_song`;
-    startMetadataUpdate(apiUrl, 'lautfm');
+    startMetadataUpdate(apiUrl, 'lautfm', media);
     mainAudio.play();
 }
 
 function playSpecial(media) {
     mainAudio.src = media.url;
     const apiUrl = `https://scraper2.onlineradiobox.com/${media.api}`;
-    startMetadataUpdate(apiUrl, 'special');
+    startMetadataUpdate(apiUrl, 'special', media);
     mainAudio.play();
 }
 /*
@@ -942,7 +1000,8 @@ function playUnknownStream(media) {
         } else {
             mainAudio.src = currentUrl;
             metadataElement.textContent = "Visit radio's homepage for playing info";
-            trackHistory(media.name + ' Live');
+            const liveTrackName = media.name + ' (Live)';
+            trackHistory(liveTrackName, media);
             mainAudio.play().catch((e) => {
                 console.warn("Stream failed to play", e);
                 handlePlaybackError(e);
@@ -983,7 +1042,7 @@ function playUnknownStream(media) {
             if (streamRetryCount <= MAX_RETRIES) {
                 console.log(`Retry ${streamRetryCount}/${MAX_RETRIES}: Trying proxy for mixed content`);
                 showNotification(`Mixed content blocked, trying proxy (${streamRetryCount}/${MAX_RETRIES})`, 'warning');
-                currentUrl = proxyLink + originalUrl;
+                currentUrl = appServices.proxyLink + originalUrl;
                 isUsingProxy = true;
                 setTimeout(() => {
                     attemptPlayback();
@@ -1003,19 +1062,19 @@ function playUnknownStream(media) {
             }
         }
     };
-    if (originalUrl.startsWith('http://') && !originalUrl.startsWith(proxyLink)) {
+    if (originalUrl.startsWith('http://') && !originalUrl.startsWith(appServices.proxyLink)) {
         if (isRawIP(originalUrl)) {
             console.warn('Skipping proxy for: ' + originalUrl);
             showNotification(`Allow insecure content on your browser to play this stream or download the m3u file to play it`, 'warning');
         } else {
-            currentUrl = proxyLink + originalUrl;
+            currentUrl = appServices.proxyLink + originalUrl;
             isUsingProxy = true;
         }
     }
     attemptPlayback();
 }
 
-function startMetadataUpdate(apiUrl, type) {
+function startMetadataUpdate(apiUrl, type, media) {
     const fetchMetadata = () => {
         fetch(apiUrl)
             .then(response => {
@@ -1025,7 +1084,7 @@ function startMetadataUpdate(apiUrl, type) {
                 return response.json();
             })
             .then(jsonData => {
-                updateMetadata(jsonData, type);
+                updateMetadata(jsonData, type, media);
             })
             .catch(error => {
                 console.error('Error fetching or processing data:', error);
@@ -1054,22 +1113,22 @@ function formatLautTitle(jsonData) {
         return streamTitle;
     } catch (error) {
         console.error('Failed to parse JSON:', error);
-        return 'Metadata not available';
+        return 'No metadata';
     }
 }
 
-function updateMetadata(jsonData, type) {
+function updateMetadata(jsonData, type, media) {
     switch (type) {
         case 'lautfm':
             const streamTitle = formatLautTitle(jsonData);
             metadataElement.textContent = streamTitle;
-            trackHistory(streamTitle);
+            trackHistory(streamTitle, media);
             break;
         case 'special':
             try {
                 const streamTitle = jsonData.title || 'No metadata';
                 metadataElement.textContent = streamTitle;
-                trackHistory(streamTitle);
+                trackHistory(streamTitle, media);
             } catch (error) {
                 console.error('Failed to parse JSON:', error);
                 metadataElement.textContent = 'No metadata';
@@ -1187,7 +1246,7 @@ function radioSearch() {
     searchResultContainer.classList.remove('active');
     findradio.style.display = "block";
 
-    fetch(`${proxyLink}https://de2.api.radio-browser.info/json/stations/${searchBy}/${searchValue}?hidebroken=true&limit=150&order=clickcount&reverse=true`)
+    fetch(`${appServices.proxyLink}https://de2.api.radio-browser.info/json/stations/${searchBy}/${searchValue}?hidebroken=true&limit=150&order=clickcount&reverse=true`)
         .then(response => response.json())
         .then(data => {
             if (data.length > 0) {
@@ -1273,10 +1332,10 @@ searchInput.addEventListener('keyup', function (event) {
 });
 
 async function searchAcrossApis(searchTerm) {
-    const lastfmUrl = `https://ws.audioscrobbler.com/2.0/?method=track.search&format=json&limit=5&api_key=b9747c75368b42160af4301c2bf654a1&track=${encodeURIComponent(searchTerm)}`;
-    const youtubeUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&type=video&q=${encodeURIComponent(searchTerm)}&key=AIzaSyAwM_RLjqj8dbbMAP5ls4qg1olDsaxSq5s`;
-    const itunesUrl = `${proxyLink}https://itunes.apple.com/search?limit=5&media=music&term=${encodeURIComponent(searchTerm)}`;
-    const deezerUrl = `${proxyLink}https://api.deezer.com/search?q=${encodeURIComponent(searchTerm)}&limit=5`;
+    const lastfmUrl = `https://ws.audioscrobbler.com/2.0/?method=track.search&format=json&limit=5&api_key=${appServices.lastfm}&track=${encodeURIComponent(searchTerm)}`;
+    const youtubeUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&type=video&q=${encodeURIComponent(searchTerm)}&key=${appServices.ytkey}`;
+    const itunesUrl = `${appServices.proxyLink}https://itunes.apple.com/search?limit=5&media=music&term=${encodeURIComponent(searchTerm)}`;
+    const deezerUrl = `${appServices.proxyLink}https://api.deezer.com/search?q=${encodeURIComponent(searchTerm)}&limit=5`;
 
     const safeJsonFetch = async (url, apiName) => {
         try {
@@ -1532,20 +1591,7 @@ function getWebsiteURL(label, searchTerm) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const db = firebase.database();
-
     initializeUI();
-
-    function createElement(tag, id, innerHTML, attributes = {}) {
-        const element = document.createElement(tag);
-        if (id) element.id = id;
-        if (innerHTML) element.innerHTML = innerHTML;
-        for (const [key, value] of Object.entries(attributes)) {
-            element.setAttribute(key, value);
-        }
-        return element;
-    }
-
     class Sasalele {
         home() {
             const chatContainer = document.querySelector('.chat_container');
@@ -1692,9 +1738,10 @@ document.addEventListener('DOMContentLoaded', () => {
         refreshChat() {
             const chatContentContainer = document.getElementById('chat_content_container');
             const currentUser = this.getName();
-
-            db.ref('chats/').off();
-            db.ref('chats/').orderByChild('timestamp').on('value', (snapshot) => {
+            const chatsRef = ref(db, 'chats/');
+            off(chatsRef);
+            const chatQuery = query(chatsRef, orderByChild('timestamp'));
+            onValue(chatQuery, (snapshot) => {
                 chatContentContainer.innerHTML = '';
                 const chats = snapshot.val() || {};
                 const chatEntries = Object.entries(chats).sort((a, b) => a[1].timestamp - b[1].timestamp);
@@ -1760,37 +1807,62 @@ document.addEventListener('DOMContentLoaded', () => {
     if (app.getName()) app.chat();
 });
 
-function loadPlaylist(playlistName) {
-    showLoading();
-    const audioRef = firebase.database().ref(`audioList/${playlistName}`);
+async function loadPlaylist(playlistName) {
+    try {
+        showLoading();
+        const audioRef = ref(db, `audioList/${playlistName}`);
+        const snapshot = await get(audioRef);
+        const data = snapshot.val();
 
-    audioRef.once("value")
-        .then(snapshot => {
-            const data = snapshot.val();
-            if (!data) {
-                hideLoading();
-                console.warn(`No audio data found for: ${playlistName}`);
-                if (ap) ap.destroy();
-                container.style.display = 'none';
-                return;
-            }
-
-            const audioArray = Object.values(data);
-            container.style.display = 'block';
-
-            if (ap) ap.destroy();
-
-            ap = new APlayer({
-                container: document.getElementById('aplayer'),
-                lrcType: 1,
-                audio: audioArray
-            });
-
+        if (!data) {
             hideLoading();
-        })
-        .catch(error => {
-            console.error("Err:", error);
-            hideLoading();
-            alert("Error loading playlist: " + error.message);
+            console.warn(`No audio data found for: ${playlistName}`);
+            ap.destroy();
+            container.style.display = 'none';
+            return;
+        }
+
+        const audioArray = Object.values(data).map(item => ({
+            name: item.name,
+            artist: item.artist,
+            url: item.url,
+            cover: item.cover || 'assets/sasalele_logo-removebg.webp'
+        }));
+
+        if (container) container.style.display = 'block';
+        if (ap) ap.destroy();
+
+        ap = new APlayer({
+            container: document.getElementById('aplayer'),
+            lrcType: 1,
+            audio: audioArray
         });
+
+        ap.on('play', updatePlayerTitleAndMediaSession);
+        hideLoading();
+    } catch (error) {
+        console.error("Error loading playlist:", error);
+        hideLoading();
+        alert("Error loading playlist: " + error.message);
+    }
+
+    function updatePlayerTitleAndMediaSession() {
+        const currentTrackIndex = ap.list.index;
+        const currentTrack = ap.list.audios[currentTrackIndex];
+        if (currentTrack) {
+            const trackName = `${currentTrack.artist || 'Unknown Artist'} - ${currentTrack.name || 'Unknown Title'}`;
+            trackHistory(trackName, playlistName);
+            if ('mediaSession' in navigator) {
+                navigator.mediaSession.metadata = new MediaMetadata({
+                    title: currentTrack.name || 'Unknown Track',
+                    artist: currentTrack.artist || 'Unknown Artist',
+                    album: playlistName,
+                    artwork: [{
+                        src: currentTrack.cover || 'assets/sasalele_logo-removebg.webp',
+                        sizes: '96x96'
+                    }]
+                });
+            }
+        }
+    }
 }
