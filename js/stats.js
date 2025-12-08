@@ -51,6 +51,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     window.showNotification = showNotification;
 
+    function showLoadingSpinner() {
+        document.getElementById('loadingSpinner').style.display = 'block';
+    }
+
+    function hideLoadingSpinner() {
+        document.getElementById('loadingSpinner').style.display = 'none';
+    }
+
+    window.showLoadingSpinner = showLoadingSpinner;
+    window.hideLoadingSpinner = hideLoadingSpinner;
+
     $(function () {
         $('[data-toggle="tooltip"]').tooltip({
             trigger: 'hover'
@@ -85,24 +96,45 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById("liveTime").innerHTML = diffYears + " Years " + diffDays + " Days " + diffHours + " Hours " + diffMinutes + " Minutes " + diffSeconds + " Seconds";
     }
 
-    async function fetchLastCommitDate() {
-        const apiUrl = `https://api.github.com/repos/Mikeexe2/Sasalele-Music-Station/commits`;
-        try {
-            const response = await fetch(apiUrl);
-            const commits = await response.json();
-            if (commits && commits.length > 0) {
-                const lastCommitDate = commits[0].commit.author.date;
-                const formattedDate = new Date(lastCommitDate).toLocaleDateString('en-GB', {
-                    weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
-                });
-                document.getElementById('last-updated-date').textContent = formattedDate;
-            } else {
-                console.error('No commits found for the repository');
+    const getLastCommitDate = (() => {
+        const storageKey = "lastCommitDate";
+
+        return async function () {
+            let cachedDate = localStorage.getItem(storageKey);
+            if (cachedDate) {
+
+                document.getElementById('last-updated-date').textContent = cachedDate;
+
+                return cachedDate;
             }
-        } catch (error) {
-            console.error('Error fetching commit data:', error);
-        }
-    }
+            const apiUrl = `https://api.github.com/repos/Mikeexe2/Sasalele-Music-Station/commits`;
+            try {
+                const response = await fetch(apiUrl);
+                const commits = await response.json();
+
+                if (commits && commits.length > 0) {
+                    const lastCommitDate = commits[0].commit.author.date;
+                    const formattedDate = new Date(lastCommitDate).toLocaleDateString('en-GB', {
+                        weekday: 'long',
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric'
+                    });
+
+                    localStorage.setItem(storageKey, formattedDate);
+
+                    document.getElementById('last-updated-date').textContent = formattedDate;
+                    return formattedDate;
+                } else {
+                    console.error('No commits found for the repository');
+                    return null;
+                }
+            } catch (error) {
+                console.error('Error fetching commit data:', error);
+                return null;
+            }
+        };
+    })();
 
     const clockTime = document.getElementById("clockTime");
     const clockDay = document.getElementById("clockDay");
@@ -136,6 +168,22 @@ document.addEventListener('DOMContentLoaded', function () {
         'assets/0.webp', 'assets/1.webp', 'assets/2.webp',
         'assets/3.webp', 'assets/4.webp', 'assets/5.webp', 'assets/6.webp'
     ];
+
+    const gradients = [
+        "var(--gradient-vivid-cyan-blue-to-vivid-purple)",
+        "var(--gradient-light-green-cyan-to-vivid-green-cyan)",
+        "var(--gradient--luminous-vivid-amber-to-luminous-vivid-orange)",
+        "var(--gradient--luminous-vivid-orange-to-vivid-red)",
+        "var(--gradient--very-light-gray-to-cyan-bluish-gray)",
+        "var(--gradient--cool-to-warm-spectrum)",
+        "var(gradient--blush-light-purple)",
+        "var(--gradient--blush-bordeaux)",
+        "var(--gradient--luminous-dusk)",
+        "var(--gradient--pale-ocean)",
+        "var(--gradient--electric-grass)",
+        "var(--gradient--midnight)"
+    ];
+
     const beatPatterns = [
         [600, 600, 600, 600],
         [400, 400, 800, 400],
@@ -261,15 +309,24 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    function setRandomBackground() {
+    function setRandomBg() {
         const randomIndex = getRandomInt(0, bgimages.length - 1);
         const selectedImage = bgimages[randomIndex];
         document.body.style.backgroundImage = `url(${selectedImage})`;
     }
 
+    function setRandomBackground() {
+        const index = Math.floor(Math.random() * gradients.length);
+        document.body.style.backgroundImage = gradients[index];
+        document.body.style.backgroundSize = "cover";
+        document.body.style.backgroundPosition = "center";
+        document.body.style.backgroundRepeat = "no-repeat";
+    }
+
     setRandomBackground();
+    //setRandomBg();
     updateClock();
     setInterval(updateClock, 1000);
     siteTime();
-    fetchLastCommitDate();
+    getLastCommitDate();
 });

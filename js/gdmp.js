@@ -1,7 +1,7 @@
-import { ref, get } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js';
-
+import { ref, get } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";
 document.addEventListener('DOMContentLoaded', function () {
     const CLIENT_ID = appServices.clientId;
+    const db = appServices.db;
     const apiKey = appServices.apiKey;
     const form = document.getElementById('folderForm');
     const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest';
@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const audio = document.getElementById('audio');
     const source = document.getElementById('source');
     const fileTree = document.getElementById("file-tree");
-    const db = window.appServices.db;
 
     let tokenClient;
     let gapiInited = false;
@@ -24,32 +23,31 @@ document.addEventListener('DOMContentLoaded', function () {
     let playing;
 
     let folderId = localStorage.getItem("parentfolder");
-
-    function loadScript(src, onload) {
+    function loadScript(src) {
         return new Promise((resolve, reject) => {
-            const script = document.createElement("script");
-            script.src = src;
-            script.async = true;
-            script.defer = true;
-            script.onload = () => {
-                if (typeof onload === "function") onload();
-                resolve();
-            };
-            script.onerror = reject;
-            document.head.appendChild(script);
+            const s = document.createElement("script");
+            s.src = src;
+            s.async = true;
+            s.defer = true;
+            s.onload = resolve;
+            s.onerror = reject;
+            document.head.appendChild(s);
         });
     }
 
-    async function loadGoogleApis() {
-        await loadScript("https://apis.google.com/js/api.js", () => gapiLoaded());
-        await loadScript("https://accounts.google.com/gsi/client", () => gisLoaded());
-    }
+    async function initGoogleDrive() {
+        await loadScript("https://apis.google.com/js/api.js");
+        await loadScript("https://accounts.google.com/gsi/client");
+
+        gapiLoaded();
+        gisLoaded();
+    };
 
 
     function gapiLoaded() {
         gapi.load('client', initializeGapiClient);
     }
-    // window.gapiLoaded = gapiLoaded();
+
 
     async function initializeGapiClient() {
         await gapi.client.init({
@@ -66,8 +64,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         gisInited = true;
     }
-    // window.gisLoaded = gisLoaded();
-    loadGoogleApis();
 
     function handleAuthClick(folderId) {
         tokenClient.callback = async (resp) => {
@@ -78,8 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // set parentfolder as root if nothing set  
             if (folderId == "" || folderId == null) {
                 localStorage.setItem("parentfolder", "root");
-                folderId = "root";
-                parent.value = folderId;
+                parent.value = "root";
             }
 
             // only load initial contents on first auth
@@ -140,28 +135,54 @@ document.addEventListener('DOMContentLoaded', function () {
             var files = response.result.files;
             var container = document.getElementById(location);
             if (files && files.length > 0) {
-                for (var i = 0; i < files.length; i++) {
-                    var file = files[i];
+
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
                     if (file.mimeType.includes("application/vnd.google-apps.folder")) {
-                        container.innerHTML += `
-                    <details id="${file.id}">
-                        <summary onclick="getContents('${file.id}')"><span>${file.name}</span></summary>
-                    </details>
-                    `;
-                    } else if (file.mimeType.includes("audio")) {
+                        const details = document.createElement("details");
+                        details.id = file.id;
+                        const summary = document.createElement("summary");
+                        summary.textContent = file.name;
+                        summary.addEventListener("click", () => {
+                            getContents(file.id);
+                        });
+
+                        details.appendChild(summary);
+                        container.appendChild(details);
+                    }
+                    else if (file.mimeType.includes("audio")) {
+                        const trackContainer = document.createElement("div");
+                        trackContainer.className = "track-container";
+
                         const safeFileJSON = encodeURIComponent(JSON.stringify(file));
-                        container.innerHTML += `
-                    <div class="track-container">
-                       <button class="track" data-file="${safeFileJSON}" onclick="playTrack(this)"><i class="fas fa-play"></i> ${file.name}</button>
-                        <a href="${file.webContentLink}" download="${file.name}" class="download"><i class="fas fa-download"></i></a>
-                    </div>  
-                    `;
+
+                        const button = document.createElement("button");
+                        button.className = "track";
+                        button.dataset.file = safeFileJSON;
+                        button.innerHTML = `<i class="fas fa-play"></i> ${file.name}`;
+
+                        button.addEventListener("click", () => {
+                            playTrack(button, "link");
+                        });
+
+                        const download = document.createElement("a");
+                        download.href = file.webContentLink;
+                        download.download = file.name;
+                        download.className = "download";
+                        download.innerHTML = `<i class="fas fa-download"></i>`;
+
+                        trackContainer.appendChild(button);
+                        trackContainer.appendChild(download);
+                        container.appendChild(trackContainer);
                     }
                 }
+
                 container.classList.add("loaded");
-            } else {
-                alert('No files found.');
             }
+            else {
+                alert("No files found.");
+            }
+
             container.firstElementChild.focus();
         }).catch(function (error) {
             if (error.status === 401) {
@@ -186,7 +207,6 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
         playing = false;
     }
-
 
     function playTrack(element, type) {
         const stationDataString = element.dataset.file;
@@ -227,12 +247,7 @@ document.addEventListener('DOMContentLoaded', function () {
         source.src = "";
         audio.load();
 
-        const spinner = `<div id="spinner">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>`;
-        playing.innerHTML += spinner;
+        showLoadingSpinner();
 
         if (type === 'demo') {
             // Handle demo track
@@ -240,16 +255,14 @@ document.addEventListener('DOMContentLoaded', function () {
             audio.load();
             audio.oncanplay = () => {
                 audio.play();
-                if (document.getElementById("spinner")) {
-                    document.getElementById("spinner").remove();
-                }
+                hideLoadingSpinner();
                 updateMediaSession(file);
             };
             return;
         }
         // public link
         if (type === 'link') {
-            fetch(`https://www.googleapis.com/drive/v3/files/${id}?alt=media&key=${apiKey}`)
+            fetch(`https://www.googleapis.com/drive/v3/files/${id}?alt=media&key=${appServices.apiKey}`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -262,18 +275,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     audio.load();
                     audio.oncanplay = () => {
                         audio.play();
-                        if (document.getElementById("spinner")) {
-                            document.getElementById("spinner").remove();
-                        }
+                        hideLoadingSpinner();
                         updateMediaSession(file);
                     };
                 })
                 .catch(error => {
                     console.error('Error fetching the public link track:', error);
                     alert('There was an error playing the track.');
-                    if (document.getElementById("spinner")) {
-                        document.getElementById("spinner").remove();
-                    }
+                    hideLoadingSpinner();
                     updateMediaSession(file);
                 });
             return;
@@ -290,9 +299,7 @@ document.addEventListener('DOMContentLoaded', function () {
             audio.load();
             audio.oncanplay = () => {
                 audio.play();
-                if (document.getElementById("spinner")) {
-                    document.getElementById("spinner").remove();
-                }
+                hideLoadingSpinner();
                 updateMediaSession(file);
             };
         }).catch(function (error) {
@@ -406,9 +413,9 @@ document.addEventListener('DOMContentLoaded', function () {
         content.innerHTML = "";
         localStorage.removeItem("email");
     }
+
     async function loadFolders() {
-        const gdref = "gdpublic";
-        const webRef = ref(db, gdref);
+        const webRef = ref(db, 'gdpublic');
         const snapshot = await get(webRef);
         const folders = [];
         try {
@@ -423,7 +430,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
             populateDropdown(folders);
-            document.getElementById('loadingSpinner').style.display = 'none';
+            hideLoadingSpinner();
         } catch (err) {
             console.error("Error loading folders", err);
         }
@@ -453,13 +460,26 @@ document.addEventListener('DOMContentLoaded', function () {
         fileTree.innerHTML = '';
     }
 
-    function showLoadingSpinner() {
-        document.getElementById('loadingSpinner').style.display = 'block';
+    function loadLink() {
+        const linkInput = document.getElementById('shareLinkInput');
+        const link = linkInput.value.trim();
+
+        if (link === '') {
+            alert('Please enter a Google Drive folder link.');
+            return;
+        }
+        clearFileTree();
+        const folderIdMatch = link.match(/folders\/([^/?]+)/);
+
+        if (folderIdMatch) {
+            const folderId = folderIdMatch[1];
+            fetchDriveFiles(folderId);
+            fileTree.style.display = 'block';
+        } else {
+            alert('Invalid Google Drive folder link.');
+        }
     }
 
-    function hideLoadingSpinner() {
-        document.getElementById('loadingSpinner').style.display = 'none';
-    }
 
     function fetchDriveFiles(folderId, subfolderContent = null) {
         showLoadingSpinner();
@@ -543,26 +563,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    function loadLink() {
-        const linkInput = document.getElementById('shareLinkInput');
-        const link = linkInput.value.trim();
-
-        if (link === '') {
-            alert('Please enter a Google Drive folder link.');
-            return;
-        }
-        clearFileTree();
-        const folderIdMatch = link.match(/folders\/([^/?]+)/);
-
-        if (folderIdMatch) {
-            const folderId = folderIdMatch[1];
-            fetchDriveFiles(folderId);
-            fileTree.style.display = 'block';
-        } else {
-            alert('Invalid Google Drive folder link.');
-        }
-    }
-
     function downloadTrack(event, fileId, fileName) {
         const apiUrl = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=${apiKey}`;
         event.preventDefault();
@@ -588,6 +588,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     showLoadingSpinner();
     loadFolders();
+    getFolderId();
     LL.addEventListener('click', loadLink);
     CF.addEventListener('click', changeFolder);
     next.addEventListener('click', nextTrack);
@@ -606,4 +607,5 @@ document.addEventListener('DOMContentLoaded', function () {
             playTrack(target, 'demo');
         }
     });
+    initGoogleDrive();
 });
