@@ -162,6 +162,18 @@
     }
 }
 
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .anim-fade-slide {
     animation: fade-slide .2s ease-out forwards
 }
@@ -1876,10 +1888,6 @@ media-seek-forward-button:hover {
     animation: spin 1s linear infinite
 }
 
-.pb-100 {
-    padding-bottom: 100px !important
-}
-
 .tips-btn {
     border: none;
     background: 0 0;
@@ -1907,33 +1915,67 @@ media-seek-forward-button:hover {
     color: var(--apple-white)
 }
 
-#contents,
-#demo,
-#file-tree {
-    border-radius: 10px;
-    max-width: 90%;
-    margin: 0 auto;
-    padding: 10px;
-    margin-bottom: 10px;
-    justify-content: center;
-    color: var(--apple-white);
-    background-color: var(--black-90-alpha)
+#parentfolder {
+    width: 50%
 }
 
-#intro {
-    margin-bottom: 5px
+#contents,
+#file-tree,
+#demo {
+    max-width: 90%;
+    margin: 0 auto;
+    background: rgba(25, 25, 35, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+details {
+    margin: 5px 0;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    background: rgba(30, 30, 45, 0.6);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+details[open] {
+    background: rgba(35, 35, 55, 0.8);
+    border-color: rgba(106, 17, 203, 0.7);
+}
+
+summary {
+    padding: 12px 18px;
+    cursor: pointer;
+    color: #e0e0e0;
+    position: relative;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
 }
 
 .track-container {
+    padding-top: 5px !important;
     display: flex;
-    justify-content: space-between;
-    background-color: var(--black-50-alpha);
+    align-items: center;
+    background: rgba(40, 40, 60, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 8px;
-    transition: background-color .2s ease
+    transition: all 0.3s ease;
+    gap: 10px;
+    height: auto;
+}
+
+.track-container.is-playing {
+    border: 4px solid var(--caution-red-vivid-100);
 }
 
 .track-container:hover {
-    background-color: var(--white-20-alpha)
+    border-color: rgba(106, 17, 203, 0.5);
+    background: rgba(50, 50, 70, 0.6);
+    transform: translateY(-1px);
 }
 
 .track {
@@ -1954,6 +1996,54 @@ media-seek-forward-button:hover {
     color: #0af
 }
 
+.download {
+    flex-shrink: 0;
+    cursor: pointer;
+    border-radius: 6px;
+    background: rgba(37, 117, 252, 0.2);
+    color: var(--expressive-green);
+    text-decoration: none;
+    padding: 5px;
+    margin-left: 10px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+
+.download:hover {
+    background: rgba(37, 117, 252, 0.3);
+    color: white;
+    transform: scale(1.05);
+    border-color: rgba(37, 117, 252, 0.5);
+}
+
+.download .fas.fa-download {
+    font-size: 12px;
+}
+
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+details[open]>*:not(summary) {
+    animation: slideDown 0.3s ease;
+}
+
+details details {
+    margin-left: 20px;
+    margin-right: 5px;
+    border-radius: 8px;
+}
+
 .track:last-of-type {
     margin-bottom: 15px
 }
@@ -1962,27 +2052,8 @@ media-seek-forward-button:hover {
     margin-top: 0
 }
 
-.download {
-    flex-shrink: 0;
-    color: var(--expressive-green);
-    text-decoration: none;
-    padding: 5px;
-    margin-left: 10px;
-    font-size: 14px;
-    transition: color .2s ease
-}
-
-.download:hover {
-    color: #fff
-}
-
 .playing {
-    color: var(--expressive-green) !important;
-    outline: 2px solid #0af
-}
-
-#parentfolder {
-    width: 50%
+    color: var(--expressive-green) !important
 }
 
 @keyframes spin {
@@ -2087,39 +2158,47 @@ media-seek-forward-button:hover {
     }
 }
 
-details summary {
-    padding: 5px
-}
-
-.track,
-details .p,
-summary {
-    font-size: var(--font-size--medium)
-}
-
-summary span {
-    padding-right: 20px;
-    font-weight: 500
-}
-
-details {
-    border: #28a745 !important;
-    margin-bottom: 10px
-}
-
-details details {
-    margin-left: 15px
-}
-
 details details:last-of-type {
     margin-bottom: 10px
 }
 
 @media only screen and (max-width: 575.98px),
-(pointer:coarse) {
+(pointer: coarse) and (hover: none) {
     .tooltip {
-        display: none !important
+        display: none !important;
     }
+
+    #copyIcon:hover,
+    #copyIcon:active,
+    .p-btn:hover,
+    .p-btn:active,
+    #next-btn:hover,
+    #next-btn:active,
+    #prev-btn:hover,
+    #prev-btn:active {
+        background: none !important;
+        color: var(--apple-white) !important;
+        transform: none !important;
+        box-shadow: none !important;
+        border-color: transparent !important;
+    }
+
+    media-controller {
+        --media-control-hover-background: transparent;
+    }
+
+    media-mute-button:hover,
+    media-mute-button:active,
+    media-play-button:hover,
+    media-play-button:active,
+    media-seek-backward-button:hover,
+    media-seek-backward-button:active,
+    media-seek-forward-button:hover,
+    media-seek-forward-button:active {
+        --media-icon-color: var(--apple-white) !important;
+        background: transparent !important;
+    }
+
 }
 
 @media only screen and (max-width: 575.98px) {
@@ -2206,10 +2285,6 @@ details details:last-of-type {
         top: 250px
     }
 
-    #intro {
-        margin: .2em auto 0 auto
-    }
-
     .itunes-item {
         display: block
     }
@@ -2221,6 +2296,30 @@ details details:last-of-type {
         max-width: 100%;
         padding: 10px 15px;
         border-radius: 0
+    }
+
+    #contents,
+    #file-tree,
+    #demo {
+        padding: 5px;
+        margin: 5px;
+    }
+
+    summary {
+        padding: 4px 6px;
+    }
+
+    .track-container {
+        padding: 5px 2px;
+    }
+
+    .download {
+        padding: 0;
+        font-size: 12px;
+    }
+
+    details details {
+        margin-left: 2px;
     }
 
     #player {
