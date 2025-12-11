@@ -1,4 +1,4 @@
-import { ref, get, query, orderByChild, onValue, off } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js';
+import { ref, set, get, onValue, query, orderByChild, push } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js';
 
 const playerContainer = document.getElementById("player");
 const expandIcon = document.querySelector("#togglePlayer .fa-expand");
@@ -26,16 +26,17 @@ const innerlastfm = document.getElementById('lastfmList');
 const inneritunes = document.getElementById('itunesList');
 const innerdeezer = document.getElementById('deezerList');
 const metadataElement = document.getElementById('metadataDisplay');
+const metaSource = document.getElementById('metadataSource');
 const genreSelect = document.getElementById('genre-select');
-const mainAudio = document.getElementById('mainAudio');
 const toggleButton = document.getElementById('toggleButton');
-const panel = document.getElementById('sidePanel');
+const sidePanel = document.getElementById('sidePanel');
 const hideButton = document.getElementById('hideButton');
 const searchNavLink = document.querySelector('.search-nav-link');
 const defaultGenre = "jmusic";
 const MAX_RETRIES = 3;
 const playlistMenu = document.getElementById('playlistMenu');
 const container = document.getElementById('hugeData');
+const selectedContainer = document.getElementById("selected");
 
 const countrySelectContainer = document.getElementById('countrySelectContainer');
 const countrySelect = document.getElementById('countrySelect');
@@ -48,8 +49,11 @@ const findRadioBtn = document.getElementById("radiosearch");
 const searchField = document.getElementById('search-field');
 const searchResultContainer = document.querySelector('.radio-result-container');
 const searchResultHeader = document.querySelector('.radio-result-header');
+const debouncedFilterStations = debounce(filterStations, 200);
 const findradio = document.querySelector('.radioresultsdisplay');
 const db = window.appServices.db;
+const coolDown = 2000;
+const mediaController = document.getElementById('media-controller');
 
 let hlsPlayer = null;
 let icecastPlayer = null;
@@ -62,25 +66,39 @@ let chosenUrl = '';
 let selectedPlaylist = null;
 let ap = null;
 let originalTitle = document.title;
+let isRandomPlayRunning = false;
+let debounceTimeout;
+let sakuin = [];
 
-function showLoading() {
-    document.getElementById('loadingSpinner').style.display = 'block';
-}
-
-function hideLoading() {
-    document.getElementById('loadingSpinner').style.display = 'none';
+function debounce(func, delay = 300) {
+    return function (...args) {
+        clearTimeout(debounceTimeout);
+        debounceTimeout = setTimeout(() => {
+            func.apply(this, args);
+        }, delay);
+    };
 }
 
 function togglePanel() {
-    const isOpen = panel.classList.contains('open');
-    panel.classList.toggle('open', !isOpen);
+    const toggleButton = document.getElementById('toggleButton');
+    const icon = toggleButton.querySelector('i');
+    sidePanel.classList.toggle('open');
+    const isNowOpen = sidePanel.classList.contains('open');
+    toggleButton.setAttribute('aria-expanded', isNowOpen);
+    if (isNowOpen) {
+        icon.classList.remove('fa-comment');
+        icon.classList.add('fa-times');
+    } else {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-comment');
+    }
 }
 
 function updatePlayerUI(media) {
     coverImage.src = `${media.favicon ? media.favicon : 'assets/radios/Unidentified2.webp'}`;
     coverImage.classList.add('rotating');
     nowPlaying.innerHTML = `<a href="${media.homepage || media.url}" target="_blank" class="homepagelink">${media.name}</a>`;
-    document.getElementById('metadataSource').textContent = `Stream type: ${media.host || 'from API'}`;
+    metaSource.textContent = `Stream type: ${media.host || 'from API'}`;
 }
 
 function displayRecentTracks() {
@@ -118,6 +136,13 @@ function updateMediaSessionMetadata(title, artist, media) {
             }]
         });
     }
+}
+
+function stopMediaSession() {
+    if ('mediaSession' in navigator) {
+        navigator.mediaSession.metadata = null;
+    }
+    document.title = originalTitle;
 }
 
 function trackHistory(trackName, media) {
@@ -159,37 +184,27 @@ function trackHistory(trackName, media) {
 }
 
 async function loadStations(genre) {
-    const selectedContainer = document.getElementById(genre);
-    if (!selectedContainer) return;
-
-    showLoading();
+    showLoadingSpinner();
     selectedContainer.classList.add('active');
     try {
-        const radref = `stations/${genre}`;
-        const webRef = ref(db, radref);
-        const snapshot = await get(webRef);
-        const data = snapshot.val() || {};
-        const stations = Object.values(data);
-        renderStations(stations, genre);
-        hideLoading();
+        const stationsRef = ref(db, `stations/${genre}`);
+        const snapshot = await get(stationsRef);
+        if (snapshot.exists()) {
+            const data = snapshot.val();
+            const stations = Object.values(data);
+            renderStations(stations);
+        } else {
+            console.warn(`No data available for genre: ${genre}`);
+            selectedContainer.innerHTML = '<p class="no-stations">No stations available</p>';
+        }
+        hideLoadingSpinner();
         if (currentSearchTerm && currentSearchTerm.trim() !== "") {
             filterStations();
         }
+    } catch (err) {
+        console.error("Error fetching stations:", err);
+        hideLoadingSpinner();
     }
-    catch (err) {
-        console.error("[loadStations] Error fetching stations:", err);
-        selectedContainer.innerHTML = '<p class="no-stations">Error loading stations</p>';
-    }
-}
-
-function createElement(tag, id, innerHTML, attributes = {}) {
-    const element = document.createElement(tag);
-    if (id) element.id = id;
-    if (innerHTML) element.innerHTML = innerHTML;
-    for (const [key, value] of Object.entries(attributes)) {
-        element.setAttribute(key, value);
-    }
-    return element;
 }
 
 function initializeUI() {
@@ -211,32 +226,21 @@ function initializeUI() {
 
     searchOption.addEventListener('change', handleSearchOptionChange);
 
-    toggleButton.addEventListener('click', togglePanel);
+    if (hideButton) {
+        hideButton.addEventListener('click', togglePanel);
+    }
 
-    hideButton.addEventListener('click', function () {
-        panel.classList.remove('open');
-    });
+    if (toggleButton) {
+        toggleButton.addEventListener('click', togglePanel);
+    }
 
     stationSearch.addEventListener('input', function () {
         currentSearchTerm = this.value;
-        filterStations();
+        debouncedFilterStations();
     });
 
     stopBtn.addEventListener('click', () => {
         stopPlayback();
-    });
-
-    searchNavLink.addEventListener('click', function (e) {
-        e.preventDefault();
-        searchInput.focus();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            const offset = target.offsetTop - 60;
-            window.scrollTo({
-                top: offset,
-                behavior: 'smooth'
-            });
-        }
     });
 
     historyDisplay.addEventListener('click', function () {
@@ -301,12 +305,30 @@ function initializeUI() {
     }
 }
 
-function renderStations(stations, genre) {
-    const selectedContainer = document.getElementById(genre);
-    if (!selectedContainer) return;
+if (searchNavLink) {
+    searchNavLink.addEventListener('click', handleSearchNavClick);
+}
 
+function handleSearchNavClick(e) {
+    e.preventDefault();
+    const targetId = this.getAttribute('href');
+    const targetElement = document.querySelector(targetId);
+    if (targetElement) {
+        const offset = targetElement.offsetTop - 60;
+        window.scrollTo({
+            top: offset,
+            behavior: 'smooth'
+        });
+        setTimeout(() => {
+            searchInput.focus();
+        }, 150);
+    }
+}
+
+function renderStations(stations) {
     if (stations.length === 0) {
         selectedContainer.innerHTML = '<p class="no-stations">No stations available in this genre</p>';
+        sakuin = [];
         return;
     }
 
@@ -347,21 +369,16 @@ function renderStations(stations, genre) {
             }
         });
     }
-
-    if (typeof stationCount !== 'undefined' && stationCount) {
-        stationCount.textContent = stations.length;
-    }
+    sakuin = stations.map((_, index) => index);
+    stationCount.textContent = stations.length;
 }
 
 function filterStations() {
     const searchTerm = currentSearchTerm.trim().toLowerCase();
     const activeGenre = document.querySelector('.genre-content.active');
-
     if (!activeGenre) return;
-
     const items = activeGenre.querySelectorAll('li');
     let visibleCount = 0;
-
     items.forEach(item => {
         try {
             const station = JSON.parse(decodeURIComponent(item.dataset.station));
@@ -369,13 +386,11 @@ function filterStations() {
             const host = (station.host || '').toLowerCase();
             const homepage = (station.homepage || '').toLowerCase();
             const url = (station.url || '').toLowerCase();
-
             const match =
                 name.includes(searchTerm) ||
                 host.includes(searchTerm) ||
                 homepage.includes(searchTerm) ||
                 url.includes(searchTerm)
-
             item.style.display = match ? '' : 'none';
             if (match) visibleCount++;
         } catch (err) {
@@ -385,7 +400,8 @@ function filterStations() {
     });
 
     let noResults = activeGenre.querySelector('.no-results');
-    if (visibleCount === 0 && !noResults) {
+
+    if (visibleCount === 0 && searchTerm.length > 0 && !noResults) {
         noResults = document.createElement('p');
         noResults.className = 'no-results';
         noResults.textContent = 'No stations found matching your search';
@@ -396,16 +412,30 @@ function filterStations() {
         activeGenre.appendChild(noResults);
     } else if (visibleCount > 0 && noResults) {
         noResults.remove();
+    } else if (visibleCount === 0 && searchTerm.length === 0 && noResults) {
+        noResults.remove();
     }
 };
 
-randomplay.addEventListener('click', function () {
+randomplay.addEventListener('click', async function () {
+    if (isRandomPlayRunning) {
+        showNotification(`Please slow down!`, 'warning');
+        return;
+    }
+    isRandomPlayRunning = true;
     const activeGenre = document.querySelector('.genre-content.active');
-    if (!activeGenre) return;
-    const visibleStations = [...activeGenre.querySelectorAll('li:not([style*="display: none"])')];
-    if (visibleStations.length === 0) return;
-    const randomIndex = Math.floor(Math.random() * visibleStations.length);
-    const randomStationLi = visibleStations[randomIndex];
+    if (!activeGenre) {
+        isRandomPlayRunning = false;
+        return;
+    }
+    const visibleStations = activeGenre.querySelectorAll('li');
+    if (sakuin.length === 0) {
+        isRandomPlayRunning = false;
+        return;
+    }
+    const randomIndex = Math.floor(Math.random() * sakuin.length);
+    const stationIndexToPlay = sakuin[randomIndex];
+    const randomStationLi = visibleStations[stationIndexToPlay];
     try {
         const stationDataString = randomStationLi.dataset.station;
         if (!stationDataString) {
@@ -414,9 +444,13 @@ randomplay.addEventListener('click', function () {
         }
         const media = JSON.parse(decodeURIComponent(stationDataString));
         const playButton = randomStationLi.querySelector('.main-play-button');
-        playMedia(media, playButton);
+        await playMedia(media, playButton);
     } catch (err) {
         console.error("Failed to start random playback:", err);
+    } finally {
+        setTimeout(() => {
+            isRandomPlayRunning = false;
+        }, coolDown);
     }
 });
 
@@ -505,20 +539,11 @@ function RadioM3UDownload(stationURL, stationName) {
 }
 
 async function stopPlayback() {
+    if (!isPlaying) return;
     console.log("[stopPlayback] called");
-    if (!mainAudio) return;
-    if (mainAudio) {
-        mainAudio.pause();
-        console.log("[stopPlayback] mainAudio paused");
-    }
-
     if (icecastPlayer) {
-        try {
-            icecastPlayer.stop();
-            icecastPlayer.detachAudioElement();
-        } catch (err) {
-            console.error("[cleanupPlayers] icecast cleanup error:", err);
-        }
+        icecastPlayer.stop();
+        await icecastPlayer.detachAudioElement();
         icecastPlayer = null;
     }
 
@@ -532,11 +557,12 @@ async function stopPlayback() {
         hlsPlayer = null;
     }
 
-    try {
-        mainAudio.removeAttribute("src");
-        mainAudio.load();
-    } catch (err) {
-        console.warn("[stopPlayback] failed to reset mainAudio:", err);
+    const currentMedia = mediaController.querySelector('[slot="media"]');
+    if (currentMedia) {
+        currentMedia.pause();
+        currentMedia.removeAttribute('src');
+        currentMedia.load();
+        currentMedia.remove();
     }
 
     if (metadataInterval) {
@@ -549,26 +575,27 @@ async function stopPlayback() {
         metadataEventSource = null;
     }
 
-    isPlaying = false;
-    coverImage.src = "assets/NezukoYay.gif";
-    coverImage.classList.remove('rotating');
-    document.querySelectorAll('li').forEach(li => li.classList.remove('active-station'));
-    nowPlaying.textContent = '';
-    metadataElement.textContent = '';
-    document.getElementById('metadataSource').textContent = '';
+    if (window.currentlyActiveLi) {
+        window.currentlyActiveLi.classList.remove('active-station');
+    }
     currentStation = null;
-    document.title = originalTitle;
-    showNotification(`Playback stopped.`, 'success');
+    isPlaying = false;
+    coverImage.classList.remove('rotating');
+    coverImage.src = "assets/ball.svg";
+    nowPlaying.innerHTML = '';
+    metadataElement.textContent = '';
+    metaSource.textContent = '';
+
+    stopMediaSession();
 }
 
 async function playMedia(media, button) {
     await stopPlayback();
-    await new Promise(r => setTimeout(r, 100));
-    showNotification(`Playback started.`, 'success');
+    const newAudioElement = document.createElement('audio');
+    newAudioElement.setAttribute('slot', 'media');
+    mediaController.appendChild(newAudioElement);
 
-    if (window.currentlyActiveLi) {
-        window.currentlyActiveLi.classList.remove('active-station');
-    }
+    showNotification(`Playback started.`, 'success');
 
     const parentLi = button.closest('li');
     if (parentLi) {
@@ -580,24 +607,24 @@ async function playMedia(media, button) {
 
     switch (media.host) {
         case "icecast":
-            playIcecastStream(media);
+            playIcecastStream(newAudioElement, media);
         case "zeno":
-            playIcecastStream(media);
+            playIcecastStream(newAudioElement, media);
             break;
         case "lautfm":
-            playLautFM(media);
+            playLautFM(newAudioElement, media);
             break;
         case "special":
-            playSpecial(media);
+            playSpecial(newAudioElement, media);
             break;
         case "hls":
-            playHlsStream(media);
+            playHlsStream(newAudioElement, media);
             break;
         case "unknown":
-            playUnknownStream(media);
+            playUnknownStream(newAudioElement, media);
             break;
         default:
-            playIcecastStream(media);
+            playIcecastStream(newAudioElement, media);
             break;
     }
     currentStation = media;
@@ -605,7 +632,7 @@ async function playMedia(media, button) {
     isPlaying = true;
 }
 
-function playHlsStream(media) {
+function playHlsStream(audioEl, media) {
     if (Hls.isSupported()) {
         hlsPlayer = new Hls({
             debug: false,
@@ -622,7 +649,7 @@ function playHlsStream(media) {
 
         const loadStream = () => {
             hlsPlayer.loadSource(currentUrl);
-            hlsPlayer.attachMedia(mainAudio);
+            hlsPlayer.attachMedia(audioEl);
         };
 
         const handleRetry = (errorType) => {
@@ -639,7 +666,11 @@ function playHlsStream(media) {
 
                     hlsPlayer.destroy();
                     setTimeout(() => {
-                        playHlsStreamWithConfig(media, currentUrl, retryCount);
+                        const newAudioElement = document.createElement('audio');
+                        newAudioElement.setAttribute('slot', 'media');
+                        newAudioElement.setAttribute('crossorigin', 'anonymous');
+                        mediaController.appendChild(newAudioElement);
+                        playHlsStreamWithConfig(newAudioElement, media, currentUrl, retryCount);
                     }, 1000);
                     return true;
                 }
@@ -675,7 +706,7 @@ function playHlsStream(media) {
                 const stationName = data.levels[0].name || "Live Stream";
                 metadataElement.textContent = stationName;
                 trackHistory(liveTrackName, media);
-                mainAudio.play();
+                audioEl.play();
 
                 retryCount = 0;
             }
@@ -765,10 +796,10 @@ function playHlsStream(media) {
                 }
             }
         });
-    } else if (mainAudio.canPlayType('application/vnd.apple.mpegurl')) {
+    } else if (audioEl.canPlayType('application/vnd.apple.mpegurl')) {
         showNotification('HLS: Using native support', 'warning');
-        mainAudio.src = media.url_resolved || media.url;
-        mainAudio.play();
+        audioEl.src = media.url_resolved || media.url;
+        audioEl.play();
     } else {
         metadataElement.textContent = 'HLS not supported in this browser';
         showNotification('HLS: Not supported', 'warning');
@@ -776,7 +807,7 @@ function playHlsStream(media) {
     }
 }
 
-function playHlsStreamWithConfig(media, url, retryCount) {
+function playHlsStreamWithConfig(audioEl, media, url, retryCount) {
     const liveTrackName = media.name + ' (Live)';
     if (Hls.isSupported()) {
         hlsPlayer = new Hls({
@@ -787,14 +818,14 @@ function playHlsStreamWithConfig(media, url, retryCount) {
         });
 
         hlsPlayer.loadSource(url);
-        hlsPlayer.attachMedia(mainAudio);
+        hlsPlayer.attachMedia(audioEl);
 
         hlsPlayer.on(Hls.Events.MANIFEST_PARSED, (event, data) => {
             if (data && data.levels && data.levels.length > 0) {
                 const stationName = data.levels[0].name || "Live Stream";
                 metadataElement.textContent = stationName;
                 trackHistory(liveTrackName, media);
-                mainAudio.play();
+                audioEl.play();
             }
         });
 
@@ -808,20 +839,26 @@ function playHlsStreamWithConfig(media, url, retryCount) {
     }
 }
 
-function playIcecastStream(media) {
+function playIcecastStream(audioEl, media) {
     let retryCount = 0;
     let originalUrl = media.url_resolved || media.url;
     let currentUrl = originalUrl;
     let isUsingProxy = false;
     let fallbackTriggered = false;
 
-    function attemptIcecastPlayback() {
-        showNotification(`Attempting Icecast playback (attempt ${retryCount + 1}/${MAX_RETRIES + 1})`, 'success');
+    async function attemptIcecastPlayback() {
+        showNotification(`Attempting playback (attempt ${retryCount + 1}/${MAX_RETRIES + 1})`, 'success');
+        if (icecastPlayer) {
+            console.log("it is still there, why!!!????");
+            icecastPlayer.stop();
+            await icecastPlayer.detachAudioElement();
+        }
+
         try {
             icecastPlayer = new IcecastMetadataPlayer(currentUrl, {
-                audioElement: mainAudio,
+                audioElement: audioEl,
                 onMetadata: (metadata) => {
-                    const currentTitle = metadata.StreamTitle ? metadata.StreamTitle.trim() : null;
+                    const currentTitle = metadata.StreamTitle;
                     if (currentTitle) {
                         metadataElement.textContent = currentTitle;
                         trackHistory(currentTitle, media);
@@ -832,7 +869,7 @@ function playIcecastStream(media) {
                     }
                 },
                 metadataTypes: ["icy"],
-                icyDetectionTimeout: 10000,
+                icyDetectionTimeout: 2000,
                 enableLogging: false,
                 onError: (message) => {
                     console.error("Icecast player error:", message);
@@ -840,10 +877,7 @@ function playIcecastStream(media) {
                 },
                 onLoad: () => {
                     metadataElement.textContent = 'Loading...';
-                },
-                onEnd: () => {
-                    metadataElement.textContent = 'Stream ended';
-                },
+                }
             });
 
             icecastPlayer.play().catch(err => {
@@ -857,21 +891,18 @@ function playIcecastStream(media) {
         }
     }
 
-    function handleIcecastError(error) {
+    async function handleIcecastError(error) {
         retryCount++;
-
         console.log(`Icecast error (attempt ${retryCount}/${MAX_RETRIES + 1}):`, error);
-
         if (icecastPlayer) {
             try {
                 icecastPlayer.stop();
-                icecastPlayer.detachAudioElement();
+                await icecastPlayer.detachAudioElement();
             } catch (err) {
-                console.warn("Icecast cleanup error:", err);
+                console.warn("Icecast cleanup error during retry:", err);
             }
             icecastPlayer = null;
         }
-
         if (!isUsingProxy && retryCount <= MAX_RETRIES) {
             console.log(`Retry ${retryCount}/${MAX_RETRIES}: Trying with proxy`);
             showNotification(`Icecast stream failed, trying proxy... (${retryCount}/${MAX_RETRIES})`, 'warning');
@@ -907,27 +938,23 @@ function playIcecastStream(media) {
         showNotification(`Icecast failed, trying alternative method...`, 'warning');
 
         if (icecastPlayer) {
-            try {
-                icecastPlayer.stop();
-                icecastPlayer.detachAudioElement();
-            } catch (err) {
-                console.warn("Icecast cleanup error:", err);
-            }
+            icecastPlayer.stop();
+            await icecastPlayer.detachAudioElement();
             icecastPlayer = null;
         }
 
         try {
-            if (!mainAudio.paused) {
-                mainAudio.pause();
-            }
-            mainAudio.currentTime = 0;
-            mainAudio.src = '';
+            if (audioEl) {
+                audioEl.destroy();
+            };
         } catch (err) {
             console.warn("Audio cleanup error:", err);
         }
-
-        await new Promise(r => setTimeout(r, 500));
-        playUnknownStream(media);
+        const newAudioElement = document.createElement('audio');
+        newAudioElement.setAttribute('slot', 'media');
+        newAudioElement.setAttribute('crossorigin', 'anonymous');
+        mediaController.appendChild(newAudioElement);
+        playUnknownStream(newAudioElement, media);
     }
 
     if (originalUrl.startsWith('http://') && !originalUrl.startsWith(appServices.proxyLink)) {
@@ -942,38 +969,38 @@ function playIcecastStream(media) {
     attemptIcecastPlayback();
 }
 
-function playLautFM(media) {
-    mainAudio.src = media.url;
+function playLautFM(audioEl, media) {
+    audioEl.src = media.url;
     const apiUrl = `https://api.laut.fm/station/${getSpecialID(media.url)}/current_song`;
     startMetadataUpdate(apiUrl, 'lautfm', media);
-    mainAudio.play();
+    audioEl.play();
 }
 
-function playSpecial(media) {
-    mainAudio.src = media.url;
+function playSpecial(audioEl, media) {
+    audioEl.src = media.url;
     const apiUrl = `https://scraper2.onlineradiobox.com/${media.api}`;
     startMetadataUpdate(apiUrl, 'special', media);
-    mainAudio.play();
+    audioEl.play();
 }
 /*
 function playZeno(media) {
     mainAudio.src = media.url;
     const zenoapiUrl = `https://api.zeno.fm/mounts/metadata/subscribe/${getSpecialID(media.url)}`;
-
+ 
     metadataEventSource = new EventSource(zenoapiUrl);
     metadataEventSource.addEventListener('message', function (event) {
         processData(event.data);
     });
-
+ 
     metadataEventSource.addEventListener('error', function (event) {
         console.error('Stream endpoint not active:', event);
         metadataElement.textContent = 'Stream endpoint not active';
     });
-
+ 
     function processData(data) {
         try {
             const parsedData = JSON.parse(data);
-
+ 
             if (parsedData.streamTitle) {
                 const streamTitle = parsedData.streamTitle.trim();
                 trackHistory(streamTitle);
@@ -984,88 +1011,87 @@ function playZeno(media) {
         } catch (error) {
             console.error('Failed to parse JSON:', error);
         }
-
+ 
     }
     mainAudio.play();
 }*/
 
-function playUnknownStream(media) {
+function playUnknownStream(audioEl, media) {
     let streamRetryCount = 0;
-    let originalUrl = media.url_resolved || media.url;
+    const originalUrl = media.url_resolved || media.url;
     let currentUrl = originalUrl;
     let isUsingProxy = false;
     const attemptPlayback = () => {
         if (currentUrl.includes('.m3u8')) {
-            playHlsStream(media);
+            if (audioEl) {
+                audioEl.destroy();
+            }
+            const newAudioElement = document.createElement('audio');
+            newAudioElement.setAttribute('slot', 'media');
+            newAudioElement.setAttribute('crossorigin', 'anonymous');
+            mediaController.appendChild(newAudioElement);
+            playHlsStream(newAudioElement, media);
         } else {
-            mainAudio.src = currentUrl;
+            audioEl.src = currentUrl;
             metadataElement.textContent = "Visit radio's homepage for playing info";
             const liveTrackName = media.name + ' (Live)';
             trackHistory(liveTrackName, media);
-            mainAudio.play().catch((e) => {
-                console.warn("Stream failed to play", e);
-                handlePlaybackError(e);
-            });
+            audioEl.play().catch(handlePlaybackError);
         }
     };
     const handlePlaybackError = (error) => {
         streamRetryCount++;
-        console.log(`Playback error (attempt ${streamRetryCount}/${MAX_RETRIES}):`, error.name, error.message);
-        const shouldRetryWithOriginal = isUsingProxy && (
-            error.name === 'SecurityError' ||
-            error.message.includes("not allowed") ||
-            error.message.includes("404") ||
-            error.message.includes("403") ||
-            error.message.includes("500") ||
-            error.name === 'NotSupportedError' ||
-            error.message.includes("supported source")
-        );
-        const shouldRetryWithProxy = !isUsingProxy && (
-            error.name === 'SecurityError' ||
-            error.message.includes("not allowed") ||
-            error.message.includes("mixed content")
-        );
-
-        if (shouldRetryWithOriginal) {
-            if (streamRetryCount <= MAX_RETRIES) {
-                console.log(`Retry ${streamRetryCount}/${MAX_RETRIES}: Switching to original URL from proxy`);
-                showNotification(`Proxy failed, retrying with original URL (${streamRetryCount}/${MAX_RETRIES})`, 'warning');
-                currentUrl = originalUrl;
-                isUsingProxy = false;
-                setTimeout(() => {
-                    attemptPlayback();
-                }, 1000);
-                return;
-            }
-        }
-        else if (shouldRetryWithProxy) {
-            if (streamRetryCount <= MAX_RETRIES) {
-                console.log(`Retry ${streamRetryCount}/${MAX_RETRIES}: Trying proxy for mixed content`);
-                showNotification(`Mixed content blocked, trying proxy (${streamRetryCount}/${MAX_RETRIES})`, 'warning');
-                currentUrl = appServices.proxyLink + originalUrl;
-                isUsingProxy = true;
-                setTimeout(() => {
-                    attemptPlayback();
-                }, 1000);
-                return;
-            }
-        }
-
-        if (streamRetryCount >= MAX_RETRIES) {
+        console.warn(`Playback error (attempt ${streamRetryCount}/${MAX_RETRIES}):`, error.name, error.message);
+        if (streamRetryCount > MAX_RETRIES) {
             showNotification(`Failed to play stream after ${MAX_RETRIES} attempts. Stopping playback.`, 'danger');
             stopPlayback();
+            return;
+        }
+        if (shouldRetry(error)) {
+            retryStream(error);
         } else {
-            showNotification(`Stream failed to play: ${error.message} (Attempt ${streamRetryCount}/${MAX_RETRIES})`, 'warning');
-            if (streamRetryCount >= MAX_RETRIES) {
-                showNotification(`Playback failed after ${MAX_RETRIES} attempts. Stopping playback.`, 'danger');
-                stopPlayback();
-            }
+            console.warn(`${error.message}`);
+            showNotification(`Stream failed to play. (Attempt ${streamRetryCount}/${MAX_RETRIES})`, 'warning');
+            stopPlayback();
         }
     };
+
+    const shouldRetry = (error) => {
+        const retryConditions = [
+            'SecurityError',
+            'NotSupportedError',
+            '404',
+            '403',
+            '500',
+            'not allowed',
+            'supported source',
+            'mixed content'
+        ];
+        return retryConditions.some(condition =>
+            error.name.includes(condition) || error.message.includes(condition)
+        );
+    };
+
+    const retryStream = (error) => {
+        let retryMessage = '';
+        if (isUsingProxy && (error.name === 'SecurityError' || error.message.includes('not allowed') || error.message.includes('404') || error.message.includes('403') || error.message.includes('500'))) {
+            retryMessage = `Retrying with original URL (${streamRetryCount}/${MAX_RETRIES})`;
+            currentUrl = originalUrl;
+            isUsingProxy = false;
+        } else if (!isUsingProxy && (error.name === 'SecurityError' || error.message.includes('mixed content'))) {
+            retryMessage = `Retrying with proxy (${streamRetryCount}/${MAX_RETRIES})`;
+            currentUrl = appServices.proxyLink + originalUrl;
+            isUsingProxy = true;
+        }
+        console.log(`Retry ${streamRetryCount}/${MAX_RETRIES}: ${retryMessage}`);
+        showNotification(retryMessage, 'warning');
+        setTimeout(attemptPlayback, 1000);
+    };
+
     if (originalUrl.startsWith('http://') && !originalUrl.startsWith(appServices.proxyLink)) {
         if (isRawIP(originalUrl)) {
             console.warn('Skipping proxy for: ' + originalUrl);
-            showNotification(`Allow insecure content on your browser to play this stream or download the m3u file to play it`, 'warning');
+            showNotification('Allow insecure content on your browser to play this stream or download the m3u file to play it', 'warning');
         } else {
             currentUrl = appServices.proxyLink + originalUrl;
             isUsingProxy = true;
@@ -1220,7 +1246,7 @@ function clearSearchField() {
 }
 
 function radioSearch() {
-    showLoading();
+    showLoadingSpinner();
     const searchBy = searchOption.value;
     let searchValue = '';
     switch (searchBy) {
@@ -1250,7 +1276,7 @@ function radioSearch() {
         .then(response => response.json())
         .then(data => {
             if (data.length > 0) {
-                hideLoading();
+                hideLoadingSpinner();
                 searchResultHeader.innerHTML = `Top 150 Radio Search Results for: <mark id="searchTerms">${searchValue}</mark>`;
                 searchResultContainer.classList.add('active');
                 searchResultContainer.innerHTML = '';
@@ -1279,13 +1305,13 @@ function radioSearch() {
                     searchResultContainer.appendChild(radioItem);
                 });
             } else {
-                hideLoading();
+                hideLoadingSpinner();
                 searchResultHeader.style.display = "block";
                 searchResultHeader.textContent = 'No result found.';
             }
         })
         .catch(error => {
-            hideLoading();
+            hideLoadingSpinner();
             console.error('Error fetching data:', error);
         });
 
@@ -1592,232 +1618,308 @@ function getWebsiteURL(label, searchTerm) {
 
 document.addEventListener('DOMContentLoaded', () => {
     initializeUI();
-    class Sasalele {
-        home() {
-            const chatContainer = document.querySelector('.chat_container');
-            if (chatContainer) chatContainer.innerHTML = '';
-            this.createJoinForm();
-        }
 
-        chat() {
-            this.createChat();
-        }
+    if (typeof db !== 'undefined') {
+        window.chatApp = new ChatApp();
+    }
+});
 
-        createJoinForm() {
-            const parent = this;
-            const joinFormContainer = document.querySelector('.joinform');
-            joinFormContainer.innerHTML = '';
+class ChatApp {
+    constructor() {
+        this.chatPaths = {
+            general: 'chats/general',
+            mixednuts: 'chats/mixednuts'
+        };
+        this.currentChatPath = this.chatPaths.general;
+        this.currentUser = null;
+        this.activeListener = null;
+        this.isSending = false;
+        this.joinFormEl = document.querySelector('.joinform');
+        this.chatContainerEl = document.querySelector('.chat_container');
+        this.init();
+    }
 
-            const joinInnerContainer = createElement('div', 'join_inner_container');
-            const joinInputContainer = createElement('div', 'join_input_container');
-            const joinButtonContainer = createElement('div', 'join_button_container');
+    init() {
+        this.setupChatButtons();
+        this.checkUserSession();
+    }
 
-            const joinInput = createElement('input', 'join_input', '', {
-                maxlength: 20,
-                placeholder: 'Input your name...'
-            });
-            const joinButton = createElement('button', 'join_button', 'Join <i class="fas fa-sign-in-alt"></i>');
-
-            joinButton.classList.add('disabled');
-
-            joinInput.addEventListener('keyup', () => {
-                const isEnabled = joinInput.value.length > 0;
-                joinButton.classList.toggle('enabled', isEnabled);
-                joinButton.classList.toggle('disabled', !isEnabled);
-            });
-
-            joinButton.addEventListener('click', () => {
-                if (joinButton.classList.contains('enabled')) {
-                    parent.saveName(joinInput.value);
-                    joinFormContainer.innerHTML = '';
-                    parent.createChat();
-                }
-            });
-
-            joinInputContainer.append(joinInput);
-            joinButtonContainer.append(joinButton);
-            joinInnerContainer.append(joinInputContainer, joinButtonContainer);
-            joinFormContainer.append(joinInnerContainer);
-        }
-
-        createChat() {
-            const parent = this;
-            const chatContainer = document.querySelector('.chat_container');
-            chatContainer.innerHTML = '';
-
-            const chatInnerContainer = createElement('div', 'chat_inner_container');
-            const chatContentContainer = createElement('div', 'chat_content_container');
-            const chatInputContainer = createElement('div', 'chat_input_container');
-            const chatLogoutContainer = createElement('div', 'chat_logout_container');
-
-            const chatInput = createElement('input', 'chat_input', '', {
-                maxlength: 2000,
-                placeholder: `Hi ${parent.getName()}. Say something...`
-            });
-            const chatInputSend = createElement('button', 'chat_input_send', `<i class="far fa-paper-plane"></i>`, { disabled: true });
-            const chatLogout = createElement('button', 'chat_logout', `${parent.getName()} • logout`);
-
-            chatLogout.onclick = () => {
-                localStorage.clear();
-                parent.home();
-            };
-
-            chatInput.addEventListener('input', () => {
-                const hasValue = chatInput.value.length > 0;
-                chatInputSend.disabled = !hasValue;
-                chatInputSend.classList.toggle('enabled', hasValue);
-            });
-
-            chatInput.addEventListener('keyup', (e) => {
-                if (e.key === 'Enter' && chatInput.value.trim() !== '') {
-                    chatInputSend.click();
-                }
-            });
-
-            chatInputSend.addEventListener('click', () => {
-                const message = chatInput.value.trim();
-                if (message) {
-                    parent.sendMessage(message);
-                    chatInput.value = '';
-                    chatInput.focus();
-                    chatInputSend.disabled = true;
-                    chatInputSend.classList.remove('enabled');
-                }
-            });
-
-            chatInputContainer.append(chatInput, chatInputSend);
-            chatLogoutContainer.append(chatLogout);
-            chatInnerContainer.append(chatContentContainer, chatInputContainer, chatLogoutContainer);
-            chatContainer.append(chatInnerContainer);
-
-            parent.refreshChat();
-        }
-
-        saveName(name) {
-            localStorage.setItem('name', name);
-        }
-
-        getName() {
-            const name = localStorage.getItem('name');
-            if (!name) {
-                this.home();
-                return null;
-            }
-            return name;
-        }
-
-        linkify(text) {
-            const urlRegex = /(https?:\/\/[^\s]+)/g;
-            return text.replace(urlRegex, (url) => {
-                const safeURL = url.replace(/"/g, "&quot;");
-                return `<a href="${safeURL}" target="_blank" style="color:#007bff; text-decoration:underline;">${url}</a>`;
-            });
-        }
-
-        formatTime(timestamp) {
-            const date = new Date(timestamp);
-            const now = new Date();
-            const isToday = date.toDateString() === now.toDateString();
-            const timeStr = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            if (isToday) return timeStr;
-            return `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1)
-                .toString()
-                .padStart(2, '0')} ${timeStr}`;
-        }
-
-        sendMessage(message) {
-            const name = this.getName();
-            if (!name) return;
-            db.ref('chats/').push({
-                name,
-                message,
-                timestamp: Date.now()
-            });
-        }
-
-        refreshChat() {
-            const chatContentContainer = document.getElementById('chat_content_container');
-            const currentUser = this.getName();
-            const chatsRef = ref(db, 'chats/');
-            off(chatsRef);
-            const chatQuery = query(chatsRef, orderByChild('timestamp'));
-            onValue(chatQuery, (snapshot) => {
-                chatContentContainer.innerHTML = '';
-                const chats = snapshot.val() || {};
-                const chatEntries = Object.entries(chats).sort((a, b) => a[1].timestamp - b[1].timestamp);
-
-                let lastDateLabel = '';
-
-                for (const [key, { name, message, timestamp }] of chatEntries) {
-                    const msgDate = new Date(timestamp);
-                    const today = new Date();
-                    const yesterday = new Date();
-                    yesterday.setDate(today.getDate() - 1);
-
-                    let dateLabel;
-                    if (msgDate.toDateString() === today.toDateString()) dateLabel = 'Today';
-                    else if (msgDate.toDateString() === yesterday.toDateString()) dateLabel = 'Yesterday';
-                    else dateLabel = msgDate.toLocaleDateString();
-
-                    if (lastDateLabel !== dateLabel) {
-                        lastDateLabel = dateLabel;
-                        const separator = createElement('div', null, dateLabel, { class: 'date_separator' });
-                        chatContentContainer.append(separator);
-                    }
-
-                    const isMine = name === currentUser;
-                    const messageContainer = createElement('div', null, '', {
-                        class: isMine
-                            ? 'message_container my_message'
-                            : 'message_container'
-                    });
-
-                    const messageInnerContainer = createElement('div', null, '', { class: 'message_inner_container' });
-
-                    if (!isMine) {
-                        const messageUser = createElement('p', null, name, { class: 'message_user' });
-                        const userContainer = createElement('div', null, '', { class: 'message_user_container' });
-                        userContainer.append(messageUser);
-                        messageInnerContainer.append(userContainer);
-                    } else {
-                        const messageUser = createElement('p', null, name, { class: 'message_user my_username' });
-                        const userContainer = createElement('div', null, '', { class: 'message_user_container' });
-                        userContainer.append(messageUser);
-                        messageInnerContainer.append(userContainer);
-                    }
-
-
-                    const messageContent = createElement('p', null, this.linkify(message), { class: 'message_content' });
-                    const messageTime = createElement('span', null, this.formatTime(timestamp), { class: 'message_time' });
-
-                    const contentContainer = createElement('div', null, '', { class: 'message_content_container' });
-                    contentContainer.append(messageContent, messageTime);
-
-                    messageInnerContainer.append(contentContainer);
-                    messageContainer.append(messageInnerContainer);
-                    chatContentContainer.append(messageContainer);
-                }
-
-                chatContentContainer.scrollTop = chatContentContainer.scrollHeight;
-            });
+    setupChatButtons() {
+        const generalBtn = document.getElementById('generalChatBtn');
+        const mixednutsBtn = document.getElementById('anotherChatBtn');
+        if (generalBtn && mixednutsBtn) {
+            generalBtn.addEventListener('click', () => this.switchChat('general'));
+            mixednutsBtn.addEventListener('click', () => this.switchChat('mixednuts'));
         }
     }
 
-    const app = new Sasalele();
-    if (app.getName()) app.chat();
-});
+    checkUserSession() {
+        const savedName = localStorage.getItem('name');
+        if (savedName) {
+            this.currentUser = savedName;
+            this.showChat();
+        } else {
+            this.showJoinForm();
+        }
+    }
+
+    switchChat(room) {
+        if (this.currentChatPath === this.chatPaths[room]) return;
+        document.getElementById('generalChatBtn').classList.toggle('active', room === 'general');
+        document.getElementById('anotherChatBtn').classList.toggle('active', room === 'mixednuts');
+        this.currentChatPath = this.chatPaths[room];
+        if (this.currentUser) {
+            this.clearMessages();
+            this.startListening();
+        }
+    }
+
+    showJoinForm() {
+        this.chatContainerEl.innerHTML = '';
+        this.chatContainerEl.style.display = 'none';
+        this.joinFormEl.innerHTML = `
+            <div class="container mt-3">
+                <div class="mb-3">
+                    <input type="text" id="usernameInput" class="form-control" 
+                           placeholder="Enter your name..." maxlength="20">
+                </div>
+                <button id="joinBtn" class="btn btn-primary w-100" disabled>
+                    Join Chat
+                </button>
+            </div>
+        `;
+        this.joinFormEl.style.display = 'block';
+        const usernameInput = document.getElementById('usernameInput');
+        const joinBtn = document.getElementById('joinBtn');
+        usernameInput.addEventListener('input', () => {
+            const isValid = usernameInput.value.trim().length > 0;
+            joinBtn.disabled = !isValid;
+        });
+        joinBtn.addEventListener('click', () => {
+            const username = usernameInput.value.trim();
+            if (!username) return;
+            this.currentUser = username;
+            localStorage.setItem('name', username);
+            this.showChat();
+        });
+        usernameInput.focus();
+    }
+
+    showChat() {
+        this.joinFormEl.style.display = 'none';
+        this.buildChatUI();
+        this.chatContainerEl.style.display = 'block';
+        this.startListening();
+    }
+
+    buildChatUI() {
+        const savedName = localStorage.getItem('name');
+        this.chatContainerEl.innerHTML = `
+            <div class="chat-content-wrapper">
+                <div id="messagesContainer" class="messages-container"></div>
+                <div class="message-input-area mt-3">
+                    <div class="input-group">
+                        <input type="text" id="messageInput" class="form-control" 
+                               placeholder="Hi ${savedName}. Say Something..." maxlength="2000">
+                        <button id="sendBtn" class="btn btn-primary" disabled>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="text-center mt-2">
+                    <button id="logoutBtn" class="btn btn-outline-secondary btn-sm">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        `;
+        this.setupChatEvents();
+    }
+
+    setupChatEvents() {
+        const messageInput = document.getElementById('messageInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        messageInput.addEventListener('input', () => {
+            const hasText = messageInput.value.trim().length > 0;
+            sendBtn.disabled = !hasText;
+        });
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !sendBtn.disabled) {
+                this.sendMessage(messageInput.value.trim());
+                messageInput.value = '';
+                sendBtn.disabled = true;
+            }
+        });
+        sendBtn.addEventListener('click', () => {
+            this.sendMessage(messageInput.value.trim());
+            messageInput.value = '';
+            sendBtn.disabled = true;
+        });
+        logoutBtn.addEventListener('click', () => this.logout());
+        setTimeout(() => messageInput.focus(), 100);
+    }
+
+    async sendMessage(text) {
+        if (!text || !this.currentUser || this.isSending) return;
+        this.isSending = true;
+        const messageData = {
+            text: String(text),
+            user: String(this.currentUser),
+            timestamp: Date.now()
+        };
+        try {
+            const messageRef = ref(db, this.currentChatPath);
+            const newMessageRef = push(messageRef);
+            await set(newMessageRef, {
+                message: messageData.text,
+                name: messageData.user,
+                timestamp: messageData.timestamp
+            });
+        } catch (error) {
+            console.error('Failed to send message:', error);
+        } finally {
+            this.isSending = false;
+        }
+    }
+
+    startListening() {
+        this.stopListening();
+        const messagesContainer = document.getElementById('messagesContainer');
+        if (!messagesContainer) return;
+        messagesContainer.innerHTML = '<div class="text-center text-muted py-3">Loading messages...</div>';
+        const chatRef = ref(db, this.currentChatPath);
+        const chatQuery = query(chatRef, orderByChild('timestamp'));
+        this.activeListener = onValue(chatQuery, (snapshot) => {
+            this.handleMessages(snapshot, messagesContainer);
+        }, (error) => {
+            console.error('Firebase listener error:', error);
+            messagesContainer.innerHTML = `
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Error loading messages. Please refresh the page.
+                </div>
+            `;
+        });
+    }
+
+    handleMessages(snapshot, container) {
+        if (!snapshot.exists()) {
+            container.innerHTML = '<div class="text-center text-muted py-3">No messages yet. Start the conversation!</div>';
+            return;
+        }
+        const messages = [];
+        snapshot.forEach((childSnapshot) => {
+            const msg = childSnapshot.val();
+            if (msg && msg.timestamp) {
+                messages.push({
+                    id: childSnapshot.key,
+                    ...msg
+                });
+            }
+        });
+
+        messages.sort((a, b) => a.timestamp - b.timestamp);
+        container.innerHTML = '';
+        messages.forEach(msg => {
+            const messageEl = this.createMessageElement(msg);
+            container.appendChild(messageEl);
+        });
+        setTimeout(() => {
+            container.scrollTop = container.scrollHeight;
+        }, 100);
+    }
+
+    createMessageElement(msg) {
+        const isOwnMessage = msg.name === this.currentUser;
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${isOwnMessage ? 'own-message' : 'other-message'}`;
+        messageDiv.innerHTML = `
+            <div class="message-header">
+                <span class="message-user">${this.escapeHtml(msg.name || 'Unknown')}</span>
+                <span class="message-time">${this.formatTime(msg.timestamp)}</span>
+            </div>
+            <div class="message-body">
+                ${this.linkifyText(this.escapeHtml(msg.message || ''))}
+            </div>
+        `;
+        return messageDiv;
+    }
+
+    clearMessages() {
+        const container = document.getElementById('messagesContainer');
+        if (container) {
+            container.innerHTML = '<div class="text-center text-muted py-3">Loading messages...</div>';
+        }
+    }
+
+    stopListening() {
+        if (this.activeListener) {
+            this.activeListener();
+            this.activeListener = null;
+        }
+    }
+
+    logout() {
+        this.stopListening();
+        this.currentUser = null;
+        localStorage.removeItem('name');
+        this.showJoinForm();
+    }
+
+    escapeHtml(text) {
+        if (typeof text !== 'string') return '';
+        return text
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    }
+
+    linkifyText(text) {
+        if (!text) return '';
+        const urlRegex = /(https?:\/\/[^\s]+)/g;
+        return text.replace(urlRegex, url =>
+            `<a href="${url}" target="_blank" rel="noopener">${url}</a>`
+        );
+    }
+
+    formatTime(timestamp) {
+        const date = new Date(timestamp);
+        const now = new Date();
+        const getFormattedDate = (d) => {
+            const year = d.getFullYear();
+            const month = (d.getMonth() + 1).toString().padStart(2, '0');
+            const day = d.getDate().toString().padStart(2, '0');
+            return `${year}/${month}/${day}`;
+        };
+        const getFormattedTime = (d) => {
+            return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        };
+        if (date.toDateString() === now.toDateString()) {
+            return getFormattedTime(date);
+        }
+        const yesterday = new Date(now);
+        yesterday.setDate(yesterday.getDate() - 1);
+        if (date.toDateString() === yesterday.toDateString()) {
+            return `Yesterday ${getFormattedTime(date)}`;
+        }
+        return `${getFormattedDate(date)} ${getFormattedTime(date)}`;
+    }
+}
 
 async function loadPlaylist(playlistName) {
     try {
-        showLoading();
+        showLoadingSpinner();
         const audioRef = ref(db, `audioList/${playlistName}`);
         const snapshot = await get(audioRef);
         const data = snapshot.val();
 
         if (!data) {
-            hideLoading();
+            hideLoadingSpinner();
             console.warn(`No audio data found for: ${playlistName}`);
-            ap.destroy();
+            if (ap) ap.destroy();
             container.style.display = 'none';
             return;
         }
@@ -1839,10 +1941,10 @@ async function loadPlaylist(playlistName) {
         });
 
         ap.on('play', updatePlayerTitleAndMediaSession);
-        hideLoading();
+        hideLoadingSpinner();
     } catch (error) {
         console.error("Error loading playlist:", error);
-        hideLoading();
+        hideLoadingSpinner();
         alert("Error loading playlist: " + error.message);
     }
 

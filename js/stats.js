@@ -138,22 +138,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const clockTime = document.getElementById("clockTime");
     const clockDay = document.getElementById("clockDay");
+    const yearElement = document.getElementById('current-year');
+    const currentYear = new Date().getFullYear();
+    function updateCopyrightYear() {
+        yearElement.textContent = currentYear.toString();
+    }
 
     function updateClock() {
         const now = new Date();
         const timeString = `${padZero(now.getHours())}:${padZero(now.getMinutes())}:${padZero(now.getSeconds())}`;
-        const dayString = `${padZero(now.getMonth() + 1)}/${padZero(now.getDate())} ${getDayAbbreviation(now.getDay())}`;
+        const dayString = `${currentYear.toString()}/${padZero(now.getMonth() + 1)}/${padZero(now.getDate())} ${getDayAbbreviation(now.getDay())}`;
 
         clockTime.textContent = timeString;
         clockDay.textContent = dayString;
     }
 
     function padZero(num) {
-        return (num < 10 ? "0" : "") + num;
+        return num.toString().padStart(2, '0');
     }
 
     function getDayAbbreviation(day) {
-        const days = ["日", "月", "火", "水", "木", "金", "土"];
+        const days = ["Sun (日)", "Mon (月)", "Tue (火)", "Wed (水)", "Thu (木)", "Fri (金)", "Sat(土)"];
         return days[day];
     }
 
@@ -204,6 +209,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const phaseDuration = 10 * 1000;
     const randomimg = document.getElementById('randomimg');
+    const backgroundElement = document.body; 
     let isAnimating = false;
     let currentPhase = 'random';
     let phaseStartTime = 0;
@@ -213,6 +219,12 @@ document.addEventListener('DOMContentLoaded', function () {
     let animationTimeout = null;
     let currentBeatPattern = [];
     let currentBeatIndex = 0;
+
+    function setRandomBackground() {
+        const randomIndex = getRandomInt(0, gradients.length - 1);
+        const gradient = gradients[randomIndex];
+        backgroundElement.style.background = gradient;
+    }
 
     function getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -248,6 +260,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!isAnimating) return;
         const elapsed = Date.now() - phaseStartTime;
         if (currentPhase === 'random') {
+            setRandomBackground(); 
             setRandomImage();
             const nextInterval = getNextBeatInterval();
             if (elapsed > phaseDuration) {
@@ -255,6 +268,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 selectRandomGifFolder();
                 gifFolderCurrentIndex = 1;
                 phaseStartTime = Date.now();
+                setRandomBackground();
             }
             animationTimeout = setTimeout(() => requestAnimationFrame(updateImageAndBackground), nextInterval);
         } else if (currentPhase === 'fast') {
@@ -323,9 +337,10 @@ document.addEventListener('DOMContentLoaded', function () {
         document.body.style.backgroundRepeat = "no-repeat";
     }
 
-    setRandomBackground();
+    //setRandomBackground();
     //setRandomBg();
     updateClock();
+    updateCopyrightYear();
     setInterval(updateClock, 1000);
     siteTime();
     getLastCommitDate();

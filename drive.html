@@ -65,15 +65,14 @@
                                     class="fa-brands fa-google-drive"></i>
                             </a>
                         </li>
-                        <div class="d-flex justify-content-center align-items-center">
+                        <div class="d-flex align-items-center">
                             <div id="clock">
-                                <span id="clockTime"></span>
                                 <span id="clockDay"></span>
+                                <span id="clockTime"></span>
                             </div>
-                            <div class="switch-container" data-toggle="tooltip" data-placement="bottom" title="Animate">
-                                <label class="switch">
-                                    <input type="checkbox" id="toggleAnimation">
-                                    <span class="slider"></span> </label>
+                            <div class="form-check form-switch" data-toggle="tooltip" data-placement="bottom"
+                                title="Animate">
+                                <input class="form-check-input" type="checkbox" id="toggleAnimation" role="switch">
                             </div>
                         </div>
                     </ul>
@@ -271,7 +270,9 @@
                                     Operated for: <span id="liveTime">00:00:00</span> |
                                     Views: <span class="waline-pageview-count">0</span>
                                 </p>
-                                <p class="mb-1">&copy; 2023-present Sasalele-Music-Station</p>
+                                <p class="mb-1">
+                                    &copy; 2023-<span id="current-year">present</span> Sasalele-Music-Station
+                                </p>
                             </div>
                         </div>
                         <div class="mdui-progress">
