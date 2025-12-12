@@ -593,6 +593,7 @@ async function playMedia(media, button) {
     await stopPlayback();
     const newAudioElement = document.createElement('audio');
     newAudioElement.setAttribute('slot', 'media');
+    newAudioElement.setAttribute('crossorigin', 'anonymous');
     mediaController.appendChild(newAudioElement);
 
     showNotification(`Playback started.`, 'success');
@@ -624,7 +625,12 @@ async function playMedia(media, button) {
             playUnknownStream(newAudioElement, media);
             break;
         default:
-            playIcecastStream(newAudioElement, media);
+            if (media.url_resolved.includes('.m3u8')) {
+                playHlsStream(newAudioElement, media);
+            }
+            else {
+                playIcecastStream(newAudioElement, media);
+            }
             break;
     }
     currentStation = media;
@@ -666,11 +672,7 @@ function playHlsStream(audioEl, media) {
 
                     hlsPlayer.destroy();
                     setTimeout(() => {
-                        const newAudioElement = document.createElement('audio');
-                        newAudioElement.setAttribute('slot', 'media');
-                        newAudioElement.setAttribute('crossorigin', 'anonymous');
-                        mediaController.appendChild(newAudioElement);
-                        playHlsStreamWithConfig(newAudioElement, media, currentUrl, retryCount);
+                        playHlsStreamWithConfig(audioEl, media, currentUrl, retryCount);
                     }, 1000);
                     return true;
                 }
@@ -840,20 +842,48 @@ function playHlsStreamWithConfig(audioEl, media, url, retryCount) {
 }
 
 function playIcecastStream(audioEl, media) {
-    let retryCount = 0;
+    let totalAttempts = 0;
     let originalUrl = media.url_resolved || media.url;
     let currentUrl = originalUrl;
-    let isUsingProxy = false;
     let fallbackTriggered = false;
+    let initialUrl = originalUrl;
+    if (originalUrl.startsWith('http://') && !originalUrl.startsWith(appServices.proxyLink)) {
+        if (isRawIP(originalUrl)) {
+            console.warn('Skipping proxy for: ' + originalUrl);
+            showNotification(`Allow insecure content on your browser to play this stream or download the m3u file to play it`, 'warning');
+        } else {
+            currentUrl = appServices.proxyLink + originalUrl;
+            initialUrl = currentUrl;
+        }
+    }
+
+    const shouldRetry = (errorString) => {
+        const lowerCaseError = String(errorString).toLowerCase();
+        const retryConditions = [
+            'securityerror',
+            'notsupportederror',
+            'aborterror',
+            '403',
+            '500',
+            'network',
+            'load',
+            'not allowed',
+            'supported source',
+            'mixed content',
+            'connection closed',
+            'invalid chunk'
+        ];
+        return retryConditions.some(condition => lowerCaseError.includes(condition));
+    };
 
     async function attemptIcecastPlayback() {
-        showNotification(`Attempting playback (attempt ${retryCount + 1}/${MAX_RETRIES + 1})`, 'success');
+        totalAttempts++;
+        showNotification(`Attempting playback (attempt ${totalAttempts}/${MAX_RETRIES + 1})`, 'success');
         if (icecastPlayer) {
-            console.log("it is still there, why!!!????");
+            console.log("Cleaning up previous icecast player instance.");
             icecastPlayer.stop();
             await icecastPlayer.detachAudioElement();
         }
-
         try {
             icecastPlayer = new IcecastMetadataPlayer(currentUrl, {
                 audioElement: audioEl,
@@ -873,27 +903,24 @@ function playIcecastStream(audioEl, media) {
                 enableLogging: false,
                 onError: (message) => {
                     console.error("Icecast player error:", message);
-                    handleIcecastError(message);
+                    handleIcecastError(String(message));
                 },
                 onLoad: () => {
                     metadataElement.textContent = 'Loading...';
                 }
             });
-
             icecastPlayer.play().catch(err => {
                 console.error("Error during icecast play:", err);
-                handleIcecastError(err.message || err);
+                handleIcecastError(String(err.message || err));
             });
-
         } catch (err) {
             console.error("Icecast initialization failed:", err);
-            handleIcecastError(err.message || err);
+            handleIcecastError(String(err.message || err));
         }
     }
 
     async function handleIcecastError(error) {
-        retryCount++;
-        console.log(`Icecast error (attempt ${retryCount}/${MAX_RETRIES + 1}):`, error);
+        console.log(`Icecast error (attempt ${totalAttempts}/${MAX_RETRIES + 1}):`, error);
         if (icecastPlayer) {
             try {
                 icecastPlayer.stop();
@@ -903,68 +930,53 @@ function playIcecastStream(audioEl, media) {
             }
             icecastPlayer = null;
         }
-        if (!isUsingProxy && retryCount <= MAX_RETRIES) {
-            console.log(`Retry ${retryCount}/${MAX_RETRIES}: Trying with proxy`);
-            showNotification(`Icecast stream failed, trying proxy... (${retryCount}/${MAX_RETRIES})`, 'warning');
-
-            currentUrl = appServices.proxyLink + originalUrl;
-            isUsingProxy = true;
-
-            setTimeout(() => {
-                attemptIcecastPlayback();
-            }, 1000);
+        if (!shouldRetry(error)) {
+            console.warn("Icecast error is not transient, forcing fallback to playUnknownStream.");
+            triggerFallbackToUnknown(`Icecast encountered a non-retryable error: ${error}`, audioEl);
+            return;
         }
-        else if (retryCount > MAX_RETRIES || (isUsingProxy && retryCount > 1)) {
-            console.warn("All Icecast attempts failed, falling back to playUnknownStream");
-            triggerFallbackToUnknown(`Icecast failed after ${retryCount} attempts`);
+        if (totalAttempts > MAX_RETRIES) {
+            console.warn("Max Icecast attempts reached, falling back to playUnknownStream");
+            triggerFallbackToUnknown(`Icecast failed after ${totalAttempts} attempts`, audioEl);
+            return;
         }
-        else if (isUsingProxy && retryCount === 1) {
-            console.log(`Retry ${retryCount}/${MAX_RETRIES}: Proxy failed, trying original URL`);
-            showNotification(`Proxy failed, trying original URL... (${retryCount}/${MAX_RETRIES})`, 'warning');
-            currentUrl = originalUrl;
-            isUsingProxy = false;
-
-            setTimeout(() => {
-                attemptIcecastPlayback();
-            }, 1000);
+        let nextUrl = currentUrl;
+        let retryMessage = '';
+        const isCurrentlyProxy = currentUrl.includes(appServices.proxyLink) && currentUrl !== originalUrl;
+        const canSwap = initialUrl !== originalUrl;
+        if (canSwap) {
+            if (totalAttempts % 2 !== 0) {
+                if (isCurrentlyProxy) {
+                    nextUrl = originalUrl;
+                    retryMessage = `Proxy failed. Retrying with original URL (${totalAttempts + 1}/${MAX_RETRIES + 1})`;
+                }
+            } else {
+                if (!isCurrentlyProxy) {
+                    nextUrl = appServices.proxyLink + originalUrl;
+                    retryMessage = `Original failed. Retrying with proxy URL (${totalAttempts + 1}/${MAX_RETRIES + 1})`;
+                }
+            }
         }
+        currentUrl = nextUrl;
+        console.log(retryMessage || `Retry ${totalAttempts}/${MAX_RETRIES}: Retrying same URL`);
+        showNotification(retryMessage || `Retrying stream... (${totalAttempts}/${MAX_RETRIES})`, 'warning');
+        setTimeout(() => {
+            attemptIcecastPlayback();
+        }, 1000);
     }
 
-    async function triggerFallbackToUnknown(reason) {
+    async function triggerFallbackToUnknown(reason, audioEl) {
         if (fallbackTriggered) return;
         fallbackTriggered = true;
-
         console.warn("Falling back to playUnknownStream:", reason);
         showNotification(`Icecast failed, trying alternative method...`, 'warning');
-
         if (icecastPlayer) {
             icecastPlayer.stop();
             await icecastPlayer.detachAudioElement();
             icecastPlayer = null;
         }
-
-        try {
-            if (audioEl) {
-                audioEl.destroy();
-            };
-        } catch (err) {
-            console.warn("Audio cleanup error:", err);
-        }
-        const newAudioElement = document.createElement('audio');
-        newAudioElement.setAttribute('slot', 'media');
-        newAudioElement.setAttribute('crossorigin', 'anonymous');
-        mediaController.appendChild(newAudioElement);
-        playUnknownStream(newAudioElement, media);
-    }
-
-    if (originalUrl.startsWith('http://') && !originalUrl.startsWith(appServices.proxyLink)) {
-        if (isRawIP(originalUrl)) {
-            console.warn('Skipping proxy for: ' + originalUrl);
-            showNotification(`Allow insecure content on your browser to play this stream or download the m3u file to play it`, 'warning');
-        } else {
-            currentUrl = appServices.proxyLink + originalUrl;
-            isUsingProxy = true;
-        }
+        audioEl.src = '';
+        playUnknownStream(audioEl, media);
     }
     attemptIcecastPlayback();
 }
@@ -1017,41 +1029,46 @@ function playZeno(media) {
 }*/
 
 function playUnknownStream(audioEl, media) {
-    let streamRetryCount = 0;
+    let totalAttempts = 0;
     const originalUrl = media.url_resolved || media.url;
     let currentUrl = originalUrl;
-    let isUsingProxy = false;
-    const attemptPlayback = () => {
-        if (currentUrl.includes('.m3u8')) {
-            if (audioEl) {
-                audioEl.destroy();
-            }
-            const newAudioElement = document.createElement('audio');
-            newAudioElement.setAttribute('slot', 'media');
-            newAudioElement.setAttribute('crossorigin', 'anonymous');
-            mediaController.appendChild(newAudioElement);
-            playHlsStream(newAudioElement, media);
+    let initialUrl = originalUrl;
+    if (originalUrl.startsWith('http://') && !originalUrl.startsWith(appServices.proxyLink)) {
+        if (isRawIP(originalUrl)) {
+            console.warn('Skipping proxy for: ' + originalUrl);
+            showNotification('Allow insecure content on your browser to play this stream or download the m3u file to play it', 'warning');
         } else {
-            audioEl.src = currentUrl;
-            metadataElement.textContent = "Visit radio's homepage for playing info";
-            const liveTrackName = media.name + ' (Live)';
-            trackHistory(liveTrackName, media);
-            audioEl.play().catch(handlePlaybackError);
+            currentUrl = appServices.proxyLink + originalUrl;
+            initialUrl = currentUrl;
         }
-    };
+    }
+
+    const attemptPlayback = () => {
+        totalAttempts++;
+        console.log(`Attempting playback of unknown stream (attempt ${totalAttempts}/${MAX_RETRIES + 1})`);
+        showNotification(`Attempting playback (attempt ${totalAttempts}/${MAX_RETRIES + 1})`, 'success');
+        audioEl.src = currentUrl;
+        metadataElement.textContent = "Visit radio's homepage for playing info";
+        const liveTrackName = media.name + ' (Live)';
+        trackHistory(liveTrackName, media);
+        audioEl.play().catch(err => {
+            const error = err instanceof Error ? err : new Error(String(err || 'Unknown Playback Error'));
+            handlePlaybackError(error);
+        });
+    }
+
     const handlePlaybackError = (error) => {
-        streamRetryCount++;
-        console.warn(`Playback error (attempt ${streamRetryCount}/${MAX_RETRIES}):`, error.name, error.message);
-        if (streamRetryCount > MAX_RETRIES) {
-            showNotification(`Failed to play stream after ${MAX_RETRIES} attempts. Stopping playback.`, 'danger');
+        console.warn(`Playback error (attempt ${totalAttempts}/${MAX_RETRIES + 1}):`, error.name, error.message);
+        if (totalAttempts >= MAX_RETRIES + 1) {
+            showNotification(`Failed to play stream after ${MAX_RETRIES + 1} attempts. Stopping playback.`, 'danger');
             stopPlayback();
             return;
         }
         if (shouldRetry(error)) {
             retryStream(error);
         } else {
-            console.warn(`${error.message}`);
-            showNotification(`Stream failed to play. (Attempt ${streamRetryCount}/${MAX_RETRIES})`, 'warning');
+            console.error("Non-retryable error encountered, stopping:", error);
+            showNotification(`Stream failed: ${error.message}. Stopping playback.`, 'danger');
             stopPlayback();
         }
     };
@@ -1060,43 +1077,40 @@ function playUnknownStream(audioEl, media) {
         const retryConditions = [
             'SecurityError',
             'NotSupportedError',
-            '404',
+            'AbortError',
             '403',
             '500',
+            'network',
+            'load',
+        ];
+        const messageConditions = [
             'not allowed',
             'supported source',
             'mixed content'
         ];
-        return retryConditions.some(condition =>
-            error.name.includes(condition) || error.message.includes(condition)
-        );
+        return retryConditions.some(condition => error.name.toLowerCase().includes(condition)) ||
+            messageConditions.some(condition => error.message.toLowerCase().includes(condition));
     };
 
     const retryStream = (error) => {
+        let nextUrl = currentUrl;
         let retryMessage = '';
-        if (isUsingProxy && (error.name === 'SecurityError' || error.message.includes('not allowed') || error.message.includes('404') || error.message.includes('403') || error.message.includes('500'))) {
-            retryMessage = `Retrying with original URL (${streamRetryCount}/${MAX_RETRIES})`;
-            currentUrl = originalUrl;
-            isUsingProxy = false;
-        } else if (!isUsingProxy && (error.name === 'SecurityError' || error.message.includes('mixed content'))) {
-            retryMessage = `Retrying with proxy (${streamRetryCount}/${MAX_RETRIES})`;
-            currentUrl = appServices.proxyLink + originalUrl;
-            isUsingProxy = true;
+        const isCurrentlyProxy = currentUrl.includes(appServices.proxyLink) && currentUrl !== originalUrl;
+        if (totalAttempts % 2 !== 0 && initialUrl !== originalUrl) {
+            if (isCurrentlyProxy) {
+                nextUrl = originalUrl;
+                retryMessage = `Proxy failed. Retrying with original URL (${totalAttempts + 1}/${MAX_RETRIES + 1})`;
+            } else {
+                nextUrl = appServices.proxyLink + originalUrl;
+                retryMessage = `Original failed. Retrying with proxy URL (${totalAttempts + 1}/${MAX_RETRIES + 1})`;
+            }
         }
-        console.log(`Retry ${streamRetryCount}/${MAX_RETRIES}: ${retryMessage}`);
-        showNotification(retryMessage, 'warning');
+
+        currentUrl = nextUrl;
+        console.log(retryMessage || `Retry ${totalAttempts}/${MAX_RETRIES}: Retrying same URL`);
+        showNotification(retryMessage || `Retrying stream... (${totalAttempts}/${MAX_RETRIES})`, 'warning');
         setTimeout(attemptPlayback, 1000);
     };
-
-    if (originalUrl.startsWith('http://') && !originalUrl.startsWith(appServices.proxyLink)) {
-        if (isRawIP(originalUrl)) {
-            console.warn('Skipping proxy for: ' + originalUrl);
-            showNotification('Allow insecure content on your browser to play this stream or download the m3u file to play it', 'warning');
-        } else {
-            currentUrl = appServices.proxyLink + originalUrl;
-            isUsingProxy = true;
-        }
-    }
     attemptPlayback();
 }
 

@@ -171,7 +171,8 @@ document.addEventListener('DOMContentLoaded', function () {
     };
     const bgimages = [
         'assets/0.webp', 'assets/1.webp', 'assets/2.webp',
-        'assets/3.webp', 'assets/4.webp', 'assets/5.webp', 'assets/6.webp'
+        'assets/3.webp', 'assets/4.webp', 'assets/5.webp', 'assets/6.webp',
+        'assets/vsc-git.jpg', 'assets/wall2.jpg', 'assets/wall3.jpg', 'assets/sasalele_bg.jpg', 'assets/bg2.jpg'
     ];
 
     const gradients = [
@@ -209,7 +210,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const phaseDuration = 10 * 1000;
     const randomimg = document.getElementById('randomimg');
-    const backgroundElement = document.body; 
+    const backgroundElement = document.body;
     let isAnimating = false;
     let currentPhase = 'random';
     let phaseStartTime = 0;
@@ -260,7 +261,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!isAnimating) return;
         const elapsed = Date.now() - phaseStartTime;
         if (currentPhase === 'random') {
-            setRandomBackground(); 
+            setRandomBackground();
             setRandomImage();
             const nextInterval = getNextBeatInterval();
             if (elapsed > phaseDuration) {
@@ -338,7 +339,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     //setRandomBackground();
-    //setRandomBg();
+    setRandomBg();
     updateClock();
     updateCopyrightYear();
     setInterval(updateClock, 1000);

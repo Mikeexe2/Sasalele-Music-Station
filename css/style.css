@@ -211,14 +211,14 @@
 }
 
 body {
-    background: url("https://bing.biturl.top/?resolution=1920&format=image&index=0&mkt=zh-CN");
+    background: var(--gradient--vivid-cyan-blue-to-vivid-purple);
     min-height: 100vh;
     font-family: 'Microsoft YaHei', sans-serif;
     width: 100%;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
-    background-attachment: fixed
+    background-attachment: fixed;
 }
 
 .app-card {
@@ -405,7 +405,7 @@ body {
 }
 
 .genre-btn:hover {
-    background: var(--black-40-alpha);
+    background: #28397e;
     transform: translateY(-2px)
 }
 
@@ -917,11 +917,12 @@ media-seek-forward-button:hover {
     bottom: 0;
     left: 2px;
     z-index: 5;
+    opacity: 0.96;
     background: #0e1840;
-    backdrop-filter: 12px;
     color: var(--apple-white);
     border-radius: 10px;
-    width: fit-content
+    width: fit-content;
+    transition: all 0.4s ease-in-out;
 }
 
 #copyIcon,
@@ -1096,6 +1097,7 @@ media-seek-forward-button:hover {
 
 #clock {
     margin-right: 10px;
+    margin-left: 10px;
     color: var(--apple-white)
 }
 
