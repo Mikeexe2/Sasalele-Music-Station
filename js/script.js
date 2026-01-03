@@ -47,10 +47,9 @@ const tagSelect = document.getElementById('tagSelect');
 const searchOption = document.getElementById('searchOption');
 const findRadioBtn = document.getElementById("radiosearch");
 const searchField = document.getElementById('search-field');
-const searchResultContainer = document.querySelector('.radio-result-container');
-const searchResultHeader = document.querySelector('.radio-result-header');
+const searchResultContainer = document.getElementById('radio-result-container');
+const searchResultHeader = document.getElementById('radio-result-header');
 const debouncedFilterStations = debounce(filterStations, 200);
-const findradio = document.querySelector('.radioresultsdisplay');
 const db = window.appServices.db;
 const coolDown = 2000;
 const mediaController = document.getElementById('media-controller');
@@ -214,6 +213,7 @@ function initializeUI() {
     defaultGenreButton.classList.add('active');
 
     genreSelect.addEventListener('click', (event) => {
+        searchResultHeader.style.display = "none";
         const genreButton = event.target.closest('.genre-btn');
         const genre = genreButton.getAttribute('data-genre');
         document.querySelectorAll('.genre-content').forEach(c => c.classList.remove('active'));
@@ -359,11 +359,22 @@ function renderStations(stations) {
     selectedContainer.innerHTML = genreHTML;
     if (currentStation) {
         const stationElements = selectedContainer.querySelectorAll('li');
+
         const currentStationData = encodeURIComponent(JSON.stringify(currentStation));
         stationElements.forEach(el => {
             if (el.dataset.station === currentStationData) {
+                const playButton = el.querySelector('.main-play-button');
+                const currentMediaElement = mediaController && mediaController.media;
+                const isCurrentlyPlaying = currentMediaElement ? !currentMediaElement.paused : false;
                 el.classList.add('active-station');
                 window.currentlyActiveLi = el;
+                if (isCurrentlyPlaying && playButton) {
+                    playButton.innerHTML = '<i class="fas fa-pause"></i>';
+                    playButton.setAttribute('data-playing', 'true');
+                    playButton.title = 'Pause';
+                    playButton.classList.remove('btn-primary');
+                    playButton.classList.add('btn-warning');
+                }
             } else {
                 el.classList.remove('active-station');
             }
@@ -463,6 +474,7 @@ document.addEventListener('click', function (event) {
     setTimeout(() => target.removeAttribute('data-processing'), 1000);
 
     if (target.classList.contains('download-button')) {
+        showNotification(`Downloading...`, 'success');
         handleDownloadClick(target);
     } else if (target.classList.contains('main-play-button')) {
         handlePlayClick(target);
@@ -471,20 +483,40 @@ document.addEventListener('click', function (event) {
 
 function handlePlayClick(button) {
     const parentLi = button.closest('li');
+    const isCurrentlyPlaying = button.getAttribute('data-playing') === 'true';
     const stationDataString = parentLi.dataset.station;
+
     if (!stationDataString) {
         console.error("[handlePlayClick] Missing station data on <li> element.");
         return;
     }
+
+    let mediaData;
+
     try {
-        const media = JSON.parse(decodeURIComponent(stationDataString));
-        if (!media || !media.url) {
-            console.error("[handlePlayClick] Parsed media object is invalid or missing URL.");
-            return;
-        }
-        playMedia(media, button);
+        mediaData = JSON.parse(decodeURIComponent(stationDataString));
     } catch (err) {
-        console.error("[handlePlayClick] Failed to parse media:", err);
+        console.error('[handlePlayClick] Failed to parse media:', err);
+        return;
+    }
+    if (!mediaData || !mediaData.url) {
+        console.error("[handlePlayClick] Parsed media object is invalid or missing URL.");
+        return;
+    }
+
+    const currentMedia = mediaController.querySelector('[slot="media"]');
+    const isSameStationLoaded = currentMedia && (currentMedia.src === mediaData.url);
+
+    if (isCurrentlyPlaying) {
+        if (currentMedia) {
+            currentMedia.pause();
+        }
+    } else {
+        if (isSameStationLoaded) {
+            currentMedia.play();
+        } else {
+            playMedia(mediaData, button);
+        }
     }
 }
 
@@ -575,9 +607,8 @@ async function stopPlayback() {
         metadataEventSource = null;
     }
 
-    if (window.currentlyActiveLi) {
-        window.currentlyActiveLi.classList.remove('active-station');
-    }
+    clearActiveStation();
+
     currentStation = null;
     isPlaying = false;
     coverImage.classList.remove('rotating');
@@ -589,21 +620,67 @@ async function stopPlayback() {
     stopMediaSession();
 }
 
+function clearActiveStation() {
+    if (window.currentlyActiveLi) {
+        window.currentlyActiveLi.classList.remove('active-station');
+        const playButton = window.currentlyActiveLi.querySelector('.main-play-button');
+        if (playButton) {
+            playButton.innerHTML = '<i class="fas fa-play"></i>';
+            playButton.setAttribute('data-playing', 'false');
+            playButton.classList.remove('btn-warning');
+            playButton.classList.add('btn-primary');
+        }
+        window.currentlyActiveLi = null;
+    }
+}
+
+function updateActiveStationPlayButton(isPlaying) {
+    if (!window.currentlyActiveLi) return;
+
+    const playButton = window.currentlyActiveLi.querySelector('.main-play-button');
+    if (playButton) {
+        if (isPlaying) {
+            playButton.innerHTML = '<i class="fas fa-pause"></i>';
+            playButton.setAttribute('data-playing', 'true');
+            playButton.title = 'Pause';
+            playButton.classList.remove('btn-primary');
+            playButton.classList.add('btn-warning');
+        } else {
+            playButton.innerHTML = '<i class="fas fa-play"></i>';
+            playButton.setAttribute('data-playing', 'false');
+            playButton.title = 'Play';
+            playButton.classList.remove('btn-warning');
+            playButton.classList.add('btn-primary');
+        }
+    }
+}
+
 async function playMedia(media, button) {
     await stopPlayback();
     const newAudioElement = document.createElement('audio');
     newAudioElement.setAttribute('slot', 'media');
-    newAudioElement.setAttribute('crossorigin', 'anonymous');
     mediaController.appendChild(newAudioElement);
+    newAudioElement.addEventListener('play', () => {
+        updateActiveStationPlayButton(true);
+    });
+    newAudioElement.addEventListener('pause', () => {
+        updateActiveStationPlayButton(false);
+    });
 
-    showNotification(`Playback started.`, 'success');
+    //showNotification(`Playback started.`, 'success');
 
     const parentLi = button.closest('li');
     if (parentLi) {
         parentLi.classList.add('active-station');
         window.currentlyActiveLi = parentLi;
-    } else {
-        window.currentlyActiveLi = null;
+
+        const playButton = parentLi.querySelector('.main-play-button');
+        if (playButton) {
+            playButton.innerHTML = '<i class="fas fa-pause"></i>';
+            playButton.setAttribute('data-playing', 'true');
+            playButton.classList.remove('btn-primary');
+            playButton.classList.add('btn-warning');
+        }
     }
 
     switch (media.host) {
@@ -665,7 +742,7 @@ function playHlsStream(audioEl, media) {
                 retryCount++;
                 if (retryCount <= maxRetries) {
                     console.log(`Retry ${retryCount}/${maxRetries}: Switching to original URL`);
-                    showNotification(`Proxy failed, retrying with original URL (${retryCount}/${maxRetries})`, 'warning');
+                    //showNotification(`Proxy failed, retrying with original URL (${retryCount}/${maxRetries})`, 'warning');
 
                     currentUrl = media.url_resolved || media.url;
                     isUsingProxy = false;
@@ -878,7 +955,7 @@ function playIcecastStream(audioEl, media) {
 
     async function attemptIcecastPlayback() {
         totalAttempts++;
-        showNotification(`Attempting playback (attempt ${totalAttempts}/${MAX_RETRIES + 1})`, 'success');
+        //showNotification(`Attempting playback (attempt ${totalAttempts}/${MAX_RETRIES + 1})`, 'success');
         if (icecastPlayer) {
             console.log("Cleaning up previous icecast player instance.");
             icecastPlayer.stop();
@@ -959,7 +1036,7 @@ function playIcecastStream(audioEl, media) {
         }
         currentUrl = nextUrl;
         console.log(retryMessage || `Retry ${totalAttempts}/${MAX_RETRIES}: Retrying same URL`);
-        showNotification(retryMessage || `Retrying stream... (${totalAttempts}/${MAX_RETRIES})`, 'warning');
+        //showNotification(retryMessage || `Retrying stream... (${totalAttempts}/${MAX_RETRIES})`, 'warning');
         setTimeout(() => {
             attemptIcecastPlayback();
         }, 1000);
@@ -969,7 +1046,7 @@ function playIcecastStream(audioEl, media) {
         if (fallbackTriggered) return;
         fallbackTriggered = true;
         console.warn("Falling back to playUnknownStream:", reason);
-        showNotification(`Icecast failed, trying alternative method...`, 'warning');
+        //showNotification(`Icecast failed, trying alternative method...`, 'warning');
         if (icecastPlayer) {
             icecastPlayer.stop();
             await icecastPlayer.detachAudioElement();
@@ -1046,7 +1123,7 @@ function playUnknownStream(audioEl, media) {
     const attemptPlayback = () => {
         totalAttempts++;
         console.log(`Attempting playback of unknown stream (attempt ${totalAttempts}/${MAX_RETRIES + 1})`);
-        showNotification(`Attempting playback (attempt ${totalAttempts}/${MAX_RETRIES + 1})`, 'success');
+        //showNotification(`Attempting playback (attempt ${totalAttempts}/${MAX_RETRIES + 1})`, 'success');
         audioEl.src = currentUrl;
         metadataElement.textContent = "Visit radio's homepage for playing info";
         const liveTrackName = media.name + ' (Live)';
@@ -1068,7 +1145,7 @@ function playUnknownStream(audioEl, media) {
             retryStream(error);
         } else {
             console.error("Non-retryable error encountered, stopping:", error);
-            showNotification(`Stream failed: ${error.message}. Stopping playback.`, 'danger');
+            showNotification(`Stream failed. Stopping playback.`, 'danger');
             stopPlayback();
         }
     };
@@ -1273,7 +1350,7 @@ function radioSearch() {
         case 'bylanguage':
             searchValue = languageSelect.value.toLowerCase();
             break;
-        case 'bytag': info
+        case 'bytag':
             searchValue = tagSelect.value.toLowerCase();
             break;
         default:
@@ -1281,17 +1358,21 @@ function radioSearch() {
     }
 
     if (searchValue === '' || searchBy === 'Search by') {
+        showNotification(`Please enter a search term!`, 'warning');
+        hideLoadingSpinner();
         return;
     }
-    searchResultContainer.classList.remove('active');
-    findradio.style.display = "block";
 
     fetch(`${appServices.proxyLink}https://de2.api.radio-browser.info/json/stations/${searchBy}/${searchValue}?hidebroken=true&limit=150&order=clickcount&reverse=true`)
         .then(response => response.json())
         .then(data => {
             if (data.length > 0) {
-                hideLoadingSpinner();
-                searchResultHeader.innerHTML = `Top 150 Radio Search Results for: <mark id="searchTerms">${searchValue}</mark>`;
+                document.querySelectorAll('.genre-content').forEach(c => c.classList.remove('active'));
+                document.querySelectorAll('.genre-btn').forEach(button => {
+                    button.classList.remove('active');
+                });
+                searchResultHeader.innerHTML = `<div class="search-terms">Top 150 Radio Search Results for: <span id="searchTerms">${searchValue}</span><div>`;
+                searchResultHeader.style.display = "block";
                 searchResultContainer.classList.add('active');
                 searchResultContainer.innerHTML = '';
 
@@ -1318,6 +1399,8 @@ function radioSearch() {
                     `;
                     searchResultContainer.appendChild(radioItem);
                 });
+                hideLoadingSpinner();
+                stationCount.textContent = data.length;
             } else {
                 hideLoadingSpinner();
                 searchResultHeader.style.display = "block";
@@ -1360,6 +1443,9 @@ function performSearch() {
         inneritunes.innerHTML = '';
 
         searchAcrossApis(searchTerm);
+    }
+    else {
+        showNotification(`Please enter a search term!`, 'warning');
     }
     searchInput.value = '';
 }

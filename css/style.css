@@ -383,7 +383,8 @@ body {
 }
 
 .radio-result-header {
-    display: none
+    display: none;
+    text-align: center;
 }
 
 #genre-select {
@@ -562,8 +563,8 @@ body {
 }
 
 .gsc-control-cse {
-    border-radius: 8px !important;
-    margin-bottom: 10px !important
+    background: var(--secondary-green-5) !important;
+    border: none !important
 }
 
 .noresult {
@@ -1223,11 +1224,6 @@ media-seek-forward-button:hover {
 #recentPanel .modal-body {
     max-height: 70vh;
     overflow-y: auto;
-}
-
-.gsc-control-cse {
-    background: 0 0 !important;
-    border: none !important
 }
 
 .collapse {

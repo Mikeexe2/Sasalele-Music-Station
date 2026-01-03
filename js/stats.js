@@ -97,16 +97,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const getLastCommitDate = (() => {
-        const storageKey = "lastCommitDate";
-
         return async function () {
-            let cachedDate = localStorage.getItem(storageKey);
-            if (cachedDate) {
-
-                document.getElementById('last-updated-date').textContent = cachedDate;
-
-                return cachedDate;
-            }
             const apiUrl = `https://api.github.com/repos/Mikeexe2/Sasalele-Music-Station/commits`;
             try {
                 const response = await fetch(apiUrl);
@@ -119,9 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         day: 'numeric',
                         month: 'long',
                         year: 'numeric'
-                    });
-
-                    localStorage.setItem(storageKey, formattedDate);
+                    })
 
                     document.getElementById('last-updated-date').textContent = formattedDate;
                     return formattedDate;
@@ -158,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function getDayAbbreviation(day) {
-        const days = ["Sun (日)", "Mon (月)", "Tue (火)", "Wed (水)", "Thu (木)", "Fri (金)", "Sat(土)"];
+        const days = ["Sun (日) ", "Mon (月) ", "Tue (火) ", "Wed (水) ", "Thu (木) ", "Fri (金) ", "Sat(土) "];
         return days[day];
     }
 

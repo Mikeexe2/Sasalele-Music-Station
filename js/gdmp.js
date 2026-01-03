@@ -564,6 +564,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function downloadTrack(event, fileId, fileName) {
+        showNotification(`Downloading...`, 'success');
         const apiUrl = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=${apiKey}`;
         event.preventDefault();
         fetch(apiUrl)
