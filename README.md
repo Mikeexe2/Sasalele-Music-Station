@@ -20,9 +20,9 @@ This website project aims to collect all public radio links in the world which s
 
 ### 📝 Project Changelog
 
-#### 📅 2025-12-11
+#### 📅 2025-12-13
 
-* **Added:** MediaSession API integration to display the currently playing track/station ib notifications and update the page title accordingly.
+* **Added:** MediaSession API integration to display the currently playing track/station in notification and update the page title accordingly.
 * **Changed:** Expanded the recently played list capacity to store up to 300 station/track names.
 * **Added:** New chatroom in chat to better classify the messages.
 * **Changed:** Upgraded Firebase JavaScript SDK to the modular.
@@ -41,10 +41,10 @@ This website project aims to collect all public radio links in the world which s
 * **Added:** Redesigned curated website display.
 * **Added:** "Stop streaming" function for the M3U8 video player.
 * **Added:** Beat pattern simulation added to the animation feature.
-* **Changed:**Switched Zeno streams to use the Icecast player for better compatibility.
-* **Changed:**Improved playback logic for M3U8 and direct streams.
-* **Changed:**Migrated data management from JSON files to a database, simplifying updates and maintenance.
-* **Changed:**Enhanced player with more functionalities.
+* **Changed:** Switched Zeno streams to use the Icecast player for better compatibility.
+* **Changed:** Improved playback logic for M3U8 and direct streams.
+* **Changed:** Migrated data management from JSON files to a database, simplifying updates and maintenance.
+* **Changed:** Enhanced player with more functionalities.
 * **Fixed:** Issue where the genre filter input did not persist when searching for stations.
 * **Fixed:** Audio playback bug when switching from Icecast streams to other stream types.
 * **Fixed:** Corrected fallback behavior of the Icecast player, especially for stations loaded via RadioBrowser API.
