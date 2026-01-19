@@ -38,7 +38,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.css" />
         <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline-meta.css" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@waline/client@3.5.6/dist/waline.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@waline/client@3.8.0/dist/waline.min.css">
     </head>
 
     <body>
@@ -506,7 +506,9 @@
                         <img id="ip" style="display: inline;" src="assets/ball.svg">
                     </div>
                     <div class="track-info">
-                        <span class="ml-1"><span id="nowPlaying" class="mr-1"></span>
+                        <span class="ml-1">
+                            <span id="nowPlaying" class="mr-1"></span>
+                            <small class="stream-type" id="metadataSource" style="display: none;"></small>
                             <div class="d-flex align-items-center">
                                 <span id="metadataDisplay" class="mr-1"></span>
                                 <button id="copyIcon" data-toggle="tooltip" data-placement="top"
@@ -517,8 +519,6 @@
                                     </span>
                                 </button>
                             </div>
-                            <span id="metadataSource" class="metadata-source">
-                            </span>
                         </span>
                     </div>
                 </div>

@@ -1,8 +1,9 @@
 import { ref, get } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js';
+import { db } from './utils.js';
+
 document.addEventListener('DOMContentLoaded', function () {
   const siteList = document.getElementById("siteList");
   const siteTabs = document.getElementById("siteTabs");
-  const db = window.appServices.db;
 
   async function renderSites(category) {
     siteList.innerHTML = "";

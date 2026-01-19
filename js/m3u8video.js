@@ -1,5 +1,5 @@
 import { ref, get, onValue } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js';
-
+import { db, keyConf } from './utils.js';
 document.addEventListener('DOMContentLoaded', function () {
 
   let currentVideos = [];
@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const defaultGenreName = "Japanese";
   const m3uURLInput = document.getElementById("m3uURL");
   const channelThumbCache = {};
-  const db = window.appServices.db;
 
   m3uURLInput.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
@@ -106,7 +105,6 @@ document.addEventListener('DOMContentLoaded', function () {
     playMedia(selectedLink);
   }
 
-  const PROXY_BASE = "https://sasalele.apnic-anycast.workers.dev/";
   const HLS_OPTIONS = {
     maxBufferLength: 12,
     maxMaxBufferLength: 40,
@@ -138,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function proxyUrl(url) {
-    return PROXY_BASE + encodeURIComponent(url);
+    return keyConf.proxyLink + encodeURIComponent(url);
   }
 
   function isHlsUrl(url) {
@@ -601,7 +599,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   async function fetchChannelThumbnail(channelId) {
-    const url = `https://www.googleapis.com/youtube/v3/channels?part=snippet&id=${channelId}&key=AIzaSyAwM_RLjqj8dbbMAP5ls4qg1olDsaxSq5s`;
+    const url = `https://www.googleapis.com/youtube/v3/channels?part=snippet&id=${channelId}&key=${keyConf.ytKey}`;
     const res = await fetch(url);
     const data = await res.json();
 
@@ -612,7 +610,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   async function fetchLiveVideoId(channelId) {
-    const url = `https://www.googleapis.com/youtube/v3/search?part=id&channelId=${channelId}&eventType=live&type=video&maxResults=1&key=AIzaSyAwM_RLjqj8dbbMAP5ls4qg1olDsaxSq5s`;
+    const url = `https://www.googleapis.com/youtube/v3/search?part=id&channelId=${channelId}&eventType=live&type=video&maxResults=1&key=${keyConf.ytKey}`;
 
     try {
       const response = await fetch(url);

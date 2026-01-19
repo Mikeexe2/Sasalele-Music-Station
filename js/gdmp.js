@@ -1,8 +1,7 @@
 import { ref, get } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";
+import { db, keyConf } from './utils.js';
+
 document.addEventListener('DOMContentLoaded', function () {
-    const CLIENT_ID = appServices.clientId;
-    const db = appServices.db;
-    const apiKey = appServices.apiKey;
     const form = document.getElementById('folderForm');
     const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest';
     const SCOPES = 'https://www.googleapis.com/auth/drive.readonly';
@@ -58,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function gisLoaded() {
         tokenClient = google.accounts.oauth2.initTokenClient({
-            client_id: CLIENT_ID,
+            client_id: keyConf.clientId,
             scope: SCOPES,
             callback: '',
         });
@@ -262,7 +261,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         // public link
         if (type === 'link') {
-            fetch(`https://www.googleapis.com/drive/v3/files/${id}?alt=media&key=${appServices.apiKey}`)
+            fetch(`https://www.googleapis.com/drive/v3/files/${id}?alt=media&key=${keyConf.apiKey}`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -483,7 +482,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function fetchDriveFiles(folderId, subfolderContent = null) {
         showLoadingSpinner();
-        const apiUrl = `https://www.googleapis.com/drive/v3/files?q='${folderId}' in parents&key=${apiKey}`;
+        const apiUrl = `https://www.googleapis.com/drive/v3/files?q='${folderId}' in parents&key=${keyConf.apiKey}`;
         fetch(apiUrl)
             .then(response => {
                 if (!response.ok) {
@@ -565,7 +564,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function downloadTrack(event, fileId, fileName) {
         showNotification(`Downloading...`, 'success');
-        const apiUrl = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=${apiKey}`;
+        const apiUrl = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=${keyConf.apiKey}`;
         event.preventDefault();
         fetch(apiUrl)
             .then(response => {

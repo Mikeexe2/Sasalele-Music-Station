@@ -1,4 +1,5 @@
 import { ref, set, get, onValue, query, orderByChild, push } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js';
+import { db, keyConf } from './utils.js';
 
 const playerContainer = document.getElementById("player");
 const expandIcon = document.querySelector("#togglePlayer .fa-expand");
@@ -50,8 +51,8 @@ const searchField = document.getElementById('search-field');
 const searchResultContainer = document.getElementById('radio-result-container');
 const searchResultHeader = document.getElementById('radio-result-header');
 const debouncedFilterStations = debounce(filterStations, 200);
-const db = window.appServices.db;
 const coolDown = 2000;
+const proxyLink = keyConf.proxyLink;
 const mediaController = document.getElementById('media-controller');
 
 let hlsPlayer = null;
@@ -97,7 +98,8 @@ function updatePlayerUI(media) {
     coverImage.src = `${media.favicon ? media.favicon : 'assets/radios/Unidentified2.webp'}`;
     coverImage.classList.add('rotating');
     nowPlaying.innerHTML = `<a href="${media.homepage || media.url}" target="_blank" class="homepagelink">${media.name}</a>`;
-    metaSource.textContent = `Stream type: ${media.host || 'from API'}`;
+    metaSource.style.display = 'inline-block';
+    metaSource.textContent = `${media.host || 'from API'}`;
 }
 
 function displayRecentTracks() {
@@ -187,10 +189,13 @@ async function loadStations(genre) {
     selectedContainer.classList.add('active');
     try {
         const stationsRef = ref(db, `stations/${genre}`);
-        const snapshot = await get(stationsRef);
+        const stationsQuery = query(stationsRef, orderByChild('createdAt'));
+        const snapshot = await get(stationsQuery);
         if (snapshot.exists()) {
-            const data = snapshot.val();
-            const stations = Object.values(data);
+            const stations = [];
+            snapshot.forEach((childSnapshot) => {
+                stations.push(childSnapshot.val());
+            });
             renderStations(stations);
         } else {
             console.warn(`No data available for genre: ${genre}`);
@@ -534,8 +539,8 @@ function handleDownloadClick(button) {
 function RadioM3UDownload(stationURL, stationName) {
     let cleanedURL = stationURL;
 
-    if (cleanedURL.startsWith(appServices.proxyLink)) {
-        cleanedURL = cleanedURL.substring(appServices.proxyLink.length);
+    if (cleanedURL.startsWith(proxyLink)) {
+        cleanedURL = cleanedURL.substring(proxyLink.length);
     }
 
     const patternsToRemove = [
@@ -615,6 +620,7 @@ async function stopPlayback() {
     coverImage.src = "assets/ball.svg";
     nowPlaying.innerHTML = '';
     metadataElement.textContent = '';
+    metaSource.style.display = 'none';
     metaSource.textContent = '';
 
     stopMediaSession();
@@ -767,12 +773,12 @@ function playHlsStream(audioEl, media) {
         const originalUrl = media.url_resolved || media.url;
         chosenUrl = originalUrl;
 
-        if (chosenUrl.startsWith('http://') && !chosenUrl.startsWith(appServices.proxyLink)) {
+        if (chosenUrl.startsWith('http://') && !chosenUrl.startsWith(proxyLink)) {
             if (isRawIP(chosenUrl)) {
                 console.warn('Skipping proxy for: ' + chosenUrl);
                 showNotification(`Allow insecure content on your browser to play this stream or download the m3u file to play it`, 'warning');
             } else {
-                chosenUrl = appServices.proxyLink + chosenUrl;
+                chosenUrl = proxyLink + chosenUrl;
                 isUsingProxy = true;
             }
         }
@@ -924,12 +930,12 @@ function playIcecastStream(audioEl, media) {
     let currentUrl = originalUrl;
     let fallbackTriggered = false;
     let initialUrl = originalUrl;
-    if (originalUrl.startsWith('http://') && !originalUrl.startsWith(appServices.proxyLink)) {
+    if (originalUrl.startsWith('http://') && !originalUrl.startsWith(proxyLink)) {
         if (isRawIP(originalUrl)) {
             console.warn('Skipping proxy for: ' + originalUrl);
             showNotification(`Allow insecure content on your browser to play this stream or download the m3u file to play it`, 'warning');
         } else {
-            currentUrl = appServices.proxyLink + originalUrl;
+            currentUrl = proxyLink + originalUrl;
             initialUrl = currentUrl;
         }
     }
@@ -1019,7 +1025,7 @@ function playIcecastStream(audioEl, media) {
         }
         let nextUrl = currentUrl;
         let retryMessage = '';
-        const isCurrentlyProxy = currentUrl.includes(appServices.proxyLink) && currentUrl !== originalUrl;
+        const isCurrentlyProxy = currentUrl.includes(proxyLink) && currentUrl !== originalUrl;
         const canSwap = initialUrl !== originalUrl;
         if (canSwap) {
             if (totalAttempts % 2 !== 0) {
@@ -1029,7 +1035,7 @@ function playIcecastStream(audioEl, media) {
                 }
             } else {
                 if (!isCurrentlyProxy) {
-                    nextUrl = appServices.proxyLink + originalUrl;
+                    nextUrl = proxyLink + originalUrl;
                     retryMessage = `Original failed. Retrying with proxy URL (${totalAttempts + 1}/${MAX_RETRIES + 1})`;
                 }
             }
@@ -1110,12 +1116,12 @@ function playUnknownStream(audioEl, media) {
     const originalUrl = media.url_resolved || media.url;
     let currentUrl = originalUrl;
     let initialUrl = originalUrl;
-    if (originalUrl.startsWith('http://') && !originalUrl.startsWith(appServices.proxyLink)) {
+    if (originalUrl.startsWith('http://') && !originalUrl.startsWith(proxyLink)) {
         if (isRawIP(originalUrl)) {
             console.warn('Skipping proxy for: ' + originalUrl);
             showNotification('Allow insecure content on your browser to play this stream or download the m3u file to play it', 'warning');
         } else {
-            currentUrl = appServices.proxyLink + originalUrl;
+            currentUrl = proxyLink + originalUrl;
             initialUrl = currentUrl;
         }
     }
@@ -1172,13 +1178,13 @@ function playUnknownStream(audioEl, media) {
     const retryStream = (error) => {
         let nextUrl = currentUrl;
         let retryMessage = '';
-        const isCurrentlyProxy = currentUrl.includes(appServices.proxyLink) && currentUrl !== originalUrl;
+        const isCurrentlyProxy = currentUrl.includes(proxyLink) && currentUrl !== originalUrl;
         if (totalAttempts % 2 !== 0 && initialUrl !== originalUrl) {
             if (isCurrentlyProxy) {
                 nextUrl = originalUrl;
                 retryMessage = `Proxy failed. Retrying with original URL (${totalAttempts + 1}/${MAX_RETRIES + 1})`;
             } else {
-                nextUrl = appServices.proxyLink + originalUrl;
+                nextUrl = proxyLink + originalUrl;
                 retryMessage = `Original failed. Retrying with proxy URL (${totalAttempts + 1}/${MAX_RETRIES + 1})`;
             }
         }
@@ -1363,7 +1369,7 @@ function radioSearch() {
         return;
     }
 
-    fetch(`${appServices.proxyLink}https://de2.api.radio-browser.info/json/stations/${searchBy}/${searchValue}?hidebroken=true&limit=150&order=clickcount&reverse=true`)
+    fetch(`${proxyLink}https://de2.api.radio-browser.info/json/stations/${searchBy}/${searchValue}?hidebroken=true&limit=150&order=clickcount&reverse=true`)
         .then(response => response.json())
         .then(data => {
             if (data.length > 0) {
@@ -1458,10 +1464,10 @@ searchInput.addEventListener('keyup', function (event) {
 });
 
 async function searchAcrossApis(searchTerm) {
-    const lastfmUrl = `https://ws.audioscrobbler.com/2.0/?method=track.search&format=json&limit=5&api_key=${appServices.lastfm}&track=${encodeURIComponent(searchTerm)}`;
-    const youtubeUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&type=video&q=${encodeURIComponent(searchTerm)}&key=${appServices.ytkey}`;
-    const itunesUrl = `${appServices.proxyLink}https://itunes.apple.com/search?limit=5&media=music&term=${encodeURIComponent(searchTerm)}`;
-    const deezerUrl = `${appServices.proxyLink}https://api.deezer.com/search?q=${encodeURIComponent(searchTerm)}&limit=5`;
+    const lastfmUrl = `https://ws.audioscrobbler.com/2.0/?method=track.search&format=json&limit=5&api_key=${keyConf.lastfmKey}&track=${encodeURIComponent(searchTerm)}`;
+    const youtubeUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&type=video&q=${encodeURIComponent(searchTerm)}&key=${keyConf.ytKey}`;
+    const itunesUrl = `${proxyLink}https://itunes.apple.com/search?limit=5&media=music&term=${encodeURIComponent(searchTerm)}`;
+    const deezerUrl = `${proxyLink}https://api.deezer.com/search?q=${encodeURIComponent(searchTerm)}&limit=5`;
 
     const safeJsonFetch = async (url, apiName) => {
         try {

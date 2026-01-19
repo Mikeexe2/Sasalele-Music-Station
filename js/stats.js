@@ -36,15 +36,15 @@ document.addEventListener('DOMContentLoaded', function () {
             notification.classList.remove('show');
             setTimeout(() => {
                 notificationArea.removeChild(notification);
-            }, 2000);
-        }, 1000);
+            }, 1500);
+        }, 1500);
     }
 
     function createNotificationArea() {
         const notificationArea = document.createElement('div');
         notificationArea.id = 'notification-area';
         notificationArea.className = 'position-fixed top-0 end-0 p-3';
-        notificationArea.style.zIndex = '99999';
+        notificationArea.style.zIndex = '10';
         document.body.appendChild(notificationArea);
         return notificationArea;
     }
@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function getDayAbbreviation(day) {
-        const days = ["Sun (日) ", "Mon (月) ", "Tue (火) ", "Wed (水) ", "Thu (木) ", "Fri (金) ", "Sat(土) "];
+        const days = ["Sun (日) ", "Mon (月) ", "Tue (火) ", "Wed (水) ", "Thu (木) ", "Fri (金) ", "Sat (土)"];
         return days[day];
     }
 
@@ -289,12 +289,12 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     }
-
+    
     async function handleToggleChange() {
         const toggleAnimation = document.getElementById('toggleAnimation');
-        const loadingSpinner = document.getElementById('loadingSpinner');
         if (toggleAnimation.checked) {
-            loadingSpinner.style.display = 'block';
+            showLoadingSpinner();
+            document.body.classList.add('is-loading');
             try {
                 await preloadImages(imageUrls);
                 console.log("Images preloaded");
@@ -304,7 +304,8 @@ document.addEventListener('DOMContentLoaded', function () {
             } catch (err) {
                 console.error("Error preloading images:", err);
             } finally {
-                loadingSpinner.style.display = 'none';
+                hideLoadingSpinner();
+                document.body.classList.remove('is-loading');
             }
         } else {
             isAnimating = false;

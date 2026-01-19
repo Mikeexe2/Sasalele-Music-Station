@@ -221,6 +221,12 @@ body {
     background-attachment: fixed;
 }
 
+body.is-loading {
+    pointer-events: none;
+    user-select: none;
+    cursor: wait;
+}
+
 .app-card {
     background: #121417;
     border: 1px solid rgba(255, 255, 255, .04);
