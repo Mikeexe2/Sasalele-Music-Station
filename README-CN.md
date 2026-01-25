@@ -14,11 +14,11 @@
 - 🆕 **播放信息：** 显示当前播放信息（只限支持的），并记录最近播放的曲目。
 - 📥 **可下载的播放列表：** 下载 M3U 或 M3U8 格式的广播电台文件，通过支持的播放器收听。
 - 🔍 **增强搜索：** 使用 Radio Browser API 来寻找更多广播电台，并通过[搜索](https://basic.pp.ua/#search)功能从 LastFM、Deezer、iTunes、YouTube 及您喜欢的搜索引擎中获取结果。
-- 📺 **视频流：** 通过[Sasalele 视频播放器](https://basic.pp.ua/video.html)观看超过 20,000 个 M3U8 视频流。
+- 📺 **视频流：** 通过[Sasalele 视频播放器](https://basic.pp.ua/video)观看超过 20,000 个 M3U8 视频流。
 - 🎥 **YouTube 直播流：** 访问精心策划的 YouTube 直播流列表，适合后台收听。
-- 📂 **Google Drive 集成：** 登录 Google，使用[Google Drive 音乐播放器](https://basic.pp.ua/drive.html)播放或下载您的音乐收藏，或直接粘贴公开的 Google Drive 文件夹链接以访问您的音乐。
+- 📂 **Google Drive 集成：** 登录 Google，使用[Google Drive 音乐播放器](https://basic.pp.ua/drive)播放或下载您的音乐收藏，或直接粘贴公开的 Google Drive 文件夹链接以访问您的音乐。
 - 🔧 **MP3 管理：** 探索用于下载、编辑和管理 MP3 文件的工具的列表。
-- 🎙 **日本播客：** 通过我们的[资源列表](https://basic.pp.ua/website.html)来找到更多日本播客。
+- 🎙 **日本播客：** 通过我们的[资源列表](https://basic.pp.ua/website)来找到更多日本播客。
 - 💬 **社区聊天：** 参与对话，与他人分享您正在收听的音乐。
 
 ## 贡献

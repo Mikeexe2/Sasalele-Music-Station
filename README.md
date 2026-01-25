@@ -11,11 +11,11 @@ This website project aims to collect all public radio links in the world which s
 - 🆕 View the track name of the song streamed by the radio stations (for supported streams only).
 - 📥 Download M3U8 files of radio stations and listen on your device with a supported player like Poweramp or VLC Media Player.
 - 🔍 Use the RadioBrowser API to discover even more radio stations and quickly search for songs across LastFM, Deezer, iTunes, YouTube, and selected search engines.
-- 📺 Watch over 20,000 M3U8 video streams via the [Sasalele Video Player](https://basic.pp.ua/video.html).
+- 📺 Watch over 20,000 M3U8 video streams via the [Sasalele Video Player](https://basic.pp.ua/video).
 - 🎥 YouTube Live streams perfect for background listening.
-- 📂 Log in with Google to play or download your music collection through the [Google Drive Music Player](https://basic.pp.ua/drive.html) or paste a public Google Drive folder link to access your music directly.
+- 📂 Log in with Google to play or download your music collection through the [Google Drive Music Player](https://basic.pp.ua/drive) or paste a public Google Drive folder link to access your music directly.
 - 🔧 Explore a curated list of websites for downloading, editing, and managing MP3 files.
-- 🎙 Discover Japanese podcasts with our [curated list of resources](https://basic.pp.ua/website.html).
+- 🎙 Discover Japanese podcasts with our [curated list of resources](https://basic.pp.ua/website).
 - 💬 Join the conversation and share your current listenings with others.
 
 ### 📝 Project Changelog
@@ -69,7 +69,7 @@ This website project aims to collect all public radio links in the world which s
 * **Fixed:** Right-click and paste content into chat input.
 
 #### 📅 2024-08-28
-* **Added:** New site (https://basic.pp.ua/assets/hirakataroma.html).
+* **Added:** New site (https://basic.pp.ua/assets/hirakataroma).
 * **Added:** Load MP3 files from dropdown list of public Google Drive Shared folders.
 * **Added:** Paste and load public google drive folder link function [issue 4](https://github.com/Mikeexe2/Sasalele-Music-Station/issues/4).
 * **Added:** YouTube Live Streams in video page.
