@@ -1,4 +1,4 @@
-import { ref, set, get, onValue, query, orderByChild, push } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js';
+import { ref, set, get, onValue, query, orderByChild, child, push } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js';
 import { db, keyConf } from './utils.js';
 
 const playerContainer = document.getElementById("player");
@@ -33,7 +33,6 @@ const toggleButton = document.getElementById('toggleButton');
 const sidePanel = document.getElementById('sidePanel');
 const hideButton = document.getElementById('hideButton');
 const searchNavLink = document.querySelector('.search-nav-link');
-const defaultGenre = "jmusic";
 const MAX_RETRIES = 3;
 const playlistMenu = document.getElementById('playlistMenu');
 const container = document.getElementById('hugeData');
@@ -48,10 +47,9 @@ const tagSelect = document.getElementById('tagSelect');
 const searchOption = document.getElementById('searchOption');
 const findRadioBtn = document.getElementById("radiosearch");
 const searchField = document.getElementById('search-field');
-const searchResultContainer = document.getElementById('radio-result-container');
 const searchResultHeader = document.getElementById('radio-result-header');
 const debouncedFilterStations = debounce(filterStations, 200);
-const coolDown = 2000;
+const coolDown = 1000;
 const proxyLink = keyConf.proxyLink;
 const mediaController = document.getElementById('media-controller');
 
@@ -68,7 +66,8 @@ let ap = null;
 let originalTitle = document.title;
 let isRandomPlayRunning = false;
 let debounceTimeout;
-let sakuin = [];
+let currentStationsList = [];
+let filteredIndices = [];
 
 function debounce(func, delay = 300) {
     return function (...args) {
@@ -99,7 +98,7 @@ function updatePlayerUI(media) {
     coverImage.classList.add('rotating');
     nowPlaying.innerHTML = `<a href="${media.homepage || media.url}" target="_blank" class="homepagelink">${media.name}</a>`;
     metaSource.style.display = 'inline-block';
-    metaSource.textContent = `${media.host || 'from API'}`;
+    metaSource.textContent = `${media.host}`;
 }
 
 function displayRecentTracks() {
@@ -184,6 +183,39 @@ function trackHistory(trackName, media) {
     }
 }
 
+async function loadGenres() {
+    try {
+        const snapshot = await get(child(ref(db), `genres`));
+
+        if (snapshot.exists()) {
+            const data = snapshot.val();
+            const sortedGenres = Object.entries(data).sort((a, b) => a[1].order - b[1].order);
+
+            let htmlContent = '';
+            sortedGenres.forEach(([id, details], index) => {
+                const activeClass = index === 0 ? 'active' : '';
+                htmlContent += `
+                    <li>
+                        <span class="genre-pill align-items-center ${activeClass}"
+                              data-genre="${id}" 
+                              role="button">
+                              ${details.name}
+                        </span>
+                    </li>`;
+            });
+
+            genreSelect.innerHTML = htmlContent;
+
+            attachGenreListeners();
+            if (sortedGenres.length > 0) {
+                loadStations(sortedGenres[0][0]);
+            }
+        }
+    } catch (error) {
+        console.error("Error fetching genres:", error);
+    }
+}
+
 async function loadStations(genre) {
     showLoadingSpinner();
     selectedContainer.classList.add('active');
@@ -191,44 +223,47 @@ async function loadStations(genre) {
         const stationsRef = ref(db, `stations/${genre}`);
         const stationsQuery = query(stationsRef, orderByChild('createdAt'));
         const snapshot = await get(stationsQuery);
+
         if (snapshot.exists()) {
-            const stations = [];
+            currentStationsList = [];
             snapshot.forEach((childSnapshot) => {
-                stations.push(childSnapshot.val());
+                currentStationsList.push({
+                    id: childSnapshot.key,
+                    ...childSnapshot.val()
+                });
             });
-            renderStations(stations);
+            currentStationsList.reverse();
+            renderStations(currentStationsList);
         } else {
-            console.warn(`No data available for genre: ${genre}`);
             selectedContainer.innerHTML = '<p class="no-stations">No stations available</p>';
         }
+    } catch (err) {
+        console.error("Error fetching stations:", err);
+    } finally {
         hideLoadingSpinner();
         if (currentSearchTerm && currentSearchTerm.trim() !== "") {
             filterStations();
         }
-    } catch (err) {
-        console.error("Error fetching stations:", err);
-        hideLoadingSpinner();
     }
 }
 
-function initializeUI() {
-    loadStations(defaultGenre);
-    const defaultGenreButton = genreSelect?.querySelector(`[data-genre="${defaultGenre}"]`);
+function attachGenreListeners() {
+    const pills = document.querySelectorAll('.genre-pill');
+    pills.forEach(pill => {
+        pill.addEventListener('click', (e) => {
+            const genre = e.target.getAttribute('data-genre');
+            document.querySelector('.genre-pill.active')?.classList.remove('active');
+            e.target.classList.add('active');
 
-    defaultGenreButton.classList.add('active');
+            e.target.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
 
-    genreSelect.addEventListener('click', (event) => {
-        searchResultHeader.style.display = "none";
-        const genreButton = event.target.closest('.genre-btn');
-        const genre = genreButton.getAttribute('data-genre');
-        document.querySelectorAll('.genre-content').forEach(c => c.classList.remove('active'));
-        loadStations(genre);
-        document.querySelectorAll('.genre-btn').forEach(button => {
-            button.classList.remove('active');
+            loadStations(genre);
         });
-        genreButton.classList.add('active');
     });
+}
 
+function initializeUI() {
+    loadGenres();
     searchOption.addEventListener('change', handleSearchOptionChange);
 
     if (hideButton) {
@@ -331,30 +366,37 @@ function handleSearchNavClick(e) {
 }
 
 function renderStations(stations) {
+    if (searchResultHeader) { searchResultHeader.style.display = "none"; }
     if (stations.length === 0) {
         selectedContainer.innerHTML = '<p class="no-stations">No stations available in this genre</p>';
-        sakuin = [];
         return;
     }
 
-    const genreHTML = stations.map(station => {
-        const streamTypeClass = `stream-type-${station.host}`;
-        const safeData = encodeURIComponent(JSON.stringify(station));
+    const genreHTML = stations.map((station, index) => {
+        const tags = station.tags || [station.host];
+        const tagsHTML = tags.map(tag =>
+            `<span class="tagger">${tag}</span>`
+        ).join('');
+
         return `
-        <li data-station="${safeData}">
-            <img src="${station.favicon || 'assets/radios/Unidentified2.webp'}" alt="${station.name}">
+        <li data-index="${index}" class="align-items-center p-2 mb-2 station-item">
+            <img src="${station.favicon || 'assets/radios/Unidentified2.webp'}" 
+                 alt="${station.name}" 
+                 class="station-img">
             <div class="flex-grow-1 info">
-                <h5 class="mb-1 text-truncate">${station.name}</h5>
-                <small class="stream-type ${streamTypeClass}">${station.host}</small>
+                <h5>${station.name}</h5>
+                <div class="d-flex flex-wrap">
+                    ${tagsHTML}
+                </div>
             </div>
             <div class="ms-3 d-flex button-group">
-                <a href="${station.homepage || station.url}" target="_blank" class="btn btn-sm btn-info">
+                <a href="${station.homepage || station.url}" target="_blank" class="btn btn-sm btn-outline-info border-0">
                     <i class="fas fa-external-link-alt"></i>
                 </a>
-                <button class="btn btn-sm btn-dark download-button">
+                <button class="btn btn-sm btn-outline-light border-0 download-button">
                     <i class="fas fa-download"></i>
                 </button>
-                <button class="btn btn-sm btn-primary main-play-button">
+                <button class="btn btn-sm btn-primary main-play-button rounded-circle ms-1" style="width: 32px; height: 32px; padding: 0;">
                     <i class="fas fa-play"></i>
                 </button>
             </div>
@@ -363,11 +405,11 @@ function renderStations(stations) {
 
     selectedContainer.innerHTML = genreHTML;
     if (currentStation) {
-        const stationElements = selectedContainer.querySelectorAll('li');
-
-        const currentStationData = encodeURIComponent(JSON.stringify(currentStation));
+        const stationElements = selectedContainer.querySelectorAll('li.station-item');
         stationElements.forEach(el => {
-            if (el.dataset.station === currentStationData) {
+            const index = el.dataset.index;
+            const stationAtThisIndex = currentStationsList[index];
+            if (stationAtThisIndex && stationAtThisIndex.url === currentStation.url) {
                 const playButton = el.querySelector('.main-play-button');
                 const currentMediaElement = mediaController && mediaController.media;
                 const isCurrentlyPlaying = currentMediaElement ? !currentMediaElement.paused : false;
@@ -376,7 +418,6 @@ function renderStations(stations) {
                 if (isCurrentlyPlaying && playButton) {
                     playButton.innerHTML = '<i class="fas fa-pause"></i>';
                     playButton.setAttribute('data-playing', 'true');
-                    playButton.title = 'Pause';
                     playButton.classList.remove('btn-primary');
                     playButton.classList.add('btn-warning');
                 }
@@ -385,88 +426,84 @@ function renderStations(stations) {
             }
         });
     }
-    sakuin = stations.map((_, index) => index);
     stationCount.textContent = stations.length;
 }
 
 function filterStations() {
-    const searchTerm = currentSearchTerm.trim().toLowerCase();
-    const activeGenre = document.querySelector('.genre-content.active');
-    if (!activeGenre) return;
-    const items = activeGenre.querySelectorAll('li');
+    const searchTerm = (currentSearchTerm || "").trim().toLowerCase();
+    const items = selectedContainer.querySelectorAll('li.station-item');
+
     let visibleCount = 0;
-    items.forEach(item => {
-        try {
-            const station = JSON.parse(decodeURIComponent(item.dataset.station));
-            const name = (station.name || '').toLowerCase();
-            const host = (station.host || '').toLowerCase();
-            const homepage = (station.homepage || '').toLowerCase();
-            const url = (station.url || '').toLowerCase();
-            const match =
-                name.includes(searchTerm) ||
-                host.includes(searchTerm) ||
-                homepage.includes(searchTerm) ||
-                url.includes(searchTerm)
-            item.style.display = match ? '' : 'none';
-            if (match) visibleCount++;
-        } catch (err) {
-            console.warn('[stationSearch] Failed to parse data-station for an item:', err);
+    filteredIndices = [];
+
+    currentStationsList.forEach((station, index) => {
+        const item = items[index];
+        if (!item) return;
+
+        const tagsString = (station.tags || []).join(' ').toLowerCase();
+        const match =
+            (station.name || "").toLowerCase().includes(searchTerm) ||
+            (station.host || "").toLowerCase().includes(searchTerm) ||
+            tagsString.includes(searchTerm);
+
+        if (match) {
+            item.style.display = '';
+            visibleCount++;
+            filteredIndices.push(index);
+        } else {
             item.style.display = 'none';
         }
     });
 
-    let noResults = activeGenre.querySelector('.no-results');
+    updateNoResultsUI(visibleCount, searchTerm);
+    stationCount.textContent = visibleCount;
+}
 
-    if (visibleCount === 0 && searchTerm.length > 0 && !noResults) {
-        noResults = document.createElement('p');
-        noResults.className = 'no-results';
-        noResults.textContent = 'No stations found matching your search';
-        noResults.style.gridColumn = '1 / -1';
-        noResults.style.textAlign = 'center';
-        noResults.style.padding = '20px';
-        noResults.style.color = 'white';
-        activeGenre.appendChild(noResults);
-    } else if (visibleCount > 0 && noResults) {
-        noResults.remove();
-    } else if (visibleCount === 0 && searchTerm.length === 0 && noResults) {
+function updateNoResultsUI(count, term) {
+    let noResults = selectedContainer.querySelector('.no-results');
+
+    if (count === 0 && term.length > 0) {
+        if (!noResults) {
+            noResults = document.createElement('div');
+            noResults.className = 'no-results text-center p-5 opacity-50';
+            noResults.innerHTML = `<i class="fas fa-search mb-2"></i><p>No matches for "${term}"</p>`;
+            selectedContainer.appendChild(noResults);
+        }
+    } else if (noResults) {
         noResults.remove();
     }
-};
+}
 
 randomplay.addEventListener('click', async function () {
-    if (isRandomPlayRunning) {
-        showNotification(`Please slow down!`, 'warning');
+    if (isRandomPlayRunning) return;
+
+    const pool = (currentSearchTerm.trim().length > 0)
+        ? filteredIndices
+        : currentStationsList.map((_, i) => i);
+
+    if (pool.length === 0) {
+        showNotification("No visible stations to play", "warning");
         return;
     }
+
     isRandomPlayRunning = true;
-    const activeGenre = document.querySelector('.genre-content.active');
-    if (!activeGenre) {
-        isRandomPlayRunning = false;
-        return;
-    }
-    const visibleStations = activeGenre.querySelectorAll('li');
-    if (sakuin.length === 0) {
-        isRandomPlayRunning = false;
-        return;
-    }
-    const randomIndex = Math.floor(Math.random() * sakuin.length);
-    const stationIndexToPlay = sakuin[randomIndex];
-    const randomStationLi = visibleStations[stationIndexToPlay];
+
     try {
-        const stationDataString = randomStationLi.dataset.station;
-        if (!stationDataString) {
-            console.error("Random station selected is missing data-station attribute.");
-            return;
+        const randomIndexInPool = Math.floor(Math.random() * pool.length);
+        const actualIndex = pool[randomIndexInPool];
+        const media = currentStationsList[actualIndex];
+
+        const randomStationLi = selectedContainer.querySelector(`li[data-index="${actualIndex}"]`);
+
+        if (randomStationLi) {
+            const playButton = randomStationLi.querySelector('.main-play-button');
+            await playMedia(media, playButton);
+            randomStationLi.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
-        const media = JSON.parse(decodeURIComponent(stationDataString));
-        const playButton = randomStationLi.querySelector('.main-play-button');
-        await playMedia(media, playButton);
     } catch (err) {
-        console.error("Failed to start random playback:", err);
+        console.error(err);
     } finally {
-        setTimeout(() => {
-            isRandomPlayRunning = false;
-        }, coolDown);
+        setTimeout(() => isRandomPlayRunning = false, coolDown);
     }
 });
 
@@ -479,7 +516,6 @@ document.addEventListener('click', function (event) {
     setTimeout(() => target.removeAttribute('data-processing'), 1000);
 
     if (target.classList.contains('download-button')) {
-        showNotification(`Downloading...`, 'success');
         handleDownloadClick(target);
     } else if (target.classList.contains('main-play-button')) {
         handlePlayClick(target);
@@ -488,28 +524,19 @@ document.addEventListener('click', function (event) {
 
 function handlePlayClick(button) {
     const parentLi = button.closest('li');
-    const isCurrentlyPlaying = button.getAttribute('data-playing') === 'true';
-    const stationDataString = parentLi.dataset.station;
+    if (!parentLi) return;
 
-    if (!stationDataString) {
-        console.error("[handlePlayClick] Missing station data on <li> element.");
-        return;
-    }
+    const index = parentLi.dataset.index;
+    const mediaData = currentStationsList[index];
 
-    let mediaData;
-
-    try {
-        mediaData = JSON.parse(decodeURIComponent(stationDataString));
-    } catch (err) {
-        console.error('[handlePlayClick] Failed to parse media:', err);
-        return;
-    }
     if (!mediaData || !mediaData.url) {
-        console.error("[handlePlayClick] Parsed media object is invalid or missing URL.");
+        console.error("[handlePlayClick] Media data not found in global array or missing URL.");
         return;
     }
 
+    const isCurrentlyPlaying = button.getAttribute('data-playing') === 'true';
     const currentMedia = mediaController.querySelector('[slot="media"]');
+
     const isSameStationLoaded = currentMedia && (currentMedia.src === mediaData.url);
 
     if (isCurrentlyPlaying) {
@@ -528,11 +555,15 @@ function handlePlayClick(button) {
 function handleDownloadClick(button) {
     const parentLi = button.closest('li');
     if (!parentLi) return;
-    try {
-        const media = JSON.parse(decodeURIComponent(parentLi.dataset.station));
+
+    const index = parentLi.dataset.index;
+    const media = currentStationsList[index];
+
+    if (media && media.url) {
+        showNotification(`Downloaded ${media.name}...`, 'success');
         RadioM3UDownload(media.url, media.name);
-    } catch (err) {
-        console.error("[handleDownloadClick] Failed to parse media:", err);
+    } else {
+        console.error("[handleDownloadClick] Failed to find media in global array.");
     }
 }
 
@@ -673,8 +704,6 @@ async function playMedia(media, button) {
         updateActiveStationPlayButton(false);
     });
 
-    //showNotification(`Playback started.`, 'success');
-
     const parentLi = button.closest('li');
     if (parentLi) {
         parentLi.classList.add('active-station');
@@ -689,9 +718,9 @@ async function playMedia(media, button) {
         }
     }
 
-    switch (media.host) {
+    const hostType = media.host;
+    switch (hostType) {
         case "icecast":
-            playIcecastStream(newAudioElement, media);
         case "zeno":
             playIcecastStream(newAudioElement, media);
             break;
@@ -708,17 +737,16 @@ async function playMedia(media, button) {
             playUnknownStream(newAudioElement, media);
             break;
         default:
-            if (media.url_resolved.includes('.m3u8')) {
+            if (media.url.includes('.m3u8')) {
                 playHlsStream(newAudioElement, media);
-            }
-            else {
+            } else {
                 playIcecastStream(newAudioElement, media);
             }
             break;
     }
     currentStation = media;
-    updatePlayerUI(media);
     isPlaying = true;
+    updatePlayerUI(media);
 }
 
 function playHlsStream(audioEl, media) {
@@ -732,7 +760,7 @@ function playHlsStream(audioEl, media) {
 
         let retryCount = 0;
         const maxRetries = 3;
-        let currentUrl = media.url_resolved || media.url;
+        let currentUrl = media.url;
         let isUsingProxy = false;
         const liveTrackName = media.name + ' (Live)';
 
@@ -750,7 +778,7 @@ function playHlsStream(audioEl, media) {
                     console.log(`Retry ${retryCount}/${maxRetries}: Switching to original URL`);
                     //showNotification(`Proxy failed, retrying with original URL (${retryCount}/${maxRetries})`, 'warning');
 
-                    currentUrl = media.url_resolved || media.url;
+                    currentUrl = media.url;
                     isUsingProxy = false;
 
                     hlsPlayer.destroy();
@@ -770,7 +798,7 @@ function playHlsStream(audioEl, media) {
             return false;
         };
 
-        const originalUrl = media.url_resolved || media.url;
+        const originalUrl = media.url;
         chosenUrl = originalUrl;
 
         if (chosenUrl.startsWith('http://') && !chosenUrl.startsWith(proxyLink)) {
@@ -883,7 +911,7 @@ function playHlsStream(audioEl, media) {
         });
     } else if (audioEl.canPlayType('application/vnd.apple.mpegurl')) {
         showNotification('HLS: Using native support', 'warning');
-        audioEl.src = media.url_resolved || media.url;
+        audioEl.src = media.url;
         audioEl.play();
     } else {
         metadataElement.textContent = 'HLS not supported in this browser';
@@ -926,7 +954,7 @@ function playHlsStreamWithConfig(audioEl, media, url, retryCount) {
 
 function playIcecastStream(audioEl, media) {
     let totalAttempts = 0;
-    let originalUrl = media.url_resolved || media.url;
+    let originalUrl = media.url;
     let currentUrl = originalUrl;
     let fallbackTriggered = false;
     let initialUrl = originalUrl;
@@ -1113,7 +1141,7 @@ function playZeno(media) {
 
 function playUnknownStream(audioEl, media) {
     let totalAttempts = 0;
-    const originalUrl = media.url_resolved || media.url;
+    const originalUrl = media.url;
     let currentUrl = originalUrl;
     let initialUrl = originalUrl;
     if (originalUrl.startsWith('http://') && !originalUrl.startsWith(proxyLink)) {
@@ -1374,39 +1402,54 @@ function radioSearch() {
         .then(data => {
             if (data.length > 0) {
                 document.querySelectorAll('.genre-content').forEach(c => c.classList.remove('active'));
-                document.querySelectorAll('.genre-btn').forEach(button => {
-                    button.classList.remove('active');
-                });
+                document.querySelector('.genre-pill.active')?.classList.remove('active');
+
                 searchResultHeader.innerHTML = `<div class="search-terms">Top 150 Radio Search Results for: <span id="searchTerms">${searchValue}</span><div>`;
                 searchResultHeader.style.display = "block";
-                searchResultContainer.classList.add('active');
-                searchResultContainer.innerHTML = '';
+                selectedContainer.classList.add('active');
+                currentStationsList = [];
+                currentStationsList = data.map(radio => ({
+                    name: radio.name,
+                    url: radio.url_resolved || radio.url,
+                    favicon: radio.favicon,
+                    homepage: radio.homepage,
+                    host: 'from API',
+                    tags: radio.tags ? radio.tags.split(',').slice(0, 3) : ['Radio'],
+                }));
 
-                data.forEach(radio => {
-                    const radioItem = document.createElement('li');
-                    const safeData = encodeURIComponent(JSON.stringify(radio));
-                    radioItem.setAttribute('data-station', safeData);
-                    radioItem.innerHTML = `
-                    <img src="${radio.favicon || 'assets/radios/Unidentified2.webp'}">
+                const radioHTML = currentStationsList.map((radio, index) => {
+                    const tagsHTML = radio.tags.map(tag =>
+                        `<span class="tagger">${tag}</span>`
+                    ).join('');
+
+                    return `
+                <li data-index="${index}" class="align-items-center p-2 mb-2 station-item">
+                    <img src="${radio.favicon || 'assets/radios/Unidentified2.webp'}" 
+                         alt="${radio.name}" class="station-img">
                     <div class="flex-grow-1 info">
-                        <h5 class="mb-1 text-truncate">${radio.name}</h5>
+                        <h5>${radio.name}</h5>
+                        <div class="d-flex flex-wrap">
+                            ${tagsHTML}
+                        </div>
                     </div>
                     <div class="ms-3 d-flex button-group">
-                        <a href="${radio.homepage || radio.url}" target="_blank" class="btn btn-sm btn-info">
+                        <a href="${radio.homepage || radio.url}" target="_blank" class="btn btn-sm btn-outline-info border-0">
                             <i class="fas fa-external-link-alt"></i>
                         </a>
-                        <button class="btn btn-sm btn-dark download-button">
+                        <button class="btn btn-sm btn-outline-light border-0 download-button">
                             <i class="fas fa-download"></i>
                         </button>
-                        <button class="btn btn-sm btn-primary main-play-button">
+                        <button class="btn btn-sm btn-primary main-play-button rounded-circle ms-1" style="width: 32px; height: 32px; padding: 0;">
                             <i class="fas fa-play"></i>
                         </button>
                     </div>
-                    `;
-                    searchResultContainer.appendChild(radioItem);
-                });
+                </li>`;
+                }).join('');
+
+                selectedContainer.innerHTML = radioHTML;
                 hideLoadingSpinner();
-                stationCount.textContent = data.length;
+                stationCount.textContent = currentStationsList.length;
+
             } else {
                 hideLoadingSpinner();
                 searchResultHeader.style.display = "block";
@@ -1417,7 +1460,6 @@ function radioSearch() {
             hideLoadingSpinner();
             console.error('Error fetching data:', error);
         });
-
     clearSearchField();
 }
 
