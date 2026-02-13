@@ -1,378 +1,546 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Sasalele M3U8 Video Streams Player</title>
+    <meta
+      name="robots"
+      content="index, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+    />
+    <meta
+      name="Keywords"
+      content="m3u8 streams, live streaming, IPTV, HLS, live TV, streaming media, m3u8 playlist, Japanese movies online, HLS streams"
+    />
+    <meta
+      name="description"
+      content="Watch Japanese news, movies, and live TV with m3u8 streams. Enjoy seamless streaming experiences with our extensive collection of streams and live broadcasts."
+    />
+    <link rel="canonical" href="https://basic.pp.ua/video" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Sasalele M3U8 Video Streams Player" />
+    <meta property="og:url" content="https://basic.pp.ua/video" />
+    <meta
+      property="og:site_name"
+      content="Sasalele M3U8 Video Streams Player"
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Sasalele M3U8 Video Streams Player",
+        "url": "https://basic.pp.ua/video"
+      }
+    </script>
+    <link rel="icon" href="/assets/sasalele_logo.webp" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/assets/sasalele_logo.webp" />
+    <link
+      rel="shortcut icon"
+      href="/assets/sasalele_logo.webp"
+      type="image/x-icon"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.6.15/dist/hls.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@waline/client@v3/dist/waline-meta.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@waline/client@3.5.6/dist/waline.min.css"
+    />
+    <link rel="stylesheet" href="/src/css/styles.css" />
+  </head>
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>Sasalele M3U8 Video Streams Player</title>
-        <meta name="robots" content="index, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-        <meta name="Keywords"
-            content="m3u8 streams, live streaming, IPTV, HLS, live TV, streaming media, m3u8 playlist, Japanese movies online, HLS streams">
-        <meta name="description"
-            content="Watch Japanese news, movies, and live TV with m3u8 streams. Enjoy seamless streaming experiences with our extensive collection of streams and live broadcasts.">
-        <link rel="canonical" href="https://basic.pp.ua/video">
-        <meta property="og:type" content="website">
-        <meta property="og:title" content="Sasalele M3U8 Video Streams Player">
-        <meta property="og:url" content="https://basic.pp.ua/video">
-        <meta property="og:site_name" content="Sasalele M3U8 Video Streams Player">
-        <script type="application/ld+json">{
-                         "@context": "https://schema.org",
-                         "@type": "WebSite",
-                         "name": "Sasalele M3U8 Video Streams Player",
-                         "url": "https://basic.pp.ua/video"
-                         }
-                      </script>
-        <link rel="icon" href="/assets/sasalele_logo-removebg.webp" type="image/x-icon" />
-        <link rel="apple-touch-icon" href="/assets/sasalele_logo-removebg.webp">
-        <link rel="shortcut icon" href="/assets/sasalele_logo-removebg.webp" type="image/x-icon" />
-        <link rel="stylesheet" href="/css/style.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/hls.js@latest" type="text/javascript"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline-meta.css" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@waline/client@3.5.6/dist/waline.min.css">
-    </head>
+  <body>
+    <div id="background">
+      <img id="randomimg" src="" alt="Sasalele Music Station" />
+    </div>
+    <div id="content">
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="navbar-brand d-flex align-items-center">
+          <a href="/">
+            <img
+              src="/assets/sasalele_logo.webp"
+              width="30"
+              height="30"
+              class="d-inline-block align-top"
+              alt="Sasalele Music Station"
+            />
+          </a>
+          <div class="clock">
+            <span id="clockDay"></span>
+            <span id="clockTime"></span>
+          </div>
+        </div>
 
-    <body>
-        <div id="background"><img id="randomimg" src="" alt="Sasalele Music Station"></div>
-        <div id="content">
-            <nav class="navbar sticky-top navbar-dark navbar-expand-md">
-                <a class="navbar-brand" href="/">
-                    <img src="/assets/sasalele_logo-removebg.webp" width="30" height="30"
-                        class="d-inline-block align-top" alt="Sasalele Music Station">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/"
+                >Radios <i class="fas fa-radio"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/website.html"
+                >Websites <i class="fa-fw fas fa-link"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#"
+                >Videos <i class="fas fa-video"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/drive.html"
+                >GDMP <i class="fa-brands fa-google-drive"></i>
+              </a>
+            </li>
+            <div class="d-flex align-items-center">
+              <div class="nav-item form-check form-switch">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="toggleAnimation"
+                  role="switch"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Animate"
+                />
+                <label class="form-check-label" for="toggleAnimation"> </label>
+              </div>
+            </div>
+          </ul>
+        </div>
+      </nav>
+      <section id="videos">
+        <div class="selected-title">
+          <h1 id="selected-video-title">Videos</h1>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8">
+              <div id="vplayer" class="container">
+                <media-controller
+                  style="width: 100%; max-width: 720px; aspect-ratio: 16 / 9"
+                >
+                  <video slot="media" id="video-player" src=""></video>
+                  <media-loading-indicator
+                    slot="centered-chrome"
+                    noautohide
+                  ></media-loading-indicator>
+                  <media-control-bar>
+                    <media-play-button></media-play-button>
+                    <button
+                      class="p-btn"
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      title="Stop Streaming"
+                      id="vidstopBtn"
+                    >
+                      <i class="fas fa-stop"></i>
+                    </button>
+                    <media-seek-backward-button></media-seek-backward-button>
+                    <media-seek-forward-button></media-seek-forward-button>
+                    <media-mute-button></media-mute-button>
+                    <media-volume-range></media-volume-range>
+                    <media-time-range></media-time-range>
+                    <media-time-display
+                      showduration
+                      remaining
+                    ></media-time-display>
+                    <media-playback-rate-button></media-playback-rate-button>
+                    <media-fullscreen-button></media-fullscreen-button>
+                  </media-control-bar>
+                </media-controller>
+              </div>
+            </div>
+            <div class="col-lg-4 mb-1">
+              <div class="d-flex justify-content-center mb-1">
+                <div class="dropdown">
+                  <button
+                    type="button"
+                    class="btn btn-info dropdown-toggle"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <i class="fa fa-bars"></i> Streams
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a
+                        href="#"
+                        class="genre-link dropdown-item active"
+                        data-genre="videos/jpvideos"
+                        selected
+                        >Japanese</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        class="genre-link dropdown-item"
+                        data-genre="videos/krvideos"
+                        >Korean</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        class="genre-link dropdown-item"
+                        data-genre="videos/cnvideos"
+                        >Chinese 1</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        class="genre-link dropdown-item"
+                        data-genre="videos/cnvideos2"
+                        >Chinese 2</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        class="genre-link dropdown-item"
+                        data-genre="videos/cnvideos3"
+                        >Chinese 3</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        class="genre-link dropdown-item"
+                        data-genre="videos/cloudmovies"
+                        >CN Shows</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        class="genre-link dropdown-item"
+                        data-genre="videos/cncloudmusic"
+                        >Chinese MV</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        class="genre-link dropdown-item"
+                        data-genre="videos/krcloudmusic"
+                        >Korean MV</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        class="genre-link dropdown-item"
+                        data-genre="videos/mix"
+                        >All mix 1</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        class="genre-link dropdown-item"
+                        data-genre="videos/mix2"
+                        >All mix 2</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        class="genre-link dropdown-item"
+                        data-genre="videos/mix3"
+                        >All mix 3</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        class="genre-link dropdown-item"
+                        data-genre="videos/mix4"
+                        >All mix 4</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        class="genre-link dropdown-item"
+                        data-genre="videos/mix5"
+                        >All mix 5</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        class="genre-link dropdown-item"
+                        data-genre="videos/mix6"
+                        >All mix 6</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+                <div id="genre-info" class="ms-auto mb-2">
+                  <span id="genre-name"></span>
+                  <strong> (<span id="channel-count"></span>)</strong>
+                </div>
+              </div>
+              <div class="input-group mb-2 w-100">
+                <input
+                  type="search"
+                  id="searchChannel"
+                  class="form-control"
+                  placeholder="Search Channel"
+                />
+              </div>
+              <div id="loadingSpinner" class="mb-4"></div>
+              <div id="video-list" class="list-group w-100"></div>
+            </div>
+          </div>
+        </div>
+        <div class="container-fluid">
+          <div class="row d-flex justify-content-center">
+            <div class="col-md-10">
+              <div class="input-group mb-3">
+                <input
+                  type="search"
+                  id="m3uURL"
+                  class="form-control"
+                  placeholder="Enter M3U8/MP4 stream URL"
+                />
+                <button id="loadM3U" class="btn btn-primary btn-go">Go</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="alert alert-info mt-4" role="alert" style="opacity: 0.95">
+            <strong>Note:</strong> Video streams are collected from public
+            sources. If playback fails, it may be due to stream availability or
+            network restrictions. Try refreshing or using a VPN if needed. Enjoy
+            watching!
+          </div>
+          <div class="accordion" id="infoAccordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne"
+                  aria-expanded="false"
+                  aria-controls="collapseOne"
+                >
+                  What is an M3U8 Link?
+                </button>
+              </h2>
+              <div
+                id="collapseOne"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingOne"
+                data-bs-parent="#infoAccordion"
+              >
+                <div class="accordion-body">
+                  <p>
+                    M3U8 is a playlist format for streaming audio and video. It
+                    contains links to media files and is commonly used for
+                    online video streams.
+                  </p>
+                  <ul>
+                    <li>Paste an M3U8 URL above</li>
+                    <li>Click "Go" to start streaming</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseTwo"
+                  aria-expanded="false"
+                  aria-controls="collapseTwo"
+                >
+                  What is HLS?
+                </button>
+              </h2>
+              <div
+                id="collapseTwo"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingTwo"
+                data-bs-parent="#infoAccordion"
+              >
+                <div class="accordion-body">
+                  <p>
+                    HLS (HTTP Live Streaming) is a protocol for delivering media
+                    over the internet. It breaks streams into small segments for
+                    smooth playback, often described by M3U8 playlists.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingThree">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseThree"
+                  aria-expanded="false"
+                  aria-controls="collapseThree"
+                >
+                  Why can't some M3U8 files play?
+                </button>
+              </h2>
+              <div
+                id="collapseThree"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingThree"
+                data-bs-parent="#infoAccordion"
+              >
+                <div class="accordion-body">
+                  <p>
+                    Some streams may not play due to network restrictions or
+                    browser limitations. If you have issues, try refreshing,
+                    using a VPN, or installing a browser extension like
+                    <a
+                      href="https://chromewebstore.google.com/detail/native-hls-playback/emnphkkblegpebimobpbekeedfgemhof"
+                      target="_blank"
+                      ><strong>Native HLS Playback</strong></a
+                    >.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="selected-title">
+          <h1>YouTube Live Stream</h1>
+        </div>
+        <div class="container py-4">
+          <div class="row g-3">
+            <div class="col-12 col-md-8">
+              <div class="app-card p-3">
+                <div id="playerTitle" class="mb-2">
+                  <h5 class="mb-0">Loading...</h5>
+                </div>
+
+                <div class="player-wrapper mb-3">
+                  <div id="yt-player"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-4">
+              <div
+                class="d-flex justify-content-between align-items-center mb-3"
+              >
+                <div class="d-flex gap-2 align-items-center">
+                  <select
+                    id="genreSelect"
+                    class="form-select genre-select"
+                  ></select>
+                </div>
+              </div>
+              <div class="app-card p-2">
+                <div
+                  class="d-flex justify-content-between align-items-center px-1 mb-2"
+                >
+                  <strong>Streams</strong>
+                  <small id="streamCount" class="text-muted">0</small>
+                </div>
+                <div id="streamList" class="stream-list list-group"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div id="waline"></div>
+
+      <section class="footer py-1 mt-auto">
+        <div class="container">
+          <div class="row justify-content-center text-center">
+            <div class="col-lg-10">
+              <p class="attribution-text mb-1 small">
+                Disclaimer: We do not host or broadcast any content from our
+                servers. We provide a convenient interface to access publicly
+                available third-party streams. All rights belong to the original
+                creators and stations.
+              </p>
+
+              <div class="social-links mb-1">
+                <a
+                  target="_blank"
+                  href="https://t.mesasalelemusic"
+                  class="btn btn-social btn-telegram btn-sm mx-1"
+                >
+                  <i class="fab fa-telegram-plane me-1"></i>Telegram
                 </a>
+                <a
+                  target="_blank"
+                  href="https://github.com/Mikeexe2/Sasalele-Music-Station"
+                  class="btn btn-social btn-github btn-sm mx-1"
+                >
+                  <i class="fab fa-github me-1"></i>GitHub
+                </a>
+              </div>
 
-                <h6 id="selected-video-title" class="selected-title mb-2" style="display:none;"></h6>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span> </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="/">Radios <i class="fas fa-radio"></i></a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="/website">Websites <i
-                                    class="fa-fw fas fa-link"></i></a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Videos <i
-                                    class="fas fa-video"></i></a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="/drive">Drive Music Player <i
-                                    class="fa-brands fa-google-drive"></i></a>
-                        </li>
-                        <div class="d-flex align-items-center">
-                            <div id="clock">
-                                <span id="clockDay"></span>
-                                <span id="clockTime"></span>
-                            </div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="toggleAnimation" role="switch"
-                                    data-toggle="tooltip" data-placement="top" title="Animate">
-
-                                <label class="form-check-label" for="toggleAnimation">
-                                </label>
-                            </div>
-                        </div>
-                    </ul>
-                </div>
-            </nav>
-            <section id="videos">
-                <div class="section-title">
-                    <h1>Videos</h1>
-                </div>
-
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <div id="vplayer" class="container">
-                                <media-controller style="width: 100%;max-width: 720px; aspect-ratio: 16 / 9;">
-                                    <video slot="media" id="video-player" src=""></video>
-                                    <media-loading-indicator slot="centered-chrome"
-                                        noautohide></media-loading-indicator>
-                                    <media-control-bar>
-                                        <media-play-button></media-play-button>
-                                        <button class="p-btn" data-toggle="tooltip" data-placement="top"
-                                            title="Stop Streaming" id="vidstopBtn"><i class="fas fa-stop"></i>
-                                        </button>
-                                        <media-seek-backward-button></media-seek-backward-button>
-                                        <media-seek-forward-button></media-seek-forward-button>
-                                        <media-mute-button></media-mute-button>
-                                        <media-volume-range></media-volume-range>
-                                        <media-time-range></media-time-range>
-                                        <media-time-display showduration remaining></media-time-display>
-                                        <media-playback-rate-button></media-playback-rate-button>
-                                        <media-fullscreen-button></media-fullscreen-button> </media-control-bar>
-                                </media-controller>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 mb-1">
-                            <div class="d-flex justify-content-center mb-1">
-                                <div class="dropdown">
-                                    <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i class="fa fa-bars"></i> Streams
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#" class="genre-link" data-genre="videos/jpvideos"
-                                                selected>Japanese</a>
-                                        </li>
-                                        <li><a href="#" class="genre-link" data-genre="videos/krvideos">Korean</a></li>
-                                        <li><a href="#" class="genre-link" data-genre="videos/cnvideos">Chinese 1</a>
-                                        </li>
-                                        <li><a href="#" class="genre-link" data-genre="videos/cnvideos2">Chinese 2</a>
-                                        </li>
-                                        <li><a href="#" class="genre-link" data-genre="videos/cnvideos3">Chinese 3</a>
-                                        </li>
-                                        <li><a href="#" class="genre-link" data-genre="videos/cnvideos4">Chinese 4</a>
-                                        </li>
-                                        <li><a href="#" class="genre-link" data-genre="videos/cloudmovies">CN Shows</a>
-                                        </li>
-                                        <li><a href="#" class="genre-link" data-genre="videos/cncloudmusic">Chinese
-                                                MV</a></li>
-                                        <li><a href="#" class="genre-link" data-genre="videos/krcloudmusic">Korean
-                                                MV</a></li>
-                                        <li><a href="#" class="genre-link" data-genre="videos/mix">All mix 1</a></li>
-                                        <li><a href="#" class="genre-link" data-genre="videos/mix2">All mix 2</a></li>
-                                        <li><a href="#" class="genre-link" data-genre="videos/mix3">All mix 3</a></li>
-                                        <li><a href="#" class="genre-link" data-genre="enshow/part1">EN Shows 1</a></li>
-                                        <li><a href="#" class="genre-link" data-genre="enshow/part2">EN Shows 2</a></li>
-                                        <li><a href="#" class="genre-link" data-genre="enshow/part3">EN Shows 3</a></li>
-                                        <li><a href="#" class="genre-link" data-genre="enshow/part4">EN Shows 4</a></li>
-                                        <li><a href="#" class="genre-link" data-genre="enshow/part5">EN Shows 5</a></li>
-                                        <li><a href="#" class="genre-link" data-genre="enshow/part6">EN Shows 6</a></li>
-                                        <li><a href="#" class="genre-link" data-genre="enshow/part7">EN Shows 7</a></li>
-                                        <li><a href="#" class="genre-link" data-genre="enshow/part8">EN Shows 8</a></li>
-                                        <li><a href="#" class="genre-link" data-genre="enshow/part9">EN Shows 9</a></li>
-                                        <li><a href="#" class="genre-link" data-genre="enshow/part10">EN Shows 10</a>
-                                        </li>
-                                        <li><a href="#" class="genre-link" data-genre="enshow/part11">EN Shows 11</a>
-                                        </li>
-                                        <li><a href="#" class="genre-link" data-genre="enshow/part12">EN Shows 12</a>
-                                        </li>
-                                        <li><a href="#" class="genre-link" data-genre="enshow/part13">EN Shows 13</a>
-                                        </li>
-                                        <li><a href="#" class="genre-link" data-genre="enshow/part14">EN Shows 14</a>
-                                        </li>
-                                        <li><a href="#" class="genre-link" data-genre="enshow/part15">EN Shows 15</a>
-                                        </li>
-                                        <li><a href="#" class="genre-link" data-genre="enshow/part16">EN Shows 16</a>
-                                        </li>
-                                        <li><a href="#" class="genre-link" data-genre="enshow/part17">EN Shows 17</a>
-                                        </li>
-                                        <li><a href="#" class="genre-link" data-genre="enshow/part18">EN Shows 18</a>
-                                        </li>
-                                        <li><a href="#" class="genre-link" data-genre="enshow/part19">EN Shows 19</a>
-                                        </li>
-                                        <li><a href="#" class="genre-link" data-genre="enshow/part20">EN Shows 20</a>
-                                        </li>
-                                        <li><a href="#" class="genre-link" data-genre="enshow/part21">EN Shows 21</a>
-                                        </li>
-                                        <li><a href="#" class="genre-link" data-genre="enshow/part22">EN Shows 22</a>
-                                        </li>
-                                        <li><a href="#" class="genre-link" data-genre="enshow/part23">EN Shows 23</a>
-                                        </li>
-                                        <li><a href="#" class="genre-link" data-genre="enshow/part24">EN Shows 24</a>
-                                        </li>
-                                        <li><a href="#" class="genre-link" data-genre="enshow/part25">EN Shows 25</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div id="genre-info" class="ms-auto mb-2">
-                                    <span id="genre-name"></span>
-                                    <strong> (<span id="channel-count"></span>)</strong>
-                                </div>
-                            </div>
-                            <div class="input-group mb-2 w-100">
-                                <input type="search" id="searchChannel" class="form-control"
-                                    placeholder="Search Channel">
-                            </div>
-                            <div id="loadingSpinner" class="mb-4"></div>
-                            <div id="video-list" class="list-group w-100"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="container-fluid">
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-md-10">
-                            <div class="input-group mb-3">
-                                <input type="search" id="m3uURL" class="form-control"
-                                    placeholder="Enter M3U8/MP4 stream URL">
-                                <button id="loadM3U" class="btn btn-primary btn-go">Go</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="alert alert-info mt-4" role="alert" style="opacity:0.95;">
-                        <strong>Note:</strong> Video streams are collected from public sources. If playback fails, it
-                        may be due to stream availability or network restrictions. Try refreshing or using a VPN if
-                        needed. Enjoy watching!
-                    </div>
-                    <div class="accordion" id="infoAccordion">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingOne">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                    What is an M3U8 Link?
-                                </button>
-                            </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
-                                data-bs-parent="#infoAccordion">
-                                <div class="accordion-body">
-                                    <p>
-                                        M3U8 is a playlist format for streaming audio and video. It contains links to
-                                        media
-                                        files and is commonly used for online video streams.
-                                    </p>
-                                    <ul>
-                                        <li>Paste an M3U8 URL above</li>
-                                        <li>Click "Go" to start streaming</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    What is HLS?
-                                </button>
-                            </h2>
-                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                                data-bs-parent="#infoAccordion">
-                                <div class="accordion-body">
-                                    <p>
-                                        HLS (HTTP Live Streaming) is a protocol for delivering media over the internet.
-                                        It
-                                        breaks streams into small segments for smooth playback, often described by M3U8
-                                        playlists.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    Why can't some M3U8 files play?
-                                </button>
-                            </h2>
-                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                                data-bs-parent="#infoAccordion">
-                                <div class="accordion-body">
-                                    <p>
-                                        Some streams may not play due to network restrictions or browser limitations. If
-                                        you
-                                        have
-                                        issues, try refreshing, using a VPN, or installing a browser extension like <a
-                                            href="https://chromewebstore.google.com/detail/native-hls-playback/emnphkkblegpebimobpbekeedfgemhof"
-                                            target="_blank"><strong>Native HLS Playback</strong></a>.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="section-title">
-                    <h1>YouTube Live Stream</h1>
-                </div>
-                <div class="container py-4">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <div class="d-flex gap-2 align-items-center">
-                            <select id="genreSelect" class="form-select genre-select"></select>
-                        </div>
-                    </div>
-
-                    <div class="row g-3">
-                        <div class="col-12 col-md-4">
-                            <div class="app-card p-2">
-                                <div class="d-flex justify-content-between align-items-center px-1 mb-2">
-                                    <strong>Streams</strong>
-                                    <small id="streamCount" class="text-muted">0</small>
-                                </div>
-                                <div id="streamList" class="stream-list list-group"></div>
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-md-8">
-                            <div class="app-card p-3">
-                                <div id="playerTitle" class="mb-2">
-                                    <h5 class="mb-0">Loading...</h5>
-                                    <small id="playerSubtitle" class="text-muted">Select a stream</small>
-                                </div>
-
-                                <div class="player-wrapper mb-3">
-                                    <div id="yt-player"></div>
-                                </div>
-
-                                <div class="d-flex gap-2">
-                                    <a id="openOnYT" class="btn btn-outline-light" target="_blank" rel="noopener">Open
-                                        on
-                                        YouTube</a>
-                                    <button id="playPauseBtn" class="btn btn-primary">Play / Pause</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <div id="waline"></div>
-
-            <section class="footer text-light py-4">
-                <div class="container">
-                    <div class="row justify-content-center text-center">
-                        <div class="col-lg-8">
-                            <p class="mb-1">
-                                This site is currently under development. Some features may experience issues. We
-                                appreciate
-                                your
-                                understanding.
-                            </p>
-                            <div class="social-links mb-1">
-                                <a target="_blank" href="https://t.me/sasalelemusic" class="btn btn-sm mx-1">
-                                    <i class="fab fa-telegram me-1"></i>Telegram
-                                </a>
-                                <a target="_blank" href="https://github.com/Mikeexe2/Sasalele-Music-Station"
-                                    class="btn btn-sm mx-1">
-                                    <i class="fab fa-github me-1"></i>GitHub
-                                </a>
-                            </div>
-                            <p class="mb-1 text-muted">
-                                <small>Last updated: <span id="last-updated-date"
-                                        class="fw-bold">Loading...</span></small>
-                            </p>
-
-                            <div class="stats mt-1">
-                                <p class="small">
-                                    Operated for: <span id="liveTime">00:00:00</span> |
-                                    Views: <span class="waline-pageview-count">0</span>
-                                </p>
-                                <p class="mb-1">
-                                    &copy; 2023-<span id="current-year">present</span> Sasalele-Music-Station
-                                </p>
-                            </div>
-                        </div>
-                        <div class="mdui-progress">
-                            <div class="mdui-progress-indeterminate"></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+              <hr class="footer-divider mb-1 mx-auto" />
+              <div class="footer-info text-muted small">
+                <p class="mb-1">
+                  Last updated:
+                  <span id="last-updated-date" class="text-light fw-bold"
+                    >Loading...</span
+                  >
+                  | Views: <span class="waline-pageview-count fw-bold">0</span>
+                </p>
+                <p class="copyright mb-0 opacity-50">
+                  &copy; 2023-<span id="current-year">present</span>
+                  Sasalele-Music-Station
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="back-to-top d-flex align-items-center justify-content-center"><i class="fa-solid fa-arrow-up"></i>
-        </div>
-        <script>
-            var tag = document.createElement('script');
-            tag.src = "https://www.youtube.com/iframe_api";
-            document.head.appendChild(tag);
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"></script>
-        <script type="module" src="js/utils.js"></script>
-        <script src="js/stats.js"></script>
-        <script type="module" src="js/m3u8video.js"></script>
-        <script type="module" src="https://cdn.jsdelivr.net/npm/media-chrome@4/+esm"></script>
-    </body>
-
+      </section>
+    </div>
+    <div class="back-to-top d-flex align-items-center justify-content-center">
+      <i class="fa-solid fa-arrow-up"></i>
+    </div>
+    <script>
+      var tag = document.createElement("script");
+      tag.src = "https://www.youtube.com/iframe_api";
+      document.head.appendChild(tag);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"></script>
+    <script type="module" src="/src/js/utils.js"></script>
+    <script type="module" src="/src/js/stats.js"></script>
+    <script type="module" src="/src/js/m3u8video.js"></script>
+    <script type="module">
+      import mediaChrome from "https://cdn.jsdelivr.net/npm/media-chrome@4.17.2/+esm";
+    </script>
+  </body>
 </html>

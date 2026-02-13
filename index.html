@@ -1,596 +1,906 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Sasalele Music Station</title>
+    <meta name="robots" content="index" />
+    <meta
+      name="Keywords"
+      content="Japanese Radio Stations, Internet Radio stream URL, Japanese Music, J-Pop, M3U8 Player Online, Japanese Internet Radio"
+    />
+    <meta
+      name="description"
+      content="Listen to your favorite Japan music on 400+ internet radios and websites featuring Japanese music. Join us on Sasalele Music Station, ササレレ音楽ステーションto uncover a universe of japanese music."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Sasalele Music Station" />
+    <meta
+      property="og:description"
+      content="Sasalele Music Station is a website that focuses on Japanese music and the promotion of Japanese artists to all countries. 日本の音楽とさらにたくさんの音楽をお楽しみください。"
+    />
+    <meta property="og:url" content="https://basic.pp.ua" />
+    <meta property="og:image" content="https://basic.pp.ua/assets/sms.jpg" />
+    <meta property="og:site_name" content="Sasalele Music Station" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Sasalele Music Station",
+        "url": "https://basic.pp.ua"
+      }
+    </script>
+    <link rel="icon" href="/assets/sasalele_logo.webp" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/assets/sasalele_logo.webp" />
+    <link
+      rel="shortcut icon"
+      href="/assets/sasalele_logo.webp"
+      type="image/x-icon"
+    />
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/jsmediatags@3.9.7/dist/jsmediatags.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.6.15/dist/hls.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@waline/client@v3/dist/waline-meta.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@waline/client@3.5.6/dist/waline.min.css"
+    />
+    <link rel="stylesheet" href="src/css/styles.css" />
+  </head>
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>Sasalele Music Station</title>
-        <meta name="robots" content="index">
-        <meta name="Keywords"
-            content="Japanese Radio Stations, Internet Radio stream URL, Japanese Music, J-Pop, M3U8 Player Online, Japanese Internet Radio">
-        <meta name="description"
-            content="Listen to your favorite Japan music on 400+ internet radios and websites featuring Japanese music. Join us on Sasalele Music Station, ササレレ音楽ステーションto uncover a universe of japanese music.">
-        <meta property="og:type" content="website">
-        <meta property="og:title" content="Sasalele Music Station">
-        <meta property="og:description"
-            content="Sasalele Music Station is a website that focuses on Japanese music and the promotion of Japanese artists to all countries. 日本の音楽とさらにたくさんの音楽をお楽しみください。" />
-        <meta property="og:url" content="https://basic.pp.ua">
-        <meta property="og:image" content="https://basic.pp.ua/assets/sasalele_banner.png" />
-        <meta property="og:site_name" content="Sasalele Music Station">
-        <script type="application/ld+json">{
-         "@context": "https://schema.org",
-         "@type": "WebSite",
-         "name": "Sasalele Music Station",
-         "url": "https://basic.pp.ua"
-         }
-      </script>
-        <link rel="icon" href="/assets/sasalele_logo-removebg.webp" type="image/x-icon" />
-        <link rel="apple-touch-icon" href="/assets/sasalele_logo-removebg.webp">
-        <link rel="shortcut icon" href="/assets/sasalele_logo-removebg.webp" type="image/x-icon" />
-        <link rel="stylesheet" href="/css/style.css">
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        <script src="https://cdn.jsdelivr.net/npm/jsmediatags@3.9.7/dist/jsmediatags.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/hls.js@latest" type="text/javascript"></script>
-        <script src="js/src/icecast-metadata-player-1.17.13.main.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.css" />
-        <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline-meta.css" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@waline/client@3.8.0/dist/waline.min.css">
-    </head>
+  <body>
+    <div id="background"></div>
+    <img id="randomimg" src="" alt="Sasalele Music Station" />
+    <div id="content">
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="navbar-brand d-flex align-items-center">
+          <a href="/">
+            <img
+              src="/assets/sasalele_logo.webp"
+              width="30"
+              height="30"
+              class="d-inline-block align-top"
+              alt="Sasalele Music Station"
+            />
+          </a>
+          <div class="clock">
+            <span id="clockDay"></span>
+            <span id="clockTime"></span>
+          </div>
+        </div>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#"
+                >Radios <i class="fas fa-radio"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/website.html"
+                >Websites <i class="fa-fw fas fa-link"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/video.html"
+                >Videos <i class="fas fa-video"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/drive.html"
+                >GDMP <i class="fa-brands fa-google-drive"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link search-nav-link" href="#search">
+                Search <i class="fas fa-magnifying-glass"></i>
+              </a>
+            </li>
+            <div class="d-flex align-items-center">
+              <div class="nav-item form-check form-switch">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="toggleAnimation"
+                  role="switch"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Animate"
+                />
+                <label class="form-check-label" for="toggleAnimation"> </label>
+              </div>
+            </div>
+          </ul>
+        </div>
+      </nav>
+      <div id="loadingSpinner"></div>
+      <div
+        class="modal fade"
+        id="tipsModal"
+        tabindex="-1"
+        aria-labelledby="tipsModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="tipsModalLabel">
+                <i class="fas fa-lightbulb"></i> Tips
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <strong>Want to know the current song?</strong>
+              <p>
+                You can use the
+                <a
+                  class="blank-name"
+                  href="https://chrome.google.com/webstore/detail/shazam-find-song-names-fr/mmioliijnhnoblpgimnlajmefafdfilb"
+                  target="_blank"
+                  ><strong>Shazam browser extension</strong></a
+                >
+                to identify songs, or check the stream homepage for recent
+                tracks.
+              </p>
+              <strong>Radio stream not playing?</strong><br />
+              Some stations use (http) links, which may be blocked by your
+              browser for security reasons.<br />
+              On desktop browsers, you can allow insecure content for this site:
+              <ul>
+                <li>Click the lock icon in the address bar.</li>
+                <li>Select '<strong>Site Settings</strong>'.</li>
+                <li>Set 'Insecure Content' to 'Allow'.</li>
+              </ul>
+              <small>This option may not be available on mobile browsers.</small
+              ><br />
+              <a
+                class="blank-name"
+                href="https://support.google.com/chrome/thread/29505473?hl=en&msgid=39996297"
+                target="_blank"
+                >Learn more</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <body>
-        <div id="background"></div>
-        <img id="randomimg" src="" alt="Sasalele Music Station">
-        <div id="content">
-            <nav class="navbar sticky-top navbar-dark navbar-expand-md">
-                <a class="navbar-brand" href="/">
-                    <img src="/assets/sasalele_logo-removebg.webp" width="30" height="30"
-                        class="d-inline-block align-top" alt="Sasalele Music Station">
+      <div class="chathold">
+        <button
+          id="toggleButton"
+          aria-expanded="false"
+          class="btn btn-primary rounded-circle"
+        >
+          <i class="fas fa-comment"></i>
+        </button>
+      </div>
+
+      <div id="sidePanel" class="side-window-panel">
+        <div class="d-flex align-items-center">
+          <div class="flex-grow-1 text-center">
+            <button
+              id="generalChatBtn"
+              class="btn btn-sm btn-outline-primary active"
+            >
+              General Chatroom
+            </button>
+            <button id="anotherChatBtn" class="btn btn-sm btn-outline-primary">
+              Sharing Chatroom
+            </button>
+          </div>
+          <button id="hideButton" aria-label="Close" class="btn-close"></button>
+        </div>
+        <div class="container-fluid">
+          <div class="joinform"></div>
+          <div class="chat_container"></div>
+        </div>
+      </div>
+      <section id="radio-section">
+        <div
+          class="d-flex align-items-center justify-content-center mb-1 gap-2"
+        >
+          <div class="selected-title">
+            <h1>
+              Internet Radios
+              <button
+                type="button"
+                class="tips-btn"
+                data-bs-toggle="modal"
+                title="Tips"
+                data-bs-target="#tipsModal"
+                aria-label="Show Tips"
+              >
+                <i class="fas fa-info-circle"></i>
+              </button>
+            </h1>
+          </div>
+          <div class="header-controls">
+            <button
+              type="button"
+              class="btn btn-sm btn-primary rounded-circle"
+              id="searchToggleBtn"
+              title="Radio Browser API"
+              aria-label="Toggle Search"
+              data-state="closed"
+            >
+              <i class="fas fa-search"></i>
+            </button>
+            <button
+              type="button"
+              class="btn btn-sm btn-primary rounded-circle"
+              id="customStreamToggleBtn"
+              title="Stream Link"
+              aria-label="Toggle Custom Stream"
+              data-state="closed"
+            >
+              <i class="fas fa-link"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="container" id="searchPanel" style="display: none">
+          <div class="card shadow-sm border-0 rounded-4">
+            <div class="card-body">
+              <div class="row g-3 align-items-end">
+                <div class="col-md-3">
+                  <label for="searchOption" class="form-label fw-semibold"
+                    >Radio Station Search</label
+                  >
+                  <select class="form-select" id="searchOption">
+                    <option selected disabled>Choose a search option</option>
+                    <option value="byname">Search by Name</option>
+                    <option value="bycountry">Search by Country</option>
+                    <option value="bylanguage">Search by Language</option>
+                    <option value="bytag">Search by Tag</option>
+                  </select>
+                </div>
+
+                <div
+                  class="col-md-4"
+                  id="searchInputContainer"
+                  style="display: none"
+                >
+                  <label for="search-field" class="form-label fw-semibold"
+                    >Keyword</label
+                  >
+                  <input
+                    type="search"
+                    id="search-field"
+                    class="form-control"
+                    placeholder="Enter search keyword"
+                  />
+                </div>
+
+                <div
+                  class="col-md-4"
+                  id="countrySelectContainer"
+                  style="display: none"
+                >
+                  <label for="countrySelect" class="form-label fw-semibold"
+                    >Country</label
+                  >
+                  <select class="form-select" id="countrySelect">
+                    <option value="">Select Country</option>
+                  </select>
+                </div>
+
+                <div
+                  class="col-md-4"
+                  id="languageSelectContainer"
+                  style="display: none"
+                >
+                  <label for="languageSelect" class="form-label fw-semibold"
+                    >Language</label
+                  >
+                  <select class="form-select" id="languageSelect">
+                    <option value="">Select Language</option>
+                  </select>
+                </div>
+
+                <div
+                  class="col-md-4"
+                  id="tagSelectContainer"
+                  style="display: none"
+                >
+                  <label for="tagSelect" class="form-label fw-semibold"
+                    >Tag</label
+                  >
+                  <select class="form-select" id="tagSelect">
+                    <option value="">Select Tag</option>
+                  </select>
+                </div>
+
+                <div class="col-md-1 d-grid">
+                  <button
+                    class="btn btn-primary"
+                    type="button"
+                    id="radiosearch"
+                  >
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="text-end">
+                <span class="badge bg-light text-secondary border">
+                  Powered by RadioBrowser API
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container" id="customStreamPanel" style="display: none">
+          <div class="stream-content">
+            <div class="input-group">
+              <input
+                type="search"
+                id="streamUrlInput"
+                class="form-control"
+                placeholder="Paste stream URL (m3u8, mp3, etc.)"
+                aria-label="Stream URL"
+              />
+              <button
+                class="btn btn-primary"
+                id="playStreamButton"
+                type="button"
+                aria-label="Play Stream"
+              >
+                <i class="fas fa-play"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="genre-wrapper d-flex align-items-center">
+            <button class="nav-arrow left-arrow" onclick="scrollGenres(-200)">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <ul
+              class="nav genre-tabs overflow-x-auto flex-nowrap"
+              id="genre-select"
+            ></ul>
+            <button class="nav-arrow right-arrow" onclick="scrollGenres(200)">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+          <div id="radio-result-header"></div>
+          <div class="d-flex align-items-center gap-2">
+            <div class="input-group">
+              <input
+                type="search"
+                id="sasalelesearch"
+                class="form-control"
+                placeholder="Filter stations by name, tag"
+                aria-label="Search"
+              />
+            </div>
+            <span id="station-count" class="badge text-bg-info rounded-pill"
+              >0</span
+            >
+          </div>
+
+          <div class="stations-container">
+            <div id="selected" class="genre-content"></div>
+          </div>
+        </div>
+      </section>
+      <section id="search">
+        <div class="selected-title">
+          <h1>Search</h1>
+        </div>
+        <div class="container mb-3">
+          <div class="input-group text-center mx-auto">
+            <input
+              type="search"
+              id="searchInput"
+              class="form-control rounded-start-pill"
+              placeholder="Enter a song name"
+            />
+            <button
+              type="button"
+              class="btn btn-primary rounded-end-pill"
+              id="searchButton"
+            >
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+
+        <div
+          id="searchResultsWrapper"
+          class="container search-results mb-3"
+          style="display: none"
+        >
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <button
+              class="btn btn-link p-0"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#searchResultsCollapse"
+              aria-expanded="true"
+              aria-controls="searchResultsCollapse"
+            >
+              <span id="collapseIcon"><i class="fas fa-chevron-down"></i></span>
+            </button>
+            <button
+              type="button"
+              class="btn-close"
+              aria-label="Close"
+              id="dismissSearchResults"
+            ></button>
+          </div>
+          <div class="collapse show" id="searchResultsCollapse">
+            <div class="mb-1">
+              <div class="col-md-12">
+                <span class="badge">Last.fm</span>
+                <div id="lastfmList" class="list-group mb-2"></div>
+              </div>
+              <div class="col-md-12">
+                <span class="badge">Deezer</span>
+                <div id="deezerList" class="list-group mb-2"></div>
+              </div>
+              <div class="col-md-12">
+                <span class="badge">iTunes</span>
+                <div id="itunesList" class="list-group mb-2"></div>
+              </div>
+              <span class="badge">Google Programmable Search</span>
+              <div class="gcse-search"></div>
+              <span class="badge">More search options</span>
+              <div class="table-responsive mb-3">
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <button class="togglesearch">
+                          <div class="button-icon icon-google"></div>
+                          <span class="button-label">Google</span>
+                        </button>
+                      </td>
+                      <td>
+                        <button class="togglesearch">
+                          <div class="button-icon icon-youtube"></div>
+                          <span class="button-label">YouTube</span>
+                        </button>
+                      </td>
+                      <td>
+                        <button class="togglesearch">
+                          <div class="button-icon icon-youtubemusic"></div>
+                          <span class="button-label">YouTube Music</span>
+                        </button>
+                      </td>
+                      <td>
+                        <button class="togglesearch">
+                          <div class="button-icon icon-spotify"></div>
+                          <span class="button-label">Spotify</span>
+                        </button>
+                      </td>
+                      <td>
+                        <button class="togglesearch">
+                          <div class="button-icon icon-apple"></div>
+                          <span class="button-label">Apple Music</span>
+                        </button>
+                      </td>
+                      <td>
+                        <button class="togglesearch">
+                          <div class="button-icon icon-netease"></div>
+                          <span class="button-label">网易云</span>
+                        </button>
+                      </td>
+                      <td>
+                        <button class="togglesearch">
+                          <div class="button-icon icon-kkbox"></div>
+                          <span class="button-label">KKBOX</span>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <button class="togglesearch">
+                          <div class="button-icon icon-google"></div>
+                          <span class="button-label">Google(Lyrics)</span>
+                        </button>
+                      </td>
+                      <td>
+                        <button class="togglesearch">
+                          <div class="button-icon icon-soundcloud"></div>
+                          <span class="button-label">Soundcloud</span>
+                        </button>
+                      </td>
+                      <td>
+                        <button class="togglesearch">
+                          <div class="button-icon icon-amazon"></div>
+                          <span class="button-label">Amazon Music</span>
+                        </button>
+                      </td>
+                      <td>
+                        <button class="togglesearch">
+                          <div class="button-icon icon-amazon"></div>
+                          <span class="button-label">Amazon Japan</span>
+                        </button>
+                      </td>
+                      <td>
+                        <button class="togglesearch">
+                          <div class="button-icon icon-audarchive"></div>
+                          <span class="button-label">Audio Archive</span>
+                        </button>
+                      </td>
+                      <td>
+                        <button class="togglesearch">
+                          <div class="button-icon icon-vgmdb"></div>
+                          <span class="button-label">VGMdb</span>
+                        </button>
+                      </td>
+                      <td>
+                        <button class="togglesearch">
+                          <div class="button-icon icon-niconico"></div>
+                          <span class="button-label">ニコニコ動画</span>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <button class="togglesearch">
+                          <div class="button-icon icon-kugeci"></div>
+                          <span class="button-label">Kugeci</span>
+                        </button>
+                      </td>
+                      <td>
+                        <button class="togglesearch">
+                          <div class="button-icon icon-musicbrainz"></div>
+                          <span class="button-label">MusicBrainz</span>
+                        </button>
+                      </td>
+                      <td>
+                        <button class="togglesearch">
+                          <div class="button-icon icon-lastfm"></div>
+                          <span class="button-label">last.fm</span>
+                        </button>
+                      </td>
+                      <td>
+                        <button class="togglesearch">
+                          <div class="button-icon icon-gnudb"></div>
+                          <span class="button-label">Gnudb</span>
+                        </button>
+                      </td>
+                      <td>
+                        <button class="togglesearch">
+                          <div class="button-icon icon-followlyrics"></div>
+                          <span class="button-label">FollowLyrics</span>
+                        </button>
+                      </td>
+                      <td>
+                        <button class="togglesearch">
+                          <div class="button-icon icon-baha"></div>
+                          <span class="button-label">巴哈姆特</span>
+                        </button>
+                      </td>
+                      <td>
+                        <button class="togglesearch">
+                          <div class="button-icon icon-lrclib"></div>
+                          <span class="button-label">LRC Lib</span>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <button class="togglesearch">
+                          <div class="button-icon icon-utanet"></div>
+                          <span class="button-label">Uta-net</span>
+                        </button>
+                      </td>
+                      <td>
+                        <button class="togglesearch">
+                          <div class="button-icon icon-petitlyrics"></div>
+                          <span class="button-label">PetitLyrics</span>
+                        </button>
+                      </td>
+                      <td>
+                        <button class="togglesearch">
+                          <div class="button-icon icon-mikudb"></div>
+                          <span class="button-label">MikuDB</span>
+                        </button>
+                      </td>
+                      <td>
+                        <button class="togglesearch">
+                          <div class="button-icon icon-vocadb"></div>
+                          <span class="button-label">VocaDB</span>
+                        </button>
+                      </td>
+                      <td>
+                        <button class="togglesearch">
+                          <div class="button-icon icon-touhoudb"></div>
+                          <span class="button-label">TouhouDB</span>
+                        </button>
+                      </td>
+                      <td>
+                        <button class="togglesearch">
+                          <div class="button-icon icon-touhoufandom"></div>
+                          <span class="button-label">Touhou Fandom</span>
+                        </button>
+                      </td>
+                      <td>
+                        <button class="togglesearch">
+                          <div class="button-icon icon-touhouwiki"></div>
+                          <span class="button-label">Touhou Wiki</span>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="container ratio ratio-16x9">
+                <iframe
+                  class="embed-responsive-item"
+                  id="YouTubeVideo"
+                  style="display: none"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container py-4">
+          <div class="dropdown mb-3 text-center">
+            <button
+              class="btn btn-primary dropdown-toggle"
+              type="button"
+              id="playlistDropdown"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Playlists
+            </button>
+            <ul class="dropdown-menu" id="playlistMenu">
+              <li>
+                <a class="dropdown-item" data-playlist="jpsongs"
+                  >Japanese Songs 1</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" data-playlist="jpsongs2"
+                  >Japanese Songs 2</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" data-playlist="jpsongs3"
+                  >Japanese Songs 3</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" data-playlist="bgm">Game / BGM</a>
+              </li>
+              <li><a class="dropdown-item" data-playlist="mix">Mix</a></li>
+              <li>
+                <a class="dropdown-item" data-playlist="maplestory"
+                  >MapleStory</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="mb-4 mt-2" id="hugeData" style="display: none">
+            <div id="aplayer"></div>
+          </div>
+        </div>
+      </section>
+
+      <div id="waline"></div>
+      <div id="player">
+        <div class="media-con">
+          <media-controller id="media-controller" audio>
+            <media-control-bar>
+              <media-play-button></media-play-button>
+              <button
+                class="p-btn"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Stop Streaming"
+                id="stopBtn"
+              >
+                <i class="fas fa-stop"></i>
+              </button>
+              <media-seek-backward-button></media-seek-backward-button>
+              <media-seek-forward-button></media-seek-forward-button>
+              <media-live-button></media-live-button>
+              <media-time-display showduration></media-time-display>
+              <media-time-range></media-time-range>
+              <media-mute-button></media-mute-button>
+              <media-volume-range></media-volume-range>
+              <button
+                id="toggleRandom"
+                class="p-btn"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Play randomly in current view"
+              >
+                <i class="fas fa-shuffle" id="randomplay"></i>
+              </button>
+              <button
+                id="historyBtn"
+                class="p-btn"
+                data-bs-toggle="modal"
+                data-bs-target="#recentPanel"
+                data-bs-placement="top"
+                title="View History"
+              >
+                <i class="fa fa-history"></i>
+              </button>
+            </media-control-bar>
+          </media-controller>
+          <button
+            id="togglePlayer"
+            class="p-btn"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Switch Layout"
+          >
+            <i class="fas fa-expand"></i>
+            <i class="fas fa-compress"></i>
+          </button>
+        </div>
+        <div class="playing-info">
+          <div id="cover" class="mt-1">
+            <img id="ip" style="display: inline" src="/assets/ball.svg" />
+          </div>
+          <div class="track-info">
+            <span class="ml-1">
+              <span id="nowPlaying" class="mr-1"></span>
+              <small
+                class="stream-type"
+                id="metadataSource"
+                style="display: none"
+              ></small>
+              <div class="d-flex align-items-center">
+                <span id="metadataDisplay" class="mr-1"></span>
+                <button
+                  id="copyIcon"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Copy track title"
+                >
+                  <i class="fas fa-copy"></i>
+                  <span class="copy-confirmation" style="display: none">
+                    <i class="fas fa-check"></i> Copied!
+                  </span>
+                </button>
+                <button
+                  id="searchIcon"
+                  class="search-icon-button"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Search song"
+                >
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        class="modal fade"
+        id="recentPanel"
+        tabindex="-1"
+        aria-labelledby="recent"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header bg-primary">
+              <h5 class="modal-title" id="recent">
+                <i class="fas fa-history me-2"></i>Recent Tracks
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <ul
+                id="recentTracksList"
+                class="list-group list-group-flush"
+              ></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="footer py-1 mt-auto">
+        <div class="container">
+          <div class="row justify-content-center text-center">
+            <div class="col-lg-10">
+              <p class="attribution-text mb-1 small">
+                This site acts as a directory of publicly available web radio
+                streams. All station names, logos, and audio content remain the
+                property of their respective owners.
+              </p>
+
+              <div class="social-links mb-1">
+                <a
+                  target="_blank"
+                  href="https://t.mesasalelemusic"
+                  class="btn btn-social btn-telegram btn-sm mx-1"
+                >
+                  <i class="fab fa-telegram-plane me-1"></i>Telegram
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span> </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Radios <i class="fas fa-radio"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/website">Websites <i class="fa-fw fas fa-link"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/video">Videos <i class="fas fa-video"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/drive">Drive Music Player <i
-                                    class="fa-brands fa-google-drive"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link search-nav-link" href="#search">
-                                Search <i class="fas fa-magnifying-glass"></i>
-                            </a>
-                        </li>
-                        <div class="d-flex align-items-center">
-                            <div id="clock">
-                                <span id="clockDay"></span>
-                                <span id="clockTime"></span>
-                            </div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="toggleAnimation" role="switch"
-                                    data-toggle="tooltip" data-placement="top" title="Animate">
-                                <label class="form-check-label" for="toggleAnimation">
-                                </label>
-                            </div>
-                        </div>
-                    </ul>
-                </div>
-            </nav>
-            <div id="loadingSpinner"></div>
-            <div class="modal fade" id="tipsModal" tabindex="-1" aria-labelledby="tipsModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="tipsModalLabel">
-                                <i class="fas fa-lightbulb"></i> Tips
-                            </h5>
-                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                                aria-label="Close">
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <strong>Want to know the current song?</strong>
-                            <p>
-                                You can use the <a class="blank-name"
-                                    href="https://chrome.google.com/webstore/detail/shazam-find-song-names-fr/mmioliijnhnoblpgimnlajmefafdfilb"
-                                    target="_blank"><strong>Shazam browser extension</strong></a> to identify songs, or
-                                check the stream homepage for recent tracks.
-                            </p>
-                            <strong>Radio stream not playing?</strong><br>
-                            Some stations use (http) links, which may be blocked by your browser for security
-                            reasons.<br>
-                            On desktop browsers, you can allow insecure content for this site:
-                            <ul>
-                                <li>Click the lock icon in the address bar.</li>
-                                <li>Select '<strong>Site Settings</strong>'.</li>
-                                <li>Set 'Insecure Content' to 'Allow'.</li>
-                            </ul>
-                            <small>This option may not be available on mobile browsers.</small><br>
-                            <a class="blank-name"
-                                href="https://support.google.com/chrome/thread/29505473?hl=en&msgid=39996297"
-                                target="_blank">Learn more</a>
-                        </div>
-                    </div>
-                </div>
+                <a
+                  target="_blank"
+                  href="https://github.com/Mikeexe2/Sasalele-Music-Station"
+                  class="btn btn-social btn-github btn-sm mx-1"
+                >
+                  <i class="fab fa-github me-1"></i>GitHub
+                </a>
+              </div>
+
+              <hr class="footer-divider mb-1 mx-auto" />
+              <div class="footer-info text-muted small">
+                <p class="mb-1">
+                  Last updated:
+                  <span id="last-updated-date" class="text-light fw-bold"
+                    >Loading...</span
+                  >
+                  | Views: <span class="waline-pageview-count fw-bold">0</span>
+                </p>
+                <p class="copyright mb-0 opacity-50">
+                  &copy; 2023-<span id="current-year">present</span>
+                  Sasalele-Music-Station
+                </p>
+              </div>
             </div>
-            <div class="chathold">
-                <div class="chathold">
-                    <button id="toggleButton" aria-expanded="false" class="chat-btn">
-                        <i class="fas fa-comment"></i>
-                    </button>
-                </div>
-            </div>
-            <div id="sidePanel" class="side-window-panel">
-                <div class="d-flex align-items-center">
-                    <div class="flex-grow-1 text-center">
-                        <button id="generalChatBtn" class="btn btn-sm btn-outline-primary active">
-                            General Chatroom
-                        </button>
-                        <button id="anotherChatBtn" class="btn btn-sm btn-outline-primary">
-                            Sharing Chatroom
-                        </button>
-                    </div>
-                    <button id="hideButton" aria-label="Close" class="btn">
-                        <i class="fas fa-xmark"></i>
-                    </button>
-                </div>
-                <div class="container-fluid">
-                    <div class="joinform"></div>
-                    <div class="chat_container">
-                    </div>
-                </div>
-            </div>
-            <div class="section-title">
-                <h1>Internet Radios <button type="button" class="tips-btn" data-bs-toggle="modal" title="Tips"
-                        data-bs-target="#tipsModal">
-                        <i class="fas fa-info-circle"></i>
-                    </button></h1>
-            </div>
-            <div class="container">
-                <div class="container my-3">
-                    <div class="d-flex flex-wrap gap-2">
-                        <div class="input-group flex-nowrap" style="max-width: 600px; width: auto;">
-                            <select class="form-select flex-shrink-0" id="searchOption" style="max-width: 300px;">
-                                <option selected>Search by Radio Browser API</option>
-                                <option value="byname">Name</option>
-                                <option value="bycountry">Country</option>
-                                <option value="bylanguage">Language</option>
-                                <option value="bytag">Tag</option>
-                            </select>
-
-                            <input type="search" id="search-field" class="form-control" placeholder="Search by name"
-                                style="display: none; min-width: 160px;">
-
-                            <div id="countrySelectContainer" class="flex-grow-1" style="display: none;">
-                                <select class="form-select" id="countrySelect">
-                                    <option value="">Select Country</option>
-                                </select>
-                            </div>
-
-                            <div id="languageSelectContainer" class="flex-grow-1" style="display: none;">
-                                <select class="form-select" id="languageSelect">
-                                    <option value="">Select Language</option>
-                                </select>
-                            </div>
-
-                            <div id="tagSelectContainer" class="flex-grow-1" style="display: none;">
-                                <select class="form-select" id="tagSelect">
-                                    <option value="">Select Tag</option>
-                                </select>
-                            </div>
-
-                            <button class="btn btn-primary flex-shrink-0" type="button" id="radiosearch">Search</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="genre-wrapper d-flex align-items-center">
-                    <button class="nav-arrow left-arrow d-none d-md-block" onclick="scrollGenres(-200)"><i
-                            class="fas fa-chevron-left"></i></button>
-
-                    <ul class="nav flex-nowrap overflow-x-auto custom-scrollbar-hide" id="genre-select">
-                    </ul>
-
-                    <button class="nav-arrow right-arrow d-none d-md-block" onclick="scrollGenres(200)"><i
-                            class="fas fa-chevron-right"></i></button>
-                </div>
-                <div id="radio-result-header">
-                </div>
-                <div class="col md-4 mt-2">
-                    <div class="d-flex align-items-center">
-                        <div class="input-group">
-                            <input type="search" id="sasalelesearch" autofocus class="form-control"
-                                placeholder="Search by Name or tags" aria-label="Search">
-                        </div>
-                        <div class="station-count-container">
-                            <span id="station-count">0</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="stations-container">
-                    <div id="selected" class="genre-content"></div>
-                </div>
-            </div>
-
-            <section id="search">
-                <div class="section-title mt-2">
-                    <h1>Search</h1>
-                </div>
-                <div class="container mb-3">
-                    <div class="input-group text-center mx-auto">
-                        <input type="search" id="searchInput" class="form-control rounded-start-pill"
-                            placeholder="Enter a song name">
-                        <button type="button" class="btn btn-primary rounded-end-pill" id="searchButton">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <div id="searchResultsWrapper" class="container search-results mb-3" style="display:none;">
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                        <button class="btn btn-link p-0" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#searchResultsCollapse" aria-expanded="true"
-                            aria-controls="searchResultsCollapse">
-                            <span id="collapseIcon"><i class="fas fa-chevron-down"></i></span>
-                        </button>
-                        <button type="button" class="btn-close" aria-label="Close" id="dismissSearchResults"></button>
-                    </div>
-                    <div class="collapse show" id="searchResultsCollapse">
-                        <div class="search-terms">Searching for: <span id="searchTerms"></span></div>
-                        <div class="mb-1">
-                            <div class="col-md-12">
-                                <span class="badge badge-dark">Last.fm</span>
-                                <div id="lastfmList" class="list-group mb-2">
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <span class="badge badge-dark">Deezer</span>
-                                <div id="deezerList" class="list-group mb-2"></div>
-                            </div>
-                            <div class="col-md-12">
-                                <span class="badge badge-dark">iTunes</span>
-                                <div id="itunesList" class="list-group mb-2"></div>
-                            </div>
-                            <span class="badge badge-dark">Google Programmable Search</span>
-                            <div class="gcse-search"></div>
-                            <span class="badge badge-dark">More search options</span>
-                            <div class="table-responsive mb-3">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <button class="togglesearch">
-                                                    <div class="button-icon icon-google"></div>
-                                                    <span class="button-label">Google</span>
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <button class="togglesearch">
-                                                    <div class="button-icon icon-youtube"></div>
-                                                    <span class="button-label">YouTube</span>
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <button class="togglesearch">
-                                                    <div class="button-icon icon-youtubemusic"></div>
-                                                    <span class="button-label">YouTube Music</span>
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <button class="togglesearch">
-                                                    <div class="button-icon icon-spotify"></div>
-                                                    <span class="button-label">Spotify</span>
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <button class="togglesearch">
-                                                    <div class="button-icon icon-apple"></div>
-                                                    <span class="button-label">Apple Music</span>
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <button class="togglesearch">
-                                                    <div class="button-icon icon-netease"></div>
-                                                    <span class="button-label">网易云</span>
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <button class="togglesearch">
-                                                    <div class="button-icon icon-kkbox"></div>
-                                                    <span class="button-label">KKBOX</span>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <button class="togglesearch">
-                                                    <div class="button-icon icon-google"></div>
-                                                    <span class="button-label">Google(Lyrics)</span>
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <button class="togglesearch">
-                                                    <div class="button-icon icon-soundcloud"></div>
-                                                    <span class="button-label">Soundcloud</span>
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <button class="togglesearch">
-                                                    <div class="button-icon icon-amazon"></div>
-                                                    <span class="button-label">Amazon Music</span>
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <button class="togglesearch">
-                                                    <div class="button-icon icon-amazon"></div>
-                                                    <span class="button-label">Amazon Japan</span>
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <button class="togglesearch">
-                                                    <div class="button-icon icon-audarchive"></div>
-                                                    <span class="button-label">Audio Archive</span>
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <button class="togglesearch">
-                                                    <div class="button-icon icon-vgmdb"></div>
-                                                    <span class="button-label">VGMdb</span>
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <button class="togglesearch">
-                                                    <div class="button-icon icon-niconico"></div>
-                                                    <span class="button-label">ニコニコ動画</span>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <button class="togglesearch">
-                                                    <div class="button-icon icon-kugeci"></div>
-                                                    <span class="button-label">Kugeci</span>
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <button class="togglesearch">
-                                                    <div class="button-icon icon-musicbrainz"></div>
-                                                    <span class="button-label">MusicBrainz</span>
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <button class="togglesearch">
-                                                    <div class="button-icon icon-lastfm"></div>
-                                                    <span class="button-label">last.fm</span>
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <button class="togglesearch">
-                                                    <div class="button-icon icon-gnudb"></div>
-                                                    <span class="button-label">Gnudb</span>
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <button class="togglesearch">
-                                                    <div class="button-icon icon-followlyrics"></div>
-                                                    <span class="button-label">FollowLyrics</span>
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <button class="togglesearch">
-                                                    <div class="button-icon icon-baha"></div>
-                                                    <span class="button-label">巴哈姆特</span>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <button class="togglesearch">
-                                                    <div class="button-icon icon-utanet"></div>
-                                                    <span class="button-label">Uta-net</span>
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <button class="togglesearch">
-                                                    <div class="button-icon icon-petitlyrics"></div>
-                                                    <span class="button-label">PetitLyrics</span>
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <button class="togglesearch">
-                                                    <div class="button-icon icon-mikudb"></div>
-                                                    <span class="button-label">MikuDB</span>
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <button class="togglesearch">
-                                                    <div class="button-icon icon-vocadb"></div>
-                                                    <span class="button-label">VocaDB</span>
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <button class="togglesearch">
-                                                    <div class="button-icon icon-touhoudb"></div>
-                                                    <span class="button-label">TouhouDB</span>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="container ratio ratio-16x9">
-                                <iframe class="embed-responsive-item" id="YouTubeVideo" style="display:none;"
-                                    allowfullscreen></iframe>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </section>
-
-            <div class="container py-4">
-                <div class="dropdown mb-3 text-center">
-                    <button class="btn btn-primary dropdown-toggle" type="button" id="playlistDropdown"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Select a Playlist
-                    </button>
-                    <ul class="dropdown-menu" id="playlistMenu">
-                        <li><a class="dropdown-item" data-playlist="jpsongs">Japanese Songs 1</a></li>
-                        <li><a class="dropdown-item" data-playlist="jpsongs2">Japanese Songs 2</a></li>
-                        <li><a class="dropdown-item" data-playlist="jpsongs3">Japanese Songs 3</a></li>
-                        <li><a class="dropdown-item" data-playlist="bgm">Game / BGM</a></li>
-                        <li><a class="dropdown-item" data-playlist="mix">Mix</a></li>
-                        <li><a class="dropdown-item" data-playlist="maplestory">MapleStory</a></li>
-                    </ul>
-                </div>
-
-                <div class="mb-4 mt-2" id="hugeData" style="display:none">
-                    <div id="aplayer"></div>
-                </div>
-            </div>
-
-            <div id="waline"></div>
-            <div id="player">
-                <div class="media-con">
-                    <media-controller id="media-controller" audio>
-                        <media-control-bar>
-                            <media-play-button></media-play-button>
-                            <button class="p-btn" data-toggle="tooltip" data-placement="top" title="Stop Streaming"
-                                id="stopBtn"><i class="fas fa-stop"></i></button>
-                            <media-seek-backward-button></media-seek-backward-button>
-                            <media-seek-forward-button></media-seek-forward-button>
-                            <media-live-button></media-live-button>
-                            <media-time-display showduration></media-time-display>
-                            <media-time-range></media-time-range>
-                            <media-mute-button></media-mute-button>
-                            <media-volume-range></media-volume-range>
-                            <button id="toggleRandom" class="p-btn" data-toggle="tooltip" data-placement="top"
-                                title="Tap to play randomly">
-                                <i class="fas fa-shuffle" id="randomplay"></i>
-                            </button>
-                            <button id="historyBtn" class="p-btn" data-bs-toggle="modal" data-bs-target="#recentPanel"
-                                data-bs-placement="top" title="View History">
-                                <i class="fa fa-history"></i> </button>
-                        </media-control-bar>
-                    </media-controller>
-                    <button id="togglePlayer" class="p-btn" data-toggle="tooltip" data-placement="top"
-                        title="Switch Layout">
-                        <i class="fas fa-expand"></i>
-                        <i class="fas fa-compress"></i>
-                    </button>
-                </div>
-                <div class="playing-info">
-                    <div id="cover" class="mt-1">
-                        <img id="ip" style="display: inline;" src="/assets/ball.svg">
-                    </div>
-                    <div class="track-info">
-                        <span class="ml-1">
-                            <span id="nowPlaying" class="mr-1"></span>
-                            <small class="stream-type" id="metadataSource" style="display: none;"></small>
-                            <div class="d-flex align-items-center">
-                                <span id="metadataDisplay" class="mr-1"></span>
-                                <button id="copyIcon" data-toggle="tooltip" data-placement="top"
-                                    title="Copy track title">
-                                    <i class="fas fa-copy"></i>
-                                    <span class="copy-confirmation" style="display: none;">
-                                        <i class="fas fa-check"></i> Copied!
-                                    </span>
-                                </button>
-                            </div>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="modal fade" id="recentPanel" tabindex="-1" aria-labelledby="recent" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header bg-primary text-white">
-                            <h5 class="modal-title" id="recent">
-                                <i class="fas fa-history me-2"></i>Recent Tracks
-                            </h5>
-                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body bg-dark text-light">
-                            <ul id="recentTracksList" class="list-group list-group-flush">
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <section class="footer text-light py-4">
-                <div class="container">
-                    <div class="row justify-content-center text-center">
-                        <div class="col-lg-8">
-                            <p class="mb-1">
-                                This site is currently under development. Some features may experience issues. We
-                                appreciate
-                                your
-                                understanding.
-                            </p>
-                            <div class="social-links mb-1">
-                                <a target="_blank" href="https://t.me/sasalelemusic" class="btn btn-sm mx-1">
-                                    <i class="fab fa-telegram me-1"></i>Telegram
-                                </a>
-                                <a target="_blank" href="https://github.com/Mikeexe2/Sasalele-Music-Station"
-                                    class="btn btn-sm mx-1">
-                                    <i class="fab fa-github me-1"></i>GitHub
-                                </a>
-                            </div>
-                            <p class="mb-1 text-muted">
-                                <small>Last updated: <span id="last-updated-date"
-                                        class="fw-bold">Loading...</span></small>
-                            </p>
-                            <div class="stats mt-1">
-                                <p class="small">
-                                    Operated for: <span id="liveTime">00:00:00</span> |
-                                    Views: <span class="waline-pageview-count">0</span>
-                                </p>
-                                <p class="mb-1">
-                                    &copy; 2023-<span id="current-year">present</span> Sasalele-Music-Station
-                                </p>
-                            </div>
-                        </div>
-                        <div class="mdui-progress">
-                            <div class="mdui-progress-indeterminate"></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+          </div>
         </div>
-        <div class="back-to-top d-flex align-items-center justify-content-center"><i class="fa-solid fa-arrow-up"></i>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"></script>
-        <script type="module" src="https://cdn.jsdelivr.net/npm/media-chrome@4/+esm"></script>
-        <script type="module" src="/js/utils.js"></script>
-        <script src="/js/stats.js"></script>
-        <script type="module" src="/js/script.js"></script>
-        <script>
-            function scrollGenres(amount) {
-                document.getElementById('genre-select').scrollBy({
-                    left: amount,
-                    behavior: 'smooth'
-                });
-            }
-        </script>
-    </body>
-
+      </section>
+    </div>
+    <div class="back-to-top d-flex align-items-center justify-content-center">
+      <i class="fa-solid fa-arrow-up"></i>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"></script>
+    <script type="module">
+      import mediaChrome from "https://cdn.jsdelivr.net/npm/media-chrome@4.17.2/+esm";
+    </script>
+    <script type="module" src="/src/js/utils.js"></script>
+    <script type="module" src="/src/js/stats.js"></script>
+    <script type="module" src="/src/js/scripts.js"></script>
+    <script>
+      function scrollGenres(amount) {
+        document.getElementById("genre-select").scrollBy({
+          left: amount,
+          behavior: "smooth",
+        });
+      }
+    </script>
+  </body>
 </html>

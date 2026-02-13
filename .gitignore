@@ -1,4 +1,11 @@
-assets/music/
-assets/hirakataroma.html
-js/utils.js
-images/
+public/assets/music/
+public/assets/radios/
+public/assets/covers/
+public/assets/websites/
+public/assets/downloads/
+public/assets/wallpapers/
+hirakataroma.html
+src/js/utils.js
+public/images/
+node_modules/
+dist/

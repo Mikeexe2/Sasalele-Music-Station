@@ -1,159 +1,248 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Curated Music Website List</title>
+    <meta
+      name="robots"
+      content="index, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+    />
+    <meta
+      name="Keywords"
+      content="Japanese Radio Stations, Japan Music, Internet Radio stream URL, Japanese Music, J-Pop, Japanese Learning, Japanese Internet Radio, Music Download Sites, Podcasts, Online Radio Streaming, Japanese Podcasts, Music Tools"
+    />
+    <meta
+      name="description"
+      content="Discover the best collection of websites for Japanese radio stations, music download sites, tools, and podcast pages. Explore a wide range of Japanese music genres, J-Pop hits, and educational content. Enjoy high-quality online radio streaming and find useful music tools and resources."
+    />
+    <link rel="canonical" href="https://basic.pp.ua/website" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Curated Music Website List" />
+    <meta property=" og:url" content="https://basic.pp.ua/website" />
+    <meta property="og:site_name" content="Curated Music Website List" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Curated Music Website List",
+        "url": "https://basic.pp.ua/website"
+      }
+    </script>
+    <link rel="icon" href="assets/sasalele_logo.webp" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="assets/sasalele_logo.webp" />
+    <link
+      rel="shortcut icon"
+      href="assets/sasalele_logo.webp"
+      type="image/x-icon"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@waline/client@v3/dist/waline-meta.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@waline/client@3.5.6/dist/waline.min.css"
+    />
+    <link rel="stylesheet" href="/src/css/styles.css" />
+  </head>
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>Curated Music Website List</title>
-        <meta name="robots" content="index, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-        <meta name="Keywords"
-            content="Japanese Radio Stations, Japan Music, Internet Radio stream URL, Japanese Music, J-Pop, Japanese Learning, Japanese Internet Radio, Music Download Sites, Podcasts, Online Radio Streaming, Japanese Podcasts, Music Tools">
-        <meta name="description"
-            content="Discover the best collection of websites for Japanese radio stations, music download sites, tools, and podcast pages. Explore a wide range of Japanese music genres, J-Pop hits, and educational content. Enjoy high-quality online radio streaming and find useful music tools and resources.">
-        <link rel="canonical" href="https://basic.pp.ua/website">
-        <meta property="og:type" content="website">
-        <meta property="og:title" content="Curated Music Website List">
-        <meta property=" og:url" content="https://basic.pp.ua/website">
-        <meta property="og:site_name" content="Curated Music Website List">
-        <script type="application/ld+json">{
-         "@context": "https://schema.org",
-         "@type": "WebSite",
-         "name": "Curated Music Website List",
-         "url": "https://basic.pp.ua/website"
-         }
-      </script>
-        <link rel="icon" href="assets/sasalele_logo-removebg.webp" type="image/x-icon" />
-        <link rel="apple-touch-icon" href="assets/sasalele_logo-removebg.webp">
-        <link rel="shortcut icon" href="assets/sasalele_logo-removebg.webp" type="image/x-icon" />
-        <link rel="stylesheet" href="css/style.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline-meta.css" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@waline/client@3.5.6/dist/waline.min.css">
-    </head>
-
-    <body class="bg-dark text-light">
-        <div id="background"><img id="randomimg" src="" alt="Sasalele Music Station"></div>
-        <div id="content">
-            <nav class="navbar sticky-top navbar-dark navbar-expand-md">
-                <a class="navbar-brand" href="/">
-                    <img src="assets/sasalele_logo-removebg.webp" width="30" height="30"
-                        class="d-inline-block align-top" alt="Sasalele Music Station">
-                </a>
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span> </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="/">Radios <i class="fas fa-radio"></i></a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Websites <i
-                                    class="fa-fw fas fa-link"></i></a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="/video">Videos <i class="fas fa-video"></i></a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="/drive">Drive Music Player <i
-                                    class="fa-brands fa-google-drive"></i></a>
-                        </li>
-                        <div class="d-flex align-items-center">
-                            <div id="clock">
-                                <span id="clockDay"></span>
-                                <span id="clockTime"></span>
-                            </div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="toggleAnimation" role="switch"
-                                    data-toggle="tooltip" data-placement="top" title="Animate">
-
-                                <label class="form-check-label" for="toggleAnimation">
-                                </label>
-                            </div>
-                        </div>
-                    </ul>
-                </div>
-            </nav>
-            <div class="col-12">
-                <div class="card card-xl" id="c-11">
-                    <div
-                        class="card-header d-flex flex-nowrap text-nowrap gap-2 align-items-center bg-dark border-bottom border-secondary">
-                        <ul class="card-tab d-flex flex-nowrap nav text-sm overflow-x-auto" id="siteTabs">
-                            <li class="nav-item"><span class="nav-link active" data-category="musicsite">Music
-                                    Sites</span></li>
-                            <li class="nav-item"><span class="nav-link" data-category="radiosite">Radio Sites</span>
-                            <li class="nav-item"><span class="nav-link" data-category="jppodcast">Japanese
-                                    Podcast</span>
-                            </li>
-                            <li class="nav-item"><span class="nav-link" data-category="jpradio">Japanese Radios</span>
-                            </li>
-                            <li class="nav-item"><span class="nav-link" data-category="jpspotify">Japanese
-                                    Spotify</span>
-                            </li>
-                            <li class="nav-item"><span class="nav-link" data-category="mediatools">Media Tools</span>
-                            </li>
-                            <li class="nav-item"><span class="nav-link"
-                                    data-category="mediadownloader">Downloader</span>
-                            </li>
-                            <li class="nav-item"><span class="nav-link" data-category="downloadsite">Download
-                                    Sites</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="card-body">
-                        <div id="loadingSpinner" class="mb-4"></div>
-                        <div id="siteList"
-                            class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3 list-grid list-grid-padding">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="waline"></div>
+  <body>
+    <div id="background">
+      <img id="randomimg" src="" alt="Sasalele Music Station" />
+    </div>
+    <div id="content">
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="navbar-brand d-flex align-items-center">
+          <a href="/">
+            <img
+              src="/assets/sasalele_logo.webp"
+              width="30"
+              height="30"
+              class="d-inline-block align-top"
+              alt="Sasalele Music Station"
+            />
+          </a>
+          <div class="clock">
+            <span id="clockDay"></span>
+            <span id="clockTime"></span>
+          </div>
         </div>
-        <section class="footer text-light py-4">
-            <div class="container">
-                <div class="row justify-content-center text-center">
-                    <div class="col-lg-8">
-                        <p class="mb-1">
-                            This site is currently under development. Some features may experience issues. We appreciate
-                            your
-                            understanding.
-                        </p>
-                        <div class="social-links mb-1">
-                            <a target="_blank" href="https://t.me/sasalelemusic" class="btn btn-sm mx-1">
-                                <i class="fab fa-telegram me-1"></i>Telegram
-                            </a>
-                            <a target="_blank" href="https://github.com/Mikeexe2/Sasalele-Music-Station"
-                                class="btn btn-sm mx-1">
-                                <i class="fab fa-github me-1"></i>GitHub
-                            </a>
-                        </div>
-                        <p class="mb-1 text-muted">
-                            <small>Last updated: <span id="last-updated-date" class="fw-bold">Loading...</span></small>
-                        </p>
-                        <div class="stats mt-1">
-                            <p class="small">
-                                Operated for: <span id="liveTime">00:00:00</span> |
-                                Views: <span class="waline-pageview-count">0</span>
-                            </p>
-                        </div>
-                        <p class="mb-1">
-                            &copy; 2023-<span id="current-year">present</span> Sasalele-Music-Station
-                        </p>
-                    </div>
-                    <div class="mdui-progress">
-                        <div class="mdui-progress-indeterminate"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <div class="back-to-top d-flex align-items-center justify-content-center"><i class="fa-solid fa-arrow-up"></i>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"></script>
-        <script type="module" src="js/utils.js"></script>
-        <script src="js/stats.js"></script>
-        <script type="module" src="js/loadwebsites.js"></script>
-    </body>
 
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/"
+                >Radios <i class="fas fa-radio"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#"
+                >Websites <i class="fa-fw fas fa-link"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/video.html"
+                >Videos <i class="fas fa-video"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/drive.html"
+                >GDMP <i class="fa-brands fa-google-drive"></i>
+              </a>
+            </li>
+            <div class="d-flex align-items-center">
+              <div class="nav-item form-check form-switch">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="toggleAnimation"
+                  role="switch"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Animate"
+                />
+                <label class="form-check-label" for="toggleAnimation"> </label>
+              </div>
+            </div>
+          </ul>
+        </div>
+      </nav>
+      <div class="col-12">
+        <div class="card card-xl" id="c-11">
+          <div
+            class="card-header d-flex flex-nowrap text-nowrap gap-2 align-items-center border-bottom border-secondary"
+          >
+            <ul
+              class="card-tab d-flex flex-nowrap nav text-sm overflow-x-auto"
+              id="siteTabs"
+            >
+              <li class="nav-item">
+                <span class="nav-link" data-category="musicsite"
+                  >Music Sites</span
+                >
+              </li>
+              <li class="nav-item">
+                <span class="nav-link" data-category="radiosite"
+                  >Radio Sites</span
+                >
+              </li>
+              <li class="nav-item">
+                <span class="nav-link" data-category="jppodcast"
+                  >Japanese Podcast</span
+                >
+              </li>
+              <li class="nav-item">
+                <span class="nav-link" data-category="jpradio"
+                  >Japanese Radios</span
+                >
+              </li>
+              <li class="nav-item">
+                <span class="nav-link" data-category="jpspotify"
+                  >Japanese Spotify</span
+                >
+              </li>
+              <li class="nav-item">
+                <span class="nav-link active" data-category="mediatools"
+                  >Media Tools</span
+                >
+              </li>
+              <li class="nav-item">
+                <span class="nav-link" data-category="mediadownloader"
+                  >Downloader</span
+                >
+              </li>
+              <li class="nav-item">
+                <span class="nav-link" data-category="downloadsite"
+                  >Download Sites</span
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="card-body">
+            <div id="loadingSpinner" class="mb-4"></div>
+            <div
+              id="siteList"
+              class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-3 list-grid list-grid-padding"
+            ></div>
+          </div>
+        </div>
+      </div>
+      <div id="waline"></div>
+    </div>
+    <section class="footer py-1 mt-auto">
+      <div class="container">
+        <div class="row justify-content-center text-center">
+          <div class="col-lg-10">
+            <p class="attribution-text mb-1 small">
+              This page is a collection of the best media tools, podcasts, and
+              radio directories found across the web. We do not own or maintain
+              these external services; we simply gather them here to help you
+              discover new sounds and tools.
+            </p>
+
+            <div class="social-links mb-1">
+              <a
+                target="_blank"
+                href="https://t.mesasalelemusic"
+                class="btn btn-social btn-telegram btn-sm mx-1"
+              >
+                <i class="fab fa-telegram-plane me-1"></i>Telegram
+              </a>
+              <a
+                target="_blank"
+                href="https://github.com/Mikeexe2/Sasalele-Music-Station"
+                class="btn btn-social btn-github btn-sm mx-1"
+              >
+                <i class="fab fa-github me-1"></i>GitHub
+              </a>
+            </div>
+
+            <hr class="footer-divider mb-1 mx-auto" />
+            <div class="footer-info text-muted small">
+              <p class="mb-1">
+                Last updated:
+                <span id="last-updated-date" class="text-light fw-bold"
+                  >Loading...</span
+                >
+                | Views: <span class="waline-pageview-count fw-bold">0</span>
+              </p>
+              <p class="copyright mb-0 opacity-50">
+                &copy; 2023-<span id="current-year">present</span>
+                Sasalele-Music-Station
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="back-to-top d-flex align-items-center justify-content-center">
+      <i class="fa-solid fa-arrow-up"></i>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"></script>
+    <script type="module" src="/src/js/utils.js"></script>
+    <script type="module" src="/src/js/stats.js"></script>
+    <script type="module" src="/src/js/loadwebsites.js"></script>
+  </body>
 </html>

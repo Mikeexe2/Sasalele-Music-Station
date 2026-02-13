@@ -1,298 +1,463 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Google Drive Music Player</title>
+    <meta
+      name="robots"
+      content="index, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+    />
+    <meta
+      name="Keywords"
+      content="Google Drive Music Player, GDMP, stream music from Google Drive, cloud music player, online music player, music streaming service, personal music collection, play music from cloud storage"
+    />
+    <meta
+      name="description"
+      content="Experience seamless music streaming with GDMP, the Google Drive Music Player. Access and enjoy your own music collection from anywhere, anytime. Stream music directly from your Google Drive account and elevate your listening experience."
+    />
+    <link rel="canonical" href="https://basic.pp.ua/drive" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Google Drive Music Player" />
+    <meta property="og:url" content="https://basic.pp.ua/drive" />
+    <meta property="og:site_name" content="Google Drive Music Player" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Google Drive Music Player",
+        "url": "https://basic.pp.ua/drive"
+      }
+    </script>
+    <link rel="icon" href="/assets/sasalele_logo.webp" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/assets/sasalele_logo.webp" />
+    <link
+      rel="shortcut icon"
+      href="/assets/sasalele_logo.webp"
+      type="image/x-icon"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@waline/client@v3/dist/waline-meta.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@waline/client@3.5.6/dist/waline.min.css"
+    />
+    <link rel="stylesheet" href="/src/css/styles.css" />
+  </head>
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>Google Drive Music Player</title>
-        <meta name="robots" content="index, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-        <meta name="Keywords"
-            content="Google Drive Music Player, GDMP, stream music from Google Drive, cloud music player, online music player, music streaming service, personal music collection, play music from cloud storage">
-        <meta name="description"
-            content="Experience seamless music streaming with GDMP, the Google Drive Music Player. Access and enjoy your own music collection from anywhere, anytime. Stream music directly from your Google Drive account and elevate your listening experience.">
-        <link rel="canonical" href="https://basic.pp.ua/drive">
-        <meta property="og:type" content="website">
-        <meta property="og:title" content="Google Drive Music Player">
-        <meta property="og:url" content="https://basic.pp.ua/drive">
-        <meta property="og:site_name" content="Google Drive Music Player">
-        <script type="application/ld+json">{
-                         "@context": "https://schema.org",
-                         "@type": "WebSite",
-                         "name": "Google Drive Music Player",
-                         "url": "https://basic.pp.ua/drive"
-                         }
-                      </script>
-        <link rel="icon" href="/assets/sasalele_logo-removebg.webp" type="image/x-icon" />
-        <link rel="apple-touch-icon" href="/assets/sasalele_logo-removebg.webp">
-        <link rel="shortcut icon" href="/assets/sasalele_logo-removebg.webp" type="image/x-icon" />
-        <link rel="stylesheet" href="/css/style.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline-meta.css" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@waline/client@3.5.6/dist/waline.min.css">
-    </head>
+  <body>
+    <div id="background">
+      <img id="randomimg" src="" alt="Sasalele Music Station" />
+    </div>
+    <div id="content">
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="navbar-brand d-flex align-items-center">
+          <a href="/">
+            <img
+              src="/assets/sasalele_logo.webp"
+              width="30"
+              height="30"
+              class="d-inline-block align-top"
+              alt="Sasalele Music Station"
+            />
+          </a>
+          <div class="clock">
+            <span id="clockDay"></span>
+            <span id="clockTime"></span>
+          </div>
+        </div>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/"
+                >Radios <i class="fas fa-radio"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/website.html"
+                >Websites <i class="fa-fw fas fa-link"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/video.html"
+                >Videos <i class="fas fa-video"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#"
+                >GDMP <i class="fa-brands fa-google-drive"></i>
+              </a>
+            </li>
+            <div class="d-flex align-items-center">
+              <div class="nav-item form-check form-switch">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="toggleAnimation"
+                  role="switch"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Animate"
+                />
+                <label class="form-check-label" for="toggleAnimation"></label>
+              </div>
+            </div>
+          </ul>
+        </div>
+      </nav>
+      <div
+        class="modal fade"
+        id="tips"
+        tabindex="-1"
+        aria-labelledby="tipsModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title fs-5" id="tipsModalLabel">Guide</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <p>
+                Paste the share link
+                <a
+                  class="blank-name"
+                  href="https://www.wikihow.com/images/5/5c/Make-Direct-Links-of-Google-Drive-Files-Step-5-Version-2.jpg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Example Link</a
+                >
+                for the
+                <a
+                  class="blank-name"
+                  href="https://drive.google.com"
+                  target="_blank"
+                  >Google Drive</a
+                >
+                folder you would like to use and click the 'Load Link' button.
+                You can try some readily available public links in the dropdown
+                to see how it works.
+              </p>
+              <p>
+                Alternatively, login into your Google Account with your folder
+                ID
+                <a
+                  class="blank-name"
+                  href="https://i.sstatic.net/YFZPb.png"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Example ID</a
+                >
+                or use "<strong>root</strong>" to browse from your top-level
+                folder.<br />
+              </p>
+              <strong
+                >Your privacy is paramount. This app collects zero user
+                data.</strong
+              >
+              <p>
+                Review our
+                <a class="blank-name" href="/privacypolicy" target="_blank"
+                  >Privacy Policy</a
+                >
+                for more details.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <section id="drive">
+        <div class="selected-title">
+          <h1 class="">
+            Google Drive Music Player
+            <button
+              type="button"
+              class="tips-btn"
+              data-bs-toggle="modal"
+              title="Tips"
+              data-bs-target="#tips"
+            >
+              <i class="fas fa-info-circle"></i>
+            </button>
+          </h1>
+        </div>
+        <div class="container">
+          <form id="folderForm">
+            <div class="row justify-content-center">
+              <div class="col-md-6">
+                <div class="input-group mb-1">
+                  <input
+                    type="search"
+                    class="form-control"
+                    required
+                    id="parentfolder"
+                    name="parentfolder"
+                    placeholder="google-drive-folder-id"
+                  />
+                  <button type="submit" class="btn btn-primary">
+                    <i class="fab fa-google"></i> Login
+                  </button>
+                </div>
+                <div
+                  class="alert alert-info alert-dismissible fade show"
+                  role="alert"
+                >
+                  The app needs access to your
+                  <a
+                    class="blank-name"
+                    href="https://drive.google.com/drive/my-drive"
+                    target="_blank"
+                    >Google drive</a
+                  >
+                  to play your audio files. Review our
+                  <a class="blank-name" href="/privacypolicy" target="_blank"
+                    >Privacy Policy</a
+                  >.
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"
+                  ></button>
+                </div>
+              </div>
+            </div>
+          </form>
 
-    <body>
-        <div id="background"><img id="randomimg" src="" alt="Sasalele Music Station"></div>
-        <div id="content">
-            <nav class="navbar sticky-top navbar-dark navbar-expand-md">
-                <a class="navbar-brand" href="/">
-                    <img src="/assets/sasalele_logo-removebg.webp" width="30" height="30"
-                        class="d-inline-block align-top" alt="Sasalele Music Station">
+          <div class="row justify-content-center">
+            <div class="col-md-6">
+              <div class="input-group mb-3 flex-nowrap">
+                <input
+                  type="search"
+                  id="shareLinkInput"
+                  class="form-control"
+                  required
+                  placeholder="Paste Google Drive share link here"
+                />
+                <button
+                  class="btn btn-success"
+                  id="loadLinkButton"
+                  type="button"
+                >
+                  Load Link
+                </button>
+                <div class="btn-group">
+                  <button
+                    class="btn btn-primary dropdown-toggle"
+                    type="button"
+                    id="folderDropdown"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Public Links
+                  </button>
+                  <ul
+                    class="dropdown-menu dropdown-menu-end"
+                    id="folderDropdownMenu"
+                    aria-labelledby="folderDropdown"
+                  ></ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="loadingSpinner" class="mb-4"></div>
+        <div id="file-tree" style="display: none"></div>
+        <div id="intro" class="container">
+          <div id="demo" class="loaded">
+            <details open>
+              <summary>Japanese Song Collection 1</summary>
+              <div class="track-container">
+                <button
+                  class="track demo-track-btn"
+                  data-track-name="好きにしなよ - Anly"
+                  data-track-id="好きにしなよ - Anly"
+                >
+                  <i class="fas fa-play"></i> Anly - 好きにしなよ
+                </button>
+              </div>
+              <div class="track-container">
+                <button
+                  class="track demo-track-btn"
+                  data-track-name="紅葉愛唄 - GARNiDELiA"
+                  data-track-id="紅葉愛唄 - GARNiDELiA"
+                >
+                  <i class="fas fa-play"></i> GARNiDELiA - 紅葉愛唄
+                </button>
+              </div>
+              <div class="track-container">
+                <button
+                  class="track demo-track-btn"
+                  data-track-name="花ハ踊レヤいろはにほ (随花起舞) - チーム・ハナヤマタ"
+                  data-track-id="花ハ踊レヤいろはにほ (随花起舞) - チーム・ハナヤマタ"
+                >
+                  <i class="fas fa-play"></i> チーム・ハナヤマタ -
+                  花ハ踊レヤいろはにほ
+                </button>
+              </div>
+            </details>
+            <details open>
+              <summary>Japanese Song Collection 2</summary>
+              <div class="track-container">
+                <button
+                  class="track demo-track-btn"
+                  data-track-name="都会っ子田舎っ子 - びわ湖くん"
+                  data-track-id="都会っ子田舎っ子 - びわ湖くん"
+                >
+                  <i class="fas fa-play"></i> びわ湖くん - 都会っ子田舎っ子
+                </button>
+              </div>
+              <div class="track-container">
+                <button
+                  class="track demo-track-btn"
+                  data-track-name="天空の狂詩曲 - さゆり"
+                  data-track-id="天空の狂詩曲 - さゆり"
+                >
+                  <i class="fas fa-play"></i>
+                  さゆり - 天空の狂詩曲
+                </button>
+              </div>
+              <div class="track-container">
+                <button
+                  class="track demo-track-btn"
+                  data-track-name="ロストワンの号哭Band edition - 周平"
+                  data-track-id="ロストワンの号哭Band edition - 周平"
+                >
+                  <i class="fas fa-play"></i> 周平 - ロストワンの号哭Band
+                  edition
+                </button>
+              </div>
+            </details>
+          </div>
+        </div>
+        <div id="contents" style="display: none" class="container"></div>
+        <div class="container mt-5 mb-5">
+          <div class="row justify-content-center">
+            <div class="col-auto mb-2">
+              <button class="btn btn-primary" id="folderchange">
+                Change Folder / User
+              </button>
+            </div>
+            <div class="col-auto">
+              <a
+                class="btn btn-primary blank-name"
+                href="https://myaccount.google.com/security"
+                target="_blank"
+                role="button"
+              >
+                Revoke Access
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div id="waline"></div>
+      <div id="gdmp" class="d-flex justify-content-between align-items-center">
+        <button id="prev-btn" class="p-btn">
+          <i class="fas fa-step-backward"></i>
+        </button>
+        <media-controller audio class="flex-grow-1 mx-2">
+          <audio slot="media" id="audio">
+            <source id="source" src="" type="audio/mpeg" />
+          </audio>
+          <media-control-bar>
+            <media-play-button></media-play-button>
+            <media-time-display show-duration></media-time-display>
+            <media-time-range></media-time-range>
+            <media-playback-rate-button></media-playback-rate-button>
+            <media-mute-button></media-mute-button>
+            <media-volume-range></media-volume-range>
+          </media-control-bar>
+        </media-controller>
+        <button id="next-btn" class="p-btn">
+          <i class="fas fa-step-forward"></i>
+        </button>
+      </div>
+
+      <section class="footer py-1 mt-auto">
+        <div class="container">
+          <div class="row justify-content-center text-center">
+            <div class="col-lg-10">
+              <p class="attribution-text mb-1 small">
+                A portion of our library is curated and shared by music
+                enthusiasts via public links. Credits go to the original
+                uploaders for their archival efforts.
+              </p>
+
+              <div class="social-links mb-1">
+                <a
+                  target="_blank"
+                  href="https://t.mesasalelemusic"
+                  class="btn btn-social btn-telegram btn-sm mx-1"
+                >
+                  <i class="fab fa-telegram-plane me-1"></i>Telegram
                 </a>
+                <a
+                  target="_blank"
+                  href="https://github.com/Mikeexe2/Sasalele-Music-Station"
+                  class="btn btn-social btn-github btn-sm mx-1"
+                >
+                  <i class="fab fa-github me-1"></i>GitHub
+                </a>
+              </div>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span> </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/">Radios <i class="fas fa-radio"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/website">Websites <i class="fa-fw fas fa-link"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/video">Videos <i class="fas fa-video"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Drive Music Player <i
-                                    class="fa-brands fa-google-drive"></i>
-                            </a>
-                        </li>
-                        <div class="d-flex align-items-center">
-                            <div id="clock">
-                                <span id="clockDay"></span>
-                                <span id="clockTime"></span>
-                            </div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="toggleAnimation" role="switch"
-                                    data-toggle="tooltip" data-placement="top" title="Animate">
-
-                                <label class="form-check-label" for="toggleAnimation">
-                                </label>
-                            </div>
-                        </div>
-                    </ul>
-                </div>
-            </nav>
-            <div id="gdmp">
-                <button id="prev-btn"><i class="fas fa-step-backward"></i></button>
-                <media-controller audio>
-                    <audio slot="media" id="audio">
-                        <source id="source" src="" type="audio/mpeg">
-                    </audio>
-                    <media-control-bar>
-                        <media-play-button></media-play-button>
-                        <media-time-display show-duration></media-time-display>
-                        <media-time-range></media-time-range>
-                        <media-playback-rate-button></media-playback-rate-button>
-                        <media-mute-button></media-mute-button>
-                        <media-volume-range></media-volume-range>
-                    </media-control-bar>
-                </media-controller>
-                <button id="next-btn"><i class="fas fa-step-forward"></i></button>
+              <hr class="footer-divider mb-1 mx-auto" />
+              <div class="footer-info text-muted small">
+                <p class="mb-1">
+                  Last updated:
+                  <span id="last-updated-date" class="text-light fw-bold"
+                    >Loading...</span
+                  >
+                  | Views: <span class="waline-pageview-count fw-bold">0</span>
+                </p>
+                <p class="copyright mb-0 opacity-50">
+                  &copy; 2023-<span id="current-year">present</span>
+                  Sasalele-Music-Station
+                </p>
+              </div>
             </div>
-            <div class="modal fade" id="tips" tabindex="-1" aria-labelledby="tipsModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title fs-5" id="tipsModalLabel">Guide</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Paste the share link <a class="blank-name"
-                                    href="https://global.discourse-cdn.com/business7/uploads/glideapps/original/3X/3/1/31c8434de6f1d7cc408bcaade9a87ab8f92b9281.png"
-                                    target="_blank" rel="noopener noreferrer">Example Link</a> for the <a
-                                    class="blank-name" href="https://drive.google.com" target="_blank">Google
-                                    Drive</a> folder you would like to use and click the 'Load Link'
-                                button. You can try some readily available public links in the dropdown to see how
-                                it
-                                works.</p>
-                            <p>Alternatively, login into your Google Account with your folder ID <a class="blank-name"
-                                    href="https://i.sstatic.net/YFZPb.png" target="_blank"
-                                    rel="noopener noreferrer">Example
-                                    ID</a> or use
-                                "<strong>root</strong>" to
-                                browse from your
-                                top-level
-                                folder.<br></p><strong>Your privacy is paramount. This app collects zero user
-                                data.</strong>
-                            <p>Review our <a class="blank-name" href="/privacypolicy" target="_blank">Privacy
-                                    Policy</a> for more details.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <section id="drive">
-                <div class="section-title">
-                    <h1>Google Drive Music Player <button type="button" class="tips-btn" data-bs-toggle="modal"
-                            title="Tips" data-bs-target="#tips">
-                            <i class="fas fa-info-circle"></i>
-                        </button></h1>
-                </div>
-
-                <div class="container">
-                    <form id="folderForm">
-                        <div class="row justify-content-center">
-                            <div class="col-md-6">
-                                <div class="input-group mb-1">
-                                    <input type="search" class="form-control" required id="parentfolder"
-                                        name="parentfolder" placeholder="google-drive-folder-id">
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="fab fa-google"></i> Login
-                                    </button>
-                                </div>
-                                <div class="alert alert-info" role="alert">
-                                    The app needs access to your
-                                    <a class="blank-name" href="https://drive.google.com/drive/my-drive"
-                                        target="_blank">Google drive</a>
-                                    to play your audio files.
-                                    Review our
-                                    <a class="blank-name" href="/privacypolicy" target="_blank">Privacy Policy</a>.
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-
-                    <div class="row justify-content-center">
-                        <div class="col-md-6">
-                            <div class="input-group mb-3 flex-nowrap">
-                                <input type="search" id="shareLinkInput" class="form-control" required
-                                    placeholder="Paste Google Drive share link here">
-                                <button class="btn btn-success" id="loadLinkButton" type="button">
-                                    Load Link
-                                </button>
-                                <div class="btn-group">
-                                    <button class="btn btn-primary dropdown-toggle" type="button" id="folderDropdown"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        Public Links
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-end" id="folderDropdownMenu"
-                                        aria-labelledby="folderDropdown">
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div id="loadingSpinner" class="mb-4"></div>
-                <div id="file-tree" style="display: none;">
-                </div>
-                <div id="intro">
-                    <div id="demo" class="loaded">
-                        <details open>
-                            <summary>Japanese Song Collection 1</summary>
-                            <div class="track-container">
-                                <button class="track demo-track-btn" data-track-name="好きにしなよ - Anly"
-                                    data-track-id="好きにしなよ - Anly">
-                                    <i class="fas fa-play"></i> Anly - 好きにしなよ
-                                </button>
-                            </div>
-                            <div class="track-container">
-                                <button class="track demo-track-btn" data-track-name="紅葉愛唄 - GARNiDELiA"
-                                    data-track-id="紅葉愛唄 - GARNiDELiA">
-                                    <i class="fas fa-play"></i> GARNiDELiA - 紅葉愛唄
-                                </button>
-                            </div>
-                            <div class="track-container">
-                                <button class="track demo-track-btn" data-track-name="花ハ踊レヤいろはにほ (随花起舞) - チーム・ハナヤマタ"
-                                    data-track-id="花ハ踊レヤいろはにほ (随花起舞) - チーム・ハナヤマタ">
-                                    <i class="fas fa-play"></i> チーム・ハナヤマタ - 花ハ踊レヤいろはにほ
-                                </button>
-                            </div>
-                        </details>
-                        <details open>
-                            <summary>Japanese Song Collection 2</summary>
-                            <div class="track-container"><button class="track demo-track-btn"
-                                    data-track-name="都会っ子田舎っ子 - びわ湖くん" data-track-id="都会っ子田舎っ子 - びわ湖くん"><i
-                                        class="fas fa-play"></i>
-                                    びわ湖くん - 都会っ子田舎っ子</button></div>
-                            <div class="track-container"><button class="track demo-track-btn"
-                                    data-track-name="天空の狂詩曲 - さゆり" data-track-id="天空の狂詩曲 - さゆり"><i
-                                        class="fas fa-play"></i>
-                                    さゆり - 天空の狂詩曲
-                                </button></div>
-                            <div class="track-container"><button class="track demo-track-btn"
-                                    data-track-name="ロストワンの号哭Band edition - 周平"
-                                    data-track-id="ロストワンの号哭Band edition - 周平"><i class="fas fa-play"></i>
-                                    周平 - ロストワンの号哭Band edition</button></div>
-                        </details>
-                    </div>
-                </div>
-                <div id="contents" style="display:none"></div>
-                <div class="container mt-5 mb-5">
-                    <div class="row justify-content-center">
-                        <div class="col-auto mb-2">
-                            <button class="btn btn-primary" id="folderchange">Change Folder / User</button>
-                        </div>
-                        <div class="col-auto">
-                            <a class="btn btn-primary blank-name" href="https://myaccount.google.com/security"
-                                target="_blank" role="button">
-                                Revoke Access
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <div id="waline">
-            </div>
-
-            <section class="footer text-light py-4">
-                <div class="container">
-                    <div class="row justify-content-center text-center">
-                        <div class="col-lg-8">
-                            <p class="mb-1">
-                                This site is currently under development. Some features may experience issues. We
-                                appreciate
-                                your
-                                understanding.
-                            </p>
-                            <div class="social-links mb-1">
-                                <a target="_blank" href="https://t.me/sasalelemusic" class="btn btn-sm mx-1">
-                                    <i class="fab fa-telegram me-1"></i>Telegram
-                                </a>
-                                <a target="_blank" href="https://github.com/Mikeexe2/Sasalele-Music-Station"
-                                    class="btn btn-sm mx-1">
-                                    <i class="fab fa-github me-1"></i>GitHub
-                                </a>
-                            </div>
-                            <p class="mb-1 text-muted">
-                                <small>Last updated: <span id="last-updated-date"
-                                        class="fw-bold">Loading...</span></small>
-                            </p>
-
-                            <div class="stats mt-1">
-                                <p class="small">
-                                    Operated for: <span id="liveTime">00:00:00</span> |
-                                    Views: <span class="waline-pageview-count">0</span>
-                                </p>
-                                <p class="mb-1">
-                                    &copy; 2023-<span id="current-year">present</span> Sasalele-Music-Station
-                                </p>
-                            </div>
-                        </div>
-                        <div class="mdui-progress">
-                            <div class="mdui-progress-indeterminate"></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+          </div>
         </div>
-        <div class="back-to-top d-flex align-items-center justify-content-center"><i class="fa-solid fa-arrow-up"></i>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"></script>
-        <script type="module" src="/js/utils.js"></script>
-        <script src="/js/stats.js"></script>
-        <script type="module" src="/js/gdmp.js"></script>
-        <script type="module" src="https://cdn.jsdelivr.net/npm/media-chrome@4/+esm"></script>
-    </body>
-
+      </section>
+    </div>
+    <div class="back-to-top d-flex align-items-center justify-content-center">
+      <i class="fa-solid fa-arrow-up"></i>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"></script>
+    <script type="module" src="/src/js/utils.js"></script>
+    <script type="module" src="/src/js/stats.js"></script>
+    <script type="module" src="/src/js/gdmp.js"></script>
+    <script type="module">
+      import mediaChrome from "https://cdn.jsdelivr.net/npm/media-chrome@4.17.2/+esm";
+    </script>
+  </body>
 </html>

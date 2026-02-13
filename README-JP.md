@@ -4,7 +4,7 @@
 
 <p align="center">
   <a href="https://basic.pp.ua">
-    <img src="assets/sasalele_banner.png" style="width: 400px">
+    <img src="public/assets/sasalele_logo.webp" style="width: 400px">
   </a>
 </p>
 

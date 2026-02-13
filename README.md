@@ -1,9 +1,10 @@
-# <p align="center"><img src="assets/sasalele_logo-removebg.webp" style="width: 40px;"> Sasalele Music Station</p>
+# <p align="center"><img src="public/assets/sasalele_logo.webp" style="width: 40px;"> Sasalele Music Station</p>
 
 This website project aims to collect all public radio links in the world which stream Japanese music, including genres like J-Pop, J-Rock, Anime OST, Vocaloid..... However, you may also find Korean, Chinese and English speaking radios inside this website. This repository contains the source code for the website. Pull requests are welcomed!
-* [日本語](README-JP.md)
-* [中文](README-CN.md)
-* [한국어](README-KR.md)
+
+- [日本語](README-JP.md)
+- [中文](README-CN.md)
+- [한국어](README-KR.md)
 
 ## Features
 
@@ -20,121 +21,136 @@ This website project aims to collect all public radio links in the world which s
 
 ### 📝 Project Changelog
 
+#### 📅 2025-02-14
+
+- **Added:** New Paste Stream field allowing users to play any supported external radio stream directly within the player.
+- **Added:** New search icon to instantly search for the currently playing track title.
+- **Added:** Detailed individual tags on radio stations and more categories of them.
+- **Changed:** Cleaned up the GitHub repository to store only source code.
+- **Changed:** Migrate project to Vite for automated bundling.
+- **Changed:** UI enhancement for smoother user experience.
+- **Changed:** Improved the random play logic to provide near-instant station switching.
+- **Fixed:** Broken stream retry logic which would trigger audio playback after a user had stopped the player.
+
 #### 📅 2025-12-13
 
-* **Added:** MediaSession API integration to display the currently playing track/station in notification and update the page title accordingly.
-* **Changed:** Expanded the recently played list capacity to store up to 300 station/track names.
-* **Added:** New chatroom in chat to better classify the messages.
-* **Changed:** Upgraded Firebase JavaScript SDK to the modular.
-* **Changed:** Improved the Google Drive Music Player UI and playback logic.
-* **Changed:** Improved the random play logic to be faster.
-* **Changed:** All date display logic will now use YYYY/MM/DD.
-* **Fixed:** Icecast streams does not stop properly which caused the previous metadata element continue to show up.
+- **Added:** MediaSession API integration to display the currently playing track/station in notification and update the page title accordingly.
+- **Changed:** Expanded the recently played list capacity to store up to 300 station/track names.
+- **Added:** New chatroom in chat to better classify the messages.
+- **Changed:** Upgraded Firebase JavaScript SDK to the modular.
+- **Changed:** Improved the Google Drive Music Player UI and playback logic.
+- **Changed:** Improved the random play logic to be faster.
+- **Changed:** All date display logic will now use YYYY/MM/DD.
+- **Fixed:** Icecast streams does not stop properly which caused the previous metadata element continue to show up.
 
 #### 📅 2025-11-13
 
-* **Added:** Error and status notifications for both video and audio players.
-* **Added:** Comment sections on every webpage.
-* **Added:** Dismissable search container.
-* **Added:** Clickable links and message timestamps in chat.
-* **Added:**  Expanded playlist with additional songs with lrc.
-* **Added:** Redesigned curated website display.
-* **Added:** "Stop streaming" function for the M3U8 video player.
-* **Added:** Beat pattern simulation added to the animation feature.
-* **Changed:** Switched Zeno streams to use the Icecast player for better compatibility.
-* **Changed:** Improved playback logic for M3U8 and direct streams.
-* **Changed:** Migrated data management from JSON files to a database, simplifying updates and maintenance.
-* **Changed:** Enhanced player with more functionalities.
-* **Fixed:** Issue where the genre filter input did not persist when searching for stations.
-* **Fixed:** Audio playback bug when switching from Icecast streams to other stream types.
-* **Fixed:** Corrected fallback behavior of the Icecast player, especially for stations loaded via RadioBrowser API.
-* **Fixed:** M3U8 file download issues for stations sourced from RadioBrowser API.
+- **Added:** Error and status notifications for both video and audio players.
+- **Added:** Comment sections on every webpage.
+- **Added:** Dismissable search container.
+- **Added:** Clickable links and message timestamps in chat.
+- **Added:** Expanded playlist with additional songs with lrc.
+- **Added:** Redesigned curated website display.
+- **Added:** "Stop streaming" function for the M3U8 video player.
+- **Added:** Beat pattern simulation added to the animation feature.
+- **Changed:** Switched Zeno streams to use the Icecast player for better compatibility.
+- **Changed:** Improved playback logic for M3U8 and direct streams.
+- **Changed:** Migrated data management from JSON files to a database, simplifying updates and maintenance.
+- **Changed:** Enhanced player with more functionalities.
+- **Fixed:** Issue where the genre filter input did not persist when searching for stations.
+- **Fixed:** Audio playback bug when switching from Icecast streams to other stream types.
+- **Fixed:** Corrected fallback behavior of the Icecast player, especially for stations loaded via RadioBrowser API.
+- **Fixed:** M3U8 file download issues for stations sourced from RadioBrowser API.
 
 #### 📅 2025-08-29
 
-* **Added:** New player style, now all streams (including hls streams) will use one single player to play (with metadata support).
-* **Added:** Dark themed website.
-* **Changed:** Used "Artist - Title" convention when displaying the song info instead of "Title - Artist".
-* **Fixed:**  [issue 21](https://github.com/Mikeexe2/Sasalele-Music-Station/issues/21). Metadata for icecast streams now displayed immediately once station is loaded.
-* **Fixed:**  [issue 23](https://github.com/Mikeexe2/Sasalele-Music-Station/issues/23). Fixed the audio control logic to prevent pausing issues.
-* **Fixed:** Google Drive public share link loading issue.
+- **Added:** New player style, now all streams (including hls streams) will use one single player to play (with metadata support).
+- **Added:** Dark themed website.
+- **Changed:** Used "Artist - Title" convention when displaying the song info instead of "Title - Artist".
+- **Fixed:** [issue 21](https://github.com/Mikeexe2/Sasalele-Music-Station/issues/21). Metadata for icecast streams now displayed immediately once station is loaded.
+- **Fixed:** [issue 23](https://github.com/Mikeexe2/Sasalele-Music-Station/issues/23). Fixed the audio control logic to prevent pausing issues.
+- **Fixed:** Google Drive public share link loading issue.
 
 #### 📅 2024-09-16
-* **Added:**  New player style.
-* **Added:**  New radio station display style [issue 12](https://github.com/Mikeexe2/Sasalele-Music-Station/issues/12).
-* **Added:**  Search input focus.
-* **Changed:** Use official countries list provided by RadioBrowser API.
-* **Added:** Search limit to the API's request URL to increase search speed.
-* **Fixed:** Low volume issues (preset 0.3 -> 1.0).
-* **Fixed:** Right-click and paste content into chat input.
+
+- **Added:** New player style.
+- **Added:** New radio station display style [issue 12](https://github.com/Mikeexe2/Sasalele-Music-Station/issues/12).
+- **Added:** Search input focus.
+- **Changed:** Use official countries list provided by RadioBrowser API.
+- **Added:** Search limit to the API's request URL to increase search speed.
+- **Fixed:** Low volume issues (preset 0.3 -> 1.0).
+- **Fixed:** Right-click and paste content into chat input.
 
 #### 📅 2024-08-28
-* **Added:** New site (https://basic.pp.ua/assets/hirakataroma).
-* **Added:** Load MP3 files from dropdown list of public Google Drive Shared folders.
-* **Added:** Paste and load public google drive folder link function [issue 4](https://github.com/Mikeexe2/Sasalele-Music-Station/issues/4).
-* **Added:** YouTube Live Streams in video page.
+
+- **Added:** New site (https://basic.pp.ua/assets/hirakataroma).
+- **Added:** Load MP3 files from dropdown list of public Google Drive Shared folders.
+- **Added:** Paste and load public google drive folder link function [issue 4](https://github.com/Mikeexe2/Sasalele-Music-Station/issues/4).
+- **Added:** YouTube Live Streams in video page.
 
 #### 📅 2024-08-10
-* **Added:** Download function for Google drive music file.
-* **Changed:** UI enhancement.
-* **Fixed:** Fontawesome icon display issues.
+
+- **Added:** Download function for Google drive music file.
+- **Changed:** UI enhancement.
+- **Fixed:** Fontawesome icon display issues.
 
 #### 📅 2024-08-01
-* **Changed:** Rewrite firebase chat function.
-* **Fixed:** Change M3U8 video play logic to fix mixed-content issues and add handling for streams that cannot be played directly on the webpage.
+
+- **Changed:** Rewrite firebase chat function.
+- **Fixed:** Change M3U8 video play logic to fix mixed-content issues and add handling for streams that cannot be played directly on the webpage.
 
 #### 📅 2024-07-20
 
-* **Added:** Metadata fetching for supported streams [issue 10](https://github.com/Mikeexe2/Sasalele-Music-Station/issues/10).
-* **Added:** Store and display recently played tracks.
-* **Added:** Copy stream title function.
-* **Added:** Attempt to add a 0x40 hues animation.
-* **Fixed:** Fix playback issues with better metadata fetching approach.
-* **Changed:** Use an animation button to control the "0x40 Hues" animation.
+- **Added:** Metadata fetching for supported streams [issue 10](https://github.com/Mikeexe2/Sasalele-Music-Station/issues/10).
+- **Added:** Store and display recently played tracks.
+- **Added:** Copy stream title function.
+- **Added:** Attempt to add a 0x40 hues animation.
+- **Fixed:** Fix playback issues with better metadata fetching approach.
+- **Changed:** Use an animation button to control the "0x40 Hues" animation.
 
 #### 📅 2024-07-14
 
-* **Added:** Added icecast metadata fetching for supported radios.
-* **Added:** Attempt to add a 0x40 hues animation.
-* **Changed:** Enhance search by APIs.
-* **Changed:** Use Javascript to load and display curated website list in order to ease maintenance.
+- **Added:** Added icecast metadata fetching for supported radios.
+- **Added:** Attempt to add a 0x40 hues animation.
+- **Changed:** Enhance search by APIs.
+- **Changed:** Use Javascript to load and display curated website list in order to ease maintenance.
 
 #### 📅 2024-06-30
 
-* **Added:** Function to download M3U8/ radio station stream link in .m3u/ .m3u8 file [issue 16](https://github.com/Mikeexe2/Sasalele-Music-Station/issues/16).
-* **Changed:** M3U8 Radio stream rework, display in a genre-separated list with dynamic loading.
-* **Changed:** Attempt to solve CORS issues in playing stream by using a proxy.
+- **Added:** Function to download M3U8/ radio station stream link in .m3u/ .m3u8 file [issue 16](https://github.com/Mikeexe2/Sasalele-Music-Station/issues/16).
+- **Changed:** M3U8 Radio stream rework, display in a genre-separated list with dynamic loading.
+- **Changed:** Attempt to solve CORS issues in playing stream by using a proxy.
 
 #### 📅 2024-06-16
 
-* **Added:** New M3U8 video stream playing function by pasting the M3U8 link or selecting from a dropdown menu.
-* **Added:** Privacy policy for Google Drive Music Player has been implemented.
+- **Added:** New M3U8 video stream playing function by pasting the M3U8 link or selecting from a dropdown menu.
+- **Added:** Privacy policy for Google Drive Music Player has been implemented.
 
 #### 📅 2024-01-16
 
-* **Added:** Real-time chat function using Firebase has been integrated.
+- **Added:** Real-time chat function using Firebase has been integrated.
 
 #### 📅 2023-11-10
 
-* **Added:** Player with random play and play pause functionality.
-* **Added:** Station's playlist using Aplayer (with lrc support).
+- **Added:** Player with random play and play pause functionality.
+- **Added:** Station's playlist using Aplayer (with lrc support).
 
 #### 📅 2023-11-04
 
-* **Changed:** Use json file to store stations instead of using m3u file.
-* **Added:** Google drive music player.
-* **Added:** Homepage link for radio stations [issues 9](https://github.com/Mikeexe2/Sasalele-Music-Station/issues/9).
+- **Changed:** Use json file to store stations instead of using m3u file.
+- **Added:** Google drive music player.
+- **Added:** Homepage link for radio stations [issues 9](https://github.com/Mikeexe2/Sasalele-Music-Station/issues/9).
 
 #### 📅 2023-10-25
 
-* **Changed:** Use json file to store stations instead of using m3u file.
-* **Added:** Use LastFM API and YouTube API for search function
-* **Added:** Homepage link for radio stations [issues 9](https://github.com/Mikeexe2/Sasalele-Music-Station/issues/9).
+- **Changed:** Use json file to store stations instead of using m3u file.
+- **Added:** Use LastFM API and YouTube API for search function
+- **Added:** Homepage link for radio stations [issues 9](https://github.com/Mikeexe2/Sasalele-Music-Station/issues/9).
 
 #### 📅 2023-10-02
 
-* **Added:** Try to use mobile responsive design.
-* **Added:** Search by site function.
+- **Added:** Try to use mobile responsive design.
+- **Added:** Search by site function.
 
 ## Discussion & Latest Update:
 
@@ -145,7 +161,9 @@ This website project aims to collect all public radio links in the world which s
 A huge thank you to all the radio station owners and all video stream provider—without you, none of this would be possible!
 
 ### Open Source Contributions
+
 This project is built upon the foundation and hard work of the following essential open-source libraries:
+
 - **icecast-metadata-js** - [GitHub](https://github.com/eshaz/icecast-metadata-js)
 - **Drive Music Player** - [GitHub](https://github.com/dandalpiaz/drive-music-player)
 - **APlayer** - [GitHub](https://github.com/DIYgod/APlayer)
