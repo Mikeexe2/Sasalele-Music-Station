@@ -1,9 +1,6 @@
-import {
-  ref,
-  get,
-} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";
-import { db, keyConf } from "./utils.js";
-
+import { ref, get } from "firebase/database";
+import { db } from "./utils.js";
+import "media-chrome";
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("folderForm");
   const DISCOVERY_DOC =
@@ -59,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function gisLoaded() {
     tokenClient = google.accounts.oauth2.initTokenClient({
-      client_id: keyConf.clientId,
+      client_id: import.meta.env.VITE_CLIENTID,
       scope: SCOPES,
       callback: "",
     });
@@ -228,8 +225,8 @@ document.addEventListener("DOMContentLoaded", function () {
       console.error("Missing file data on track button.");
       return;
     }
-    const file = JSON.parse(decodeURIComponent(stationDataString));
-    const id = file.id;
+    const trackData = JSON.parse(decodeURIComponent(stationDataString));
+    const id = trackData.id;
     // check if clicked track is already 'playing'
     if (element == playing) {
       if (audio.paused) {
@@ -270,14 +267,14 @@ document.addEventListener("DOMContentLoaded", function () {
       audio.oncanplay = () => {
         audio.play();
         hideLoadingSpinner();
-        updateMediaSession(file);
+        updateMediaSession(trackData);
       };
       return;
     }
     // public link
     if (type === "link") {
       fetch(
-        `https://www.googleapis.com/drive/v3/files/${id}?alt=media&key=${keyConf.apiKey}`,
+        `https://www.googleapis.com/drive/v3/files/${id}?alt=media&key=${import.meta.env.VITE_GD_API_KEY}`,
       )
         .then((response) => {
           if (!response.ok) {
@@ -310,7 +307,7 @@ document.addEventListener("DOMContentLoaded", function () {
         alt: "media",
       })
       .then(function (response) {
-        dataArr = Uint8Array.from(
+        const dataArr = Uint8Array.from(
           response.body.split("").map((chr) => chr.charCodeAt(0)),
         );
         file = new File([dataArr], "audiofilename", {
@@ -482,6 +479,12 @@ document.addEventListener("DOMContentLoaded", function () {
       item.dataset.folderId = folder.folderId;
       item.addEventListener("click", (event) => {
         event.preventDefault();
+        dropdownMenu
+          .querySelectorAll(".dropdown-item.active")
+          .forEach((activeItem) => {
+            activeItem.classList.remove("active");
+          });
+        item.classList.add("active");
         clearFileTree();
         fetchDriveFiles(folder.folderId);
         fileTree.style.display = "block";
@@ -517,7 +520,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function fetchDriveFiles(folderId, subfolderContent = null) {
     showLoadingSpinner();
-    const apiUrl = `https://www.googleapis.com/drive/v3/files?q='${folderId}' in parents&key=${keyConf.apiKey}`;
+    const apiUrl = `https://www.googleapis.com/drive/v3/files?q='${folderId}' in parents&key=${import.meta.env.VITE_GD_API_KEY}`;
     fetch(apiUrl)
       .then((response) => {
         if (!response.ok) {
@@ -603,7 +606,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function downloadTrack(event, fileId, fileName) {
     showNotification(`Downloading...`, "success");
-    const apiUrl = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=${keyConf.apiKey}`;
+    const apiUrl = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=${import.meta.env.VITE_GD_API_KEY}`;
     event.preventDefault();
     fetch(apiUrl)
       .then((response) => {

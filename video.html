@@ -33,39 +33,23 @@
       }
     </script>
     <link rel="icon" href="/assets/sasalele_logo.webp" type="image/x-icon" />
-    <link rel="apple-touch-icon" href="/assets/sasalele_logo.webp" />
+    <link
+      rel="apple-touch-icon"
+      href="/assets/sasalele_logo.png"
+      type="image/png"
+    />
     <link
       rel="shortcut icon"
       href="/assets/sasalele_logo.webp"
       type="image/x-icon"
     />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.6.15/dist/hls.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/@waline/client@v3/dist/waline-meta.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@waline/client@3.5.6/dist/waline.min.css"
-    />
-    <link rel="stylesheet" href="/src/css/styles.css" />
   </head>
 
   <body>
     <div id="background">
-      <img id="randomimg" src="" alt="Sasalele Music Station" />
+      <img id="randomimg" alt="Sasalele Music Station" />
     </div>
-    <div id="content">
+    <main class="content">
       <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <div class="navbar-brand d-flex align-items-center">
           <a href="/">
@@ -102,9 +86,9 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/website.html"
-                >Websites <i class="fa-fw fas fa-link"></i>
-              </a>
+              <a class="nav-link" href="/website"
+                >Websites <i class="fas fa-book-bookmark"></i
+              ></a>
             </li>
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="#"
@@ -123,28 +107,65 @@
                   type="checkbox"
                   id="toggleAnimation"
                   role="switch"
-                  data-toggle="tooltip"
-                  data-placement="top"
                   title="Animate"
                 />
-                <label class="form-check-label" for="toggleAnimation"> </label>
+                <label class="form-check-label" for="toggleAnimation"></label>
               </div>
             </div>
           </ul>
         </div>
       </nav>
       <section id="videos">
-        <div class="selected-title">
-          <h1 id="selected-video-title">Videos</h1>
+        <div
+          class="d-flex align-items-center justify-content-center mb-1 gap-2"
+        >
+          <div class="selected-title">
+            <h1 id="selected-video-title">Videos</h1>
+          </div>
+          <div class="header-controls">
+            <button
+              type="button"
+              class="btn btn-sm btn-primary rounded-circle"
+              id="customStreamToggle"
+              title="Custom Stream"
+              aria-label="Toggle Custom Stream"
+              data-state="closed"
+            >
+              <i class="fas fa-link"></i>
+            </button>
+          </div>
         </div>
-        <div class="container">
+        <div id="loadingSpinner"></div>
+        <div class="container-fluid">
+          <div
+            class="container mb-2"
+            id="customStreamPanel"
+            style="display: none"
+          >
+            <div class="stream-content">
+              <div class="input-group">
+                <input
+                  type="search"
+                  id="m3uURL"
+                  class="form-control"
+                  placeholder="Enter M3U8/MP4 stream URL"
+                />
+                <button
+                  class="btn btn-primary"
+                  id="loadM3U"
+                  type="button"
+                  aria-label="Play Stream"
+                >
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+          </div>
           <div class="row">
             <div class="col-lg-8">
-              <div id="vplayer" class="container">
-                <media-controller
-                  style="width: 100%; max-width: 720px; aspect-ratio: 16 / 9"
-                >
-                  <video slot="media" id="video-player" src=""></video>
+              <div id="vplayer">
+                <media-controller style="width: 100%; aspect-ratio: 16 / 9">
+                  <video slot="media" id="video-player"></video>
                   <media-loading-indicator
                     slot="centered-chrome"
                     noautohide
@@ -153,8 +174,6 @@
                     <media-play-button></media-play-button>
                     <button
                       class="p-btn"
-                      data-toggle="tooltip"
-                      data-placement="top"
                       title="Stop Streaming"
                       id="vidstopBtn"
                     >
@@ -165,10 +184,7 @@
                     <media-mute-button></media-mute-button>
                     <media-volume-range></media-volume-range>
                     <media-time-range></media-time-range>
-                    <media-time-display
-                      showduration
-                      remaining
-                    ></media-time-display>
+                    <media-time-display showduration></media-time-display>
                     <media-playback-rate-button></media-playback-rate-button>
                     <media-fullscreen-button></media-fullscreen-button>
                   </media-control-bar>
@@ -176,7 +192,7 @@
               </div>
             </div>
             <div class="col-lg-4 mb-1">
-              <div class="d-flex justify-content-center mb-1">
+              <div class="d-flex mb-1">
                 <div class="dropdown">
                   <button
                     type="button"
@@ -184,7 +200,7 @@
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    <i class="fa fa-bars"></i> Streams
+                    Streams
                   </button>
                   <ul class="dropdown-menu">
                     <li>
@@ -302,9 +318,12 @@
                     </li>
                   </ul>
                 </div>
-                <div id="genre-info" class="ms-auto mb-2">
-                  <span id="genre-name"></span>
-                  <strong> (<span id="channel-count"></span>)</strong>
+                <div class="ms-auto mt-2">
+                  <span
+                    id="channel-count"
+                    class="badge text-bg-info rounded-pill"
+                    >0</span
+                  >
                 </div>
               </div>
               <div class="input-group mb-2 w-100">
@@ -315,27 +334,11 @@
                   placeholder="Search Channel"
                 />
               </div>
-              <div id="loadingSpinner" class="mb-4"></div>
               <div id="video-list" class="list-group w-100"></div>
             </div>
           </div>
         </div>
         <div class="container-fluid">
-          <div class="row d-flex justify-content-center">
-            <div class="col-md-10">
-              <div class="input-group mb-3">
-                <input
-                  type="search"
-                  id="m3uURL"
-                  class="form-control"
-                  placeholder="Enter M3U8/MP4 stream URL"
-                />
-                <button id="loadM3U" class="btn btn-primary btn-go">Go</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="container">
           <div class="alert alert-info mt-4" role="alert" style="opacity: 0.95">
             <strong>Note:</strong> Video streams are collected from public
             sources. If playback fails, it may be due to stream availability or
@@ -439,24 +442,20 @@
           </div>
         </div>
         <div class="selected-title">
-          <h1>YouTube Live Stream</h1>
+          <h1 id="playerTitle">YouTube Live Stream</h1>
         </div>
-        <div class="container py-4">
-          <div class="row g-3">
-            <div class="col-12 col-md-8">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-8 mb-2">
               <div class="app-card p-3">
-                <div id="playerTitle" class="mb-2">
-                  <h5 class="mb-0">Loading...</h5>
-                </div>
-
-                <div class="player-wrapper mb-3">
+                <div class="player-wrapper mb-1">
                   <div id="yt-player"></div>
                 </div>
               </div>
             </div>
-            <div class="col-12 col-md-4">
+            <div class="col-lg-4 mb-1">
               <div
-                class="d-flex justify-content-between align-items-center mb-3"
+                class="d-flex justify-content-between align-items-center mb-1"
               >
                 <div class="d-flex gap-2 align-items-center">
                   <select
@@ -472,7 +471,7 @@
                   <strong>Streams</strong>
                   <small id="streamCount" class="text-muted">0</small>
                 </div>
-                <div id="streamList" class="stream-list list-group"></div>
+                <div id="streamList" class="stream-list list-group w-100"></div>
               </div>
             </div>
           </div>
@@ -494,7 +493,7 @@
               <div class="social-links mb-1">
                 <a
                   target="_blank"
-                  href="https://t.mesasalelemusic"
+                  href="https://t.me/sasalelemusic"
                   class="btn btn-social btn-telegram btn-sm mx-1"
                 >
                   <i class="fab fa-telegram-plane me-1"></i>Telegram
@@ -515,7 +514,8 @@
                   <span id="last-updated-date" class="text-light fw-bold"
                     >Loading...</span
                   >
-                  | Views: <span class="waline-pageview-count fw-bold">0</span>
+                  | Views:
+                  <span class="waline-pageview-count fw-bold">0</span>
                 </p>
                 <p class="copyright mb-0 opacity-50">
                   &copy; 2023-<span id="current-year">present</span>
@@ -526,21 +526,15 @@
           </div>
         </div>
       </section>
-    </div>
-    <div class="back-to-top d-flex align-items-center justify-content-center">
-      <i class="fa-solid fa-arrow-up"></i>
-    </div>
+    </main>
+
     <script>
       var tag = document.createElement("script");
       tag.src = "https://www.youtube.com/iframe_api";
       document.head.appendChild(tag);
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"></script>
     <script type="module" src="/src/js/utils.js"></script>
     <script type="module" src="/src/js/stats.js"></script>
     <script type="module" src="/src/js/m3u8video.js"></script>
-    <script type="module">
-      import mediaChrome from "https://cdn.jsdelivr.net/npm/media-chrome@4.17.2/+esm";
-    </script>
   </body>
 </html>

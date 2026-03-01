@@ -7,9 +7,9 @@ import {
   orderByChild,
   child,
   push,
-} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";
-import { db, keyConf } from "./utils.js";
-import IcecastMetadataPlayer from "icecast-metadata-player";
+} from "firebase/database";
+import { db } from "./utils.js";
+import "media-chrome";
 
 const searchToggleBtn = document.getElementById("searchToggleBtn");
 const customStreamToggleBtn = document.getElementById("customStreamToggleBtn");
@@ -18,17 +18,15 @@ const customStreamPanel = document.getElementById("customStreamPanel");
 const streamUrlInput = document.getElementById("streamUrlInput");
 const playStreamButton = document.getElementById("playStreamButton");
 const playerContainer = document.getElementById("player");
-const expandIcon = document.querySelector("#togglePlayer .fa-expand");
-const minimizeIcon = document.querySelector("#togglePlayer .fa-compress");
+const togglePlayerButton = document.getElementById("togglePlayer");
 const coverImage = document.getElementById("ip");
 const nowPlaying = document.getElementById("nowPlaying");
 const stationCount = document.getElementById("station-count");
 const historyDisplay = document.getElementById("historyBtn");
-const randomplay = document.getElementById("randomplay");
+const randomplay = document.getElementById("toggleRandom");
 const stopBtn = document.getElementById("stopBtn");
-const togglePlayerButton = document.getElementById("togglePlayer");
 const copyIcon = document.getElementById("copyIcon");
-const copyIconSymbol = copyIcon.querySelector("i.fas.fa-copy");
+const copyIconSymbol = copyIcon.querySelector(".fa-copy");
 const confirmation = document.querySelector("#copyIcon .copy-confirmation");
 const searchIcon = document.getElementById("searchIcon");
 const stationSearch = document.getElementById("sasalelesearch");
@@ -36,7 +34,6 @@ const searchInput = document.getElementById("searchInput");
 const searchButton = document.getElementById("searchButton");
 const searchResultsWrapper = document.getElementById("searchResultsWrapper");
 const dismissBtn = document.getElementById("dismissSearchResults");
-const collapseIcon = document.getElementById("collapseIcon");
 const searchResultsCollapse = document.getElementById("searchResultsCollapse");
 const VideoDisplay = document.getElementById("YouTubeVideo");
 const innerlastfm = document.getElementById("lastfmList");
@@ -49,7 +46,7 @@ const sidePanel = document.getElementById("sidePanel");
 const hideButton = document.getElementById("hideButton");
 const searchNavLink = document.querySelector(".search-nav-link");
 const playlistMenu = document.getElementById("playlistMenu");
-const container = document.getElementById("hugeData");
+const acontainer = document.getElementById("hugeData");
 const selectedContainer = document.getElementById("selected");
 const recentTracksList = document.getElementById("recentTracksList");
 const searchInputCon = document.getElementById("searchInputContainer");
@@ -74,15 +71,17 @@ const chatContainerEl = document.querySelector(".chat_container");
 const generalBtn = document.getElementById("generalChatBtn");
 const mixednutsBtn = document.getElementById("anotherChatBtn");
 const MAX_RETRIES = 3;
-const MAX_RESULTS = 5;
 const coolDown = 1000;
-const proxyLink = keyConf.proxyLink;
+const proxyLink = import.meta.env.VITE_PROXY_LINK;
 const visithomepage = "Visit radio's homepage for playing info";
 const nometadata = "No Metadata";
 const notactive = "Stream endpoint not active";
 const debouncedFilterStations = debounce(filterStations, 200);
+const searchCache = new Map();
 let hlsPlayer = null;
+let hlsModules = null;
 let icecastPlayer = null;
+let icecastModules = null;
 let currentStation = null;
 let isPlaying = false;
 let metadataInterval = null;
@@ -101,6 +100,23 @@ let shouldStopRetrying = false;
 let retryTimeoutId = null;
 
 // utility
+const getValidMetadata = (actionName) => {
+  const content = metadataElement.textContent.trim();
+  const invalidStates = [
+    visithomepage,
+    nometadata,
+    notactive,
+    "Loading...",
+    "",
+  ];
+
+  if (invalidStates.includes(content)) {
+    showNotification(`No content to ${actionName}!`, "warning");
+    return null;
+  }
+  return content;
+};
+
 function debounce(func, delay = 300) {
   return function (...args) {
     clearTimeout(debounceTimeout);
@@ -149,7 +165,7 @@ function togglePanel() {
 
 function updatePlayerUI(media) {
   coverImage.src = `${media.favicon ? media.favicon : "assets/radios/Unidentified2.webp"}`;
-  nowPlaying.innerHTML = `<a href="${media.homepage || media.url}" target="_blank" class="homepagelink">${media.name}</a>`;
+  nowPlaying.innerHTML = `<a href="${media.homepage || media.url}" target="_blank" rel="noopener noreferrer" class="homepagelink" title="Visit ${media.name} homepage">${media.name}</a>`;
   //metaSource.style.display = 'inline-block';
   //metaSource.textContent = `${media.host}`;
 }
@@ -328,6 +344,10 @@ function attachGenreListeners() {
 function initializeUI() {
   loadGenres();
 
+  togglePlayerButton.addEventListener("click", () => {
+    playerContainer.classList.toggle("minimized");
+  });
+
   if (hideButton) {
     hideButton.addEventListener("click", togglePanel);
   }
@@ -405,29 +425,20 @@ function initializeUI() {
     displayRecentTracks();
   });
 
-  copyIcon.addEventListener("click", () => {
-    const textContent = metadataElement.textContent.trim();
-    if (
-      !textContent ||
-      textContent === visithomepage ||
-      textContent === nometadata ||
-      textContent === notactive
-    ) {
-      showNotification("No content to copy!", "warning");
-      return;
+  copyIcon.addEventListener("click", async () => {
+    const content = getValidMetadata("copy");
+    if (!content) return;
+    try {
+      await navigator.clipboard.writeText(content);
+      copyIconSymbol.style.display = "none";
+      confirmation.style.display = "inline-block";
+      setTimeout(() => {
+        confirmation.style.display = "none";
+        copyIconSymbol.style.display = "inline-block";
+      }, 1500);
+    } catch (err) {
+      console.error("Failed to copy: ", err);
     }
-    const textarea = document.createElement("textarea");
-    textarea.value = textContent;
-    document.body.appendChild(textarea);
-    textarea.select();
-    document.execCommand("copy");
-    document.body.removeChild(textarea);
-    copyIconSymbol.style.display = "none";
-    confirmation.style.display = "inline-flex";
-    setTimeout(() => {
-      confirmation.style.display = "none";
-      copyIconSymbol.style.display = "inline";
-    }, 300);
   });
 
   searchButton.addEventListener("click", performSearch);
@@ -438,18 +449,10 @@ function initializeUI() {
   });
 
   searchIcon.addEventListener("click", () => {
-    const textContent = metadataElement.textContent.trim();
+    const content = getValidMetadata("search");
+    if (!content || isSearching) return;
 
-    if (
-      !textContent ||
-      textContent === visithomepage ||
-      textContent === nometadata ||
-      textContent === notactive
-    ) {
-      showNotification("No content to search!", "warning");
-      return;
-    }
-    if (textContent === lastSearchedContent) {
+    if (content === lastSearchedContent) {
       showNotification("Search already available!", "info");
       searchIcon.classList.add("search-disabled");
       setTimeout(() => {
@@ -457,18 +460,15 @@ function initializeUI() {
       }, 300);
       return;
     }
-    if (isSearching) {
-      showNotification("Search already in progress...", "info");
-      return;
-    }
+
     isSearching = true;
     searchIcon.disabled = true;
+
+    searchInput.value = lastSearchedContent = content;
     searchInput.scrollIntoView({
       behavior: "smooth",
       block: "center",
     });
-    searchInput.value = textContent;
-    lastSearchedContent = textContent;
     performSearch();
 
     searchIcon.classList.add("search-active");
@@ -476,13 +476,7 @@ function initializeUI() {
       isSearching = false;
       searchIcon.disabled = false;
       searchIcon.classList.remove("search-active");
-    }, 300);
-  });
-
-  togglePlayerButton.addEventListener("click", () => {
-    playerContainer.classList.toggle("minimized");
-    expandIcon.classList.toggle("hidden");
-    minimizeIcon.classList.toggle("hidden");
+    }, 600);
   });
 
   playlistMenu.addEventListener("click", (e) => {
@@ -498,14 +492,6 @@ function initializeUI() {
 
   dismissBtn.addEventListener("click", () => {
     searchResultsWrapper.style.display = "none";
-  });
-
-  searchResultsCollapse.addEventListener("show.bs.collapse", () => {
-    collapseIcon.querySelector("i").className = "fas fa-chevron-down";
-  });
-
-  searchResultsCollapse.addEventListener("hide.bs.collapse", () => {
-    collapseIcon.querySelector("i").className = "fas fa-chevron-up";
   });
 
   findRadioBtn.addEventListener("click", radioSearch);
@@ -565,7 +551,7 @@ function renderStations(stations) {
         .join("");
 
       return `
-        <li data-index="${index}" class="align-items-center p-2 mb-1 station-item">
+        <li data-index="${index}" class="align-items-center station-item">
             <img src="${station.favicon || "assets/radios/Unidentified2.webp"}" 
                  alt="${station.name}" 
                  class="station-img">
@@ -575,14 +561,14 @@ function renderStations(stations) {
                     ${tagsHTML}
                 </div>
             </div>
-            <div class="ms-3 d-flex button-group">
-                <a href="${station.homepage || station.url}" target="_blank" class="btn btn-sm btn-outline-info border-0">
+            <div class="d-flex button-group flex-shrink-0">
+                <a href="${station.homepage || station.url}" target="_blank" class="btn btn-sm p-btn">
                     <i class="fas fa-external-link-alt"></i>
                 </a>
-                <button class="btn btn-sm btn-outline-light border-0 download-button">
-                    <i class="fas fa-download"></i>
+                <button class="btn btn-sm p-btn download-button">
+                    <i class="fas fa-file-arrow-down"></i>
                 </button>
-                <button class="btn btn-sm btn-primary main-play-button rounded-circle ms-1">
+                <button class="btn btn-sm btn-primary main-play-button rounded-circle">
                     <i class="fas fa-play"></i>
                 </button>
             </div>
@@ -857,7 +843,7 @@ async function stopPlayback() {
     clearActiveStation();
     currentTrack = "";
     currentStation = null;
-    coverImage.src = "assets/ball.svg";
+    coverImage.src = "/ball.svg";
     nowPlaying.innerHTML = "";
     metadataElement.textContent = "";
     stopMediaSession();
@@ -966,7 +952,21 @@ async function playMedia(media, button) {
   updatePlayerUI(media);
 }
 
-function playHlsStream(audioEl, media) {
+async function playHlsStream(audioEl, media) {
+  if (!hlsModules) {
+    const [Hls, jsmediatagsModule] = await Promise.all([
+      import("hls.js").then((m) => m.default || m),
+      import("jsmediatags/dist/jsmediatags.min.js").then((m) => m.default || m),
+    ]);
+
+    hlsModules = {
+      Hls,
+      jsmediatags: jsmediatagsModule,
+    };
+  }
+
+  const { Hls, jsmediatags } = hlsModules;
+
   shouldStopRetrying = false;
 
   if (!Hls.isSupported()) {
@@ -1025,7 +1025,6 @@ function playHlsStream(audioEl, media) {
     if (!hlsPlayer) return;
     hlsPlayer.on(Hls.Events.MANIFEST_PARSED, (event, data) => {
       if (shouldStopRetrying) return;
-
       if (data && data.levels && data.levels.length > 0) {
         const stationName = data.levels[0].name || visithomepage;
         metadataElement.textContent = stationName;
@@ -1041,12 +1040,12 @@ function playHlsStream(audioEl, media) {
     });
     hlsPlayer.on(Hls.Events.FRAG_PARSING_METADATA, (event, data) => {
       if (shouldStopRetrying) return;
-
       data.samples.forEach((sample) => {
-        window.jsmediatags.read(new Blob([sample.data]), {
+        jsmediatags.read(new Blob([sample.data]), {
           onSuccess: (tag) => {
+            console.debug("[HLS Debug] jsmediatags success:", tag.tags);
             if (shouldStopRetrying) return;
-            const displayText = formatMetadataDisplay(tag.tags, liveTrackName);
+            let displayText = formatMetadataDisplay(tag.tags, liveTrackName);
             metadataElement.textContent = displayText;
             trackHistory(displayText, media);
           },
@@ -1274,11 +1273,20 @@ const shouldRetry = (error) => {
   return retryConditions.some((condition) => errorString.includes(condition));
 };
 
-function playIcecastStream(audioEl, media) {
+async function playIcecastStream(audioEl, media) {
   let totalAttempts = 0;
   let originalUrl = media.url;
   let currentUrl = originalUrl;
   let fallbackTriggered = false;
+
+  if (!icecastModules) {
+    const [module] = await Promise.all([
+      import("icecast-metadata-player").then((m) => m.default || m),
+    ]);
+    icecastModules = { IcecastMetadataPlayer: module };
+  }
+
+  const { IcecastMetadataPlayer } = icecastModules;
 
   shouldStopRetrying = false;
 
@@ -1621,7 +1629,7 @@ function updateMetadata(data, media) {
       } else if (songEntry) {
         const title = songEntry.title;
         const artistName = songEntry.artist?.entry?.[0]?.name;
-        streamTitle = formatTitle(artistName, data.title);
+        streamTitle = formatTitle(artistName, title);
       } else if (data.ArtistName && data.TrackTitle) {
         streamTitle = formatTitle(data.ArtistName, data.TrackTitle);
       } else if (data.result && data.result.data) {
@@ -1699,7 +1707,7 @@ function decodeEntities(text) {
   return textArea.value;
 }
 
-// search station with options using Radio Browser's API
+// search station with options using RadioBrowser's API
 const countries = [
   "United States",
   "Germany",
@@ -2041,10 +2049,8 @@ function radioSearch() {
 }
 
 function showSearchResults() {
-  showLoadingSpinner();
   searchResultsWrapper.style.display = "block";
   searchResultsCollapse.classList.add("show");
-  collapseIcon.querySelector("i").className = "fas fa-chevron-down";
 }
 
 function performSearch() {
@@ -2059,6 +2065,13 @@ function performSearch() {
     }
     if (gscInput) {
       gscInput.value = lastSearchedContent;
+      const enterEvent = new KeyboardEvent("keydown", {
+        bubbles: true,
+        cancelable: true,
+        keyCode: 13,
+        key: "Enter",
+      });
+      gscInput.dispatchEvent(enterEvent);
     }
 
     inneritunes.innerHTML = "";
@@ -2073,57 +2086,61 @@ function performSearch() {
 }
 
 async function searchAcrossApis(searchTerm) {
-  const lastfmUrl = `https://ws.audioscrobbler.com/2.0/?method=track.search&format=json&limit=5&api_key=${keyConf.lastfmKey}&track=${encodeURIComponent(searchTerm)}`;
-  const youtubeUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&type=video&q=${encodeURIComponent(searchTerm)}&key=${keyConf.ytKey}`;
-  const itunesUrl = `${proxyLink}https://itunes.apple.com/search?limit=5&media=music&term=${encodeURIComponent(searchTerm)}`;
-  const deezerUrl = `${proxyLink}https://api.deezer.com/search?q=${encodeURIComponent(searchTerm)}&limit=5`;
+  const services = [
+    {
+      name: "YouTube",
+      url: `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&type=video&q=${encodeURIComponent(searchTerm)}&key=${import.meta.env.VITE_YT_KEY}`,
+      render: (data) => {
+        const results = data ? formatYoutubeResults(data) : [];
+        VideoDisplay.style.display = "block";
+        VideoDisplay.src =
+          results.length > 0
+            ? `https://www.youtube.com/embed/${results[0].videoId}`
+            : `https://www.youtube.com/embed/SBQprWeOx8g`;
+      },
+    },
+    {
+      name: "Last.fm",
+      url: `${import.meta.env.VITE_PROXY}lastfm/search?track=${encodeURIComponent(searchTerm)}`,
+      render: (data) => {
+        const results = data ? formatLastfmResults(data) : [];
+        renderLastfm(results);
+      },
+    },
+    {
+      name: "iTunes",
+      url: `${proxyLink}https://itunes.apple.com/search?limit=10&media=music&term=${encodeURIComponent(searchTerm)}`,
+      render: (data) => {
+        const results = data ? formatItunesResults(data) : [];
+        renderMusicResults(results, inneritunes, "iTunes");
+      },
+    },
+    {
+      name: "Deezer",
+      url: `${import.meta.env.VITE_PROXY}deezer/search?q=${encodeURIComponent(searchTerm)}&limit=10`,
+      render: (data) => {
+        const results = data ? formatDeezerResults(data) : [];
+        renderMusicResults(results, innerdeezer, "Deezer");
+      },
+    },
+  ];
+  services.forEach(async (service) => {
+    const data = await safeJsonFetch(service.url, service.name);
+    service.render(data);
+  });
+}
 
-  const safeJsonFetch = async (url, apiName) => {
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        console.warn(`${apiName} API returned status ${response.status}`);
-        return null;
-      }
-      const text = await response.text();
-
-      try {
-        return JSON.parse(text);
-      } catch (parseError) {
-        console.error(`${apiName} API returned invalid JSON:`, parseError);
-        console.debug(
-          `${apiName} response starts with:`,
-          text.substring(0, 100),
-        );
-        return null;
-      }
-    } catch (fetchError) {
-      console.error(`Error fetching from ${apiName} API:`, fetchError);
-      return null;
-    }
-  };
-
+async function safeJsonFetch(url, apiName) {
+  if (searchCache.has(url)) return searchCache.get(url);
   try {
-    const [lastfmData, youtubeData, itunesData, deezerData] = await Promise.all(
-      [
-        safeJsonFetch(lastfmUrl, "Last.fm"),
-        safeJsonFetch(youtubeUrl, "YouTube"),
-        safeJsonFetch(itunesUrl, "iTunes"),
-        safeJsonFetch(deezerUrl, "Deezer"),
-      ],
-    );
-    const results = {
-      lastfm: lastfmData ? formatLastfmResults(lastfmData) : [],
-      youtube: youtubeData ? formatYoutubeResults(youtubeData) : [],
-      itunes: itunesData ? formatItunesResults(itunesData) : [],
-      deezer: deezerData ? formatDeezerResults(deezerData) : [],
-    };
-
-    displayResults(results);
-    hideLoadingSpinner();
+    const response = await fetch(url);
+    if (!response.ok) return null;
+    const data = await response.json();
+    searchCache.set(url, data);
+    return data;
   } catch (error) {
-    console.error("Error searching across APIs:", error);
-    displayResults({ lastfm: [], youtube: [], itunes: [], deezer: [] });
+    console.error(`Error fetching ${apiName}:`, error);
+    return null;
   }
 }
 
@@ -2177,21 +2194,12 @@ function formatDeezerResults(data) {
   }));
 }
 
-function displayResults(results) {
-  const lastfmResults = results.lastfm;
-  const youtubeResults = results.youtube;
-  const itunesResults = results.itunes;
-  const deezerResults = results.deezer;
-
-  VideoDisplay.style.display = "block";
-
+function renderLastfm(lastfmResults) {
   if (lastfmResults.length > 0) {
     const fragment = document.createDocumentFragment();
-    const resultsCount = Math.min(MAX_RESULTS, lastfmResults.length);
 
-    for (let i = 0; i < resultsCount; i++) {
+    for (let i = 0; i < lastfmResults.length; i++) {
       const song = lastfmResults[i];
-      if (!song) continue;
       const listItem = document.createElement("li");
       listItem.className = "list-group-item";
       listItem.textContent = `${song.artist} - ${song.title}`;
@@ -2199,28 +2207,24 @@ function displayResults(results) {
     }
     innerlastfm.appendChild(fragment);
   } else {
-    innerlastfm.innerHTML =
-      '<h6 class="noresult mb-2">No results found on LastFM :(</h6>';
+    innerlastfm.innerHTML = `<div class="p-3 text-center text-secondary"><small>No results on LastFM</small></div>`;
   }
-
-  VideoDisplay.src =
-    youtubeResults.length > 0
-      ? `https://www.youtube.com/embed/${youtubeResults[0].videoId}`
-      : `https://www.youtube.com/embed/SBQprWeOx8g`;
-
-  renderMusicResults(itunesResults, inneritunes, "iTunes");
-  renderMusicResults(deezerResults, innerdeezer, "Deezer");
 }
 
 function renderMusicResults(results, container, serviceName) {
   if (results.length === 0) {
-    container.innerHTML = `<h6 class="noresult mb-2">No results found on ${serviceName} :(</h6>`;
+    container.innerHTML = `<div class="p-3 text-center text-secondary">
+      <i class="fas fa-search mb-2 d-block opacity-50"></i>
+      <small>No results found on ${serviceName}</small>
+    </div>`;
     return;
   }
 
   const fragment = document.createDocumentFragment();
 
-  results.slice(0, MAX_RESULTS).forEach((res) => {
+  for (let index = 0; index < results.length; index++) {
+    const res = results[index];
+    const playerID = `audio-${serviceName}-${index}`;
     const data = {
       img: res.artworkUrl || res.cover,
       artist: res.artistName || res.artist,
@@ -2230,29 +2234,42 @@ function renderMusicResults(results, container, serviceName) {
     };
 
     const listItem = document.createElement("li");
-    listItem.className = "itunes-item";
-    listItem.innerHTML = `
-            <img class="search-cover" src="${data.img}" alt="${data.track}">
-            <div class="info">
-                <p><strong>${data.artist} - ${data.track}</strong></p>
-                <p class="album-name">${data.album}</p>
-            </div>
-            <audio controls class="audio-preview">
-                <source src="${data.audio}" type="audio/mpeg">
-            </audio>`;
-    fragment.appendChild(listItem);
-  });
 
+    listItem.className =
+      "list-group-item d-flex align-items-center p-2 border-0 bg-transparent";
+
+    listItem.innerHTML = `
+      <img class="search-cover shadow-sm me-3" 
+           src="${data.img}" 
+           alt="${data.track}" >
+      <div class="info flex-grow-1">
+          <p class="mb-0 fw-bold">
+              ${data.artist} - ${data.track}
+          </p>
+          <p class="mb-0 album-name">
+              ${data.album}
+          </p>
+          <div class="mt-2 w-100">
+               <media-controller audio class="w-100">
+                  <audio slot="media" id="${playerID}" src="${data.audio}" preload="none"></audio>
+                  <media-control-bar class="w-100" mediacontroller="${playerID}">
+                    <media-play-button mediacontroller="${playerID}"></media-play-button>
+                    <media-time-display mediacontroller="${playerID}" show-duration></media-time-display>
+                    <media-time-range mediacontroller="${playerID}" class="flex-grow-1"></media-time-range>
+                  </media-control-bar>
+               </media-controller>
+          </div>
+      </div>
+    `;
+    fragment.appendChild(listItem);
+  }
   container.appendChild(fragment);
 
-  const players = container.querySelectorAll(".audio-preview");
-  players.forEach((player) => {
-    player.addEventListener("play", () => {
+  const allAudios = container.querySelectorAll('audio[slot="media"]');
+  allAudios.forEach((audio) => {
+    audio.addEventListener("play", () => {
       document.querySelectorAll("audio").forEach((other) => {
-        if (other !== player) {
-          other.pause();
-          other.currentTime = 0;
-        }
+        if (other !== audio) other.pause();
       });
     });
   });
@@ -2424,7 +2441,7 @@ class ChatApp {
                 </div>
                 <div class="text-center mt-2">
                     <button id="logoutBtn" class="btn btn-outline-secondary btn-sm">
-                        <i class="fas fa-sign-out-alt"></i> Logout
+                        <i class="fas fa-sign-out"></i> Logout
                     </button>
                 </div>
             </div>
@@ -2616,6 +2633,14 @@ class ChatApp {
 async function loadPlaylist(playlistName) {
   try {
     showLoadingSpinner();
+    const [APlayerModule] = await Promise.all([
+      import("aplayer/dist/APlayer.min.js"),
+      import("aplayer/dist/APlayer.min.css"),
+    ]);
+
+    // The actual class is usually in the .default property
+    const APlayer = APlayerModule.default;
+
     const audioRef = ref(db, `audioList/${playlistName}`);
     const snapshot = await get(audioRef);
     const data = snapshot.val();
@@ -2624,7 +2649,7 @@ async function loadPlaylist(playlistName) {
       hideLoadingSpinner();
       console.warn(`No audio data found for: ${playlistName}`);
       if (ap) ap.destroy();
-      container.style.display = "none";
+      acontainer.style.display = "none";
       return;
     }
 
@@ -2632,10 +2657,11 @@ async function loadPlaylist(playlistName) {
       name: item.name,
       artist: item.artist,
       url: item.url,
+      lrc: item.lrc,
       cover: item.cover || "assets/sasalele_logo.webp",
     }));
 
-    if (container) container.style.display = "block";
+    if (acontainer) acontainer.style.display = "block";
     if (ap) ap.destroy();
 
     ap = new APlayer({

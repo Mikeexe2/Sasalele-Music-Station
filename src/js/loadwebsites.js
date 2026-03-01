@@ -1,7 +1,4 @@
-import {
-  ref,
-  get,
-} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";
+import { ref, get } from "firebase/database";
 import { db } from "./utils.js";
 
 document.addEventListener("DOMContentLoaded", function () {

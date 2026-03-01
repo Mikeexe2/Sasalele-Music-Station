@@ -30,38 +30,23 @@
       }
     </script>
     <link rel="icon" href="/assets/sasalele_logo.webp" type="image/x-icon" />
-    <link rel="apple-touch-icon" href="/assets/sasalele_logo.webp" />
+    <link
+      rel="apple-touch-icon"
+      href="/assets/sasalele_logo.png"
+      type="image/png"
+    />
     <link
       rel="shortcut icon"
       href="/assets/sasalele_logo.webp"
       type="image/x-icon"
     />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/@waline/client@v3/dist/waline-meta.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@waline/client@3.5.6/dist/waline.min.css"
-    />
-    <link rel="stylesheet" href="/src/css/styles.css" />
   </head>
 
   <body>
     <div id="background">
-      <img id="randomimg" src="" alt="Sasalele Music Station" />
+      <img id="randomimg" alt="Sasalele Music Station" />
     </div>
-    <div id="content">
+    <main class="content">
       <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <div class="navbar-brand d-flex align-items-center">
           <a href="/">
@@ -97,9 +82,9 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/website.html"
-                >Websites <i class="fa-fw fas fa-link"></i>
-              </a>
+              <a class="nav-link" href="/website"
+                >Websites <i class="fas fa-book-bookmark"></i
+              ></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/video.html"
@@ -118,8 +103,6 @@
                   type="checkbox"
                   id="toggleAnimation"
                   role="switch"
-                  data-toggle="tooltip"
-                  data-placement="top"
                   title="Animate"
                 />
                 <label class="form-check-label" for="toggleAnimation"></label>
@@ -210,87 +193,79 @@
             </button>
           </h1>
         </div>
-        <div class="container">
+        <div id="loadingSpinner"></div>
+        <div class="container-fluid">
+          <div
+            class="alert alert-info alert-dismissible fade show"
+            role="alert"
+          >
+            The app needs access to your
+            <a
+              class="blank-name"
+              href="https://drive.google.com/drive/my-drive"
+              target="_blank"
+              >Google drive</a
+            >
+            to play your audio files. Review our
+            <a class="blank-name" href="/privacypolicy" target="_blank"
+              >Privacy Policy</a
+            >.
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
+          </div>
           <form id="folderForm">
             <div class="row justify-content-center">
-              <div class="col-md-6">
-                <div class="input-group mb-1">
-                  <input
-                    type="search"
-                    class="form-control"
-                    required
-                    id="parentfolder"
-                    name="parentfolder"
-                    placeholder="google-drive-folder-id"
-                  />
-                  <button type="submit" class="btn btn-primary">
-                    <i class="fab fa-google"></i> Login
-                  </button>
-                </div>
-                <div
-                  class="alert alert-info alert-dismissible fade show"
-                  role="alert"
-                >
-                  The app needs access to your
-                  <a
-                    class="blank-name"
-                    href="https://drive.google.com/drive/my-drive"
-                    target="_blank"
-                    >Google drive</a
-                  >
-                  to play your audio files. Review our
-                  <a class="blank-name" href="/privacypolicy" target="_blank"
-                    >Privacy Policy</a
-                  >.
-                  <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="alert"
-                    aria-label="Close"
-                  ></button>
-                </div>
+              <div class="input-group mb-1">
+                <input
+                  type="search"
+                  class="form-control"
+                  required
+                  id="parentfolder"
+                  name="parentfolder"
+                  placeholder="google-drive-folder-id"
+                />
+                <button type="submit" class="btn btn-primary">
+                  <i class="fab fa-google"></i> Login
+                </button>
               </div>
             </div>
           </form>
 
           <div class="row justify-content-center">
-            <div class="col-md-6">
-              <div class="input-group mb-3 flex-nowrap">
-                <input
-                  type="search"
-                  id="shareLinkInput"
-                  class="form-control"
-                  required
-                  placeholder="Paste Google Drive share link here"
-                />
+            <div class="input-group mb-3 flex-nowrap">
+              <input
+                type="search"
+                id="shareLinkInput"
+                class="form-control"
+                required
+                placeholder="Paste Google Drive share link here"
+              />
+              <button class="btn btn-success" id="loadLinkButton" type="button">
+                Load Link
+              </button>
+              <div class="btn-group">
                 <button
-                  class="btn btn-success"
-                  id="loadLinkButton"
+                  class="btn btn-primary dropdown-toggle"
                   type="button"
+                  id="folderDropdown"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
                 >
-                  Load Link
+                  Public Links
                 </button>
-                <div class="btn-group">
-                  <button
-                    class="btn btn-primary dropdown-toggle"
-                    type="button"
-                    id="folderDropdown"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    Public Links
-                  </button>
-                  <ul
-                    class="dropdown-menu dropdown-menu-end"
-                    id="folderDropdownMenu"
-                    aria-labelledby="folderDropdown"
-                  ></ul>
-                </div>
+                <ul
+                  class="dropdown-menu dropdown-menu-end"
+                  id="folderDropdownMenu"
+                  aria-labelledby="folderDropdown"
+                ></ul>
               </div>
             </div>
           </div>
         </div>
-        <div id="loadingSpinner" class="mb-4"></div>
         <div id="file-tree" style="display: none"></div>
         <div id="intro" class="container">
           <div id="demo" class="loaded">
@@ -387,7 +362,7 @@
         </button>
         <media-controller audio class="flex-grow-1 mx-2">
           <audio slot="media" id="audio">
-            <source id="source" src="" type="audio/mpeg" />
+            <source id="source" type="audio/mpeg" />
           </audio>
           <media-control-bar>
             <media-play-button></media-play-button>
@@ -416,7 +391,7 @@
               <div class="social-links mb-1">
                 <a
                   target="_blank"
-                  href="https://t.mesasalelemusic"
+                  href="https://t.me/sasalelemusic"
                   class="btn btn-social btn-telegram btn-sm mx-1"
                 >
                   <i class="fab fa-telegram-plane me-1"></i>Telegram
@@ -437,7 +412,8 @@
                   <span id="last-updated-date" class="text-light fw-bold"
                     >Loading...</span
                   >
-                  | Views: <span class="waline-pageview-count fw-bold">0</span>
+                  | Views:
+                  <span class="waline-pageview-count fw-bold">0</span>
                 </p>
                 <p class="copyright mb-0 opacity-50">
                   &copy; 2023-<span id="current-year">present</span>
@@ -448,16 +424,10 @@
           </div>
         </div>
       </section>
-    </div>
-    <div class="back-to-top d-flex align-items-center justify-content-center">
-      <i class="fa-solid fa-arrow-up"></i>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"></script>
+    </main>
+
     <script type="module" src="/src/js/utils.js"></script>
     <script type="module" src="/src/js/stats.js"></script>
     <script type="module" src="/src/js/gdmp.js"></script>
-    <script type="module">
-      import mediaChrome from "https://cdn.jsdelivr.net/npm/media-chrome@4.17.2/+esm";
-    </script>
   </body>
 </html>

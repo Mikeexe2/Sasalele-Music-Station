@@ -1,9 +1,9 @@
-import {
-  ref,
-  get,
-  onValue,
-} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";
-import { db, keyConf } from "./utils.js";
+import { ref, get, onValue } from "firebase/database";
+import { db } from "./utils.js";
+import Hls from "hls.js";
+import "media-chrome";
+import "../css/videos.css";
+
 document.addEventListener("DOMContentLoaded", function () {
   let currentVideos = [];
   let currentPlayingElement = null;
@@ -15,10 +15,38 @@ document.addEventListener("DOMContentLoaded", function () {
   const genreNameElement = document.getElementById("genre-name");
   const channelCountElement = document.getElementById("channel-count");
   const searchChannel = document.getElementById("searchChannel");
+  const customStreamToggleBtn = document.getElementById(
+    "customStreamToggle",
+  );
+  const customStreamPanel = document.getElementById("customStreamPanel");
   const defaultGenre = "videos/jpvideos";
   const defaultGenreName = "Japanese";
   const m3uURLInput = document.getElementById("m3uURL");
   const channelThumbCache = {};
+
+  function openPanel(panel, button) {
+    panel.style.display = "block";
+    panel.style.animation = "slideDown 0.3s ease-out";
+    button.setAttribute("data-state", "open");
+  }
+
+  function closePanel(panel, button) {
+    panel.style.animation = "slideUp 0.3s ease-out";
+    setTimeout(() => {
+      panel.style.display = "none";
+    }, 300);
+    button.setAttribute("data-state", "closed");
+  }
+  
+  customStreamToggleBtn.addEventListener("click", () => {
+    const isOpen = customStreamPanel.style.display !== "none";
+
+    if (isOpen) {
+      closePanel(customStreamPanel, customStreamToggleBtn);
+    } else {
+      openPanel(customStreamPanel, customStreamToggleBtn);
+    }
+  });
 
   m3uURLInput.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
@@ -36,11 +64,8 @@ document.addEventListener("DOMContentLoaded", function () {
       const videoRef = ref(db, genre);
       const snapshot = await get(videoRef);
 
-      document.getElementById("loadingSpinner").style.display = "none";
       const data = snapshot.val() || {};
       const videoLinks = Object.values(data);
-
-      console.log(`${genre} loaded:`, videoLinks.length, "videos");
       return videoLinks;
     } catch (error) {
       console.error("Error fetching videos:", error);
@@ -50,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   async function loadGenre(genre, genreName) {
     try {
-      document.getElementById("loadingSpinner").style.display = "block";
+      showLoadingSpinner();
       const videos = await fetchVideoLinks(genre);
       currentVideos = videos;
       createVideoList(currentVideos);
@@ -67,6 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (channelCountElement) {
       channelCountElement.textContent = count;
     }
+    hideLoadingSpinner();
   }
 
   function createVideoList(videos) {
@@ -140,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function proxyUrl(url) {
-    return keyConf.proxyLink + encodeURIComponent(url);
+    return import.meta.env.VITE_PROXY_LINK + encodeURIComponent(url);
   }
 
   function isHlsUrl(url) {
@@ -168,7 +194,6 @@ document.addEventListener("DOMContentLoaded", function () {
     try {
       videoPlayer.src = url;
       await videoPlayer.play();
-      showNotification("Playback started (direct)", "success");
       return {
         ok: true,
       };
@@ -258,8 +283,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   async function playMedia(originalUrl) {
     cleanupHls();
-    showNotification("Preparing playback...", "success");
-
     const proxiedUrl = proxyUrl(originalUrl);
     let res;
 
@@ -309,12 +332,7 @@ document.addEventListener("DOMContentLoaded", function () {
       console.warn("Attempt failed:", res.reason);
       showNotification(`Unable to play: ${res.reason}`, "warning");
     }
-
     stopVideoPlayback();
-    showNotification(
-      "Stream failed to play after multiple attempts.",
-      "danger",
-    );
   }
 
   const loadM3UButton = document.getElementById("loadM3U");
@@ -357,7 +375,6 @@ document.addEventListener("DOMContentLoaded", function () {
         currentPlayingElement.style.color = "";
         currentPlayingElement = null;
       }
-      showNotification("Playback stopped successfully.", "success");
     } catch (err) {
       console.error("Error stopping playback:", err);
     }
@@ -387,9 +404,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const genreSelect = document.getElementById("genreSelect");
   const streamList = document.getElementById("streamList");
   const streamCount = document.getElementById("streamCount");
-  const playerTitle = document
-    .getElementById("playerTitle")
-    .querySelector("h5");
+  const playerTitle = document.getElementById("playerTitle");
 
   let ytPlayer = null;
   let isPlaying = false;
@@ -448,6 +463,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function loadGenres() {
+    showLoadingSpinner();
     const ytRef = ref(db, "ytByGenre");
 
     onValue(
@@ -585,6 +601,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 20);
       }
     });
+    hideLoadingSpinner();
   }
 
   genreSelect.addEventListener("change", () => {
@@ -593,18 +610,18 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   async function fetchChannelThumbnail(channelId) {
-    const url = `https://www.googleapis.com/youtube/v3/channels?part=snippet&id=${channelId}&key=${keyConf.ytKey}`;
+    const url = `https://www.googleapis.com/youtube/v3/channels?part=snippet&id=${channelId}&key=${import.meta.env.VITE_YT_KEY}`;
     const res = await fetch(url);
     const data = await res.json();
 
     if (data.items && data.items[0]) {
       return data.items[0].snippet.thumbnails.high.url;
     }
-    return "assets/ball.svg";
+    return "/ball.svg";
   }
 
   async function fetchLiveVideoId(channelId) {
-    const url = `https://www.googleapis.com/youtube/v3/search?part=id&channelId=${channelId}&eventType=live&type=video&maxResults=1&key=${keyConf.ytKey}`;
+    const url = `https://www.googleapis.com/youtube/v3/search?part=id&channelId=${channelId}&eventType=live&type=video&maxResults=1&key=${import.meta.env.VITE_YT_KEY}`;
 
     try {
       const response = await fetch(url);

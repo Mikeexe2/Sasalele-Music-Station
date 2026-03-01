@@ -1,0 +1,8 @@
+media-controller {
+  --media-control-background: var(--black-90-alpha) !important;
+  --media-control-hover-background: var(--black-90-alpha) !important;
+}
+
+#vidstopBtn {
+  background: var(--black-90-alpha);
+}

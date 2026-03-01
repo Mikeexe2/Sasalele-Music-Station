@@ -1,27 +1,10 @@
-import { firebaseConfig } from "./utils.js";
 document.addEventListener("DOMContentLoaded", function () {
   const toggle = document.getElementById("toggleAnimation");
+  const loader = document.getElementById("loadingSpinner");
 
   if (toggle) {
     toggle.onclick = null;
     toggle.addEventListener("change", handleToggleChange);
-  }
-
-  const backtotop = document.querySelector(".back-to-top");
-  if (backtotop) {
-    function toggleBacktotop() {
-      backtotop.classList.toggle("active", window.scrollY > 100);
-    }
-
-    backtotop.addEventListener("click", goTop);
-    window.addEventListener("scroll", toggleBacktotop);
-  }
-
-  function goTop() {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
   }
 
   function showNotification(message, type = "info") {
@@ -54,27 +37,20 @@ document.addEventListener("DOMContentLoaded", function () {
   window.showNotification = showNotification;
 
   function showLoadingSpinner() {
-    document.getElementById("loadingSpinner").style.display = "block";
+    loader.style.display = "flex";
+    setTimeout(() => (loader.style.opacity = "1"), 10);
   }
 
   function hideLoadingSpinner() {
-    document.getElementById("loadingSpinner").style.display = "none";
+    loader.style.opacity = "0";
+    setTimeout(() => (loader.style.display = "none"), 300);
   }
 
   window.showLoadingSpinner = showLoadingSpinner;
   window.hideLoadingSpinner = hideLoadingSpinner;
 
-  $(function () {
-    $('[data-toggle="tooltip"]').tooltip({
-      trigger: "hover",
-    });
-    $("#historyBtn").tooltip({
-      trigger: "hover",
-    });
-  });
-
   const getLastUpdateDate = (async () => {
-    const apiUrl = `${firebaseConfig.databaseURL}/metadata/lastUpdated.json`;
+    const apiUrl = `${import.meta.env.VITE_FIREBASE_DATABASE_URL}/metadata/lastUpdated.json`;
     try {
       const response = await fetch(apiUrl);
       const timestamp = await response.json();
@@ -600,7 +576,9 @@ document.addEventListener("DOMContentLoaded", function () {
       if (foot) foot.style.display = "none";
       if (radio) radio.style.display = "none";
       if (search) search.style.display = "none";
-      if (togglePlayerButton) togglePlayerButton.click();
+      if (togglePlayerButton) {
+        togglePlayerButton.click();
+      }
       showLoadingSpinner();
       try {
         await preloadImages(imageUrls);
@@ -618,7 +596,9 @@ document.addEventListener("DOMContentLoaded", function () {
       if (foot) foot.style.display = "block";
       if (radio) radio.style.display = "block";
       if (search) search.style.display = "block";
-      if (togglePlayerButton) togglePlayerButton.click();
+      if (togglePlayerButton) {
+        togglePlayerButton.click();
+      }
       isAnimating = false;
       clearTimeout(animationTimeout);
       animationTimeout = null;
