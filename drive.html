@@ -87,7 +87,7 @@
               ></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/video.html"
+              <a class="nav-link" href="/video"
                 >Videos <i class="fas fa-video"></i>
               </a>
             </li>
@@ -189,7 +189,7 @@
               title="Tips"
               data-bs-target="#tips"
             >
-              <i class="fas fa-info-circle"></i>
+              <i class="fas fa-circle-info"></i>
             </button>
           </h1>
         </div>
@@ -274,29 +274,30 @@
               <div class="track-container">
                 <button
                   class="track demo-track-btn"
-                  data-track-name="好きにしなよ - Anly"
                   data-track-id="好きにしなよ - Anly"
                 >
-                  <i class="fas fa-play"></i> Anly - 好きにしなよ
+                  <span class="track-icon"><i class="fas fa-play"></i></span
+                  ><span class="track-name">Anly - 好きにしなよ</span>
                 </button>
               </div>
               <div class="track-container">
                 <button
                   class="track demo-track-btn"
-                  data-track-name="紅葉愛唄 - GARNiDELiA"
                   data-track-id="紅葉愛唄 - GARNiDELiA"
                 >
-                  <i class="fas fa-play"></i> GARNiDELiA - 紅葉愛唄
+                  <span class="track-icon"><i class="fas fa-play"></i></span
+                  ><span class="track-name">GARNiDELiA - 紅葉愛唄</span>
                 </button>
               </div>
               <div class="track-container">
                 <button
                   class="track demo-track-btn"
-                  data-track-name="花ハ踊レヤいろはにほ (随花起舞) - チーム・ハナヤマタ"
                   data-track-id="花ハ踊レヤいろはにほ (随花起舞) - チーム・ハナヤマタ"
                 >
-                  <i class="fas fa-play"></i> チーム・ハナヤマタ -
-                  花ハ踊レヤいろはにほ
+                  <span class="track-icon"><i class="fas fa-play"></i></span>
+                  <span class="track-name"
+                    >チーム・ハナヤマタ - 花ハ踊レヤいろはにほ</span
+                  >
                 </button>
               </div>
             </details>
@@ -305,30 +306,30 @@
               <div class="track-container">
                 <button
                   class="track demo-track-btn"
-                  data-track-name="都会っ子田舎っ子 - びわ湖くん"
                   data-track-id="都会っ子田舎っ子 - びわ湖くん"
                 >
-                  <i class="fas fa-play"></i> びわ湖くん - 都会っ子田舎っ子
+                  <span class="track-icon"><i class="fas fa-play"></i></span
+                  ><span class="track-name">びわ湖くん - 都会っ子田舎っ子</span>
                 </button>
               </div>
               <div class="track-container">
                 <button
                   class="track demo-track-btn"
-                  data-track-name="天空の狂詩曲 - さゆり"
                   data-track-id="天空の狂詩曲 - さゆり"
                 >
-                  <i class="fas fa-play"></i>
-                  さゆり - 天空の狂詩曲
+                  <span class="track-icon"><i class="fas fa-play"></i></span
+                  ><span class="track-name">さゆり - 天空の狂詩曲</span>
                 </button>
               </div>
               <div class="track-container">
                 <button
                   class="track demo-track-btn"
-                  data-track-name="ロストワンの号哭Band edition - 周平"
                   data-track-id="ロストワンの号哭Band edition - 周平"
                 >
-                  <i class="fas fa-play"></i> 周平 - ロストワンの号哭Band
-                  edition
+                  <span class="track-icon"><i class="fas fa-play"></i></span
+                  ><span class="track-name"
+                    >周平 - ロストワンの号哭Band edition</span
+                  >
                 </button>
               </div>
             </details>
@@ -356,28 +357,51 @@
         </div>
       </section>
       <div id="waline"></div>
-      <div id="gdmp" class="d-flex justify-content-between align-items-center">
-        <button id="prev-btn" class="p-btn">
-          <i class="fas fa-step-backward"></i>
-        </button>
-        <media-controller audio class="flex-grow-1 mx-2">
-          <audio slot="media" id="audio">
-            <source id="source" type="audio/mpeg" />
-          </audio>
-          <media-control-bar>
-            <media-play-button></media-play-button>
-            <media-time-display show-duration></media-time-display>
-            <media-time-range></media-time-range>
-            <media-playback-rate-button></media-playback-rate-button>
-            <media-mute-button></media-mute-button>
-            <media-volume-range></media-volume-range>
-          </media-control-bar>
-        </media-controller>
-        <button id="next-btn" class="p-btn">
-          <i class="fas fa-step-forward"></i>
-        </button>
-      </div>
+      <div
+        id="gdmp"
+        class="d-flex flex-column justify-content-center align-items-center"
+      >
+        <div class="gdmp-info d-flex align-items-center">
+          <img src="/ball.svg" alt="Cover Art" class="cover-art" />
+          <div class="ml-3">
+            <div id="artist-name" class="font-weight-bold">Artist</div>
+            <div id="track-name">Track</div>
+          </div>
+        </div>
+        <div
+          id="lyrics-container"
+          class="text-center mt-1"
+          style="min-height: 1.5em; color: #1db954; font-weight: 500"
+        >
+          <span id="current-lyric">Lyrics</span>
+        </div>
+        <div class="d-flex justify-content-between align-items-center w-100">
+          <button id="prev-btn" class="p-btn">
+            <i class="fas fa-backward-step"></i>
+          </button>
 
+          <media-controller audio class="flex-grow-1 mx-2">
+            <audio slot="media" id="audio">
+              <source id="source" type="audio/mpeg" />
+            </audio>
+            <media-control-bar>
+              <media-play-button></media-play-button>
+              <button class="p-btn" title="Stop Streaming" id="stopBtn">
+                <i class="fas fa-stop"></i>
+              </button>
+              <media-time-display show-duration></media-time-display>
+              <media-time-range></media-time-range>
+              <media-playback-rate-button></media-playback-rate-button>
+              <media-mute-button></media-mute-button>
+              <media-volume-range></media-volume-range>
+            </media-control-bar>
+          </media-controller>
+
+          <button id="next-btn" class="p-btn">
+            <i class="fas fa-forward-step"></i>
+          </button>
+        </div>
+      </div>
       <section class="footer py-1 mt-auto">
         <div class="container">
           <div class="row justify-content-center text-center">
@@ -394,7 +418,7 @@
                   href="https://t.me/sasalelemusic"
                   class="btn btn-social btn-telegram btn-sm mx-1"
                 >
-                  <i class="fab fa-telegram-plane me-1"></i>Telegram
+                  <i class="fab fa-telegram me-1"></i>Telegram
                 </a>
                 <a
                   target="_blank"
@@ -416,7 +440,9 @@
                   <span class="waline-pageview-count fw-bold">0</span>
                 </p>
                 <p class="copyright mb-0 opacity-50">
-                  &copy; 2023-<span id="current-year">present</span>
+                  <i class="fas fa-copyright"></i> 2023-<span id="current-year"
+                    >present</span
+                  >
                   Sasalele-Music-Station
                 </p>
               </div>
@@ -425,8 +451,7 @@
         </div>
       </section>
     </main>
-
-    <script type="module" src="/src/js/utils.js"></script>
+    <script type="module" src="/src/js/icons.js"></script>
     <script type="module" src="/src/js/stats.js"></script>
     <script type="module" src="/src/js/gdmp.js"></script>
   </body>

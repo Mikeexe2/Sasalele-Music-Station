@@ -21,10 +21,13 @@
     "@waline/client": "^3.11.0",
     "aplayer": "^1.10.1",
     "bootstrap": "^5.3.8",
+    "buffer": "^6.0.3",
+    "dashjs": "^5.1.1",
     "firebase": "^12.9.0",
     "hls.js": "^1.6.15",
     "icecast-metadata-player": "^1.17.13",
     "jsmediatags": "^3.9.7",
-    "media-chrome": "^4.17.2"
+    "media-chrome": "^4.17.2",
+    "music-metadata-browser": "^2.5.11"
   }
 }

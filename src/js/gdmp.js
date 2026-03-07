@@ -1,7 +1,16 @@
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.min.js";
+import "media-chrome";
+import "@waline/client/waline.css";
+import "../css/styles.css";
 import { ref, get } from "firebase/database";
 import { db } from "./utils.js";
-import "media-chrome";
+import { createIcon } from "./icons.js";
+import { Buffer } from "buffer";
+import * as mm from "music-metadata-browser";
+
 document.addEventListener("DOMContentLoaded", function () {
+  window.Buffer = Buffer;
   const form = document.getElementById("folderForm");
   const DISCOVERY_DOC =
     "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest";
@@ -16,11 +25,20 @@ document.addEventListener("DOMContentLoaded", function () {
   const audio = document.getElementById("audio");
   const source = document.getElementById("source");
   const fileTree = document.getElementById("file-tree");
+  const trackNameEl = document.getElementById("track-name");
+  const artistNameEl = document.getElementById("artist-name");
+  const coverArtEl = document.querySelector(".cover-art");
+  const stopBtn = document.getElementById("stopBtn");
+  const lyricDisplay = document.getElementById("current-lyric");
+  const loading = "Loading....";
 
   let tokenClient;
   let gapiInited = false;
   let gisInited = false;
   let playing;
+  let currentLyricsArray = [];
+  let lastLyricIndex = -1;
+  let file;
 
   let folderId = localStorage.getItem("parentfolder");
   function loadScript(src) {
@@ -143,7 +161,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var container = document.getElementById(location);
         if (files && files.length > 0) {
           for (let i = 0; i < files.length; i++) {
-            const file = files[i];
+            file = files[i];
             if (file.mimeType.includes("application/vnd.google-apps.folder")) {
               const details = document.createElement("details");
               details.id = file.id;
@@ -164,7 +182,10 @@ document.addEventListener("DOMContentLoaded", function () {
               const button = document.createElement("button");
               button.className = "track";
               button.dataset.file = safeFileJSON;
-              button.innerHTML = `<i class="fas fa-play"></i> ${file.name}`;
+              button.innerHTML = `
+              <span class="track-icon">${createIcon("play")}</span>
+              <span class="track-name">${file.name}</span>
+            `;
 
               button.addEventListener("click", () => {
                 playTrack(button, "link");
@@ -174,7 +195,7 @@ document.addEventListener("DOMContentLoaded", function () {
               download.href = file.webContentLink;
               download.download = file.name;
               download.className = "download";
-              download.innerHTML = `<i class="fas fa-download"></i>`;
+              download.innerHTML = `${createIcon("download")} `;
 
               trackContainer.appendChild(button);
               trackContainer.appendChild(download);
@@ -219,15 +240,16 @@ document.addEventListener("DOMContentLoaded", function () {
     playing = false;
   }
 
-  function playTrack(element, type) {
+  async function playTrack(element, type) {
     const stationDataString = element.dataset.file;
     if (!stationDataString) {
       console.error("Missing file data on track button.");
       return;
     }
-    const trackData = JSON.parse(decodeURIComponent(stationDataString));
-    const id = trackData.id;
-    // check if clicked track is already 'playing'
+    file = JSON.parse(decodeURIComponent(stationDataString));
+
+    const id = file.id;
+
     if (element == playing) {
       if (audio.paused) {
         audio.play();
@@ -236,7 +258,10 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       return;
     }
-
+    trackNameEl.textContent = loading;
+    artistNameEl.textContent = loading;
+    lyricDisplay.textContent = loading;
+    await stopPlayback();
     // check for something already 'playing'
     if (playing) {
       const previousContainer = playing.closest(".track-container");
@@ -254,20 +279,14 @@ document.addEventListener("DOMContentLoaded", function () {
     if (newContainer) {
       newContainer.classList.add("is-playing");
     }
-    audio.pause();
-    source.src = "";
-    audio.load();
-
-    showLoadingSpinner();
 
     if (type === "demo") {
-      // Handle demo track
-      source.src = `assets/music/${id}.mp3`;
+      const demoUrl = `/assets/music/${id}.mp3`;
+      source.src = demoUrl;
       audio.load();
       audio.oncanplay = () => {
         audio.play();
-        hideLoadingSpinner();
-        updateMediaSession(trackData);
+        updateMediaSession({ name: id, url: demoUrl });
       };
       return;
     }
@@ -288,15 +307,13 @@ document.addEventListener("DOMContentLoaded", function () {
           audio.load();
           audio.oncanplay = () => {
             audio.play();
-            hideLoadingSpinner();
-            updateMediaSession(file);
+            updateMediaSession(file, blob);
           };
         })
         .catch((error) => {
           console.error("Error fetching the public link track:", "warning");
           showNotification("There was an error playing the track.", "warning");
-          hideLoadingSpinner();
-          updateMediaSession(file);
+          stopPlayback();
         });
       return;
     }
@@ -318,8 +335,7 @@ document.addEventListener("DOMContentLoaded", function () {
         audio.load();
         audio.oncanplay = () => {
           audio.play();
-          hideLoadingSpinner();
-          updateMediaSession(file);
+          updateMediaSession(file, file);
         };
       })
       .catch(function (error) {
@@ -336,41 +352,141 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
-  function updateMediaSession(file) {
-    if (!("mediaSession" in navigator)) return;
-    const fileName = file.name || "Unknown Track";
-    let trackTitle = fileName;
-    let trackArtist = "";
-
-    const cleaned = fileName.replace(/\.(mp3|m4a|ogg|wav|flac|aac|wma)$/i, "");
+  async function updateMediaSession(file, blob = null) {
+    const rawFileName = file.name || "Unknown Track";
+    const cleaned = rawFileName.replace(
+      /\.(mp3|m4a|ogg|wav|flac|aac|wma)$/i,
+      "",
+    );
     const dashCount = (cleaned.match(/ - /g) || []).length;
+
+    let fallbackArtist = cleaned;
+    let fallbackTitle = cleaned;
 
     if (dashCount === 1) {
       const parts = cleaned.split(" - ", 2);
-      if (parts.length === 2) {
-        trackArtist = parts[0].trim();
-        trackTitle = parts[1].trim();
+      fallbackArtist = parts[0].trim();
+      fallbackTitle = parts[1].trim();
+    }
+    let metadata = null;
+    let coverUrl = "/assets/sasalele_logo.webp";
+    let rawLyrics = "";
+
+    try {
+      if (blob) {
+        metadata = await mm.parseBlob(blob);
+      } else if (file.url) {
+        metadata = await mm.fetchFromUrl(file.url);
       }
+    } catch (e) {
+      console.error("Parser Error Details:", e);
+      console.log("Blob info:", blob.type, blob.size);
+    }
+
+    const finalTitle = metadata?.common.title || fallbackTitle;
+    const finalArtist = metadata?.common.artist || fallbackArtist;
+
+    if (metadata.common.lyrics && metadata.common.lyrics.length > 0) {
+      rawLyrics = metadata.common.lyrics[0];
+      console.log(rawLyrics);
     } else {
-      trackArtist = cleaned;
-      trackTitle = cleaned;
+      const id3 =
+        metadata.native["ID3v2.3"] || metadata.native["ID3v2.4"] || [];
+      const usltTag = id3.find((tag) => tag.id === "USLT");
+      if (usltTag) {
+        rawLyrics = usltTag.value.text || usltTag.value;
+      }
     }
 
-    if (document) {
-      document.title = cleaned;
+    if (rawLyrics) {
+      const syncedLyrics = parseLrc(rawLyrics);
+      if (syncedLyrics.length > 0) {
+        setupLyricSync(audio, syncedLyrics);
+      } else {
+        lyricDisplay.textContent = "";
+      }
     }
 
-    navigator.mediaSession.metadata = new MediaMetadata({
-      title: trackTitle,
-      artist: trackArtist,
-      album: "GDMP",
-      artwork: [
-        {
-          src: "assets/sasalele_logo.webp",
-          sizes: "96x96",
-        },
-      ],
+    if (metadata?.common.picture?.[0]) {
+      const pic = metadata.common.picture[0];
+      coverUrl = URL.createObjectURL(
+        new Blob([pic.data], { type: pic.format }),
+      );
+    }
+
+    trackNameEl.textContent = finalTitle;
+    artistNameEl.textContent = finalArtist;
+    coverArtEl.src = coverUrl;
+    document.title = cleaned;
+
+    if ("mediaSession" in navigator) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: finalTitle,
+        artist: finalArtist,
+        album: metadata?.common.album || "GDMP",
+        artwork: [{ src: coverUrl, sizes: "512x512" }],
+      });
+    }
+    navigator.mediaSession.setActionHandler("play", () => audio.play());
+    navigator.mediaSession.setActionHandler("pause", () => audio.pause());
+  }
+
+  function parseLrc(lrcText) {
+    const lines = lrcText.replace(/^.*\|\|/, "").split(/\r?\n/);
+    const lrcArray = [];
+
+    const timeExp = /\[(\d{2}):(\d{2})\.(\d{2,3})\]/g;
+
+    lines.forEach((line) => {
+      const matches = line.match(timeExp);
+      if (matches) {
+        const text = line.replace(timeExp, "").trim();
+        matches.forEach((match) => {
+          const t =
+            timeExp.exec(match) || /\[(\d{2}):(\d{2})\.(\d{2,3})\]/.exec(match);
+          if (t) {
+            const minutes = parseInt(t[1]);
+            const seconds = parseInt(t[2]);
+            const ms = parseInt(t[3].padEnd(3, "0"));
+            const time = (minutes * 60 + seconds) * 1000 + ms;
+
+            lrcArray.push({ time, text });
+          }
+          timeExp.lastIndex = 0;
+        });
+      }
     });
+    return lrcArray.sort((a, b) => a.time - b.time);
+  }
+
+  function setupLyricSync(audioElement, lrcArray) {
+    currentLyricsArray = lrcArray;
+    lastLyricIndex = -1;
+
+    audioElement.ontimeupdate = () => {
+      if (!currentLyricsArray.length) return;
+
+      const currentTimeMs = audioElement.currentTime * 1000;
+
+      let index = currentLyricsArray.findIndex((line, i) => {
+        const nextLine = currentLyricsArray[i + 1];
+        return (
+          currentTimeMs >= line.time &&
+          (!nextLine || currentTimeMs < nextLine.time)
+        );
+      });
+
+      if (index !== -1 && index !== lastLyricIndex) {
+        lastLyricIndex = index;
+        const activeLine = currentLyricsArray[index];
+
+        lyricDisplay.style.opacity = 0;
+        setTimeout(() => {
+          lyricDisplay.textContent = activeLine.text;
+          lyricDisplay.style.opacity = 1;
+        }, 50);
+      }
+    };
   }
 
   function prevTrack() {
@@ -399,12 +515,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function resetIconToPlay() {
-    const iconElement = playing.querySelector("i");
-    if (iconElement) {
-      iconElement.classList.remove("fa-pause");
-      iconElement.classList.add("fa-play");
-    }
+    if (!playing) return;
 
+    const iconContainer = playing.querySelector(".track-icon");
+    if (iconContainer) {
+      iconContainer.innerHTML = createIcon("play");
+    }
     const barsElement = playing.querySelector("#bars");
     if (barsElement) {
       barsElement.remove();
@@ -412,12 +528,19 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function resetIconToPause() {
-    const iconElement = playing.querySelector("i");
-    if (iconElement) {
-      iconElement.classList.remove("fa-play");
-      iconElement.classList.add("fa-pause");
+    if (!playing) return;
+    const iconContainer = playing.querySelector(".track-icon");
+    if (iconContainer) {
+      iconContainer.innerHTML = createIcon("pause");
     }
-    const indicator = ` <div id="bars"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>`;
+    const indicator = `
+    <div id="bars">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  `;
     if (!playing.querySelector("#bars")) {
       playing.insertAdjacentHTML("beforeend", indicator);
     }
@@ -565,14 +688,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
           const playButton = document.createElement("button");
           playButton.classList.add("track");
-          playButton.innerHTML = `<i class="fas fa-play"></i> ${file.name}`;
+          playButton.innerHTML = `
+            <span class="track-icon">${createIcon("play")}</span>
+            <span class="track-name">${file.name}</span>
+          `;
           playButton.setAttribute("data-file", safeFileJSON);
           playButton.addEventListener("click", () =>
             playTrack(playButton, "link"),
           );
           const downloadLink = document.createElement("a");
           downloadLink.classList.add("download");
-          downloadLink.innerHTML = `<i class="fas fa-download"></i>`;
+          downloadLink.innerHTML = `${createIcon("download")} `;
           downloadLink.href = "#";
           downloadLink.addEventListener("click", (event) =>
             downloadTrack(event, file.id, file.name),
@@ -631,6 +757,45 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
+  async function stopPlayback() {
+    if (!playing) return;
+    try {
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+        source.src = "";
+        audio.load();
+      }
+      if (playing) {
+        const previousContainer = playing.closest(".track-container");
+        if (previousContainer) {
+          previousContainer.classList.remove("is-playing");
+        }
+        resetIconToPlay();
+        playing.classList.remove("playing");
+      }
+      playing = false;
+      if ("mediaSession" in navigator) {
+        navigator.mediaSession.metadata = null;
+        navigator.mediaSession.playbackState = "none";
+      }
+      coverArtEl.src = "/ball.svg";
+      document.title = "Google Drive Music Player";
+      if (window.currentCoverUrl) {
+        URL.revokeObjectURL(window.currentCoverUrl);
+        window.currentCoverUrl = null;
+      }
+      currentLyricsArray = [];
+      lastLyricIndex = -1;
+      trackNameEl.textContent = "";
+      artistNameEl.textContent = "";
+      lyricDisplay.textContent = "";
+    } catch (err) {
+      console.error("[stopPlayback] unexpected error:", err);
+      playing = false;
+    }
+  }
+
   showLoadingSpinner();
   loadFolders();
   getFolderId();
@@ -639,14 +804,17 @@ document.addEventListener("DOMContentLoaded", function () {
   next.addEventListener("click", nextTrack);
   prev.addEventListener("click", prevTrack);
   form.addEventListener("submit", submitFolderId);
+  stopBtn.addEventListener("click", () => {
+    stopPlayback();
+  });
+
   document.addEventListener("click", function (event) {
     const target = event.target.closest(".demo-track-btn");
     if (target) {
-      const file = {
+      file = {
         id: target.dataset.trackId,
-        name: target.dataset.trackName,
       };
-      const fileData = { id: file.id, name: file.name };
+      const fileData = { id: file.id };
       target.setAttribute(
         "data-file",
         encodeURIComponent(JSON.stringify(fileData)),
