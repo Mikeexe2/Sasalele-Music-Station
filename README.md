@@ -1,5 +1,19 @@
 # <div style="margin-right: 18px; margin-top: 18px; display:flex; vertical-align: middle; align-items: center; max-width: 100%;"><img src="public/assets/sasalele_logo.webp" width="82" style="margin-right: 18px;">Sasalele Music Station</div>
+# <div style="margin-right: 18px; margin-top: 18px; display:flex; vertical-align: middle; align-items: center; max-width: 100%;"><img src="public/assets/sasalele_logo.webp" width="82" style="margin-right: 18px;">Sasalele Music Station</div>
 
+# 🎉 Features
+
+## [📻 Radio Player](https://basic.pp.ua)
+
+A feature-rich streaming experience with real-time metadata and global integration. Explore a specialized directory of public radio links from around the world. While we focus heavily on **Japanese music** (J-Pop, J-Rock, Anime OST, Vocaloid, etc.), you will also find a diverse selection of Korean, Chinese, and English-speaking stations.
+
+### ⚡ Core Playback & Discovery
+
+- Smart Metadata: View live track names and artist info for all supported streams.
+- Genre-Tagged Stations: Easily browse thousands of stations categorized by their specific musical genres.
+- Dynamic Filtering: Instantly filter the station list by Name or Tags to find exactly what you're looking for.
+- Random Play: Feeling adventurous? Let the "Random Play" feature pick a high-quality station for you.
+- Curated J-Pop Hub: Special access to a curated Japanese music playlist featuring real-time lyrics display.
 # 🎉 Features
 
 ## [📻 Radio Player](https://basic.pp.ua)
@@ -97,7 +111,30 @@ Stay up to date with the latest improvements and bug fixes.
   - Join us on our platforms for updates, tips, discussion & ideas
 
     [![Telegram Badge](https://img.shields.io/badge/telegram-❤️-252850?style=plastic&logo=telegram)](https://t.me/sasalelemusic)
+    [![Telegram Badge](https://img.shields.io/badge/telegram-❤️-252850?style=plastic&logo=telegram)](https://t.me/sasalelemusic)
 
+# ⚖️ Disclaimer
+
+This project is maintained by an individual developer for educational and personal learning purposes only. By using this repository or the hosted service, you agree to the following:
+
+```
+© Copyright (C) 2023-present Sasalele Music Station <sasalele-team@basic.pp.ua>
+- Non-Commercial: Redistribution, rebranding, or "white-labeling" of this project without permission is not allowed.
+- Usage Limits: Using parts of this codebase for purposes other than personal learning or contributing to this specific repository is not allowed.
+- No Warranty: This software is provided "as-is." The developer is not responsible for the content of external radio/video streams or how you use them.
+```
+
+For the full legal terms, please refer to the [LICENSE](https://github.com/Mikeexe2/Sasalele-Music-Station/blob/main/LICENSE) file.
+
+## ❤️ Acknowledgements & Credits
+
+#### 🤝 Content Providers
+
+A sincere thank you to the radio station owners and video stream providers worldwide. Your dedication to broadcasting and sharing culture is the heartbeat of this project—without your streams, this platform wouldn't exist. I have integrated direct links to the official websites of the radio stations within the player. I encourage u to visit these sites to support the broadcasters directly.
+
+### 🛠️ Open Source Foundation
+
+This project stands on the shoulders of giants. We are deeply grateful to the following open-source libraries and APIs for their essential contributions to the web ecosystem:
 # ⚖️ Disclaimer
 
 This project is maintained by an individual developer for educational and personal learning purposes only. By using this repository or the hosted service, you agree to the following:
@@ -130,7 +167,24 @@ This project stands on the shoulders of giants. We are deeply grateful to the fo
 - **Waline** - [GitHub](https://github.com/walinejs/waline)
 
 ### 🌐 APIs Used
+### 🌐 APIs Used
 
+- [RadioBrowser API](https://api.radio-browser.info/) An open-source, community-driven database that powers our station search discovery.
+- [LastFM API](https://www.last.fm/api) Provides track search
+- [iTunes Search API](https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/index.html) Track Search, Album Search, Audio Preview
+- [Deezer Simple API](https://developers.deezer.com/api) Track Search, Album Search, Audio Preview
+- [YouTube Data API](https://developers.google.com/youtube/v3) Allowing for real-time discovery of global video broadcasts and live streams.
+- [Google Drive API](https://developers.google.com/drive/api/reference/rest/v3) Facilitates secure OAuth2 authentication and direct streaming for personal cloud music collections.
+
+<p align="center">
+<a href="https://star-history.com/#Mikeexe2/Sasalele-Music-Station&Date">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Mikeexe2/Sasalele-Music-Station&type=Date&theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Mikeexe2/Sasalele-Music-Station&type=Date" />
+    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Mikeexe2/Sasalele-Music-Station&type=Date" />
+  </picture>
+</a>
+</p>
 - [RadioBrowser API](https://api.radio-browser.info/) An open-source, community-driven database that powers our station search discovery.
 - [LastFM API](https://www.last.fm/api) Provides track search
 - [iTunes Search API](https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/index.html) Track Search, Album Search, Audio Preview
