@@ -1,3 +1,8 @@
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.min.js";
+import "@waline/client/waline.css";
+import "../css/styles.css";
+import "media-chrome";
 import {
   ref,
   set,
@@ -5,11 +10,13 @@ import {
   onValue,
   query,
   orderByChild,
+  limitToLast,
+  endBefore,
   child,
   push,
 } from "firebase/database";
 import { db } from "./utils.js";
-import "media-chrome";
+import { createIcon } from "./icons.js";
 
 const searchToggleBtn = document.getElementById("searchToggleBtn");
 const customStreamToggleBtn = document.getElementById("customStreamToggleBtn");
@@ -19,6 +26,7 @@ const streamUrlInput = document.getElementById("streamUrlInput");
 const playStreamButton = document.getElementById("playStreamButton");
 const playerContainer = document.getElementById("player");
 const togglePlayerButton = document.getElementById("togglePlayer");
+const toggleIcon = document.querySelector("#togglePlayer .toggle-icon");
 const coverImage = document.getElementById("ip");
 const nowPlaying = document.getElementById("nowPlaying");
 const stationCount = document.getElementById("station-count");
@@ -150,17 +158,10 @@ function closePanel(panel, button) {
 }
 
 function togglePanel() {
-  const icon = toggleButton.querySelector("i");
   sidePanel.classList.toggle("open");
   const isNowOpen = sidePanel.classList.contains("open");
   toggleButton.setAttribute("aria-expanded", isNowOpen);
-  if (isNowOpen) {
-    icon.classList.remove("fa-comment");
-    icon.classList.add("fa-times");
-  } else {
-    icon.classList.remove("fa-times");
-    icon.classList.add("fa-comment");
-  }
+  toggleButton.innerHTML = createIcon(isNowOpen ? "times" : "comments");
 }
 
 function updatePlayerUI(media) {
@@ -199,8 +200,8 @@ function updateMediaSessionMetadata(title, artist, media) {
       album: album || "Playing Music",
       artwork: [
         {
-          src: favicon || "assets/sasalele_logo.webp",
-          sizes: "96x96",
+          src: favicon || "/assets/sasalele_logo.webp",
+          sizes: "512x512",
         },
       ],
     });
@@ -240,10 +241,7 @@ function trackHistory(trackName, media) {
   }
 
   updateMediaSessionMetadata(trackTitle, trackArtist, media);
-
-  if (document) {
-    document.title = `${cleanTrackName}`;
-  }
+  document.title = `${cleanTrackName}`;
 
   if (trackName !== latestTrack) {
     recentTracks = recentTracks.filter((track) => track !== trackName);
@@ -341,11 +339,19 @@ function attachGenreListeners() {
   });
 }
 
+function updateToggleIcon() {
+  const isMinimized = playerContainer.classList.contains("minimized");
+  toggleIcon.innerHTML = isMinimized
+    ? createIcon("expand")
+    : createIcon("compress");
+}
+
 function initializeUI() {
   loadGenres();
 
   togglePlayerButton.addEventListener("click", () => {
     playerContainer.classList.toggle("minimized");
+    updateToggleIcon();
   });
 
   if (hideButton) {
@@ -398,7 +404,7 @@ function initializeUI() {
 
     const customStreamMedia = {
       url: url,
-      favicon: "assets/sasalele_logo.webp",
+      favicon: "/assets/sasalele_logo.webp",
       name: url.split("/").pop() || "Custom Stream",
     };
 
@@ -561,15 +567,15 @@ function renderStations(stations) {
                     ${tagsHTML}
                 </div>
             </div>
-            <div class="d-flex button-group flex-shrink-0">
-                <a href="${station.homepage || station.url}" target="_blank" class="btn btn-sm p-btn">
-                    <i class="fas fa-external-link-alt"></i>
+            <div class="ms-3 d-flex button-group">
+                <a href="${station.homepage || station.url}" target="_blank" rel="noopener noreferrer" class="btn btn-sm p-btn">
+                    ${createIcon("external-link-alt")}
                 </a>
                 <button class="btn btn-sm p-btn download-button">
-                    <i class="fas fa-file-arrow-down"></i>
+                ${createIcon("file-arrow-down")}
                 </button>
                 <button class="btn btn-sm btn-primary main-play-button rounded-circle">
-                    <i class="fas fa-play"></i>
+                ${createIcon("play")}
                 </button>
             </div>
         </li>`;
@@ -592,7 +598,7 @@ function renderStations(stations) {
         el.classList.add("active-station");
         window.currentlyActiveLi = el;
         if (isCurrentlyPlaying && playButton) {
-          playButton.innerHTML = '<i class="fas fa-pause"></i>';
+          playButton.innerHTML = createIcon("pause");
           playButton.setAttribute("data-playing", "true");
           playButton.classList.remove("btn-primary");
           playButton.classList.add("btn-warning");
@@ -642,7 +648,7 @@ function updateNoResultsUI(count, term) {
     if (!noResults) {
       noResults = document.createElement("div");
       noResults.className = "no-results text-center p-5 opacity-50";
-      noResults.innerHTML = `<i class="fas fa-search mb-2"></i><p>No matches for "${term}"</p>`;
+      noResults.innerHTML = `${createIcon("search")}</i><p>No matches for "${term}"</p>`;
       selectedContainer.appendChild(noResults);
     }
   } else if (noResults) {
@@ -742,7 +748,7 @@ function handleDownloadClick(button) {
   const media = currentStationsList[index];
 
   if (media && media.url) {
-    showNotification(`Downloaded ${media.name}...`, "success");
+    showNotification(`Downloading ${media.name}...`, "success");
     RadioM3UDownload(media.url, media.name);
   } else {
     console.error(
@@ -863,7 +869,7 @@ function clearActiveStation() {
     const playButton =
       window.currentlyActiveLi.querySelector(".main-play-button");
     if (playButton) {
-      playButton.innerHTML = '<i class="fas fa-play"></i>';
+      playButton.innerHTML = createIcon("play");
       playButton.setAttribute("data-playing", "false");
       playButton.classList.remove("btn-warning");
       playButton.classList.add("btn-primary");
@@ -879,13 +885,13 @@ function updateActiveStationPlayButton(isPlaying) {
     window.currentlyActiveLi.querySelector(".main-play-button");
   if (playButton) {
     if (isPlaying) {
-      playButton.innerHTML = '<i class="fas fa-pause"></i>';
+      playButton.innerHTML = createIcon("pause");
       playButton.setAttribute("data-playing", "true");
       playButton.title = "Pause";
       playButton.classList.remove("btn-primary");
       playButton.classList.add("btn-warning");
     } else {
-      playButton.innerHTML = '<i class="fas fa-play"></i>';
+      playButton.innerHTML = createIcon("play");
       playButton.setAttribute("data-playing", "false");
       playButton.title = "Play";
       playButton.classList.remove("btn-warning");
@@ -902,8 +908,14 @@ async function playMedia(media, button) {
   mediaController.appendChild(newAudioElement);
   newAudioElement.addEventListener("play", () => {
     updateActiveStationPlayButton(true);
+    if ("mediaSession" in navigator) {
+      navigator.mediaSession.playbackState = "playing";
+    }
   });
   newAudioElement.addEventListener("pause", () => {
+    if ("mediaSession" in navigator) {
+      navigator.mediaSession.playbackState = "paused";
+    }
     updateActiveStationPlayButton(false);
   });
 
@@ -914,7 +926,7 @@ async function playMedia(media, button) {
 
     const playButton = parentLi.querySelector(".main-play-button");
     if (playButton) {
-      playButton.innerHTML = '<i class="fas fa-pause"></i>';
+      playButton.innerHTML = createIcon("pause");
       playButton.setAttribute("data-playing", "true");
       playButton.classList.remove("btn-primary");
       playButton.classList.add("btn-warning");
@@ -2018,15 +2030,15 @@ function radioSearch() {
                         </div>
                     </div>
                     <div class="ms-3 d-flex button-group">
-                        <a href="${radio.homepage || radio.url}" target="_blank" class="btn btn-sm btn-outline-info border-0">
-                            <i class="fas fa-external-link-alt"></i>
+                        <a href="${radio.homepage || radio.url}" target="_blank" rel="noopener noreferrer"  class="btn btn-sm p-btn">
+                        ${createIcon("external-link-alt")}
                         </a>
-                        <button class="btn btn-sm btn-outline-light border-0 download-button">
-                            <i class="fas fa-download"></i>
-                        </button>
-                        <button class="btn btn-sm btn-primary main-play-button rounded-circle ms-1">
-                            <i class="fas fa-play"></i>
-                        </button>
+                      <button class="btn btn-sm p-btn download-button">
+                      ${createIcon("file-arrow-down")}
+                      </button>
+                      <button class="btn btn-sm btn-primary main-play-button rounded-circle">
+                        ${createIcon("play")}
+                      </button>
                     </div>
                 </li>`;
           })
@@ -2207,14 +2219,17 @@ function renderLastfm(lastfmResults) {
     }
     innerlastfm.appendChild(fragment);
   } else {
-    innerlastfm.innerHTML = `<div class="p-3 text-center text-secondary"><small>No results on LastFM</small></div>`;
+    innerlastfm.innerHTML = `<div class="p-3 text-center text-secondary">
+    ${createIcon("search")}
+      <small>No results found on LastFM</small>
+    </div>`;
   }
 }
 
 function renderMusicResults(results, container, serviceName) {
   if (results.length === 0) {
     container.innerHTML = `<div class="p-3 text-center text-secondary">
-      <i class="fas fa-search mb-2 d-block opacity-50"></i>
+    ${createIcon("search")}
       <small>No results found on ${serviceName}</small>
     </div>`;
     return;
@@ -2249,10 +2264,10 @@ function renderMusicResults(results, container, serviceName) {
           <p class="mb-0 album-name">
               ${data.album}
           </p>
-          <div class="mt-2 w-100">
-               <media-controller audio class="w-100">
+          <div class="mt-2">
+               <media-controller audio>
                   <audio slot="media" id="${playerID}" src="${data.audio}" preload="none"></audio>
-                  <media-control-bar class="w-100" mediacontroller="${playerID}">
+                  <media-control-bar mediacontroller="${playerID}">
                     <media-play-button mediacontroller="${playerID}"></media-play-button>
                     <media-time-display mediacontroller="${playerID}" show-duration></media-time-display>
                     <media-time-range mediacontroller="${playerID}" class="flex-grow-1"></media-time-range>
@@ -2347,6 +2362,7 @@ class ChatApp {
     this.currentUser = null;
     this.activeListener = null;
     this.isSending = false;
+    this.oldestTimestamp = null;
     this.joinFormEl = joinFormEl;
     this.chatContainerEl = chatContainerEl;
     this.init();
@@ -2378,32 +2394,37 @@ class ChatApp {
 
   switchChat(room) {
     if (this.currentChatPath === this.chatPaths[room]) return;
+    if (!this.currentUser) {
+      showNotification(`Please log in first!`, "warning");
+      return;
+    }
     generalBtn.classList.toggle("active", room === "general");
     mixednutsBtn.classList.toggle("active", room === "mixednuts");
     this.currentChatPath = this.chatPaths[room];
     if (this.currentUser) {
+      this.stopListening();
       this.clearMessages();
+      this.resetLoadMoreUI();
       this.startListening();
     }
   }
 
   showJoinForm() {
-    this.chatContainerEl.innerHTML = "";
-    this.chatContainerEl.style.display = "none";
-    this.joinFormEl.innerHTML = `
+    chatContainerEl.innerHTML = "";
+    chatContainerEl.style.display = "none";
+    joinFormEl.innerHTML = `
             <div class="container mt-3">
                 <div class="mb-3">
-                    <input type="text" id="usernameInput" class="form-control" 
-                           placeholder="Enter your name..." maxlength="20">
+                    <input type="text" id="usernameInput" class="form-control" placeholder="Enter your name..." maxlength="20">
                 </div>
-                <button id="joinBtn" class="btn btn-primary w-100" disabled>
-                    Join Chat
-                </button>
+                <button id="joinBtn" class="btn btn-primary w-100" disabled>Join Chat</button>
             </div>
         `;
-    this.joinFormEl.style.display = "block";
+    joinFormEl.style.display = "block";
+
     const usernameInput = document.getElementById("usernameInput");
     const joinBtn = document.getElementById("joinBtn");
+
     usernameInput.addEventListener("input", () => {
       const isValid = usernameInput.value.trim().length > 0;
       joinBtn.disabled = !isValid;
@@ -2419,29 +2440,35 @@ class ChatApp {
   }
 
   showChat() {
-    this.joinFormEl.style.display = "none";
+    joinFormEl.style.display = "none";
     this.buildChatUI();
-    this.chatContainerEl.style.display = "block";
+    chatContainerEl.style.display = "block";
     this.startListening();
   }
 
   buildChatUI() {
     const savedName = localStorage.getItem("name");
-    this.chatContainerEl.innerHTML = `
+    chatContainerEl.innerHTML = `
             <div class="chat-content-wrapper">
-                <div id="messagesContainer" class="messages-container"></div>
+                <div id="messagesContainer" class="messages-container">
+                  <div id="loadMoreArea" class="text-center py-2">
+                    <button id="loadMoreBtn" class="btn btn-sm btn-link">Load Older Messages</button>
+                  </div>
+                  <div id="historyContainer"></div>
+                  <div id="liveMessages"></div>
+                </div>
                 <div class="message-input-area">
                     <div class="input-group">
                         <input type="text" id="messageInput" class="form-control" 
                                placeholder="Hi ${savedName}. Say Something..." maxlength="2000">
                         <button id="sendBtn" class="btn btn-primary" disabled>
-                            <i class="fas fa-paper-plane"></i>
+                             ${createIcon("paper-plane")}
                         </button>
                     </div>
                 </div>
                 <div class="text-center mt-2">
                     <button id="logoutBtn" class="btn btn-outline-secondary btn-sm">
-                        <i class="fas fa-sign-out"></i> Logout
+                        ${createIcon("right-from-bracket")} Logout
                     </button>
                 </div>
             </div>
@@ -2469,6 +2496,9 @@ class ChatApp {
       messageInput.value = "";
       sendBtn.disabled = true;
     });
+    document
+      .getElementById("loadMoreBtn")
+      ?.addEventListener("click", () => this.loadMore());
     logoutBtn.addEventListener("click", () => this.logout());
     setTimeout(() => messageInput.focus(), 100);
   }
@@ -2497,56 +2527,102 @@ class ChatApp {
   }
 
   startListening() {
-    this.stopListening();
-    const messagesContainer = document.getElementById("messagesContainer");
-    if (!messagesContainer) return;
-    messagesContainer.innerHTML =
-      '<div class="text-center text-muted py-3">Loading messages...</div>';
+    const liveContainer = document.getElementById("liveMessages");
+    const historyContainer = document.getElementById("historyContainer");
+    if (!liveContainer) return;
+    liveContainer.innerHTML = "";
+    historyContainer.innerHTML = "";
+
     const chatRef = ref(db, this.currentChatPath);
-    const chatQuery = query(chatRef, orderByChild("timestamp"));
-    this.activeListener = onValue(
-      chatQuery,
-      (snapshot) => {
-        this.handleMessages(snapshot, messagesContainer);
-      },
-      (error) => {
-        console.error("Firebase listener error:", error);
-        messagesContainer.innerHTML = `
-                <div class="alert alert-warning">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    Error loading messages. Please refresh the page.
-                </div>
-            `;
-      },
+
+    const chatQuery = query(
+      chatRef,
+      orderByChild("timestamp"),
+      limitToLast(40),
     );
+
+    this.activeListener = onValue(chatQuery, (snapshot) => {
+      this.handleMessages(snapshot);
+    });
   }
 
-  handleMessages(snapshot, container) {
+  handleMessages(snapshot) {
+    const liveContainer = document.getElementById("liveMessages");
     if (!snapshot.exists()) {
-      container.innerHTML =
-        '<div class="text-center text-muted py-3">No messages yet. Start the conversation!</div>';
+      liveContainer.innerHTML =
+        '<div class="text-center text-muted py-3">No messages.</div>';
       return;
     }
     const messages = [];
-    snapshot.forEach((childSnapshot) => {
-      const msg = childSnapshot.val();
-      if (msg && msg.timestamp) {
-        messages.push({
-          id: childSnapshot.key,
-          ...msg,
-        });
-      }
+    snapshot.forEach((child) => {
+      messages.push({ id: child.key, ...child.val() });
     });
 
     messages.sort((a, b) => a.timestamp - b.timestamp);
-    container.innerHTML = "";
+    //first load
+    if (this.oldestTimestamp === null && messages.length > 0) {
+      this.oldestTimestamp = messages[0].timestamp;
+    }
+
     messages.forEach((msg) => {
-      const messageEl = this.createMessageElement(msg);
-      container.appendChild(messageEl);
+      liveContainer.appendChild(this.createMessageElement(msg));
     });
+    const container = document.getElementById("messagesContainer");
     setTimeout(() => {
       container.scrollTop = container.scrollHeight;
     }, 100);
+  }
+
+  async loadMore() {
+    if (!this.oldestTimestamp) return;
+
+    const btn = document.getElementById("loadMoreBtn");
+    const historyContainer = document.getElementById("historyContainer");
+    const limitCount = 50;
+
+    btn.disabled = true;
+    btn.innerText = "Loading...";
+
+    const chatRef = ref(db, this.currentChatPath);
+    const oldQuery = query(
+      chatRef,
+      orderByChild("timestamp"),
+      endBefore(this.oldestTimestamp),
+      limitToLast(limitCount),
+    );
+
+    try {
+      const snapshot = await get(oldQuery);
+
+      if (snapshot.exists()) {
+        const oldMessages = [];
+        snapshot.forEach((child) => {
+          oldMessages.push({ id: child.key, ...child.val() });
+        });
+
+        oldMessages.sort((a, b) => a.timestamp - b.timestamp);
+        this.oldestTimestamp = oldMessages[0].timestamp;
+
+        oldMessages.reverse().forEach((msg) => {
+          const msgEl = this.createMessageElement(msg);
+          historyContainer.prepend(msgEl);
+        });
+        if (oldMessages.length < limitCount) {
+          btn.parentElement.innerHTML =
+            '<span class="text-muted small">Beginning of chat</span>';
+        } else {
+          btn.innerText = "Load Older Messages";
+          btn.disabled = false;
+        }
+      } else {
+        btn.parentElement.innerHTML =
+          '<span class="text-muted small">Beginning of chat</span>';
+      }
+    } catch (e) {
+      console.error("Load more failed:", e);
+      btn.disabled = false;
+      btn.innerText = "Error - Try Again";
+    }
   }
 
   createMessageElement(msg) {
@@ -2566,11 +2642,18 @@ class ChatApp {
   }
 
   clearMessages() {
-    const container = document.getElementById("messagesContainer");
-    if (container) {
-      container.innerHTML =
-        '<div class="text-center text-muted py-3">Loading messages...</div>';
-    }
+    document.getElementById("historyContainer").innerHTML = "";
+    document.getElementById("liveMessages").innerHTML = "";
+  }
+
+  resetLoadMoreUI() {
+    const loadMoreArea = document.getElementById("loadMoreArea");
+    if (!loadMoreArea) return;
+    loadMoreArea.innerHTML = `<button id="loadMoreBtn" class="btn btn-sm btn-link">Load Older Messages</button>`;
+    document
+      .getElementById("loadMoreBtn")
+      .addEventListener("click", () => this.loadMore());
+    this.oldestTimestamp = null;
   }
 
   stopListening() {
@@ -2602,7 +2685,8 @@ class ChatApp {
     const urlRegex = /(https?:\/\/[^\s]+)/g;
     return text.replace(
       urlRegex,
-      (url) => `<a href="${url}" target="_blank" rel="noopener">${url}</a>`,
+      (url) =>
+        `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`,
     );
   }
 
@@ -2638,7 +2722,6 @@ async function loadPlaylist(playlistName) {
       import("aplayer/dist/APlayer.min.css"),
     ]);
 
-    // The actual class is usually in the .default property
     const APlayer = APlayerModule.default;
 
     const audioRef = ref(db, `audioList/${playlistName}`);
@@ -2658,7 +2741,7 @@ async function loadPlaylist(playlistName) {
       artist: item.artist,
       url: item.url,
       lrc: item.lrc,
-      cover: item.cover || "assets/sasalele_logo.webp",
+      cover: item.cover || "/assets/sasalele_logo.webp",
     }));
 
     if (acontainer) acontainer.style.display = "block";
@@ -2668,6 +2751,7 @@ async function loadPlaylist(playlistName) {
       container: aPlayer,
       lrcType: 1,
       autoplay: false,
+      preload: "none",
       audio: audioArray,
     });
 
@@ -2692,19 +2776,27 @@ async function loadPlaylist(playlistName) {
           album: playlistName,
           artwork: [
             {
-              src: currentTrack.cover || "assets/sasalele_logo.webp",
-              sizes: "96x96",
+              src: currentTrack.cover || "/assets/sasalele_logo.webp",
+              sizes: "512x512",
             },
           ],
         });
+        navigator.mediaSession.setActionHandler("play", () => ap.play());
+        navigator.mediaSession.setActionHandler("pause", () => ap.pause());
       }
     }
   }
 }
+
 document.addEventListener("DOMContentLoaded", () => {
   initializeUI();
-
   if (typeof db !== "undefined") {
     window.chatApp = new ChatApp();
   }
+  const cseScript = document.createElement("script");
+  cseScript.src = `https://cse.google.com/cse.js?cx=${import.meta.env.VITE_CSE}`;
+  cseScript.setAttribute("data-cfasync", "false");
+  cseScript.async = true;
+
+  document.head.appendChild(cseScript);
 });

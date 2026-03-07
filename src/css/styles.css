@@ -160,28 +160,12 @@
   backdrop-filter: blur(10px);
 }
 
-.wl-user-avatar,
 .wl-meta {
   display: none;
 }
 
-.wl-user {
-  position: relative;
-  width: 60px;
-  height: 60px;
-}
-
-.wl-user::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: url(/SSONeko.svg);
-  background-size: cover;
-  border-radius: 50%;
-  background-position: center;
+.wl-user-avatar {
+  content: url("/SSONeko.svg") !important;
 }
 
 .navbar-brand {
@@ -311,74 +295,6 @@ body.is-loading {
   height: auto;
   border-radius: 0.4rem;
   display: block;
-}
-
-.player-wrapper {
-  position: relative;
-  padding-top: 56.25%;
-}
-
-#yt-player {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-#channel-count {
-  font-size: var(--font-size--small);
-}
-
-.stream-list::-webkit-scrollbar {
-  width: 10px;
-}
-
-.stream-list::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 6px;
-}
-
-.stream-title {
-  font-size: 0.95rem;
-  color: #eaf2ff;
-}
-
-@media (max-width: 767.98px) {
-  .stream-list {
-    max-height: 36vh;
-  }
-
-  .player-wrapper {
-    padding-top: 56.25%;
-  }
-}
-
-#video-list {
-  max-height: 300px;
-  overflow-y: auto;
-  margin-bottom: 1px;
-  padding: 0 5px;
-}
-
-#streamList li,
-#video-list li {
-  cursor: pointer;
-  padding: 10px;
-  list-style: none;
-}
-
-.video-container {
-  position: relative;
-  padding-top: 56.25%;
-}
-
-.video-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
 }
 
 .header-controls {
@@ -533,16 +449,25 @@ body.is-loading {
   transition: all 0.2s ease-in-out;
 }
 
-.button-group {
+.station-item .button-group {
   align-items: center;
   gap: 3px;
   margin-left: auto;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
 }
 
 .station-item:hover {
   background: var(--gray-100);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.station-item:hover .button-group {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
 }
 
 .station-item:active {
@@ -690,10 +615,6 @@ body.is-loading {
   white-space: normal;
   overflow: hidden;
   word-wrap: break-word;
-}
-
-#video-player {
-  background: var(--apple-black);
 }
 
 .search-results {
@@ -1028,7 +949,7 @@ media-controller {
   --media-control-background: transparent;
   --media-background-color: transparent;
   --media-icon-color: var(--apple-white);
-  --media-primary-color: var(--apple-white);
+  --media-primary-color: var(--player-accent, --apple-white);
   --media-control-hover-background: transparent;
   --media-button-hover-background: transparent;
   --media-range-track-background: var(--white-60-alpha);
@@ -1139,8 +1060,7 @@ media-mute-button:hover {
   }
 }
 
-#stopBtn,
-#vidstopBtn {
+#stopBtn {
   color: var(--caution-red-100);
 }
 
@@ -1154,21 +1074,8 @@ media-mute-button:hover {
   overflow: hidden;
 }
 
-#togglePlayer .fa-compress {
-  display: inline-block;
-}
-
-#togglePlayer .fa-expand {
-  display: none;
-}
-
-#player.minimized #togglePlayer .fa-expand {
-  display: inline-block;
-}
-
 #player.minimized .track-info,
-#player.minimized media-controller,
-#player.minimized #togglePlayer .fa-compress {
+#player.minimized media-controller {
   display: none;
 }
 
@@ -1556,12 +1463,27 @@ media-mute-button:hover {
   bottom: 0;
   z-index: 5;
   border-top: 2px solid var(--white-30-alpha);
-  background: var(--black-90-alpha);
+  background-color: var(--black-50-alpha);
   backdrop-filter: blur(10px);
   width: fit-content;
   max-width: 90%;
   overflow: hidden;
   border-radius: 10px;
+}
+
+.gdmp-info {
+  width: 100%;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.cover-art {
+  margin-right: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  object-fit: cover;
 }
 
 #loadingSpinner {
@@ -1600,31 +1522,29 @@ media-mute-button:hover {
 #contents,
 #file-tree,
 #demo {
-  background: var(--gray-50-alpha);
+  background: var(--gray-70-alpha);
+  backdrop-filter: blur 10px;
   border-radius: 16px;
-  padding: 25px;
-  box-shadow: 0 8px 32px var(--black-30-alpha);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 10px;
 }
 
 details {
   margin: 5px 0;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 10px;
-  background: rgba(30, 30, 45, 0.6);
   transition: all 0.3s ease;
   overflow: hidden;
 }
 
 details[open] {
-  background: rgba(35, 35, 55, 0.8);
+  background: var(--black-70-alpha);
   border-color: rgba(106, 17, 203, 0.7);
 }
 
 summary {
   padding: 12px 18px;
   cursor: pointer;
-  background-color: var(--gray-60-alpha) !important;
+  background-color: var(--focus-blue-80-alpha);
   color: var(--apple-white);
   position: relative;
   transition: all 0.3s ease;
@@ -1633,39 +1553,44 @@ summary {
 }
 
 .track-container {
-  padding-top: 5px !important;
   display: flex;
-  align-items: center;
-  background: rgba(40, 40, 60, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--gray-40-alpha);
   border-radius: 8px;
   transition: all 0.3s ease;
-  gap: 10px;
-  height: auto;
+  height: fit-content;
 }
 
 .track-container:hover {
-  border-color: rgba(106, 17, 203, 0.5);
-  background: rgba(50, 50, 70, 0.6);
+  background: var(--focus-blue-30-alpha);
   transform: translateY(-1px);
 }
 
 .track {
-  flex-grow: 1;
-  background: 0 0;
-  border: none;
+  display: flex;
+  align-items: flex-start;
   text-align: left;
-  color: var(--apple-white);
+  width: 100%;
+  border: none;
+  padding: 10px;
+  background: transparent;
   cursor: pointer;
-  word-wrap: break-word;
-  margin-left: 10px;
 }
 
-.track i {
-  margin-left: 10px;
-  margin-right: 10px;
-  vertical-align: middle;
+.track-icon {
+  margin-right: 12px;
+  flex-shrink: 0;
+  width: 20px;
+  padding-top: 2px;
+  display: flex;
+  justify-content: center;
   color: #0af;
+}
+
+.track-name {
+  flex-grow: 1;
+  word-break: break-word;
+  white-space: normal;
+  line-height: 1.4;
 }
 
 .download {
@@ -1693,20 +1618,6 @@ summary {
 
 details[open] > *:not(summary) {
   animation: slideDown 0.3s ease;
-}
-
-details details {
-  margin-left: 20px;
-  margin-right: 5px;
-  border-radius: 8px;
-}
-
-.track:last-of-type {
-  margin-bottom: 15px;
-}
-
-.track:first-of-type {
-  margin-top: 0;
 }
 
 .playing {
@@ -1776,14 +1687,17 @@ details details:last-of-type {
   margin-bottom: 10px;
 }
 
-@media only screen and (max-width: 575.98px),
-  (pointer: coarse) and (hover: none) {
-  .tooltip {
+@media only screen and (max-width: 575.98px), 
+       (pointer: coarse) {
+  .tooltip, 
+  .nav-arrow {
     display: none !important;
   }
 
-  .nav-arrow {
-    display: none;
+  .station-item .button-group {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateX(0) !important;
   }
 }
 

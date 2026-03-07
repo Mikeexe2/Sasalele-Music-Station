@@ -82,17 +82,17 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/website.html"
+              <a class="nav-link" href="/website"
                 >Websites <i class="fas fa-book-bookmark"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/video.html"
+              <a class="nav-link" href="/video"
                 >Videos <i class="fas fa-video"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/drive.html"
+              <a class="nav-link" href="/drive"
                 >GDMP <i class="fa-brands fa-google-drive"></i>
               </a>
             </li>
@@ -207,7 +207,7 @@
                 data-bs-target="#tipsModal"
                 aria-label="Show Tips"
               >
-                <i class="fas fa-info-circle"></i>
+                <i class="fas fa-circle-info"></i>
               </button>
             </h1>
           </div>
@@ -220,7 +220,7 @@
               aria-label="Toggle Search"
               data-state="closed"
             >
-              <i class="fas fa-search"></i>
+              <i class="fas fa-magnifying-glass"></i>
             </button>
             <button
               type="button"
@@ -313,7 +313,7 @@
                     type="button"
                     id="radiosearch"
                   >
-                    <i class="fas fa-search"></i>
+                    <i class="fas fa-magnifying-glass"></i>
                   </button>
                 </div>
               </div>
@@ -398,7 +398,7 @@
               class="btn btn-primary rounded-end-pill"
               id="searchButton"
             >
-              <i class="fas fa-search"></i>
+              <i class="fas fa-magnifying-glass"></i>
             </button>
           </div>
         </div>
@@ -465,8 +465,7 @@
                   <h6 class="badge bg-secondary mb-2">
                     Google Programmable Search
                   </h6>
-                  <div class="gcse-searchresults-only"></div>
-
+                  <div class="gcse-search"></div>
                   <div class="search-it-on-section">
                     <h6 class="badge bg-dark border border-secondary mb-3">
                       Search it on
@@ -680,9 +679,8 @@
               </button>
             </media-control-bar>
           </media-controller>
-          <button id="togglePlayer" class="p-btn" title="Switch Layout">
-            <i class="fas fa-expand"></i>
-            <i class="fas fa-compress"></i>
+          <button id="togglePlayer" class="p-btn mb-1" title="Switch Layout">
+            <span class="toggle-icon"><i class="fas fa-compress"></i></span>
           </button>
         </div>
         <div class="playing-info d-flex align-items-start">
@@ -707,7 +705,7 @@
                   </span>
                 </button>
                 <button id="searchIcon" class="p-btn" title="Search">
-                  <i class="fas fa-search"></i>
+                  <i class="fas fa-magnifying-glass"></i>
                 </button>
               </div>
             </div>
@@ -768,7 +766,7 @@
                   href="https://t.me/sasalelemusic"
                   class="btn btn-social btn-telegram btn-sm mx-1"
                 >
-                  <i class="fab fa-telegram-plane me-1"></i>Telegram
+                  <i class="fab fa-telegram me-1"></i>Telegram
                 </a>
                 <a
                   target="_blank"
@@ -790,7 +788,9 @@
                   <span class="waline-pageview-count fw-bold">0</span>
                 </p>
                 <p class="copyright mb-0 opacity-50">
-                  &copy; 2023-<span id="current-year">present</span>
+                  <i class="fas fa-copyright"></i> 2023-<span id="current-year"
+                    >present</span
+                  >
                   Sasalele-Music-Station
                 </p>
               </div>
@@ -799,7 +799,7 @@
         </div>
       </section>
     </main>
-    <script type="module" src="/src/js/utils.js"></script>
+    <script type="module" src="/src/js/icons.js"></script>
     <script type="module" src="/src/js/stats.js"></script>
     <script type="module" src="/src/js/scripts.js"></script>
     <script>

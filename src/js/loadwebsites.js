@@ -1,3 +1,7 @@
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.min.js";
+import "@waline/client/waline.css";
+import "../css/styles.css";
 import { ref, get } from "firebase/database";
 import { db } from "./utils.js";
 
@@ -15,15 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
       hideLoadingSpinner();
 
-      if (!snapshot.exists()) {
-        siteList.innerHTML = `
-          <div class="text-center w-100 py-3">
-            <i class="fas fa-info-circle text-muted"></i><br>
-            No sites found in <b>${category}</b>.
-          </div>`;
-        return;
-      }
-
       snapshot.forEach((child) => {
         const site = child.val();
 
@@ -31,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
         card.className = "col";
 
         card.innerHTML = `
-          <a role="button" class="list-item" href="${site.url}" target="_blank">
+          <a role="button" class="list-item" href="${site.url}" target="_blank" rel="noopener noreferrer">
             <div class="media rounded">
               <img src="${site.icon}" alt="${site.name}" class="media-content">
             </div>
