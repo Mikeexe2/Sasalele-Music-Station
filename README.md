@@ -1,184 +1,149 @@
-# <p align="center"><img src="public/assets/sasalele_logo.webp" style="width: 40px;"> Sasalele Music Station</p>
+# <div style="margin-right: 18px; margin-top: 18px; display:flex; vertical-align: middle; align-items: center; max-width: 100%;"><img src="public/assets/sasalele_logo.webp" width="82" style="margin-right: 18px;">Sasalele Music Station</div>
 
-This website project aims to collect all public radio links in the world which stream Japanese music, including genres like J-Pop, J-Rock, Anime OST, Vocaloid..... However, you may also find Korean, Chinese and English speaking radios inside this website. This repository contains the source code for the website. Pull requests are welcomed!
+# 🎉 Features
 
-- [日本語](README-JP.md)
-- [中文](README-CN.md)
-- [한국어](README-KR.md)
+## [📻 Radio Player](https://basic.pp.ua)
 
-## Features
+A feature-rich streaming experience with real-time metadata and global integration. Explore a specialized directory of public radio links from around the world. While we focus heavily on **Japanese music** (J-Pop, J-Rock, Anime OST, Vocaloid, etc.), you will also find a diverse selection of Korean, Chinese, and English-speaking stations.
 
-- 🎶 Extensive radio collection categorized by genres, and listen directly in browser.
-- 🆕 View the track name of the song streamed by the radio stations (for supported streams only).
-- 📥 Download M3U8 files of radio stations and listen on your device with a supported player like Poweramp or VLC Media Player.
-- 🔍 Use the RadioBrowser API to discover even more radio stations and quickly search for songs across LastFM, Deezer, iTunes, YouTube, and selected search engines.
-- 📺 Watch over 20,000 M3U8 video streams via the [Sasalele Video Player](https://basic.pp.ua/video).
-- 🎥 YouTube Live streams perfect for background listening.
-- 📂 Log in with Google to play or download your music collection through the [Google Drive Music Player](https://basic.pp.ua/drive) or paste a public Google Drive folder link to access your music directly.
-- 🔧 Explore a curated list of websites for downloading, editing, and managing MP3 files.
-- 🎙 Discover Japanese podcasts with our [curated list of resources](https://basic.pp.ua/website).
-- 💬 Join the conversation and share your current listenings with others.
+### ⚡ Core Playback & Discovery
 
-### 📝 Project Changelog
+- Smart Metadata: View live track names and artist info for all supported streams.
+- Genre-Tagged Stations: Easily browse thousands of stations categorized by their specific musical genres.
+- Dynamic Filtering: Instantly filter the station list by Name or Tags to find exactly what you're looking for.
+- Random Play: Feeling adventurous? Let the "Random Play" feature pick a high-quality station for you.
+- Curated J-Pop Hub: Special access to a curated Japanese music playlist featuring real-time lyrics display.
 
-#### 📅 2025-02-14
+### 🔍 Global Search & Integration
 
-- **Added:** New Paste Stream field allowing users to play any supported external radio stream directly within the player.
-- **Added:** New search icon to instantly search for the currently playing track title.
-- **Added:** Detailed individual tags on radio stations and more categories of them.
-- **Changed:** Cleaned up the GitHub repository to store only source code.
-- **Changed:** Migrate project to Vite for automated bundling.
-- **Changed:** UI enhancement for smoother user experience.
-- **Changed:** Improved the random play logic to provide near-instant station switching.
-- **Fixed:** Broken stream retry logic which would trigger audio playback after a user had stopped the player.
+- Multi-Platform Search: One click redirects you to find the current track on Last.fm, iTunes, Deezer, YouTube, or Google.
+- RadioBrowser API: Tap into a massive, community-driven database to discover hidden gems from around the world.
+- Custom Streams: Full support for pasting custom URLs and .m3u8 stream links for direct browser playback.
 
-#### 📅 2025-12-13
+### 🛠 Utility & Social
 
-- **Added:** MediaSession API integration to display the currently playing track/station in notification and update the page title accordingly.
-- **Changed:** Expanded the recently played list capacity to store up to 300 station/track names.
-- **Added:** New chatroom in chat to better classify the messages.
-- **Changed:** Upgraded Firebase JavaScript SDK to the modular.
-- **Changed:** Improved the Google Drive Music Player UI and playback logic.
-- **Changed:** Improved the random play logic to be faster.
-- **Changed:** All date display logic will now use YYYY/MM/DD.
-- **Fixed:** Icecast streams does not stop properly which caused the previous metadata element continue to show up.
+- Sync & History: Your "Recently Played" tracks are automatically saved to localStorage for quick retrieval.
+- Portable Playlists: Generate and export .m3u files to listen on external players like VLC or Poweramp.
+- Real-time Chat: Share your current vibe! Easily copy stream titles and jump into the integrated chat or our Telegram community to discuss what's playing.
+- Always Live: We regularly prune dead links. If a station is down, suggest a replacement via the site chat or Telegram.
 
-#### 📅 2025-11-13
+## [📺 Video Player](https://basic.pp.ua/video)
 
-- **Added:** Error and status notifications for both video and audio players.
-- **Added:** Comment sections on every webpage.
-- **Added:** Dismissable search container.
-- **Added:** Clickable links and message timestamps in chat.
-- **Added:** Expanded playlist with additional songs with lrc.
-- **Added:** Redesigned curated website display.
-- **Added:** "Stop streaming" function for the M3U8 video player.
-- **Added:** Beat pattern simulation added to the animation feature.
-- **Changed:** Switched Zeno streams to use the Icecast player for better compatibility.
-- **Changed:** Improved playback logic for M3U8 and direct streams.
-- **Changed:** Migrated data management from JSON files to a database, simplifying updates and maintenance.
-- **Changed:** Enhanced player with more functionalities.
-- **Fixed:** Issue where the genre filter input did not persist when searching for stations.
-- **Fixed:** Audio playback bug when switching from Icecast streams to other stream types.
-- **Fixed:** Corrected fallback behavior of the Icecast player, especially for stations loaded via RadioBrowser API.
-- **Fixed:** M3U8 file download issues for stations sourced from RadioBrowser API.
+Global live streaming at your fingertips.
 
-#### 📅 2025-08-29
+- World-Wide Content: Access high-quality .m3u8 streams from Japan, Korea, China, and beyond.
+- YouTube Live Hub: Instant access to curated YouTube categories including Lofi, News, Street Cams, and Music.
+- Direct Play: Input any public stream link for instant playback without leaving the platform.
+- Dynamic Retry Mechanism: Automatically handles loading issues to ensure a stable viewing experience.
+- HLS & MPEG-DASH  Support: Native integration for HTTP Live Streaming and direct video stream protocols.
 
-- **Added:** New player style, now all streams (including hls streams) will use one single player to play (with metadata support).
-- **Added:** Dark themed website.
-- **Changed:** Used "Artist - Title" convention when displaying the song info instead of "Title - Artist".
-- **Fixed:** [issue 21](https://github.com/Mikeexe2/Sasalele-Music-Station/issues/21). Metadata for icecast streams now displayed immediately once station is loaded.
-- **Fixed:** [issue 23](https://github.com/Mikeexe2/Sasalele-Music-Station/issues/23). Fixed the audio control logic to prevent pausing issues.
-- **Fixed:** Google Drive public share link loading issue.
+## [☁️ Google Drive Music Player](https://basic.pp.ua/drive)
 
-#### 📅 2024-09-16
+Turn your cloud storage into a personal streaming service.
 
-- **Added:** New player style.
-- **Added:** New radio station display style [issue 12](https://github.com/Mikeexe2/Sasalele-Music-Station/issues/12).
-- **Added:** Search input focus.
-- **Changed:** Use official countries list provided by RadioBrowser API.
-- **Added:** Search limit to the API's request URL to increase search speed.
-- **Fixed:** Low volume issues (preset 0.3 -> 1.0).
-- **Fixed:** Right-click and paste content into chat input.
+- Secure Access: Log in via OAuth Integration to securely stream or download your private music library.
+- Autoplay: Seamlessly transitions to the next track in your folder.
+- Extract and display file metadata in player interface (title, artist, lyric)
+- Intuitive Navigation: Full playback control with Previous and Next functionality.
+- Public Link Scraper: Simply paste a public Google Drive folder link to instantly scrape and play audio files.
+- Direct Downloads: Save tracks from your Drive folders directly to your local device with one click.
 
-#### 📅 2024-08-28
+## [📚 Curated Resources](https://basic.pp.ua/website)
 
-- **Added:** New site (https://basic.pp.ua/assets/hirakataroma).
-- **Added:** Load MP3 files from dropdown list of public Google Drive Shared folders.
-- **Added:** Paste and load public google drive folder link function [issue 4](https://github.com/Mikeexe2/Sasalele-Music-Station/issues/4).
-- **Added:** YouTube Live Streams in video page.
+A hand-picked directory for audiophiles.
 
-#### 📅 2024-08-10
+- Toolbox: Discover the best web-based tools for downloading, editing, and managing MP3s.
+- J-Culture Hub: Specialized lists for Japanese podcasts and niche regional radio stations.
 
-- **Added:** Download function for Google drive music file.
-- **Changed:** UI enhancement.
-- **Fixed:** Fontawesome icon display issues.
+## Some additional cool features:
 
-#### 📅 2024-08-01
+- Randomized Wallpapers: Enjoy a fresh, high-quality aesthetic every time you visit or refresh the site.
+- 0x40 Hues Animation Mode (Simulation): Toggle an immersive visualizer inspired by the 0x40 Hues project. This mode show random image and background transitions for a rhythmic experience.
 
-- **Changed:** Rewrite firebase chat function.
-- **Fixed:** Change M3U8 video play logic to fix mixed-content issues and add handling for streams that cannot be played directly on the webpage.
+## 📱 Cross-Platform Accessibility
 
-#### 📅 2024-07-20
+- Progressive Web App (PWA): Take the experience beyond the browser. Install the project as a standalone app on Desktop, Android, or iOS for:
+  - Faster access via your home screen or taskbar.
+  - A cleaner, "app-like" interface without browser address bars.
+  - Improved performance and smoother transitions.
 
-- **Added:** Metadata fetching for supported streams [issue 10](https://github.com/Mikeexe2/Sasalele-Music-Station/issues/10).
-- **Added:** Store and display recently played tracks.
-- **Added:** Copy stream title function.
-- **Added:** Attempt to add a 0x40 hues animation.
-- **Fixed:** Fix playback issues with better metadata fetching approach.
-- **Changed:** Use an animation button to control the "0x40 Hues" animation.
+# Screenshots
 
-#### 📅 2024-07-14
+<img src="https://scontent.fkul21-2.fna.fbcdn.net/v/t39.30808-6/630649601_942666191422070_6263529495820518821_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=7b2446&_nc_ohc=A2C4h1_3-4EQ7kNvwHVYPkb&_nc_oc=Adk27t7eX9aWEhq8DQsLFCzaZDm-AbqqCc1dzh5Y1ENPCDqqpu4eVKZB_OtxX4pxxJt-9-nr17MHwNt4UQD59SzI&_nc_zt=23&_nc_ht=scontent.fkul21-2.fna&_nc_gid=_1vpBujPPbWkMK6kDmzEKA&_nc_ss=8&oh=00_Afsea3sxxZC-sN4cNg9uy8SRO4IQPk5AXTig76q5m6q22w&oe=69AA23A7"/>
+<img src="https://scontent.fkul21-1.fna.fbcdn.net/v/t39.30808-6/630915651_942667518088604_1659900754431019053_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=7b2446&_nc_ohc=mbDa6wLGhkgQ7kNvwFqWuho&_nc_oc=AdlsHqKvlESbaEMS7E-3znRopjq8GNlcum788Cl3598XoXnUOUc8nMYNpB1hGH8bg0xEgGZdEv3Z5cZDzBfvyRZ6&_nc_zt=23&_nc_ht=scontent.fkul21-1.fna&_nc_gid=P5g3OTuS8B6hMG8RdBogcA&_nc_ss=8&oh=00_AfsebduRuTWGlWBFxv2Kl7Irzn-t7VeQB9faGA2EhAPCRQ&oe=69AA318A"/>
+<img src="https://scontent.fkul21-1.fna.fbcdn.net/v/t39.30808-6/628412528_942667441421945_6556491633786067475_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=7b2446&_nc_ohc=2yPhxNXjHd4Q7kNvwHKVqIl&_nc_oc=Adnh0zhT6ZClJKQOOryWqoaAMAsLF3MtYXGmZRBfioKwd_MZmTl-tXxTKIr0swhT8GwtaKxyrNf1bHz69XDBqvO1&_nc_zt=23&_nc_ht=scontent.fkul21-1.fna&_nc_gid=yENBYrJ-aYRq7Q5DFavbSQ&_nc_ss=8&oh=00_AftPUaLsiokQyqGgVYTJKeO4F0On_yuG4PTkRoJRPmwmBA&oe=69AA34B4"/>
+<img src="https://scontent.fkul21-2.fna.fbcdn.net/v/t39.30808-6/629301565_942667348088621_4464987923482741988_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=7b2446&_nc_ohc=JBEQt3CdpyEQ7kNvwF_bB38&_nc_oc=AdkHmKTOSy65ntKi_tGuAiN4j0t9mha3N7-TS4ceXeBxQKXYABADy6KohwUXmXM3USUGG9GskdEyF4wLcrLbjWRz&_nc_zt=23&_nc_ht=scontent.fkul21-2.fna&_nc_gid=jPsfMKBVBo6gjaQ31EFvgw&_nc_ss=8&oh=00_Afujz7nSoiTDJYvFq9XFBdLK8y95JAXO8CBzkCjHRVqKkg&oe=69AA11DB"/>
+<img src="https://scontent.fkul21-2.fna.fbcdn.net/v/t39.30808-6/630844687_942666258088730_864942467702608838_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=7b2446&_nc_ohc=aP07thGAUZUQ7kNvwGLGjTS&_nc_oc=Adkf4OrXtaf0qm1etZcN3aNCKGIq9wfpDsBF2Xb7DiC_I3Wfbff6mFrM-1d6DKAK5IyJj1esT3dG6_3daRNeL-CV&_nc_zt=23&_nc_ht=scontent.fkul21-2.fna&_nc_gid=URB3AXWiNsLlpleO6q2d_w&_nc_ss=8&oh=00_Afs9e3MbO_NVrBUfh7w0xuFPtq_ISmJ76COxAO18Khpc7g&oe=69AA0EF3"/>
 
-- **Added:** Added icecast metadata fetching for supported radios.
-- **Added:** Attempt to add a 0x40 hues animation.
-- **Changed:** Enhance search by APIs.
-- **Changed:** Use Javascript to load and display curated website list in order to ease maintenance.
+# Project Evolution
 
-#### 📅 2024-06-30
+Stay up to date with the latest improvements and bug fixes.
 
-- **Added:** Function to download M3U8/ radio station stream link in .m3u/ .m3u8 file [issue 16](https://github.com/Mikeexe2/Sasalele-Music-Station/issues/16).
-- **Changed:** M3U8 Radio stream rework, display in a genre-separated list with dynamic loading.
-- **Changed:** Attempt to solve CORS issues in playing stream by using a proxy.
+- View the Full [Changelog](https://github.com/Mikeexe2/Sasalele-Music-Station/blob/main/CHANGELOG.md) file.
 
-#### 📅 2024-06-16
+# Donate
 
-- **Added:** New M3U8 video stream playing function by pasting the M3U8 link or selecting from a dropdown menu.
-- **Added:** Privacy policy for Google Drive Music Player has been implemented.
+- Donation will help to sustain our activities.
 
-#### 📅 2024-01-16
+  <a href="https://ko-fi.com/mikeexe2" target="_blank"><img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="Ko-fi" style="height: 42px;" ></a>
+- Don't forget to 🌟 star the repo if you like the project ^^
 
-- **Added:** Real-time chat function using Firebase has been integrated.
+# Social
 
-#### 📅 2023-11-10
+#### Suggest a Feature or Report a Bug
 
-- **Added:** Player with random play and play pause functionality.
-- **Added:** Station's playlist using Aplayer (with lrc support).
+- If you find a dead radio link or have an idea for this project:
 
-#### 📅 2023-11-04
+  - Join us on our platforms for updates, tips, discussion & ideas
 
-- **Changed:** Use json file to store stations instead of using m3u file.
-- **Added:** Google drive music player.
-- **Added:** Homepage link for radio stations [issues 9](https://github.com/Mikeexe2/Sasalele-Music-Station/issues/9).
+    [![Telegram Badge](https://img.shields.io/badge/telegram-❤️-252850?style=plastic&logo=telegram)](https://t.me/sasalelemusic)
 
-#### 📅 2023-10-25
+# ⚖️ Disclaimer
 
-- **Changed:** Use json file to store stations instead of using m3u file.
-- **Added:** Use LastFM API and YouTube API for search function
-- **Added:** Homepage link for radio stations [issues 9](https://github.com/Mikeexe2/Sasalele-Music-Station/issues/9).
+This project is maintained by an individual developer for educational and personal learning purposes only. By using this repository or the hosted service, you agree to the following:
 
-#### 📅 2023-10-02
+```
+© Copyright (C) 2023-present Sasalele Music Station <sasalele-team@basic.pp.ua>
+- Non-Commercial: Redistribution, rebranding, or "white-labeling" of this project without permission is not allowed.
+- Usage Limits: Using parts of this codebase for purposes other than personal learning or contributing to this specific repository is not allowed.
+- No Warranty: This software is provided "as-is." The developer is not responsible for the content of external radio/video streams or how you use them.
+```
 
-- **Added:** Try to use mobile responsive design.
-- **Added:** Search by site function.
+For the full legal terms, please refer to the [LICENSE](https://github.com/Mikeexe2/Sasalele-Music-Station/blob/main/LICENSE) file.
 
-## Discussion & Latest Update:
+## ❤️ Acknowledgements & Credits
 
-[![Telegram Badge](https://img.shields.io/badge/telegram-❤️-252850?style=plastic&logo=telegram)](https://t.me/sasalelemusic)
+#### 🤝 Content Providers
 
-## Acknowledgements
+A sincere thank you to the radio station owners and video stream providers worldwide. Your dedication to broadcasting and sharing culture is the heartbeat of this project—without your streams, this platform wouldn't exist. I have integrated direct links to the official websites of the radio stations within the player. I encourage u to visit these sites to support the broadcasters directly.
 
-A huge thank you to all the radio station owners and all video stream provider—without you, none of this would be possible!
+### 🛠️ Open Source Foundation
 
-### Open Source Contributions
-
-This project is built upon the foundation and hard work of the following essential open-source libraries:
+This project stands on the shoulders of giants. We are deeply grateful to the following open-source libraries and APIs for their essential contributions to the web ecosystem:
 
 - **icecast-metadata-js** - [GitHub](https://github.com/eshaz/icecast-metadata-js)
+- **music-metadata-browser** - [GitHub](https://github.com/Borewit/music-metadata-browser)
 - **Drive Music Player** - [GitHub](https://github.com/dandalpiaz/drive-music-player)
 - **APlayer** - [GitHub](https://github.com/DIYgod/APlayer)
 - **hls.js** - [GitHub](https://github.com/video-dev/hls.js)
+- **dash.js** - [GitHub](https://github.com/Dash-Industry-Forum/dash.js)
 - **Waline** - [GitHub](https://github.com/walinejs/waline)
 
-### APIs Used
+### 🌐 APIs Used
 
-- [LastFM API](https://www.last.fm/api)
-- [iTunes Search API](https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/index.html)
-- [Deezer Simple API](https://developers.deezer.com/api)
-- [RadioBrowser API](https://api.radio-browser.info/)
-- [YouTube Data API](https://developers.google.com/youtube/v3)
-- [Google Drive API](https://developers.google.com/drive/api/reference/rest/v3)
+- [RadioBrowser API](https://api.radio-browser.info/) An open-source, community-driven database that powers our station search discovery.
+- [LastFM API](https://www.last.fm/api) Provides track search
+- [iTunes Search API](https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/index.html) Track Search, Album Search, Audio Preview
+- [Deezer Simple API](https://developers.deezer.com/api) Track Search, Album Search, Audio Preview
+- [YouTube Data API](https://developers.google.com/youtube/v3) Allowing for real-time discovery of global video broadcasts and live streams.
+- [Google Drive API](https://developers.google.com/drive/api/reference/rest/v3) Facilitates secure OAuth2 authentication and direct streaming for personal cloud music collections.
 
-## Stargazers over time
-
-[![Stargazers over time](https://starchart.cc/Mikeexe2/Sasalele-Music-Station.svg?variant=adaptive)](https://starchart.cc/Mikeexe2/Sasalele-Music-Station)
+<p align="center">
+<a href="https://star-history.com/#Mikeexe2/Sasalele-Music-Station&Date">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Mikeexe2/Sasalele-Music-Station&type=Date&theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Mikeexe2/Sasalele-Music-Station&type=Date" />
+    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Mikeexe2/Sasalele-Music-Station&type=Date" />
+  </picture>
+</a>
+</p>
