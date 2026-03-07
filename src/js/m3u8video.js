@@ -1,23 +1,29 @@
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.min.js";
+import "@waline/client/waline.css";
+import "../css/styles.css";
+import "../css/videos.css";
+import "media-chrome";
 import { ref, get, onValue } from "firebase/database";
 import { db } from "./utils.js";
-import Hls from "hls.js";
-import "media-chrome";
-import "../css/videos.css";
+let hlsModules;
+let dashModules = null;
 
 document.addEventListener("DOMContentLoaded", function () {
   let currentVideos = [];
   let currentPlayingElement = null;
   let hlsInstance = null;
+  let dashPlayerInstance = null;
   let fallbackHlsInstance = null;
   const titleNow = document.getElementById("selected-video-title");
   const videoPlayer = document.getElementById("video-player");
+  const subtitleElement = document.getElementById("dash-subtitles");
   const videoListElement = document.getElementById("video-list");
+  const controller = document.querySelector("media-controller");
   const genreNameElement = document.getElementById("genre-name");
   const channelCountElement = document.getElementById("channel-count");
   const searchChannel = document.getElementById("searchChannel");
-  const customStreamToggleBtn = document.getElementById(
-    "customStreamToggle",
-  );
+  const customStreamToggleBtn = document.getElementById("customStreamToggle");
   const customStreamPanel = document.getElementById("customStreamPanel");
   const defaultGenre = "videos/jpvideos";
   const defaultGenreName = "Japanese";
@@ -37,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 300);
     button.setAttribute("data-state", "closed");
   }
-  
+
   customStreamToggleBtn.addEventListener("click", () => {
     const isOpen = customStreamPanel.style.display !== "none";
 
@@ -154,15 +160,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function cleanupHls() {
     if (hlsInstance) {
+      hlsInstance.detachMedia();
       hlsInstance.destroy();
       hlsInstance = null;
     }
     if (fallbackHlsInstance) {
+      hlsInstance.detachMedia();
       fallbackHlsInstance.destroy();
       fallbackHlsInstance = null;
     }
     videoPlayer.removeAttribute("src");
     videoPlayer.load();
+  }
+
+  function cleanupDash() {
+    if (dashPlayerInstance) {
+      dashPlayerInstance.reset();
+      dashPlayerInstance.destroy();
+      dashPlayerInstance = null;
+    }
   }
 
   function proxyUrl(url) {
@@ -185,6 +201,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function isPhpDynamicHLS(url) {
     return url.includes(".php");
+  }
+
+  function isMPD(url) {
+    return url.includes(".mpd");
   }
 
   async function tryDirect(url) {
@@ -213,6 +233,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   async function tryHls(url, isFallback = false) {
+    const { Hls } = hlsModules;
     const hlsInst = new Hls(HLS_OPTIONS);
     if (isFallback) fallbackHlsInstance = hlsInst;
     else hlsInstance = hlsInst;
@@ -262,6 +283,37 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  async function tryDash(url, isProxied = false) {
+    const { dashjs } = dashModules;
+
+    return new Promise((resolve) => {
+      try {
+        cleanupDash();
+        dashPlayerInstance = dashjs.MediaPlayer().create();
+        dashPlayerInstance.on(dashjs.MediaPlayer.events.ERROR, (e) => {
+          console.error("DASH Error:", e);
+          resolve({
+            ok: false,
+            reason: isProxied ? "Proxy DASH failed" : "Direct DASH failed",
+          });
+        });
+        dashPlayerInstance.on(
+          dashjs.MediaPlayer.events.STREAM_INITIALIZED,
+          () => {
+            resolve({ ok: true });
+          },
+        );
+        dashPlayerInstance.initialize(videoPlayer, url, true);
+        dashPlayerInstance.attachTTMLRenderingDiv(subtitleElement);
+        setTimeout(() => {
+          resolve({ ok: false, reason: "DASH initialization timeout" });
+        }, 10000);
+      } catch (err) {
+        resolve({ ok: false, reason: err.message });
+      }
+    });
+  }
+
   function testHttpAllowed(url) {
     return new Promise((resolve) => {
       const testVideo = document.createElement("video");
@@ -283,6 +335,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   async function playMedia(originalUrl) {
     cleanupHls();
+    cleanupDash();
+
     const proxiedUrl = proxyUrl(originalUrl);
     let res;
 
@@ -299,30 +353,43 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
+    const ensureHlsLoaded = async () => {
+      if (!hlsModules) {
+        const Hls = await import("hls.js").then((m) => m.default || m);
+        hlsModules = { Hls };
+      }
+      return hlsModules.Hls;
+    };
+
+    const ensureDashLoaded = async () => {
+      if (!dashModules) {
+        const dashjs = await import("dashjs").then((m) => m.default || m);
+        dashModules = { dashjs };
+      }
+      return dashModules.dashjs;
+    };
+
     if (isDirectMedia(originalUrl)) {
       attemptOrder.push(() => tryDirect(originalUrl));
       attemptOrder.push(() => tryDirect(proxiedUrl));
-    } else if (isHlsUrl(originalUrl)) {
-      if (Hls.isSupported()) {
-        attemptOrder.push(() => tryHls(originalUrl));
-        attemptOrder.push(() => tryHls(proxiedUrl, true));
-      } else {
-        attemptOrder.push(() => tryDirect(originalUrl));
-        attemptOrder.push(() => tryDirect(proxiedUrl));
-      }
-    } else if (isPhpDynamicHLS(originalUrl)) {
+    } else if (isHlsUrl(originalUrl) || isPhpDynamicHLS(originalUrl)) {
+      const Hls = await ensureHlsLoaded();
       if (Hls.isSupported()) {
         attemptOrder.push(() => tryHls(originalUrl));
         attemptOrder.push(() => tryHls(proxiedUrl, true));
       }
       attemptOrder.push(() => tryDirect(originalUrl));
-      attemptOrder.push(() => tryDirect(proxiedUrl));
+    } else if (isMPD(originalUrl)) {
+      const dashjs = await ensureDashLoaded();
+      if (dashjs) {
+        attemptOrder.push(() => tryDash(originalUrl));
+        attemptOrder.push(() => tryDash(proxiedUrl, true));
+      }
     } else {
       attemptOrder.push(() => tryDirect(originalUrl));
-      attemptOrder.push(() => tryDirect(proxiedUrl));
+      const Hls = await ensureHlsLoaded();
       if (Hls.isSupported()) {
         attemptOrder.push(() => tryHls(originalUrl));
-        attemptOrder.push(() => tryHls(proxiedUrl, true));
       }
     }
 
@@ -341,6 +408,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const Url = m3uURLInput.value;
       if (Url) {
         playMedia(Url);
+        showNotification("Loading...", "success");
         if (titleNow) {
           titleNow.textContent = "Videos";
         }
@@ -350,8 +418,38 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  controller.addEventListener("mediaenterfullscreen", async () => {
+    try {
+      if (screen.orientation && screen.orientation.lock) {
+        await screen.orientation.lock("landscape");
+        console.log("Orientation locked to landscape");
+      }
+    } catch (err) {
+      console.warn("Orientation lock failed:", err);
+    }
+  });
+
+  controller.addEventListener("mediaexitfullscreen", () => {
+    if (screen.orientation && screen.orientation.unlock) {
+      screen.orientation.unlock();
+      console.log("Orientation unlocked (returning to user settings)");
+    }
+  });
+
   function stopVideoPlayback() {
     try {
+      if (document.fullscreenElement || document.webkitFullscreenElement) {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        }
+      }
+
+      if (screen.orientation && screen.orientation.unlock) {
+        screen.orientation.unlock();
+      }
+
       videoPlayer.pause();
       videoPlayer.removeAttribute("src");
       videoPlayer.load();
@@ -359,6 +457,11 @@ document.addEventListener("DOMContentLoaded", function () {
       if (hlsInstance) {
         hlsInstance.destroy();
         hlsInstance = null;
+      }
+
+      if (dashPlayerInstance) {
+        dashPlayerInstance.destroy();
+        dashPlayerInstance = null;
       }
 
       if (fallbackHlsInstance) {
