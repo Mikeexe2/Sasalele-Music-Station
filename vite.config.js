@@ -1,20 +1,17 @@
 import { resolve } from "path";
 import { defineConfig } from "vite";
-import { ViteMinifyPlugin } from "vite-plugin-minify";
 import purgecss from "@fullhuman/postcss-purgecss";
 import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig(({ mode }) => {
-  const isProd = mode === "production";
   return {
     plugins: [
-      isProd ? ViteMinifyPlugin({}) : null,
       purgecss({
-        content: ['./index.html', './src/**/*.js'],
+        content: ["./index.html", "./src/**/*.js"],
         safelist: {
           standard: [/^nav-/, /^btn-/, /^modal-/],
-          deep: [/data-bs-theme$/]
-        }
+          deep: [/data-bs-theme$/],
+        },
       }),
       VitePWA({
         registerType: "autoUpdate",
@@ -76,7 +73,8 @@ export default defineConfig(({ mode }) => {
           website: resolve(__dirname, "website.html"),
           video: resolve(__dirname, "video.html"),
           drive: resolve(__dirname, "drive.html"),
-          privacypolicy: resolve(__dirname, "privacypolicy.html"),
+          privacypolicy: resolve(__dirname, "privacy-policy.html"),
+          tos: resolve(__dirname, "terms-of-service.html"),
         },
       },
     },

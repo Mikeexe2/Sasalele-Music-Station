@@ -132,7 +132,6 @@
   --youtube-red: red;
   --focus-blue-100: #0091ff;
   --focus-blue-30-alpha: rgba(0, 145, 255, 0.3);
-  --focus-blue-80-alpha: rgba(0, 145, 255, 0.8);
   --highlight-yellow-100: #f5e100;
   --highlight-yellow-30-alpha: rgba(245, 225, 0, 0.3);
   --waline-white: #1a1a1a;
@@ -156,7 +155,7 @@
 }
 
 #waline {
-  background: var(--gray-80-alpha);
+  background: var(--gray-70-alpha);
   backdrop-filter: blur(10px);
 }
 
@@ -252,12 +251,6 @@ body {
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;
-}
-
-body.is-loading {
-  pointer-events: none;
-  user-select: none;
-  cursor: wait;
 }
 
 .app-card {
@@ -442,7 +435,7 @@ body.is-loading {
   display: flex;
   align-items: center;
   padding: 10px 14px;
-  background: var(--gray-80-alpha);
+  background: var(--gray-60-alpha);
   backdrop-filter: blur(10px);
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.05);
@@ -453,8 +446,6 @@ body.is-loading {
   align-items: center;
   gap: 3px;
   margin-left: auto;
-  opacity: 0;
-  visibility: hidden;
   transition: all 0.3s ease;
 }
 
@@ -462,12 +453,6 @@ body.is-loading {
   background: var(--gray-100);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.station-item:hover .button-group {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(0);
 }
 
 .station-item:active {
@@ -857,7 +842,7 @@ body.is-loading {
 
 .media {
   overflow: hidden;
-  background-color: var(--black-50-alpha);
+  background-color: var(--black-20-alpha);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -949,7 +934,7 @@ media-controller {
   --media-control-background: transparent;
   --media-background-color: transparent;
   --media-icon-color: var(--apple-white);
-  --media-primary-color: var(--player-accent, --apple-white);
+  --media-primary-color: var(--apple-white);
   --media-control-hover-background: transparent;
   --media-button-hover-background: transparent;
   --media-range-track-background: var(--white-60-alpha);
@@ -982,7 +967,7 @@ media-mute-button:hover {
   left: 0;
   z-index: 6;
   border-top: 2px solid var(--white-30-alpha);
-  background: var(--black-90-alpha);
+  background: var(--black-60-alpha);
   backdrop-filter: blur(10px);
   color: var(--apple-white);
   border-radius: 10px;
@@ -1274,8 +1259,39 @@ media-mute-button:hover {
 .footer {
   border-top: 2px solid var(--white-10-alpha);
   color: var(--apple-white);
-  background: var(--gray-70-alpha);
+  background: var(--gray-90-alpha);
   backdrop-filter: blur 10px;
+}
+
+.footer-links {
+  gap: 2rem;
+}
+
+.footer-links a {
+  color: var(--gray-30);
+  text-decoration: none;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: var(--expressive-orange);
+}
+
+.footer-links a.policy-link {
+  color: var(--expressive-orange);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.footer-copy {
+  color: var(--gray-30);
+  font-size: 0.78rem;
+  text-align: center;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .attribution-text {
@@ -1500,6 +1516,7 @@ media-mute-button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: wait;
   transition: opacity 0.3s ease;
 }
 
@@ -1522,7 +1539,7 @@ media-mute-button:hover {
 #contents,
 #file-tree,
 #demo {
-  background: var(--gray-70-alpha);
+  background: var(--gray-60-alpha);
   backdrop-filter: blur 10px;
   border-radius: 16px;
   padding: 10px;
@@ -1537,14 +1554,37 @@ details {
 }
 
 details[open] {
-  background: var(--black-70-alpha);
-  border-color: rgba(106, 17, 203, 0.7);
+  background: var(--black-40-alpha);
+  border-color: rgba(233, 230, 237, 0.7);
+}
+
+details details {
+  margin-left: 10px;
+  margin-right: 5px;
+  border-radius: 8px;
+}
+
+details details:last-of-type {
+  margin-bottom: 10px;
+}
+
+.card,
+.card-body,
+.list-item,
+.accordion-item,
+.accordion-body,
+.modal-content,
+.dropdown-menu,
+.offcanvas {
+  backdrop-filter: blur(10px) !important;
+  background-color: var(--black-60-alpha) !important;
 }
 
 summary {
-  padding: 12px 18px;
+  padding: 10px 16px;
   cursor: pointer;
-  background-color: var(--focus-blue-80-alpha);
+  background: var(--focus-blue-30-alpha);
+  backdrop-filter: blur(5px);
   color: var(--apple-white);
   position: relative;
   transition: all 0.3s ease;
@@ -1552,9 +1592,14 @@ summary {
   align-items: center;
 }
 
+.subfolder-content {
+  margin-left: 10px;
+}
+
 .track-container {
   display: flex;
-  background: var(--gray-40-alpha);
+  background: var(--black-30-alpha);
+  backdrop-filter: blur(5px);
   border-radius: 8px;
   transition: all 0.3s ease;
   height: fit-content;
@@ -1596,24 +1641,18 @@ summary {
 .download {
   flex-shrink: 0;
   cursor: pointer;
-  border-radius: 6px;
-  background: rgba(37, 117, 252, 0.2);
+  border: 0;
+  margin-top: 5px;
+  margin-right: 10px;
+  vertical-align: middle;
   color: var(--expressive-green);
   text-decoration: none;
-  padding: 5px;
-  margin-right: 10px;
   transition: all 0.3s ease;
 }
 
 .download:hover {
-  background: rgba(37, 117, 252, 0.3);
   color: white;
-  transform: scale(1.05);
-  border-color: rgba(37, 117, 252, 0.5);
-}
-
-.download .fas.fa-download {
-  font-size: var(--font-size--small);
+  transform: scale(1.25);
 }
 
 details[open] > *:not(summary) {
@@ -1687,17 +1726,10 @@ details details:last-of-type {
   margin-bottom: 10px;
 }
 
-@media only screen and (max-width: 575.98px), 
-       (pointer: coarse) {
-  .tooltip, 
+@media only screen and (max-width: 575.98px), (pointer: coarse) {
+  .tooltip,
   .nav-arrow {
     display: none !important;
-  }
-
-  .station-item .button-group {
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: translateX(0) !important;
   }
 }
 
@@ -1836,6 +1868,11 @@ details details:last-of-type {
 
   details details {
     margin-left: 2px;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    gap: 1rem;
   }
 
   #player {

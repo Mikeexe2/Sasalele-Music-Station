@@ -1,10 +1,70 @@
 import { initIcons } from "./icons.js";
 import { initExternalTools } from "./utils.js";
+import { get, ref } from "firebase/database";
+import { db } from "./utils.js";
+
+export async function generateDropdown(
+  categoryPath,
+  dropdownButton,
+  dropdownMenu,
+  onSelect,
+  autoSelectFirst = false,
+) {
+  try {
+    const snapshot = await get(ref(db, categoryPath));
+    if (!snapshot.exists()) {
+      console.warn(`Category not found at ${categoryPath}`);
+      return;
+    }
+    const categoryData = snapshot.val();
+    if (categoryData.label) dropdownButton.textContent = categoryData.label;
+    const subCategories = categoryData.subCategories || {};
+    const subKeys = Object.keys(subCategories);
+    if (subKeys.length === 0) return;
+    subKeys.sort(
+      (a, b) => (subCategories[a].order ?? 0) - (subCategories[b].order ?? 0),
+    );
+    dropdownMenu.innerHTML = "";
+    subKeys.forEach((key) => {
+      const sub = subCategories[key];
+      const li = document.createElement("li");
+      const item = document.createElement("a");
+      item.classList.add("dropdown-item");
+      item.dataset.key = key;
+      item.textContent = sub.label || key;
+      li.appendChild(item);
+      dropdownMenu.appendChild(li);
+    });
+    dropdownMenu.addEventListener("click", (e) => {
+      const item = e.target.closest(".dropdown-item");
+      if (!item) return;
+      e.preventDefault();
+      dropdownMenu
+        .querySelectorAll(".dropdown-item.active")
+        .forEach((el) => el.classList.remove("active"));
+      item.classList.add("active");
+      const selectedKey = item.dataset.key;
+      const name = item.textContent;
+      onSelect?.(selectedKey, name);
+    });
+    if (autoSelectFirst && subKeys.length > 0) {
+      const firstItem = dropdownMenu.querySelector(".dropdown-item");
+      if (firstItem) {
+        firstItem.classList.add("active");
+        const firstKey = firstItem.dataset.key;
+        const firstName = firstItem.textContent;
+        onSelect?.(firstKey, firstName);
+      }
+    }
+  } catch (error) {
+    console.error("Error generating dropdown:", error);
+  }
+}
 
 document.addEventListener("DOMContentLoaded", function () {
   const toggle = document.getElementById("toggleAnimation");
   const loader = document.getElementById("loadingSpinner");
-  
+
   if (toggle) {
     toggle.onclick = null;
     toggle.addEventListener("change", handleToggleChange);

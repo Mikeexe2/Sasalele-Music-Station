@@ -6,6 +6,7 @@ import "../css/videos.css";
 import "media-chrome";
 import { ref, get, onValue } from "firebase/database";
 import { db } from "./utils.js";
+import { generateDropdown } from "./stats.js";
 let hlsModules;
 let dashModules = null;
 
@@ -67,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   async function fetchVideoLinks(genre) {
     try {
-      const videoRef = ref(db, genre);
+      const videoRef = ref(db, `videos/${genre}`);
       const snapshot = await get(videoRef);
 
       const data = snapshot.val() || {};
@@ -82,10 +83,15 @@ document.addEventListener("DOMContentLoaded", function () {
   async function loadGenre(genre, genreName) {
     try {
       showLoadingSpinner();
+      console.log(genre);
       const videos = await fetchVideoLinks(genre);
       currentVideos = videos;
       createVideoList(currentVideos);
       updateGenreInfo(genreName, currentVideos.length);
+      if (searchChannel && searchChannel.value.trim() !== "") {
+        const filteredVideos = filterVideoList(searchChannel.value);
+        createVideoList(filteredVideos);
+      }
     } catch (error) {
       console.error("Error loading genre:", error);
     }
@@ -483,19 +489,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  document.querySelectorAll(".genre-link").forEach((link) => {
-    link.addEventListener("click", async function (e) {
-      e.preventDefault();
-      document
-        .querySelectorAll(".genre-link")
-        .forEach((l) => l.classList.remove("active"));
-      e.target.classList.add("active");
-      const genre = this.getAttribute("data-genre");
-      const genreName = this.textContent;
-      await loadGenre(genre, genreName);
-    });
-  });
-
   if (searchChannel) {
     searchChannel.addEventListener("input", function () {
       const query = this.value;
@@ -565,61 +558,75 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  function loadGenres() {
+  async function loadGenres() {
     showLoadingSpinner();
-    const ytRef = ref(db, "ytByGenre");
+    const categoryRef = ref(db, "categories/ytByGenre");
 
-    onValue(
-      ytRef,
-      (snapshot) => {
-        if (!snapshot.exists()) {
-          genreSelect.innerHTML = "<option>No genres</option>";
-          return;
-        }
+    onValue(categoryRef, async (snapshot) => {
+      if (!snapshot.exists()) {
+        genreSelect.innerHTML = "<option>No genres</option>";
+        hideLoadingSpinner();
+        return;
+      }
 
-        genresData = {};
-        const keys = [];
+      const categoryData = snapshot.val();
+      const subCategories = categoryData.subCategories || {};
 
-        snapshot.forEach((child) => {
-          keys.push(child.key);
+      const genreEntries = Object.keys(subCategories).map((key) => ({
+        key,
+        label: subCategories[key].label || key,
+        order: subCategories[key].order ?? 0,
+      }));
 
+      genreEntries.sort((a, b) => a.order - b.order);
+
+      genreSelect.innerHTML = "";
+
+      genreEntries.forEach((entry) => {
+        const opt = document.createElement("option");
+        opt.value = entry.key;
+        opt.textContent = entry.label;
+        genreSelect.appendChild(opt);
+      });
+
+      async function loadGenreData(selectedKey) {
+        if (!selectedKey) return;
+
+        showLoadingSpinner();
+
+        const dataRef = ref(db, `ytByGenre/${selectedKey}`);
+        const dataSnapshot = await get(dataRef);
+
+        if (!dataSnapshot.exists()) {
+          genresData[selectedKey] = [];
+        } else {
           const items = [];
-          child.forEach((entry) => {
-            const v = entry.val();
+          dataSnapshot.forEach((child) => {
+            const v = child.val();
             items.push({
-              id: entry.key,
-              link: v.link,
+              id: child.key,
               title: v.title,
+              link: v.link,
             });
           });
+          genresData[selectedKey] = items;
+        }
 
-          genresData[child.key] = items;
-        });
+        renderStreamsForGenre(selectedKey);
+        hideLoadingSpinner();
+      }
 
-        genreSelect.innerHTML = "";
-        keys.forEach((k) => {
-          const opt = document.createElement("option");
-          opt.value = k;
-          opt.textContent = k;
+      genreSelect.onchange = (e) => {
+        loadGenreData(e.target.value);
+      };
+      const firstKey = genreEntries[0]?.key;
+      if (firstKey) {
+        genreSelect.value = firstKey;
+        await loadGenreData(firstKey);
+      }
 
-          if (k === "Japanese") opt.selected = true;
-          genreSelect.appendChild(opt);
-        });
-
-        const currentSelected = genreSelect.value;
-        const defaultKey = genresData[currentSelected]
-          ? currentSelected
-          : genresData["Japanese"]
-            ? "Japanese"
-            : keys[0];
-
-        genreSelect.value = defaultKey || "";
-        renderStreamsForGenre(defaultKey);
-      },
-      {
-        onlyOnce: false,
-      },
-    );
+      hideLoadingSpinner();
+    });
   }
 
   function isChan2(id) {
@@ -753,6 +760,12 @@ document.addEventListener("DOMContentLoaded", function () {
         })
       : "";
   }
-  loadGenre(defaultGenre, defaultGenreName);
+  generateDropdown(
+    "categories/videos",
+    videoDropdown,
+    videoMenu,
+    (key, name) => loadGenre(key, name),
+    true,
+  );
   loadGenres();
 });

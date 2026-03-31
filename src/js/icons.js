@@ -29,6 +29,14 @@ import {
   faExclamationTriangle,
   faMagnifyingGlass,
   faCopyright,
+  faShieldHalved,
+  faGlobe,
+  faFolderOpen,
+  faFileLines,
+  faArrowsRotate,
+  faBan,
+  faHeadphones,
+  faTags,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -73,6 +81,14 @@ const importedIcons = {
   faGoogleDrive,
   faTelegram,
   faCopyright,
+  faShieldHalved,
+  faGlobe,
+  faFolderOpen,
+  faFileLines,
+  faBan,
+  faArrowsRotate,
+  faHeadphones,
+  faTags,
 };
 
 function toKebabCase(iconName) {

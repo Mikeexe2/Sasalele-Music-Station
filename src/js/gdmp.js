@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  function getContents(id, type) {
+  function getContents(id, type, containerEl) {
     var contentsQuery = "'" + id + "'" + " in parents and trashed = false ";
     gapi.client.drive.files
       .list({
@@ -141,34 +141,34 @@ document.addEventListener("DOMContentLoaded", function () {
         fields: "nextPageToken, files(id, name, mimeType, webContentLink)",
       })
       .then(function (response) {
-        // Hide intro and show content
         intro.style.display = "none";
+        fileTree.style.display = "none";
         content.style.display = "block";
 
-        // set location
-        if (type == "initial") {
-          var location = "contents";
+        let container;
+        if (type === "initial") {
+          container = document.getElementById("contents");
         } else {
-          var location = id;
-
-          // check for previous load
-          if (document.getElementById(location).classList.contains("loaded")) {
+          container = containerEl;
+          if (container.classList.contains("loaded")) {
             return;
           }
         }
 
         var files = response.result.files;
-        var container = document.getElementById(location);
+
         if (files && files.length > 0) {
           for (let i = 0; i < files.length; i++) {
-            file = files[i];
-            if (file.mimeType.includes("application/vnd.google-apps.folder")) {
+            const file = files[i];
+
+            if (file.mimeType === "application/vnd.google-apps.folder") {
               const details = document.createElement("details");
               details.id = file.id;
               const summary = document.createElement("summary");
-              summary.textContent = file.name;
+              summary.innerHTML = `<span class="me-2">${createIcon("folder-open")}</span>${file.name}`;
               summary.addEventListener("click", () => {
-                getContents(file.id);
+                if (details.classList.contains("loaded")) return;
+                getContents(file.id, "folder", details);
               });
 
               details.appendChild(summary);
@@ -178,18 +178,14 @@ document.addEventListener("DOMContentLoaded", function () {
               trackContainer.className = "track-container";
 
               const safeFileJSON = encodeURIComponent(JSON.stringify(file));
-
               const button = document.createElement("button");
               button.className = "track";
               button.dataset.file = safeFileJSON;
               button.innerHTML = `
-              <span class="track-icon">${createIcon("play")}</span>
-              <span class="track-name">${file.name}</span>
-            `;
-
-              button.addEventListener("click", () => {
-                playTrack(button, "link");
-              });
+                <span class="track-icon">${createIcon("play")}</span>
+                <span class="track-name">${file.name}</span>
+              `;
+              button.addEventListener("click", () => playTrack(button, "link"));
 
               const download = document.createElement("a");
               download.href = file.webContentLink;
@@ -208,7 +204,9 @@ document.addEventListener("DOMContentLoaded", function () {
           showNotification("No files found.", "warning");
         }
 
-        container.firstElementChild.focus();
+        if (container.firstElementChild) {
+          container.firstElementChild.focus();
+        }
       })
       .catch(function (error) {
         if (error.status === 401) {
@@ -258,10 +256,10 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       return;
     }
+    await stopPlayback();
     trackNameEl.textContent = loading;
     artistNameEl.textContent = loading;
     lyricDisplay.textContent = loading;
-    await stopPlayback();
     // check for something already 'playing'
     if (playing) {
       const previousContainer = playing.closest(".track-container");
@@ -388,7 +386,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (metadata.common.lyrics && metadata.common.lyrics.length > 0) {
       rawLyrics = metadata.common.lyrics[0];
-      console.log(rawLyrics);
     } else {
       const id3 =
         metadata.native["ID3v2.3"] || metadata.native["ID3v2.4"] || [];
@@ -405,6 +402,8 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         lyricDisplay.textContent = "";
       }
+    } else {
+      lyricDisplay.textContent = "No lyrics embedded";
     }
 
     if (metadata?.common.picture?.[0]) {
@@ -417,7 +416,7 @@ document.addEventListener("DOMContentLoaded", function () {
     trackNameEl.textContent = finalTitle;
     artistNameEl.textContent = finalArtist;
     coverArtEl.src = coverUrl;
-    document.title = cleaned;
+    document.title = `${finalArtist} - ${finalTitle}`;
 
     if ("mediaSession" in navigator) {
       navigator.mediaSession.metadata = new MediaMetadata({
@@ -570,50 +569,90 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   async function loadFolders() {
-    const webRef = ref(db, "gdpublic");
-    const snapshot = await get(webRef);
-    const folders = [];
+    const webRef = ref(db, "/gdpublic");
     try {
-      if (!snapshot.exists()) {
-        console.error("No data found.");
-        return;
-      }
-      snapshot.forEach((child) => {
-        const data = child.val();
-        if (data.title && data.folderId) {
-          folders.push(data);
-        }
+      const snapshot = await get(webRef);
+      const data = snapshot.exists() ? snapshot.val() : {};
+
+      const genreDropdownMenu = document.getElementById(
+        "mainGenreDropdownMenu",
+      );
+      genreDropdownMenu.innerHTML = "";
+
+      const folderKeyDropdown = document.getElementById("folderKeyDropdown");
+      folderKeyDropdown.style.display = "none";
+
+      const genreFragment = document.createDocumentFragment();
+      Object.keys(data).forEach((folderName) => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = "#";
+        a.className = "dropdown-item";
+        a.textContent = folderName;
+        a.addEventListener("click", (event) => {
+          event.preventDefault();
+          document.getElementById("mainGenreDropdown").textContent = folderName;
+          genreDropdownMenu
+            .querySelectorAll(".dropdown-item.active")
+            .forEach((activeItem) => {
+              activeItem.classList.remove("active");
+            });
+          a.classList.add("active");
+          loadFolderKeys(folderName, data[folderName]);
+        });
+        li.appendChild(a);
+        genreFragment.appendChild(li);
       });
-      populateDropdown(folders);
+      genreDropdownMenu.appendChild(genreFragment);
+
       hideLoadingSpinner();
     } catch (err) {
-      console.error("Error loading folders", err);
+      console.error("Error loading genres", err);
     }
   }
 
-  function populateDropdown(folders) {
-    const dropdownMenu = document.getElementById("folderDropdownMenu");
-    dropdownMenu.innerHTML = "";
-    folders.forEach((folder) => {
-      const item = document.createElement("a");
-      item.className = "dropdown-item";
-      item.href = "#";
-      item.textContent = folder.title;
-      item.dataset.folderId = folder.folderId;
-      item.addEventListener("click", (event) => {
+  function loadFolderKeys(folderName, folderData) {
+    const folderKeyDropdown = document.getElementById("folderKeyDropdown");
+    const folderKeyDropdownMenu = document.getElementById(
+      "folderKeyDropdownMenu",
+    );
+
+    folderKeyDropdownMenu.innerHTML = "";
+    if (!folderData || Object.keys(folderData).length === 0) {
+      folderKeyDropdown.style.display = "none";
+      return;
+    }
+
+    const fragment = document.createDocumentFragment();
+    Object.entries(folderData).forEach(([pushKey, entry]) => {
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = "#";
+      a.className = "dropdown-item";
+      a.textContent = entry.title;
+      a.dataset.folderId = entry.folderId || "";
+      a.addEventListener("click", (event) => {
         event.preventDefault();
-        dropdownMenu
+        folderKeyDropdown.textContent = entry.title;
+        folderKeyDropdownMenu
           .querySelectorAll(".dropdown-item.active")
           .forEach((activeItem) => {
             activeItem.classList.remove("active");
           });
-        item.classList.add("active");
+        a.classList.add("active");
+
         clearFileTree();
-        fetchDriveFiles(folder.folderId);
-        fileTree.style.display = "block";
+        fetchDriveFiles(entry.folderId);
       });
-      dropdownMenu.appendChild(item);
+
+      li.appendChild(a);
+      fragment.appendChild(li);
     });
+
+    folderKeyDropdownMenu.appendChild(fragment);
+
+    folderKeyDropdown.innerHTML = `Select Folder`;
+    folderKeyDropdown.style.display = "";
   }
 
   function clearFileTree() {
@@ -635,7 +674,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (folderIdMatch) {
       const folderId = folderIdMatch[1];
       fetchDriveFiles(folderId);
-      fileTree.style.display = "block";
     } else {
       showNotification("Invalid Google Drive folder link.", "warning");
     }
@@ -660,6 +698,8 @@ document.addEventListener("DOMContentLoaded", function () {
       .finally(() => {
         hideLoadingSpinner();
         intro.style.display = "none";
+        fileTree.style.display = "block";
+        content.style.display = "none";
       });
   }
 
@@ -671,7 +711,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const details = document.createElement("details");
             details.id = file.id;
             const summary = document.createElement("summary");
-            summary.textContent = file.name;
+            summary.innerHTML = `<span class="me-2">${createIcon("folder-open")}</span>${file.name}`;
             summary.addEventListener("click", () => toggleSubfolder(details));
 
             details.appendChild(summary);

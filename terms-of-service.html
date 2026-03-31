@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Terms of Service — Sasalele Music Station – Google Drive Music Player
+    </title>
+    <style>
+      :root {
+        --bg: #0f0f0f;
+        --surface: #161616;
+        --border: #2a2a2a;
+        --accent: #6e93c8;
+        --accent-dim: rgba(163, 174, 183, 0.225);
+        --text: #e8e4dc;
+        --muted: #888;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        font-weight: 300;
+        line-height: 1.75;
+        font-size: 15px;
+        min-height: 100vh;
+      }
+
+      header {
+        border-bottom: 1px solid var(--border);
+        padding: 0.5rem 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        background: rgba(15, 15, 15, 0.92);
+        backdrop-filter: blur(12px);
+        z-index: 100;
+      }
+
+      .logo {
+        font-size: 1.3rem;
+        color: var(--accent);
+        letter-spacing: 0.02em;
+        text-decoration: none;
+      }
+
+      .header-links {
+        display: flex;
+        gap: 1.5rem;
+      }
+
+      .header-links a {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 0.85rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        transition: color 0.2s;
+      }
+
+      .header-links a:hover,
+      .header-links a.active {
+        color: var(--accent);
+      }
+
+      .page-wrap {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0.2rem 2rem 3rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 400;
+        line-height: 1.15;
+        margin-bottom: 0.75rem;
+        color: var(--text);
+      }
+
+      .meta {
+        color: var(--muted);
+        font-size: 0.85rem;
+        margin-bottom: 0.3rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .toc {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--accent);
+        padding: 0.5rem 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .toc-title {
+        font-size: 0.7rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 1rem;
+      }
+
+      .toc ol {
+        list-style: none;
+        counter-reset: toc;
+      }
+
+      .toc ol li {
+        counter-increment: toc;
+        margin-bottom: 0.4rem;
+      }
+
+      .toc ol li::before {
+        content: counter(toc, decimal-leading-zero) ". ";
+        color: var(--accent);
+        font-size: 0.8rem;
+      }
+
+      .toc a {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 0.88rem;
+        transition: color 0.2s;
+      }
+      .toc a:hover {
+        color: var(--text);
+      }
+
+      section {
+        margin-bottom: 3rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+        font-weight: 400;
+        color: var(--text);
+        margin-bottom: 1rem;
+        padding-top: 1rem;
+        display: flex;
+        align-items: baseline;
+        gap: 0.75rem;
+      }
+
+      h2 .num {
+        font-size: 0.75rem;
+        color: var(--accent);
+        font-weight: 500;
+        letter-spacing: 0.08em;
+      }
+
+      p {
+        margin-bottom: 1rem;
+        color: #c8c4bc;
+      }
+
+      ul,
+      ol {
+        padding-left: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      li {
+        margin-bottom: 0.4rem;
+        color: #c8c4bc;
+      }
+
+      .highlight-box {
+        background: var(--accent-dim);
+        border: 1px solid rgba(200, 169, 110, 0.25);
+        border-left: 3px solid var(--accent);
+        padding: 1.25rem 1.5rem;
+        margin: 1.5rem 0;
+      }
+
+      .highlight-box p {
+        color: var(--text);
+        margin: 0;
+      }
+
+      .warning-box {
+        background: rgba(200, 80, 80, 0.08);
+        border: 1px solid rgba(200, 80, 80, 0.25);
+        border-left: 3px solid #c85050;
+        padding: 1.25rem 1.5rem;
+        margin: 1.5rem 0;
+      }
+
+      .warning-box p {
+        color: #e8c4c4;
+        margin: 0;
+      }
+
+      strong {
+        color: var(--text);
+        font-weight: 500;
+      }
+
+      a {
+        color: var(--accent);
+      }
+
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 2rem;
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+
+      footer a {
+        color: var(--muted);
+        margin: 0 0.75rem;
+        text-decoration: none;
+      }
+      footer a:hover {
+        color: var(--accent);
+      }
+
+      @media (max-width: 600px) {
+        header {
+          padding: 1rem;
+        }
+        .page-wrap {
+          padding: 2.5rem 1.25rem 4rem;
+        }
+      }
+    </style>
+    <link rel="icon" href="assets/sasalele_logo.webp" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="assets/sasalele_logo.webp" />
+    <link
+      rel="shortcut icon"
+      href="assets/sasalele_logo.webp"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <header>
+      <a class="logo" href="#"
+        >Sasalele Music Station – Google Drive Music Player</a
+      >
+      <nav class="header-links">
+        <a href="/privacy-policy.html">Privacy</a>
+        <a href="/terms-of-service.html" class="active">Terms</a>
+      </nav>
+    </header>
+
+    <div class="page-wrap">
+      <h1>Terms of Service</h1>
+      <p class="meta">
+        Last updated: March 12, 2026 &nbsp;·&nbsp; Effective: March 12, 2026
+      </p>
+
+      <div class="toc">
+        <p class="toc-title">Contents</p>
+        <ol>
+          <li><a href="#acceptance">Acceptance of Terms</a></li>
+          <li><a href="#description">Description of Service</a></li>
+          <li><a href="#eligibility">Eligibility</a></li>
+          <li>
+            <a href="#google-account">Google Account &amp; Authorisation</a>
+          </li>
+          <li><a href="#permitted-use">Permitted Use</a></li>
+          <li><a href="#prohibited-use">Prohibited Use</a></li>
+          <li>
+            <a href="#intellectual-property"
+              >Intellectual Property &amp; Copyright</a
+            >
+          </li>
+          <li><a href="#downloads">File Downloads</a></li>
+          <li><a href="#disclaimers">Disclaimers</a></li>
+          <li><a href="#limitation">Limitation of Liability</a></li>
+          <li><a href="#termination">Termination</a></li>
+          <li><a href="#changes">Changes to These Terms</a></li>
+          <li><a href="#governing-law">Governing Law</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ol>
+      </div>
+
+      <section id="acceptance">
+        <h2><span class="num">01</span> Acceptance of Terms</h2>
+        <p>
+          By accessing or using Sasalele Music Station – Google Drive Music
+          Player (("the App"), "we", "our", or "us"), you agree to be bound by
+          these Terms of Service ("Terms"). If you do not agree with any part of
+          these Terms, you must not use the Service.
+        </p>
+        <p>
+          These Terms constitute a legally binding agreement between you
+          ("User", "you") and Sasalele Music Station – Google Drive Music Player
+          regarding your use of the Service. Please read them carefully.
+        </p>
+      </section>
+
+      <section id="description">
+        <h2><span class="num">02</span> Description of Service</h2>
+        <p>
+          This app is a web-based music library viewer that connects to your
+          Google Drive account to allow you to:
+        </p>
+        <ul>
+          <li>
+            Browse folders and audio files stored in your own Google Drive,
+          </li>
+          <li>Stream or preview audio files you own, and</li>
+          <li>
+            Download audio files from your own Google Drive to your local
+            device.
+          </li>
+        </ul>
+        <div class="highlight-box">
+          <p>
+            The app is a read-only access tool. It cannot create, edit, move, or
+            delete any files in your Google Drive. It is a personal utility for
+            accessing your own content only.
+          </p>
+        </div>
+        <p>
+          The Service operates as a client-side application. Your Google Drive
+          data is fetched directly in your browser and is not processed or
+          stored on our servers.
+        </p>
+      </section>
+
+      <section id="eligibility">
+        <h2><span class="num">03</span> Eligibility</h2>
+        <p>To use the Service, you must:</p>
+        <ul>
+          <li>
+            Be at least 13 years of age (or the minimum age required in your
+            jurisdiction to consent to data processing),
+          </li>
+          <li>Have a valid Google account,</li>
+          <li>
+            Have the legal capacity to enter into a binding agreement, and
+          </li>
+          <li>
+            Not be prohibited from using the Service under applicable laws.
+          </li>
+        </ul>
+        <p>
+          If you are under the age of 18, you represent that your parent or
+          legal guardian has reviewed and agreed to these Terms on your behalf.
+        </p>
+      </section>
+
+      <section id="google-account">
+        <h2><span class="num">04</span> Google Account &amp; Authorisation</h2>
+        <p>
+          The Service requires you to authenticate with your Google account
+          using Google OAuth 2.0. By connecting your Google account, you
+          authorise the app to:
+        </p>
+        <ul>
+          <li>
+            Access your Google Drive in <strong>read-only mode</strong> to
+            retrieve file names, folder structures, and audio file metadata,
+          </li>
+          <li>
+            Generate temporary download links for audio files you select, and
+          </li>
+          <li>
+            Read your email address and basic profile for session management
+            purposes.
+          </li>
+        </ul>
+        <p>
+          You are solely responsible for maintaining the security of your Google
+          account credentials. Sasalele Music Station – Google Drive Music
+          Player does not have access to your Google password and does not store
+          your OAuth tokens on any server.
+        </p>
+        <p>
+          You may revoke the app's access to your Google account at any time
+          through
+          <a
+            href="https://myaccount.google.com/permissions"
+            target="_blank"
+            rel="noopener"
+            >Google Account Permissions</a
+          >.
+        </p>
+        <p>
+          Our use of Google user data is governed by the
+          <a
+            href="https://developers.google.com/terms/api-services-user-data-policy"
+            target="_blank"
+            rel="noopener"
+            >Google API Services User Data Policy</a
+          >.
+        </p>
+      </section>
+
+      <section id="permitted-use">
+        <h2><span class="num">05</span> Permitted Use</h2>
+        <p>
+          You may use the Service solely for lawful, personal, non-commercial
+          purposes, including:
+        </p>
+        <ul>
+          <li>
+            Browsing and organising your own personal music library stored in
+            Google Drive,
+          </li>
+          <li>
+            Listening to or previewing audio files you own or have lawfully
+            obtained, and
+          </li>
+          <li>
+            Downloading copies of audio files to which you have lawful access
+            and rights.
+          </li>
+        </ul>
+      </section>
+
+      <section id="prohibited-use">
+        <h2><span class="num">06</span> Prohibited Use</h2>
+        <p>You agree not to use the Service to:</p>
+        <ul>
+          <li>
+            Access, download, or distribute audio files you do not own or do not
+            have a lawful licence to use,
+          </li>
+          <li>
+            Infringe any third party's intellectual property rights, including
+            copyright,
+          </li>
+          <li>Circumvent any digital rights management (DRM) protections,</li>
+          <li>
+            Attempt to reverse-engineer, scrape, or exploit the Service in an
+            unauthorised manner,
+          </li>
+          <li>
+            Upload malicious code or attempt to interfere with the Service's
+            operation,
+          </li>
+          <li>
+            Use the Service in any manner that violates applicable laws or
+            regulations, or
+          </li>
+          <li>Share access to your authenticated session with others.</li>
+        </ul>
+        <div class="warning-box">
+          <p>
+            <strong>Important:</strong> Sasalele Music Station – Google Drive
+            Music Player provides access to files in your own Google Drive. You
+            are solely responsible for ensuring that any files you access,
+            stream, or download comply with applicable copyright laws. Sasalele
+            Music Station – Google Drive Music Player bears no responsibility
+            for your use of third-party copyrighted material.
+          </p>
+        </div>
+      </section>
+
+      <section id="intellectual-property">
+        <h2>
+          <span class="num">07</span> Intellectual Property &amp; Copyright
+        </h2>
+        <p>
+          The app, its interface, design, and source code are the intellectual
+          property of Sasalele Music Station – Google Drive Music Player are
+          protected by applicable copyright and intellectual property laws.
+        </p>
+        <p>
+          Audio files and other content stored in your Google Drive remain your
+          property (or the property of their respective rights holders).
+          Sasalele Music Station – Google Drive Music Player makes no claim of
+          ownership over any content you access through the Service.
+        </p>
+        <p>You acknowledge that:</p>
+        <ul>
+          <li>
+            Downloading copyrighted audio files without authorisation from the
+            rights holder may constitute copyright infringement,
+          </li>
+          <li>
+            It is your sole responsibility to ensure you have the right to
+            download and use any files accessed through the Service, and
+          </li>
+          <li>
+            The app is not liable for any copyright infringement you commit
+            using the Service.
+          </li>
+        </ul>
+      </section>
+
+      <section id="downloads">
+        <h2><span class="num">08</span> File Downloads</h2>
+        <p>
+          The Service provides functionality to download audio files from your
+          Google Drive to your local device. When using this feature, you
+          confirm that:
+        </p>
+        <ul>
+          <li>
+            You are the owner of the file or have explicit permission from the
+            rights holder to download it,
+          </li>
+          <li>The download is for personal, lawful use only, and</li>
+          <li>
+            You will not redistribute, sell, or otherwise use the downloaded
+            files in violation of copyright law or any licence agreement.
+          </li>
+        </ul>
+        <p>
+          Download links are generated directly by Google and are temporary in
+          nature. The app does not host, cache, or transmit your audio files.
+        </p>
+      </section>
+
+      <section id="disclaimers">
+        <h2><span class="num">09</span> Disclaimers</h2>
+        <p>
+          The Service is provided on an <strong>"as is"</strong> and
+          <strong>"as available"</strong> basis without warranties of any kind,
+          express or implied, including but not limited to warranties of
+          merchantability, fitness for a particular purpose, or
+          non-infringement.
+        </p>
+        <p>We do not warrant that:</p>
+        <ul>
+          <li>
+            The Service will be uninterrupted, error-free, or free of viruses,
+          </li>
+          <li>
+            The Service will remain compatible with future versions of Google
+            Drive or the Google API,
+          </li>
+          <li>Any errors or defects will be corrected, or</li>
+          <li>The Service will meet your specific requirements.</li>
+        </ul>
+        <p>
+          The Service depends on Google's APIs. Sasalele Music Station – Google
+          Drive Music Player is not responsible for any interruption,
+          modification, or discontinuation of Google services.
+        </p>
+      </section>
+
+      <section id="limitation">
+        <h2><span class="num">10</span> Limitation of Liability</h2>
+        <p>
+          To the maximum extent permitted by applicable law, Sasalele Music
+          Station – Google Drive Music Player and its operators shall not be
+          liable for any indirect, incidental, special, consequential, or
+          punitive damages, including but not limited to:
+        </p>
+        <ul>
+          <li>Loss of data or files,</li>
+          <li>Loss of profits or revenue,</li>
+          <li>Unauthorised access to your Google account,</li>
+          <li>Any damages arising from your use of downloaded files, or</li>
+          <li>Any third-party claims arising from your use of the Service.</li>
+        </ul>
+        <p>
+          In no event shall the app's total liability exceed the amount you paid
+          (if any) to use the Service in the 12 months preceding the claim.
+        </p>
+      </section>
+
+      <section id="termination">
+        <h2><span class="num">11</span> Termination</h2>
+        <p>
+          We reserve the right to suspend or terminate your access to the
+          Service at any time, with or without notice, if we determine that you
+          have violated these Terms or applicable law.
+        </p>
+        <p>
+          You may stop using the Service at any time. To fully revoke Sasalele
+          Music Station – Google Drive Music Player's access to your Google
+          account, visit
+          <a
+            href="https://myaccount.google.com/permissions"
+            target="_blank"
+            rel="noopener"
+            >myaccount.google.com/permissions</a
+          >
+          and remove the app from your authorised applications.
+        </p>
+        <p>
+          Upon termination, all provisions of these Terms which by their nature
+          should survive will survive, including intellectual property
+          provisions, disclaimers, and limitations of liability.
+        </p>
+      </section>
+
+      <section id="changes">
+        <h2><span class="num">12</span> Changes to These Terms</h2>
+        <p>
+          We reserve the right to update these Terms at any time. When we do, we
+          will revise the "Last updated" date at the top of this page. Material
+          changes will be communicated by updating this page.
+        </p>
+        <p>
+          Your continued use of the Service after revised Terms are posted
+          constitutes your acceptance of those changes. If you do not agree with
+          updated Terms, you must stop using the Service.
+        </p>
+      </section>
+
+      <section id="governing-law">
+        <h2><span class="num">13</span> Governing Law</h2>
+        <p>
+          These Terms are governed by and construed in accordance with the laws
+          of Malaysia, without regard to its conflict of law provisions. Any
+          disputes arising from these Terms or your use of the Service shall be
+          subject to the exclusive jurisdiction of the courts of Malaysia.
+        </p>
+        <p>
+          If any provision of these Terms is found to be unenforceable, the
+          remaining provisions shall continue in full force and effect.
+        </p>
+      </section>
+
+      <section id="contact">
+        <h2><span class="num">14</span> Contact Us</h2>
+        <p>
+          If you have any questions about these Terms of Service, please contact
+          us:
+        </p>
+        <ul>
+          <li>
+            <strong>Email:</strong>
+            <a href="mailto:sasalele-team@basic.pp.ua"
+              >sasalele-team@basic.pp.ua</a
+            >
+          </li>
+          <li>
+            <strong>Website:</strong>
+            <a href="https://basic.pp.ua/drive">https://basic.pp.ua/drive</a>
+          </li>
+        </ul>
+        <p>We will respond to all reasonable enquiries within 30 days.</p>
+      </section>
+    </div>
+
+    <footer>
+      <p>
+        © 2026 Sasalele Music Station – Google Drive Music Player. All rights
+        reserved.
+      </p>
+      <p style="margin-top: 0.75rem">
+        <a href="/privacy-policy.html">Privacy Policy</a>
+        <a href="/terms-of-service.html">Terms of Service</a>
+        <a href="mailto:sasalele-team@basic.pp.ua">Contact</a>
+      </p>
+    </footer>
+    <script>
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute("href").substring(1);
+          const targetElement = document.getElementById(targetId);
+          const offset = 40;
+          window.scrollTo({
+            top: targetElement.offsetTop - offset,
+            behavior: "smooth",
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

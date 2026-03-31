@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Privacy Policy — Sasalele Music Station – Google Drive Music Player
+    </title>
+    <style>
+      :root {
+        --bg: #0f0f0f;
+        --surface: #212121;
+        --border: #2a2a2a;
+        --accent: #6e93c8;
+        --accent-dim: rgba(163, 174, 183, 0.225);
+        --text: #e8e4dc;
+        --muted: #888;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        font-weight: 300;
+        line-height: 1.75;
+        font-size: 15px;
+        min-height: 100vh;
+      }
+
+      header {
+        border-bottom: 1px solid var(--border);
+        padding: 0.5rem 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        background: rgba(15, 15, 15, 0.92);
+        backdrop-filter: blur(12px);
+        z-index: 100;
+      }
+
+      .logo {
+        font-size: 1.3rem;
+        color: var(--accent);
+        letter-spacing: 0.02em;
+        text-decoration: none;
+      }
+
+      .header-links {
+        display: flex;
+        gap: 1.5rem;
+      }
+
+      .header-links a {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 0.85rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        transition: color 0.2s;
+      }
+
+      .header-links a:hover,
+      .header-links a.active {
+        color: var(--accent);
+      }
+
+      .page-wrap {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0.2rem 2rem 3rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 400;
+        line-height: 1.15;
+        margin-bottom: 0.75rem;
+        color: var(--text);
+      }
+
+      .meta {
+        color: var(--muted);
+        font-size: 0.85rem;
+        margin-bottom: 0.3rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .toc {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--accent);
+        padding: 0.5rem 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .toc-title {
+        font-size: 0.7rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 1rem;
+      }
+
+      .toc ol {
+        list-style: none;
+        counter-reset: toc;
+      }
+
+      .toc ol li {
+        counter-increment: toc;
+        margin-bottom: 0.4rem;
+      }
+
+      .toc ol li::before {
+        content: counter(toc, decimal-leading-zero) ". ";
+        color: var(--accent);
+        font-size: 0.8rem;
+      }
+
+      .toc a {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 0.88rem;
+        transition: color 0.2s;
+      }
+      .toc a:hover {
+        color: var(--text);
+      }
+
+      section {
+        margin-bottom: 3rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+        font-weight: 400;
+        color: var(--text);
+        margin-bottom: 1rem;
+        padding-top: 1rem;
+        display: flex;
+        align-items: baseline;
+        gap: 0.75rem;
+      }
+
+      h2 .num {
+        font-size: 0.75rem;
+        color: var(--accent);
+        font-weight: 500;
+        letter-spacing: 0.08em;
+      }
+
+      p {
+        margin-bottom: 1rem;
+        color: #c8c4bc;
+      }
+
+      ul,
+      ol {
+        padding-left: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      li {
+        margin-bottom: 0.4rem;
+        color: #c8c4bc;
+      }
+
+      .highlight-box {
+        background: var(--accent-dim);
+        border: 1px solid rgba(200, 169, 110, 0.25);
+        border-left: 3px solid var(--accent);
+        padding: 1.25rem 1.5rem;
+        margin: 1.5rem 0;
+      }
+
+      .highlight-box p {
+        color: var(--text);
+        margin: 0;
+      }
+
+      strong {
+        color: var(--text);
+        font-weight: 500;
+      }
+
+      a {
+        color: var(--accent);
+      }
+
+      .scope-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+        font-size: 0.88rem;
+      }
+
+      .scope-table th {
+        background: var(--surface);
+        color: var(--accent);
+        text-align: left;
+        padding: 0.75rem 1rem;
+        font-weight: 500;
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .scope-table td {
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid var(--border);
+        color: #c8c4bc;
+        vertical-align: top;
+      }
+
+      .scope-table tr:last-child td {
+        border-bottom: none;
+      }
+
+      .tag {
+        display: inline-block;
+        background: var(--accent-dim);
+        color: var(--accent);
+        font-size: 0.7rem;
+        padding: 0.15rem 0.5rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 2rem;
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+
+      footer a {
+        color: var(--muted);
+        margin: 0 0.75rem;
+        text-decoration: none;
+      }
+      footer a:hover {
+        color: var(--accent);
+      }
+
+      @media (max-width: 600px) {
+        header {
+          padding: 1rem;
+        }
+        .page-wrap {
+          padding: 2.5rem 1.25rem 4rem;
+        }
+        .scope-table {
+          font-size: 0.8rem;
+        }
+      }
+    </style>
+    <link rel="icon" href="assets/sasalele_logo.webp" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="assets/sasalele_logo.webp" />
+    <link
+      rel="shortcut icon"
+      href="assets/sasalele_logo.webp"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <header>
+      <a class="logo" href="#"
+        >Sasalele Music Station – Google Drive Music Player</a
+      >
+      <nav class="header-links">
+        <a href="/privacy-policy.html" class="active">Privacy</a>
+        <a href="/terms-of-service.html">Terms</a>
+      </nav>
+    </header>
+
+    <div class="page-wrap">
+      <h1>Privacy Policy</h1>
+      <p class="meta">
+        Last updated: March 12, 2026 &nbsp;·&nbsp; Effective: March 12, 2026
+      </p>
+
+      <div class="toc">
+        <p class="toc-title">Contents</p>
+        <ol>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#information-we-collect">Information We Collect</a></li>
+          <li><a href="#google-oauth">Google OAuth &amp; Permissions</a></li>
+          <li><a href="#how-we-use">How We Use Your Information</a></li>
+          <li><a href="#data-sharing">Data Sharing &amp; Disclosure</a></li>
+          <li><a href="#data-storage">Data Storage &amp; Security</a></li>
+          <li><a href="#retention">Data Retention</a></li>
+          <li><a href="#your-rights">Your Rights &amp; Controls</a></li>
+          <li><a href="#changes">Changes to This Policy</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ol>
+      </div>
+
+      <section id="overview">
+        <h2><span class="num">01</span> Overview</h2>
+        <p>
+          Sasalele Music Station – Google Drive Music Player ("the App", we",
+          "our", or "us") is a personal music library viewer that connects to
+          your Google Drive account to let you browse and download audio files
+          you own. We are committed to protecting your privacy and handling your
+          data with full transparency.
+        </p>
+        <div class="highlight-box">
+          <p>
+            <strong>Plain-language summary:</strong> We only access your Google
+            Drive to show you your own music files. We do not store your files,
+            sell your data, or access anything beyond what you explicitly
+            authorise.
+          </p>
+        </div>
+        <p>
+          This Privacy Policy explains what data we collect, how we use it, and
+          what controls you have. By using the app, you agree to the practices
+          described here.
+        </p>
+      </section>
+
+      <section id="information-we-collect">
+        <h2><span class="num">02</span> Information We Collect</h2>
+        <p>
+          We collect only the minimum information necessary to operate the
+          service:
+        </p>
+        <ul>
+          <li>
+            <strong>Google Account information:</strong> Your email address and
+            basic profile data provided by Google at sign-in, used solely to
+            identify your session.
+          </li>
+          <li>
+            <strong>Google Drive metadata:</strong> File names, file IDs, MIME
+            types, and folder structure of your Drive content — retrieved on
+            demand to render the file tree in the app.
+          </li>
+          <li>
+            <strong>Audio file access links:</strong> Temporary, user-initiated
+            download links for audio files you choose to download. These links
+            are generated by Google and are not stored by us.
+          </li>
+          <li>
+            <strong>Session tokens:</strong> Short-lived OAuth access tokens,
+            stored temporarily in your browser's local storage for the duration
+            of your session (maximum 1 hour). These are never transmitted to or
+            stored on our servers.
+          </li>
+        </ul>
+        <p>
+          We do <strong>not</strong> collect, read, or store the content of your
+          audio files or any other files in your Drive.
+        </p>
+      </section>
+
+      <section id="google-oauth">
+        <h2><span class="num">03</span> Google OAuth &amp; Permissions</h2>
+        <p>
+          The App uses Google OAuth 2.0 to authenticate you and to access your
+          Google Drive on your behalf. We request the following Google API
+          scopes:
+        </p>
+
+        <table class="scope-table">
+          <thead>
+            <tr>
+              <th>Scope</th>
+              <th>Purpose</th>
+              <th>Classification</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <code>https://www.googleapis.com/auth/drive.readonly</code>
+              </td>
+              <td>
+                Read file names, folder structures, and generate download links
+                for audio files you own in Google Drive.
+              </td>
+              <td><span class="tag">Sensitive</span></td>
+            </tr>
+            <tr>
+              <td>
+                <code>https://www.googleapis.com/auth/userinfo.email</code>
+              </td>
+              <td>
+                Retrieve your email address to maintain your session and enable
+                session refresh.
+              </td>
+              <td><span class="tag">Basic</span></td>
+            </tr>
+            <tr>
+              <td>
+                <code>https://www.googleapis.com/auth/userinfo.profile</code>
+              </td>
+              <td>
+                Retrieve your basic profile name for display purposes within the
+                app.
+              </td>
+              <td><span class="tag">Basic</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="highlight-box">
+          <p>
+            <strong>We only request read-only access.</strong> The app cannot
+            create, modify, move, or delete any files in your Google Drive.
+            Access is strictly limited to reading file metadata and providing
+            download links for audio files you explicitly select.
+          </p>
+        </div>
+
+        <p>
+          Our use of data obtained through Google APIs complies with the
+          <a
+            href="https://developers.google.com/terms/api-services-user-data-policy"
+            target="_blank"
+            rel="noopener"
+            >Google API Services User Data Policy</a
+          >, including the Limited Use requirements.
+        </p>
+
+        <p>
+          You may revoke The App's access to your Google account at any time by
+          visiting
+          <a
+            href="https://myaccount.google.com/permissions"
+            target="_blank"
+            rel="noopener"
+            >Google Account Permissions</a
+          >.
+        </p>
+      </section>
+
+      <section id="how-we-use">
+        <h2><span class="num">04</span> How We Use Your Information</h2>
+        <p>
+          We use the information collected exclusively for the following
+          purposes:
+        </p>
+        <ul>
+          <li>
+            To authenticate you and maintain your session for up to one hour.
+          </li>
+          <li>
+            To retrieve and display your Google Drive folder structure and audio
+            file list within the app interface.
+          </li>
+          <li>
+            To generate download links for audio files you explicitly choose to
+            download.
+          </li>
+          <li>
+            To refresh your OAuth session token when it expires, using the hint
+            email stored locally in your browser.
+          </li>
+        </ul>
+        <p>
+          We do <strong>not</strong> use your information for advertising,
+          profiling, analytics, machine learning, or any purpose beyond the
+          direct operation of the service described above.
+        </p>
+        <p>
+          We do <strong>not</strong> use your Google user data to develop,
+          improve, or train any generalised AI or ML models.
+        </p>
+      </section>
+
+      <section id="data-sharing">
+        <h2><span class="num">05</span> Data Sharing &amp; Disclosure</h2>
+        <p>
+          We do not sell, rent, trade, or share your personal data with any
+          third parties, except in the following limited circumstances:
+        </p>
+        <ul>
+          <li>
+            <strong>Google LLC:</strong> Requests are made to Google's APIs to
+            retrieve your Drive data. Google's own
+            <a
+              href="https://policies.google.com/privacy"
+              target="_blank"
+              rel="noopener"
+              >Privacy Policy</a
+            >
+            applies to data held by Google.
+          </li>
+          <li>
+            <strong>Legal requirements:</strong> We may disclose data if
+            required by law, court order, or governmental authority, and only to
+            the extent legally required.
+          </li>
+        </ul>
+        <p>
+          There are no advertising partners, analytics platforms, or data
+          brokers involved in the operation of the app.
+        </p>
+      </section>
+
+      <section id="data-storage">
+        <h2><span class="num">06</span> Data Storage &amp; Security</h2>
+        <p>
+          The App operates primarily as a client-side application. All Google
+          Drive data is fetched directly in your browser and is never
+          transmitted to or stored on our servers.
+        </p>
+        <ul>
+          <li>
+            OAuth access tokens are stored in your browser's
+            <code>localStorage</code> and expire after 1 hour.
+          </li>
+          <li>
+            Your email address hint is stored in
+            <code>localStorage</code> solely to enable seamless session refresh.
+          </li>
+          <li>
+            No audio file content is cached, uploaded, or stored by the app at
+            any point.
+          </li>
+        </ul>
+        <p>
+          While we implement reasonable security practices, no method of
+          internet transmission is 100% secure. You are responsible for ensuring
+          your own device and browser session security.
+        </p>
+      </section>
+
+      <section id="retention">
+        <h2><span class="num">07</span> Data Retention</h2>
+        <p>
+          Because we do not operate backend servers that store your data, there
+          is no server-side retention to speak of. All data held by the app
+          exists only in your browser's local storage and is cleared when you:
+        </p>
+        <ul>
+          <li>Sign out of The App,</li>
+          <li>Clear your browser storage or cookies, or</li>
+          <li>Revoke access via your Google Account settings.</li>
+        </ul>
+      </section>
+
+      <section id="your-rights">
+        <h2><span class="num">08</span> Your Rights &amp; Controls</h2>
+        <p>
+          You have full control over your data and access. Specifically, you
+          may:
+        </p>
+        <ul>
+          <li>
+            <strong>Revoke access:</strong> Remove the app's access to your
+            Google account at any time at
+            <a
+              href="https://myaccount.google.com/permissions"
+              target="_blank"
+              rel="noopener"
+              >myaccount.google.com/permissions</a
+            >.
+          </li>
+          <li>
+            <strong>Clear local data:</strong> Delete all locally stored session
+            data by clearing your browser's local storage for this site.
+          </li>
+          <li>
+            <strong>Request information:</strong> Contact us to request a
+            description of any data we hold about you (in practice, this will be
+            none, as we hold no server-side data).
+          </li>
+          <li>
+            <strong>Data deletion:</strong> Since no personal data is stored
+            server-side, deletion is accomplished by revoking access and
+            clearing browser storage.
+          </li>
+        </ul>
+        <p>
+          If you are located in the European Economic Area, United Kingdom, or
+          other jurisdictions with applicable data protection laws, you may have
+          additional rights including the right to access, rectify, or port your
+          data. Contact us to exercise these rights.
+        </p>
+      </section>
+
+      <section id="changes">
+        <h2><span class="num">09</span> Changes to This Policy</h2>
+        <p>
+          We may update this Privacy Policy from time to time. When we do, we
+          will revise the "Last updated" date at the top of this page. If we
+          make material changes, we will notify users by updating this page
+          prominently. Your continued use of the app after changes are posted
+          constitutes acceptance of the revised policy.
+        </p>
+        <p>We encourage you to review this policy periodically.</p>
+      </section>
+
+      <section id="contact">
+        <h2><span class="num">10</span> Contact Us</h2>
+        <p>
+          If you have any questions, concerns, or requests regarding this
+          Privacy Policy or your data, please contact us:
+        </p>
+        <ul>
+          <li>
+            <strong>Email:</strong>
+            <a href="mailto:sasalele-team@basic.pp.ua"
+              >sasalele-team@basic.pp.ua</a
+            >
+          </li>
+          <li>
+            <strong>Website:</strong>
+            <a href="https://basic.pp.ua/drive">https://basic.pp.ua/drive</a>
+          </li>
+        </ul>
+        <p>We will respond to all reasonable requests within 30 days.</p>
+      </section>
+    </div>
+
+    <footer>
+      <p>
+        © 2026 Sasalele Music Station – Google Drive Music Player. All rights
+        reserved.
+      </p>
+      <p style="margin-top: 0.75rem">
+        <a href="/privacy-policy.html">Privacy Policy</a>
+        <a href="/terms-of-service.html">Terms of Service</a>
+        <a href="mailto:sasalele-team@basic.pp.ua">Contact</a>
+      </p>
+    </footer>
+    <script>
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute("href").substring(1);
+          const targetElement = document.getElementById(targetId);
+          const offset = 40;
+          window.scrollTo({
+            top: targetElement.offsetTop - offset,
+            behavior: "smooth",
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

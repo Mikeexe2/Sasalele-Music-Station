@@ -17,6 +17,7 @@ import {
 } from "firebase/database";
 import { db } from "./utils.js";
 import { createIcon } from "./icons.js";
+import { generateDropdown } from "./stats.js";
 
 const searchToggleBtn = document.getElementById("searchToggleBtn");
 const customStreamToggleBtn = document.getElementById("customStreamToggleBtn");
@@ -255,33 +256,30 @@ function trackHistory(trackName, media) {
 
 async function loadGenres() {
   try {
-    const snapshot = await get(child(ref(db), `genres`));
-
-    if (snapshot.exists()) {
-      const data = snapshot.val();
-      const sortedGenres = Object.entries(data).sort(
-        (a, b) => a[1].order - b[1].order,
-      );
-
-      let htmlContent = "";
-      sortedGenres.forEach(([id, details], index) => {
-        const activeClass = index === 0 ? "active" : "";
-        htmlContent += `
-                    <li>
-                        <span class="genre-pill align-items-center ${activeClass}"
-                              data-genre="${id}" 
-                              role="button">
-                              ${details.name}
-                        </span>
-                    </li>`;
-      });
-
-      genreSelect.innerHTML = htmlContent;
-
-      attachGenreListeners();
-      if (sortedGenres.length > 0) {
-        loadStations(sortedGenres[0][0]);
-      }
+    const snapshot = await get(ref(db, "categories/stations"));
+    if (!snapshot.exists()) return;
+    const data = snapshot.val();
+    const subCategories = data.subCategories || {};
+    const sortedGenres = Object.entries(subCategories).sort(
+      (a, b) => (Number(a[1].order) || 0) - (Number(b[1].order) || 0),
+    );
+    let htmlContent = "";
+    sortedGenres.forEach(([id, details], index) => {
+      const activeClass = index === 0 ? "active" : "";
+      htmlContent += `
+        <li>
+          <span class="genre-pill align-items-center ${activeClass}"
+                data-genre="${id}"
+                role="button">
+                ${details.label}
+          </span>
+        </li>
+      `;
+    });
+    genreSelect.innerHTML = htmlContent;
+    attachGenreListeners();
+    if (sortedGenres.length > 0) {
+      loadStations(sortedGenres[0][0]);
     }
   } catch (error) {
     console.error("Error fetching genres:", error);
@@ -348,6 +346,13 @@ function updateToggleIcon() {
 
 function initializeUI() {
   loadGenres();
+  generateDropdown(
+    "categories/audioList",
+    playlistDropdown,
+    playlistMenu,
+    (key) => loadPlaylist(key),
+    false,
+  );
 
   togglePlayerButton.addEventListener("click", () => {
     playerContainer.classList.toggle("minimized");
@@ -485,17 +490,6 @@ function initializeUI() {
     }, 600);
   });
 
-  playlistMenu.addEventListener("click", (e) => {
-    if (!e.target.matches(".dropdown-item")) return;
-    e.preventDefault();
-    playlistMenu.querySelectorAll(".dropdown-item.active").forEach((item) => {
-      item.classList.remove("active");
-    });
-    e.target.classList.add("active");
-    const selectedPlaylist = e.target.getAttribute("data-playlist");
-    loadPlaylist(selectedPlaylist);
-  });
-
   dismissBtn.addEventListener("click", () => {
     searchResultsWrapper.style.display = "none";
   });
@@ -574,7 +568,7 @@ function renderStations(stations) {
                 <button class="btn btn-sm p-btn download-button">
                 ${createIcon("file-arrow-down")}
                 </button>
-                <button class="btn btn-sm btn-primary main-play-button rounded-circle">
+                <button class="btn btn-sm p-btn main-play-button">
                 ${createIcon("play")}
                 </button>
             </div>
@@ -600,8 +594,6 @@ function renderStations(stations) {
         if (isCurrentlyPlaying && playButton) {
           playButton.innerHTML = createIcon("pause");
           playButton.setAttribute("data-playing", "true");
-          playButton.classList.remove("btn-primary");
-          playButton.classList.add("btn-warning");
         }
       } else {
         el.classList.remove("active-station");
@@ -871,8 +863,6 @@ function clearActiveStation() {
     if (playButton) {
       playButton.innerHTML = createIcon("play");
       playButton.setAttribute("data-playing", "false");
-      playButton.classList.remove("btn-warning");
-      playButton.classList.add("btn-primary");
     }
     window.currentlyActiveLi = null;
   }
@@ -888,14 +878,10 @@ function updateActiveStationPlayButton(isPlaying) {
       playButton.innerHTML = createIcon("pause");
       playButton.setAttribute("data-playing", "true");
       playButton.title = "Pause";
-      playButton.classList.remove("btn-primary");
-      playButton.classList.add("btn-warning");
     } else {
       playButton.innerHTML = createIcon("play");
       playButton.setAttribute("data-playing", "false");
       playButton.title = "Play";
-      playButton.classList.remove("btn-warning");
-      playButton.classList.add("btn-primary");
     }
   }
 }
@@ -928,8 +914,6 @@ async function playMedia(media, button) {
     if (playButton) {
       playButton.innerHTML = createIcon("pause");
       playButton.setAttribute("data-playing", "true");
-      playButton.classList.remove("btn-primary");
-      playButton.classList.add("btn-warning");
     }
   }
 
@@ -2036,7 +2020,7 @@ function radioSearch() {
                       <button class="btn btn-sm p-btn download-button">
                       ${createIcon("file-arrow-down")}
                       </button>
-                      <button class="btn btn-sm btn-primary main-play-button rounded-circle">
+                      <button class="btn btn-sm p-btn main-play-button">
                         ${createIcon("play")}
                       </button>
                     </div>
@@ -2730,7 +2714,6 @@ async function loadPlaylist(playlistName) {
 
     if (!data) {
       hideLoadingSpinner();
-      console.warn(`No audio data found for: ${playlistName}`);
       if (ap) ap.destroy();
       acontainer.style.display = "none";
       return;
@@ -2776,7 +2759,7 @@ async function loadPlaylist(playlistName) {
           album: playlistName,
           artwork: [
             {
-              src: currentTrack.cover || "/assets/sasalele_logo.webp",
+              src: currentTrack.cover,
               sizes: "512x512",
             },
           ],
