@@ -1,67 +1,21 @@
-# End User License Agreement (EULA)
+MIT License
 
-**App Name:** Sasalele Music Station  
-**Effective Date:** 05 Oct, 2023  
-**Developer:** Mikeexe2
+Copyright (c) 2026 Mikeexe2
 
-PLEASE READ THIS END USER LICENSE AGREEMENT ("AGREEMENT") CAREFULLY.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
----
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-## 1. Agreement
-
-BY ACCESSING, DOWNLOADING, OR USING THE SOURCE CODE OR THE HOSTED SERVICE, YOU AGREE TO BE BOUND BY THE TERMS OF THIS AGREEMENT.
-
----
-
-## 2. License Grant
-
-The Licensor grants you a personal, non-exclusive, non-transferable, and limited license to use the codebase and the web application solely for educational and personal learning purposes.
-
----
-
-## 3. Restrictions
-
-You may **not**:
-
-- Use any part of this codebase to generate revenue or for any business-related activity without explicit written permission from me.
-- Redistribute the source code, or any modified version thereof, for any commercial or non-commercial purpose.
-- Rebrand or "white-label" the project to represent it as your own product or service.
-- Reverse engineer, decompile, or disassemble the Software **except for personal use only**.
-- Use parts of the codebase for purposes other than personal learning or contributing directly to this repository.
-
----
-
-## 4. Intellectual Property
-All rights, titles, and interests in and to the software (including but not limited to code, UI/UX design, and documentation) are and will remain the exclusive property of the Licensor. This license does not grant you any rights to the Licensor’s trademarks or service marks.
-
----
-
-## 5. Third-Party Content & APIs
-
-This project utilizes third-party APIs (including but not limited to RadioBrowser, Google Drive, and YouTube). Your use of these features is subject to the respective terms of service of those third-party providers. The Licensor is not responsible for the content or availability of these external streams.
-
----
-
-## 6. Data and Privacy
-
-- The Licensor is committed to a "Privacy-First" approach. However, for the purposes of security, performance optimization, and API reliability, the following technical data is processed:
-    - Technical Logging: The Licensor monitor server-side performance and API traffic.
-    - Non-Identifying Data: These logs may include non-identifying information such as IP addresses (for DDoS protection), browser types, and request timestamps. This data is used solely for diagnostic purposes and to ensure the stability of the service.
-    - No Personal Tracking: This project does not collect, sell, or store Personal Identifiable Information (PII) such as names, email addresses, or account credentials.
-    - Third-Party Analytics: Use of the hosted service is subject to Cloudflare’s Privacy Policy. No tracking cookies are used by the Licensor to identify individual user behavior.
-- Local Storage: Any data stored (such as "Recent Played" history) is saved locally on your device's browser and is never accessible by the Licensor.
-
----
-
-## 7. Disclaimer of Warranty
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE LICENSOR BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY.
-
----
-
-## 8. Termination
-
-This license is effective until terminated by you or the Licensor. Your rights under this license will terminate automatically without notice if you fail to comply with any terms of this Agreement.
-
----
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
