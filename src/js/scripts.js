@@ -12,7 +12,6 @@ import {
   orderByChild,
   limitToLast,
   endBefore,
-  child,
   push,
 } from "firebase/database";
 import { db } from "./utils.js";
@@ -166,7 +165,7 @@ function togglePanel() {
 }
 
 function updatePlayerUI(media) {
-  coverImage.src = `${media.favicon ? media.favicon : "assets/radios/Unidentified2.webp"}`;
+  coverImage.src = `${media.favicon ? media.favicon : "/assets/radios/Unidentified2.webp"}`;
   nowPlaying.innerHTML = `<a href="${media.homepage || media.url}" target="_blank" rel="noopener noreferrer" class="homepagelink" title="Visit ${media.name} homepage">${media.name}</a>`;
   //metaSource.style.display = 'inline-block';
   //metaSource.textContent = `${media.host}`;
@@ -288,6 +287,7 @@ async function loadGenres() {
 
 async function loadStations(genre) {
   showLoadingSpinner();
+  selectedContainer.innerHTML = "";
   selectedContainer.classList.add("active");
   try {
     const stationsRef = ref(db, `stations/${genre}`);
@@ -410,7 +410,7 @@ function initializeUI() {
     const customStreamMedia = {
       url: url,
       favicon: "/assets/sasalele_logo.webp",
-      name: url.split("/").pop() || "Custom Stream",
+      name: "Custom Stream",
     };
 
     const fakeButton = document.createElement("button");
@@ -2005,7 +2005,7 @@ function radioSearch() {
 
             return `
                 <li data-index="${index}" class="align-items-center p-2 mb-2 station-item">
-                    <img src="${radio.favicon || "assets/radios/Unidentified2.webp"}" 
+                    <img src="${radio.favicon || "/assets/radios/Unidentified2.webp"}" 
                          alt="${radio.name}" class="station-img">
                     <div class="flex-grow-1 info">
                         <h5>${radio.name}</h5>
@@ -2501,7 +2501,7 @@ class ChatApp {
       await set(newMessageRef, {
         message: messageData.text,
         name: messageData.user,
-        timestamp: messageData.timestamp,
+        createdAt: messageData.timestamp,
       });
     } catch (error) {
       console.error("Failed to send message:", error);
@@ -2521,7 +2521,7 @@ class ChatApp {
 
     const chatQuery = query(
       chatRef,
-      orderByChild("timestamp"),
+      orderByChild("createdAt"),
       limitToLast(40),
     );
 
@@ -2542,10 +2542,10 @@ class ChatApp {
       messages.push({ id: child.key, ...child.val() });
     });
 
-    messages.sort((a, b) => a.timestamp - b.timestamp);
+    messages.sort((a, b) => a.createdAt - b.createdAt);
     //first load
     if (this.oldestTimestamp === null && messages.length > 0) {
-      this.oldestTimestamp = messages[0].timestamp;
+      this.oldestTimestamp = messages[0].createdAt;
     }
 
     messages.forEach((msg) => {
@@ -2570,7 +2570,7 @@ class ChatApp {
     const chatRef = ref(db, this.currentChatPath);
     const oldQuery = query(
       chatRef,
-      orderByChild("timestamp"),
+      orderByChild("createdAt"),
       endBefore(this.oldestTimestamp),
       limitToLast(limitCount),
     );
@@ -2584,8 +2584,8 @@ class ChatApp {
           oldMessages.push({ id: child.key, ...child.val() });
         });
 
-        oldMessages.sort((a, b) => a.timestamp - b.timestamp);
-        this.oldestTimestamp = oldMessages[0].timestamp;
+        oldMessages.sort((a, b) => a.createdAt - b.createdAt);
+        this.oldestTimestamp = oldMessages[0].createdAt;
 
         oldMessages.reverse().forEach((msg) => {
           const msgEl = this.createMessageElement(msg);
@@ -2616,7 +2616,7 @@ class ChatApp {
     messageDiv.innerHTML = `
             <div class="message-header">
                 <span class="message-user">${this.escapeHtml(msg.name || "Unknown")}</span>
-                <span class="message-time">${this.formatTime(msg.timestamp)}</span>
+                <span class="message-time">${this.formatTime(msg.createdAt)}</span>
             </div>
             <div class="message-body">
                 ${this.linkifyText(this.escapeHtml(msg.message || ""))}

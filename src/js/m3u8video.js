@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", function () {
   let currentPlayingElement = null;
   let hlsInstance = null;
   let dashPlayerInstance = null;
-  let fallbackHlsInstance = null;
   const titleNow = document.getElementById("selected-video-title");
   const videoPlayer = document.getElementById("video-player");
   const subtitleElement = document.getElementById("dash-subtitles");
@@ -26,8 +25,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const searchChannel = document.getElementById("searchChannel");
   const customStreamToggleBtn = document.getElementById("customStreamToggle");
   const customStreamPanel = document.getElementById("customStreamPanel");
-  const defaultGenre = "videos/jpvideos";
-  const defaultGenreName = "Japanese";
   const m3uURLInput = document.getElementById("m3uURL");
   const channelThumbCache = {};
 
@@ -170,13 +167,6 @@ document.addEventListener("DOMContentLoaded", function () {
       hlsInstance.destroy();
       hlsInstance = null;
     }
-    if (fallbackHlsInstance) {
-      hlsInstance.detachMedia();
-      fallbackHlsInstance.destroy();
-      fallbackHlsInstance = null;
-    }
-    videoPlayer.removeAttribute("src");
-    videoPlayer.load();
   }
 
   function cleanupDash() {
@@ -185,6 +175,12 @@ document.addEventListener("DOMContentLoaded", function () {
       dashPlayerInstance.destroy();
       dashPlayerInstance = null;
     }
+  }
+
+  function cleanupVideo() {
+    videoPlayer.pause();
+    videoPlayer.removeAttribute("src");
+    videoPlayer.load();
   }
 
   function proxyUrl(url) {
@@ -214,9 +210,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   async function tryDirect(url) {
-    videoPlayer.pause();
-    videoPlayer.removeAttribute("src");
-    videoPlayer.load();
+    cleanupVideo();
     try {
       videoPlayer.src = url;
       await videoPlayer.play();
@@ -238,15 +232,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  async function tryHls(url, isFallback = false) {
+  async function tryHls(url) {
     const { Hls } = hlsModules;
     const hlsInst = new Hls(HLS_OPTIONS);
-    if (isFallback) fallbackHlsInstance = hlsInst;
-    else hlsInstance = hlsInst;
+    hlsInstance = hlsInst;
 
-    videoPlayer.pause();
-    videoPlayer.removeAttribute("src");
-    videoPlayer.load();
+    cleanupVideo();
 
     hlsInst.attachMedia(videoPlayer);
     hlsInst.loadSource(url);
@@ -456,9 +447,7 @@ document.addEventListener("DOMContentLoaded", function () {
         screen.orientation.unlock();
       }
 
-      videoPlayer.pause();
-      videoPlayer.removeAttribute("src");
-      videoPlayer.load();
+      cleanupVideo();
 
       if (hlsInstance) {
         hlsInstance.destroy();
@@ -468,11 +457,6 @@ document.addEventListener("DOMContentLoaded", function () {
       if (dashPlayerInstance) {
         dashPlayerInstance.destroy();
         dashPlayerInstance = null;
-      }
-
-      if (fallbackHlsInstance) {
-        fallbackHlsInstance.destroy();
-        fallbackHlsInstance = null;
       }
 
       if (titleNow) {
