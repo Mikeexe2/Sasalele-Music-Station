@@ -127,11 +127,19 @@
               type="button"
               class="btn btn-sm btn-primary rounded-circle"
               id="customStreamToggle"
-              title="Custom Stream"
+              title="Custom Stream / Import Playlist"
               aria-label="Toggle Custom Stream"
               data-state="closed"
             >
               <i class="fas fa-link"></i>
+            </button>
+            <button
+              type="button"
+              class="btn btn-sm btn-outline-warning rounded-circle"
+              id="favoritesOnlyToggle"
+              title="Show Favorites Only"
+            >
+              <i class="fa-star-outline"></i>
             </button>
           </div>
         </div>
@@ -143,21 +151,86 @@
             style="display: none"
           >
             <div class="stream-content">
-              <div class="input-group">
-                <input
-                  type="search"
-                  id="m3uURL"
-                  class="form-control"
-                  placeholder="Paste your .m3u8, .mp4, or .mpd link here"
-                />
-                <button
-                  class="btn btn-primary"
-                  id="loadM3U"
-                  type="button"
-                  aria-label="Play Stream"
-                >
-                  <i class="fas fa-play"></i>
-                </button>
+              <ul class="nav nav-pills nav-fill mb-2" id="customStreamTabs">
+                <li class="nav-item">
+                  <button
+                    class="nav-link active"
+                    type="button"
+                    id="tabPlayUrl"
+                    data-target="playUrlTab"
+                  >
+                    Play URL
+                  </button>
+                </li>
+                <li class="nav-item">
+                  <button
+                    class="nav-link"
+                    type="button"
+                    id="tabImportPlaylist"
+                    data-target="importPlaylistTab"
+                  >
+                    Import Playlist
+                  </button>
+                </li>
+              </ul>
+
+              <div id="playUrlTab" class="stream-tab-pane">
+                <div class="input-group">
+                  <input
+                    type="search"
+                    id="m3uURL"
+                    class="form-control"
+                    placeholder="Paste your .m3u8, .mp4, or .mpd link here"
+                  />
+                  <button
+                    class="btn btn-primary"
+                    id="loadM3U"
+                    type="button"
+                    aria-label="Play Stream"
+                  >
+                    <i class="fas fa-play"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div
+                id="importPlaylistTab"
+                class="stream-tab-pane"
+                style="display: none"
+              >
+                <div class="input-group mb-2">
+                  <input
+                    type="search"
+                    id="importPlaylistURL"
+                    class="form-control"
+                    placeholder="Paste a .m3u / .m3u8 playlist URL"
+                  />
+                  <button
+                    class="btn btn-primary"
+                    id="importPlaylistURLBtn"
+                    type="button"
+                    aria-label="Import Playlist from URL"
+                  >
+                    <i class="fas fa-file-import"></i>
+                  </button>
+                </div>
+                <div id="importDropZone" class="import-drop-zone">
+                  <i class="fas fa-cloud-upload-alt"></i>
+                  <p class="mb-1">Drag &amp; drop an .m3u / .m3u8 file here</p>
+                  <p class="mb-2 text-muted small">or</p>
+                  <label
+                    for="importFileInput"
+                    class="btn btn-sm btn-outline-primary mb-0"
+                  >
+                    Choose File
+                  </label>
+                  <input
+                    type="file"
+                    id="importFileInput"
+                    accept=".m3u,.m3u8,audio/x-mpegurl,application/vnd.apple.mpegurl"
+                    hidden
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -226,6 +299,30 @@
                   placeholder="Search Channel"
                 />
               </div>
+              <div class="d-flex align-items-center gap-2 mb-2 list-toolbar">
+                <button
+                  type="button"
+                  class="btn btn-sm btn-outline-secondary"
+                  id="multiSelectToggle"
+                  title="Select multiple streams to export"
+                  aria-pressed="false"
+                >
+                  <i class="fas fa-list-check"></i> Select
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-sm btn-success ms-auto"
+                  id="downloadSelectedBtn"
+                  style="display: none"
+                >
+                  <i class="fas fa-download"></i> Download Selected
+                  <span
+                    id="selectedCount"
+                    class="badge text-bg-light text-dark ms-1"
+                    >0</span
+                  >
+                </button>
+              </div>
               <div id="video-list" class="list-group w-100"></div>
             </div>
           </div>
@@ -234,8 +331,7 @@
           <div class="alert alert-info mt-4" role="alert" style="opacity: 0.95">
             <strong>Note:</strong> Video streams are collected from publicly
             available sources. Playback availability may vary depending on your
-            network or regional restrictions. For the best viewing experience,
-            using a VPN is recommended. You may also try refreshing the page.
+            network or regional restrictions. VPN is recommended.
           </div>
           <div class="accordion" id="infoAccordion">
             <div class="accordion-item">
@@ -248,7 +344,7 @@
                   aria-expanded="false"
                   aria-controls="collapseOne"
                 >
-                  Where to find links?
+                  What kind of M3U file is supported?
                 </button>
               </h2>
               <div
@@ -259,77 +355,38 @@
               >
                 <div class="accordion-body">
                   <p>
-                    You can find <strong>.M3U8</strong>, <strong>.MP4</strong>,
-                    and <strong>.MPD</strong> links on various video streaming
-                    platforms, media servers, or video hosting sites. Look for
-                    links that start with "http://" or "https://" followed by
-                    the file extension (.m3u8, .mp4, or .mpd). These links are
-                    often provided by streaming services or can be found in the
-                    "share" or "embed" options of the video you're watching.
+                    This player supports
+                    <strong>Extended M3U</strong> and
+                    <strong>M3U8</strong> playlist files or a valid m3u links.
                   </p>
 
+                  <h5>File Requirements:</h5>
                   <ul>
-                    <li>Paste an M3U8 URL above</li>
-                    <li>Click play to start streaming</li>
+                    <li>
+                      <strong>Supported Extensions:</strong>
+                      <code>.m3u</code> or <code>.m3u8</code>
+                    </li>
+                    <li>
+                      <strong>Encoding:</strong> UTF-8 (recommended for special
+                      characters and international titles).
+                    </li>
+                    <li>
+                      <strong>Stream Protocols:</strong> Direct HTTP/HTTPS links
+                      pointing to HLS (<code>.m3u8</code>), MP4, .mpd or live
+                      video streams.
+                    </li>
                   </ul>
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingTwo">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseTwo"
-                  aria-expanded="false"
-                  aria-controls="collapseTwo"
-                >
-                  What is HLS?
-                </button>
-              </h2>
-              <div
-                id="collapseTwo"
-                class="accordion-collapse collapse"
-                aria-labelledby="headingTwo"
-                data-bs-parent="#infoAccordion"
-              >
-                <div class="accordion-body">
-                  <p>
-                    HLS (HTTP Live Streaming) is a protocol for delivering media
-                    over the internet. It breaks streams into small segments for
-                    smooth playback, often described by M3U8 playlists.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingFive">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseFive"
-                  aria-expanded="false"
-                  aria-controls="collapseFive"
-                >
-                  What is MPEG-DASH?
-                </button>
-              </h2>
-              <div
-                id="collapseFive"
-                class="accordion-collapse collapse"
-                aria-labelledby="headingFive"
-                data-bs-parent="#infoAccordion"
-              >
-                <div class="accordion-body">
-                  <p>
-                    MPEG-DASH (Dynamic Adaptive Streaming over HTTP) is an
-                    international standard for media streaming. Like HLS, it
-                    breaks content into small segments, but it uses an XML-based
-                    manifest file (.mpd) to provide high-quality playback that
-                    adapts to your internet speed in real-time.
-                  </p>
+                  <h5>Expected File Format:</h5>
+                  <pre class="p-2 rounded"><code>#EXTM3U
+#EXTINF:-1 group-title="Live TV", Channel Name 1
+https://example.com/live/stream1/index.m3u8
+
+#EXTINF:-1 group-title="Movies", Movie Title 2
+https://example.com/vod/movie2.m3u8</code></pre>
+                  <p>OR</p>
+                  <pre
+                    class="p-2 rounded"
+                  ><code>https://raw.githubusercontent.com/username/repo_name/refs/heads/main/playlists/some_videos.m3u</code></pre>
                 </div>
               </div>
             </div>
@@ -354,9 +411,13 @@
               >
                 <div class="accordion-body">
                   <p>
-                    Some streams may not play due to network restrictions or
-                    browser limitations. If you have issues, try refreshing,
-                    using a VPN, or installing a browser extension like
+                    The page is served over https. So if the stream url is not
+                    https but http, the browser may throw a warning. The content
+                    fails to load. Disable web security in your browser to get
+                    around this. Some streams may not play due to network
+                    restrictions or browser limitations. If you have issues, try
+                    refreshing, using a VPN, or installing a browser extension
+                    like
                     <a
                       href="https://chromewebstore.google.com/detail/native-hls-playback/emnphkkblegpebimobpbekeedfgemhof"
                       target="_blank"
@@ -404,6 +465,29 @@
           </div>
         </div>
       </section>
+      <div id="sidePanel" class="side-window-panel">
+        <div class="d-flex align-items-center">
+          <div class="flex-grow-1 text-center">
+            <button class="btn btn-sm btn-outline-primary active">
+              Chat
+            </button>
+          </div>
+          <button id="hideButton" aria-label="Close" class="btn-close"></button>
+        </div>
+        <div class="container-fluid">
+          <div class="joinform" id="supportJoinForm"></div>
+          <div class="chat_container" id="supportChat"></div>
+        </div>
+      </div>
+      <div class="chathold">
+        <button
+          id="toggleButton"
+          aria-expanded="false"
+          class="align-items-center justify-content-center"
+        >
+          <i class="fas fa-comments"></i>
+        </button>
+      </div>
       <div id="waline"></div>
 
       <section class="footer py-1 mt-auto">

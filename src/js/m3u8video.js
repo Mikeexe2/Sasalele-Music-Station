@@ -7,14 +7,25 @@ import "media-chrome";
 import { ref, get, onValue } from "firebase/database";
 import { db } from "./utils.js";
 import { generateDropdown } from "./stats.js";
+import { ChatApp } from "./chat.js";
+import { createIcon } from "./icons.js";
 let hlsModules;
 let dashModules = null;
 
+const FAVORITES_STORAGE_KEY = "m3u8_favorite_streams";
+
 document.addEventListener("DOMContentLoaded", function () {
   let currentVideos = [];
+  let currentPlayingLink = null;
   let currentPlayingElement = null;
   let hlsInstance = null;
   let dashPlayerInstance = null;
+
+  let favorites = loadFavorites();
+  let showFavoritesOnly = false;
+  let multiSelectMode = false;
+  let selectedLinks = new Set();
+
   const titleNow = document.getElementById("selected-video-title");
   const videoPlayer = document.getElementById("video-player");
   const subtitleElement = document.getElementById("dash-subtitles");
@@ -27,6 +38,32 @@ document.addEventListener("DOMContentLoaded", function () {
   const customStreamPanel = document.getElementById("customStreamPanel");
   const m3uURLInput = document.getElementById("m3uURL");
   const channelThumbCache = {};
+
+  const tabPlayUrl = document.getElementById("tabPlayUrl");
+  const tabImportPlaylist = document.getElementById("tabImportPlaylist");
+  const playUrlTab = document.getElementById("playUrlTab");
+  const importPlaylistTab = document.getElementById("importPlaylistTab");
+  const importPlaylistURLInput = document.getElementById("importPlaylistURL");
+  const importPlaylistURLBtn = document.getElementById("importPlaylistURLBtn");
+  const importDropZone = document.getElementById("importDropZone");
+  const importFileInput = document.getElementById("importFileInput");
+
+  const favoritesOnlyToggle = document.getElementById("favoritesOnlyToggle");
+  const multiSelectToggle = document.getElementById("multiSelectToggle");
+  const downloadSelectedBtn = document.getElementById("downloadSelectedBtn");
+  const selectedCountBadge = document.getElementById("selectedCount");
+
+  new ChatApp({
+    chatPath: "chats/videochat",
+    containerEl: document.getElementById("supportChat"),
+    joinFormEl: document.getElementById("supportJoinForm"),
+    storageKey: "name",
+    panel: {
+      panelEl: document.getElementById("sidePanel"),
+      toggleEl: document.getElementById("toggleButton"),
+      closeEl: document.getElementById("hideButton"),
+    },
+  });
 
   function openPanel(panel, button) {
     panel.style.display = "block";
@@ -52,12 +89,44 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  function activateTab(target) {
+    const tabs = [
+      { btn: tabPlayUrl, pane: playUrlTab, key: "playUrlTab" },
+      {
+        btn: tabImportPlaylist,
+        pane: importPlaylistTab,
+        key: "importPlaylistTab",
+      },
+    ];
+    tabs.forEach(({ btn, pane, key }) => {
+      const isActive = key === target;
+      btn.classList.toggle("active", isActive);
+      pane.style.display = isActive ? "block" : "none";
+    });
+  }
+
+  if (tabPlayUrl && tabImportPlaylist) {
+    tabPlayUrl.addEventListener("click", () => activateTab("playUrlTab"));
+    tabImportPlaylist.addEventListener("click", () =>
+      activateTab("importPlaylistTab"),
+    );
+  }
+
   m3uURLInput.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
       event.preventDefault();
       loadM3UButton.click();
     }
   });
+
+  if (importPlaylistURLInput) {
+    importPlaylistURLInput.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        importPlaylistURLBtn.click();
+      }
+    });
+  }
 
   document
     .getElementById("vidstopBtn")
@@ -80,15 +149,10 @@ document.addEventListener("DOMContentLoaded", function () {
   async function loadGenre(genre, genreName) {
     try {
       showLoadingSpinner();
-      console.log(genre);
       const videos = await fetchVideoLinks(genre);
       currentVideos = videos;
-      createVideoList(currentVideos);
+      renderVideoList();
       updateGenreInfo(genreName, currentVideos.length);
-      if (searchChannel && searchChannel.value.trim() !== "") {
-        const filteredVideos = filterVideoList(searchChannel.value);
-        createVideoList(filteredVideos);
-      }
     } catch (error) {
       console.error("Error loading genre:", error);
     }
@@ -104,44 +168,400 @@ document.addEventListener("DOMContentLoaded", function () {
     hideLoadingSpinner();
   }
 
+  function loadFavorites() {
+    try {
+      const raw = localStorage.getItem(FAVORITES_STORAGE_KEY);
+      return new Set(raw ? JSON.parse(raw) : []);
+    } catch (err) {
+      console.warn("Could not read favorites from localStorage:", err);
+      return new Set();
+    }
+  }
+
+  function saveFavorites() {
+    try {
+      localStorage.setItem(
+        FAVORITES_STORAGE_KEY,
+        JSON.stringify([...favorites]),
+      );
+    } catch (err) {
+      console.warn("Could not save favorites to localStorage:", err);
+    }
+  }
+
+  function toggleFavorite(link) {
+    if (favorites.has(link)) {
+      favorites.delete(link);
+    } else {
+      favorites.add(link);
+    }
+    saveFavorites();
+  }
+
+  favoritesOnlyToggle.addEventListener("click", () => {
+    showFavoritesOnly = !showFavoritesOnly;
+    favoritesOnlyToggle.classList.toggle("active", showFavoritesOnly);
+    favoritesOnlyToggle.setAttribute(
+      "aria-pressed",
+      showFavoritesOnly ? "true" : "false",
+    );
+    favoritesOnlyToggle.innerHTML = createIcon(
+      showFavoritesOnly ? "star" : "star-outline",
+    );
+    renderVideoList();
+  });
+
+  multiSelectToggle.addEventListener("click", () => {
+    multiSelectMode = !multiSelectMode;
+    selectedLinks.clear();
+    multiSelectToggle.classList.toggle("active", multiSelectMode);
+    multiSelectToggle.setAttribute(
+      "aria-pressed",
+      multiSelectMode ? "true" : "false",
+    );
+    downloadSelectedBtn.style.display = multiSelectMode
+      ? "inline-flex"
+      : "none";
+    updateSelectedCount();
+    renderVideoList();
+  });
+
+  downloadSelectedBtn.addEventListener("click", () => {
+    const selectedVideos = currentVideos.filter((v) =>
+      selectedLinks.has(v.link),
+    );
+    if (!selectedVideos.length) {
+      showNotification("No streams selected.", "warning");
+      return;
+    }
+    downloadM3U(selectedVideos, "selected-streams");
+  });
+
+  function updateSelectedCount() {
+    if (selectedCountBadge) {
+      selectedCountBadge.textContent = selectedLinks.size;
+    }
+  }
+
+  function buildM3UContent(videos) {
+    let content = "#EXTM3U\n";
+    videos.forEach((v) => {
+      content += `#EXTINF:-1,${v.title}\n${v.link}\n`;
+    });
+    return content;
+  }
+
+  function sanitizeFilename(name) {
+    return (
+      (name || "playlist")
+        .toString()
+        .replace(/[\\/:*?"<>|]/g, "")
+        .replace(/[\x00-\x1F\x7F]/g, "")
+        .trim()
+        .slice(0, 60) || "playlist"
+    );
+  }
+
+  function downloadM3U(videos, filenameBase) {
+    const content = buildM3UContent(videos);
+    const blob = new Blob([content], { type: "audio/x-mpegurl" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${sanitizeFilename(filenameBase)}.m3u8`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function parseM3U(text) {
+    const lines = text.split(/\r?\n/);
+    const videos = [];
+    let pendingTitle = null;
+    let pendingLogo = null;
+
+    for (let rawLine of lines) {
+      const line = rawLine.trim();
+      if (!line) continue;
+
+      if (line.startsWith("#EXTINF")) {
+        const commaIdx = line.indexOf(",");
+        pendingTitle =
+          commaIdx !== -1 ? line.slice(commaIdx + 1).trim() : "Untitled";
+        const logoMatch = line.match(/tvg-logo="([^"]*)"/i);
+        pendingLogo = logoMatch ? logoMatch[1] : null;
+        continue;
+      }
+
+      if (line.startsWith("#")) {
+        continue;
+      }
+
+      videos.push({
+        title: pendingTitle || line,
+        link: line,
+        logo: pendingLogo,
+      });
+      pendingTitle = null;
+      pendingLogo = null;
+    }
+
+    return videos;
+  }
+
+  function loadImportedPlaylist(videos, name) {
+    if (!videos.length) {
+      showNotification("No streams found in that playlist.", "warning");
+      return;
+    }
+    currentVideos = videos;
+    multiSelectMode = false;
+    selectedLinks.clear();
+    multiSelectToggle.classList.remove("active");
+    downloadSelectedBtn.style.display = "none";
+    renderVideoList();
+    updateGenreInfo(name, currentVideos.length);
+    showNotification(`Imported ${videos.length} streams.`, "success");
+    if (titleNow) {
+      titleNow.textContent = name;
+    }
+    closePanel(customStreamPanel, customStreamToggleBtn);
+  }
+
+  async function importM3UFile(file) {
+    try {
+      const text = await file.text();
+      const videos = parseM3U(text);
+      loadImportedPlaylist(videos, file.name.replace(/\.(m3u8?|txt)$/i, ""));
+    } catch (err) {
+      console.error("Error reading playlist file:", err);
+      showNotification(
+        `Could not read playlist file: ${err.message}`,
+        "warning",
+      );
+    }
+  }
+
+  async function importM3UFromURL(url) {
+    showLoadingSpinner();
+    try {
+      const text = await fetchPlaylistText(url);
+      const videos = parseM3U(text);
+      loadImportedPlaylist(videos, "Imported Playlist");
+    } catch (err) {
+      console.error("Error importing playlist from URL:", err);
+      showNotification(
+        `Failed to import playlist: ${err.message || err}`,
+        "warning",
+      );
+    } finally {
+      hideLoadingSpinner();
+    }
+  }
+
+  async function fetchPlaylistText(url) {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return await res.text();
+    } catch (directErr) {
+      const res = await fetch(proxyUrl(url));
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return await res.text();
+    }
+  }
+
+  if (importPlaylistURLBtn) {
+    importPlaylistURLBtn.addEventListener("click", () => {
+      const url = importPlaylistURLInput.value.trim();
+      if (!url) {
+        showNotification("Please enter a playlist URL.", "warning");
+        return;
+      }
+      importM3UFromURL(url);
+    });
+  }
+
+  if (importFileInput) {
+    importFileInput.addEventListener("change", (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (file) importM3UFile(file);
+      importFileInput.value = "";
+    });
+  }
+
+  if (importDropZone) {
+    ["dragenter", "dragover"].forEach((evtName) => {
+      importDropZone.addEventListener(evtName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        importDropZone.classList.add("drag-over");
+      });
+    });
+
+    ["dragleave", "dragend"].forEach((evtName) => {
+      importDropZone.addEventListener(evtName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        importDropZone.classList.remove("drag-over");
+      });
+    });
+
+    importDropZone.addEventListener("drop", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      importDropZone.classList.remove("drag-over");
+      const file = e.dataTransfer.files && e.dataTransfer.files[0];
+      if (file) {
+        importM3UFile(file);
+      } else {
+        showNotification("No file detected in drop.", "warning");
+      }
+    });
+  }
+  function getDisplayVideos() {
+    let list = currentVideos;
+
+    if (showFavoritesOnly) {
+      list = list.filter((v) => favorites.has(v.link));
+    }
+
+    if (searchChannel && searchChannel.value.trim() !== "") {
+      const query = searchChannel.value.toLowerCase();
+      list = list.filter((v) => v.title.toLowerCase().includes(query));
+    }
+
+    return list;
+  }
+
+  function renderVideoList() {
+    createVideoList(getDisplayVideos());
+  }
+
   function createVideoList(videos) {
     videoListElement.innerHTML = "";
+    videoListElement.scrollTop = 0;
+
+    if (!videos.length) {
+      const empty = document.createElement("div");
+      empty.className = "text-center text-muted py-3 video-list-empty";
+      empty.textContent = showFavoritesOnly
+        ? "No favorites yet — tap the star on a stream to add one."
+        : "No channels found.";
+      videoListElement.appendChild(empty);
+      return;
+    }
 
     videos.forEach((video) => {
       const listItem = document.createElement("li");
-      listItem.classList.add("list-group-item", "list-group-item-action");
-      listItem.textContent = video.title;
+      listItem.classList.add(
+        "list-group-item",
+        "list-group-item-action",
+        "video-item",
+      );
       listItem.dataset.link = video.link;
-      listItem.addEventListener("click", (event) => selectVideo(event.target));
+
+      if (multiSelectMode) {
+        const checkboxWrap = document.createElement("span");
+        checkboxWrap.className = "video-checkbox-wrap";
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.className = "form-check-input video-checkbox";
+        checkbox.setAttribute("aria-label", `Select ${video.title}`);
+        checkbox.checked = selectedLinks.has(video.link);
+        checkbox.addEventListener("click", (e) => e.stopPropagation());
+        checkbox.addEventListener("change", () => {
+          if (checkbox.checked) {
+            selectedLinks.add(video.link);
+          } else {
+            selectedLinks.delete(video.link);
+          }
+          updateSelectedCount();
+        });
+        checkboxWrap.appendChild(checkbox);
+        listItem.appendChild(checkboxWrap);
+      }
+
+      const titleSpan = document.createElement("span");
+      titleSpan.className = "video-title-text";
+      titleSpan.textContent = video.title;
+      listItem.appendChild(titleSpan);
+
+      const actions = document.createElement("span");
+      actions.className = "video-item-actions";
+
+      const isFavorite = favorites.has(video.link);
+      const starBtn = document.createElement("button");
+      starBtn.type = "button";
+      starBtn.className = "icon-btn star-btn" + (isFavorite ? " active" : "");
+      starBtn.setAttribute("aria-label", "Toggle favorite");
+      starBtn.title = isFavorite ? "Remove from favorites" : "Add to favorites";
+      starBtn.innerHTML = createIcon(isFavorite ? "star" : "star-outline");
+      starBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggleFavorite(video.link);
+        if (showFavoritesOnly) {
+          renderVideoList();
+        } else {
+          const nowFavorite = favorites.has(video.link);
+          starBtn.classList.toggle("active", nowFavorite);
+          starBtn.title = nowFavorite
+            ? "Remove from favorites"
+            : "Add to favorites";
+          starBtn.innerHTML = createIcon(nowFavorite ? "star" : "star-outline");
+        }
+      });
+      actions.appendChild(starBtn);
+
+      const dlBtn = document.createElement("button");
+      dlBtn.type = "button";
+      dlBtn.className = "icon-btn download-btn";
+      dlBtn.title = "Download this stream as .m3u8";
+      dlBtn.innerHTML = createIcon("download");
+      dlBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        downloadM3U([video], video.title);
+        showNotification(`Downloading ${video.title}...`, "success");
+      });
+      actions.appendChild(dlBtn);
+
+      listItem.appendChild(actions);
+
+      if (video.link === currentPlayingLink) {
+        listItem.classList.add("playing");
+      }
+
+      listItem.addEventListener("click", () => {
+        if (multiSelectMode) {
+          const checkbox = listItem.querySelector(".video-checkbox");
+          if (checkbox) {
+            checkbox.checked = !checkbox.checked;
+            checkbox.dispatchEvent(new Event("change"));
+          }
+          return;
+        }
+        selectVideo(listItem, video);
+      });
+
       videoListElement.appendChild(listItem);
     });
   }
 
-  function filterVideoList(query) {
-    const lowerCaseQuery = query.toLowerCase();
-    return currentVideos.filter((video) =>
-      video.title.toLowerCase().includes(lowerCaseQuery),
-    );
-  }
-
-  function selectVideo(element) {
-    const selectedLink = element.dataset.link;
-    const selectedTitle = element.textContent;
-
+  function selectVideo(element, video) {
     if (currentPlayingElement) {
-      currentPlayingElement.style.backgroundColor = "";
-      currentPlayingElement.style.color = "";
+      currentPlayingElement.classList.remove("playing");
     }
 
-    element.style.backgroundColor = "#a1d5a7";
-    element.style.color = "#000";
+    element.classList.add("playing");
     currentPlayingElement = element;
+    currentPlayingLink = video.link;
 
     if (titleNow) {
-      titleNow.textContent = selectedTitle;
+      titleNow.textContent = video.title;
     }
 
-    playMedia(selectedLink);
+    playMedia(video.link);
   }
 
   const HLS_OPTIONS = {
@@ -405,6 +825,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const Url = m3uURLInput.value;
       if (Url) {
         playMedia(Url);
+        currentPlayingLink = Url;
         showNotification("Loading...", "success");
         if (titleNow) {
           titleNow.textContent = "Videos";
@@ -475,9 +896,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (searchChannel) {
     searchChannel.addEventListener("input", function () {
-      const query = this.value;
-      const filteredVideos = filterVideoList(query);
-      createVideoList(filteredVideos);
+      renderVideoList();
     });
   }
 
