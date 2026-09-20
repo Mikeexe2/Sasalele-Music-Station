@@ -15,7 +15,15 @@ import {
   push,
 } from "firebase/database";
 import { db } from "./utils.js";
+import { onAuthChange } from "./auth.js";
+import {
+  addFavorite,
+  removeFavorite,
+  subscribeFavorites,
+  getStationId,
+} from "./favorites.js";
 import { createIcon } from "./icons.js";
+import { ChatApp } from "./chat.js";
 import { generateDropdown } from "./stats.js";
 
 const searchToggleBtn = document.getElementById("searchToggleBtn");
@@ -38,6 +46,7 @@ const copyIconSymbol = copyIcon.querySelector(".fa-copy");
 const confirmation = document.querySelector("#copyIcon .copy-confirmation");
 const searchIcon = document.getElementById("searchIcon");
 const stationSearch = document.getElementById("sasalelesearch");
+const favoritesViewBtn = document.getElementById("favoritesViewBtn");
 const searchInput = document.getElementById("searchInput");
 const searchButton = document.getElementById("searchButton");
 const searchResultsWrapper = document.getElementById("searchResultsWrapper");
@@ -49,9 +58,6 @@ const inneritunes = document.getElementById("itunesList");
 const innerdeezer = document.getElementById("deezerList");
 const metadataElement = document.getElementById("metadataDisplay");
 const genreSelect = document.getElementById("genre-select");
-const toggleButton = document.getElementById("toggleButton");
-const sidePanel = document.getElementById("sidePanel");
-const hideButton = document.getElementById("hideButton");
 const searchNavLink = document.querySelector(".search-nav-link");
 const playlistMenu = document.getElementById("playlistMenu");
 const acontainer = document.getElementById("hugeData");
@@ -74,10 +80,6 @@ const findRadioBtn = document.getElementById("radiosearch");
 const searchResultHeader = document.getElementById("radio-result-header");
 const mediaController = document.getElementById("media-controller");
 const aPlayer = document.getElementById("aplayer");
-const joinFormEl = document.querySelector(".joinform");
-const chatContainerEl = document.querySelector(".chat_container");
-const generalBtn = document.getElementById("generalChatBtn");
-const mixednutsBtn = document.getElementById("anotherChatBtn");
 const MAX_RETRIES = 3;
 const coolDown = 1000;
 const proxyLink = import.meta.env.VITE_PROXY_LINK;
@@ -86,6 +88,8 @@ const nometadata = "No Metadata";
 const notactive = "Stream endpoint not active";
 const debouncedFilterStations = debounce(filterStations, 200);
 const searchCache = new Map();
+
+let activeStationMenu = null;
 let hlsPlayer = null;
 let hlsModules = null;
 let icecastPlayer = null;
@@ -106,8 +110,105 @@ let isSearching = false;
 let isStoppingPlayback = false;
 let shouldStopRetrying = false;
 let retryTimeoutId = null;
+let currentUid = null;
+let favoritesList = [];
+let favoritesMap = new Map();
+let unsubFavorites = null;
+let currentView = "genre";
+const stationById = new Map();
 
 // utility
+
+function closeStationMenu() {
+  if (!activeStationMenu) return;
+  const { panel, toggleBtn } = activeStationMenu;
+  panel.remove();
+  toggleBtn?.setAttribute("aria-expanded", "false");
+  activeStationMenu = null;
+}
+
+function openStationMenu(toggleBtn) {
+  const wasOpen = activeStationMenu?.toggleBtn === toggleBtn;
+  closeStationMenu();
+  if (wasOpen) return;
+  const li = toggleBtn.closest("li.station-item");
+  const id = li?.dataset.stationId;
+  const station = id ? stationById.get(id) : null;
+  if (!station) return;
+  const homepage = station.homepage || station.url || "#";
+  const isFav = favoritesMap.has(id);
+  const panel = document.createElement("div");
+  panel.className = "station-menu-panel";
+  panel.setAttribute("role", "menu");
+  panel.innerHTML = `
+    <button type="button"
+            class="station-menu-item favorite-button"
+            role="menuitem"
+            data-station-id="${id}"
+            aria-pressed="${isFav}">
+      ${createIcon(isFav ? "heart" : "heart-outline")}
+      <span>${isFav ? "Remove from favourites" : "Add to favourites"}</span>
+    </button>
+    <a class="station-menu-item external-link-btn" role="menuitem"
+       href="${homepage}" target="_blank" rel="noopener noreferrer">
+      ${createIcon("external-link-alt")}
+      <span>Visit homepage</span>
+    </a>
+    <button type="button" class="station-menu-item" role="menuitem"
+            data-action="download">
+      ${createIcon("file-arrow-down")}
+      <span>Download .m3u</span>
+    </button>
+  `;
+  document.body.appendChild(panel);
+  const btnRect = toggleBtn.getBoundingClientRect();
+  const panelRect = panel.getBoundingClientRect();
+  const gap = 6;
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  let top = btnRect.bottom + gap;
+  let left = btnRect.right - panelRect.width;
+  if (top + panelRect.height > vh - 8) {
+    const flippedTop = btnRect.top - panelRect.height - gap;
+    top = flippedTop >= 8 ? flippedTop : Math.max(8, vh - panelRect.height - 8);
+  }
+  if (left < 8) left = 8;
+  if (left + panelRect.width > vw - 8) {
+    left = vw - panelRect.width - 8;
+  }
+  panel.style.top = `${top}px`;
+  panel.style.left = `${left}px`;
+  const favBtn = panel.querySelector(".favorite-button");
+  favBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    handleFavoriteClick(favBtn);
+    closeStationMenu();
+  });
+  panel
+    .querySelector('[data-action="download"]')
+    .addEventListener("click", () => {
+      closeStationMenu();
+      const media = stationById.get(id);
+      if (media?.url) {
+        showNotification(`Downloading ${media.name}...`, "success");
+        RadioM3UDownload(media.url, media.name);
+      }
+    });
+  panel.querySelector("a.station-menu-item").addEventListener("click", () => {
+    closeStationMenu();
+  });
+  toggleBtn.setAttribute("aria-expanded", "true");
+  activeStationMenu = { panel, toggleBtn };
+}
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeStationMenu();
+});
+window.addEventListener("scroll", closeStationMenu, true);
+window.addEventListener("resize", closeStationMenu);
+window.addEventListener("orientationchange", closeStationMenu);
+
 const getValidMetadata = (actionName) => {
   const content = metadataElement.textContent.trim();
   const invalidStates = [
@@ -157,18 +258,9 @@ function closePanel(panel, button) {
   button.setAttribute("data-state", "closed");
 }
 
-function togglePanel() {
-  sidePanel.classList.toggle("open");
-  const isNowOpen = sidePanel.classList.contains("open");
-  toggleButton.setAttribute("aria-expanded", isNowOpen);
-  toggleButton.innerHTML = createIcon(isNowOpen ? "times" : "comments");
-}
-
 function updatePlayerUI(media) {
   coverImage.src = `${media.favicon ? media.favicon : "/assets/radios/Unidentified2.webp"}`;
   nowPlaying.innerHTML = `<a href="${media.homepage || media.url}" target="_blank" rel="noopener noreferrer" class="homepagelink" title="Visit ${media.name} homepage">${media.name}</a>`;
-  //metaSource.style.display = 'inline-block';
-  //metaSource.textContent = `${media.host}`;
 }
 
 function displayRecentTracks() {
@@ -295,18 +387,19 @@ async function loadStations(genre) {
     const snapshot = await get(stationsQuery);
 
     if (snapshot.exists()) {
-      currentStationsList = [];
+      const list = [];
       snapshot.forEach((childSnapshot) => {
-        currentStationsList.push({
+        list.push({
           id: childSnapshot.key,
           ...childSnapshot.val(),
         });
       });
-      currentStationsList.reverse();
-      renderStations(currentStationsList);
+      list.reverse();
+      renderStations(list);
     } else {
       selectedContainer.innerHTML =
         '<p class="no-stations">No stations available</p>';
+      stationCount.textContent = "0";
     }
   } catch (err) {
     console.error("Error fetching stations:", err);
@@ -331,7 +424,7 @@ function attachGenreListeners() {
         inline: "center",
         block: "nearest",
       });
-
+      currentView = "genre";
       loadStations(genre);
     });
   });
@@ -342,6 +435,256 @@ function updateToggleIcon() {
   toggleIcon.innerHTML = isMinimized
     ? createIcon("expand")
     : createIcon("compress");
+}
+
+function generateStationId() {
+  if (typeof crypto !== "undefined" && crypto.randomUUID) {
+    return `imported_${crypto.randomUUID()}`;
+  }
+  return `imported_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
+}
+
+function parseM3U(content, sourceName = "Imported Playlist") {
+  if (!content || typeof content !== "string") return [];
+
+  const lines = content.split(/\r?\n/);
+  const stations = [];
+  const attrRegex = /([a-zA-Z0-9_-]+)="([^"]*)"/g;
+
+  let pending = null;
+  let index = 0;
+
+  for (const raw of lines) {
+    const line = raw.trim();
+    if (!line) continue;
+
+    if (line.toUpperCase().startsWith("#EXTM3U")) continue;
+
+    if (line.toUpperCase().startsWith("#EXTINF:")) {
+      const commaIdx = line.indexOf(",");
+      const metaPart = commaIdx >= 0 ? line.slice(0, commaIdx) : line;
+      const displayName = commaIdx >= 0 ? line.slice(commaIdx + 1).trim() : "";
+
+      const attrs = {};
+      let m;
+      attrRegex.lastIndex = 0;
+      while ((m = attrRegex.exec(metaPart)) !== null) {
+        attrs[m[1].toLowerCase()] = m[2];
+      }
+
+      pending = {
+        name: displayName || attrs["tvg-name"] || "",
+        favicon:
+          attrs["tvg-logo"] || attrs["logo"] || attrs["logo-small"] || "",
+        group: attrs["group-title"] || "",
+        tvgId: attrs["tvg-id"] || "",
+      };
+      continue;
+    }
+
+    if (line.toUpperCase().startsWith("#EXTGRP:")) {
+      const group = line.slice(8).trim();
+      if (!pending) pending = { name: "", favicon: "", group: "" };
+      pending.group = group || pending.group;
+      continue;
+    }
+
+    if (line.startsWith("#")) continue;
+
+    if (!/^[a-z][a-z0-9+.-]*:\/\//i.test(line)) continue;
+
+    const id = generateStationId();
+
+    stations.push({
+      id,
+      url: line,
+      name: pending?.name || `Track ${index + 1}`,
+      favicon: pending?.favicon || "/assets/radios/Unidentified2.webp",
+      homepage: "",
+      host: "external",
+      tags: "",
+      api: "",
+      importedFrom: sourceName,
+    });
+
+    pending = null;
+    index++;
+  }
+
+  return stations;
+}
+
+function setupCustomStreamTabs() {
+  const tabs = document.querySelectorAll("#customStreamTabs .nav-link");
+  if (!tabs.length) return;
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      tabs.forEach((t) => t.classList.remove("active"));
+      tab.classList.add("active");
+
+      const targetId = tab.dataset.target;
+      ["playUrlTab", "importPlaylistTab"].forEach((id) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.style.display = id === targetId ? "" : "none";
+      });
+    });
+  });
+}
+
+function setupImportPlaylist() {
+  const urlInput = document.getElementById("importPlaylistURL");
+  const urlBtn = document.getElementById("importPlaylistURLBtn");
+  const dropZone = document.getElementById("importDropZone");
+  const fileInput = document.getElementById("importFileInput");
+
+  if (urlInput && urlBtn) {
+    urlBtn.disabled = urlInput.value.trim().length === 0;
+    urlInput.addEventListener("input", () => {
+      urlBtn.disabled = urlInput.value.trim().length === 0;
+    });
+    urlInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter" && !urlBtn.disabled) {
+        e.preventDefault();
+        urlBtn.click();
+      }
+    });
+    urlBtn.addEventListener("click", () => {
+      const url = urlInput.value.trim();
+      if (!isValidUrl(url)) {
+        showNotification("Invalid playlist URL", "warning");
+        return;
+      }
+      importPlaylistFromURL(url);
+    });
+  }
+
+  if (fileInput) {
+    fileInput.addEventListener("change", (e) => {
+      const file = e.target.files?.[0];
+      if (file) readPlaylistFile(file);
+      fileInput.value = "";
+    });
+  }
+
+  if (dropZone) {
+    const setDrag = (on) => dropZone.classList.toggle("drag-over", on);
+
+    ["dragenter", "dragover"].forEach((evt) =>
+      dropZone.addEventListener(evt, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setDrag(true);
+      }),
+    );
+    ["dragleave", "dragend"].forEach((evt) =>
+      dropZone.addEventListener(evt, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setDrag(false);
+      }),
+    );
+    dropZone.addEventListener("drop", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setDrag(false);
+      const file = e.dataTransfer?.files?.[0];
+      if (file) readPlaylistFile(file);
+    });
+
+    dropZone.addEventListener("click", (e) => {
+      if (e.target.closest("label, input")) return;
+      fileInput?.click();
+    });
+  }
+
+  ["dragover", "drop"].forEach((evt) =>
+    window.addEventListener(
+      evt,
+      (e) => {
+        if (!e.target.closest?.("#importDropZone")) e.preventDefault();
+      },
+      false,
+    ),
+  );
+}
+
+function readPlaylistFile(file) {
+  const MAX_SIZE = 5 * 1024 * 1024; // 5 MB
+  if (file.size > MAX_SIZE) {
+    showNotification("Playlist file too large (max 5MB)", "warning");
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      applyImportedPlaylist(String(reader.result || ""), file.name);
+    } catch (err) {
+      console.error("[M3U] parse failed:", err);
+      showNotification("Failed to parse playlist", "danger");
+    }
+  };
+  reader.onerror = () => showNotification("Failed to read file", "danger");
+  reader.readAsText(file, "utf-8");
+}
+
+async function importPlaylistFromURL(url) {
+  showNotification("Loading playlist...", "info");
+
+  const tryFetch = async (target) => {
+    const res = await fetch(target, { mode: "cors" });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return res.text();
+  };
+
+  try {
+    const content = await tryFetch(url);
+    const name = decodeURIComponent(
+      url.split("/").pop() || "Imported Playlist",
+    );
+    applyImportedPlaylist(content, name);
+  } catch (err) {
+    console.warn("[M3U] direct fetch failed, trying proxy:", err);
+    if (proxyLink && !url.startsWith(proxyLink)) {
+      try {
+        const content = await tryFetch(proxyLink + url);
+        const name = decodeURIComponent(
+          url.split("/").pop() || "Imported Playlist",
+        );
+        applyImportedPlaylist(content, name);
+        return;
+      } catch (err2) {
+        console.error("[M3U] proxy fetch also failed:", err2);
+      }
+    }
+    showNotification("Failed to load playlist", "danger");
+  }
+}
+
+function applyImportedPlaylist(content, sourceName) {
+  const stations = parseM3U(content, sourceName);
+
+  if (stations.length === 0) {
+    showNotification("No stations found in this playlist", "warning");
+    return;
+  }
+
+  currentView = "imported";
+
+  document.querySelector(".genre-pill.active")?.classList.remove("active");
+
+  currentSearchTerm = "";
+  if (stationSearch) stationSearch.value = "";
+
+  const headerText = `<div class="search-terms">Imported: ${sourceName} <span class="searchTerms">(${stations.length}) </span><div>`;
+  renderStations(stations, { headerText });
+
+  if (customStreamPanel && customStreamToggleBtn) {
+    closePanel(customStreamPanel, customStreamToggleBtn);
+  }
+
+  showNotification(`Imported ${stations.length} stations`, "success");
 }
 
 function initializeUI() {
@@ -358,10 +701,6 @@ function initializeUI() {
     playerContainer.classList.toggle("minimized");
     updateToggleIcon();
   });
-
-  if (hideButton) {
-    hideButton.addEventListener("click", togglePanel);
-  }
 
   searchToggleBtn.addEventListener("click", () => {
     const isOpen = searchPanel.style.display !== "none";
@@ -384,6 +723,9 @@ function initializeUI() {
       closePanel(searchPanel, searchToggleBtn);
     }
   });
+
+  setupCustomStreamTabs();
+  setupImportPlaylist();
 
   searchOption.addEventListener("change", handleSearchOptionChange);
 
@@ -419,14 +761,12 @@ function initializeUI() {
     playMedia(customStreamMedia, fakeButton);
   });
 
-  if (toggleButton) {
-    toggleButton.addEventListener("click", togglePanel);
-  }
-
   stationSearch.addEventListener("input", function () {
     currentSearchTerm = this.value;
     debouncedFilterStations();
   });
+
+  favoritesViewBtn.addEventListener("click", openFavoritesView);
 
   stopBtn.addEventListener("click", () => {
     stopPlayback();
@@ -449,6 +789,35 @@ function initializeUI() {
       }, 1500);
     } catch (err) {
       console.error("Failed to copy: ", err);
+    }
+  });
+
+  onAuthChange((user) => {
+    currentUid = user?.uid || null;
+
+    if (unsubFavorites) {
+      unsubFavorites();
+      unsubFavorites = null;
+    }
+
+    if (currentUid) {
+      unsubFavorites = subscribeFavorites(currentUid, (list) => {
+        favoritesList = list;
+        favoritesMap = new Map(list.map((f) => [f.id, f]));
+        updateFavoritesCount();
+        onFavoritesChanged();
+      });
+    } else {
+      favoritesList = [];
+      favoritesMap = new Map();
+      updateFavoritesCount();
+      onFavoritesChanged();
+    }
+  });
+
+  selectedContainer.addEventListener("click", (e) => {
+    if (e.target.closest("#open-auth-btn")) {
+      window.dispatchEvent(new CustomEvent("open-chat-panel"));
     }
   });
 
@@ -533,57 +902,205 @@ function handleSearchNavClick(e) {
   }
 }
 
-function renderStations(stations) {
+function updateFavoritesCount() {
+  const badge = document.getElementById("favoritesCount");
+  if (!badge) return;
+  const n = favoritesList.length;
+  badge.textContent = String(n);
+  badge.style.display = n > 0 ? "" : "none";
+}
+
+function onFavoritesChanged() {
+  if (currentView === "favorites") {
+    renderFavoritesView();
+  } else {
+    refreshFavoriteHearts();
+  }
+}
+
+function refreshFavoriteHearts() {
+  const items = selectedContainer.querySelectorAll("li.station-item");
+  items.forEach((el) => {
+    const id = el.dataset.stationId;
+    if (!id) return;
+    const heartBtn = el.querySelector(".favorite-button");
+    if (!heartBtn) return;
+    const isFav = favoritesMap.has(id);
+    heartBtn.setAttribute("aria-pressed", String(isFav));
+    heartBtn.title = isFav ? "Remove from favourites" : "Add to favourites";
+    heartBtn.innerHTML = createIcon(isFav ? "heart" : "heart-outline");
+  });
+}
+
+function openFavoritesView() {
+  currentView = "favorites";
+  currentSearchTerm = "";
+  stationSearch.value = "";
   if (searchResultHeader) {
     searchResultHeader.style.display = "none";
   }
+  document.querySelector(".genre-pill.active")?.classList.remove("active");
+  renderFavoritesView();
+}
+
+function renderFavoritesView() {
+  const scrollTop = selectedContainer.scrollTop;
+
+  if (!currentUid) {
+    selectedContainer.innerHTML = `
+      <div class="text-center p-5 opacity-75">
+         ${createIcon("heart")}
+        <p mt-3>Sign in to save and view your favourite stations.</p>
+        <button id="open-auth-btn" class="btn btn-primary btn-sm">Sign In / Sign Up</button>
+      </div>`;
+    stationCount.textContent = "0";
+    return;
+  }
+
+  if (favoritesList.length === 0) {
+    selectedContainer.innerHTML = `
+      <div class="text-center p-5 opacity-75">
+        ${createIcon("heart")}
+        <p mt-3>No favourites yet.</p>
+        <p class="small">Tap the heart on any station to add it here.</p>
+      </div>`;
+    stationCount.textContent = "0";
+    return;
+  }
+
+  renderStations(favoritesList, { favoritesView: true });
+
+  if (currentSearchTerm && currentSearchTerm.trim() !== "") {
+    filterStations();
+  }
+
+  selectedContainer.scrollTop = scrollTop;
+}
+
+async function handleFavoriteClick(btn) {
+  if (!currentUid) {
+    showNotification("Sign in to save favourites", "warning");
+    window.dispatchEvent(new CustomEvent("open-chat-panel"));
+    return;
+  }
+  if (btn.hasAttribute("data-processing")) return;
+  btn.setAttribute("data-processing", "true");
+  setTimeout(() => btn.removeAttribute("data-processing"), 800);
+
+  const id = btn.dataset.stationId;
+  const station = stationById.get(id);
+  if (!station) return;
+
+  const isFav = favoritesMap.has(id);
+
+  try {
+    if (isFav) {
+      await removeFavorite(currentUid, id);
+    } else {
+      await addFavorite(currentUid, station);
+    }
+  } catch (err) {
+    console.error("[favorite] toggle failed:", err);
+    showNotification("Failed to update favourites", "danger");
+  }
+}
+
+function renderStations(stations, options = {}) {
+  const { favoritesView = false, headerText = null } = options;
+
+  if (searchResultHeader) {
+    if (headerText) {
+      searchResultHeader.innerHTML = headerText;
+      searchResultHeader.style.display = "block";
+    } else {
+      searchResultHeader.style.display = "none";
+    }
+  }
+
+  currentStationsList = stations;
+
+  stationById.clear();
+  stations.forEach((s) => {
+    stationById.set(getStationId(s), s);
+  });
+
+  window.currentlyActiveLi = null;
+
   if (stations.length === 0) {
-    selectedContainer.innerHTML =
-      '<p class="no-stations">No stations available in this genre</p>';
+    selectedContainer.innerHTML = favoritesView
+      ? '<p class="no-stations">No favourites yet</p>'
+      : '<p class="no-stations">No stations available in this genre</p>';
+    stationCount.textContent = "0";
     return;
   }
 
   const genreHTML = stations
     .map((station, index) => {
+      const id = getStationId(station);
+      const isFav = favoritesMap.has(id);
       const tags = station.tags || [];
       const tagsHTML = tags
         .map((tag) => `<span class="tagger">${tag}</span>`)
         .join("");
 
       return `
-        <li data-index="${index}" class="align-items-center station-item">
-            <img src="${station.favicon || "assets/radios/Unidentified2.webp"}" 
-                 alt="${station.name}" 
-                 class="station-img">
-            <div class="flex-grow-1 info">
-                <h5>${station.name}</h5>
-                <div class="d-flex flex-wrap">
-                    ${tagsHTML}
-                </div>
-            </div>
-            <div class="ms-3 d-flex button-group">
-                <a href="${station.homepage || station.url}" target="_blank" rel="noopener noreferrer" class="btn btn-sm p-btn">
-                    ${createIcon("external-link-alt")}
-                </a>
-                <button class="btn btn-sm p-btn download-button">
-                ${createIcon("file-arrow-down")}
-                </button>
-                <button class="btn btn-sm p-btn main-play-button">
-                ${createIcon("play")}
-                </button>
-            </div>
-        </li>`;
+  <li data-index="${index}" data-station-id="${id}" class="align-items-center station-item">
+      <img src="${station.favicon || "assets/radios/Unidentified2.webp"}"
+           alt="${station.name}"
+           class="station-img">
+
+      <div class="flex-grow-1 info"
+           role="button" tabindex="0"
+           aria-label="Play ${station.name}">
+          <h5>${station.name}</h5>
+          <div class="d-flex flex-wrap tags-row">
+              ${tagsHTML}
+          </div>
+      </div>
+
+      <div class="ms-2 d-flex button-group align-items-center">
+          <button class="btn btn-sm p-btn favorite-button desktop-only-btn"
+                  data-station-id="${id}"
+                  aria-pressed="${isFav}"
+                  title="${isFav ? "Remove from favourites" : "Add to favourites"}">
+                  ${createIcon(isFav ? "heart" : "heart-outline")}
+          </button>
+
+          <a href="${station.homepage || station.url}"
+             target="_blank" rel="noopener noreferrer"
+             class="btn btn-sm p-btn external-inline-btn desktop-only-btn">
+             ${createIcon("external-link-alt")}
+          </a>
+
+          <button class="btn btn-sm p-btn download-button desktop-only-btn">
+              ${createIcon("file-arrow-down")}
+          </button>
+
+          <button class="btn btn-sm p-btn station-menu-toggle"
+                  type="button"
+                  aria-haspopup="menu"
+                  aria-expanded="false"
+                  title="More actions">
+                  ${createIcon("ellipsis-vertical")}
+          </button>
+
+          <button class="btn btn-sm p-btn main-play-button">
+              ${createIcon("play")}
+          </button>
+      </div>
+  </li>`;
     })
     .join("");
 
   selectedContainer.innerHTML = genreHTML;
+
   if (currentStation) {
     const stationElements =
       selectedContainer.querySelectorAll("li.station-item");
     stationElements.forEach((el) => {
-      const index = el.dataset.index;
-      const stationAtThisIndex = currentStationsList[index];
-      if (stationAtThisIndex && stationAtThisIndex.url === currentStation.url) {
+      const id = el.dataset.stationId;
+      const stationHere = stationById.get(id);
+      if (stationHere && stationHere.url === currentStation.url) {
         const playButton = el.querySelector(".main-play-button");
         const currentMediaElement = mediaController && mediaController.media;
         const isCurrentlyPlaying = currentMediaElement
@@ -685,6 +1202,34 @@ randomplay.addEventListener("click", async function () {
 });
 
 document.addEventListener("click", function (event) {
+  const menuToggle = event.target.closest(".station-menu-toggle");
+  if (menuToggle) {
+    event.preventDefault();
+    event.stopPropagation();
+    openStationMenu(menuToggle);
+    return;
+  }
+  if (event.target.closest(".station-menu-panel")) return;
+  closeStationMenu();
+
+  const favBtn = event.target.closest(".favorite-button");
+  if (favBtn) {
+    event.preventDefault();
+    event.stopPropagation();
+    handleFavoriteClick(favBtn);
+    return;
+  }
+
+  const infoArea = event.target.closest(".station-item .info");
+  if (infoArea && !event.target.closest("button, a, .station-menu-panel")) {
+    event.preventDefault();
+    const playBtn = infoArea
+      .closest("li.station-item")
+      ?.querySelector(".main-play-button");
+    if (playBtn) handlePlayClick(playBtn);
+    return;
+  }
+
   const target = event.target.closest(".download-button, .main-play-button");
   if (!target) return;
 
@@ -700,11 +1245,11 @@ document.addEventListener("click", function (event) {
 });
 
 function handlePlayClick(button) {
-  const parentLi = button.closest("li");
+  const parentLi = button.closest("li.station-item");
   if (!parentLi) return;
 
-  const index = parentLi.dataset.index;
-  const mediaData = currentStationsList[index];
+  const id = parentLi.dataset.stationId;
+  const mediaData = stationById.get(id);
 
   if (!mediaData || !mediaData.url) {
     console.error(
@@ -733,11 +1278,11 @@ function handlePlayClick(button) {
 }
 
 function handleDownloadClick(button) {
-  const parentLi = button.closest("li");
+  const parentLi = button.closest("li.station-item");
   if (!parentLi) return;
 
-  const index = parentLi.dataset.index;
-  const media = currentStationsList[index];
+  const id = parentLi.dataset.stationId;
+  const media = stationById.get(id);
 
   if (media && media.url) {
     showNotification(`Downloading ${media.name}...`, "success");
@@ -886,18 +1431,94 @@ function updateActiveStationPlayButton(isPlaying) {
   }
 }
 
+function playNextStation() {
+  if (!isPlaying || !currentStation) return;
+  if (isStoppingPlayback) return;
+
+  if (!currentStationsList || currentStationsList.length === 0) {
+    stopPlayback();
+    return;
+  }
+
+  const pool =
+    currentSearchTerm.trim().length > 0
+      ? filteredIndices
+      : currentStationsList.map((_, i) => i);
+
+  if (pool.length === 0) {
+    stopPlayback();
+    return;
+  }
+
+  const currentId = getStationId(currentStation);
+  const currentUrl = currentStation.url;
+
+  let poolPos = pool.findIndex((i) => {
+    const s = currentStationsList[i];
+    if (!s) return false;
+    if (getStationId(s) === currentId) return true;
+    if (s.url && s.url === currentUrl) return true;
+    return false;
+  });
+
+  if (poolPos === -1) poolPos = -1;
+
+  const nextPoolPos = (poolPos + 1) % pool.length;
+  const nextIndex = pool[nextPoolPos];
+  const nextStation = currentStationsList[nextIndex];
+
+  if (!nextStation) {
+    stopPlayback();
+    return;
+  }
+
+  if (
+    pool.length === 1 &&
+    nextStation.url &&
+    currentStation.url &&
+    nextStation.url === currentStation.url
+  ) {
+    stopPlayback();
+    return;
+  }
+
+  const nextId = getStationId(nextStation);
+  const nextLi = Array.from(
+    selectedContainer.querySelectorAll("li.station-item"),
+  ).find((el) => el.dataset.stationId === nextId);
+
+  const nextBtn = nextLi?.querySelector(".main-play-button");
+
+  if (nextLi) {
+    nextLi.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
+
+  if (nextBtn) {
+    playMedia(nextStation, nextBtn);
+  } else {
+    const fakeButton = document.createElement("button");
+    fakeButton.classList.add("main-play-button");
+    playMedia(nextStation, fakeButton);
+  }
+}
+
 async function playMedia(media, button) {
   await stopPlayback();
   metadataElement.textContent = "Loading...";
+
   const newAudioElement = document.createElement("audio");
   newAudioElement.setAttribute("slot", "media");
   mediaController.appendChild(newAudioElement);
+
+  let hasAdvanced = false;
+
   newAudioElement.addEventListener("play", () => {
     updateActiveStationPlayButton(true);
     if ("mediaSession" in navigator) {
       navigator.mediaSession.playbackState = "playing";
     }
   });
+
   newAudioElement.addEventListener("pause", () => {
     if ("mediaSession" in navigator) {
       navigator.mediaSession.playbackState = "paused";
@@ -905,7 +1526,35 @@ async function playMedia(media, button) {
     updateActiveStationPlayButton(false);
   });
 
-  const parentLi = button.closest("li");
+  newAudioElement.addEventListener("pause", () => {
+    if ("mediaSession" in navigator) {
+      navigator.mediaSession.playbackState = "paused";
+    }
+    updateActiveStationPlayButton(false);
+  });
+
+  newAudioElement.addEventListener("ended", () => {
+    if (hasAdvanced) return;
+    hasAdvanced = true;
+
+    if (isStoppingPlayback) return;
+    if (shouldStopRetrying) return;
+    if (!isPlaying) return;
+
+    const activeMedia = mediaController.querySelector('[slot="media"]');
+    if (activeMedia !== newAudioElement) return;
+
+    const sameAsCurrent =
+      currentStation &&
+      media &&
+      (getStationId(currentStation) === getStationId(media) ||
+        currentStation.url === media.url);
+    if (!sameAsCurrent) return;
+
+    playNextStation();
+  });
+
+  const parentLi = button.closest("li.station-item");
   if (parentLi) {
     parentLi.classList.add("active-station");
     window.currentlyActiveLi = parentLi;
@@ -1705,6 +2354,14 @@ function decodeEntities(text) {
 
 // search station with options using RadioBrowser's API
 const countries = [
+  "Japan",
+  "South Korea",
+  "Thailand",
+  "Vietnam",
+  "Malaysia",
+  "Colombia",
+  "Chile",
+  "Indonesia",
   "United States",
   "Germany",
   "Russia",
@@ -1721,9 +2378,7 @@ const countries = [
   "Argentina",
   "Netherlands",
   "Turkey",
-  "Indonesia",
   "Belgium",
-  "Japan",
   "Hungary",
   "Peru",
   "Ukraine",
@@ -1735,16 +2390,10 @@ const countries = [
   "Finland",
   "Israel",
   "Kenya",
-  "South Korea",
-  "Thailand",
   "Pakistan",
   "Nigeria",
   "Iran",
   "Egypt",
-  "Vietnam",
-  "Malaysia",
-  "Colombia",
-  "Chile",
   "Romania",
   "Morocco",
   "Ecuador",
@@ -1767,51 +2416,49 @@ function populateCountries() {
 }
 
 const languages = [
+  "Japanese",
   "English",
+  "Chinese",
+  "Korean",
+  "Russian",
+  "Indonesian",
+  "German",
   "Spanish",
   "French",
-  "Chinese",
-  "Hindi",
+  "Malay",
+  "Urdu",
   "Arabic",
   "Bengali",
   "Portuguese",
-  "Russian",
-  "Japanese",
-  "German",
-  "Korean",
-  "Turkish",
-  "Italian",
-  "Dutch",
-  "Polish",
-  "Ukrainian",
-  "Persian",
-  "Malay",
-  "Thai",
-  "Swahili",
-  "Tagalog",
-  "Greek",
-  "Hungarian",
-  "Finnish",
-  "Czech",
-  "Danish",
-  "Swedish",
-  "Norwegian",
-  "Romanian",
-  "Bulgarian",
-  "Vietnamese",
-  "Indonesian",
-  "Tamil",
-  "Telugu",
+  "Hindi",
   "Marathi",
-  "Gujarati",
-  "Punjabi",
-  "Urdu",
-  "Pashto",
+  "Telugu",
+  "Turkish",
+  "Tamil",
+  "Vietnamese",
+  "Tagalog",
+  "Persian",
   "Farsi",
+  "Swahili",
+  "Thai",
+  "Punjabi",
+  "Italian",
+  "Pashto",
+  "Ukrainian",
+  "Polish",
   "Kurdish",
-  "Hausa",
   "Somali",
+  "Romanian",
+  "Dutch",
+  "Greek",
+  "Czech",
+  "Hungarian",
+  "Swedish",
+  "Bulgarian",
   "Afrikaans",
+  "Danish",
+  "Finnish",
+  "Norwegian",
 ];
 
 function populateLanguages() {
@@ -1824,78 +2471,66 @@ function populateLanguages() {
 }
 
 const tags = [
-  "pop",
-  "music",
-  "news",
-  "rock",
-  "classical",
-  "talk",
-  "radio",
-  "hits",
-  "community radio",
-  "dance",
-  "electronic",
-  "80s",
-  "oldies",
-  "méxico",
-  "christian",
-  "jazz",
-  "classic hits",
-  "pop music",
-  "top 40",
-  "90s",
-  "adult contemporary",
-  "country",
-  "house",
-  "house",
-  "folk",
-  "chillout",
-  "soul",
-  "top40",
-  "news talk",
-  "metal",
-  "hiphop",
-  "techno",
-  "rap",
-  "sports",
-  "ambient",
-  "lounge",
-  "culture",
-  "disco",
-  "funk",
-  "retro",
-  "electro",
-  "top hits",
-  "world music",
-  "edm",
-  "latino",
-  "international",
-  "relax",
-  "college radio",
-  "catholic",
-  "christmas music",
-  "pop dance",
-  "hip-hop",
-  "00s",
-  "love songs",
-  "club",
-  "various",
-  "mix",
-  "iheart",
-  "bible",
-  "piano",
-  "tech house",
-  "vaporwave",
-  "dj",
-  "anime radio",
   "anime",
-  "free japan music",
   "japanese",
   "japanese music",
   "japanese idols",
   "japan",
-  "anime openings",
-  "animegroove",
+  "pop",
+  "pop music",
+  "top 40",
+  "top40",
+  "hits",
+  "top hits",
+  "pop dance",
+  "adult contemporary",
+  "love songs",
+  "electronic",
+  "electro",
+  "dance",
+  "edm",
+  "house",
+  "tech house",
+  "techno",
+  "disco",
+  "club",
+  "dj",
+  "ambient",
+  "chillout",
+  "lounge",
+  "relax",
+  "vaporwave",
+  "hip-hop",
+  "rap",
+  "funk",
+  "soul",
+  "rock",
+  "metal",
+  "jazz",
+  "classical",
+  "piano",
+  "folk",
+  "country",
+  "world music",
+  "international",
+  "80s",
+  "90s",
+  "00s",
+  "oldies",
+  "retro",
+  "classic hits",
+  "news",
+  "talk",
+  "sports",
+  "culture",
+  "community radio",
+  "iheart",
+  "christian",
+  "catholic",
+  "bible",
+  "christmas music",
+  "music",
+  "mix",
 ];
 
 function populateTags() {
@@ -1944,10 +2579,11 @@ function clearSearchField() {
   tagSelect.value = "";
 }
 
-function radioSearch() {
+async function radioSearch() {
   showLoadingSpinner();
   const searchBy = searchOption.value;
   let searchValue = "";
+
   switch (searchBy) {
     case "byname":
       searchValue = searchField.value.toLowerCase();
@@ -1962,7 +2598,9 @@ function radioSearch() {
       searchValue = tagSelect.value.toLowerCase();
       break;
     default:
-      break;
+      hideLoadingSpinner();
+      showNotification(`Please select a search type!`, "warning");
+      return;
   }
 
   if (searchValue === "" || searchBy === "Search by") {
@@ -1970,78 +2608,52 @@ function radioSearch() {
     hideLoadingSpinner();
     return;
   }
+  await searchRadioBrowser(searchBy, searchValue);
+}
 
-  fetch(
-    `${proxyLink}https://de2.api.radio-browser.info/json/stations/${searchBy}/${searchValue}?hidebroken=true&limit=150&order=clickcount&reverse=true`,
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.length > 0) {
-        document
-          .querySelectorAll(".genre-content")
-          .forEach((c) => c.classList.remove("active"));
-        document
-          .querySelector(".genre-pill.active")
-          ?.classList.remove("active");
-
-        searchResultHeader.innerHTML = `<div class="search-terms">Top 150 Search Results for: <span class="searchTerms">${searchValue}</span><div>`;
-        searchResultHeader.style.display = "block";
-        selectedContainer.classList.add("active");
-        currentStationsList = [];
-        currentStationsList = data.map((radio) => ({
-          name: radio.name,
-          url: radio.url_resolved || radio.url,
-          favicon: radio.favicon,
-          homepage: radio.homepage,
-          host: "from API",
-          tags: radio.tags ? radio.tags.split(",").slice(0, 3) : ["Radio"],
-        }));
-
-        const radioHTML = currentStationsList
-          .map((radio, index) => {
-            const tagsHTML = radio.tags
-              .map((tag) => `<span class="tagger">${tag}</span>`)
-              .join("");
-
-            return `
-                <li data-index="${index}" class="align-items-center p-2 mb-2 station-item">
-                    <img src="${radio.favicon || "/assets/radios/Unidentified2.webp"}" 
-                         alt="${radio.name}" class="station-img">
-                    <div class="flex-grow-1 info">
-                        <h5>${radio.name}</h5>
-                        <div class="d-flex flex-wrap">
-                            ${tagsHTML}
-                        </div>
-                    </div>
-                    <div class="ms-3 d-flex button-group">
-                        <a href="${radio.homepage || radio.url}" target="_blank" rel="noopener noreferrer"  class="btn btn-sm p-btn">
-                        ${createIcon("external-link-alt")}
-                        </a>
-                      <button class="btn btn-sm p-btn download-button">
-                      ${createIcon("file-arrow-down")}
-                      </button>
-                      <button class="btn btn-sm p-btn main-play-button">
-                        ${createIcon("play")}
-                      </button>
-                    </div>
-                </li>`;
-          })
-          .join("");
-
-        selectedContainer.innerHTML = radioHTML;
-        hideLoadingSpinner();
-        stationCount.textContent = currentStationsList.length;
-      } else {
-        hideLoadingSpinner();
-        searchResultHeader.style.display = "block";
-        searchResultHeader.textContent = "No result found.";
-      }
-    })
-    .catch((error) => {
-      hideLoadingSpinner();
-      console.error("Error fetching data:", error);
-    });
-  clearSearchField();
+async function searchRadioBrowser(searchBy, searchValue) {
+  const headerText = `<div class="search-terms">Top 150 Search Results for: <span class="searchTerms">${searchValue}</span><div>`;
+  try {
+    const res = await fetch(
+      `${proxyLink}https://de2.api.radio-browser.info/json/stations/${searchBy}/${encodeURIComponent(searchValue)}?hidebroken=true&limit=150&order=clickcount&reverse=true`,
+    );
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    hideLoadingSpinner();
+    if (!Array.isArray(data) || data.length === 0) {
+      searchResultHeader.textContent = "No result found.";
+      searchResultHeader.style.display = "block";
+      selectedContainer.innerHTML = "";
+      stationCount.textContent = "0";
+      return;
+    }
+    document.querySelector(".genre-pill.active")?.classList.remove("active");
+    selectedContainer.classList.add("active");
+    currentView = "search";
+    currentSearchTerm = "";
+    if (stationSearch) stationSearch.value = "";
+    const stations = data.map((radio) => ({
+      id: radio.stationuuid || radio.url_resolved || radio.url,
+      name: radio.name,
+      url: radio.url_resolved || radio.url,
+      favicon: radio.favicon,
+      homepage: radio.homepage,
+      host: "from API",
+      tags: radio.tags ? radio.tags.split(",").slice(0, 3) : ["Radio"],
+      api: "",
+    }));
+    renderStations(stations, { headerText });
+  } catch (error) {
+    hideLoadingSpinner();
+    console.error("Error fetching data:", error);
+    searchResultHeader.textContent = "No result found.";
+    searchResultHeader.style.display = "block";
+    selectedContainer.innerHTML = "";
+    stationCount.textContent = "0";
+  } finally {
+    clearSearchField();
+    closePanel(searchPanel, searchToggleBtn);
+  }
 }
 
 function showSearchResults() {
@@ -2336,368 +2948,6 @@ function getWebsiteURL(label, searchTerm) {
   }
 }
 
-class ChatApp {
-  constructor() {
-    this.chatPaths = {
-      general: "chats/general",
-      mixednuts: "chats/mixednuts",
-    };
-    this.currentChatPath = this.chatPaths.general;
-    this.currentUser = null;
-    this.activeListener = null;
-    this.isSending = false;
-    this.oldestTimestamp = null;
-    this.joinFormEl = joinFormEl;
-    this.chatContainerEl = chatContainerEl;
-    this.init();
-  }
-
-  init() {
-    this.setupChatButtons();
-    this.checkUserSession();
-  }
-
-  setupChatButtons() {
-    if (generalBtn && mixednutsBtn) {
-      generalBtn.addEventListener("click", () => this.switchChat("general"));
-      mixednutsBtn.addEventListener("click", () =>
-        this.switchChat("mixednuts"),
-      );
-    }
-  }
-
-  checkUserSession() {
-    const savedName = localStorage.getItem("name");
-    if (savedName) {
-      this.currentUser = savedName;
-      this.showChat();
-    } else {
-      this.showJoinForm();
-    }
-  }
-
-  switchChat(room) {
-    if (this.currentChatPath === this.chatPaths[room]) return;
-    if (!this.currentUser) {
-      showNotification(`Please log in first!`, "warning");
-      return;
-    }
-    generalBtn.classList.toggle("active", room === "general");
-    mixednutsBtn.classList.toggle("active", room === "mixednuts");
-    this.currentChatPath = this.chatPaths[room];
-    if (this.currentUser) {
-      this.stopListening();
-      this.clearMessages();
-      this.resetLoadMoreUI();
-      this.startListening();
-    }
-  }
-
-  showJoinForm() {
-    chatContainerEl.innerHTML = "";
-    chatContainerEl.style.display = "none";
-    joinFormEl.innerHTML = `
-            <div class="container mt-3">
-                <div class="mb-3">
-                    <input type="text" id="usernameInput" class="form-control" placeholder="Enter your name..." maxlength="20">
-                </div>
-                <button id="joinBtn" class="btn btn-primary w-100" disabled>Join Chat</button>
-            </div>
-        `;
-    joinFormEl.style.display = "block";
-
-    const usernameInput = document.getElementById("usernameInput");
-    const joinBtn = document.getElementById("joinBtn");
-
-    usernameInput.addEventListener("input", () => {
-      const isValid = usernameInput.value.trim().length > 0;
-      joinBtn.disabled = !isValid;
-    });
-    joinBtn.addEventListener("click", () => {
-      const username = usernameInput.value.trim();
-      if (!username) return;
-      this.currentUser = username;
-      localStorage.setItem("name", username);
-      this.showChat();
-    });
-    usernameInput.focus();
-  }
-
-  showChat() {
-    joinFormEl.style.display = "none";
-    this.buildChatUI();
-    chatContainerEl.style.display = "block";
-    this.startListening();
-  }
-
-  buildChatUI() {
-    const savedName = localStorage.getItem("name");
-    chatContainerEl.innerHTML = `
-            <div class="chat-content-wrapper">
-                <div id="messagesContainer" class="messages-container">
-                  <div id="loadMoreArea" class="text-center py-2">
-                    <button id="loadMoreBtn" class="btn btn-sm btn-link">Load Older Messages</button>
-                  </div>
-                  <div id="historyContainer"></div>
-                  <div id="liveMessages"></div>
-                </div>
-                <div class="message-input-area">
-                    <div class="input-group">
-                        <input type="text" id="messageInput" class="form-control" 
-                               placeholder="Hi ${savedName}. Say Something..." maxlength="2000">
-                        <button id="sendBtn" class="btn btn-primary" disabled>
-                             ${createIcon("paper-plane")}
-                        </button>
-                    </div>
-                </div>
-                <div class="text-center mt-2">
-                    <button id="logoutBtn" class="btn btn-outline-secondary btn-sm">
-                        ${createIcon("right-from-bracket")} Logout
-                    </button>
-                </div>
-            </div>
-        `;
-    this.setupChatEvents();
-  }
-
-  setupChatEvents() {
-    const messageInput = document.getElementById("messageInput");
-    const sendBtn = document.getElementById("sendBtn");
-    const logoutBtn = document.getElementById("logoutBtn");
-    messageInput.addEventListener("input", () => {
-      const hasText = messageInput.value.trim().length > 0;
-      sendBtn.disabled = !hasText;
-    });
-    messageInput.addEventListener("keypress", (e) => {
-      if (e.key === "Enter" && !sendBtn.disabled) {
-        this.sendMessage(messageInput.value.trim());
-        messageInput.value = "";
-        sendBtn.disabled = true;
-      }
-    });
-    sendBtn.addEventListener("click", () => {
-      this.sendMessage(messageInput.value.trim());
-      messageInput.value = "";
-      sendBtn.disabled = true;
-    });
-    document
-      .getElementById("loadMoreBtn")
-      ?.addEventListener("click", () => this.loadMore());
-    logoutBtn.addEventListener("click", () => this.logout());
-    setTimeout(() => messageInput.focus(), 100);
-  }
-
-  async sendMessage(text) {
-    if (!text || !this.currentUser || this.isSending) return;
-    this.isSending = true;
-    const messageData = {
-      text: String(text),
-      user: String(this.currentUser),
-      timestamp: Date.now(),
-    };
-    try {
-      const messageRef = ref(db, this.currentChatPath);
-      const newMessageRef = push(messageRef);
-      await set(newMessageRef, {
-        message: messageData.text,
-        name: messageData.user,
-        createdAt: messageData.timestamp,
-      });
-    } catch (error) {
-      console.error("Failed to send message:", error);
-    } finally {
-      this.isSending = false;
-    }
-  }
-
-  startListening() {
-    const liveContainer = document.getElementById("liveMessages");
-    const historyContainer = document.getElementById("historyContainer");
-    if (!liveContainer) return;
-    liveContainer.innerHTML = "";
-    historyContainer.innerHTML = "";
-
-    const chatRef = ref(db, this.currentChatPath);
-
-    const chatQuery = query(
-      chatRef,
-      orderByChild("createdAt"),
-      limitToLast(40),
-    );
-
-    this.activeListener = onValue(chatQuery, (snapshot) => {
-      this.handleMessages(snapshot);
-    });
-  }
-
-  handleMessages(snapshot) {
-    const liveContainer = document.getElementById("liveMessages");
-    if (!snapshot.exists()) {
-      liveContainer.innerHTML =
-        '<div class="text-center text-muted py-3">No messages.</div>';
-      return;
-    }
-    const messages = [];
-    snapshot.forEach((child) => {
-      messages.push({ id: child.key, ...child.val() });
-    });
-
-    messages.sort((a, b) => a.createdAt - b.createdAt);
-    //first load
-    if (this.oldestTimestamp === null && messages.length > 0) {
-      this.oldestTimestamp = messages[0].createdAt;
-    }
-
-    messages.forEach((msg) => {
-      liveContainer.appendChild(this.createMessageElement(msg));
-    });
-    const container = document.getElementById("messagesContainer");
-    setTimeout(() => {
-      container.scrollTop = container.scrollHeight;
-    }, 100);
-  }
-
-  async loadMore() {
-    if (!this.oldestTimestamp) return;
-
-    const btn = document.getElementById("loadMoreBtn");
-    const historyContainer = document.getElementById("historyContainer");
-    const limitCount = 50;
-
-    btn.disabled = true;
-    btn.innerText = "Loading...";
-
-    const chatRef = ref(db, this.currentChatPath);
-    const oldQuery = query(
-      chatRef,
-      orderByChild("createdAt"),
-      endBefore(this.oldestTimestamp),
-      limitToLast(limitCount),
-    );
-
-    try {
-      const snapshot = await get(oldQuery);
-
-      if (snapshot.exists()) {
-        const oldMessages = [];
-        snapshot.forEach((child) => {
-          oldMessages.push({ id: child.key, ...child.val() });
-        });
-
-        oldMessages.sort((a, b) => a.createdAt - b.createdAt);
-        this.oldestTimestamp = oldMessages[0].createdAt;
-
-        oldMessages.reverse().forEach((msg) => {
-          const msgEl = this.createMessageElement(msg);
-          historyContainer.prepend(msgEl);
-        });
-        if (oldMessages.length < limitCount) {
-          btn.parentElement.innerHTML =
-            '<span class="text-muted small">Beginning of chat</span>';
-        } else {
-          btn.innerText = "Load Older Messages";
-          btn.disabled = false;
-        }
-      } else {
-        btn.parentElement.innerHTML =
-          '<span class="text-muted small">Beginning of chat</span>';
-      }
-    } catch (e) {
-      console.error("Load more failed:", e);
-      btn.disabled = false;
-      btn.innerText = "Error - Try Again";
-    }
-  }
-
-  createMessageElement(msg) {
-    const isOwnMessage = msg.name === this.currentUser;
-    const messageDiv = document.createElement("div");
-    messageDiv.className = `message ${isOwnMessage ? "own-message" : "other-message"}`;
-    messageDiv.innerHTML = `
-            <div class="message-header">
-                <span class="message-user">${this.escapeHtml(msg.name || "Unknown")}</span>
-                <span class="message-time">${this.formatTime(msg.createdAt)}</span>
-            </div>
-            <div class="message-body">
-                ${this.linkifyText(this.escapeHtml(msg.message || ""))}
-            </div>
-        `;
-    return messageDiv;
-  }
-
-  clearMessages() {
-    document.getElementById("historyContainer").innerHTML = "";
-    document.getElementById("liveMessages").innerHTML = "";
-  }
-
-  resetLoadMoreUI() {
-    const loadMoreArea = document.getElementById("loadMoreArea");
-    if (!loadMoreArea) return;
-    loadMoreArea.innerHTML = `<button id="loadMoreBtn" class="btn btn-sm btn-link">Load Older Messages</button>`;
-    document
-      .getElementById("loadMoreBtn")
-      .addEventListener("click", () => this.loadMore());
-    this.oldestTimestamp = null;
-  }
-
-  stopListening() {
-    if (this.activeListener) {
-      this.activeListener();
-      this.activeListener = null;
-    }
-  }
-
-  logout() {
-    this.stopListening();
-    this.currentUser = null;
-    localStorage.removeItem("name");
-    this.showJoinForm();
-  }
-
-  escapeHtml(text) {
-    if (typeof text !== "string") return "";
-    return text
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-  }
-
-  linkifyText(text) {
-    if (!text) return "";
-    const urlRegex = /(https?:\/\/[^\s]+)/g;
-    return text.replace(
-      urlRegex,
-      (url) =>
-        `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`,
-    );
-  }
-
-  formatTime(timestamp) {
-    const date = new Date(timestamp);
-    const now = new Date();
-    const getFormattedDate = (d) => {
-      const year = d.getFullYear();
-      const month = (d.getMonth() + 1).toString().padStart(2, "0");
-      const day = d.getDate().toString().padStart(2, "0");
-      return `${year}/${month}/${day}`;
-    };
-    const getFormattedTime = (d) => {
-      return d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-    };
-    if (date.toDateString() === now.toDateString()) {
-      return getFormattedTime(date);
-    }
-    const yesterday = new Date(now);
-    yesterday.setDate(yesterday.getDate() - 1);
-    if (date.toDateString() === yesterday.toDateString()) {
-      return `Yesterday ${getFormattedTime(date)}`;
-    }
-    return `${getFormattedDate(date)} ${getFormattedTime(date)}`;
-  }
-}
-
 async function loadPlaylist(playlistName) {
   try {
     showLoadingSpinner();
@@ -2773,9 +3023,41 @@ async function loadPlaylist(playlistName) {
 
 document.addEventListener("DOMContentLoaded", () => {
   initializeUI();
-  if (typeof db !== "undefined") {
-    window.chatApp = new ChatApp();
+
+  const app = new ChatApp({
+    chatPath: "chats/general",
+    containerEl: document.getElementById("homechatcontainer"),
+    joinFormEl: document.getElementById("homechat"),
+    storageKey: "name",
+    panel: {
+      panelEl: document.getElementById("sidePanel"),
+      toggleEl: document.getElementById("toggleButton"),
+      closeEl: document.getElementById("hideButton"),
+    },
+  });
+  window.addEventListener("open-chat-panel", () => {
+    app.togglePanel();
+  });
+  const generalBtn = document.getElementById("generalBtn");
+  const mixednutsBtn = document.getElementById("mixednutsBtn");
+
+  function switchRoom(room) {
+    if (!app.currentUser) {
+      showNotification("Please log in first!", "warning");
+      return;
+    }
+    generalBtn.classList.toggle("active", room === "general");
+    mixednutsBtn.classList.toggle("active", room === "mixednuts");
+
+    app.stopListening();
+    app.clearMessages();
+    app.resetLoadMoreUI();
+    app.currentChatPath = `chats/${room}`;
+    app.startListening();
   }
+
+  generalBtn?.addEventListener("click", () => switchRoom("general"));
+  mixednutsBtn?.addEventListener("click", () => switchRoom("mixednuts"));
   const cseScript = document.createElement("script");
   cseScript.src = `https://cse.google.com/cse.js?cx=${import.meta.env.VITE_CSE}`;
   cseScript.setAttribute("data-cfasync", "false");

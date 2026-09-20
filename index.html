@@ -163,7 +163,7 @@
               ><br />
               <a
                 class="blank-name"
-                href="https://support.google.com/chrome/thread/29505473?hl=en&msgid=39996297"
+                href="https://support.google.com/chrome/thread/29505473"
                 target="_blank"
                 >Learn more</a
               >
@@ -176,20 +176,20 @@
         <div class="d-flex align-items-center">
           <div class="flex-grow-1 text-center">
             <button
-              id="generalChatBtn"
+              id="generalBtn"
               class="btn btn-sm btn-outline-primary active"
             >
-              General Chatroom
+              Chat
             </button>
-            <button id="anotherChatBtn" class="btn btn-sm btn-outline-primary">
-              Sharing Chatroom
+            <button id="mixednutsBtn" class="btn btn-sm btn-outline-primary">
+              Share
             </button>
           </div>
           <button id="hideButton" aria-label="Close" class="btn-close"></button>
         </div>
         <div class="container-fluid">
-          <div class="joinform"></div>
-          <div class="chat_container"></div>
+          <div class="joinform" id="homechat"></div>
+          <div class="chat_container" id="homechatcontainer"></div>
         </div>
       </div>
       <section id="radio-section">
@@ -231,6 +231,21 @@
               data-state="closed"
             >
               <i class="fas fa-link"></i>
+            </button>
+            <button
+              type="button"
+              id="favoritesViewBtn"
+              class="btn btn-sm btn-primary rounded-circle position-relative"
+              title="My Favourites"
+              aria-label="Show favourites"
+            >
+              <i class="fas fa-heart"></i>
+              <span
+                id="favoritesCount"
+                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                style="display: none"
+                >0</span
+              >
             </button>
           </div>
         </div>
@@ -326,24 +341,93 @@
           </div>
         </div>
 
-        <div class="container" id="customStreamPanel" style="display: none">
+        <div
+          class="container mb-2"
+          id="customStreamPanel"
+          style="display: none"
+        >
           <div class="stream-content">
-            <div class="input-group">
-              <input
-                type="search"
-                id="streamUrlInput"
-                class="form-control"
-                placeholder="Paste stream URL (m3u8, mp3, etc.)"
-                aria-label="Stream URL"
-              />
-              <button
-                class="btn btn-primary"
-                id="playStreamButton"
-                type="button"
-                aria-label="Play Stream"
-              >
-                <i class="fas fa-play"></i>
-              </button>
+            <ul class="nav nav-pills nav-fill mb-2" id="customStreamTabs">
+              <li class="nav-item">
+                <button
+                  class="nav-link active"
+                  type="button"
+                  id="tabPlayUrl"
+                  data-target="playUrlTab"
+                >
+                  Play URL
+                </button>
+              </li>
+              <li class="nav-item">
+                <button
+                  class="nav-link"
+                  type="button"
+                  id="tabImportPlaylist"
+                  data-target="importPlaylistTab"
+                >
+                  Import Playlist
+                </button>
+              </li>
+            </ul>
+
+            <div id="playUrlTab" class="stream-content">
+              <div class="input-group">
+                <input
+                  type="search"
+                  id="streamUrlInput"
+                  class="form-control"
+                  placeholder="Paste stream URL (m3u8, mp3, etc.)"
+                  aria-label="Stream URL"
+                />
+                <button
+                  class="btn btn-primary"
+                  id="playStreamButton"
+                  type="button"
+                  aria-label="Play Stream"
+                >
+                  <i class="fas fa-play"></i>
+                </button>
+              </div>
+            </div>
+
+            <div
+              id="importPlaylistTab"
+              class="stream-tab-pane"
+              style="display: none"
+            >
+              <div class="input-group mb-2">
+                <input
+                  type="search"
+                  id="importPlaylistURL"
+                  class="form-control"
+                  placeholder="Paste a .m3u / .m3u8 playlist URL"
+                />
+                <button
+                  class="btn btn-primary"
+                  id="importPlaylistURLBtn"
+                  type="button"
+                  aria-label="Import Playlist from URL"
+                >
+                  <i class="fas fa-file-import"></i>
+                </button>
+              </div>
+              <div id="importDropZone" class="import-drop-zone">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p class="mb-1">Drag &amp; drop an .m3u / .m3u8 file here</p>
+                <p class="mb-2 text-muted small">or</p>
+                <label
+                  for="importFileInput"
+                  class="btn btn-sm btn-outline-primary mb-0"
+                >
+                  Choose File
+                </label>
+                <input
+                  type="file"
+                  id="importFileInput"
+                  accept=".m3u,.m3u8,audio/x-mpegurl,application/vnd.apple.mpegurl"
+                  hidden
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -383,7 +467,7 @@
       </section>
       <section id="search">
         <div class="selected-title mt-3">
-          <h1>Search</h1>
+          <h1>Song Lookup</h1>
         </div>
         <div class="container mb-3">
           <div class="input-group text-center mx-auto">

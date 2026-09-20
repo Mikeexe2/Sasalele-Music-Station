@@ -37,7 +37,18 @@ import {
   faBan,
   faHeadphones,
   faTags,
+  faStar as faStarSolid,
+  faListCheck,
+  faCloudUploadAlt,
+  faFileImport,
+  faHeart as faHeartSolid,
+  faEllipsisVertical,
 } from "@fortawesome/free-solid-svg-icons";
+
+import {
+  faStar as faStarRegular,
+  faHeart as faHeartRegular,
+} from "@fortawesome/free-regular-svg-icons";
 
 import {
   faGithub,
@@ -89,6 +100,14 @@ const importedIcons = {
   faArrowsRotate,
   faHeadphones,
   faTags,
+  faStar: faStarSolid,
+  faListCheck,
+  faStarOutline: faStarRegular,
+  faCloudUploadAlt,
+  faFileImport,
+  faHeart: faHeartSolid,
+  faHeartOutline: faHeartRegular,
+  faEllipsisVertical,
 };
 
 function toKebabCase(iconName) {
@@ -131,7 +150,10 @@ export function createIcon(name, className = "") {
   const normalized = name.startsWith("fa-") ? name : `fa-${name}`;
   const iconData = iconMap[normalized];
 
-  if (!iconData) return "";
+  if (!iconData) {
+    console.warn(`createIcon: icon "${name}" not found in iconMap`);
+    return "";
+  }
 
   const [width, height, , , path] = iconData.icon;
 
